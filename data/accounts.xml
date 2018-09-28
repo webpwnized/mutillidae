@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xml>
+<Employees>
+	<Employee ID="1">
+		<UserName>admin</UserName>
+		<Password>adminpass</Password>
+		<Signature>g0t r00t?</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="2">
+		<UserName>adrian</UserName>
+		<Password>somepassword</Password>
+		<Signature>Zombie Films Rock!</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="3">
+		<UserName>john</UserName>
+		<Password>monkey</Password>
+		<Signature>I like the smell of confunk</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="4">
+		<UserName>jeremy</UserName>
+		<Password>password</Password>
+		<Signature>d1373 1337 speak</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="5">
+		<UserName>bryce</UserName>
+		<Password>password</Password>
+		<Signature>I Love SANS</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="6">
+		<UserName>samurai</UserName>
+		<Password>samurai</Password>
+		<Signature>Carving fools</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="7">
+		<UserName>jim</UserName>
+		<Password>password</Password>
+		<Signature>Rome is burning</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="8">
+		<UserName>bobby</UserName>
+		<Password>password</Password>
+		<Signature>Hank is my dad</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="9">
+		<UserName>simba</UserName>
+		<Password>password</Password>
+		<Signature>I am a super-cat</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="10">
+		<UserName>dreveil</UserName>
+		<Password>password</Password>
+		<Signature>Preparation H</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="11">
+		<UserName>scotty</UserName>
+		<Password>password</Password>
+		<Signature>Scotty do</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="12">
+		<UserName>cal</UserName>
+		<Password>password</Password>
+		<Signature>C-A-T-S Cats Cats Cats</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="13">
+		<UserName>john</UserName>
+		<Password>password</Password>
+		<Signature>Do the Duggie!</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="14">
+		<UserName>kevin</UserName>
+		<Password>42</Password>
+		<Signature>Doug Adams rocks</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="15">
+		<UserName>dave</UserName>
+		<Password>set</Password>
+		<Signature>Bet on S.E.T. FTW</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="16">
+		<UserName>patches</UserName>
+		<Password>tortoise</Password>
+		<Signature>meow</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="17">
+		<UserName>rocky</UserName>
+		<Password>stripes</Password>
+		<Signature>treats?</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="18">
+		<UserName>tim</UserName>
+		<Password>lanmaster53</Password>
+		<Signature>Because reconnaissance is hard to spell</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="19">
+		<UserName>ABaker</UserName>
+		<Password>SoSecret</Password>
+		<Signature>Muffin tops only</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="20">
+		<UserName>PPan</UserName>
+		<Password>NotTelling</Password>
+		<Signature>Where is Tinker?</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="21">
+		<UserName>CHook</UserName>
+		<Password>JollyRoger</Password>
+		<Signature>Gator-hater</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="22">
+		<UserName>james</UserName>
+		<Password>i&lt;3devs</Password>
+		<Signature>Occupation: Researcher</Signature>
+		<Type>Admin</Type>
+	</Employee>
+	<Employee ID="23">
+		<UserName>ed</UserName>
+		<Password>pentest</Password>
+		<Signature>Commandline KungFu anyone?</Signature>
+		<Type>Admin</Type>
+	</Employee>
+</Employees>

@@ -1,0 +1,103 @@
+~~ Licensed to the Apache Software Foundation (ASF) under one or more
+~~ contributor license agreements.  See the NOTICE file distributed with
+~~ this work for additional information regarding copyright ownership.
+~~ The ASF licenses this file to You under the Apache License, Version 2.0
+~~ (the "License"); you may not use this file except in compliance with
+~~ the License.  You may obtain a copy of the License at
+~~
+~~      http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing, software
+~~ distributed under the License is distributed on an "AS IS" BASIS,
+~~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~ See the License for the specific language governing permissions and
+~~ limitations under the License.
+ ------
+ Apache log4php
+ ------
+ ------
+ ------
+
+Contributing Patches
+
+  Before you read this document, make sure you have read the general information on the 
+  {{{Volunteering.html}Volunteering}} page. Credits to the Apache Commons project on which documents
+  this one is based on.
+
+* Respect The Original Style
+
+  Please respect the style of the orginal file. Make sure that your additions fit in with that style.
+  The framework has coding conventions and every contribution is supposed to adhere to them. 
+  You might find it a little difficult to discover the conventions used by a particular class 
+  but if you stick to the style of the original then that'll be fine. If in doubt, ask on the developers
+  mailinglist.
+
+  If a patch is submitted which doesn't satisfy the component's coding conventions, 
+  then either a committer will need to rewrite the submission or it will be rejected. 
+  Getting it right in this first place will save you having to rewrite it.
+
+  Most important codestyles:
+
+    * don't use vertical alignement
+    
+    * brackets are on the same line as the method signature
+    
+    * brackets are on the same line as control statements
+    
+    * always brackets for control statements
+    
+    * don't use _ in variablenames
+
+* Tabs Not Spaces
+
+  PLEASE NO SPACES!
+
+  Some IDEs include automatic source (re)formatting. If you use an IDE, please check that
+  this feature is either disabled or set to use tabs.
+
+  If a patch is submitted which uses tabs rather than spaces, then either a committer
+  will have to reformat it before it's applied or the patch will be rejected. Again, 
+  it's easier to get it right in the first place rather than have to reformat and resubmit your patch.
+
+* Test Cases
+
+  Classes needs to be tested with PHPUnit. If you are not familiar with the principles
+  of regression testing, then the JUnit or even the PHPUnit site has some good articles.
+
+  Before you submit your patch, please do a clean build of the full distribution and 
+  run the unit tests (this can be done with <<<maven test>>>. This ensures that 
+  your patch doesn't break any existing functionality.
+
+  We strongly recommend that you create and submit test cases together with the rest 
+  of your contribution. Test cases ensure that bugs stay fixed and features don't get broken. 
+  Test cases will probably be needed anyway so submitting them saves time.
+
+* Creating A Patch
+
+  The Apache Log4PHP source code repository holds the current source. Currently SVN is beeing used.
+
+  Please create your patch against the latest revision of the files in the source code 
+  repository since this makes the job of applying the patch much easier. 
+  If you don't have a version checked out, then check one out. If you have, then please 
+  do a fresh update before you make your changes.
+
+  The patch should be in unified format. You can create a patch in this format  by using:
+
++--
+  svn diff File >> patchfile
++--
+
+  Eclipse has some diff features too. Please make sure you have your project as a patch root.
+  Try to give your patch files meaningful names. This makes it easier for 
+  developers who need to apply a number of different patches.
+
+* Submitting A Patch
+
+  There are two ways to go to submit a patch:
+
+  * Add the patch as an attachment to a bug report. Log4PHP uses JIRA. Create a new bug
+    report if necessary.
+    
+  * Mail the JIRA issue number to the dev mailing list. The email subject should describe
+    what the patch does and should be prefixed by [PATCH]. Make sure that it's clear 
+    which component the patch is for. 

@@ -1,0 +1,23 @@
+1,admin,adminpass,g0t r00t?,Admin
+2,adrian,somepassword,Zombie Films Rock!,Admin
+3,john,monkey,I like the smell of confunk,Admin
+4,jeremy,password,d1373 1337 speak,Admin
+5,bryce,password,I Love SANS,Admin
+6,samurai,samurai,Carving fools,Admin
+7,jim,password,Rome is burning,Admin
+8,bobby,password,Hank is my dad,Admin
+9,simba,password,I am a super-cat,Admin
+10,dreveil,password,Preparation H,Admin
+11,scotty,password,Scotty do,Admin
+12,cal,password,C-A-T-S Cats Cats Cats,Admin
+13,john,password,Do the Duggie!,Admin
+14,kevin,42,Doug Adams rocks,Admin
+15,dave,set,Bet on S.E.T. FTW,Admin
+16,patches,tortoise,meow,Admin
+17,rocky,stripes,treats?,Admin
+18,tim,lanmaster53,Because reconnaissance is hard to spell,Admin
+19,ABaker,SoSecret,Muffin tops only,Admin
+20,PPan,NotTelling,Where is Tinker?,Admin
+21,CHook,JollyRoger,Gator-hater,Admin
+22,james,i<3devs,Occupation: Researcher,Admin
+23,ed,pentest,Commandline KungFu anyone?,Admin

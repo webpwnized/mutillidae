@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerPropertySetter</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerPropertySetter</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">General purpose Object property setter. Clients repeatedly invokes  setProperty() in order to invoke setters  on the Object specified in the constructor.</p>
+<p class="description"><p>Usage:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$ps&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><a href="../../log4php/config/LoggerPropertySetter.html#methodLoggerPropertySetter">LoggerPropertySetter</a><span class="src-sym">(</span><span class="src-var">$anObject</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$ps</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;name&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;Joe&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$ps</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;age&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">32</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$ps</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;isMale&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-id">true</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div>  will cause the invocations  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$anObject</span><span class="src-sym">-&gt;</span><span class="src-id">setName</span><span class="src-sym">(</span><span class="src-str">&quot;Joe&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$anObject</span><span class="src-sym">-&gt;</span><span class="src-id">setAge</span><span class="src-sym">(</span><span class="src-num">32</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$anObject</span><span class="src-sym">-&gt;</span><span class="src-id">setMale</span><span class="src-sym">(</span><span class="src-id">true</span><span class="src-sym">)</span></div></li>
+</ol></div>  if such methods exist.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marco Vassura</li>
+				<li><span class="field">version:</span> $Revision: 556801 $</li>
+				<li><span class="field">since:</span> 0.5</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_config---LoggerPropertySetter.php.html">/config/LoggerPropertySetter.php</a> (line <span class="field">47</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#setPropertiesByObject" title="details" class="method-name">setPropertiesByObject</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">&$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$properties</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+																
+												<div class="method-definition">
+											<span class="method-result">LoggerPropertySetter</span>
+										<a href="#LoggerPropertySetter" title="details" class="method-name">LoggerPropertySetter</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">&$obj</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#activate" title="details" class="method-name">activate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setProperties" title="details" class="method-name">setProperties</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$properties</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+																								<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setProperty" title="details" class="method-name">setProperty</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodsetPropertiesByObject" id="setPropertiesByObject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method setPropertiesByObject</span> (line <span class="line-number">76</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the properties of an object passed as a parameter in one  go. The <div class="src-code"><ol><li><div class="src-line"><span class="src-id">properties</span></div></li>
+</ol></div> are parsed relative to a  <div class="src-code"><ol><li><div class="src-line"><span class="src-id">prefix</span></div></li>
+</ol></div>.</p>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setPropertiesByObject
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">&$obj</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$properties</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">&$obj</span><span class="var-description">: The object to configure.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$properties</span><span class="var-description">: An array containing keys and values.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span><span class="var-description">: Only keys having the specified prefix will be set.</span>			</li>
+				</ul>
+		
+			
+	</div>
+
+<a name="methodLoggerPropertySetter" id="LoggerPropertySetter"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor LoggerPropertySetter</span> (line <span class="line-number">61</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new LoggerPropertySetter for the specified Object.</p>
+<p class="description"><p>This is done in prepartion for invoking <a href="../../log4php/config/LoggerPropertySetter.html#methodsetProperty">setProperty()</a>  one or more times.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">LoggerPropertySetter</span>
+		<span class="method-name">
+			LoggerPropertySetter
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">&$obj</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">&$obj</span><span class="var-description">: the object for which to set properties</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodactivate" id="activate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">activate</span> (line <span class="line-number">143</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			activate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetProperties" id="setProperties"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setProperties</span> (line <span class="line-number">90</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the properites for the object that match the  <div class="src-code"><ol><li><div class="src-line"><span class="src-id">prefix</span></div></li>
+</ol></div> passed as parameter.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setProperties
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$properties</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$properties</span><span class="var-description">: An array containing keys and values.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span><span class="var-description">: Only keys having the specified prefix will be set.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetProperty" id="setProperty"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setProperty</span> (line <span class="line-number">125</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set a property on this PropertySetter's Object. If successful, this</p>
+<p class="description"><p>method will invoke a setter method on the underlying Object. The  setter is the one for the specified property name and the value is  determined partly from the setter argument type and partly from the  value specified in the call to this method.</p><p>&lt;p&gt;If the setter expects a String no conversion is necessary.  If it expects an int, then an attempt is made to convert 'value'  to an int using new Integer(value). If the setter expects a boolean,  the conversion is by new Boolean(value).</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setProperty
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of the property</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: String value of the property</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.2</a>
+	</p>
+	</div></body>
+</html>

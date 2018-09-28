@@ -1,0 +1,52 @@
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+------------------------------------------------------------------------------
+ INSTALLATION
+------------------------------------------------------------------------------ 
+
+1. Before starting installing this package check if the following external
+   programs are installed:
+   
+   a. PHP (version 5.2.x or above). 
+   
+2. Extract the tarball / zipfile to a dir (ex: {YOUR_PATH}).
+
+   If you want to include log4php under an include_path dir 
+   consider step (a).
+
+   If you want to include log4php wherever you want consider 
+   step (b).
+
+   a. Create a log4php dir under an include_path.
+      Copy '{YOUR_PATH}/src/main/php' under an '{an_include_path}/log4php'. 
+
+      Include the LoggerManager class:
+   
+         require_once('log4php/LoggerManager.php');
+
+   b. Copy '{YOUR_PATH}/src/main/php' to the dir where you want log4php to  
+      reside (ex: {MY_LOG4PHP_PATH}).
+      
+      Include the LoggerManager class:
+
+         require_once( '{MY_LOG4PHP_PATH}/LoggerManager.php' );
+
+3. That's all! For more details on using Log4PHP please see the HTML docs in the site folder.
+
+------------------------------------------------------------------------------
+ $Revision: 795785 $
+------------------------------------------------------------------------------
+                                                                               

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerOptionConverter</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerOptionConverter</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A convenience class to convert property values to specific types.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marco Vassura</li>
+				<li><span class="field">version:</span> $Revision: 556801 $</li>
+				<li><span class="field">since:</span> 0.5</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_helpers---LoggerOptionConverter.php.html">/helpers/LoggerOptionConverter.php</a> (line <span class="field">35</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					static 						<span class="method-result">array</span>
+										<a href="#concatanateArrays" title="details" class="method-name">concatanateArrays</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$l</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$r</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#findAndSubst" title="details" class="method-name">findAndSubst</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$props</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#getSystemProperty" title="details" class="method-name">getSystemProperty</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$def</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#substVars" title="details" class="method-name">substVars</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$val</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$props</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">boolean</span>
+										<a href="#toBoolean" title="details" class="method-name">toBoolean</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$default</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">float</span>
+										<a href="#toFileSize" title="details" class="method-name">toFileSize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">float</span>&nbsp;<span class="var-name">$default</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">integer</span>
+										<a href="#toInt" title="details" class="method-name">toInt</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$default</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>
+										<a href="#toLevel" title="details" class="method-name">toLevel</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>&nbsp;<span class="var-name">$defaultValue</span>)
+									</div>
+								
+																																																																				</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodconcatanateArrays" id="concatanateArrays"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method concatanateArrays</span> (line <span class="line-number">44</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">array</span>
+		<span class="method-name">
+			concatanateArrays
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$l</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$r</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$l</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$r</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfindAndSubst" id="findAndSubst"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method findAndSubst</span> (line <span class="line-number">235</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find the value corresponding to <var>$key</var> in  <var>$props</var>. Then perform variable substitution on the  found value.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			findAndSubst
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$props</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$props</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetSystemProperty" id="getSystemProperty"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getSystemProperty</span> (line <span class="line-number">64</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Read a predefined var.</p>
+<p class="description"><p>It returns a value referenced by <var>$key</var> using this search criteria: <ul><li>if <var>$key</var> is a constant then return it. Else</li><li>if <var>$key</var> is set in <var>$_ENV</var> then return it. Else</li><li>return <var>$def</var>.</li></ul></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the string value of the system property, or the default                    value if there is no property with that key.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getSystemProperty
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$def</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span><span class="var-description">: The key to search for.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$def</span><span class="var-description">: The default value to return.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsubstVars" id="substVars"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method substVars</span> (line <span class="line-number">279</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Perform variable substitution in string <var>$val</var> from the values of keys found with the getSystemProperty() method.</p>
+<p class="description"><p>The variable substitution delimeters are <strong>${</strong> and <strong>}</strong>.</p><p>For example, if the &quot;MY_CONSTANT&quot; contains &quot;value&quot;, then  the call  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$s&nbsp;</span>=&nbsp;<span class="src-id"><a href="../../log4php/helpers/LoggerOptionConverter.html">LoggerOptionConverter</a></span><span class="src-sym">::</span><span class="src-id">substituteVars</span><span class="src-sym">(</span><span class="src-str">&quot;</span><span class="src-str"><span class="src-id">Value</span>&nbsp;<span class="src-id">of</span>&nbsp;<span class="src-id">key</span>&nbsp;<span class="src-id">is</span>&nbsp;${<span class="src-str">MY_CONSTANT</span><span class="src-sym">}</span>.</span><span class="src-str">&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div>  will set the variable <em>$s</em> to &quot;Value of key is value.&quot;.</p><p>If no value could be found for the specified key, then the  <var>$props</var> parameter is searched, if the value could not  be found there, then substitution defaults to the empty string.</p><p>For example, if <a href="../../log4php/helpers/LoggerOptionConverter.html#methodgetSystemProperty">getSystemProperty()</a> cannot find any value for the key  &quot;inexistentKey&quot;, then the call  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$s&nbsp;</span>=&nbsp;<span class="src-id"><a href="../../log4php/helpers/LoggerOptionConverter.html">LoggerOptionConverter</a></span><span class="src-sym">::</span><a href="../../log4php/helpers/LoggerOptionConverter.html#methodsubstVars">substVars</a><span class="src-sym">(</span><span class="src-str">&quot;</span><span class="src-str"><span class="src-id">Value</span>&nbsp;<span class="src-id">of</span>&nbsp;<span class="src-id">inexistentKey</span>&nbsp;<span class="src-id">is</span>&nbsp;<span class="src-sym">[</span>${<span class="src-str">inexistentKey</span><span class="src-sym">}</span><span class="src-sym">]</span></span><span class="src-str">&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div>  will set <var>$s</var> to &quot;Value of inexistentKey is []&quot;.</p><p>A warn is thrown if <var>$val</var> contains a start delimeter &quot;${&quot;  which is not balanced by a stop delimeter &quot;}&quot; and an empty string is returned.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			substVars
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$val</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$props</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$val</span><span class="var-description">: The string on which variable substitution is performed.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$props</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoBoolean" id="toBoolean"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method toBoolean</span> (line <span class="line-number">91</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">If <var>$value</var> is <em>true</em>, then <em>true</em> is returned. If <var>$value</var> is <em>false</em>, then <em>true</em> is returned. Otherwise, <var>$default</var> is returned.</p>
+<p class="description"><p>Case of value is unimportant.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			toBoolean
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$default</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$default</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoFileSize" id="toFileSize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method toFileSize</span> (line <span class="line-number">199</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">float</span>
+		<span class="method-name">
+			toFileSize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">float</span>&nbsp;<span class="var-name">$default</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type">float</span>
+				<span class="var-name">$default</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoInt" id="toInt"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method toInt</span> (line <span class="line-number">111</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			toInt
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$default</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$default</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoLevel" id="toLevel"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method toLevel</span> (line <span class="line-number">148</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts a standard or custom priority level to a Level object.</p>
+<p class="description"><p>If <var>$value</var> is of form &quot;<strong>level#full_file_classname</strong>&quot;,  where <em>full_file_classname</em> means the class filename with path  but without php extension, then the specified class' <em>toLevel()</em> method  is called to process the specified level string; if no '#'  character is present, then the default <a href="../../log4php/LoggerLevel.html">LoggerLevel</a>  class is used to process the level value.</p><p>As a special case, if the <var>$value</var> parameter is  equal to the string &quot;NULL&quot;, then the value <em>null</em> will  be returned.</p><p>If any error occurs while converting the value to a level,  the <var>$defaultValue</var> parameter, which may be  <em>null</em>, is returned.</p><p>Case of <var>$value</var> is insignificant for the level level, but is  significant for the class name part, if present.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> a <a href="../../log4php/LoggerLevel.html">LoggerLevel</a> or null</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>
+		<span class="method-name">
+			toLevel
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>&nbsp;<span class="var-name">$defaultValue</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>
+				<span class="var-name">$defaultValue</span>			</li>
+				</ul>
+		
+			
+	</div>
+
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.2</a>
+	</p>
+	</div></body>
+</html>

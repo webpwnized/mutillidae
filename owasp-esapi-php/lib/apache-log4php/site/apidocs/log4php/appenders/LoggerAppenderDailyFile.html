@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerAppenderDailyFile</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerAppenderDailyFile</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">LoggerAppenderDailyFile appends log events to a file ne.</p>
+<p class="description"><p>A formatted version of the date pattern is used as to create the file name  using the <a href="http://www.php.net/sprintf">http://www.php.net/sprintf</a> function.  &lt;p&gt;Parameters are <a href="../../log4php/appenders/LoggerAppenderDailyFile.html#var$datePattern">$datePattern</a>, $file. Note that file  parameter should include a '%s' identifier and should always be set  before $file param.&lt;/p&gt;</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Knut Urdalen &lt;<a href="mailto:knut.urdalen@gmail.com">knut.urdalen@gmail.com</a>&gt;</li>
+				<li><span class="field">author:</span> Abel Gonzalez &lt;<a href="mailto:agonzalez@lpsz.org">agonzalez@lpsz.org</a>&gt;</li>
+				<li><span class="field">version:</span> $Revision: 556784 $</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_appenders---LoggerAppenderDailyFile.php.html">/appenders/LoggerAppenderDailyFile.php</a> (line <span class="field">35</span>)
+		</p>
+		
+				
+		<pre><a href="../../log4php/LoggerAppender.html">LoggerAppender</a>
+   |
+   --<a href="../../log4php/LoggerAppenderSkeleton.html">LoggerAppenderSkeleton</a>
+      |
+      --<a href="../../log4php/appenders/LoggerAppenderFile.html">LoggerAppenderFile</a>
+         |
+         --LoggerAppenderDailyFile</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																								<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$datePattern" title="details" class="var-name">$datePattern</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																												
+												<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getDatePattern" title="details" class="method-name">getDatePattern</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setDatePattern" title="details" class="method-name">setDatePattern</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$format</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setFile" title="details" class="method-name">setFile</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$datePattern" id="$datePattern"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$datePattern</span>
+			 = <span class="var-default"> &quot;Ymd&quot;</span>			(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Format date.</p>
+<p class="description"><p>It follows the <a href="http://www.php.net/date()">http://www.php.net/date()</a> formatting rules and <strong>should always be set before $file param</strong>.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../log4php/LoggerAppenderSkeleton.html">LoggerAppenderSkeleton</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$closed">LoggerAppenderSkeleton::$closed</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$errorHandler">LoggerAppenderSkeleton::$errorHandler</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$headFilter">LoggerAppenderSkeleton::$headFilter</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$layout">LoggerAppenderSkeleton::$layout</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$name">LoggerAppenderSkeleton::$name</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$requiresLayout">LoggerAppenderSkeleton::$requiresLayout</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$tailFilter">LoggerAppenderSkeleton::$tailFilter</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$threshold">LoggerAppenderSkeleton::$threshold</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodgetDatePattern" id="getDatePattern"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getDatePattern</span> (line <span class="line-number">55</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> returns date format for the filename</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getDatePattern
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetDatePattern" id="setDatePattern"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setDatePattern</span> (line <span class="line-number">48</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets date format for the file name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setDatePattern
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$format</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$format</span><span class="var-description">: a regular date() string format</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetFile" id="setFile"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setFile</span> (line <span class="line-number">65</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The File property takes a string value which should be the name of the file to append to.</p>
+<p class="description"><p>Sets and opens the file where the log output will go.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetFile">LoggerAppenderFile::setFile()</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setFile
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetFile">LoggerAppenderFile::setFile()</a></dt>
+						<dd>Sets and opens the file where the log output will go.</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../log4php/appenders/LoggerAppenderFile.html">LoggerAppenderFile</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#method__construct">LoggerAppenderFile::__construct()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodactivateOptions">LoggerAppenderFile::activateOptions()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodappend">LoggerAppenderFile::append()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodclose">LoggerAppenderFile::close()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodcloseFile">LoggerAppenderFile::closeFile()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodgetAppend">LoggerAppenderFile::getAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodgetFile">LoggerAppenderFile::getFile()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodgetFileName">LoggerAppenderFile::getFileName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodreset">LoggerAppenderFile::reset()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetAppend">LoggerAppenderFile::setAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetFile">LoggerAppenderFile::setFile()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetFileName">LoggerAppenderFile::setFileName()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../log4php/LoggerAppenderSkeleton.html">LoggerAppenderSkeleton</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#method__construct">LoggerAppenderSkeleton::__construct()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodactivateOptions">LoggerAppenderSkeleton::activateOptions()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodaddFilter">LoggerAppenderSkeleton::addFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodappend">LoggerAppenderSkeleton::append()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodclearFilters">LoggerAppenderSkeleton::clearFilters()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methoddoAppend">LoggerAppenderSkeleton::doAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodfinalize">LoggerAppenderSkeleton::finalize()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetErrorHandler">LoggerAppenderSkeleton::getErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetFilter">LoggerAppenderSkeleton::getFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetFirstFilter">LoggerAppenderSkeleton::getFirstFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetLayout">LoggerAppenderSkeleton::getLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetName">LoggerAppenderSkeleton::getName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetThreshold">LoggerAppenderSkeleton::getThreshold()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodisAsSevereAsThreshold">LoggerAppenderSkeleton::isAsSevereAsThreshold()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodrequiresLayout">LoggerAppenderSkeleton::requiresLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetErrorHandler">LoggerAppenderSkeleton::setErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetLayout">LoggerAppenderSkeleton::setLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetName">LoggerAppenderSkeleton::setName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetThreshold">LoggerAppenderSkeleton::setThreshold()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#method__sleep">LoggerAppenderSkeleton::__sleep()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#method__wakeup">LoggerAppenderSkeleton::__wakeup()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../log4php/LoggerAppender.html">LoggerAppender</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodaddFilter">LoggerAppender::addFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodclearFilters">LoggerAppender::clearFilters()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodclose">LoggerAppender::close()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methoddoAppend">LoggerAppender::doAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodfactory">LoggerAppender::factory()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetErrorHandler">LoggerAppender::getErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetFilter">LoggerAppender::getFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetLayout">LoggerAppender::getLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetName">LoggerAppender::getName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodrequiresLayout">LoggerAppender::requiresLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsetErrorHandler">LoggerAppender::setErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsetLayout">LoggerAppender::setLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsetName">LoggerAppender::setName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsingleton">LoggerAppender::singleton()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.2</a>
+	</p>
+	</div></body>
+</html>

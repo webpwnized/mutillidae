@@ -1,0 +1,607 @@
+/* Global */
+/* ------------------------------------------------- */
+html{
+	font-family: sans-serif, tahoma, verdana, serif;
+}
+
+img{
+	border: none;
+	vertical-align:middle;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+}
+
+a:HOVER{
+	font-weight: bold;	
+}
+
+input,textarea{
+	border-radius: 5px;
+}
+
+code{
+	 margin-left:50px;
+	 white-space: pre-wrap;
+	 width: 400px;
+	 font-family: monospace;
+	 font-weight: bold;
+}
+
+*.important-code{
+	font-family: monospace;
+	font-weight:bold;
+	color:#770000;
+}
+
+fieldset{
+	margin-left:auto;
+	margin-right:auto;
+	border-radius: 5px;
+}
+
+fieldset legend{
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+div.page-title,span.page-title{
+	font-size: 18pt;
+	font-weight: bold;
+	text-align: center;
+	background-color: #dddddd;
+	border-color: #000000;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 5px;
+}
+
+div.footer{
+	font-size: 12pt;
+	font-weight: bold;
+	text-align: center;
+	background-color: #ccccff;
+}
+
+*.label{
+	font-weight: bold;
+}
+
+*.important{
+	font-weight: bold;
+}
+
+*.non-wrapping-label{
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+div.click-jacking-button{
+	border:1px dashed gray; 
+	background-color: white; 
+	/* for IE */ filter:alpha(opacity=55); 
+	/* CSS3 standard */opacity:0.55;
+	height: 200px;
+	width: 400px;
+	position: absolute;
+	text-align: center;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+input.button{
+	border-radius: 5px;
+	font-weight: bold;
+	background-color: #ccccff;
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	cursor: pointer;
+	text-align: center;
+}
+
+/* ------------------------------------------------- */
+/* Help Text Pop Up Lightbox (jQuery Colorbox) */
+/* ------------------------------------------------- */
+div.help-text {
+	color: #333333;
+	margin: 5px;
+}
+
+div.help-text-header{
+	border-width: 1px;
+	border-style: solid;
+	background-color: #dddddd;
+	text-align: center;
+	font-weight: bold;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+/* ------------------------------------------------- */
+/* Special Header Page Styles */
+/* ------------------------------------------------- */
+
+span.version-header {
+	position: relative;
+	left: 0px;
+	font-weight: bold;
+}
+
+span.logged-in-user-header {
+	position: absolute;
+	right: 20px;
+	font-weight: bold;
+}
+
+/* ------------------------------------------------- */
+/* Tutorials */
+/* ------------------------------------------------- */
+table.tutorial{
+	width:95%;
+}
+
+table.tutorial tr{
+	 border-top-color: #000000;
+	 border-top-style: groove;
+	 border-top-width: 1px;
+	 border-bottom-color: #000000;
+	 border-bottom-style: groove;
+	 border-bottom-width: 1px;
+}
+
+table.tutorial tr td{
+	color: #000000;
+	background-color: #ffffee;
+	text-align: left;
+	border: 1px solid black;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 5px;
+}
+
+table.tutorial tr.tutorial-title td{
+	background-color: #ffffaa;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+/* ------------------------------------------------- */
+/* Reports */
+/* ------------------------------------------------- */
+
+*.report-header{
+	 background-color: #dddddd;
+	 font-weight: bold;
+	 text-align: center;
+	 border-color: #000000;
+	 border-style: groove;
+	 border-width: 1px;
+	 padding: 3px;	
+	 border-radius: 5px;
+ }
+
+ *.report-details{
+	 background-color: #cccccc;
+	 font-weight: bold;
+	 border-top-color: #000000;
+	 border-top-style: dashed;
+	 border-top-width: 1px;
+	 border-bottom-color: #000000;
+	 border-bottom-style: dashed;
+	 border-bottom-width: 1px;	 
+}
+
+table tr th.report-label{
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+table tr td.report-data{
+	border-color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	/*font-weight: bold;*/
+}
+/* ------------------------------------------------- */
+/* Tables */
+/* ------------------------------------------------- */
+
+table{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+table tr td.label{
+	font-weight: bold;
+	/*color: white;*/
+	/*background-color: #000099;*/
+}
+
+table tr td{
+	padding:3px;
+}
+
+/* ---------------------------------------------------- */
+/* Main Site Frame */
+/* ---------------------------------------------------- */
+
+table.main-table-frame{
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+	width:100%;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+/* ---------------------------------------------------- */
+/* Horizontal Menu Table on the Sites Main Header Frame */
+/* ---------------------------------------------------- */
+td.header-menu-table{
+	background-color: #414141;
+}
+
+table.header-menu-table{
+	/*width: 80%;*/
+	border-collapse: collapse;
+	border-spacing: 0px;
+	padding: 0px;
+	margin: auto;
+}
+
+table.header-menu-table tr{
+	
+}
+
+table.header-menu-table tr td{
+	text-align: center;
+	background-color: #414141;
+	color: #000000;
+	font: bold 12px Verdana;
+	padding: 0px;
+}
+
+table.header-menu-table tr td a{
+	text-decoration: none;
+	display: block;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+table.header-menu-table tr td a:link, table.header-menu-table tr td a:visited{
+	color: white;
+}
+
+table.header-menu-table tr td a.selected{
+	background: black; 
+	color: white;
+}
+
+table.header-menu-table tr td a:hover{
+	background: black;
+	color: white;
+}
+
+/* ----------------------------------------------------------------- */
+/* Tables to display results and data like logs, captured data, etc. */
+/* ----------------------------------------------------------------- */
+
+table.results-table{
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+	width:100%;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+/* -------------------------- */
+/* Tables that make up forms  */
+/* -------------------------- */
+
+table tr td.form-header{
+	font-weight: bold;
+	background-color: #ffcccc;
+	text-align: center;
+	border: 1px solid black;
+	padding-left: 30px;
+	padding-right: 30px;
+	font-size: 18px;
+	border-radius: 5px;
+}
+
+/* ------------------------------------------------- */
+/* Small embedded tables like HTML5 web storage*/
+/* ------------------------------------------------- */
+
+table tr td.sub-header{
+	border-color: #000077;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #CCCCFF;
+	text-align: center;
+	font-weight: bold;
+	color: #000077;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+table tr td.sub-body{
+	border-color: #000077;
+	border-width: 1px;
+	border-style: solid;
+	text-align: center;
+	font-weight: bold;
+}
+
+/* ------------------------------------------------- */
+/* Hints */
+/* ------------------------------------------------- */
+
+div.hint-wrapper-header{
+	border-color: #999999;
+	border-width: 1px;
+	border-style: solid;
+	text-align: center;
+	font-weight: bold;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	width: 400px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+div.hint-wrapper-body{
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-bottom: 10px;
+}
+
+a.hint-header{
+	cursor: pointer;	
+}
+
+div.hint-header{
+	border-color: #999999;
+	border-width: 1px;
+	border-style: solid;
+	text-align: left;
+	font-weight: bold;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	width: 400px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+table.hint-table{
+	margin: 0px;
+}
+
+table tr.hint-header td{
+	border-color: #999999;
+	border-width: 1px;
+	border-style: solid;
+	text-align: left;
+	font-weight: bold;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 5px;
+	width: 800px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+table tr td.hint-body{
+	border-color: #999999;
+	border-width: 1px;
+	border-style: solid;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 5px;	
+}
+
+ul.hints li{
+	margin-top: 7px;
+}
+
+ol.tutorial li, ul.tutorial li{
+	margin-top: 7px;
+}
+
+/* ------------------------------------------------- */
+/* Errors */
+/* ------------------------------------------------- */
+
+table tr td.error-header{
+	border-color: #773333;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #ffcccc;
+	text-align: center;
+	font-weight: bold;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 3px;
+	font-size: 14px;
+	font-family: monospace;	
+}
+
+table tr td.error-label{
+	border-color: #777777;
+	background-color: #cccccc;
+	border-width: 1px;
+	border-style: solid;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 3px;
+	font-size: 12px;
+	font-family: monospace;
+}
+
+table tr td.error-detail{
+	border-color: #777777;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+	font-size: 12px;
+	font-family: monospace;
+}
+
+*.error-message{
+	border-color: #990000;
+	border-width: 1px;
+	border-style: dashed;
+	background-color: #FFCCCC;
+	text-align: center;
+	font-weight: bold;
+	color: #990000;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+		
+*.error-details{
+	border-color: #990000;
+	border-width: 1px;
+	border-style: dashed;
+	/*background-color: #FFCCCC;*/
+	text-align: left;
+	/*font-weight: bold;*/
+	color: #000000;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+span.big-asterik{
+	font-size: 24pt;
+	color: #990000;
+	vertical-align: middle;	
+}
+
+div.database-failure-message{
+	text-align: center;
+	width: 600px;
+	text-align: left;
+	font-weight: bold;
+	color: #003300;
+	padding: 3px;	
+}
+
+/* ------------------------------------------------- */
+/* Success Messages */
+/* ------------------------------------------------- */
+
+table tr td.success-header{
+	border-color: #009900;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #99FF99;
+	text-align: center;
+	font-weight: bold;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+*.success-message{
+	border-color: #003300;
+	border-width: 1px;
+	border-style: dashed;
+	background-color: #CCFFCC;
+	text-align: center;
+	font-weight: bold;
+	color: #003300;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+/* ------------------------------------------------- */
+/* Informative Messages */
+/* ------------------------------------------------- */
+
+*.informative-message{
+	border-color: #000000;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #ccccff;
+	text-align: center;
+	font-weight: bold;
+	color: #000000;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 3px;
+}
+
+/* ------------------------------------------------- */
+/* Warning Messages */
+/* ------------------------------------------------- */
+
+*.warning-message{
+	border-color: #000000;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #ffffcc;
+	color: #000000;
+	text-align: center;
+	font-weight: bold;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 3px;	
+}
+
+/* ------------------------------------------------- */
+/* Messages for results of rebuilding the database   */
+/* ------------------------------------------------- */
+
+div.database-success-message{
+	text-align: center;
+	width: 600px;
+	text-align: left;
+	font-weight: bold;
+	color: #003300;
+	padding: 3px;	
+}
+
+div.database-informative-message{
+	text-align: center;
+	width: 600px;
+	text-align: left;
+	font-weight: bold;
+	color: #000033;
+	padding: 3px;	
+}
+
+div.database-warning-message{
+	text-align: center;
+	width: 600px;
+	text-align: left;
+	font-weight: bold;
+	color: #999900;
+	padding: 3px;	
+}

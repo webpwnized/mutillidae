@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+<!-- Authors: Chris Taylor, Ceki Gulcu. -->
+<!-- Version: 1.2 -->
+
+<!-- PHP Port Modifications Author: Marco Vassura -->
+<!-- PHP dtd Version: $Revision: 771185 $ -->
+
+<!-- A configuration element consists of optional renderer
+elements,appender elements, categories and an optional root
+element. -->
+<!-- [log4php] -->
+<!--
+    category instead of logger cannot be used. categoryFactory is not implemented in log4php.
+-->
+<!-- [/log4php] -->
+<!ELEMENT log4php:configuration (renderer*, appender*,(logger)*,root?)>
+
+<!-- The "threshold" attribute takes a level value such that all -->
+<!-- logging statements with a level equal or below this value are -->
+<!-- disabled. -->
+
+<!-- Setting the "debug" enable the printing of internal log4j logging   -->
+<!-- statements.                                                         -->
+
+<!-- By default, debug attribute is "null", meaning that we not do touch -->
+<!-- internal log4j logging settings. The "null" value for the threshold -->
+<!-- attribute can be misleading. The threshold field of a repository    -->
+<!-- cannot be set to null. The "null" value for the threshold attribute -->
+<!-- simply means don't touch the threshold field, the threshold field   --> 
+<!-- keeps its old value.                                                -->
+     
+<!ATTLIST log4php:configuration
+  xmlns:log4php            CDATA #FIXED "http://logging.apache.org/log4php"
+  threshold                (all|debug|info|warn|error|fatal|off|null) "null"
+>
+
+<!-- renderer elements allow the user to customize the conversion of  -->
+<!-- message objects to String.                                       -->
+<!ELEMENT renderer EMPTY>
+<!ATTLIST renderer
+    renderedClass  CDATA #REQUIRED
+    renderingClass CDATA #REQUIRED
+>
+
+<!-- Appenders must have a name and a class. -->
+<!-- Appenders may contain an error handler, a layout, optional parameters -->
+<!-- and filters. They may also reference (or include) other appenders. -->
+<!-- [log4php] -->
+<!-- error handler tag has no effects since log4php does not handle errors. Defintion deleted. -->
+<!-- [/log4php] -->
+<!ELEMENT appender (param*, layout?, filter*, appender-ref*)>
+<!ATTLIST appender
+  name      ID  #REQUIRED
+  class     CDATA   #REQUIRED
+>
+
+<!ELEMENT layout (param*)>
+<!ATTLIST layout
+  class     CDATA   #REQUIRED
+>
+
+<!ELEMENT filter (param*)>
+<!ATTLIST filter
+  class     CDATA   #REQUIRED
+>
+
+
+<!ELEMENT param EMPTY>
+<!ATTLIST param
+  name      CDATA   #REQUIRED
+  value     CDATA   #REQUIRED
+>
+
+<!ELEMENT priority EMPTY>
+<!ATTLIST priority
+  value   CDATA #REQUIRED
+>
+
+<!ELEMENT level EMPTY>
+<!ATTLIST level
+  value   CDATA #REQUIRED
+>
+
+<!-- If no level element is specified, then the configurator MUST not -->
+<!-- touch the level of the named logger. -->
+<!ELEMENT logger (level?,appender-ref*)>
+<!ATTLIST logger
+  name      ID  #REQUIRED
+  additivity    (true|false) "true"  
+>
+
+<!ELEMENT appender-ref EMPTY>
+<!ATTLIST appender-ref
+  ref IDREF #REQUIRED
+>
+
+<!-- If no priority element is specified, then the configurator MUST not -->
+<!-- touch the priority of root. -->
+<!-- The root category always exists and cannot be subclassed. -->
+<!ELEMENT root (param*, (priority|level)?, appender-ref*)>
+
+
+<!-- ==================================================================== -->
+<!--                       A logging event                                -->
+<!-- ==================================================================== -->
+<!ELEMENT log4php:eventSet (log4php:event*)>
+<!ATTLIST log4php:eventSet
+  xmlns:log4php          CDATA #FIXED "http://www.vxr.it/log4php/" 
+  version                (0.2|0.3) "0.3" 
+  includesLocationInfo   (true|false) "true"
+>
+
+<!ELEMENT log4php:event (log4php:message, log4php:locationInfo?) >
+
+<!-- The timestamp format is application dependent. -->
+<!ATTLIST log4php:event
+    logger     CDATA #REQUIRED
+    level      CDATA #REQUIRED
+    thread     CDATA #REQUIRED
+    timestamp  CDATA #REQUIRED
+>
+
+<!ELEMENT log4php:message (#PCDATA)>
+<!ELEMENT log4php:NDC (#PCDATA)>
+
+<!ELEMENT log4php:locationInfo EMPTY>
+<!ATTLIST log4php:locationInfo
+  class  CDATA  #REQUIRED
+  method CDATA  #REQUIRED
+  file   CDATA  #REQUIRED
+  line   CDATA  #REQUIRED
+>

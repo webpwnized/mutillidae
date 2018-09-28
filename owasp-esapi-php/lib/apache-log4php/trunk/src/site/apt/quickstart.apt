@@ -1,0 +1,117 @@
+~~ Licensed to the Apache Software Foundation (ASF) under one or more
+~~ contributor license agreements.  See the NOTICE file distributed with
+~~ this work for additional information regarding copyright ownership.
+~~ The ASF licenses this file to You under the Apache License, Version 2.0
+~~ (the "License"); you may not use this file except in compliance with
+~~ the License.  You may obtain a copy of the License at
+~~
+~~      http://www.apache.org/licenses/LICENSE-2.0
+~~
+~~ Unless required by applicable law or agreed to in writing, software
+~~ distributed under the License is distributed on an "AS IS" BASIS,
+~~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~ See the License for the specific language governing permissions and
+~~ limitations under the License.
+ ------
+ Apache log4php Quickstart
+ ------
+ ------
+ ------
+
+Apache Log4php Quickstart
+
+  First, please {{{install.html}install Log4PHP}}.
+
+
+* Overview
+
+  The log4* framework is quite flexible, e.g. you can have a all log messages of
+  a certain importance go to one big logfile, all warnings from the database
+  classes send via e-mail and all everything, even debug output from some other
+  class going to a separate file. The configuration can be done using a standard
+  property file (.ini), an XML file or an PHP array. 
+ 
+  Before we start explaining how to configure it, we first explain some terms
+  that are used all over the documentation:
+  
+  * logger - an object of the Logger class that's used like "$logger->info("foo");". 
+    Each logger has a name like "main" or "myclass".
+    
+  * hierarchy - logger names can be separated by dots like "myclass" and "myclass.database"
+    to form some kind of hierarchy. Since Log4PHP uses property inheritance, subpackages of
+    "myclass.database" could be configured differently from "myclass" while still inherit
+    their ancestors configuration options per default.
+  
+  * appender - defines if the output goes to a file, a database table, e-mail, syslog etc.
+  
+  * layout - defines how the output looks like e.g. just "INFO: foo bar" or with timestamps, logger name, PID etc.
+
+** A trivial example
+  You just want logging to stdout?
+
++--
+  require_once('log4php/Logger.php');
+  
+  $logger = Logger::getLogger("main");
+  $logger->info("foo");
+  $logger->warn("bar");
++--
+
+ This gives:
+
++--
+  Sun Jul 26 01:40:23 2009,021 [10093] INFO main - foo
+  Sun Jul 26 01:40:23 2009,030 [10093] WARN main - bar
++--
+
+** A simple example
+
+  Here is an advanced, yet still simple, log4php.properties configuration:
+
++--
+    log4php.appender.default = LoggerAppenderEcho
+    log4php.appender.default.layout = LoggerLayoutSimple
+ 
+    log4php.rootLogger = WARN, default
+  
+    log4php.logger.mylogger = INFO, default
+    log4php.additivity.mylogger = "false"
++--
+
+  This configures the so called root logger at WARN level with the default
+  appender. An additional Logger named "mylogger" is configured at INFO level.
+  If you would give one of your loggers a name which hasn't been defined, like
+  "main" in the below source, in your config file, the root logger is used.
+  Once you have created such a file, you need to define it's location by setting
+  a constant: Log4PHP will look up the configuration file and prepare the
+  framework for logging.
+
++--
+  require_once('log4php/Logger.php');
+  Logger::configure('log4php.properties');
+  
+  class MyClass {
+     private $logger;
+     
+     public function __construct() {
+         $this->logger = Logger::getLogger(__CLASS__);
+         $this->logger->debug('currently in constructor');
+     }
+  } 
+  
+  $logger = Logger::getLogger('main');
+  $logger->info('below warn and thus not printed');
+  
+  new MyClass();
++--
+ 
+   The output looks like this. It is very brief as we used SimpleLayout and hides
+   one message because the default treshhold is set to WARN:
+   
++--
+  DEBUG - currently in constructor
++--
+ 
+** Hints
+
+  * Since log4php makes use of date functions, it is recommended that you have set: date_default_timezone_set('Europe/Berlin'); or similar somewhere within your application.

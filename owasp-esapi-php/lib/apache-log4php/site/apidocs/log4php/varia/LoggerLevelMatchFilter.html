@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerLevelMatchFilter</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerLevelMatchFilter</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is a very simple filter based on level matching.</p>
+<p class="description"><p>The filter admits two options <strong>&lt;var&gt;LevelToMatch&lt;/var&gt;</strong> and  <strong>&lt;var&gt;AcceptOnMatch&lt;/var&gt;</strong>. If there is an exact match between the value  of the <strong>&lt;var&gt;LevelToMatch&lt;/var&gt;</strong> option and the level of the  <a href="../../log4php/spi/LoggerLoggingEvent.html">LoggerLoggingEvent</a>, then the <a href="../../log4php/varia/LoggerLevelMatchFilter.html#methoddecide">decide()</a> method returns  <a href="../../log4php/spi/_spi---LoggerFilter.php.html#defineLOG4PHP_LOGGER_FILTER_ACCEPT">LOG4PHP_LOGGER_FILTER_ACCEPT</a> in case the <strong>&lt;var&gt;AcceptOnMatch&lt;/var&gt;</strong>  option value is set to <em>true</em>, if it is <em>false</em> then  <a href="../../log4php/spi/_spi---LoggerFilter.php.html#defineLOG4PHP_LOGGER_FILTER_DENY">LOG4PHP_LOGGER_FILTER_DENY</a> is returned. If there is no match,  <a href="../../log4php/spi/_spi---LoggerFilter.php.html#defineLOG4PHP_LOGGER_FILTER_NEUTRAL">LOG4PHP_LOGGER_FILTER_NEUTRAL</a> is returned.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marco Vassura</li>
+				<li><span class="field">version:</span> $Revision: 556784 $</li>
+				<li><span class="field">since:</span> 0.6</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_varia---LoggerLevelMatchFilter.php.html">/varia/LoggerLevelMatchFilter.php</a> (line <span class="field">41</span>)
+		</p>
+		
+				
+		<pre><a href="../../log4php/spi/LoggerFilter.html">LoggerFilter</a>
+   |
+   --LoggerLevelMatchFilter</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<span class="var-type">boolean</span>
+					<a href="#$acceptOnMatch" title="details" class="var-name">$acceptOnMatch</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>
+					<a href="#$levelToMatch" title="details" class="var-name">$levelToMatch</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																												
+												<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#decide" title="details" class="method-name">decide</a>
+											(<span class="var-type"><a href="../../log4php/spi/LoggerLoggingEvent.html">LoggerLoggingEvent</a></span>&nbsp;<span class="var-name">$event</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#getAcceptOnMatch" title="details" class="method-name">getAcceptOnMatch</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>
+										<a href="#getLevelToMatch" title="details" class="method-name">getLevelToMatch</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setAcceptOnMatch" title="details" class="method-name">setAcceptOnMatch</a>
+											(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$acceptOnMatch</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setLevelToMatch" title="details" class="method-name">setLevelToMatch</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$l</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$acceptOnMatch" id="$acceptOnMatch"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$acceptOnMatch</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$levelToMatch" id="$levelToMatch"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>
+			<span class="var-name">$levelToMatch</span>
+						(line <span class="line-number">51</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../log4php/spi/LoggerFilter.html">LoggerFilter</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/spi/LoggerFilter.html#var$next">LoggerFilter::$next</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methoddecide" id="decide"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">decide</span> (line <span class="line-number">98</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the decision of this filter.</p>
+<p class="description"><p>Returns <a href="../../log4php/spi/_spi---LoggerFilter.php.html#defineLOG4PHP_LOGGER_FILTER_NEUTRAL">LOG4PHP_LOGGER_FILTER_NEUTRAL</a> if the <strong>&lt;var&gt;LevelToMatch&lt;/var&gt;</strong>  option is not set or if there is not match.  Otherwise, if there is a  match, then the returned decision is <a href="../../log4php/spi/_spi---LoggerFilter.php.html#defineLOG4PHP_LOGGER_FILTER_ACCEPT">LOG4PHP_LOGGER_FILTER_ACCEPT</a> if the  <strong>&lt;var&gt;AcceptOnMatch&lt;/var&gt;</strong> property is set to <em>true</em>. The  returned decision is <a href="../../log4php/spi/_spi---LoggerFilter.php.html#defineLOG4PHP_LOGGER_FILTER_DENY">LOG4PHP_LOGGER_FILTER_DENY</a> if the  <strong>&lt;var&gt;AcceptOnMatch&lt;/var&gt;</strong> property is set to <em>false</em>.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			decide
+		</span>
+					(<span class="var-type"><a href="../../log4php/spi/LoggerLoggingEvent.html">LoggerLoggingEvent</a></span>&nbsp;<span class="var-name">$event</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../log4php/spi/LoggerLoggingEvent.html">LoggerLoggingEvent</a></span>
+				<span class="var-name">$event</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../log4php/spi/LoggerFilter.html#methoddecide">LoggerFilter::decide()</a></dt>
+						<dd>Decide what to do.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetAcceptOnMatch" id="getAcceptOnMatch"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAcceptOnMatch</span> (line <span class="line-number">56</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			getAcceptOnMatch
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetLevelToMatch" id="getLevelToMatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLevelToMatch</span> (line <span class="line-number">72</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../log4php/LoggerLevel.html">LoggerLevel</a></span>
+		<span class="method-name">
+			getLevelToMatch
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetAcceptOnMatch" id="setAcceptOnMatch"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setAcceptOnMatch</span> (line <span class="line-number">64</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAcceptOnMatch
+		</span>
+					(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$acceptOnMatch</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$acceptOnMatch</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetLevelToMatch" id="setLevelToMatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setLevelToMatch</span> (line <span class="line-number">80</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setLevelToMatch
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$l</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$l</span><span class="var-description">: the level to match</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../log4php/spi/LoggerFilter.html">LoggerFilter</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../log4php/spi/LoggerFilter.html#methodactivateOptions">LoggerFilter::activateOptions()</a></span><br>
+													<span class="method-name"><a href="../../log4php/spi/LoggerFilter.html#methoddecide">LoggerFilter::decide()</a></span><br>
+													<span class="method-name"><a href="../../log4php/spi/LoggerFilter.html#methodgetNext">LoggerFilter::getNext()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.2</a>
+	</p>
+	</div></body>
+</html>

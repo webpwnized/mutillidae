@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class LoggerAppenderRollingFile</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class LoggerAppenderRollingFile</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">LoggerAppenderRollingFile extends LoggerAppenderFile to backup the log files when they reach a certain size.</p>
+<p class="description"><p>Parameters are <a href="../../log4php/appenders/LoggerAppenderRollingFile.html#var$maxFileSize">$maxFileSize</a>, <a href="../../log4php/appenders/LoggerAppenderRollingFile.html#var$maxBackupIndex">$maxBackupIndex</a>.</p><p>Contributors: Sergio Strampelli.</p><p></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marco Vassura</li>
+				<li><span class="field">version:</span> $Revision: 556784 $</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_appenders---LoggerAppenderRollingFile.php.html">/appenders/LoggerAppenderRollingFile.php</a> (line <span class="field">33</span>)
+		</p>
+		
+				
+		<pre><a href="../../log4php/LoggerAppender.html">LoggerAppender</a>
+   |
+   --<a href="../../log4php/LoggerAppenderSkeleton.html">LoggerAppenderSkeleton</a>
+      |
+      --<a href="../../log4php/appenders/LoggerAppenderFile.html">LoggerAppenderFile</a>
+         |
+         --LoggerAppenderRollingFile</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$maxBackupIndex" title="details" class="var-name">$maxBackupIndex</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$maxFileSize" title="details" class="var-name">$maxFileSize</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																				
+												<div class="method-definition">
+											<span class="method-result">LoggerAppenderRollingFile</span>
+										<a href="#LoggerAppenderRollingFile" title="details" class="method-name">LoggerAppenderRollingFile</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#append" title="details" class="method-name">append</a>
+											(<span class="var-type"><a href="../../log4php/spi/LoggerLoggingEvent.html">LoggerLoggingEvent</a></span>&nbsp;<span class="var-name">$event</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getExpandedFileName" title="details" class="method-name">getExpandedFileName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getMaxBackupIndex" title="details" class="method-name">getMaxBackupIndex</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getMaximumFileSize" title="details" class="method-name">getMaximumFileSize</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#rollOver" title="details" class="method-name">rollOver</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setFileName" title="details" class="method-name">setFileName</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$fileName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setMaxBackupIndex" title="details" class="method-name">setMaxBackupIndex</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$maxBackups</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setMaxFileSize" title="details" class="method-name">setMaxFileSize</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setMaximumFileSize" title="details" class="method-name">setMaximumFileSize</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$maxFileSize</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$maxBackupIndex" id="$maxBackupIndex"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$maxBackupIndex</span>
+			 = <span class="var-default"> 1</span>			(line <span class="line-number">65</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the maximum number of backup files to keep around.</p>
+<p class="description"><p>The <var>MaxBackupIndex</var> option determines how many backup  files are kept before the oldest is erased. This option takes  a positive integer value. If set to zero, then there will be no  backup files and the log file will be truncated when it reaches  MaxFileSize.</p><p>There is one backup file by default.</p><p></p></p>
+	
+	
+		
+		
+
+</div>
+<a name="var$maxFileSize" id="$maxFileSize"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$maxFileSize</span>
+			 = <span class="var-default"> 10485760</span>			(line <span class="line-number">51</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the maximum size that the output file is allowed to reach before being rolled over to backup files.</p>
+<p class="description"><p>In configuration files, the <var>MaxFileSize</var> option takes a  long integer in the range 0 - 2^63. You can specify the value  with the suffixes &quot;KB&quot;, &quot;MB&quot; or &quot;GB&quot; so that the integer is  interpreted being expressed respectively in kilobytes, megabytes  or gigabytes. For example, the value &quot;10KB&quot; will be interpreted  as 10240.</p><p>The default maximum file size is 10MB.</p><p>Note that MaxFileSize cannot exceed <strong>2 GB</strong>.</p><p></p></p>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../log4php/LoggerAppenderSkeleton.html">LoggerAppenderSkeleton</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$closed">LoggerAppenderSkeleton::$closed</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$errorHandler">LoggerAppenderSkeleton::$errorHandler</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$headFilter">LoggerAppenderSkeleton::$headFilter</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$layout">LoggerAppenderSkeleton::$layout</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$name">LoggerAppenderSkeleton::$name</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$requiresLayout">LoggerAppenderSkeleton::$requiresLayout</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$tailFilter">LoggerAppenderSkeleton::$tailFilter</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../log4php/LoggerAppenderSkeleton.html#var$threshold">LoggerAppenderSkeleton::$threshold</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodLoggerAppenderRollingFile" id="LoggerAppenderRollingFile"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor LoggerAppenderRollingFile</span> (line <span class="line-number">78</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">LoggerAppenderRollingFile</span>
+		<span class="method-name">
+			LoggerAppenderRollingFile
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: appender name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodappend" id="append"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">append</span> (line <span class="line-number">223</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			append
+		</span>
+					(<span class="var-type"><a href="../../log4php/spi/LoggerLoggingEvent.html">LoggerLoggingEvent</a></span>&nbsp;<span class="var-name">$event</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../log4php/spi/LoggerLoggingEvent.html">LoggerLoggingEvent</a></span>
+				<span class="var-name">$event</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../log4php/appenders/LoggerAppenderFile.html#methodappend">LoggerAppenderFile::append()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetExpandedFileName" id="getExpandedFileName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getExpandedFileName</span> (line <span class="line-number">87</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the value of the MaxBackupIndex option.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getExpandedFileName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetMaxBackupIndex" id="getMaxBackupIndex"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMaxBackupIndex</span> (line <span class="line-number">95</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the value of the MaxBackupIndex option.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getMaxBackupIndex
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetMaximumFileSize" id="getMaximumFileSize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMaximumFileSize</span> (line <span class="line-number">104</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the maximum size that the output file is allowed to reach  before being rolled over to backup files.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getMaximumFileSize
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodrollOver" id="rollOver"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">rollOver</span> (line <span class="line-number">116</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Implements the usual roll over behaviour.</p>
+<p class="description"><p>If MaxBackupIndex is positive, then files File.1, ..., File.MaxBackupIndex -1 are renamed to File.2, ..., File.MaxBackupIndex.  Moreover, File is renamed File.1 and closed. A new File is created to receive further log output.</p><p>If MaxBackupIndex is equal to zero, then the File is truncated with no backup files created.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			rollOver
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetFileName" id="setFileName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setFileName</span> (line <span class="line-number">148</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setFileName
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$fileName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$fileName</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetFileName">LoggerAppenderFile::setFileName()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodsetMaxBackupIndex" id="setMaxBackupIndex"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setMaxBackupIndex</span> (line <span class="line-number">167</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the maximum number of backup files to keep around.</p>
+<p class="description"><p>The <strong>MaxBackupIndex</strong> option determines how many backup  files are kept before the oldest is erased. This option takes  a positive integer value. If set to zero, then there will be no  backup files and the log file will be truncated when it reaches  MaxFileSize.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setMaxBackupIndex
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$maxBackups</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$maxBackups</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetMaxFileSize" id="setMaxFileSize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setMaxFileSize</span> (line <span class="line-number">197</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the maximum size that the output file is allowed to reach before being rolled over to backup files.</p>
+<p class="description"><p>In configuration files, the <strong>MaxFileSize</strong> option takes an  long integer in the range 0 - 2^63. You can specify the value  with the suffixes &quot;KB&quot;, &quot;MB&quot; or &quot;GB&quot; so that the integer is  interpreted being expressed respectively in kilobytes, megabytes  or gigabytes. For example, the value &quot;10KB&quot; will be interpreted  as 10240.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setMaxFileSize
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetMaximumFileSize" id="setMaximumFileSize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setMaximumFileSize</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the maximum size that the output file is allowed to reach  before being rolled over to backup files.</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../log4php/appenders/LoggerAppenderRollingFile.html#methodsetMaxFileSize">LoggerAppenderRollingFile::setMaxFileSize()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setMaximumFileSize
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$maxFileSize</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$maxFileSize</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../log4php/appenders/LoggerAppenderFile.html">LoggerAppenderFile</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#method__construct">LoggerAppenderFile::__construct()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodactivateOptions">LoggerAppenderFile::activateOptions()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodappend">LoggerAppenderFile::append()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodclose">LoggerAppenderFile::close()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodcloseFile">LoggerAppenderFile::closeFile()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodgetAppend">LoggerAppenderFile::getAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodgetFile">LoggerAppenderFile::getFile()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodgetFileName">LoggerAppenderFile::getFileName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodreset">LoggerAppenderFile::reset()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetAppend">LoggerAppenderFile::setAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetFile">LoggerAppenderFile::setFile()</a></span><br>
+													<span class="method-name"><a href="../../log4php/appenders/LoggerAppenderFile.html#methodsetFileName">LoggerAppenderFile::setFileName()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../log4php/LoggerAppenderSkeleton.html">LoggerAppenderSkeleton</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#method__construct">LoggerAppenderSkeleton::__construct()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodactivateOptions">LoggerAppenderSkeleton::activateOptions()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodaddFilter">LoggerAppenderSkeleton::addFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodappend">LoggerAppenderSkeleton::append()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodclearFilters">LoggerAppenderSkeleton::clearFilters()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methoddoAppend">LoggerAppenderSkeleton::doAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodfinalize">LoggerAppenderSkeleton::finalize()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetErrorHandler">LoggerAppenderSkeleton::getErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetFilter">LoggerAppenderSkeleton::getFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetFirstFilter">LoggerAppenderSkeleton::getFirstFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetLayout">LoggerAppenderSkeleton::getLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetName">LoggerAppenderSkeleton::getName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodgetThreshold">LoggerAppenderSkeleton::getThreshold()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodisAsSevereAsThreshold">LoggerAppenderSkeleton::isAsSevereAsThreshold()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodrequiresLayout">LoggerAppenderSkeleton::requiresLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetErrorHandler">LoggerAppenderSkeleton::setErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetLayout">LoggerAppenderSkeleton::setLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetName">LoggerAppenderSkeleton::setName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#methodsetThreshold">LoggerAppenderSkeleton::setThreshold()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#method__sleep">LoggerAppenderSkeleton::__sleep()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppenderSkeleton.html#method__wakeup">LoggerAppenderSkeleton::__wakeup()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../log4php/LoggerAppender.html">LoggerAppender</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodaddFilter">LoggerAppender::addFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodclearFilters">LoggerAppender::clearFilters()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodclose">LoggerAppender::close()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methoddoAppend">LoggerAppender::doAppend()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodfactory">LoggerAppender::factory()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetErrorHandler">LoggerAppender::getErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetFilter">LoggerAppender::getFilter()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetLayout">LoggerAppender::getLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodgetName">LoggerAppender::getName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodrequiresLayout">LoggerAppender::requiresLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsetErrorHandler">LoggerAppender::setErrorHandler()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsetLayout">LoggerAppender::setLayout()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsetName">LoggerAppender::setName()</a></span><br>
+													<span class="method-name"><a href="../../log4php/LoggerAppender.html#methodsingleton">LoggerAppender::singleton()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.2</a>
+	</p>
+	</div></body>
+</html>

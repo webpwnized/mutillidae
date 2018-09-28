@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Properties file for OWASP Enterprise Security API (ESAPI) You can find more
+    information about ESAPI at:
+    http://www.owasp.org/index.php/Category:OWASP_Enterprise_Security_API
+
+    -->
+<esapi-properties>
+  <esapi-config>
+    <AccessControl>reference/DefaultAccessController</AccessControl>
+    <Authenticator>reference/FileBasedAuthenticator</Authenticator>
+    <Encoder>reference/DefaultEncoder</Encoder>
+    <Encryptor>reference/DefaultEncryptor</Encryptor>
+    <Executor>reference/DefaultExecutor</Executor>
+    <HTTPUtilities>reference/DefaultHTTPUtilities</HTTPUtilities>
+    <IntrusionDetector>reference/DefaultIntrusionDetector</IntrusionDetector>
+    <Logger>reference/DefaultLogFactory</Logger>
+    <Randomizer>reference/DefaultRandomizer</Randomizer>
+    <Validator>reference/DefaultValidator</Validator>
+  </esapi-config>
+  <Authenticator>
+    <RememberTokenDuration>14</RememberTokenDuration>
+    <AllowedLoginAttempts>3</AllowedLoginAttempts>
+    <MaxOldPasswordHashes>13</MaxOldPasswordHashes>
+    <UsernameParameterName>username</UsernameParameterName>
+    <PasswordParameterName>password</PasswordParameterName>
+    <!-- Session Timeouts (in minutes) -->
+    <IdleTimeoutDuration>20</IdleTimeoutDuration>
+    <AbsoluteTimeoutDuration>120</AbsoluteTimeoutDuration>
+  </Authenticator>
+  <Encoder>
+    <AllowMultipleEncoding>false</AllowMultipleEncoding>
+    <DefaultCodecList>
+      <codec>HTMLEntityCodec</codec>
+      <codec>PercentCodec</codec>
+      <codec>JavaScriptCodec</codec>
+    </DefaultCodecList>
+  </Encoder>
+  <ExecutorWindows>
+    <WorkingDirectory>%SYSTEMROOT%\Temp</WorkingDirectory>
+    <ApprovedExecutables>
+      <command>%SYSTEMROOT%\system32\cmd.exe</command>
+      <command>%SYSTEMROOT%\system32\runas.exe</command>
+    </ApprovedExecutables>
+  </ExecutorWindows>
+  <ExecutorUnix>
+    <WorkingDirectory>/tmp</WorkingDirectory>
+    <ApprovedExecutables>
+      <command>/bin/sh</command>
+      <command>/usr/bin/sudo</command>
+    </ApprovedExecutables>
+  </ExecutorUnix>
+  <Encryptor>
+    <!--
+            Algorithms WARNING: Changing these settings will invalidate all user
+            passwords, hashes, and encrypted data WARNING: Reasonable values for
+            these algorithms will be tested and documented in a future release
+        -->
+    <CharacterEncoding>UTF-8</CharacterEncoding>
+    <EncryptionAlgorithm>ESAPI_CRYPTO_MODE_RIJNDAEL-256_ECB</EncryptionAlgorithm>
+    <EncryptionKeyLength>256</EncryptionKeyLength>
+    <HashAlgorithm>ESAPI_CRYPTO_MODE_SHA1</HashAlgorithm>
+    <HashIterations>1024</HashIterations>
+    <RandomAlgorithm>SHA1PRNG</RandomAlgorithm>
+    <DigitalSignatureAlgorithm>DSA</DigitalSignatureAlgorithm>
+    <DigitalSignatureKeyLength>1024</DigitalSignatureKeyLength>
+    <secrets>
+      <MasterKey>pJhlri8JbuFYDgkqtHmm9s0Ziug2PE7ovZDyEPm4j14=</MasterKey>
+      <MasterSalt>SbftnvmEWD5ZHHP+pX3fqugNysc=</MasterSalt>
+    </secrets>
+  </Encryptor>
+  <HttpUtilities>
+    <!-- Force flags on cookies, if you use HttpUtilities to set cookies -->
+    <ForceHttpOnlySession>false</ForceHttpOnlySession>
+    <ForceSecureSession>false</ForceSecureSession>
+    <ForceHttpOnlyCookies>true</ForceHttpOnlyCookies>
+    <ForceSecureCookies>true</ForceSecureCookies>
+    <!-- File upload configuration (Windows) -->
+    <UploadDirWindows>C:\\ESAPI\\testUpload</UploadDirWindows>
+    <UploadTempDirWindows>C:\\temp</UploadTempDirWindows>
+    <!-- File upload configuration (Unix) -->
+    <UploadDirUnix>/tmp/esapi/testUpload</UploadDirUnix>
+    <UploadTempDirUnix>/tmp</UploadTempDirUnix>
+    <ApprovedUploadExtensions>
+      <extension>.zip</extension>
+      <extension>.pdf</extension>
+      <extension>.doc</extension>
+      <extension>.docx</extension>
+      <extension>.ppt</extension>
+      <extension>.pptx</extension>
+      <extension>.tar</extension>
+      <extension>.gz</extension>
+      <extension>.tgz</extension>
+      <extension>.rar</extension>
+      <extension>.war</extension>
+      <extension>.jar</extension>
+      <extension>.ear</extension>
+      <extension>.xls</extension>
+      <extension>.rtf</extension>
+      <extension>.properties</extension>
+      <extension>.java</extension>
+      <extension>.class</extension>
+      <extension>.txt</extension>
+      <extension>.xml</extension>
+      <extension>.jsp</extension>
+      <extension>.jsf</extension>
+      <extension>.exe</extension>
+      <extension>.dll</extension>
+    </ApprovedUploadExtensions>
+    <maxUploadFileBytes>500000000</maxUploadFileBytes>
+    <!--
+        Using UTF-8 throughout your stack is highly recommended. That includes
+        your database driver, container, and any other technologies you may be
+        using. Failure to do this may expose you to Unicode transcoding
+        injection attacks. Use of UTF-8 does not hinder internationalization.
+        -->
+    <ResponseContentType>text/html; charset=UTF-8</ResponseContentType>
+    <ApprovedIncludes>
+      <include>test.php</include>
+      <include>foo.php</include>
+      <include>bar.php</include>
+    </ApprovedIncludes>
+    <ApprovedResources>
+      <resource>foo</resource>
+      <resource>admin</resource>
+      <resource>users.txt</resource>
+    </ApprovedResources>
+  </HttpUtilities>
+  <Logger>
+    <!--
+        Logging level values are ALL, DEBUG, INFO, WARN, ERROR, FATAL and OFF.
+         -->
+    <LogLevel>ALL</LogLevel>
+    <!--
+        If you expect logs to contain HTML or hostile input, set this to true
+        -->
+    <LogEncodingRequired>true</LogEncodingRequired>
+    <!--
+        Application name used not only by the logger, but by ESAPI itself.
+        -->
+    <ApplicationName>ExampleApplicationName</ApplicationName>
+    <!--
+        Determines whether ESAPI should log the application name. This might be
+        clutter in some single-server/single-app environments.
+        -->
+    <LogApplicationName>false</LogApplicationName>
+    <!--
+        Determines whether ESAPI should log the server IP and port. This might
+        be clutter in some single-server environments.
+        -->
+    <LogServerIP>true</LogServerIP>
+    <!--
+        LogFileName, the name of the logging file. Provide a full directory path
+        (e.g., C:\\ESAPI\\ESAPI_logging_file) if you want to place it in a
+        specific directory.
+        -->
+    <LogFileName>./../test/testoutput/ESAPI_logging_file_test</LogFileName>
+    <!--
+        MaxLogFileSize, the max size (in bytes) of a single log file before it
+        cuts over to a new one (default is 10,000,000)
+        -->
+    <MaxLogFileSize>1000000</MaxLogFileSize>
+    <!--
+        MaxLogFileBackups, the maximum number of logfile backups kept.  The
+        oldest will be overwritten if this number has been reached when a new
+        backup is to be made. Default value is 10.
+        -->
+    <MaxLogFileBackups>10</MaxLogFileBackups>
+    <!--
+        LogFileDateFormat, is a date format string following the PHP date()
+        function format {@link http://php.net/manual/en/function.date.php} and
+        is used to format the date in log file entries.  The default format is
+        'Y-m-d H:i:s P' which produces, for example: 2010-01-31 23:59:59 +00:00
+        -->
+    <LogFileDateFormat>Y-m-d H:i:s P</LogFileDateFormat>
+  </Logger>
+  <Validator>
+    <!--
+        Validation The ESAPI validator does many security checks on input,
+        such as canonicalization and whitelist validation. Note that all of
+        these validation rules are applied *after* canonicalization.
+
+        Double-encoded characters (even with different encodings involved, are
+        never allowed. To use: First set up a pattern below. You can choose
+        any name you want, prefixed by the word "Validation." For example:
+        Validaton.email=^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$ Then
+        you can validate in your code against the pattern like this:
+        Validator.getInstance().getValidDataFromBrowser( "Email", input );
+        Validator.getInstance().isValidDataFromBrowser( "Email", input );
+
+        J2EE reference implementation has additional external validation files.
+        PHP is a bit too slow for that.
+        -->
+    <ConfigurationFile>validation.xml</ConfigurationFile>
+    <!-- Validation expressions used by this application and ESAPI -->
+    <ValidationExpressions>
+      <!-- Test application validation strings -->
+      <regexp name="SafeString" value="^[\p{L}\p{N}.]{0,1024}$" />
+      <regexp name="Email" value="^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[a-zA-Z]{2,4}$" />
+      <regexp name="IPAddress" value="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" />
+      <regexp name="URL" value="^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\:\'\/\\\+=&amp;%\$#_]*)?$" />
+      <regexp name="CreditCard" value="^(\d{4}[- ]?){3}\d{4}$" />
+      <regexp name="SSN" value="^(?!000)([0-6]\d{2}|7([0-6]\d|7[012]))([ -]?)(?!00)\d\d\3(?!0000)\d{4}$"></regexp>
+      <!-- Validators used by ESAPI -->
+      <regexp name="AccountName" value="^[a-zA-Z0-9]{3,20}$" />
+      <regexp name="SystemCommand" value="^[a-zA-Z\-\/]{0,64}$" />
+      <regexp name="RoleName" value="^[a-z]{1,20}$" />
+      <regexp name="Redirect" value="^\\/test.*$" />
+      <regexp name="PrintableASCII" value="^[a-zA-Z0-9&#32;!&#34;#$%&amp;'()*+,\-.\/:;&#60;=>?@[\\\]^_`{|}~]+$" />
+      <!--
+				Global HTTP Validation Rules.
+				Values with Base64 encoded data (e.g. encrypted state) will need at least [a-zA-Z0-9\/+=]
+			-->
+      <regexp name="HTTPScheme" value="^(http|https)$" />
+      <regexp name="HTTPServerName" value="^[a-zA-Z0-9_.\-]*$" />
+      <regexp name="HTTPParameterName" value="^[a-zA-Z0-9_]{0,32}$" />
+      <regexp name="HTTPParameterValue" value="^[a-zA-Z0-9.\-\/+=_ ]*$" />
+      <regexp name="HTTPCookieName" value="^[a-zA-Z0-9\-_]{0,32}$" />
+      <regexp name="HTTPCookieValue" value="^[a-zA-Z0-9\-\/+=_ ]*$" />
+      <regexp name="HTTPHeaderName" value="^[a-zA-Z0-9\-_]{0,32}$" />
+      <regexp name="HTTPHeaderValue" value="^[a-zA-Z0-9()\-=\*\.\?;,+\/:&amp;_ ]*$" />
+      <regexp name="HTTPContextPath" value="^[a-zA-Z0-9.\-_]*$" />
+      <regexp name="HTTPPath" value="^[a-zA-Z0-9.\-_]*$" />
+      <regexp name="HTTPQueryString" value="^[a-zA-Z0-9()\-=\*\.\?;,+\/:&amp;_ ]{1,50}$" />
+      <regexp name="HTTPURI" value="^[a-zA-Z0-9()\-=\*\.\?;,+\/:&amp;_ ]*$" />
+      <regexp name="HTTPURL" value="^.*$" />
+      <regexp name="HTTPPHPSESSIONID" value="^[A-Z0-9]{10,30}$" />
+      <!-- Validation of file related input -->
+      <regexp name="FileName" value="^[a-zA-Z0-9!@#$%^&amp;{}\[\]()_+\-=,.~'` ]{1,255}$" />
+      <regexp name="DirectoryName" value="^[a-zA-Z0-9:!@#$%^&amp;{}\[\]()_+\-=,.~'` ]{1,255}$" />
+      <regexp name="Number" value="^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$" />
+      <regexp name="Integer" value="^[-+]?[0-9]+$" />
+    </ValidationExpressions>
+  </Validator>
+  <IntrusionDetector>
+    <!--
+        Intrusion Detection.  Each event has a base to which .count, .interval,
+        and .action are added.  The IntrusionException will fire if we receive
+        "count" events within "interval" seconds.  The IntrusionDetector is
+        configurable to take the following actions: log, logout and disable
+        (multiple actions are allowed).  It can be disabled completely by
+        setting the DisableIntrusionDetection to true.
+        -->
+    <DisableIntrusionDetection>false</DisableIntrusionDetection>
+    <event name="test" count="2" interval="10">
+      <action>disable</action>
+      <action>log</action>
+    </event>
+    <!--
+            Exception Events All EnterpriseSecurityExceptions are registered
+            automatically Call IntrusionDetector.getInstance().addException(e)
+            for Exceptions that do not extend EnterpriseSecurityException. Use
+            the classname of the exception as the base.
+        -->
+    <!-- any intrusion is an attack -->
+    <event name="IntrusionException" count="1" interval="1">
+      <action>disable</action>
+      <action>log</action>
+      <action>logout</action>
+    </event>
+    <!-- for test purposes -->
+    <event name="IntegrityException" count="10" interval="5">
+      <action>disable</action>
+      <action>log</action>
+      <action>logout</action>
+    </event>
+    <!-- rapid validation errors indicate scans or attacks in progress -->
+    <event name="ValidationException" count="10" interval="10">
+      <action>log</action>
+      <action>logout</action>
+    </event>
+    <!-- sessions jumping between hosts indicates a session hijacking -->
+    <event name="AuthenticationHostException" count="2" interval="10">
+      <action>log</action>
+      <action>logout</action>
+    </event>
+  </IntrusionDetector>
+
+  <SpecialDebugging>
+    <!--
+        SpecialDebugging is currently used only by CodecDebug to determine whether
+        it should perform any work.  The output from CodecDebug is designed to make
+        the encoding and decoding of characters visible. CodecDebug log entries span
+        several lines of the log file and are the only log entries from which
+        carriage return and line feed characters are not removed.  If you wish to
+        enable SpecialDebugging you should also set the LogEncodingRequired property
+        to false or the output will be much less useful - needless to say, log files
+        which are not encoded should not be viewed in web browser or other user
+        agents which render HTML markup.
+    -->
+    <Enabled>false</Enabled>
+  </SpecialDebugging>
+
+</esapi-properties>
