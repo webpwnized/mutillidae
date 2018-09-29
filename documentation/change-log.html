@@ -13,6 +13,17 @@ TODO: Make these videos: buffer overflows, xml entity expansion
 <blockquote>
 	<div>Change Log for OWASP Mutillidae II 2.6.67:</div>
 	<ul>
+		<li>BUG FIX: Corrected several errors in MySQLHandler.php including not trying various passwords
+		from various installations of Mutillidae. The passwords that will be tried automatically
+		are blank, samurai, mutillidae and the password in config file includes/database-config.php
+		</li>	
+	</ul>
+</blockquote>
+
+<div><span style="font-weight:bold;">09/26/2018</span>: Jeremy Druin</div>
+<blockquote>
+	<div>Change Log for OWASP Mutillidae II 2.6.67:</div>
+	<ul>
 		<li>Added hints page for setting up HTTPS with self signed certificate</li>
 		<li>Added link to jump to videos on help pages</li>
 		<li>Made a new hint about setting up Apache virtual hosts</li>
