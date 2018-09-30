@@ -100,15 +100,8 @@
 	<link rel="stylesheet" type="text/css" href="./styles/ddsmoothmenu/ddsmoothmenu.css" />
 	<link rel="stylesheet" type="text/css" href="./styles/ddsmoothmenu/ddsmoothmenu-v.css" />
 
-	<script type="text/javascript" src="./javascript/bookmark-site.js"></script>
 	<script type="text/javascript" src="./javascript/ddsmoothmenu/ddsmoothmenu.js"></script>
-	<script type="text/javascript" src="./javascript/ddsmoothmenu/jquery.min.js">
-		/***********************************************
-		* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
-		* This notice MUST stay intact for legal use
-		* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
-		***********************************************/
-	</script>
+	<script type="text/javascript" src="./javascript/ddsmoothmenu/jquery.min.js"></script>
 	<script type="text/javascript">
 		ddsmoothmenu.init({
 			mainmenuid: "smoothmenu1", //menu DIV id

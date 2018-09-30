@@ -740,7 +740,7 @@
 				<li><a href="index.php?page=credits.php">Credits</a></li>
 				<li>
 					<a href="https://www.sans.org/reading-room/whitepapers/application/introduction-owasp-mutillidae-ii-web-pen-test-training-environment-34380" target="_blank">
-						Whitepaper: Introduction to OWASP Mutillidae II Web Pen Test Training Environment
+						Whitepaper: Introduction to the Mutillidae Web Pen Test Training Environment
 					</a>
 				</li>
 			</ul>
@@ -749,12 +749,7 @@
 			<a href="">Resources</a>
 			<ul>
 				<li>
-					<a onclick="bookmarkSite();" href="">
-						Bookmark Site
-					</a>
-				</li>
-				<li>
-					<a href="http://sourceforge.net/projects/mutillidae/files/mutillidae-project/" target="_blank">
+					<a href="https://github.com/webpwnized/mutillidae" target="_blank">
 						Latest Version of OWASP Mutillidae II
 					</a>
 				</li>
@@ -765,7 +760,7 @@
 				</li>
 				<li>
 					<a href="https://addons.mozilla.org/en-US/firefox/collections/jdruin/pro-web-developer-qa-pack/" target="_blank">
-						Professional Web Application Developer Quality Assurance Pack
+					Web Penetration Testing Add-Ons
 					</a>
 				</li>
 			</ul>
