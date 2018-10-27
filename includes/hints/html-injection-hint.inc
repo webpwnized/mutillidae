@@ -86,7 +86,7 @@
 					try{ 
 						lXMLHTTP = new XMLHttpRequest(); 
 					}catch (e) { 
-						alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+						alert(e.message); 
 					};//end try
 				};//end try
 			};//end try
@@ -102,7 +102,7 @@
 			lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;); 
 			lXMLHTTP.send(lData);		
 		}catch(e){ 
-			alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+			alert(e.message); 
 		};
 		alert(&#39;Thanks! You may continue now.&#39;);
 		document.getElementById(&#39;modal&#39;).setAttribute(&#39;style&#39;, &#39;&#39;);

