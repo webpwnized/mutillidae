@@ -397,6 +397,7 @@ try{
 			('conference-room-lookup.php', 56, 1),
 			('conference-room-lookup.php', 59, 1),
 			('conference-room-lookup.php', 63, 1),
+			('conference-room-lookup.php', 64, 1),
 			('credits.php', 19, 1),
 			('credits.php', 56, 1),
 			('credits.php', 59, 1),
@@ -701,6 +702,7 @@ try{
 		(61, 'Set Up Apache Virtual Hosts', 'setting-up-virtual-hosts-hint.inc'),
 		(62, 'Set Up Local Hostnames', 'setting-up-local-hostnames-hint.inc'),
 		(63, 'LDAP Injection', 'ldap-injection-hint.inc'),
+		(64, 'Setting up LDAP Server', 'ldap-setup-hint.inc'),
 		(99, 'Hints Not Found', 'hints-not-found.inc')";
 	
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);

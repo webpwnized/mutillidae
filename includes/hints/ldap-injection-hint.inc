@@ -1,58 +1,10 @@
 <br/><br/>
-<span class="report-header">Setting up LDAP server for Mutillidae</span>
-<br/><br/>
-Install Stand-Alone LDAP Daemon (slapd). When asked, 
-set the admin password to "mutillidae" (without the quotes). If these settings are not desired, ensure 
-whatever settings are chosen match those in includes/ldap-config.inc
-<br/>
-<code>
-	sudo apt install slapd ldap-utils
-</code>
-<br/>
-Check that the server is running. The status should be "active (running)".
-<br/>
-<code>
-	systemctl status slapd
-</code>
-<br/>
-Configure the LDAP server with dpkg-reconfigure
-<br/>
-<code>
-	sudo dpkg-reconfigure slapd
-</code>
-<br/>
-Enter the following values
-<br/><br/>
-Omit LDAP server configuration: <span class="label">NO</span><br/>
-DNS domain name: <span class="label">mutillidae.local</span><br/>
-Organization name: <span class="label">mutillidae</span><br/>
-Administrator password: <span class="label">mutillidae</span><br/>
-Database backend: <span class="label">MDB</span><br/>
-Do you want the database to be removed when slapd is purged? <span class="label">No</span><br/>
-Move old database? <span class="label">Yes</span><br/>
-Allow LDAPv2 protocol? <span class="label">No</span> (Note: Not all packages ask this question)
-<br/><br/>
-Install php-ldap. Determine version of PHP with
-<br/>
-<code>
-	php -v
-</code>
-<br/>
-Install the version of php-ldap that matches the version of PHP. For example
-<br/>
-<code>
-	sudo apt-get install php-ldap
-	sudo service apache2 restart
-</code>
-<br/>
-Import the LDIF file to recreate the LDAP directory used by Mutillidae. Apache Directory Studio is 
-an easy-to-use tool capible of importing LDIF files. The LDIF file is located in file
-<br/>
-<code>
-	data/mutillidae.ldif
-</code>
-<br/>
 <span class="report-header">Overview</span>
+<br/><br/>
+LDAP injection attempts to input
+ snippets of LDAP script into an application that passes the input to an LDAP server.
+ The attack takes advantage of the trust the LDAP server has in the application
+The attack executes on the LDAP server using the application account
 <br/><br/>
 LDAP injection allows an attacker to bypass access controls on LDAP data stores. This may
 result in data disclosure. Depending on how the application interprets the data extracted,
@@ -80,11 +32,19 @@ they make excellent values for fuzzing.
 	<li>Double-quote, plus, comma, semi-colon, less-than, greater-than, backslash</li>
 	<li>Null (U+0000)</li>
 </ul>
+These characters can be placed into a file with the following Python code
 <br/>
+<code>
+python -c 'for i in [0x20,0x23,0X22,0X2B,0X2C,0X3B,0X3C,0X3E,0x5C,0x00]:print(chr(i))' > /tmp/injections.txt
+</code>
+<br/><br/>
 <span class="report-header">Exploitation</span>
 <br/><br/>
 Similar to SQL injection, there is no particular pattern that will work. It depends on 
-the code implemented by the application. However, the following general patterns 
+the code implemented by the application.
+The correct injection to use may not be obvious.
+Error message do not always disclose query or search logic.
+Learning common design patterns helps know which injections might work. The following general patterns 
 apply to many applications.
 <br/><br/>
 If there is no logic operator (OR or AND), the bolded injections may work assuming they fit
@@ -119,6 +79,6 @@ The following injections work in Mutillidae Conference Room Lookup page
 <br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-I got nothing
+I got nothing. Probably in future release though.
 <?php #echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoExploitLocalFileInclusionVulnerabilityusingBurpSuite);?>
 <br/><br/>
