@@ -392,6 +392,11 @@ try{
 			('client-side-control-challenge.php', 51, 1),
 			('client-side-control-challenge.php', 56, 1),
 			('client-side-control-challenge.php', 59, 1),
+			('conference-room-lookup.php', 29, 1),
+			('conference-room-lookup.php', 30, 1),
+			('conference-room-lookup.php', 56, 1),
+			('conference-room-lookup.php', 59, 1),
+			('conference-room-lookup.php', 63, 1),
 			('credits.php', 19, 1),
 			('credits.php', 56, 1),
 			('credits.php', 59, 1),
@@ -695,6 +700,7 @@ try{
 		(60, 'Set Up HTTPS Self-signed Certificate', 'setting-up-ssl-hint.inc'),
 		(61, 'Set Up Apache Virtual Hosts', 'setting-up-virtual-hosts-hint.inc'),
 		(62, 'Set Up Local Hostnames', 'setting-up-local-hostnames-hint.inc'),
+		(63, 'LDAP Injection', 'ldap-injection-hint.inc'),
 		(99, 'Hints Not Found', 'hints-not-found.inc')";
 	
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -774,7 +780,8 @@ try{
 		(50, '<span class=\"label\">Path Relative Stylesheet Injection</span>: Within this page is an iframe containing another page. The page being framed is vulnerable to path relative stylesheet injection.'),
 		(51, '<span class=\"label\">Client-side Security Control Bypass</span>: This page attempts to implement security using client-side security controls. Any page using such controls, including this page, is vulnerable to security control bypass.'),
 		(53, '<span class=\"label\">SQL Injection with SQLMap</span>: This page contains an sql injection vulnerability. The SQLMap tool may be able to automate testing and confirming this vulnerability.'),
-		(54, '<span class=\"label\">Insufficent Transport Layer Protection</span>: This page is vulnerable to interception with wireshark or tcpdump.')";
+		(54, '<span class=\"label\">Insufficent Transport Layer Protection</span>: This page is vulnerable to interception with wireshark or tcpdump.'),
+	    (63, '<span class=\"label\">LDAP Injection</span>: This page is vulnerable to LDAP injection.')";
 	
 	
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);

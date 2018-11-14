@@ -177,6 +177,12 @@
 							</ul>
 						</li>
 						<li>
+							<a href="">LDAP Injection</a>
+							<ul>
+								<li><a href="index.php?page=conference-room-lookup.php">Conference Room Lookup</a></li>
+							</ul>
+						</li>
+						<li>
 							<a href="">Parameter Addition</a>
 							<ul>
 								<li><a href="index.php?page=repeater.php">Repeater</a></li>

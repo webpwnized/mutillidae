@@ -33,6 +33,7 @@
 				<li>JavaScript Injection</li>
 				<li>JavaScript validation bypass</li>
 				<li>JSON injection</li>
+				<li>LDAP injection</li>
 			</ul>
 		</td>
 		<td>
@@ -176,6 +177,14 @@
 		</li>
 		<li>Method tampering</li>
 		<li>Client-side control bypass</li>
+	</ul>
+</div>
+
+<p class="label">conference-room-lookup.php</p>
+<div style="padding-left: 40px;">
+	<ul>
+		<li>LDAP injection</li>
+		<li>Method tampering</li>
 	</ul>
 </div>
 

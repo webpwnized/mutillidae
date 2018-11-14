@@ -1,0 +1,87 @@
+version: 1
+
+dn: dc=mutillidae,dc=local
+objectClass: organization
+objectClass: dcObject
+objectClass: top
+dc: mutillidae
+o: mutillidae
+
+dn: cn=admin,dc=mutillidae,dc=local
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+cn: admin
+userPassword: {SSHA}jnKvM5dTUPJGYEwAiAqdHrEG/Yavkiyc
+description: LDAP administrator
+
+dn: ou=rooms,dc=mutillidae,dc=local
+objectClass: top
+objectClass: organizationalUnit
+ou: rooms
+
+dn: ou=users,dc=mutillidae,dc=local
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=groups,dc=mutillidae,dc=local
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+
+dn: cn=1F104,ou=rooms,dc=mutillidae,dc=local
+objectClass: top
+objectClass: room
+cn: 1F104
+description: 1st Floor Conference Room
+roomNumber: 104
+
+dn: cn=2F204,ou=rooms,dc=mutillidae,dc=local
+objectClass: top
+objectClass: room
+cn: 2F204
+description: 2nd Floor Conference Room
+roomNumber: 204
+
+dn: cn=Joe's Place,ou=rooms,dc=mutillidae,dc=local
+objectClass: top
+objectClass: room
+cn: Joe's Place
+
+dn: cn=fred,ou=users,dc=mutillidae,dc=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: fred
+sn: mack
+uid: fred
+userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
+
+dn: cn=sally,ou=users,dc=mutillidae,dc=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: sally
+sn: up
+uid: sally
+userPassword: {SHA}cMzZAHM41tgd07YnFiG5z5qX6gA=
+
+dn: cn=jeremy,ou=users,dc=mutillidae,dc=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: jeremy
+sn: d
+uid: jeremy
+userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
+
+dn: cn=admins,ou=groups,dc=mutillidae,dc=local
+objectClass: top
+objectClass: groupOfNames
+cn: admins
+member: cn=jeremy,ou=users,dc=mutillidae,dc=local
+member: cn=fred,ou=users,dc=mutillidae,dc=local
+
