@@ -79,6 +79,7 @@ The following injections work in Mutillidae Conference Room Lookup page
 <br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-I got nothing. Probably in future release though.
-<?php #echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoExploitLocalFileInclusionVulnerabilityusingBurpSuite);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntrotoLDAPInjectionPart1Overview);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntrotoLDAPInjectionPart2Discovery);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntrotoLDAPInjectionPart3PracticalUsage);?>
 <br/><br/>

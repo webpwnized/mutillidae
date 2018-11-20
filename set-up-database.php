@@ -1031,7 +1031,10 @@ try{
 	        (147, '0wIUci7s3gM', 'How to Display Errors in PHP Pages'),
 	        (148, 'TcgeRab7ayM', 'How to Install Mutillidae on Linux'),
 	        (149, 'sJd0ir9-jSc', 'How to Create Self-Signed Certificate in Apache'),
-	        (150, '79mOiU3GfnQ', 'How to Create Virtual Hosts in Apache')";
+	        (150, '79mOiU3GfnQ', 'How to Create Virtual Hosts in Apache'),
+        	(151, 'iUbqJy_MOiE', 'Intro to LDAP Injection: Part 1 - Overview'),
+        	(152, 'DkKUDbEt46A', 'Intro to LDAP Injection: Part 2 - Discovery'),
+            (153, 'Bdpc-LjmKLc', 'Intro to LDAP Injection: Part 3 - Practical Usage')";
 
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {

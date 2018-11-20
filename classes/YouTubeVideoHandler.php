@@ -187,7 +187,10 @@ class YouTubeVideoHandler {
 	public $HowtoInstallMutillidaeonLinux = 148;
 	public $HowtoCreateSelfSignedCertificateinApache = 149;
 	public $HowtoCreateVirtualHostsinApache = 150;
-
+	public $IntrotoLDAPInjectionPart1Overview = 151;
+	public $IntrotoLDAPInjectionPart2Discovery = 152;
+	public $IntrotoLDAPInjectionPart3PracticalUsage = 153;
+	
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){
 		$this->mSecurityLevel = $pSecurityLevel;
