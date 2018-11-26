@@ -120,7 +120,7 @@
 		});
 	</script>
 </head>
-<body onload="onLoadOfBody(this);">
+<body>
 <table class="main-table-frame" border="1px" cellspacing="0px" cellpadding="0px">
 	<tr>
 		<td bgcolor="#ccccff" align="center" colspan="7">
