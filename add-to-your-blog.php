@@ -193,7 +193,7 @@
 			if($lEnableJavaScriptValidation){
 				echo "var lInvalidBlogPattern = /\'/;";
 			}else{
-				echo "var lInvalidBlogPattern = /*/;";
+				echo "var lInvalidBlogPattern = /[]/;";
 			}// end if
 		?>
 		
