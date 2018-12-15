@@ -6,6 +6,14 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 12/15/2018 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.6.77: ---
+
+		--- Added more examples of stealing cookies to XSS hints and videos page ---
+		
+
+
 Date: 11/26/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.76: ---

