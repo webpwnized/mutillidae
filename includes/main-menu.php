@@ -390,6 +390,14 @@
 							</ul>
 						</li>								
 						<li>
+            				<a href="" target="_blank">Cross Site Request Forgery (CSRF)</a>
+            				<ul>
+            					<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
+            					<li><a href="index.php?page=register.php">Register User</a></li>
+            					<li><a href="index.php?page=user-poll.php">Poll Question</a></li>
+            				</ul>
+            			</li>
+						<li>
 							<a href="">Via "Input" (GET/POST)</a>
 							<ul>
 								<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
