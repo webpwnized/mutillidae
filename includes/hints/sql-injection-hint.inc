@@ -437,6 +437,21 @@
 	<li>For this particular query the following solution will work: ' or 5=5-- . There is a space at the end.</li>
 </ul>
 <br/>
+<span class="report-header">Example (Shorter Injections)</span>
+<br/><br/>
+<ul>
+	<li>Tautologies like 5=5 resolve to TRUE or FALSE. In MySQL, TRUE = [not zero] and false = 0.
+	Therefore, any positive number can be substituted for TRUE. Injections like ' OR 1 -- 
+	are equivalents to injections like ' or 5=5 -- 
+	</li>
+	<li>In MySQL, # and -- are both comments but # is shorter. Injections like ' OR 1 # 
+	are equivalents to injections like ' or 5=5 --
+	</li>
+	<li>In MySQL, binary comparisons can cause a statement to evaluate to TRUE. Injections like '&1# 
+	are equivalents to injections like ' or 5=5 --
+	</li>
+</ul>
+<br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->SQLInjectionExplainedPart1TheBasics);?>

@@ -6,6 +6,15 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 12/21/2018 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.6.78: ---
+
+		--- Added examples of short injections on SQL injection hints page ---
+		--- Updated LogPatternParser.php for PHP 7.3 ---
+		
+		
+		
 Date: 12/15/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.77: ---
