@@ -80,20 +80,16 @@
 
 		<?php 
 		if($lEnableJavaScriptValidation){
-			echo "var lOSLDAPInjectionPattern = /[;&]/;";
-		}else{
-			echo "var lOSLDAPInjectionPattern = /*/;";
-		}// end if
-
-		if($lEnableJavaScriptValidation){
+			echo "var lOSLDAPInjectionPattern = /[;&\*]/;";
 			echo "var lCrossSiteScriptingPattern = /[<>=()]/;";
 		}else{
-			echo "var lCrossSiteScriptingPattern = /*/;";
+			echo "var lOSLDAPInjectionPattern = /[]/;";
+			echo "var lCrossSiteScriptingPattern = /[]/;";
 		}// end if
 		?>
 		
 		if(theForm.default_room_common_name.value.search(lOSLDAPInjectionPattern) > -1){
-			alert("Ampersand and semi-colon are not allowed.\n\nDon\'t listen to security people. Everyone knows if we just filter dangerous characters, XSS is not possible.\n\nWe use JavaScript defenses combined with filtering technology.\n\nBoth are such great defenses that you are stopped in your tracks.");
+			alert("Malicious characters are not allowed.\n\nDon\'t listen to security people. Everyone knows if we just filter dangerous characters, XSS is not possible.\n\nWe use JavaScript defenses combined with filtering technology.\n\nBoth are such great defenses that you are stopped in your tracks.");
 			return false;
 		}else if(theForm.default_room_common_name.value.search(lCrossSiteScriptingPattern) > -1){
 			alert("Characters used in cross-site scripting are not allowed.\n\nDon\'t listen to security people. Everyone knows if we just filter dangerous characters, XSS is not possible.\n\nWe use JavaScript defenses combined with filtering technology.\n\nBoth are such great defenses that you are stopped in your tracks.");

@@ -196,7 +196,7 @@
 				echo "var lInvalidBlogPattern = /[]/;";
 			}// end if
 		?>
-		
+
 		if(theForm.blog_entry.value.search(lInvalidBlogPattern) > -1){
 			alert('Single-quotes are not allowed. Dont listen to security people. Everyone knows if we just filter dangerous characters, XSS is not possible.\n\nWe use JavaScript defenses combined with filtering technology.\n\nBoth are such great defenses that you are stopped in your tracks.');
 			return false;

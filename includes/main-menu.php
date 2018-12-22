@@ -71,6 +71,7 @@
 							<ul>
 								<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
+								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
 								<li><a href="index.php?page=capture-data.php">Capture Data Page</a></li>
 								<li><a href="index.php?page=login.php">Login</a></li>
@@ -99,6 +100,7 @@
 							<ul>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="./webservices/soap/ws-lookup-dns-record.php">DNS Lookup (SOAP Web Service)</a></li>
+								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 							</ul>
 						</li>
 						<li>
@@ -114,6 +116,7 @@
 								<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
 								<li><a href="index.php?page=browser-info.php">Browser Info</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
+								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -335,6 +338,7 @@
 								<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
 								<li><a href="index.php?page=user-poll.php">Poll Question</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
+								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 							</ul>
 						</li>
 						<li><a href="index.php?page=user-agent-impersonation.php">User-Agent Impersonation</a></li>
@@ -355,6 +359,7 @@
 							<a href="">Reflected (First Order)</a>
 							<ul>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
+								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -405,6 +410,7 @@
 								<li><a href="index.php?page=show-log.php">Show Log</a><li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
+								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
 								<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
 								<li><a href="index.php">Missing HTTPOnly Attribute</a></li>
@@ -477,6 +483,7 @@
 								<li><a href="index.php?page=view-someones-blog.php">View someone's blog</a></li>
 								<li><a href="index.php?page=show-log.php">Show Log</a><li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
+								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -728,6 +735,7 @@
 						<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
 						<li><a href="index.php?page=html5-storage.php">HTML5 Web Storage</a></li>
 						<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
+						<li><a href="index.php?page=echo.php">Echo Message</a></li>
 						<li><a href="index.php?page=repeater.php">Repeater</a></li>
 					</ul>		
 				</li>

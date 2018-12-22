@@ -6,6 +6,26 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 12/22/2018 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.7.0: ---
+
+		--- Added new page with new defense. The echo page will implement
+		XSS and command injection. In security level 5, encoding will
+		be used to protect the page from XSS. For command injection, 
+		a call to the PHP API will be used instead of a call to shell.
+		This is much stronger defense than the input validation 
+		used by the DNS Lookup page (the other page with command
+		injection ---
+		--- Added more filters to the JavaScript form validation for 
+		DNS Lookup and Conference Room Lookup pages ---
+		--- Optimized JavaScript in several pages ---
+		--- BUG FIX: Fixed JavaScript form validation error message 
+		in several pages ---
+		--- Added new echo page to several menus ---
+		--- BUG FIX: JavaScript bug in RegEx syntax in several pages ---
+		
+		
 Date: 12/21/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.78: ---
@@ -14,14 +34,12 @@ Date: 12/21/2018 Author: Jeremy Druin ---
 		--- Updated LogPatternParser.php for PHP 7.3 ---
 		
 		
-		
 Date: 12/15/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.77: ---
 
 		--- Added more examples of stealing cookies to XSS hints and videos page ---
 		
-
 
 Date: 11/26/2018 Author: Jeremy Druin ---
 
@@ -33,7 +51,6 @@ Date: 11/26/2018 Author: Jeremy Druin ---
 		--- Left CSRF under the 2013 menu for those use to the old menu ---
 
 
-
 Date: 11/26/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.75: ---
@@ -42,14 +59,12 @@ Date: 11/26/2018 Author: Jeremy Druin ---
 		--- BUG FIX: Merged pull request from JohnPMurphy to fix JavaScript RegEx bug ---
 	
 
-
 Date: 11/21/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.74: ---
 	
 		--- Added 3 video tutorials on LDAP injection ---
 	
-
 
 Date: 11/14/2018 Author: Jeremy Druin ---
 
@@ -58,7 +73,6 @@ Date: 11/14/2018 Author: Jeremy Druin ---
 		--- Split LDAP injection hints from LDAP set up documentation ---
 		--- Added new page: ldap-setup-hint.inc ---
 	
-
 
 Date: 11/13/2018 Author: Jeremy Druin ---
 
@@ -72,14 +86,12 @@ Date: 11/13/2018 Author: Jeremy Druin ---
 		--- Renamed database-config.php to database-config.inc ---
 	
 
-
 Date: 10/24/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.71: ---
 	
 		--- Added CSRF examples to Help page ---
 	
-
 
 Date: 10/21/2018 Author: Jeremy Druin ---
 
@@ -90,7 +102,6 @@ Date: 10/21/2018 Author: Jeremy Druin ---
 		--- Updated links from SourceForge to GitHub (Mutillidae is now hosted on GitHub) ---
 	
 
-
 Date: 09/30/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.69: ---
@@ -98,7 +109,6 @@ Date: 09/30/2018 Author: Jeremy Druin ---
 		--- BUG FIX: Removed bookmark site button. The function does not work on recent browsers ---
 		--- Added README for installation ---
 	
-
 
 Date: 09/26/2018 Author: Jeremy Druin ---
 
@@ -109,7 +119,6 @@ Date: 09/26/2018 Author: Jeremy Druin ---
 		are blank, samurai, mutillidae and the password in config file includes/database-config.php
 		 ---	
 	
-
 
 Date: 09/26/2018 Author: Jeremy Druin ---
 
@@ -129,7 +138,6 @@ Date: 09/26/2018 Author: Jeremy Druin ---
 		--- Fixed spacing issue with video links ---
 	
 
-
 Date: 09/20/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.65: ---
@@ -139,7 +147,6 @@ Date: 09/20/2018 Author: Jeremy Druin ---
 		--- BUG FIX: Fixed documentation on Creating Virtual Hosts ---
 	
 
-
 Date: 09/19/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.64: ---
@@ -148,7 +155,6 @@ Date: 09/19/2018 Author: Jeremy Druin ---
 		an entry to the /etc/hosts file ---
 		--- Added new documentation to virtual hosts page ---
 	
-
 
 Date: 09/12/2018 Author: Jeremy Druin ---
 
@@ -166,7 +172,6 @@ Date: 09/12/2018 Author: Jeremy Druin ---
 		--- Added new documentation pages for virtual hosts and local hostnames ---
 	
 
-
 Date: 04/26/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.62: ---
@@ -177,7 +182,6 @@ Date: 04/26/2018 Author: Jeremy Druin ---
 		--- Updated the help page that shows if the database seems offline in database-offline.php ---
 		--- Generally preparing project to add more web services ---
 	
-
 
 Date: 04/25/2018 Author: Jeremy Druin ---
 
@@ -192,7 +196,6 @@ Date: 04/25/2018 Author: Jeremy Druin ---
 		using https://raw.githubusercontent.com/econea/nusoap/master/src/nusoap.php ---
 	
 
-
 Date: 03/12/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.60: ---
@@ -202,7 +205,6 @@ Date: 03/12/2018 Author: Jeremy Druin ---
 		--- Added 2 new CSRF video tutorials to CSRF hints ---
 	
 
-
 Date: 03/09/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.59: ---
@@ -210,7 +212,6 @@ Date: 03/09/2018 Author: Jeremy Druin ---
 		--- Added 4 new XSS video tutorials ---
 		--- Embedded the 20 part Cross-Site Scripting Explained series into the Cross-Site Scripting hints ---
 	
-
 
 Date: 02/20/2018 Author: Jeremy Druin ---
 
@@ -225,7 +226,6 @@ Date: 02/20/2018 Author: Jeremy Druin ---
 		--- BUG FIX: Fixed username enumeration vulnerability in security level 5 ---
 		--- Added 4 new SQL injection videos ---
 	
-
 
 Date: 02/19/2018 Author: Jeremy Druin ---
 
@@ -252,14 +252,12 @@ Date: 02/19/2018 Author: Jeremy Druin ---
 		--- Added another video on command injection ---
 	
 
-
 Date: 02/15/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.56: ---
 	
 		--- Added 9 new videos across topics of Burp, Zap and Command Injection ---
 	
-
 
 Date: 01/20/2018 Author: Jeremy Druin ---
 
@@ -274,7 +272,6 @@ Date: 01/20/2018 Author: Jeremy Druin ---
 		--- Added 5 new videos to Information Disclosure hint ---
 		--- Adjusted font for videos links to make them easier to read ---
 	
-
 
 Date: 01/20/2018 Author: Jeremy Druin ---
 
@@ -292,7 +289,6 @@ Date: 01/20/2018 Author: Jeremy Druin ---
 		--- Added new videos showing fuzzing with OWASP ZAP ---
 	
 
-
 Date: 01/06/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.53: ---
@@ -303,7 +299,6 @@ Date: 01/06/2018 Author: Jeremy Druin ---
 			frame source injection
 		 ---
 	
-
 
 Date: 01/01/2018 Author: Jeremy Druin ---
 
@@ -337,7 +332,6 @@ Date: 01/01/2018 Author: Jeremy Druin ---
 		--- BUG FIX: Minor space issue on a link ---
 	
 
-
 Date: 12/30/2017 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.51: ---
@@ -353,7 +347,6 @@ Date: 12/30/2017 Author: Jeremy Druin ---
 		--- BUG FIX: Broken links to Usage Instructions in 2 places ---
 	
 
-
 Date: 12/05/2017 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.50: ---
@@ -366,7 +359,6 @@ Date: 12/05/2017 Author: Jeremy Druin ---
 		--- Updated "Others" menu to include items not found in any version of the OWASP Top Ten ---
 	
 
-
 Date: 12/04/2017 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.49: ---
@@ -377,7 +369,6 @@ Date: 12/04/2017 Author: Jeremy Druin ---
 			and Videos feature. Credit to Eric Conrad.
 		 ---
 	
-
 
 Date: 07/09/2017 Author: Jeremy Druin ---
 
@@ -394,7 +385,6 @@ Date: 07/09/2017 Author: Jeremy Druin ---
 		--- Moved the usage instructions into the documentation folder ---
 	
 
-
 Date: 07/09/2017 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.47.1: ---
@@ -405,7 +395,6 @@ Date: 07/09/2017 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 07/08/2017 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.47: ---
@@ -413,7 +402,6 @@ Date: 07/08/2017 Author: Jeremy Druin ---
 		--- BUG FIX: Updated web service for PHP 7 by merging in contribution from 
 		edwardsaus ---
 	
-
 
 Date: 04/20/2017 Author: Jeremy Druin ---
 
@@ -425,7 +413,6 @@ Date: 04/20/2017 Author: Jeremy Druin ---
 		Broken Access Control ---
 	
 
-
 Date: 04/30/2017 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.45: ---
@@ -433,7 +420,6 @@ Date: 04/30/2017 Author: Jeremy Druin ---
 		--- Added more error handling output to database setup script for the line that drops the databaseM ---
 		--- BUG FIX: Minor HTML tag errors ---
 	
-
 
 Date: 04/20/2017 Author: Jeremy Druin ---
 
@@ -444,7 +430,6 @@ Date: 04/20/2017 Author: Jeremy Druin ---
 		--- BUG FIX: Secret admin pages was under Security Misconfiguration instead of 
 		Broken Access Control ---
 	
-
 
 Date: 09/21/2016 Author: Jeremy Druin ---
 
@@ -497,7 +482,6 @@ Date: 09/21/2016 Author: Jeremy Druin ---
 		--- BUG FIX: autofocus, required and checked HTML attributes did not have correct values ---		
 	
 
-
 Date: 09/21/2016 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.42: ---
@@ -516,7 +500,6 @@ Date: 09/21/2016 Author: Jeremy Druin ---
 		--- BUG FIX: Corrected missing variable name in upload-file.php that was throwing a Warning ---
 	
 
-
 Date: 06/16/2016 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.41: ---
@@ -528,7 +511,6 @@ Date: 06/16/2016 Author: Jeremy Druin ---
 		--- BUG FIX: Refactored some code in the main menu that should not have been there ---
 		--- Alphabetized the Other Injection menu ---
 	
-
 
 Date: 06/16/2016 Author: Jeremy Druin ---
 
@@ -548,7 +530,6 @@ Date: 06/16/2016 Author: Jeremy Druin ---
 		--- BUG FIX: User info XML page had multiple undefined variables ---
 		--- Added error handling to the XMLParser class ---
 	
-
 
 Date: 06/07/2016 Author: Jeremy Druin ---
 
@@ -570,7 +551,6 @@ Date: 06/07/2016 Author: Jeremy Druin ---
 			the bubble hint level to maximum verbosity (level = 2).
 		  ---
 	
-
 
 Date: 06/05/2016 Author: Jeremy Druin ---
 
@@ -598,7 +578,6 @@ Date: 06/05/2016 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 03/17/2016 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.37: ---
@@ -614,7 +593,6 @@ Date: 03/17/2016 Author: Jeremy Druin ---
 		 ---
 		--- Added video to Command Injection hints: Solving Password Challenge In Mutillidae With Command Injection ---
 	
-
 
 Date: 02/08/2016 Author: Jeremy Druin ---
 
@@ -651,14 +629,12 @@ Date: 02/08/2016 Author: Jeremy Druin ---
 		--- Added video tutorials to application path disclosure hint ---
 	
 
-
 Date: 1/31/2016 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.35: ---
 	
 		--- Added new hint dedicated to BeEF framework ---
 	
-
 
 Date: 1/11/2016 Author: Jeremy Druin ---
 
@@ -672,14 +648,12 @@ Date: 1/11/2016 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 1/10/2016 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.33: ---
 	
 		--- Added valid sample requests to documentation for each soap web service ---
 	
-
 
 Date: 12/28/2015 Author: Jeremy Druin ---
 
@@ -688,7 +662,6 @@ Date: 12/28/2015 Author: Jeremy Druin ---
 		--- Updated the usage instructions to account for recent improvements ---
 		--- Added link to usage instructions under Documentation menu ---
 	
-
 
 Date: 12/25/2015 Author: Jeremy Druin ---
 
@@ -704,7 +677,6 @@ Date: 12/25/2015 Author: Jeremy Druin ---
 			button
 		 ---
 	
-
 
 Date: 11/26/2015 Author: Jeremy Druin ---
 
@@ -742,7 +714,6 @@ Date: 11/26/2015 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 11/01/2015 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.29: ---
@@ -756,7 +727,6 @@ Date: 11/01/2015 Author: Jeremy Druin ---
 			method in the hints to make the page static and simple
 		 ---
 	
-
 
 Date: 11/01/2015 Author: Jeremy Druin ---
 
@@ -774,7 +744,6 @@ Date: 11/01/2015 Author: Jeremy Druin ---
 		--- Removed SQL injection level-2 hints from project ---
 		--- BUG FIX: Repaired hints not honoring the order preference ---
 	
-
 
 Date: 11/01/2015 Author: Jeremy Druin ---
 
@@ -797,7 +766,6 @@ Date: 11/01/2015 Author: Jeremy Druin ---
 			to SQL injection help page
 		 ---
 	
-
 
 Date: 07/26/2015 Author: Jeremy Druin ---
 
@@ -830,7 +798,6 @@ Date: 07/26/2015 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 07/26/2015 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.25: ---
@@ -861,7 +828,6 @@ Date: 07/26/2015 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 07/26/2015 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.24: ---
@@ -873,7 +839,6 @@ Date: 07/26/2015 Author: Jeremy Druin ---
 		--- Merged level 2 hints for parameter pollution into level 1 ---
 		--- Deleted file http-parameter-pollution-tutorial.inc from project ---	
 	
-
 
 Date: 07/22/2015 Author: Jeremy Druin ---
 
@@ -900,7 +865,6 @@ Date: 07/22/2015 Author: Jeremy Druin ---
 		--- Removed TODO item "Have level-1 hints open in new tab"" from todo list
 	
 
-
 Date: 06/28/2015 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.22: ---
@@ -919,7 +883,6 @@ Date: 06/28/2015 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 06/09/2015 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.21: ---
@@ -929,7 +892,6 @@ Date: 06/09/2015 Author: Jeremy Druin ---
 		--- Optimized size of OWASP logo ---
 		--- Image resizing saving 200K on average page load. Pages should load faster. ---
 	
-
 
 Date: 06/08/2015 Author: Jeremy Druin ---
 
@@ -1041,7 +1003,6 @@ Date: 03/16/2015 Author: Jeremy Druin ---
 		--- Removed unneeded code in styling.php ---
 	
 
-
 Date: 02/21/2015 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.18: ---
@@ -1102,7 +1063,6 @@ Date: 02/21/2015 Author: Jeremy Druin ---
 		 ---		 
 	
 
-
 Date: 01/05/2015 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.17: ---
@@ -1118,7 +1078,6 @@ Date: 01/05/2015 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 10/21/2014 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.16: ---
@@ -1132,7 +1091,6 @@ Date: 10/21/2014 Author: Jeremy Druin ---
 		Credit: @amirov and @spinkham
 		 ---
 	
-
 
 Date: 10/17/2014 Author: Jeremy Druin ---
 
@@ -1155,7 +1113,6 @@ Date: 10/17/2014 Author: Jeremy Druin ---
 			RequiredSoftwareHandler class
 		 ---
 	
-
 
 Date: 09/24/2014 Author: Jeremy Druin ---
 
@@ -1196,7 +1153,6 @@ Date: 09/24/2014 Author: Jeremy Druin ---
 		  ---
 	
 
-
 Date: 09/12/2014 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.13: ---
@@ -1230,7 +1186,6 @@ Date: 09/12/2014 Author: Jeremy Druin ---
 		--- Added help me documentation for XPath ---
 	
 
-
 Date: 09/05/2014 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.12: ---
@@ -1239,7 +1194,6 @@ Date: 09/05/2014 Author: Jeremy Druin ---
 		--- Moved process-login-attempt.php into includes directory ---
 		--- Added Tim Tomes to included accounts ---
 	
-
 
 Date: 09/05/2014 Author: Jeremy Druin ---
 
@@ -1257,7 +1211,6 @@ Date: 09/05/2014 Author: Jeremy Druin ---
 		--- BUG FIX: Fixed misspelling of "Basketball" in index.php ---
 	
 
-
 Date: 03/23/2014 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.10: ---
@@ -1269,7 +1222,6 @@ Date: 03/23/2014 Author: Jeremy Druin ---
 			Rogue Coder ‏(@roguecod3r).
 		 ---
 	
-
 
 Date: 03/07/2014 Author: Jeremy Druin ---
 
@@ -1285,14 +1237,12 @@ Date: 03/07/2014 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 12/25/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.8: ---
 	
 		--- Created new menu with entires for OWASP Top Ten 2013, 2010 and 2007 ---
 	
-
 
 Date: 11/08/2013 Author: Jeremy Druin ---
 
@@ -1342,7 +1292,6 @@ Date: 11/08/2013 Author: Jeremy Druin ---
 		--- BUG FIX: Added missing page to vunerabilities listing ---
 		--- BUG FIX: Removed unneeded variables from upload.php page ---
 	
-
 
 Date: 11/07/2013 Author: Jeremy Druin ---
 
@@ -1483,7 +1432,6 @@ Date: 10/03/2013 Author: Jeremy Druin ---
 		 ---		
 	
 
-
 Date: 09/16/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.3: ---
@@ -1533,7 +1481,6 @@ Date: 09/16/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 09/10/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.6.2: ---
@@ -1544,7 +1491,6 @@ Date: 09/10/2013 Author: Jeremy Druin ---
 			in Metasploitable 2.
 		 ---
 	
-
 
 Date: 09/09/2013 Author: Jeremy Druin ---
 
@@ -1568,7 +1514,6 @@ Date: 09/09/2013 Author: Jeremy Druin ---
 			on some resolutions
 		 ---
 	
-
 
 Date: 09/08/2013 Author: Jeremy Druin ---
 
@@ -1611,7 +1556,6 @@ Date: 09/08/2013 Author: Jeremy Druin ---
 		 --- BUG FIX: Title on the information disclosure hints page ---
 	
 
-
 Date: 08/13/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.18: ---
@@ -1630,7 +1574,6 @@ Date: 08/13/2013 Author: Jeremy Druin ---
 			Began work on the video handler class
 		 ---
 	
-
 
 Date: 08/02/2013 Author: Jeremy Druin ---
 
@@ -1664,7 +1607,6 @@ Date: 08/02/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 07/30/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.16: ---
@@ -1688,7 +1630,6 @@ Date: 07/30/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 07/26/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.15: ---
@@ -1701,7 +1642,6 @@ Date: 07/26/2013 Author: Jeremy Druin ---
 		--- Added a simple shell and the Laudanum shell to 
 		the hints ---
 	
-
 
 Date: 07/15/2013 Author: Jeremy Druin ---
 
@@ -1721,7 +1661,6 @@ Date: 07/15/2013 Author: Jeremy Druin ---
 			enough. The page is also vulnerable to HTMLi and XSS.
 		 ---
 	
-
 
 Date: 07/12/2013 Author: Jeremy Druin ---
 
@@ -1745,7 +1684,6 @@ Date: 07/12/2013 Author: Jeremy Druin ---
 			is used in level 5.
 		 ---
 	
-
 
 Date: 06/22/2013 Author: Jeremy Druin/Lee Baird ---
 
@@ -1800,7 +1738,6 @@ Date: 06/22/2013 Author: Jeremy Druin/Lee Baird ---
 		--- BUG FIX: Bug found by Lee Baird. Fixed absolute path bugs in all three web services documents ---
 	
 
-
 Date: 06/22/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.11: ---
@@ -1836,7 +1773,6 @@ Date: 06/22/2013 Author: Jeremy Druin ---
 		--- Added web services to various menus ---
 	
 
-
 Date: 06/13/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.10: ---
@@ -1849,7 +1785,6 @@ Date: 06/13/2013 Author: Jeremy Druin ---
 		 ---
 		--- Added advanced HTML injection example contributed by Jon Watkins ---
 	
-
 
 Date: 5/18/2013 Author: Jeremy Druin ---
 
@@ -1875,7 +1810,6 @@ Date: 5/18/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 5/18/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.8: ---
@@ -1900,7 +1834,6 @@ Date: 5/18/2013 Author: Jeremy Druin ---
 		--- Patched bug in user-poll.php ---
 	
 
-
 Date: 5/10/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.7: ---
@@ -1913,7 +1846,6 @@ Date: 5/10/2013 Author: Jeremy Druin ---
 		--- Altered database error handler for Samurai WTF ---
 	
 
-
 Date: 5/6/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.6: ---
@@ -1923,7 +1855,6 @@ Date: 5/6/2013 Author: Jeremy Druin ---
 			and redirects hints.
 		 ---
 	
-
 
 Date: 5/6/2013 Author: Jeremy Druin ---
 
@@ -1940,7 +1871,6 @@ Date: 5/6/2013 Author: Jeremy Druin ---
 		--- Added XSS and HTMLi hints to the password generator page ---
 		--- Added more code examples to the authentication bypass page ---
 	
-
 
 Date: 5/5/2013 Author: Jeremy Druin ---
 
@@ -1971,7 +1901,6 @@ Date: 5/5/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 5/3/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.3: ---
@@ -1987,7 +1916,6 @@ Date: 5/3/2013 Author: Jeremy Druin ---
 		--- Reported by John Nicholson ---
 	
 
-
 Date: 4/27/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.2: ---
@@ -1999,7 +1927,6 @@ Date: 4/27/2013 Author: Jeremy Druin ---
 		--- Fixed bug in constants.php ---
 	
 
-
 Date: 4/27/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.5.1: ---
@@ -2008,7 +1935,6 @@ Date: 4/27/2013 Author: Jeremy Druin ---
 		logout, and enforce SSL changes. ---
 		--- Fixed bug in login sequence ---
 	
-
 
 Date: 3/30/2013 Author: Jeremy Druin ---
 
@@ -2104,7 +2030,6 @@ Date: 3/30/2013 Author: Jeremy Druin ---
 		--- Added parameter addition vulnerabilty to view user privileges ---
 	
 
-
 Date: 3/24/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.4.10: ---
@@ -2132,7 +2057,6 @@ Date: 3/24/2013 Author: Jeremy Druin ---
 		 ---
 		--- Improved formatting of the footer ---
 	
-
 
 Date: 3/24/2013 Author: Jeremy Druin ---
 
@@ -2170,7 +2094,6 @@ Date: 3/24/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 2/21/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.4.8: ---
@@ -2184,7 +2107,6 @@ Date: 2/21/2013 Author: Jeremy Druin ---
 			method to only use the method if it exists.
 		 ---
 	
-
 
 Date: 2/21/2013 Author: Jeremy Druin ---
 
@@ -2251,7 +2173,6 @@ Date: 2/21/2013 Author: Jeremy Druin ---
 		--- Updated vulnerabilities listing ---
 	
 
-
 Date: 2/12/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.4.6: ---
@@ -2279,7 +2200,6 @@ Date: 2/12/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 2/10/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.4.5: ---
@@ -2291,7 +2211,6 @@ Date: 2/10/2013 Author: Jeremy Druin ---
 		in security level 0 or 5.
 		 ---
 	
-
 
 Date: 2/8/2013 Author: Jeremy Druin ---
 
@@ -2339,7 +2258,6 @@ Date: 2/8/2013 Author: Jeremy Druin ---
 		--- Added link to the vulnerabilities page to the usage instructions page --- 
  	
 
-
 Date: 1/31/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.4.3: ---
@@ -2360,7 +2278,6 @@ Date: 1/31/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 1/26/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.4.2: ---
@@ -2370,7 +2287,6 @@ Date: 1/26/2013 Author: Jeremy Druin ---
 			Several new features have been implemented.
 		 ---
 	
-
 
 Date: 1/21/2013 Author: Jeremy Druin ---
 
@@ -2389,7 +2305,6 @@ Date: 1/21/2013 Author: Jeremy Druin ---
 		--- Added Poll Question to HTMLi and XSS menus ---
 		--- Added several pages to several new menu entries ---
 	
-
 
 Date: 1/13/2013 Author: Jeremy Druin ---
 
@@ -2453,7 +2368,6 @@ Date: 1/13/2013 Author: Jeremy Druin ---
 		--- Bug fix in formatting on vulnerabilities.php page ---
 	
 
-
 Date: 1/11/2013 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.3.14: ---
@@ -2482,7 +2396,6 @@ Date: 1/11/2013 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 12/08/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.3.13: ---
@@ -2496,7 +2409,6 @@ Date: 12/08/2012 Author: Jeremy Druin ---
 			providing working injections.
 		 ---
 	
-
 
 Date: 12/07/2012 Author: Jeremy Druin ---
 
@@ -2512,7 +2424,6 @@ Date: 12/07/2012 Author: Jeremy Druin ---
 			XML External Entity Injection page
 		 --- 		
 	
-
 
 Date: 12/06/2012 Author: Jeremy Druin ---
 
@@ -2537,7 +2448,6 @@ Date: 12/06/2012 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 10/26/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.3.10: ---
@@ -2556,7 +2466,6 @@ Date: 10/26/2012 Author: Jeremy Druin ---
 			IV are modified.
 		 ---
 	
-
 
 Date: 10/18/2012 Author: Jeremy Druin ---
 
@@ -2579,7 +2488,6 @@ Date: 10/18/2012 Author: Jeremy Druin ---
 			browser configuration.
 		 ---
 	
-
 
 Date: 09/26/2012 Author: Jeremy Druin ---
 
@@ -2634,7 +2542,6 @@ Date: 09/26/2012 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 09/15/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.3.7 (Samurai 2.0 Version): ---
@@ -2659,14 +2566,12 @@ Date: 09/15/2012 Author: Jeremy Druin ---
 	 	--- Imporved error handling for database errors in index.php ---
 	
 
-
 Date: 09/15/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.3.6 (Samurai 2.0 Version): ---
 	
 		--- Introduced a bug. Oops. This version superceded by 2.3.7 upon release. ---
 	
-
 
 Date: 09/03/2012 Author: Jeremy Druin ---
 
@@ -2683,7 +2588,6 @@ Date: 09/03/2012 Author: Jeremy Druin ---
 		--- Added new page for directory browsing under A6 - Security Misconfiguration menu ---
 	
 
-
 Date: 08/13/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.3.4: ---
@@ -2697,7 +2601,6 @@ Date: 08/13/2012 Author: Jeremy Druin ---
 		--- Added a new button on the side menu for Enforce/Drop SSL ---
 		--- Added a new button on the top menu bar for Enforce/Drop SSL --- 
 	
-
 
 Date: 08/13/2012 Author: Jeremy Druin ---
 
@@ -2721,7 +2624,6 @@ Date: 08/13/2012 Author: Jeremy Druin ---
 		--- static public $mMySQLDatabaseName = "OWASP Mutillidae II"; ---
 		--- Added database server host name to output of database-offline to help diagnostics ---
 	
-
 
 Date: 08/10/2012 Author: Jeremy Druin ---
 
@@ -2747,7 +2649,6 @@ Date: 08/10/2012 Author: Jeremy Druin ---
     	--- Added method connectToDefaultDatabase() to SQL Handler class ---
 	
 
-
 Date: 07/27/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.3.1 (Codename: Mutillidae): ---
@@ -2756,7 +2657,6 @@ Date: 07/27/2012 Author: Jeremy Druin ---
     	--- Added an entirely new attack on a new page: view-user-privilege-level.php ---
     	--- Added view-user-privilege-level.php to main menu under broken session management ---
 	
-
 
 Date: 07/26/2012 Author: Jeremy Druin ---
 
@@ -2775,7 +2675,6 @@ Date: 07/26/2012 Author: Jeremy Druin ---
     	because the section was too large to fit on screen. ---
     	--- Updated vulnerabilities listing ---
 	
-
 
 Date: 07/18/2012 Author: Jeremy Druin ---
 
@@ -2800,7 +2699,6 @@ Date: 07/18/2012 Author: Jeremy Druin ---
 		--- Imporved code on password generator page ---
 	
 
-
 Date: 07/16/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.2.2 (Codename: Mutillidae): ---
@@ -2819,7 +2717,6 @@ Date: 07/16/2012 Author: Jeremy Druin ---
 		--- Fixed cross site scripting vulnerability in user poll when in secure mode (ironic) ---
 		--- Added logging to user poll ---
 	
-
 
 Date: 06/15/2012 Author: Jeremy Druin ---
 
@@ -2882,7 +2779,6 @@ Date: 06/15/2012 Author: Jeremy Druin ---
 		--- Converted user info to use MySQL handler class ---
 	
 
-
 Date: 05/14/2012 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II (Codename: Mutillidae) 2.1.20: ---
@@ -2899,7 +2795,6 @@ Date: 05/14/2012 Author: Jeremy Druin ---
 			an error upon submitting the tool to look up.
 		 ---
 	
-
 
 Date: 05/13/2012 Author: Jeremy Druin ---
 
@@ -2924,7 +2819,6 @@ Date: 05/13/2012 Author: Jeremy Druin ---
 			gives the user the option to stay on the page.
 		 ---
 	
-
 
 Date: 03/15/2012 Author: Jeremy Druin ---
 
@@ -2970,7 +2864,6 @@ Date: 03/15/2012 Author: Jeremy Druin ---
 		--- Made the buttons on the captured data page smaller to free up some space. ---
 	
 
-
 Date: 03/08/2012 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.17: ---
@@ -2991,7 +2884,6 @@ Date: 03/08/2012 Author: Jeremy Druin ---
 		--- Fixed typo on HTML 5 storage page ---
 		--- Added delete buttons to the HTML 5 web storage page to help testing ---
 	
-
 
 Date: 03/01/2012 Author: Jeremy Druin ---
 
@@ -3017,7 +2909,6 @@ Date: 03/01/2012 Author: Jeremy Druin ---
 		--- Added hints to the capture-data.php page about cross site scripting ---
 		--- Updated the vulnerabilities listing ---
 	
-
 
 Date: 02/11/2012 Author: Jeremy Druin ---
 
@@ -3048,7 +2939,6 @@ Date: 02/11/2012 Author: Jeremy Druin ---
 			These new tokens have an entropy of around 132 bits.
 		 ---
 	
-
 
 Date: 01/30/2012 Author: Jeremy Druin ---
 
@@ -3095,7 +2985,6 @@ Date: 01/30/2012 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 01/10/2012 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.13: ---
@@ -3124,7 +3013,6 @@ Date: 01/10/2012 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 01/09/2012 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.12: ---
@@ -3147,7 +3035,6 @@ Date: 01/09/2012 Author: Jeremy Druin ---
 		--- Improved output readability on dns-lookup.php ---
 		--- Improved output readability on set-background-color.php ---
 	
-
 
 Date: 12/27/2011 Author: Jeremy Druin ---
 
@@ -3196,7 +3083,6 @@ Date: 12/27/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 12/17/2011 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.10: ---
@@ -3238,7 +3124,6 @@ Date: 12/17/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 12/16/2011 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.9: ---
@@ -3255,7 +3140,6 @@ Date: 12/16/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 12/15/2011 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.8: ---
@@ -3268,7 +3152,6 @@ Date: 12/15/2011 Author: Jeremy Druin ---
 			http://localhost. The links should have been relative anyway.
 		 ---
 	
-
 
 Date: 11/26/2011 Author: Jeremy Druin ---
 
@@ -3289,7 +3172,6 @@ Date: 11/26/2011 Author: Jeremy Druin ---
 			the page will refuse to put the secrets in client side storage.
 		 ---
 	
-
 
 Date: 11/13/2011 Author: Jeremy Druin / Kenny Kurtz ---
 
@@ -3319,7 +3201,6 @@ Date: 11/13/2011 Author: Jeremy Druin / Kenny Kurtz ---
 		 --- 
 	
 
-
 Date: 11/10/2011 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.5: ---
@@ -3336,7 +3217,6 @@ Date: 11/10/2011 Author: Jeremy Druin ---
 		 --- 
 	
 
-
 Date: 10/14/2011 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.4: ---
@@ -3351,7 +3231,6 @@ Date: 10/14/2011 Author: Jeremy Druin ---
 		--- Confirmed that the view-blog table can be attacked with sqlmap. The answer is in the Easter Egg file. ---
 		--- Updated the SQL injection tutorial file ---
 	
-
 
 Date: 10/13/2011 Author: Jeremy Druin ---
 
@@ -3373,7 +3252,6 @@ Date: 10/13/2011 Author: Jeremy Druin ---
 		--- Augmented the installation instructions ---
 		--- Added link to ihackcharities to front page ---
 	
-
 
 Date: 09/25/2011 Author: Jeremy Druin ---
 
@@ -3403,7 +3281,6 @@ Date: 09/25/2011 Author: Jeremy Druin ---
 		--- Some refactoring on user-info.php and login.php to clean up code ---
 	
 
-
 Date: 09/16/2011 Author: Jeremy Druin ---
 
 	--- Change Log for Mutillidae 2.1.1: ---
@@ -3418,7 +3295,6 @@ Date: 09/16/2011 Author: Jeremy Druin ---
 		--- Created output on page setupandreset.php to show what happened ---
 		--- Added try/catch and more error handling to setupandreset.php ---
 	
-
 
 Date: 08/31/2011 Author: Jeremy Druin ---
 
@@ -3472,7 +3348,6 @@ Date: 08/31/2011 Author: Jeremy Druin ---
 		of information about the insert. In secure mode, we keep that to ourselves. ---				 
 	
 
-
 Date: 08/19/2011 Author: Jeremy Druin ---
 
 
@@ -3484,7 +3359,6 @@ Date: 08/19/2011 Author: Jeremy Druin ---
 			to practice the JS injection in as easy a way as possible.
 		 ---
 	
-
 
 Date: 07/24/2011 Author: Jeremy Druin ---
 
@@ -3517,7 +3391,6 @@ Date: 07/24/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 07/17/2011 Author: Jeremy Druin ---
 
 
@@ -3540,7 +3413,6 @@ Date: 07/17/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 07/09/2011 Author: Jeremy Druin ---
 
 
@@ -3553,7 +3425,6 @@ Date: 07/09/2011 Author: Jeremy Druin ---
 			JavaScript encoding
 		 ---
 	
-
 
 Date: 06/21/2011 Author: Jeremy Druin ---
 
@@ -3579,7 +3450,6 @@ Date: 06/21/2011 Author: Jeremy Druin ---
 		--- Added new article "How to Access Mutillidae over Virtual Box Host Only Network" ---
 		--- Introduced a new vulnerability: JavaScript Injection ---		
 	
-
 
 Date: 06/15/2011 Author: Jeremy Druin ---
 
@@ -3635,7 +3505,6 @@ Date: 06/15/2011 Author: Jeremy Druin ---
 		--- Reformatted install instructions and main home page to be compliant with HTML 5 ---
 	
 
-
 Date: 05/20/2011 Author: Jeremy Druin ---
 
 
@@ -3672,7 +3541,6 @@ Date: 05/20/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 05/10/2011 Author: Jeremy Druin ---
 
 
@@ -3694,7 +3562,6 @@ Date: 05/10/2011 Author: Jeremy Druin ---
 			that will allow users to locate and open the file.
 		 ---
 	
-
 
 Date: 04/22/2011 Author: Jeremy Druin ---
 
@@ -3734,7 +3601,6 @@ Date: 04/22/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 04/14/2011 Author: Jeremy Druin ---
 
 
@@ -3748,7 +3614,6 @@ Date: 04/14/2011 Author: Jeremy Druin ---
 			path else throws an error.
 		 ---
 	
-
 
 Date: 04/13/2011 Author: Jeremy Druin ---
 
@@ -3773,7 +3638,6 @@ Date: 04/13/2011 Author: Jeremy Druin ---
 		--- change-log.php - Added new XSS vulnerability for users to try.
 	
 
-
 Date: 03/30/2011 Author: Jeremy Druin ---
 
 
@@ -3795,7 +3659,6 @@ Date: 03/30/2011 Author: Jeremy Druin ---
 		 ---
 	
 
-
 Date: 03/25/2011 Author: Jeremy Druin ---
 
 
@@ -3810,7 +3673,6 @@ Date: 03/25/2011 Author: Jeremy Druin ---
 		--- Added new vulnerability for X-Powered-By and discussed removing the Server HTTP header in comments ---
 	
 
-
 Date: 03/23/2011 Author: Jeremy Druin ---
 
 
@@ -3824,7 +3686,6 @@ Date: 03/23/2011 Author: Jeremy Druin ---
 		--- Added Toggle Hints into core menu but link disappears in secure mode ---
 		--- Added new failure to restrict URL access vuln ---
 	
-
 
 Date: 03/23/2011 Author: Jeremy Druin ---
 
