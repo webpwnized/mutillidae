@@ -11,6 +11,7 @@ Date: 1/1/2019 Author: Jeremy Druin ---
 	--- Change Log for OWASP Mutillidae II 2.7.1: ---
 
 		--- BUG FIX: Minor issue in OWASP logger class ---
+		--- BUG FIX: Minor issue in JavaScript message displayed if JavaScript validation failed ---
 
 
 Date: 12/22/2018 Author: Jeremy Druin ---
