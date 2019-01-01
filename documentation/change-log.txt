@@ -6,6 +6,13 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 1/1/2019 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.7.1: ---
+
+		--- BUG FIX: Minor issue in OWASP logger class ---
+
+
 Date: 12/22/2018 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.7.0: ---
