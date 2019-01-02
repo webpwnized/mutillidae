@@ -4,50 +4,35 @@
 		switch ($_SESSION["security-level"]){
 	   		case "0": // This code is insecure
 				$logged_in_user = $_SESSION['logged_in_user'];
-				$logged_in_usersignature = $_SESSION['logged_in_usersignature'];
-				$lSecurityLevelDescription = "Hosed";
 	   		break;
 	   		case "1": // This code is insecure
 	   			// DO NOTHING: This is equivalent to using client side security		
 				$logged_in_user = $_SESSION['logged_in_user'];
-				$logged_in_usersignature = $_SESSION['logged_in_usersignature'];
-				$lSecurityLevelDescription = "Arrogent";
 	   		break;
 		    
 	   		case "2":
 	   		case "3":
 	   		case "4":
 	   		case "5": // This code is fairly secure
-	  			/* 
-	  			 * NOTE: Input validation is excellent but not enough. The output must be
-	  			 * encoded per context. For example, if output is placed in HTML,
-	  			 * then HTML encode it. Blacklisting is a losing proposition. You 
-	  			 * cannot blacklist everything. The business requirements will usually
-	  			 * require allowing dangerous charaters. In the example here, we can 
-	  			 * validate username but we have to allow special characters in passwords
-	  			 * least we force weak passwords. We cannot validate the signature hardly 
-	  			 * at all. The business requirements for text fields will demand most
-	  			 * characters. Output encoding is the answer. Validate what you can, encode it
-	  			 * all.
-	  			 */
 	   			// encode the entire message following OWASP standards
 	   			// this is HTML encoding because we are outputting data into HTML
 				$logged_in_user = $Encoder->encodeForHTML($_SESSION['logged_in_user']);
-				$logged_in_usersignature = $Encoder->encodeForHTML($_SESSION['logged_in_usersignature']);
-				$lSecurityLevelDescription = "Secure";
 			break;
 	   	}// end switch		
 
+	   	$lUserID = $_SESSION['uid'];
+	   	
 	   	$lUserAuthorizationLevelText = 'User';
+	   	
 	   	if ($_SESSION['is_admin'] == 'TRUE'){
 	   		$lUserAuthorizationLevelText = 'Admin';
 	   	}// end if
 
 		$lAuthenticationStatusMessage = 
-				'Logged In ' . 
-				$lUserAuthorizationLevelText . ": " . 
-				'<span style="color:#990000;font-weight:bold;">'.$logged_in_user . "</span> (" . 
-				$logged_in_usersignature . ")";
+			'Logged In ' . 
+			$lUserAuthorizationLevelText . ": " . 
+			'<span style="color:#990000;font-weight:bold;">'.$logged_in_user.'</span>'.
+			'<a style="margin-left: 5px;" href="index.php?page=edit-account-profile.php&uid='.$lUserID.'"><img src="images/edit-icon-24-24.png" /></a>';
 	} else {
 		$logged_in_user = "anonymous";
 		$lAuthenticationStatusMessage = "Not Logged In";
@@ -63,26 +48,25 @@
 		$lPopupHintsLabel = "Hide Popup Hints";
 	}else {
 		$lPopupHintsLabel = "Show Popup Hints";
-	}//end if
-
-	switch ($_SESSION["security-level"]){
-   		case "0": // This code is insecure
-			$lSecurityLevelDescription = "Hosed";
-   		break;
-   		case "1": // This code is insecure
-   			// DO NOTHING: This is equivalent to using client side security		
-			$lSecurityLevelDescription = "Client-side Security";
-   		break;
-	    
-   		case "2":
-   		case "3":
-   		case "4":
-   		case "5": // This code is fairly secure
-			$lSecurityLevelDescription = "Server-side Security";
-		break;
-   	}// end switch		
+	}//end if	
 	
 	$lHintsMessage = "Hints: ".$_SESSION["hints-enabled"];
+	
+	switch ($_SESSION["security-level"]){
+	    case "0": // This code is insecure
+	        $lSecurityLevelDescription = "Hosed";
+	        break;
+	    case "1": // This code is insecure
+	        $lSecurityLevelDescription = "Client-Side Security";
+	        break;   
+	    case "2":
+	    case "3":
+	    case "4":
+	    case "5": // This code is fairly secure
+	        $lSecurityLevelDescription = "Secure";
+	        break;
+	}// end switch
+	
 	$lSecurityLevelMessage = "Security Level: ".$_SESSION["security-level"]." (".$lSecurityLevelDescription.")";
 
 	try{

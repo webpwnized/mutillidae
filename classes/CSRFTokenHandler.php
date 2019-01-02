@@ -82,7 +82,8 @@ class CSRFTokenHandler{
 				if (isset($_SESSION[$this->mPageBeingProtected]['csrf-token'])) {
 					$lCurrentCSRFToken = $_SESSION[$this->mPageBeingProtected]['csrf-token'];
 				}// end if
-				$lCSRFToken = 7777 + $lCurrentCSRFToken;
+				$lBase = 77;
+				$lCSRFToken = ((int)$lBase + (int)$lCurrentCSRFToken);
 			break;
 			case "NONE":
 				$lCSRFToken = "";

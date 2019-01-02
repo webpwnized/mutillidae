@@ -97,7 +97,7 @@
 			$LogHandler->writeToLog("Failed to add account for: " . $lUsername);			
 		}// end try
 			
-	}// end if (isset($_POST["register-php-submit-button"])){
+	}// end if $lFormSubmitted
 ?>
 
 <script type="text/javascript">
@@ -167,11 +167,6 @@
 			>
 		<input name="csrf-token" type="hidden" value="<?php echo $lNewCSRFTokenForNextRequest; ?>" />
 		<table style="margin-left:auto; margin-right:auto;">
-			<tr id="id-bad-cred-tr" style="display: none;">
-				<td colspan="2" class="error-message">
-					Authentication Error: Bad user name or password
-				</td>
-			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" class="form-header">Please choose your username, password and signature</td>

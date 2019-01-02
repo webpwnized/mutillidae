@@ -183,7 +183,7 @@ try{
 		(3, 'anonymous', 'An anonymous blog? Huh? ', '2009-03-01 22:27:11'),
 		(4, 'ed', 'I love me some Netcat!!!', '2009-03-01 22:27:48'),
 		(5, 'john', 'Listen to Pauldotcom!', '2009-03-01 22:29:04'),
-		(6, 'jeremy', 'Why give users the ability to get to the unfiltered Internet? It''s just asking for trouble. ', '2009-03-01 22:29:49'),
+		(6, 'jeremy', 'Mutillidae is fun', '2009-03-01 22:29:49'),
 		(7, 'john', 'Chocolate is GOOD!!!', '2009-03-01 22:30:06'),
 		(8, 'admin', 'Fear me, for I am ROOT!', '2009-03-01 22:31:13'),
 		(9, 'dave', 'Social Engineering is woot-tastic', '2009-03-01 22:31:13'),

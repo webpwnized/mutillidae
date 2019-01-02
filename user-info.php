@@ -192,7 +192,6 @@
 	    	
 	   		$lResultsFound = FALSE;
 	   		$lRecordsFound = 0;
-	   		//$lResultsFound = isset($lQueryResult->num_rows) && $lQueryResult->num_rows > 0;
 	   		if (isset($lQueryResult->num_rows)){
 				if ($lQueryResult->num_rows > 0) {
 	   				$lResultsFound = TRUE;

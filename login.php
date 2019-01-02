@@ -146,7 +146,7 @@
 			<tr><td></td></tr>
 			<tr>
 				<td colspan="2" style="text-align:center; font-style: italic;">
-					Dont have an account? <a href="?page=register.php">Please register here</a>
+					Dont have an account? <a href="index.php?page=register.php">Please register here</a>
 				</td>
 			</tr>
 		</table>
