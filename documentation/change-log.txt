@@ -5,6 +5,14 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 1/4/2019 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.7.4: ---
+
+		--- Simplified Home page links by removing about half of them. Some links
+		were stale anyway. ---
+		
+		
 Date: 1/3/2019 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.7.3: ---
@@ -1594,7 +1602,7 @@ Date: 08/13/2013 Author: Jeremy Druin ---
 	--- Change Log for OWASP Mutillidae II 2.5.18: ---
 	
 		--- 
-			Renamed change-log.htm to change-log.html in the 
+			Renamed change-log.htm to change-log.txt in the 
 			project and on Sourceforge
 		 ---
 		--- 

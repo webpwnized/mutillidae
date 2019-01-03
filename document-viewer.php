@@ -138,7 +138,7 @@
 			<tr>
 				<td style="text-align:left;">
 					<input 	name="PathToDocument" id="id_path_to_document" type="radio" 
-							value="documentation/change-log.html"
+							value="documentation/change-log.txt"
 							checked="checked"
 							autofocus="autofocus"
 							<?php

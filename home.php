@@ -35,9 +35,9 @@
 			</a>
 		</td>
 		<td>
-			<a href="http://www.youtube.com/user/webpwnized" target="_blank">
-			<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-48-48.png" />
-				Video Tutorials
+			<a href="documentation/change-log.txt" target="_blank">
+				<img alt="See the latest vulnerabilities in Mutillidae" align="middle" src="./images/new-icon-48-48.png" />
+				What's New? Click Here
 			</a>
 		</td>
 	</tr>
@@ -56,24 +56,9 @@
 	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td>
-			<a href="https://github.com/webpwnized/mutillidae" target="_blank">
-				<img align="middle" alt="OWASP Mutillidae II Bug Tracker" src="./images/technical-support-48-48.png" />
-				Bug Tracker
-			</a>
-		</td>
-		<td>
-			<a href="" onclick="alert('The email account is webpwnized. Its a gmail account.');">
-				<img alt="Help" align="middle" src="./images/mail-icon-48-48.png" />
-				Bug Report Email Address 
-			</a>
-		</td>
-	</tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr>
-		<td>
-			<a href="./index.php?page=documentation/change-log.html">
-				<img alt="See the latest vulnerabilities in Mutillidae" align="middle" src="./images/new-icon-48-48.png" />
-				What's New? Click Here
+			<a href="http://www.youtube.com/user/webpwnized" target="_blank">
+			<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-48-48.png" />
+				Video Tutorials
 			</a>
 		</td>
 		<td>
@@ -85,76 +70,30 @@
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr>
+		<td class="label" title="Latest Version">
+			<img alt="Latest Version" align="middle" src="./images/installation-icon-48-48.png" />
+			<a title="Latest Version" href="https://github.com/webpwnized/mutillidae" target="_blank">Latest Version</a>
+		</td>
 		<td>
-			<a href="index.php?page=phpmyadmin.php">
-				<img alt="Open PHP MyAdmin Console" align="middle" src="./images/phpmyadmin-logo-48-48.png" />
-				PHP MyAdmin Console
-			</a>
-		</td>	
-		<td>
-			<a href="https://github.com/webpwnized/mutillidae" target="_blank">
-				<img align="middle" alt="Feature Requests" src="./images/worm-gear-48-48.png" />
-				Feature Requests
+			<a href="documentation/mutillidae-test-scripts.txt" target="_blank">
+				<img alt="Helpful hints and scripts" align="middle" src="./images/help-icon-48-48.png" />
+				Helpful hints and scripts
 			</a>
 		</td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td>
-			<table style="margin:0px;">
-				<tr>
-					<td class="label" title="Installation Instructions">
-						<img alt="Installation Instructions" align="middle" src="./images/installation-icon-48-48.png" />
-						Installation Instructions
-					</td>
-				</tr>
-				<tr>
-					<td class="label" style="padding-right:30px;" title="Installation Instructions">
-						<ul>
-							<li><a title="Latest Version" href="https://github.com/webpwnized/mutillidae" target="_blank">Latest Version</a></li>
-							<li><a title="Installation Instructions" href="index.php?page=documentation/installation.php">Installation Instructions</a></li>
-							<li><a title="Usage Instructions" href="index.php?page=documentation/usage-instructions.php">Usage Instructions</a></li>
-						</ul>			
-					</td>
-				</tr>
-			</table>		
+			<a href="https://github.com/webpwnized/mutillidae" target="_blank">
+				<img align="middle" alt="Feature Requests" src="./images/tools-icon-48-48.png" />
+				<a href="https://addons.mozilla.org/en-US/firefox/collections/jdruin/pro-web-developer-qa-pack/" target="_blank">Some Useful Firefox Add-ons</a>
+			</a>
 		</td>
 		<td>
-			<table style="margin:0px;">
-				<tr>
-					<td class="label">
-						<img 	title="Pentesting Tools" 
-								alt="Tools" 
-								align="middle" 
-								src="./images/tools-icon-48-48.png" />
-						Tools
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<ul>
-							<li>
-								<a 	title="Download Kali" 
-									href="http://www.kali.org/" 
-									target="_blank">Kali Linux</a></li>
-							<li>
-								<a 	title="Download Samurai Web Testing Framework" 
-									href="http://samurai.inguardians.com/" 
-									target="_blank">Samurai Web Testing Framework</a>
-							</li>
-							<li>
-								<a href="https://addons.mozilla.org/en-US/firefox/collections/jdruin/pro-web-developer-qa-pack/" target="_blank">Some Useful Firefox Add-ons</a>
-							</li>
-						</ul>
-					</td>
-				</tr>
-			</table>		
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<img alt="Helpful hints and scripts" align="middle" src="./images/help-icon-48-48.png" />
-			<span style="font-weight: bold;">More Hints?: See "/documentation/mutillidae-test-scripts.txt"</span>
+			<a href="" onclick="alert('The email account is webpwnized. Its a gmail account.');">
+				<img alt="Help" align="middle" src="./images/mail-icon-48-48.png" />
+				Bug Report Email Address 
+			</a>
 		</td>
 	</tr>
 </table>
