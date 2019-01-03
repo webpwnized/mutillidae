@@ -95,13 +95,13 @@
 						   	
 		   	if (!$lValidationFailed){					
 		   		$lRowsAffected = $SQLQueryHandler->insertNewUserAccount($lUsername, $lPassword, $lUserSignature);
-				echo '<h2 class="success-message">Account created for ' . $lUsernameText .'. '.$lRowsAffected.' rows inserted.</h2>';
-				$LogHandler->writeToLog("Added account for: " . $lUsername);
+				echo '<div class="success-message">Profile updated for ' . $lUsernameText . '</div>';
+				$LogHandler->writeToLog("Profile updated for: " . $lUsername);
 		   	}// end if (!$lValidationFailed)
 			
 		} catch (Exception $e) {
 			echo $CustomErrorHandler->FormatError($e, "Failed to add account");
-			$LogHandler->writeToLog("Failed to add account for: " . $lUsername);			
+			$LogHandler->writeToLog("Failed to update profile for: " . $lUsername);			
 		}// end try
 			
 	}// end if $lFormSubmitted
