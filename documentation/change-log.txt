@@ -6,6 +6,17 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 1/3/2019 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.7.3: ---
+
+		--- BUG FIX: Added documentation for edit-account-profile.php and echo.php to vulnerabilities.php ---
+		--- BUG FIX: Made Edit Profile icon smaller for faster load time. Delay is gone now.  ---
+		--- Added register.php and edit-account-profile.php to main menu ---
+		--- Added link to login, if not already logged in, to edit-account-profile.php ---
+		--- BUG FIX: Adding missing links to main menu ---
+		
+		
 Date: 1/2/2019 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.7.2: ---

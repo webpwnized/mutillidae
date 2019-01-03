@@ -32,7 +32,8 @@
 			'Logged In ' . 
 			$lUserAuthorizationLevelText . ": " . 
 			'<span style="color:#990000;font-weight:bold;">'.$logged_in_user.'</span>'.
-			'<a style="margin-left: 5px;" href="index.php?page=edit-account-profile.php&uid='.$lUserID.'"><img src="images/edit-icon-24-24.png" /></a>';
+			'<a href="index.php?page=edit-account-profile.php&uid='.$lUserID.'">
+            <img src="images/edit-icon-20-20.png" /></a>';
 	} else {
 		$logged_in_user = "anonymous";
 		$lAuthenticationStatusMessage = "Not Logged In";

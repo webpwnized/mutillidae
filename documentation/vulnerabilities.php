@@ -249,6 +249,35 @@
 	</ul>
 </div>
 
+<p class="label">echo.php</p>
+<div style="padding-left: 40px;">
+	<ul>
+		<li>Cross site scripting on the message field</li>
+		<li>O/S Command injection on the message field</li>
+		<li>This page writes to the log. SQLi and XSS on the log are possible</li>
+		<li>HTML injection</li>
+		<li>
+			GET for POST (method tampering) is possible because only reading 
+			POSTed variables is not enforced.
+		</li>
+		<li>Application Log Injection</li>
+		<li>JavaScript Validation Bypass</li>
+	</ul>
+</div>
+
+<p class="label">edit-account-profile.php</p>
+<div style="padding-left: 40px;">
+	<ul>
+		<li>Insecure Direct Object Reference (IDOR) via UID parameter</li>
+		<li>
+			SQL injection, HTML injection and XSS 
+			via the username, signature and password field
+		</li>
+		<li>Method tampering</li>
+		<li>Application Log Injection</li>
+	</ul>
+</div>
+
 <p class="label">footer.php<span class="big-asterik">*</span></p>
 <div style="padding-left: 40px;">
 	<ul>

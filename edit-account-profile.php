@@ -306,11 +306,12 @@
 <div id="id-profile-not-found-div" style="text-align: center; display: none;">
 	<table>
 		<tr>
-			<td class="label">User profile not found</td>
+			<td class="label">User profile not found. You may <a href="index.php?page=login.php">login here</a></td>
 		</tr>
 		<tr><td></td></tr>
+		<tr><td></td></tr>
 		<tr>
-			<td colspan="2" style="text-align:center; font-style: italic;">
+			<td style="text-align:center; font-style: italic;">
 				Dont have an account? <a href="index.php?page=register.php">Please register here</a>
 			</td>
 		</tr>

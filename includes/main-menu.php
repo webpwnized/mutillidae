@@ -1,3 +1,10 @@
+<?php 
+	$lUserIDString = "";
+	if($_SESSION['loggedin'] == "True"){
+	    $lUserIDString = "&uid=" . $lUserID;
+	} //end if
+?>
+
 <div id="smoothmenu1" class="ddsmoothmenu">	
 	<ul>
 		<li style="border-color: #ffffff;border-style: solid;border-width: 1px;">
@@ -225,29 +232,24 @@
 					<ul>
 						<li><a href="">Authentication Bypass</a>
 							<ul>
-								<li><a href="">Via Brute Force</a>
-									<ul>
-										<li><a href="index.php?page=login.php">Login</a></li>
-									</ul>
-								</li>
+								<li><a href="index.php?page=login.php">Via Brute Force</a></li>
 								<li><a href="index.php?page=privilege-escalation.php">Via Cookies</a></li>
-								<li><a href="">Via SQL Injection</a>
-									<ul>
-										<li><a href="index.php?page=login.php">Login</a></li>
-									</ul>
-								</li>
+								<li><a href="index.php?page=login.php">Via SQL Injection</a></li>
+								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Via Account Hijacking</a></li>
 							</ul>
 						</li>
 						<li><a href="">Priviliege Escalation</a>
 							<ul>
 								<li><a href="index.php?page=privilege-escalation.php">Via Cookies</a></li>
 								<li><a href="index.php?page=login.php">Login</a></li>
+								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Via Account Hijacking</a></li>
 								<li><a href="index.php?page=view-user-privilege-level.php&iv=6bc24fc1ab650b25b4114e93a98f1eba">Via CBC-bit Flipping</a></li>
 							</ul>								
 						</li>
 						<li><a href="">Username Enumeration</a>
 							<ul>
 								<li><a href="index.php?page=login.php">Login</a></li>
+								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 								<li><a href="./webservices/soap/ws-user-account.php">Lookup User (SOAP Web Service)</a></li>
 								<li><a href="./webservices/rest/ws-user-account.php">User Account Management (REST Web Service)</a></li>
 							</ul>
@@ -260,6 +262,7 @@
 						<li>
 							<a href="">Information Disclosure</a>
 							<ul>
+								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 								<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 								<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
 								<li><a href="index.php?page=robots-txt.php">Robots.txt</a></li>
@@ -273,6 +276,7 @@
 								<li><a href="framer.html">X-Frame-Options (Cross-frame Scripting)</a></li>
 							</ul>
 						</li>
+						
 						<li>
 							<a href="">Application Path Disclosure</a>
 							<ul>
@@ -308,6 +312,7 @@
 						<li>
 							<a href="">Insecure Direct Object References</a>
 							<ul>
+								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Via Account Hijacking</a></li>
 								<li><a href="index.php?page=arbitrary-file-inclusion.php">Local File Inclusion</a></li>
 								<li><a href="index.php?page=arbitrary-file-inclusion.php">Remote File Inclusion</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
@@ -384,6 +389,8 @@
 							<ul>
 								<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
 								<li><a href="index.php?page=view-someones-blog.php">View someone's blog</a></li>
+								<li><a href="index.php?page=register.php">Register User</a></li>
+								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 								<li><a href="index.php?page=show-log.php">Show Log</a><li>
 							</ul>
 						</li>
@@ -561,6 +568,7 @@
 				<li>
 					<a href="http://www.owasp.org/index.php/Top_10_2010-A8" target="_blank">A8 - Failure to Restrict URL Access</a>
 					<ul>
+						<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 						<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 						<li><a href="index.php?page=source-viewer.php">Source Viewer</a></li>
 						<li><a href="index.php?page=secret-administrative-pages.php">"Secret" Administrative Pages</a></li>
@@ -595,6 +603,7 @@
 				<li>
 					<a href="http://www.owasp.org/index.php/Top_10_2007-A6" target="_blank">A6 - Information Leakage</a>
 					<ul>
+						<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 						<li><a href="index.php">Cache-Control</a></li>
 						<li><a href="index.php">X-Powered-By HTTP Header</a></li>
 						<li><a href="index.php?page=client-side-comments.php">HTML/JavaScript Comments</a></li>
@@ -614,6 +623,7 @@
 						<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
 						<li><a href="index.php?page=login.php">Login</a></li>
 						<li><a href="index.php?page=register.php">Register</a></li>
+						<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 						<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 						<li><a href="index.php?page=pen-test-tool-lookup-ajax.php">Pen Test Tool Lookup (AJAX)</a></li>
 						<li><a href="./webservices/soap/ws-user-account.php">Lookup User (SOAP Web Service)</a></li>
