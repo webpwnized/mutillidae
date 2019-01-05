@@ -8,7 +8,7 @@ cause parameter pollusion, a user can send parameters via POST which the develop
 thinks should be passed via the URL. The user could also pass a variable using both
 GET and POST. The application can be tricked by the bogus parameters.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 <br/><br/>
 <span class="report-header">Discovery Methodology</span>
 <br/><br/>

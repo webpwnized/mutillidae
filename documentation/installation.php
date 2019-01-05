@@ -63,7 +63,7 @@
 <br/><br/>
 <span class="report-header">Overview</span>
 <br/><br/>
-<img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />
+<img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />
 Several videos provide comprehensive, step-by-step instructions
 <br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoCreateUbuntuVirtualMachineVirtualBox);?>

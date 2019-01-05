@@ -106,7 +106,7 @@
 			vulnerabilities.
 			<br/><br/>
 			<a href="http://www.youtube.com/user/webpwnized" target="_blank">
-			<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-48-48.png" />
+			<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
 				Video Tutorials
 			</a>
 			<br/><br/><br/>

@@ -9,7 +9,7 @@
 			Alternatively
 			an injection may stay in the current context but modify the source code.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 			<br/><br/>
 			"Context" is the type of code and object into which the injection occurs.
 			For Javascript injection, this is often the value of a Javascript string

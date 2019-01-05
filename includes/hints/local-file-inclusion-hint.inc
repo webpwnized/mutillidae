@@ -4,7 +4,7 @@
 			Local file inclusion allows an attacker to include file local to the web server
 			possibly allowing code execution, denial of service, and data disclosure.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 			<br/><br/>
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>

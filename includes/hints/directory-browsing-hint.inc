@@ -4,7 +4,7 @@
 			Directory Browsing is allowed when the web server is misconfigured to show the
 			user the contents of directories on the server.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 			<br/><br/>
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>

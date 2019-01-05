@@ -7,7 +7,7 @@
 			In other words, the attacker
 			can send input which later is incorporated into the web page the user receives.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 			<br/><br/>
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>

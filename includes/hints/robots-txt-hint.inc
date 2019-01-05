@@ -5,7 +5,7 @@
 	suggestion for "honest" browsers which should prevent web crawlers 
 	from accessing the parts of a website listed in the roboos.txt file.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 	<br/><br/>
 	<span class="report-header">Discovery Methodology</span>
 	<br/><br/>

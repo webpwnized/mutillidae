@@ -4,7 +4,7 @@
 SSL Misconfiguration causes a variety of issues such as sensitive pages being
 accessible via HTTP, use of weak SSL ciphers, and SSL stripping.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 <br/><br/>
 <span class="report-header">Discovery Methodology</span>
 <br/><br/>

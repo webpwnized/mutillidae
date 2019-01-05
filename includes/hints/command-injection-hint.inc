@@ -10,7 +10,7 @@ created and sent by a malicious script running in the users browser. As far as
 the target site can tell, the user submitted the request by using the web site
 in the expected way.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 <br/><br/>
 <span class="report-header">Discovery Methodology</span>
 <br/><br/>

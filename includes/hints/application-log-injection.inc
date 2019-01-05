@@ -6,7 +6,7 @@ input and possess client-vulnerabilities such as XSS. For example, if
 application logs are stored in HTML format and viewed in a browser, then
 XSS vulnerabilities in the log viewer could allow execution of the XSS.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 <br/><br/>
 <span class="report-header">Discovery Methodology</span>
 <br/><br/>

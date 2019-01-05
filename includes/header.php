@@ -182,7 +182,7 @@
 			<div>&nbsp;</div>
 			<div class="label" style="text-align: center;">
 				<a href="http://www.youtube.com/user/webpwnized" style="white-space:nowrap;" target="_blank">
-					<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-48-48.png" />
+					<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
 					<br/>
 					Video Tutorials
 				</a>

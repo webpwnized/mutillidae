@@ -5,7 +5,7 @@ Burp-Suite is a set of tools packaged in a single framework that
 will be helpful when assessing web applications. A series of videos
 is provided below to help get started with Burp-Suite.
 <br/><br/>
-<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-48-48.png" style="margin-right: 10px;" />Video Tutorials</a>
+<a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/>
