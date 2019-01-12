@@ -7,6 +7,15 @@ TODO: Make these videos: buffer overflows, xml entity expansion
 
 Date: 1/5/2019 Author: Jeremy Druin ---
 
+	--- Change Log for OWASP Mutillidae II 2.7.6: ---
+	
+		--- Added more logging to make it easier to do log poisoning ---
+		--- Minor update to log page ---
+		--- Added log entry when users logs out ---
+		
+	
+Date: 1/5/2019 Author: Jeremy Druin ---
+
 	--- Change Log for OWASP Mutillidae II 2.7.5: ---
 
 		--- Deleted several images that are no longer in use to make project size smaller ---

@@ -174,7 +174,8 @@
 				}// end if
 
 				$lQueryResult = $SQLQueryHandler->getBlogRecord($lAuthor);
-
+				$LogHandler->writeToLog("User viewed blog for {$lAuthor}");
+				
 				/* Report Header */
 				echo '<div>&nbsp;</div>';
 				echo '<table border="1px" width="90%" class="results-table">';

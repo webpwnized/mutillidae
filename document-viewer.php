@@ -189,7 +189,8 @@
 			echo $lDocumentToBeFramedMessage; 
 		}else{
 			echo $Encoder->encodeForHTML($lDocumentToBeFramedMessage);
-		}// end if 
+		}// end if
+		$LogHandler->writeToLog("Framing document: " . $lDocumentToBeFramedMessage);
 	?>
 	</div>
 	<div>&nbsp;</div>

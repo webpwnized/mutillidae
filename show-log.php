@@ -95,7 +95,7 @@
     <td style="font-weight:bold;">Hostname</td>
     <td style="font-weight:bold;">IP</td>
     <td style="font-weight:bold;">Browser Agent</td>
-    <td style="font-weight:bold;">Page Viewed</td>
+    <td style="font-weight:bold;">Message</td>
     <td style="font-weight:bold;">Date/Time</td>
 </tr>
 

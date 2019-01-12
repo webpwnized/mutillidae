@@ -195,12 +195,9 @@
 <?php
 	if ($lFormSubmitted){
 		try {
-			try {
-				$LogHandler->writeToLog("Recieved request to display user information for: " . $lUsername);					
-			} catch (Exception $e) {
-				//do nothing
-			}// end try
-	    	
+            
+		    $LogHandler->writeToLog("Recieved request to display user information for: " . $lUsername);					
+			
 			if($lProtectAgainstXPathInjection){
 				$lXPathUsername = $Encoder->encodeForXPath($lUsername);
 				$lXPathPassword = $Encoder->encodeForXPath($lPassword);

@@ -1,5 +1,14 @@
 <?php
 
+    function logMessage($lMessage){
+        try {
+            global $LogHandler;
+            $LogHandler->writeToLog($lMessage);
+        } catch (Exception $e) {
+            /*do nothing*/
+        };
+    };//end function logMessage
+
    	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
    		case "1": // This code is insecure
@@ -20,7 +29,7 @@
 		case "toggle-enforce-ssl":
     		if ($_SESSION["EnforceSSL"] == "False"){
     			$_SESSION["EnforceSSL"] = "True";
-    			$lhintsPopUpNotificationCode = "SSLE1";		
+    			$lhintsPopUpNotificationCode = "SSLE1";
     		}else{
     			//default to false
     			$_SESSION["EnforceSSL"] = "False";
@@ -45,6 +54,7 @@
 			break;//case "toggle-bubble-hints"
 	    
     	case "logout":
+    	    logMessage("Logout user: {$_SESSION['logged_in_user']} ({$_SESSION['uid']})");
 		    $_SESSION["loggedin"] = "False";
 		    $_SESSION['logged_in_user'] = '';
 		    $_SESSION['logged_in_usersignature'] = '';
@@ -53,7 +63,6 @@
 	    	setcookie("uid", "", time()-2);
 	    	setcookie("username", "", time()-2);
 	    	header("Location: index.php?page=login.php&popUpNotificationCode=LOU1", TRUE, 302);
-	    	
 	    	exit(0);
 	    break;//case "logout"
 
