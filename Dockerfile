@@ -25,8 +25,4 @@ RUN sed -i 's/^Deny from all/Allow from all/g' /var/www/html/mutillidae/.htacces
 
 EXPOSE 80 443
 
-<<<<<<< HEAD
 CMD ["bash", "-c", "service mysql start && service apache2 start && sleep infinity & wait"]
-=======
-CMD ["bash", "-c", "service mysql start && service apache2 start && sleep infinity & wait"]
->>>>>>> a96d61aa05f457e96dd6d811940fcf5bad24fa35
