@@ -291,8 +291,7 @@ function sendcsrf(){
 	try{
 		var lData = &quot;&quot;;
 		var lAction = &quot;./index.php?page=user-poll.php&amp;csrf-token=&amp;choice=nmap&amp;initials=CSRF&amp;user-poll-php-submit-button=Submit+Vote&quot;;
-		http://mutillidae/index.php?
-		
+
 		var lMethod = &quot;GET&quot;;
 
 		try {

@@ -5,6 +5,13 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 2/14/2019 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.7.8: ---
+	
+		--- BUG FIX: Cross-site Request Forgery (CSRF) hints typo ---
+		
+		
 Date: 1/23/2019 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.7.7: ---
