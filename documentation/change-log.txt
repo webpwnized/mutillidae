@@ -5,6 +5,15 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+Date: 3/2/2019 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.7.9: ---
+	
+		--- BUG FIX: Set up database throws error on latest version of Maria DB 
+		due to creation of store procedures. Removed procedures since they are not
+		used. ---
+		
+
 Date: 2/14/2019 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.7.8: ---

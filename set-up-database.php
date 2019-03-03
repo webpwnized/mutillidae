@@ -1064,63 +1064,6 @@ try{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
 
-	$lQueryString = "
-	CREATE PROCEDURE getBestCollegeBasketballTeam ()
-	BEGIN
-		SELECT 'Kentucky Wildcats';
-	END;
-	";
-	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-	if (!$lQueryResult) {
-		$lErrorDetected = TRUE;
-	}else{
-		echo format("Executed query 'CREATE PROCEDURE' with result ".$lQueryResult,"S");
-	}// end if
-	
-	$lQueryString = "
-		CREATE PROCEDURE authenticateUserAndReturnProfile (p_username text, p_password text)
-		BEGIN
-			SELECT  accounts.cid, 
-		          accounts.username, 
-		          accounts.password, 
-		          accounts.mysignature
-		  FROM accounts
-		    WHERE accounts.username = p_username
-		      AND accounts.password = p_password;
-		END;
-	";
-	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-	if (!$lQueryResult) {
-		$lErrorDetected = TRUE;
-	}else{
-		echo format("Executed query 'CREATE PROCEDURE' with result ".$lQueryResult,"S");
-	}// end if
-	
-	$lQueryString = "
-		CREATE PROCEDURE insertBlogEntry (
-		  pBloggerName text,
-		  pComment text
-		)
-		BEGIN
-		
-		  INSERT INTO blogs_table(
-		    blogger_name, 
-		    comment, 
-		    date
-		   )VALUES(
-		    pBloggerName, 
-		    pComment, 
-		    now()
-		  );
-		
-		END;
-	";
-	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-	if (!$lQueryResult) {
-		$lErrorDetected = TRUE;
-	}else{
-		echo format("Executed query 'CREATE PROCEDURE' with result ".$lQueryResult,"S");
-	}// end if
 	
 	/* ***********************************************************************************
 	 * Create accounts.xml password.txt file from MySQL accounts table 
