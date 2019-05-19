@@ -5,13 +5,22 @@ TODO: Add password recovery page
 TODO: Add password hashes into the project
 TODO: Make these videos: buffer overflows, xml entity expansion
 
+
+Date: 5/18/2019 Author: Jeremy Druin ---
+
+	--- Change Log for OWASP Mutillidae II 2.7.11: ---
+	
+		--- Fixed typos found by J.Townsend aka L1ghtn1ng @jay_townsend1 ---
+		
+		
 Date: 4/24/2019 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.7.10: ---
 	
 		--- Added examples of remote file inclusion and local file inclusion into
-		hint for Insecure Direct Object Reference ---
-		
+		hint for Insecure Direct Object Reference (IDOR) ---
+
+
 Date: 3/2/2019 Author: Jeremy Druin ---
 
 	--- Change Log for OWASP Mutillidae II 2.7.9: ---
