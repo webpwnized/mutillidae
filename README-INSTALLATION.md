@@ -1,4 +1,6 @@
 # Installation
+## Ansible-Playbook Install
+Can install Mutillidae using the following playbook https://github.com/L1ghtn1ng/mutillidae-ansible
 
 ## Initial Setup
 
