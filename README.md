@@ -15,6 +15,9 @@ aleady, [you might skip directly to installing Mutillidae](https://www.youtube.c
 
 For detailed instructions, see [the comprehensive guide](https://www.youtube.com/playlist?list=PLZOToVAK85MqxEyrjINe-LwDMhxJJKzmm)
 
+### Ansible-playbook
+You can install Mutillidae using this playbook https://github.com/L1ghtn1ng/mutillidae-ansible
+
 ## Usage
 
 A [large number of video tutorials](https://www.youtube.com/playlist?list=PLZOToVAK85MrsyNmNp0yyUTBXqKRTh623) are available on the [webpwnized YouTube channel](https://www.youtube.com/user/webpwnized)
