@@ -82,9 +82,9 @@
 			?>
 
 			if(lValidateInput == "TRUE"){
-				var lDigits = "/[A-Fa-f0-9]{6}/";
-
-				if (theForm.id_background_color.value.search(lDigits) < 1){
+				var lDigits = /[0-9]{6}/;
+				
+				if (theForm.id_background_color.value.search(lDigits) != 0){
 						alert('The backgroud color must be 6 hexidecimal digits specified as RRGGBB where R is red, G is green and B is blue');
 						return false;
 				};// end if
