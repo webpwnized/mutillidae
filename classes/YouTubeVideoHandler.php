@@ -190,6 +190,19 @@ class YouTubeVideoHandler {
 	public $IntrotoLDAPInjectionPart1Overview = 151;
 	public $IntrotoLDAPInjectionPart2Discovery = 152;
 	public $IntrotoLDAPInjectionPart3PracticalUsage = 153;
+	public $LFIPart1LocalFileInclusionExplained = 154;
+	public $LFIPart2AccessingLogFiles = 155;
+	public $LFIPart3DirectoryTraversal = 156;
+	public $LFIPart4ServerSideInjectionandLFI = 157;
+	public $LFIPart5CommandShellandLFI = 158;
+	public $LFIPart6BetterCommandShell = 159;
+	public $LFIPart7AlternativePHPShellFunctions = 160;
+	public $LFIPart8ReverseShellviaLFI = 161;
+	
+	
+	
+	
+	
 	
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){

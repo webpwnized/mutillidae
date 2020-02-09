@@ -86,4 +86,12 @@
 	<br/><br/>
 	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoExploitLocalFileInclusionVulnerabilityusingBurpSuite);?>
 	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ISSA2013WebPentestingWorkshopPart6LocalRemoteFileInclusion);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart1LocalFileInclusionExplained);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart2AccessingLogFiles);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart3DirectoryTraversal);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart4ServerSideInjectionandLFI);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart5CommandShellandLFI);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart6BetterCommandShell);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart7AlternativePHPShellFunctions);?>
+	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart8ReverseShellviaLFI);?>
 	<br/><br/>

@@ -1055,8 +1055,16 @@ try{
 	        (150, '79mOiU3GfnQ', 'How to Create Virtual Hosts in Apache'),
         	(151, 'iUbqJy_MOiE', 'Intro to LDAP Injection: Part 1 - Overview'),
         	(152, 'DkKUDbEt46A', 'Intro to LDAP Injection: Part 2 - Discovery'),
-            (153, 'Bdpc-LjmKLc', 'Intro to LDAP Injection: Part 3 - Practical Usage')";
-
+            (153, 'Bdpc-LjmKLc', 'Intro to LDAP Injection: Part 3 - Practical Usage'),
+        	(154, 'V1gdO3QT-XY', 'LFI - Part 1: Local File Inclusion Explained'),
+        	(155, 'rZFnUdbA3-M', 'LFI - Part 2: Accessing Log Files'),
+        	(156, 'o01c0WfcJyc', 'LFI - Part 3: Directory Traversal'),
+        	(157, 'FGcmH9qLIpg', 'LFI - Part 4: Server-Side Injection and LFI'),
+        	(158, 'HMkWjjKMc54', 'LFI - Part 5: Command Shell and LFI'),
+        	(159, '4W-sIZX_9xU', 'LFI - Part 6: Better Command Shell'),
+        	(160, 'Nkpgm8-2zfY', 'LFI - Part 7: Alternative PHP Shell Functions'),
+        	(161, 'b6ugC1TcW64', 'LFI - Part 8: Reverse Shell via LFI')";
+	
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
