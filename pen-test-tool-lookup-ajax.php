@@ -109,7 +109,7 @@
 
 		try{ 
 			var lXMLHTTP;
-			var lURL = "/mutillidae/ajax/lookup-pen-test-tool.php";
+			var lURL = "./ajax/lookup-pen-test-tool.php";
 			var lRequestMethod = "POST";
 			var lAsyncronousRequestFlag = true;
 			
