@@ -44,7 +44,7 @@
 				$lUsername = $_REQUEST["username"];
 				$lPassword = $_REQUEST["password"];
 	    	}// end if $lProtectAgainstMethodTampering
-		}// end if $lFormSubmitted
+		}//aa end if $lFormSubmitted
 
    	} catch (Exception $e) {
 		echo $CustomErrorHandler->FormatError($e, $lQueryString);
