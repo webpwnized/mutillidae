@@ -1,4 +1,4 @@
-# <span style="color:darkblue">*OWASP Mutillidae II*</span>
+# <span style="color:darkblue">*OWASP Mutillidae II test*</span>
 
 ## Project Announcements
 
