@@ -465,8 +465,8 @@
    			// Always modified - Tells browser that new content available
    			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT", TRUE);
    			
-   			// HTTP/1.1 and cookie cache control
-   			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-cache="set-cookie"', TRUE);
+   			// HTTP/1.1 cache control
+   			header('Cache-Control: no-store, no-cache', TRUE);
    			
    			// HTTP/1.0 cache-control
    			header("Pragma: no-cache", TRUE);
