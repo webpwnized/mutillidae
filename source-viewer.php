@@ -54,25 +54,6 @@
 	}// end if
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lHTMLandXSSandSQLInjectionPointBallonTip = $BubbleHintHandler->getHint("HTMLandXSSandSQLInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[HTMLandXSSandSQLInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSandSQLInjectionPointBallonTip; ?>");
-		$('[HTMLandXSSandSQLInjectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Source Code Viewer</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -97,7 +78,7 @@
 			<td class="label">Source File Name</td>
 			<td>
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page']?>">
-				<select name="phpfile" id="id_file_select" HTMLandXSSandSQLInjectionPoint="1" autofocus="autofocus" <?php echo $lHTMLControlAttributes ?>>
+				<select name="phpfile" id="id_file_select" autofocus="autofocus" <?php echo $lHTMLControlAttributes ?>>
 				<?php 
 					$_SESSION['source-viewer-files-array'] = "";						
 					if(!$lValidateAndTokenize){
@@ -232,7 +213,7 @@
 		   	
 		   	// try to display the file
 		   	try {
-	   			echo '<span ReflectedXSSExecutionPoint=\"1\" class="label">File: '.$lFilename.'</span>';
+	   			echo '<span class="label">File: '.$lFilename.'</span>';
 	   			echo '<pre>';
 				highlight_file($lFilename);
 				echo '</pre>';

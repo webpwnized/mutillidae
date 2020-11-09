@@ -19,12 +19,6 @@
 	 * ------------------------------------------ */
 	require_once ('./includes/constants.php');
 	require_once(__ROOT__.'/includes/minimum-class-definitions.php');
-	
-	/* ------------------------------------------
- 	* initialize balloon-hint handler
- 	* ------------------------------------------ */
-	require_once (__ROOT__.'/classes/BubbleHintHandler.php');
-	$BubbleHintHandler = new BubbleHintHandler(__ROOT__."/owasp-esapi-php/src/", $_SESSION["security-level"]);
 		
 	/* ------------------------------------------
  	* initialize Client Information Handler
@@ -142,25 +136,6 @@
 	include_once(__ROOT__."/includes/log-visit.php");
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lSQLInjectionPointBallonTip = $BubbleHintHandler->getHint("SQLInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[SQLInjectionPoint]').attr("title", "<?php echo $lSQLInjectionPointBallonTip; ?>");
-		$('[SQLInjectionPoint]').balloon();
-	});
-</script>
-
 <link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
 <div class="page-title">Capture Data</div>
 
@@ -181,7 +156,7 @@
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr>
-		<td SQLInjectionPoint="1">
+		<td>
 			This page is designed to capture any parameters sent and store them in a file and a database table. It loops through
 			the POST and GET parameters and records them to a file named <span class="label"><?php print $lFilename; ?></span>. On this system, the 
 			file should be found at <span class="label"><?php print $lFilepath; ?></span>. The page
@@ -191,7 +166,7 @@
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr>
-		<th ReflectedXSSExecutionPoint="1">
+		<th>
 			The data captured on this request is: <?php print $lCapturedData; ?>
 		</th>
 	</tr>

@@ -50,33 +50,17 @@
 				$lMessageText = $lMessage; 		//allow XSS by not encoding output	    		
 	    	}//end if
 	    	
-		}// end if $lFormSubmitted    	
-    	
-		try{
-    		$lOSCommandInjectionPointBallonTip = $BubbleHintHandler->getHint("OSCommandInjectionPoint");
-       		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-		} catch (Exception $e) {
-			echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-		}// end try
-    		    	    	
+		}// end if $lFormSubmitted
+
 	}catch(Exception $e){
-		echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page echo.php");
-	}// end try	
+        echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
+    }// end try	
 ?>
 
 <div class="page-title"><span style="font-size: 18pt;">Echo</span>, <span style="font-size: 16pt;">Echo</span>, <span style="font-size: 14pt;">Echo</span>...</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[OSCommandInjectionPoint]').attr("title", "<?php echo $lOSCommandInjectionPointBallonTip; ?>");
-		$('[OSCommandInjectionPoint]').balloon();
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
     
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
@@ -125,7 +109,7 @@
 			<td>
 				<input 	type="text" id="idMessageInput" name="message" size="20" 
 						autofocus="autofocus"
-						OSCommandInjectionPoint="1"
+						
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="20" required="required"');
@@ -149,7 +133,7 @@
 /* Output results of shell command sent to operating system */
 if ($lFormSubmitted){
 	    try{
-	        echo '<div class="report-header" ReflectedXSSExecutionPoint="1">Results for '.$lMessageText.'</div>';
+	        echo '<div class="report-header">Results for '.$lMessageText.'</div>';
 	        
 	        if ($lProtectAgainstCommandInjection) {
 	            echo '<pre class="report-header" style="text-align:left;">'.$lMessage.'</pre>';

@@ -56,22 +56,6 @@
    	
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
-
 <script>
 	var DeleteCapturedData = function(){
 		if (window.confirm("Please confirm all captured data should be deleted")){
@@ -164,9 +148,9 @@
 					<td>{$lHostname}</td>
 					<td>{$lClientIPAddress}</td>
 					<td>{$lClientPort}</td>
-					<td ReflectedXSSExecutionPoint=\"1\">{$lClientUserAgentString}</td>
-					<td ReflectedXSSExecutionPoint=\"1\">{$lClientReferrer}</td>
-					<td ReflectedXSSExecutionPoint=\"1\">{$lData}</td>
+					<td>{$lClientUserAgentString}</td>
+					<td>{$lClientReferrer}</td>
+					<td>{$lData}</td>
 					<td>{$lCaptureDate}</td>
 				</tr>\n";
 		}//end while $row

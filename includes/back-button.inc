@@ -38,24 +38,9 @@
    	}// end if
 ?>
 
-<?php 
-	try{
-   		$lHTMLEventReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("HTMLEventReflectedXSSExecutionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[HTMLEventReflectedXSSExecutionPoint]').attr("title", "<?php echo $lHTMLEventReflectedXSSExecutionPointBallonTip; ?>");
-		$('[HTMLEventReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
-
 <div style="margin: 5px;">
-	<span style="font-weight: bold; margin-right: 50px;" HTMLEventReflectedXSSExecutionPoint="1">
-	<a 	onclick="document.location.href='<?php echo $lHTTPReferer; ?>';">
+	<span style="font-weight: bold; margin-right: 50px;">
+	<a id="back-button-anchor">
 		<img	src="./images/back-button-64-64.png" 
 				alt="Go Back" 
 				align="middle" 
@@ -66,3 +51,11 @@
 	</span>
 	<?php include_once('./includes/help-button.inc');?>	
 </div>
+<script nonce="<?php echo $CSPNonce; ?>">
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('back-button-anchor').addEventListener('click', 
+            function(){
+                document.location.href='<?php echo $lHTTPReferer; ?>';            
+            });
+    });
+</script>

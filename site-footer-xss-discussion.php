@@ -48,22 +48,6 @@
     }// end try;
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Browser Version Site Footer</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -77,7 +61,7 @@
 	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td class="label">Browser Version: </td>
-		<td ReflectedXSSExecutionPoint="1"><?php echo $lClientUserAgentString; ?></td>
+		<td><?php echo $lClientUserAgentString; ?></td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr><td>&nbsp;</td></tr>

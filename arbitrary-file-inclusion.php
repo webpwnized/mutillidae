@@ -45,25 +45,6 @@
     }// end try;
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lLocalFileInclusionVulnerabilityBallonTip = $BubbleHintHandler->getHint("LocalFileInclusionVulnerability");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[LocalFileInclusionVulnerability]').attr("title", "<?php echo $lLocalFileInclusionVulnerabilityBallonTip; ?>");
-		$('[LocalFileInclusionVulnerability]').balloon();
-	});
-</script>
-
 <div class="page-title">Arbitrary File Inclusion</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -75,7 +56,7 @@
 	</tr>
 	<tr><td>&nbsp;</td></tr>
 	<tr style="text-align: left;">
-		<td ReflectedXSSExecutionPoint="1" class="label">Current Page: <?php echo $lPage; ?></td>
+		<td class="label">Current Page: <?php echo $lPage; ?></td>
 	</tr>
 	<tr>
 		<td LocalFileInclusionVulnerability="1" class="label">

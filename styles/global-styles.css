@@ -59,13 +59,6 @@ div.page-title,span.page-title{
 	border-radius: 5px;
 }
 
-div.footer{
-	font-size: 12pt;
-	font-weight: bold;
-	text-align: center;
-	background-color: #ccccff;
-}
-
 *.label{
 	font-weight: bold;
 }
@@ -123,22 +116,6 @@ div.help-text-header{
 	font-weight: bold;
 	padding: 5px;
 	border-radius: 5px;
-}
-
-/* ------------------------------------------------- */
-/* Special Header Page Styles */
-/* ------------------------------------------------- */
-
-span.version-header {
-	position: relative;
-	left: 0px;
-	font-weight: bold;
-}
-
-span.logged-in-user-header {
-	position: absolute;
-	right: 20px;
-	font-weight: bold;
 }
 
 /* ------------------------------------------------- */
@@ -225,8 +202,6 @@ table{
 
 table tr td.label{
 	font-weight: bold;
-	/*color: white;*/
-	/*background-color: #000099;*/
 }
 
 table tr td{
@@ -238,62 +213,69 @@ table tr td{
 /* ---------------------------------------------------- */
 
 table.main-table-frame{
-	border-width: 1px;
-	border-color: #000000;
-	border-style: solid;
+	border-collapse: collapse;
+	border-spacing: 0px;
+	padding: 0px;
 	width:100%;
-	border-collapse: collapse;
-	border-spacing: 0px;
 }
 
-/* ---------------------------------------------------- */
-/* Horizontal Menu Table on the Sites Main Header Frame */
-/* ---------------------------------------------------- */
-td.header-menu-table{
-	background-color: #414141;
-}
-
-table.header-menu-table{
-	/*width: 80%;*/
-	border-collapse: collapse;
-	border-spacing: 0px;
-	padding: 0px;
-	margin: auto;
-}
-
-table.header-menu-table tr{
-	
-}
-
-table.header-menu-table tr td{
+tr.main-table-frame-dark{
+	background-color: #55557720;
 	text-align: center;
+	font-weight: bold;
+}
+
+td.main-table-frame-first-bar{
+	font-size: 30px;
+}
+
+td.main-table-frame-second-bar{
+	font-size: 16px;
+}
+
+span.version-header {
+	margin-left: 20px;
+}
+
+tr.main-table-frame-third-bar{
 	background-color: #414141;
-	color: #000000;
-	font: bold 12px Verdana;
-	padding: 0px;
+	text-align: center;
+	font-size: 14px;
+	color: white;
+	font-weight: bold;
+	font-style: Verdana;
 }
 
-table.header-menu-table tr td a{
-	text-decoration: none;
-	display: block;
-	padding-right: 5px;
-	padding-left: 5px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-table.header-menu-table tr td a:link, table.header-menu-table tr td a:visited{
+td.main-table-frame-third-bar a, a:active, a:visited{
 	color: white;
 }
 
-table.header-menu-table tr td a.selected{
-	background: black; 
-	color: white;
+td.main-table-frame-third-bar a:hover{
+	color: black;
+	background-color: white;
 }
 
-table.header-menu-table tr td a:hover{
-	background: black;
-	color: white;
+span.logged-in-user{
+	color: #990000;
+}
+
+td.main-table-frame-left{
+	vertical-align: top;
+	background-color: #55557720;
+	width:100pt;
+}
+
+td.main-table-frame-left div{
+	color: blue;
+	font-weight: bold;
+	text-align: center;
+}
+
+td.main-table-frame-right{
+	vertical-align: top;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
 }
 
 /* ----------------------------------------------------------------- */

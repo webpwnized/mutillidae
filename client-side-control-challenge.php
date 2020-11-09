@@ -337,28 +337,6 @@
 //-->
 </script>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lBufferOverflowInjectionPointBalloonTip = $BubbleHintHandler->getHint("BufferOverflowInjectionPoint");
-		$lHTMLandXSSInjectionPointBalloonTip = $BubbleHintHandler->getHint("HTMLandXSSInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[BufferOverflowInjectionPoint]').attr("title", "<?php echo $lBufferOverflowInjectionPointBalloonTip; ?>");
-		$('[BufferOverflowInjectionPoint]').balloon();		
-		$('[HTMLandXSSInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSInjectionPointBalloonTip; ?>");
-		$('[HTMLandXSSInjectionPoint]').balloon();		
-	});
-</script>
-
 <style>
 	input.box:hover {
 	    left: 200px;
@@ -414,48 +392,48 @@
 			<tr>
 				<td class="label" style="text-align: left;">Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="textbox" id="id_textbox" size="15" maxlength="15" required="required" autofocus="autofocus" />
+					<input type="text" name="textbox" id="id_textbox" size="15" maxlength="15" required="required" autofocus="autofocus" />
 				</td>
 			</tr>			<tr>
 				<td class="label" style="text-align: left;">Read-only Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="readonly_textbox" id="id_readonly_textbox" size="15" maxlength="15" required="required" autofocus="autofocus" readonly="readonly" value="42" />
+					<input type="text" name="readonly_textbox" id="id_readonly_textbox" size="15" maxlength="15" required="required" autofocus="autofocus" readonly="readonly" value="42" />
 				</td>
 			</tr>			
 			<tr>
 				<td class="label" style="text-align: left;">Short Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="short_textbox" id="id_short_textbox" size="3" maxlength="3" required="required" />
+					<input type="text" name="short_textbox" id="id_short_textbox" size="3" maxlength="3" required="required" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label" style="text-align: left;">Disabled Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="disabled_textbox" id="id_disabled_textbox" size="15" maxlength="15" required="required" disabled="disabled" style="background-color:#dddddd;" />
+					<input type="text" name="disabled_textbox" id="id_disabled_textbox" size="15" maxlength="15" required="required" disabled="disabled" style="background-color:#dddddd;" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label" style="text-align: left;">Hidden Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="hidden" name="hidden_textbox" id="id_hidden_textbox" size="15" maxlength="15" required="required" />
+					<input type="hidden" name="hidden_textbox" id="id_hidden_textbox" size="15" maxlength="15" required="required" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label" style="text-align: left;">"Secured by JavaScript" Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="tricky_textbox" id="id_tricky_textbox" size="15" maxlength="15" required="required" onfocus="javascript:this.blur();" />
+					<input type="text" name="tricky_textbox" id="id_tricky_textbox" size="15" maxlength="15" required="required" onfocus="javascript:this.blur();" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label" style="text-align: left;">Vanishing Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="vanishing_textbox" id="id_vanishing_textbox" size="15" maxlength="15" required="required" onmouseover="javascript:this.type='hidden';" />
+					<input type="text" name="vanishing_textbox" id="id_vanishing_textbox" size="15" maxlength="15" required="required" onmouseover="javascript:this.type='hidden';" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label" style="text-align: left;">Shy Text Box</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="shy_textbox" id="id_shy_textbox" size="15" maxlength="15" required="required" class="box" />
+					<input type="text" name="shy_textbox" id="id_shy_textbox" size="15" maxlength="15" required="required" class="box" />
 				</td>
 			</tr>
 			<tr>
@@ -467,13 +445,13 @@
 			<tr>
 				<td class="label" style="text-align: left;">Password</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="password" name="password" id="id_password" size="15" maxlength="15" required="required" value="Hint: If you use Burp-Suite this exercise is much easier" />
+					<input type="password" name="password" id="id_password" size="15" maxlength="15" required="required" value="Hint: If you use Burp-Suite this exercise is much easier" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label" style="text-align: left;">Drop-down Box</td>
 				<td style="text-align: left;">
-					<select HTMLandXSSInjectionPoint="1" name="select" id="id_select" required="required">
+					<select name="select" id="id_select" required="required">
 						<option value="1">One</option>
 						<option value="2">Two</option>
 						<option value="3">Buckle my shoe</option>

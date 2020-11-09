@@ -39,20 +39,6 @@
 			exit();
     	break;//case "toggle-enforce-ssl"
 	        	
-    	case "toggle-bubble-hints":
-    		if ($BubbleHintHandler->hintsAreDispayed()){
-    			$BubbleHintHandler->hideHints();
-    			$lhintsPopUpNotificationCode="BHD1";
-    		}else{
-    			$BubbleHintHandler->showHints();
-    			$lhintsPopUpNotificationCode="BHE1";
-    		}//end if
-		    
-    		header("Location: ".$_SERVER['SCRIPT_NAME'].'?popUpNotificationCode='.$lhintsPopUpNotificationCode.'&'.str_ireplace('do=toggle-bubble-hints&', '', $_SERVER['QUERY_STRING']), true, 302);
-			exit();
-    		
-			break;//case "toggle-bubble-hints"
-	    
     	case "logout":
     	    logMessage("Logout user: {$_SESSION['logged_in_user']} ({$_SESSION['uid']})");
 		    $_SESSION["loggedin"] = "False";
@@ -103,9 +89,7 @@
 			}//end switch
 			
 			/* Redirect the user back to the same page they clicked the "Toggle Hints" button
-			 * The index.php page will take care of using this new hint-level value to 
-			 * syncronize the page-hints and balloon tip hints. The "exit()" function makes
-			 * sure we do not accidentally write any "body" lines.
+			 * The "exit()" function makes sure we do not accidentally write any "body" lines.
 			 */
 		    header("Location: ".$_SERVER['SCRIPT_NAME'].'?popUpNotificationCode='.$lhintsPopUpNotificationCode.'&'.str_ireplace('do=toggle-hints&', '', $_SERVER['QUERY_STRING']), true, 302);
 			exit();
@@ -144,7 +128,6 @@
 			// change how much information errors barf onto the page.
 		    $CustomErrorHandler->setSecurityLevel($lSecurityLevel);
 		    $LogHandler->setSecurityLevel($lSecurityLevel);
-		    $BubbleHintHandler->setSecurityLevel($lSecurityLevel);
 		   	$MySQLHandler->setSecurityLevel($lSecurityLevel);		    
 		   	$SQLQueryHandler->setSecurityLevel($lSecurityLevel);
 		   	$RemoteFileHandler->setSecurityLevel($lSecurityLevel);

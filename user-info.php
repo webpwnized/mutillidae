@@ -85,24 +85,6 @@
 	}// end function onSubmitOfForm(/*HTMLFormElement*/ theForm)
 	
 </script>
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lSQLInjectionPointBallonTip = $BubbleHintHandler->getHint("SQLInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[SQLInjectionPoint]').attr("title", "<?php echo $lSQLInjectionPointBallonTip; ?>");
-		$('[SQLInjectionPoint]').balloon();
-	});
-</script>
 
 <div class="page-title">User Lookup (SQL)</div>
 
@@ -143,7 +125,7 @@
 		<tr>
 			<td class="label">Name</td>
 			<td>
-				<input SQLInjectionPoint="1" type="text" name="username" size="20" autofocus="autofocus" 
+				<input type="text" name="username" size="20" autofocus="autofocus" 
 					<?php
 						if ($lEnableHTMLControls) {
 							echo('minlength="1" maxlength="20" required="required"');
@@ -155,7 +137,7 @@
 		<tr>
 			<td class="label">Password</td>
 			<td>
-				<input SQLInjectionPoint="1" type="password" name="password" size="20"
+				<input type="password" name="password" size="20"
 					<?php
 						if ($lEnableHTMLControls) {
 							echo('minlength="1" maxlength="20" required="required"');
@@ -205,7 +187,7 @@
 			}// end if
 
 			echo '	<div class="report-header">
-						Results for &quot;<span ReflectedXSSExecutionPoint="1" style="color:#770000;">'
+						Results for &quot;<span style="color:#770000;">'
 						.$lUsername.
 						'</span>&quot;.'.$lRecordsFound.' records found.
 					</div>';
@@ -229,9 +211,9 @@
 						$lSignature = $Encoder->encodeForHTML($row->mysignature);			
 					}// end if
 					
-					echo "<span style=\"font-weight:bold;\">Username=</span><span ReflectedXSSExecutionPoint=\"1\">{$lUsername}</span><br/>";
-					echo "<span style=\"font-weight:bold;\">Password=</span><span ReflectedXSSExecutionPoint=\"1\">{$lPassword}</span><br/>";
-					echo "<span style=\"font-weight:bold;\">Signature=</span><span ReflectedXSSExecutionPoint=\"1\">{$lSignature}</span><br/><br/>";
+					echo "<span style=\"font-weight:bold;\">Username=</span><span>{$lUsername}</span><br/>";
+					echo "<span style=\"font-weight:bold;\">Password=</span><span>{$lPassword}</span><br/>";
+					echo "<span style=\"font-weight:bold;\">Signature=</span><span>{$lSignature}</span><br/><br/>";
 				}// end while
 	
 			} else {

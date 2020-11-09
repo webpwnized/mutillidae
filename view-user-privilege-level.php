@@ -138,28 +138,6 @@
 	}// end try	
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lBufferOverflowInjectionPointBalloonTip = $BubbleHintHandler->getHint("BufferOverflowInjectionPoint");
-		$lHTMLandXSSInjectionPointBalloonTip = $BubbleHintHandler->getHint("HTMLandXSSInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[BufferOverflowInjectionPoint]').attr("title", "<?php echo $lBufferOverflowInjectionPointBalloonTip; ?>");
-		$('[BufferOverflowInjectionPoint]').balloon();		
-		$('[HTMLandXSSInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSInjectionPointBalloonTip; ?>");
-		$('[HTMLandXSSInjectionPoint]').balloon();		
-	});
-</script>
-
 <div class="page-title">View User Privilege Level</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -208,7 +186,7 @@
 	<table>
 		<tr><td></td></tr>
 		<tr>
-			<td ReflectedXSSExecutionPoint="1" colspan="2" class="hint-header"><?php echo $lBuffer; ?></td>
+			<td colspan="2" class="hint-header"><?php echo $lBuffer; ?></td>
 		</tr>
 		<tr><td></td></tr>
 	</table>	

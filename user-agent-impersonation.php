@@ -40,22 +40,6 @@
     }// end try;
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lJavaScriptInjectionPointBallonTip = $BubbleHintHandler->getHint("JavaScriptInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[JavaScriptInjectionPoint]').attr("title", "<?php echo $lJavaScriptInjectionPointBallonTip; ?>");
-		$('[JavaScriptInjectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">User-Agent Impersonation</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -67,17 +51,17 @@
 	<table style="width:80%;" class="results-table">
 		<tr><td colspan="3" id="id_result"></td></tr>
 	   	<tr><td colspan="3">&nbsp;</td></tr>
-		<tr><th class="report-label">User Agent</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_user_agent_td"></td></tr>
-		<tr><th class="report-label">App Code Name</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_browser_codename_td"></td></tr>
-		<tr><th class="report-label">App Name</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_browser_td"></td></tr>
-		<tr><th class="report-label">Browser Version</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_browser_version_td"></td></tr>
-		<tr><th class="report-label">Platform</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_platform_td"></td></tr>
-		<tr><th class="report-label">Vendor</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_browser_vendor_td"></td></tr>
-		<tr><th class="report-label">Vendor Sub</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_browser_vendor_sub_td"></td></tr>
-		<tr><th class="report-label">Build ID</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_build_id_td"></td></tr>
-		<tr><th class="report-label">O/S CPU</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_oscpu_td"></td></tr>
-		<tr><th class="report-label">Product</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_product_td"></td></tr>
-		<tr><th class="report-label">Product Sub</th><td class="report-data" JavaScriptInjectionPoint="1" id="id_product_sub_td"></td></tr>
+		<tr><th class="report-label">User Agent</th><td class="report-data" id="id_user_agent_td"></td></tr>
+		<tr><th class="report-label">App Code Name</th><td class="report-data" id="id_browser_codename_td"></td></tr>
+		<tr><th class="report-label">App Name</th><td class="report-data" id="id_browser_td"></td></tr>
+		<tr><th class="report-label">Browser Version</th><td class="report-data" id="id_browser_version_td"></td></tr>
+		<tr><th class="report-label">Platform</th><td class="report-data" id="id_platform_td"></td></tr>
+		<tr><th class="report-label">Vendor</th><td class="report-data" id="id_browser_vendor_td"></td></tr>
+		<tr><th class="report-label">Vendor Sub</th><td class="report-data" id="id_browser_vendor_sub_td"></td></tr>
+		<tr><th class="report-label">Build ID</th><td class="report-data" id="id_build_id_td"></td></tr>
+		<tr><th class="report-label">O/S CPU</th><td class="report-data" id="id_oscpu_td"></td></tr>
+		<tr><th class="report-label">Product</th><td class="report-data" id="id_product_td"></td></tr>
+		<tr><th class="report-label">Product Sub</th><td class="report-data" id="id_product_sub_td"></td></tr>
 	</table>
 </fieldset>
 

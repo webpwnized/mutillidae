@@ -3,11 +3,11 @@
 
 		switch ($_SESSION["security-level"]){
 	   		case "0": // This code is insecure
-				$logged_in_user = $_SESSION['logged_in_user'];
-	   		break;
 	   		case "1": // This code is insecure
 	   			// DO NOTHING: This is equivalent to using client side security		
 				$logged_in_user = $_SESSION['logged_in_user'];
+				$lUserAgentString = $_SERVER['HTTP_USER_AGENT'];
+				$lPHPVersion = "PHP Version: " . phpversion();
 	   		break;
 		    
 	   		case "2":
@@ -17,6 +17,8 @@
 	   			// encode the entire message following OWASP standards
 	   			// this is HTML encoding because we are outputting data into HTML
 				$logged_in_user = $Encoder->encodeForHTML($_SESSION['logged_in_user']);
+				$lUserAgentString = $Encoder->encodeForHTML($_SERVER['HTTP_USER_AGENT']);
+				$lPHPVersion = "PHP Version: Not Available (Secure mode doesn't blab the server version)";
 			break;
 	   	}// end switch		
 
@@ -31,7 +33,7 @@
 		$lAuthenticationStatusMessage = 
 			'Logged In ' . 
 			$lUserAuthorizationLevelText . ": " . 
-			'<span style="color:#990000;font-weight:bold;">'.$logged_in_user.'</span>'.
+			'<span class="logged-in-user">'.$logged_in_user.'</span>'.
 			'<a href="index.php?page=edit-account-profile.php&uid='.$lUserID.'">
             <img src="images/edit-icon-20-20.png" /></a>';
 	} else {
@@ -40,15 +42,9 @@
 	}// end if($_SESSION['loggedin'] == "True")
 
 	if ($_SESSION["EnforceSSL"] == "True"){
-		$lEnforceSSLLabel = "Drop SSL";
+		$lEnforceSSLLabel = "Drop TLS";
 	}else {
-		$lEnforceSSLLabel = "Enforce SSL";
-	}//end if
-
-	if ($BubbleHintHandler->hintsAreDispayed() == 1){
-		$lPopupHintsLabel = "Hide Popup Hints";
-	}else {
-		$lPopupHintsLabel = "Show Popup Hints";
+		$lEnforceSSLLabel = "Enforce TLS";
 	}//end if	
 	
 	$lHintsMessage = "Hints: ".$_SESSION["hints-enabled"];
@@ -70,133 +66,106 @@
 	
 	$lSecurityLevelMessage = "Security Level: ".$_SESSION["security-level"]." (".$lSecurityLevelDescription.")";
 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lCookieTamperingAffectedAreaBallonTip = $BubbleHintHandler->getHint("CookieTamperingAffectedArea"); 
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 <head>
-	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />	
-	<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
-	<link rel="stylesheet" type="text/css" href="./styles/ddsmoothmenu/ddsmoothmenu.css" />
-	<link rel="stylesheet" type="text/css" href="./styles/ddsmoothmenu/ddsmoothmenu-v.css" />
-
-	<script type="text/javascript" src="./javascript/ddsmoothmenu/ddsmoothmenu.js"></script>
-	<script type="text/javascript" src="./javascript/ddsmoothmenu/jquery.min.js"></script>
-	<script type="text/javascript">
-		ddsmoothmenu.init({
-			mainmenuid: "smoothmenu1", //menu DIV id
-			orientation: 'v', //Horizontal or vertical menu: Set to "h" or "v"
-			classname: 'ddsmoothmenu', //class added to menu's outer DIV
-			//customtheme: ["#cccc44", "#cccccc"],
-			contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
-		});
-	</script>
-	<script type="text/javascript">
-		$(function() {
-			$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-			$('[ReflectedXSSExecutionPoint]').balloon();
-			$('[CookieTamperingAffectedArea]').attr("title", "<?php echo $lCookieTamperingAffectedAreaBallonTip; ?>");
-			$('[CookieTamperingAffectedArea]').balloon();
-		});
-	</script>
+	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+	
+	<link rel="stylesheet" type="text/css" href="styles/global-styles.css" />
+	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu.css" />
+	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu-v.css" />
+	<link rel="stylesheet" type="text/css" href="javascript/jQuery/colorbox/colorbox.css" />
+	<link rel="stylesheet" type="text/css" href="styles/gritter/jquery.gritter.css" />
+	
+	<script src="javascript/jQuery/jquery.js"></script>
+	<script src="javascript/jQuery/colorbox/jquery.colorbox-min.js"></script>
+	<script src="javascript/ddsmoothmenu/ddsmoothmenu.js"></script>
+	<script src="javascript/gritter/jquery.gritter.min.js"></script>
+	<script src="javascript/hints/hints-menu.js"></script>
+	<script src="javascript/inline-initializers/jquery-init.js"></script>
+	<script src="javascript/inline-initializers/ddsmoothmenu-init.js"></script>
+	<script src="javascript/inline-initializers/populate-web-storage.js"></script>
+	<script src="javascript/inline-initializers/gritter-init.js"></script>
+	<script src="javascript/inline-initializers/hints-menu-init.js"></script>
+	
 </head>
 <body>
-<table class="main-table-frame" border="1px" cellspacing="0px" cellpadding="0px">
-	<tr>
-		<td bgcolor="#ccccff" align="center" colspan="7">
-			<table width="100%">
-				<tr>
-					<td style="text-align:center;">
-						<span style="text-align:center; font-weight: bold; font-size:30px; text-align: center;">
-						<img style="vertical-align: middle; margin-right: 10px;" border="0px" align="top" src="images/coykillericon-50-38.png"/>
-							OWASP Mutillidae II: Keep Calm and Pwn On
-						</span>
-					</td>
-				</tr>		
-			</table>
+<table class="main-table-frame">
+	<tr class="main-table-frame-dark">
+		<td class="main-table-frame-first-bar" colspan="2">
+			<img src="images/coykillericon-50-38.png"/>
+			OWASP Mutillidae II: Keep Calm and Pwn On
 		</td>
 	</tr>
-	<tr>
-		<td bgcolor="#ccccff" align="center" colspan="7">
+	<tr class="main-table-frame-dark">
+		<td class="main-table-frame-second-bar" colspan="2">
 			<?php /* Note: $C_VERSION_STRING in index.php */ ?>
 			<span class="version-header"><?php echo $C_VERSION_STRING;?></span>
-			<span id="idSecurityLevelHeading" class="version-header" style="margin-left: 20px;"><?php echo $lSecurityLevelMessage; ?></span>
-			<span id="idHintsStatusHeading" CookieTamperingAffectedArea="1" class="version-header" style="margin-left: 20px;"><?php echo $lHintsMessage; ?></span>
-			<span id="idSystemInformationHeading" ReflectedXSSExecutionPoint="1" class="version-header" style="margin-left: 20px;"><?php echo $lAuthenticationStatusMessage ?></span>
+			<span class="version-header"><?php echo $lSecurityLevelMessage; ?></span>
+			<span class="version-header"><?php echo $lHintsMessage; ?></span>
+			<span class="version-header"><?php echo $lAuthenticationStatusMessage ?></span>
+		</td>
+	</tr>
+	<tr class="main-table-frame-third-bar">
+		<td class="main-table-frame-third-bar" colspan="2">
+			<a href="index.php?page=home.php&popUpNotificationCode=HPH0">Home</a>
+			|
+			<?php
+				if ($_SESSION['loggedin'] == 'True'){
+					echo '<a href="index.php?do=logout">Logout</a>';
+				} else {
+					echo '<a href="index.php?page=login.php">Login/Register</a>';
+				}// end if
+			?>
+			|
+			<?php 
+				if ($_SESSION['security-level'] == 0){
+					echo '<a href="index.php?do=toggle-hints&page='.$lPage.'">Toggle Hints</a>|';
+				}// end if
+			?>
+			<a href="index.php?do=toggle-security&page=<?php echo $lPage?>">Toggle Security</a>
+			|
+			<a href="index.php?do=toggle-enforce-ssl&page=<?php echo $lPage?>"><?php echo $lEnforceSSLLabel; ?></a>
+			|
+			<a href="set-up-database.php">Reset DB</a>
+			|
+			<a href="index.php?page=show-log.php">View Log</a>
+			|
+			<a href="index.php?page=captured-data.php">View Captured Data</a>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" class="header-menu-table">
-			<table class="header-menu-table">
-				<tr>
-					<td><a href="index.php?page=home.php&popUpNotificationCode=HPH0">Home</a></td>
-					<td>|</td>
-					<td>
-						<?php
-							if ($_SESSION['loggedin'] == 'True'){
-								echo '<a href="index.php?do=logout">Logout</a>';
-							} else {
-								echo '<a href="index.php?page=login.php">Login/Register</a>';
-							}// end if
-						?>		
-					</td>
-					<td>|</td>
-					<?php 
-						if ($_SESSION['security-level'] == 0){
-							echo '<td><a href="index.php?do=toggle-hints&page='.$lPage.'">Toggle Hints</a></td><td>|</td>';
-						}// end if
-					?>
-					<td><a href="index.php?do=toggle-bubble-hints&page=<?php echo $lPage?>"><?php echo $lPopupHintsLabel; ?></a></td>
-					<td>|</td>
-					<td><a href="index.php?do=toggle-security&page=<?php echo $lPage?>">Toggle Security</a></td>
-					<td>|</td>
-					<td><a href="index.php?do=toggle-enforce-ssl&page=<?php echo $lPage?>"><?php echo $lEnforceSSLLabel; ?></a></td>
-					<td>|</td>
-					<td><a href="set-up-database.php">Reset DB</a></td>
-					<td>|</td>
-					<td><a href="index.php?page=show-log.php">View Log</a></td>
-					<td>|</td>
-					<td><a href="index.php?page=captured-data.php">View Captured Data</a></td>
-				</tr>
-			</table>	
-		</td>
-	</tr>
-	<tr>
-		<td style="vertical-align:top;text-align:left;background-color:#ccccff;width:125pt;">
+		<td class="main-table-frame-left">
 			<?php require_once 'main-menu.php'; ?>
 			<div>&nbsp;</div>
-			<div class="label" style="text-align: center;">
+			<div>
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 					<input type="hidden" name="cmd" value="_s-xclick">
 					<input type="hidden" name="hosted_button_id" value="45R3YEXENU97S">
-					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="Donate Today!">
+					<img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 				</form>
-				<span style="color: blue;">Want to Help?</span>
+				Want to Help?
 			</div>
 			<div>&nbsp;</div>
-			<div class="label" style="text-align: center;">
-				<a href="http://www.youtube.com/user/webpwnized" style="white-space:nowrap;" target="_blank">
-					<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
+			<div>
+				<a href="http://www.youtube.com/user/webpwnized" target="_blank">
+					<img alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
 					<br/>
 					Video Tutorials
 				</a>
 			</div>
 			<div>&nbsp;</div>
-			<div class="label" style="text-align: center;">
+			<div>
 				<a href="https://twitter.com/webpwnized" target="_blank">
-					<img align="middle" alt="Webpwnized Twitter Channel" src="./images/twitter-bird-48-48.png" />
+					<img alt="Webpwnized Twitter Channel" src="./images/twitter-bird-48-48.png" />
 					<br/>
 					Announcements
 				</a>
 			</div>		
 			<div>&nbsp;</div>
-			<div class="label" style="text-align: center;">
+			<div>
 				<a 
 					href="https://www.sans.org/reading-room/whitepapers/application/introduction-owasp-mutillidae-ii-web-pen-test-training-environment-34380" 
 					target="_blank"
@@ -209,6 +178,5 @@
 			</div>
 			<div>&nbsp;</div>
 		</td>
-		<td valign="top">
-			<blockquote>
+		<td class="main-table-frame-right">
 			<!-- Begin Content -->

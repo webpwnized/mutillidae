@@ -92,22 +92,6 @@
    	}// end try;
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
-
 <script type="text/javascript">
 	<?php 
 	if($lEnableJavaScriptValidation){
@@ -191,7 +175,7 @@
 
 				echo "<fieldset>";
 				echo "<legend>XML Submitted</legend>";
-				echo "<div width='600px' ReflectedXSSExecutionPoint=\"1\" class=\"important-code\">" . $Encoder->encodeForXML($lXML) . "</div>";
+				echo "<div width='600px' class=\"important-code\">" . $Encoder->encodeForXML($lXML) . "</div>";
 				echo "</fieldset>";
 				echo "<div>&nbsp;</div>";
 				
@@ -206,7 +190,7 @@
 
 					echo "<fieldset>";
 					echo "<legend>Text Content Parsed From XML</legend>";
-					echo "<div width='600px' ReflectedXSSExecutionPoint=\"1\">" . $lDOMDocument->textContent . "</div>";
+					echo "<div width='600px'>" . $lDOMDocument->textContent . "</div>";
 					echo "</fieldset>";
 					echo "<div>&nbsp;</div>";
 

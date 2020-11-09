@@ -6,8 +6,8 @@
 
 .ddsmoothmenu ul{
 	z-index:100;
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	list-style-type: none;
 }
 
@@ -16,6 +16,7 @@
 	position: relative;
 	display: inline;
 	float: left;
+	border-bottom: 1px solid white;
 }
 
 /*Top level menu link items style*/
@@ -25,9 +26,8 @@
 	color: white;
 	padding: 8px 10px;
 	border-right: 1px solid #778;
-	color: #2d2b2b;
 	text-decoration: none;
-	width: 130px;
+	width: 125px;
 }
 
 * html .ddsmoothmenu ul li a{ /*IE6 hack to get sub menu links to behave correctly*/
@@ -91,7 +91,7 @@ float: none;
 
 .rightarrowclass{
 	position: absolute;
-	top: 6px;
+	top: 10px;
 	right: 5px;
 }
 

@@ -119,22 +119,6 @@
 	}// end try	
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lHTMLandXSSandSQLInjectionPointBalloonTip = $BubbleHintHandler->getHint("HTMLandXSSandSQLInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[HTMLandXSSandSQLInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSandSQLInjectionPointBalloonTip; ?>");
-		$('[HTMLandXSSandSQLInjectionPoint]').balloon();
-	});
-</script>
-
 <script type="text/javascript">
 	var onSubmitOfForm = function(/* HTMLForm */ theForm){
 
@@ -207,7 +191,7 @@
 				    <!-- MAX_FILE_SIZE must precede the file input field -->
 				    <input type="hidden" name="MAX_FILE_SIZE" id="id_max_file_size" value="<?php echo $lAllowedFileSize; ?>" />
 					<label for="filename-text" class="label">Filename</label>
-					<input type="text" HTMLandXSSandSQLInjectionPoint="1" style="background-color:#ffffff;color:#000000;font-family:courier" disabled="disabled" name="filename-text" id="idFilenameText" size="50" />
+					<input type="text" style="background-color:#ffffff;color:#000000;font-family:courier" disabled="disabled" name="filename-text" id="idFilenameText" size="50" />
 					<img src="./images/upload-32-32.png" align="middle" onclick="idFilename.click();" />
 					<input type="file" id="idFilename" name="filename" style="display: none;" onchange="idFilenameText.value=this.value" />
 				</td>

@@ -65,25 +65,6 @@
     }// end try;
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lJavaScriptInjectionPointBallonTip = $BubbleHintHandler->getHint("JavaScriptInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[JavaScriptInjectionPoint]').attr("title", "<?php echo $lJavaScriptInjectionPointBallonTip; ?>");
-		$('[JavaScriptInjectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Browser Information</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -94,8 +75,8 @@
 	<tr><th class="report-label">Client IP</th><td class="report-data"><?php echo $lClientIP; ?></td></tr>
     <tr><th class="report-label">Client Hostname</th><td class="report-data"><?php echo $lClientHostname; ?></td></tr>
     <tr><th class="report-label">Operating System</th><td class="report-data"><?php echo $lOperatingSystem ?></td></tr>
-    <tr><th class="report-label">User Agent String</th><td class="report-data" ReflectedXSSExecutionPoint="1"><?php echo $lClientUserAgentString; ?></td></tr>
-    <tr><th class="report-label">Referrer</th><td class="report-data" ReflectedXSSExecutionPoint="1"><?php echo $lClientReferrer; ?></td></tr>
+    <tr><th class="report-label">User Agent String</th><td class="report-data"><?php echo $lClientUserAgentString; ?></td></tr>
+    <tr><th class="report-label">Referrer</th><td class="report-data"><?php echo $lClientReferrer; ?></td></tr>
     <tr><th class="report-label">Remote Client Port</th><td class="report-data"><?php echo $lClientPort; ?></td></tr>
     <tr><th class="report-label">WhoIs info for client IP</th><td class="report-data"><pre><?php echo $lWhoIsInformation; ?></pre></td></tr>
 	<?php 
@@ -105,7 +86,7 @@
 		}// end foreach
 	}else{
 		foreach ($_COOKIE as $key => $value){
-	    	echo '<tr><th class="report-label" ReflectedXSSExecutionPoint="1" class="non-wrapping-label">Cookie '.$key.'</th><td class="report-data">'.$value.'</pre></td></tr>';
+	    	echo '<tr><th class="report-label" class="non-wrapping-label">Cookie '.$key.'</th><td class="report-data">'.$value.'</pre></td></tr>';
 		}// end foreach
 	}// end if
 	?>    
@@ -154,8 +135,8 @@
 		<td class="report-data" id="id_color_depth_enabled_td"></td>
 	</tr>
 	<tr>
-		<th class="report-label" JavaScriptInjectionPoint="1">Referrer</th>
-		<td class="report-data" id="id_referrer_td" JavaScriptInjectionPoint="1"></td>
+		<th class="report-label">Referrer</th>
+		<td class="report-data" id="id_referrer_td"></td>
 	</tr>
 	<tr>
 		<th class="report-label">Plug-Ins</th>

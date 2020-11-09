@@ -1,6 +1,5 @@
 <?php
 	if ($_SESSION["showhints"] > 0) {
-		require_once 'hints-menu.js.inc';
 		$lDisplayHintStyle = "block";
 	}else{
 		$lDisplayHintStyle = "none";
@@ -10,9 +9,6 @@
 <div  	class="hint-wrapper-header" 
 		id="idHintWrapperHeader"
 		title="Click to open this section"
-		onclick="toggleBody(this, window.document.getElementById('idHintWrapperBody'), window.document.getElementById('idHintWrapperHeaderImage'));"
-		onmouseover="this.style.backgroundColor='#cccccc';this.style.color='#ffffff';"
-		onmouseout="this.style.backgroundColor='#FFFFFF';this.style.color='#000000';"
 		style="display: <?php echo $lDisplayHintStyle; ?>";
 >
 	<img id="idHintWrapperHeaderImage" align="left" style="padding-right: 5px;" alt="Expand Hints" src="./images/down_arrow_16_16.png" />

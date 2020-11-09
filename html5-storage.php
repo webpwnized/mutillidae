@@ -29,22 +29,6 @@
 		echo "<script type=\"text/javascript\" src=\"javascript/html5-secrets.js\"></script>";		
 	}// end if
 ?>
-		   	
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lDOMXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("DOMXSSExecutionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[DOMXSSExecutionPoint]').attr("title", "<?php echo $lDOMXSSExecutionPointBallonTip; ?>");
-		$('[DOMXSSExecutionPoint]').balloon();
-	});
-</script>
 
 <div class="page-title">HTML 5 Storage</div>
 
@@ -234,7 +218,7 @@
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 		<tfoot id="idSessionStorageTableFooter">
-			<tr><th colspan="5"><span id="idAddItemMessageSpan" DOMXSSExecutionPoint="1"></span></th></tr>
+			<tr><th colspan="5"><span id="idAddItemMessageSpan"></span></th></tr>
 			<tr><td>&nbsp;</td></tr>
 		</tfoot>
 	</table>

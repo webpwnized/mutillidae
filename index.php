@@ -13,7 +13,6 @@
 	require_once (__ROOT__.'/classes/SQLQueryHandler.php');
 	require_once (__ROOT__.'/classes/CustomErrorHandler.php');
 	require_once (__ROOT__.'/classes/LogHandler.php');
-	require_once (__ROOT__.'/classes/BubbleHintHandler.php');
 	require_once (__ROOT__.'/classes/RemoteFileHandler.php');
 	require_once (__ROOT__.'/classes/RequiredSoftwareHandler.php');
 	
@@ -234,23 +233,6 @@
 	$SQLQueryHandler = &$_SESSION["Objects"]["SQLQueryHandler"];
 	*/
 	$SQLQueryHandler = new SQLQueryHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
-	
-	/* ------------------------------------------
- 	* initialize balloon-hint handler
- 	* ------------------------------------------ */
-	/*
-   	if (!is_object($_SESSION["Objects"]["BubbleHintHandler"])){
-		$_SESSION["Objects"]["BubbleHintHandler"] = new BubbleHintHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
-	}// end if
-	
-	// Set up an alias by reference so object can be referenced in memory without copying
-	$BubbleHintHandler = &$_SESSION["Objects"]["BubbleHintHandler"];
-	*/
-	$BubbleHintHandler = new BubbleHintHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
-	
-	if ($_SESSION["showhints"] != $BubbleHintHandler->getHintLevel()){
-		$BubbleHintHandler->setHintLevel($_SESSION["showhints"]);
-	}//end if
 
 	/* ------------------------------------------
  	* initialize remote file handler
@@ -409,8 +391,6 @@
    	
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
-   			$lIncludeFrameBustingJavaScript = FALSE;
-   			
    			/* Built-in user-agent defenses */
    			header("X-XSS-Protection: 0", TRUE);
    			
@@ -420,9 +400,6 @@
    		break;
    		
    		case "1":
-   		    /* Cross-frame scripting and click-jacking */
-   		    $lIncludeFrameBustingJavaScript = TRUE;
-   		    
    		    /* Built-in user-agent defenses */
    		    header("X-XSS-Protection: 0", TRUE);
    		    
@@ -446,7 +423,6 @@
   			 * with older browsers.
   			 */
    			header('X-FRAME-OPTIONS: DENY', TRUE);
-   			$lIncludeFrameBustingJavaScript = TRUE;
    			
    			/* Cache-control */
    			/*
@@ -510,7 +486,7 @@
 	/* ------------------------------------------
     * END Security Headers (Modern Browsers)
     * ------------------------------------------ */
-	 
+   	
    	/* ------------------------------------------
    	 * Set the HTTP content-type of this page
    	 * ------------------------------------------ */
@@ -605,7 +581,23 @@
 	/* ------------------------------------------
 	* END SIMULATE "SECRET" PAGES
 	* ------------------------------------------ */
-
+    
+	/* ------------------------------------------
+     * Set Content Security Policy (CSP) if needed
+     * ------------------------------------------ */
+    if ($lPage == "content-security-policy.php"){
+        $CSPNonce = bin2hex(openssl_random_pseudo_bytes(64));
+        $lCSP = "Content-Security-Policy: " .
+                "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.local;" .
+                "style-src 'unsafe-inline' 'self' mutillidae.local;" .
+                "img-src 'self' mutillidae.local www.paypalobjects.com;" .
+                "default-src 'self'";
+        header($lCSP, TRUE);
+    }// end if
+    /* ------------------------------------------
+     * END Content Security Policy (CSP)
+     * ------------------------------------------ */
+    
 	/* ------------------------------------------
 	* BEGIN OUTPUT RESPONSE
 	* ------------------------------------------ */
@@ -616,9 +608,7 @@
 		require_once(__ROOT__."/home.php");
 	}else{
 		/* All Other Pages */
-
-		/* Note: PHP uses lazy evaluation so if file_exists then PHP wont execute remote_file_exists */
-		if (file_exists($lPage) || $RemoteFileHandler->remoteSiteIsReachable($lPage)){
+	    if (file_exists($lPage) || $RemoteFileHandler->remoteSiteIsReachable($lPage)){
 			require_once ($lPage);
 		}else{
 			if(!$RemoteFileHandler->curlIsInstalled()){
@@ -641,22 +631,5 @@
    	 * CLOSE DATABASE CONNECTION
    	* ------------------------------------------ */
    	$MySQLHandler->closeDatabaseConnection();
-
-	/* ------------------------------------------
-	* Anti-framing protection (Older Browsers)
-	* ------------------------------------------ */
-	if ($lIncludeFrameBustingJavaScript){
-		include_once (__ROOT__."/includes/anti-framing-protection.inc");	
-	}// end if    
-    
-	/* ------------------------------------------
-	* Add javascript includes
-	* ------------------------------------------ */
-   	include_once (__ROOT__."/includes/create-html-5-web-storage-target.inc");	
-   	require_once (__ROOT__."/includes/jquery-init.inc");
-   	
-   	if (isset($_GET["popUpNotificationCode"])){
-   		include_once (__ROOT__."/includes/pop-up-status-notification.inc");
-   	}// end if
 
 ?>

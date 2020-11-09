@@ -33,22 +33,6 @@
    	}// end switch
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lArbitraryRedirectionPointBallonTip = $BubbleHintHandler->getHint("ArbitraryRedirectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ArbitraryRedirectionPoint]').attr("title", "<?php echo $lArbitraryRedirectionPointBallonTip; ?>");
-		$('[ArbitraryRedirectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Credits</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -56,7 +40,7 @@
 
 <div class="label">Developed by <a href="https://twitter.com/webpwnized" target="_blank">Jeremy "webpwnized" Druin</a>. Based on Mutillidae 1.0 from Adrian &quot;<a href="http://www.irongeek.com" target="_blank">Irongeek</a>&quot; Crenshaw.</div>
 <div>&nbsp;</div>
-<div class="label" ArbitraryRedirectionPoint="1"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lOWASPURLReference; ?>">OWASP</a></div>
-<div class="label" ArbitraryRedirectionPoint="1"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lKYISSAURLReference; ?>">ISSA Kentuckiana</a></div>
-<div class="label" ArbitraryRedirectionPoint="1"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lOWASPLouisvilleURLReference; ?>">OWASP Louisville</a></div>
-<div class="label" ArbitraryRedirectionPoint="1"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lMutillidaeFirefoxAddOnsURLReference; ?>">Helpful Firefox Add-Ons</a></div>
+<div class="label"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lOWASPURLReference; ?>">OWASP</a></div>
+<div class="label"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lKYISSAURLReference; ?>">ISSA Kentuckiana</a></div>
+<div class="label"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lOWASPLouisvilleURLReference; ?>">OWASP Louisville</a></div>
+<div class="label"><a href="index.php?page=redirectandlog.php&forwardurl=<?php echo $lMutillidaeFirefoxAddOnsURLReference; ?>">Helpful Firefox Add-Ons</a></div>

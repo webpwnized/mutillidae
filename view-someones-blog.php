@@ -66,26 +66,6 @@
    	}// end if
 ?>
 
-
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lSQLInjectionPointBallonTip = $BubbleHintHandler->getHint("SQLInjectionPoint");   		
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[SQLInjectionPoint]').attr("title", "<?php echo $lSQLInjectionPointBallonTip; ?>");
-		$('[SQLInjectionPoint]').balloon();		
-	});
-</script>
-
 <div class="page-title">View Blogs</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -113,7 +93,7 @@
 			<tr><td></td></tr>
 			<tr>
 				<td>
-					<select name="author" id="id_author_select" SQLInjectionPoint="1" autofocus="autofocus" <?php echo $lHTMLControlAttributes ?>>
+					<select name="author" id="id_author_select" autofocus="autofocus" <?php echo $lHTMLControlAttributes ?>>
 						<option value="53241E83-76EC-4920-AD6D-503DD2A6BA68">&nbsp;&nbsp;&nbsp;Please Choose Author&nbsp;&nbsp;&nbsp;</option>
 						<option value="6C57C4B5-B341-4539-977B-7ACB9D42985A">Show All</option>
 						<?php
@@ -225,9 +205,9 @@
 										
 					echo "<tr>
 						<td>{$lRowNumber}</td>
-						<td ReflectedXSSExecutionPoint=\"1\">{$lBloggerName}</td>
+						<td>{$lBloggerName}</td>
 						<td>{$lDate}</td>
-						<td ReflectedXSSExecutionPoint=\"1\">{$lComment}</td>
+						<td>{$lComment}</td>
 					</tr>\n";
 				}//end while $row
 				echo "</table>";		

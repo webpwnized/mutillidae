@@ -45,19 +45,7 @@
 		echo $CustomErrorHandler->FormatError($e, $lQueryString);
 	};// end try;
 
-	try{
-   		$lPathRelativeStylesheetInjectionAreaBallonTip = $BubbleHintHandler->getHint("PathRelativeStylesheetInjectionArea");
- 	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
 ?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[PathRelativeStylesheetInjectionArea]').attr("title", "<?php echo $lPathRelativeStylesheetInjectionAreaBallonTip; ?>");
-		$('[PathRelativeStylesheetInjectionArea]').balloon();
-	});
-</script>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>

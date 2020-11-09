@@ -93,25 +93,6 @@
 	$LogHandler->writeToLog("User chose to view document: " . $lDocumentToBeFramed);   	
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lParameterPollutionInjectionPointBallonTip = $BubbleHintHandler->getHint("ParameterPollutionInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[ParameterPollutionInjectionPoint]').attr("title", "<?php echo $lParameterPollutionInjectionPointBallonTip; ?>");
-		$('[ParameterPollutionInjectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Document Viewer</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -176,14 +157,14 @@
 			<tr><td></td></tr>
 			<tr>
 				<td style="text-align:center;">
-					<input ParameterPollutionInjectionPoint="1" name="document-viewer-php-submit-button" class="button" type="submit" value="View Document" />
+					<input name="document-viewer-php-submit-button" class="button" type="submit" value="View Document" />
 				</td>
 			</tr>
 		</table>
 	</form>
 
 	<div>&nbsp;</div>
-	<div class="label" ReflectedXSSExecutionPoint="1">
+	<div class="label">
 	<?php 
 		if (!$lEncodeOutput){
 			echo $lDocumentToBeFramedMessage; 

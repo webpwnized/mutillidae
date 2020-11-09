@@ -18,8 +18,6 @@
     }// end try;
 ?>
 
-<!-- Bubble hints code -->
-
 <div class="page-title">Robots.txt</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>

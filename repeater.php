@@ -136,28 +136,6 @@
 //-->
 </script>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lBufferOverflowInjectionPointBalloonTip = $BubbleHintHandler->getHint("BufferOverflowInjectionPoint");
-		$lHTMLandXSSInjectionPointBalloonTip = $BubbleHintHandler->getHint("HTMLandXSSInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[BufferOverflowInjectionPoint]').attr("title", "<?php echo $lBufferOverflowInjectionPointBalloonTip; ?>");
-		$('[BufferOverflowInjectionPoint]').balloon();		
-		$('[HTMLandXSSInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSInjectionPointBalloonTip; ?>");
-		$('[HTMLandXSSInjectionPoint]').balloon();		
-	});
-</script>
-
 <div class="page-title">Repeater</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -185,7 +163,7 @@
 			<tr>
 				<td class="label" style="text-align: left;">String to repeat</td>
 				<td style="text-align: left;">
-					<input HTMLandXSSInjectionPoint="1" type="text" name="string_to_repeat" size="40" autofocus="autofocus"
+					<input type="text" name="string_to_repeat" size="40" autofocus="autofocus"
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="40" required="required"');
@@ -197,7 +175,7 @@
 			<tr>
 				<td class="label" style="text-align: left;">Number of times to repeat</td>
 				<td style="text-align: left;">
-					<input BufferOverflowInjectionPoint="1" type="text" name="times_to_repeat_string" size="30"
+					<input type="text" name="times_to_repeat_string" size="30"
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="30" required="required"');
@@ -221,7 +199,7 @@
 	<table>
 		<tr><td></td></tr>
 		<tr>
-			<td ReflectedXSSExecutionPoint="1" colspan="2" class="hint-header"><?php echo $lBuffer; ?></td>
+			<td colspan="2" class="hint-header"><?php echo $lBuffer; ?></td>
 		</tr>
 		<tr><td></td></tr>
 	</table>	

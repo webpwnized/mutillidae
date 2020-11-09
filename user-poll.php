@@ -137,25 +137,6 @@
    	}//end if lFormSubmitted
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lParameterPollutionInjectionPointBallonTip = $BubbleHintHandler->getHint("ParameterPollutionInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[ParameterPollutionInjectionPoint]').attr("title", "<?php echo $lParameterPollutionInjectionPointBallonTip; ?>");
-		$('[ParameterPollutionInjectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">User Poll</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -200,7 +181,7 @@
 			</tr>
 			<tr>
 				<td class="label">
-					Your Initials:<input type="text" name="initials" <?php echo $lHTMLControlAttributes ?> ParameterPollutionInjectionPoint="1" value="<?php echo $lUserInitials; ?>"/>
+					Your Initials:<input type="text" name="initials" <?php echo $lHTMLControlAttributes ?> value="<?php echo $lUserInitials; ?>"/>
 				</td>
 			</tr>
 			<tr><td></td></tr>
@@ -212,7 +193,7 @@
 			<tr><td></td></tr>
 			<tr><td></td></tr>
 			<tr>
-				<td class="report-header" ReflectedXSSExecutionPoint="1">
+				<td class="report-header">
 				<?php echo $lUserChoiceMessage; ?>
 				</td>
 			</tr>
@@ -255,7 +236,7 @@
 				}// end if
 								
 				echo "<tr>
-						<th class=\"report-label\" ReflectedXSSExecutionPoint=\"1\">{$lToolName}</th>
+						<th class=\"report-label\">{$lToolName}</th>
 						<td class=\"report-data\">{$lToolCount}</td>
 					</tr>\n";
 			}//end while $row

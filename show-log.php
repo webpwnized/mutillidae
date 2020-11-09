@@ -42,22 +42,6 @@
 	$lQueryResult = $SQLQueryHandler->getHitLogEntries();
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Log</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -128,8 +112,8 @@
 				echo "<tr>
 						<td>{$lHostname}</td>
 						<td>{$lClientIPAddress}</td>
-						<td ReflectedXSSExecutionPoint=\"1\">{$lBrowser}</td>
-						<td ReflectedXSSExecutionPoint=\"1\">{$lReferer}</td>
+						<td>{$lBrowser}</td>
+						<td>{$lReferer}</td>
 						<td>{$lDate}</td>
 					</tr>\n";
 			}//end while $row

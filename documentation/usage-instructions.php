@@ -80,9 +80,8 @@
 			<span class="label">Home:</span> Takes user to Home page<br/>
 			<span class="label">Login/Register:</span> Takes user to Login page<br/>
 			<span class="label">Toggle Hints:</span> Shows or hides the Hints on vulnerable pages<br/>
-			<span class="label">Show Popup Hints:</span> Shows the popup hints over vulnerable areas of pages<br/>
 			<span class="label">Toggle Security:</span> Changes the security level between insecure, client-side security and secure<br/>
-			<span class="label">Enforce SSL:</span> When enforced, Mutillidae automatically redirects all HTTP requests to HTTPS<br/>
+			<span class="label">Enforce TLS:</span> When enforced, Mutillidae automatically redirects all HTTP requests to HTTPS<br/>
 			<span class="label">Reset DB:</span> Drops and rebuilds all database tables and resets the project<br/>
 			<span class="label">View Log:</span> Takes the user to view the log<br/>
 			<span class="label">View Captured Data:</span> Takes the user to the view the captured data<br/>
@@ -135,12 +134,6 @@
 			The "Help Me" button provides a basic
 			description of the vulnerabilities on the page for which the user should try exploits.
 			Use this button to get a quick list of issues. Use the Hints to see more details.
-			<br/><br/><br/>
-			<span class="report-header">Bubble Hints</span>
-			<br/><br/>
-			If the 
-			"Bubble Hints" are enabled (top menu bar), some of the vulnerable locations will have bubble
-			hints pop up when the user hovers the mouse over the vulnerable field or area. 
 			<br/><br/><br/>
 			<span class="report-header">Just give me the exploit</span>
 			<br/><br/>

@@ -40,21 +40,6 @@
     	}// end try
 ?>
 
-<?php 
-	try{
-   		$lHTMLEventReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("HTMLEventReflectedXSSExecutionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[HTMLEventReflectedXSSExecutionPoint]').attr("title", "<?php echo $lHTMLEventReflectedXSSExecutionPointBallonTip; ?>");
-		$('[HTMLEventReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
-
 <script>
 	function onSubmitOfGeneratorForm(/*HTMLFormElement*/ theForm){
 		try{
@@ -98,7 +83,7 @@
 			</tr>
 			<tr><td></td></tr>
 			<tr style="text-align: center;">
-				<td id="idUsernameInput" HTMLEventReflectedXSSExecutionPoint="1" class="label"></td>
+				<td id="idUsernameInput" class="label"></td>
 			</tr>
 			<tr id="idPasswordTableRow" style="display: none;">
 				<td class="label" id="idPasswordInput"></td>

@@ -49,25 +49,6 @@
 	}// end try
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lHTMLandXSSandSQLInjectionPointBallonTip = $BubbleHintHandler->getHint("HTMLandXSSandSQLInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[HTMLandXSSandSQLInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSandSQLInjectionPointBallonTip; ?>");
-		$('[HTMLandXSSandSQLInjectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Hacker Files of Old</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -91,7 +72,7 @@
 		<tr>
 			<td class="label">Text File Name</td>
 			<td>
-				<select size="1" name="textfile" id="id_textfile_select" HTMLandXSSandSQLInjectionPoint="1" autofocus="autofocus" <?php echo $lHTMLControlAttributes ?>>
+				<select size="1" name="textfile" id="id_textfile_select" autofocus="autofocus" <?php echo $lHTMLControlAttributes ?>>
 					<option value="<?php if ($lUseTokenization){echo 1;}else{echo 'http://www.textfiles.com/hacking/auditool.txt';}?>">Intrusion Detection in Computers by Victor H. Marshall (January 29, 1991)</option>
 					<option value="<?php if ($lUseTokenization){echo 2;}else{echo 'http://www.textfiles.com/hacking/atms';}?>">An Overview of ATMs and Information on the Encoding System</option>
 					<option value="<?php if ($lUseTokenization){echo 3;}else{echo 'http://www.textfiles.com/hacking/backdoor.txt';}?>">How to Hold Onto UNIX Root Once You Have It</option>
@@ -234,7 +215,7 @@
 			try{				
 			    // open file handle
 				$handle = fopen($lURL, "r");
-	   			echo '<span ReflectedXSSExecutionPoint=\"1\" class="label">File: '.$lTextFileDescription.'</span>';
+	   			echo '<span class="label">File: '.$lTextFileDescription.'</span>';
 	   			echo '<pre>';
 	   			echo stream_get_contents($handle);
 				echo '</pre>';

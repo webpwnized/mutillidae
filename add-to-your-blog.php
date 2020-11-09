@@ -163,28 +163,6 @@
 	}// end if isSet($_POST["add-to-your-blog-php-submit-button"])
 ?>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-   		$lXSRFVulnerabilityAreaBallonTip = $BubbleHintHandler->getHint("XSRFVulnerabilityArea");
-   		$lHTMLandXSSandSQLInjectionPointBallonTip = $BubbleHintHandler->getHint("HTMLandXSSandSQLInjectionPoint");   		
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try	
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-		$('[XSRFVulnerabilityArea]').attr("title", "<?php echo $lXSRFVulnerabilityAreaBallonTip; ?>");
-		$('[XSRFVulnerabilityArea]').balloon();
-		$('[HTMLandXSSandSQLInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSandSQLInjectionPointBallonTip; ?>");
-		$('[HTMLandXSSandSQLInjectionPoint]').balloon();		
-	});
-</script>
-
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
 	var onSubmitBlogEntry = function(/* HTMLForm */ theForm){
@@ -232,7 +210,7 @@
 			</tr>
 			<tr><td></td></tr>
 			<tr>
-				<td id="id-blog-form-header-td" ReflectedXSSExecutionPoint="1" class="form-header">
+				<td id="id-blog-form-header-td" class="form-header">
 					Add blog for <?php echo $lLoggedInUser?>
 				</td>
 			</tr>
@@ -244,7 +222,7 @@
 			</tr>
 			<tr>
 				<td>
-					<textarea 	name="blog_entry" HTMLandXSSandSQLInjectionPoint="1" rows="8" cols="65"
+					<textarea 	name="blog_entry" rows="8" cols="65"
 								autofocus="autofocus"
 						<?php 
 							if ($lEnableHTMLControls) {
@@ -338,9 +316,9 @@
 
 			echo "<tr>
 					<td>{$lRowNumber}</td>
-					<td ReflectedXSSExecutionPoint=\"1\">{$lBloggerName}</td>
+					<td>{$lBloggerName}</td>
 					<td>{$lDate}</td>
-					<td ReflectedXSSExecutionPoint=\"1\">{$lComment}</td>
+					<td>{$lComment}</td>
 				</tr>\n";
 		}//end while $lRecord
 		echo "</table><div>&nbsp;</div>";		

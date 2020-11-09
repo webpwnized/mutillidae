@@ -7,11 +7,11 @@
 
 <div id="smoothmenu1" class="ddsmoothmenu">	
 	<ul>
-		<li style="border-color: #ffffff;border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">OWASP 2017</a>
 			<ul>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A1 - Injection (SQL)</a>
+					<a href="">A1 - Injection (SQL)</a>
 					<ul>
 						<li>
 							<a href="">SQLi - Extract Data</a>
@@ -71,7 +71,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A1 - Injection (Other)</a>
+					<a href="">A1 - Injection (Other)</a>
 					<ul>
 						<li>
 							<a href="">Application Log Injection</a>
@@ -79,6 +79,7 @@
 								<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
+								<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
 								<li><a href="index.php?page=capture-data.php">Capture Data Page</a></li>
 								<li><a href="index.php?page=login.php">Login</a></li>
@@ -108,6 +109,7 @@
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="./webservices/soap/ws-lookup-dns-record.php">DNS Lookup (SOAP Web Service)</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
+								<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 							</ul>
 						</li>
 						<li>
@@ -124,6 +126,7 @@
 								<li><a href="index.php?page=browser-info.php">Browser Info</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
+								<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -226,7 +229,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">
+					<a href="">
 						A2 - Broken Authentication and Session Management
 					</a>
 					<ul>
@@ -257,7 +260,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A3 - Sensitive Data Exposure</a>
+					<a href="">A3 - Sensitive Data Exposure</a>
 					<ul>
 						<li>
 							<a href="">Information Disclosure</a>
@@ -296,7 +299,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A4 - XML External Entities</a>
+					<a href="">A4 - XML External Entities</a>
 					<ul>
 						<li>
 							<a href="">XML External Entity Injection</a>
@@ -307,7 +310,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A5 - Broken Access Control</a>
+					<a href="">A5 - Broken Access Control</a>
 					<ul>
 						<li>
 							<a href="">Insecure Direct Object References</a>
@@ -332,7 +335,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A6 - Security Misconfiguration</a>
+					<a href="">A6 - Security Misconfiguration</a>
 					<ul>
 						<li><a href="index.php?page=directory-browsing.php">Directory Browsing</a></li>
 						<li>
@@ -344,6 +347,7 @@
 								<li><a href="index.php?page=user-poll.php">Poll Question</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
+								<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 							</ul>
 						</li>
 						<li><a href="index.php?page=user-agent-impersonation.php">User-Agent Impersonation</a></li>
@@ -358,13 +362,14 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A7 - Cross Site Scripting (XSS)</a>
+					<a href="">A7 - Cross Site Scripting (XSS)</a>
 					<ul>
 						<li>
 							<a href="">Reflected (First Order)</a>
 							<ul>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
+								<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -418,6 +423,7 @@
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
+								<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
 								<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
 								<li><a href="index.php">Missing HTTPOnly Attribute</a></li>
@@ -491,6 +497,7 @@
 								<li><a href="index.php?page=show-log.php">Show Log</a><li>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
+								<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -509,10 +516,10 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A8 - Insecure Deserialization</a>
+					<a href="">A8 - Insecure Deserialization</a>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A9 - Using Components with Known Vulnerabilities</a>
+					<a href="">A9 - Using Components with Known Vulnerabilities</a>
 					<ul>
 						<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 						<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
@@ -521,17 +528,17 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf" target="_blank">A10 - Insufficient Logging and Monitoring</a>
+					<a href="">A10 - Insufficient Logging and Monitoring</a>
 				</li>
 			</ul>
 		</li>
 	</ul>
 	<ul>
-		<li style="border-color: #ffffff;border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">OWASP 2013</a>
 			<ul>
 				<li>
-					<a href="https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)" target="_blank">A8 - Cross Site Request Forgery (CSRF)</a>
+					<a href="">A8 - Cross Site Request Forgery (CSRF)</a>
 					<ul>
 						<li><a href="index.php?page=add-to-your-blog.php">Add to your blog</a></li>
 						<li><a href="index.php?page=register.php">Register User</a></li>
@@ -539,7 +546,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards" target="_blank">A10 - Unvalidated Redirects and Forwards</a>
+					<a href="">A10 - Unvalidated Redirects and Forwards</a>
 					<ul>
 						<li><a href="?page=credits.php">Credits</a></li>
 						<?php if (isset($_COOKIE["uid"]) && $_COOKIE["uid"]==1) { ?>		
@@ -553,11 +560,11 @@
 		</li>
 	</ul>
 	<ul>
-		<li style="border-color: #ffffff;border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">OWASP 2010</a>
 			<ul>
 				<li>
-					<a href="http://www.owasp.org/index.php/Top_10_2010-A7" target="_blank">A7 - Insecure Cryptographic Storage</a>
+					<a href="">A7 - Insecure Cryptographic Storage</a>
 					<ul>
 						<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
 						<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
@@ -566,7 +573,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="http://www.owasp.org/index.php/Top_10_2010-A8" target="_blank">A8 - Failure to Restrict URL Access</a>
+					<a href="">A8 - Failure to Restrict URL Access</a>
 					<ul>
 						<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 						<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
@@ -578,7 +585,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="http://www.owasp.org/index.php/Top_10_2010-A9" target="_blank">A9 - Insufficient Transport Layer Protection</a>
+					<a href="">A9 - Insufficient Transport Layer Protection</a>
 					<ul>
 						<li><a href="index.php?page=ssl-misconfiguration.php">SSL Misconfiguration</a></li>
 						<li><a href="index.php?page=login.php">Login</a></li>
@@ -590,18 +597,18 @@
 		</li>
 	</ul>	
 	<ul>
-		<li style="border-color: #ffffff;border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">OWASP 2007</a>
 			<ul>
 				<li>
-					<a href="http://www.owasp.org/index.php/Top_10_2007-A3" target="_blank">A3 - Malicious File Execution</a>
+					<a href="">A3 - Malicious File Execution</a>
 					<ul>
-						<li><a href="?page=text-file-viewer.php">Text File Viewer</a></li>
-						<li><a href="?page=source-viewer.php">Source Viewer</a></li>
+						<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
+						<li><a href="index.php?page=source-viewer.php">Source Viewer</a></li>
 					</ul>		
 				</li>
 				<li>
-					<a href="http://www.owasp.org/index.php/Top_10_2007-A6" target="_blank">A6 - Information Leakage</a>
+					<a href="">A6 - Information Leakage</a>
 					<ul>
 						<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
 						<li><a href="index.php">Cache-Control</a></li>
@@ -617,7 +624,7 @@
 					</ul>		
 				</li>
 				<li>
-					<a href="http://www.owasp.org/index.php/Top_10_2007-A6" target="_blank">A6 - Improper Error Handling</a>
+					<a href="">A6 - Improper Error Handling</a>
 					<ul>
 						<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
 						<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
@@ -633,7 +640,7 @@
 		</li>
 	</ul>	
 	<ul>
-		<li style="border-color: #ffffff; border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">Web Services</a>
 			<ul>
 				<li>
@@ -684,7 +691,7 @@
 				</li>						
 			</ul>
 		</li>
-		<li style="border-color: #ffffff; border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">HTML 5</a>
 			<ul>
 				<li>
@@ -708,7 +715,7 @@
 				</li>
 			</ul>
 		</li>
-		<li style="border-color: #ffffff; border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">Others</a>
 			<ul>			
 				<li>
@@ -746,6 +753,7 @@
 						<li><a href="index.php?page=html5-storage.php">HTML5 Web Storage</a></li>
 						<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
 						<li><a href="index.php?page=echo.php">Echo Message</a></li>
+						<li><a href="index.php?page=content-security-policy.php">Content Security Policy (CSP)</a></li>
 						<li><a href="index.php?page=repeater.php">Repeater</a></li>
 					</ul>		
 				</li>
@@ -761,14 +769,13 @@
 				</li>
 			</ul>
 		</li>
-		<li style="border-color: #ffffff;border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">Documentation</a>
 			<ul>
 				<li><a href="index.php?page=documentation/installation.php">Installation Instructions (Linux)</a></li>
 				<li><a href="documentation/mutillidae-installation-on-xampp-win7.pdf" target="_blank">Installation Instructions (Windows)</a></li>
 				<li><a href="index.php?page=documentation/usage-instructions.php">Usage Instructions</a></li>
 				<li><a href="index.php?page=documentation/vulnerabilities.php">Listing of Vulnerabilities</a></li>
-				<li><a href="documentation/change-log.txt" target="_blank">Change Log</a></li>
 				<li><a href="index.php?page=credits.php">Credits</a></li>
 				<li>
 					<a href="https://www.sans.org/reading-room/whitepapers/application/introduction-owasp-mutillidae-ii-web-pen-test-training-environment-34380" target="_blank">
@@ -777,7 +784,7 @@
 				</li>
 			</ul>
 		</li>
-		<li style="border-color: #ffffff;border-style: solid;border-width: 1px;">
+		<li>
 			<a href="">Resources</a>
 			<ul>
 				<li>

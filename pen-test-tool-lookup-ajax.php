@@ -70,21 +70,6 @@
 	}// end try
 ?>
 
-<?php 
-	try{
-   		$lJSONInjectionPointBallonTip = $BubbleHintHandler->getHint("JSONInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[JSONInjectionPoint]').attr("title", "<?php echo $lJSONInjectionPointBallonTip; ?>");
-		$('[JSONInjectionPoint]').balloon();
-	});
-</script>
-
 <div class="page-title">Pen Test Tool Lookup (AJAX Version)</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
@@ -234,7 +219,7 @@
 			<tr>
 				<td class="label" style="text-align: right;">Pen Test Tool</td>
 				<td>
-					<select id="idToolSelect" JSONInjectionPoint="1" name="ToolID" autofocus="autofocus">
+					<select id="idToolSelect" name="ToolID" autofocus="autofocus">
 						<option value="0923ac83-8b50-4eda-ad81-f1aac6168c5c" selected="selected">Please Choose Tool</option>
 						<option value="c84326e4-7487-41d3-91fd-88280828c756">Show All</option>
 						<?php echo $lPenTestToolsOptions; ?>

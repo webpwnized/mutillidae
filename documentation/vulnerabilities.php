@@ -560,7 +560,7 @@
 <div style="padding-left: 40px;">
 	<ul>
 		<li>
-			Discusses SSL downgrade attack due to a vulnerability in the site globally.
+			Discusses TLS downgrade attack due to a vulnerability in the site globally.
 			No known vulnerabilities on the page itself.
 		</li>
 	</ul>

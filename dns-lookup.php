@@ -58,33 +58,16 @@
 				$lTargetHostText = $lTargetHost; 		//allow XSS by not encoding output	    		
 	    	}//end if
 	    	
-		}// end if $lFormSubmitted    	
-    	
-		try{
-    		$lOSCommandInjectionPointBallonTip = $BubbleHintHandler->getHint("OSCommandInjectionPoint");
-       		$lReflectedXSSExecutionPointBallonTip = $BubbleHintHandler->getHint("ReflectedXSSExecutionPoint");
-		} catch (Exception $e) {
-			echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-		}// end try
-    		    	    	
+		}// end if $lFormSubmitted  
 	}catch(Exception $e){
-		echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page dns-lookup.php");
-	}// end try	
+	    echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
+	}// end try
 ?>
 
 <div class="page-title">DNS Lookup</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[OSCommandInjectionPoint]').attr("title", "<?php echo $lOSCommandInjectionPointBallonTip; ?>");
-		$('[OSCommandInjectionPoint]').balloon();
-		$('[ReflectedXSSExecutionPoint]').attr("title", "<?php echo $lReflectedXSSExecutionPointBallonTip; ?>");
-		$('[ReflectedXSSExecutionPoint]').balloon();
-	});
-</script>
     
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
@@ -132,7 +115,7 @@
 		</tr>
 		<tr><td></td></tr>
 		<tr>
-			<td colspan="2" class="form-header">Who would you like to do a DNS lookup on?<br/><br/>Enter IP or hostname</td>
+			<td colspan="2" class="form-header">Enter IP or hostname</td>
 		</tr>
 		<tr><td></td></tr>
 		<tr>
@@ -140,7 +123,6 @@
 			<td>
 				<input 	type="text" id="idTargetHostInput" name="target_host" size="20" 
 						autofocus="autofocus"
-						OSCommandInjectionPoint="1"
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="20" required="required"');
@@ -161,11 +143,11 @@
 </form>
 
 <?php
-/* Output results of shell command sent to operating system */
-if ($lFormSubmitted){
+    /* Output results of shell command sent to operating system */
+    if ($lFormSubmitted){
 	    try{
 	    	if ($lTargetHostValidated){
-	    		echo '<div class="report-header" ReflectedXSSExecutionPoint="1">Results for '.$lTargetHostText.'</div>';
+	    		echo '<div class="report-header">Results for '.$lTargetHostText.'</div>';
     			echo '<pre class="report-header" style="text-align:left;">'.shell_exec("nslookup " . $lTargetHost).'</pre>';
 				$LogHandler->writeToLog("Executed operating system command: nslookup " . $lTargetHostText);
 	    	}else{

@@ -135,25 +135,6 @@
 //-->
 </script>
 
-<!-- Bubble hints code -->
-<?php 
-	try{
-   		$lHTMLandXSSandSQLInjectionPointBalloonTip = $BubbleHintHandler->getHint("HTMLandXSSandSQLInjectionPoint");
-   		$lSQLInjectionPointBallonTip = $BubbleHintHandler->getHint("SQLInjectionPoint");
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to execute query to fetch bubble hints.");
-	}// end try
-?>
-
-<script type="text/javascript">
-	$(function() {
-		$('[HTMLandXSSandSQLInjectionPoint]').attr("title", "<?php echo $lHTMLandXSSandSQLInjectionPointBalloonTip; ?>");
-		$('[HTMLandXSSandSQLInjectionPoint]').balloon();
-		$('[SQLInjectionPoint]').attr("title", "<?php echo $lSQLInjectionPointBallonTip; ?>");
-		$('[SQLInjectionPoint]').balloon();	
-	});
-</script>
-
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/rest/ws-user-account.php">
 		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" />
@@ -175,7 +156,7 @@
 			<tr>
 				<td class="label">Username</td>
 				<td>
-					<input HTMLandXSSandSQLInjectionPoint="1" type="text" name="username" size="15" autofocus="autofocus"
+					<input type="text" name="username" size="15" autofocus="autofocus"
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="15" required="required"');
@@ -187,7 +168,7 @@
 			<tr>
 				<td class="label">Password</td>
 				<td>
-					<input SQLInjectionPoint="1" type="password" name="password" size="15" 
+					<input type="password" name="password" size="15" 
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="15" required="required"');
@@ -201,7 +182,7 @@
 			<tr>
 				<td class="label">Confirm Password</td>
 				<td>
-					<input SQLInjectionPoint="1" type="password" name="confirm_password" size="15"
+					<input type="password" name="confirm_password" size="15"
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="15" required="required"');
@@ -213,7 +194,7 @@
 			<tr>
 				<td class="label">Signature</td>
 				<td>
-					<textarea HTMLandXSSandSQLInjectionPoint="1" rows="3" cols="50" name="my_signature"
+					<textarea rows="3" cols="50" name="my_signature"
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="100" required="required"');
