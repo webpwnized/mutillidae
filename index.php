@@ -591,7 +591,8 @@
                 "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.local;" .
                 "style-src 'unsafe-inline' 'self' mutillidae.local;" .
                 "img-src 'self' mutillidae.local www.paypalobjects.com;" .
-                "default-src 'self'";
+                "default-src 'self';".
+                "report-uri includes/capture-data.php;";
         header($lCSP, TRUE);
     }// end if
     /* ------------------------------------------
