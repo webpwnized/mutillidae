@@ -16,7 +16,7 @@ a{
 }
 
 a:HOVER{
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 input,textarea{
@@ -88,7 +88,7 @@ div.click-jacking-button{
 input.button{
 	border-radius: 5px;
 	font-weight: bold;
-	background-color: #ccccff;
+	background-color: #606c3825;
 	border-color: black;
 	border-style: solid;
 	border-width: 1px;
@@ -209,7 +209,7 @@ table tr td{
 }
 
 /* ---------------------------------------------------- */
-/* Main Site Frame */
+/* Main Site Frame that holds all the pages */
 /* ---------------------------------------------------- */
 
 table.main-table-frame{
@@ -233,11 +233,17 @@ td.main-table-frame-second-bar{
 	font-size: 16px;
 }
 
-span.version-header {
-	margin-left: 20px;
+td.main-table-frame-second-bar span{
+	margin-left: 25px;
 }
 
-tr.main-table-frame-third-bar{
+td.main-table-frame-second-bar span.logged-in-user{
+	color: #990000;
+	margin-left: 0px;	
+	margin-right: 4px;
+}
+
+tr.main-table-frame-menu-bar{
 	background-color: #414141;
 	text-align: center;
 	font-size: 14px;
@@ -246,23 +252,19 @@ tr.main-table-frame-third-bar{
 	font-style: Verdana;
 }
 
-td.main-table-frame-third-bar a, a:active, a:visited{
+td.main-table-frame-menu-bar a, a:active, a:visited{
 	color: white;
 }
 
-td.main-table-frame-third-bar a:hover{
+td.main-table-frame-menu-bar a:hover{
 	color: black;
 	background-color: white;
-}
-
-span.logged-in-user{
-	color: #990000;
 }
 
 td.main-table-frame-left{
 	vertical-align: top;
 	background-color: #55557720;
-	width:100pt;
+	width:125px;
 }
 
 td.main-table-frame-left div{
@@ -279,9 +281,22 @@ td.main-table-frame-right{
 }
 
 /* ----------------------------------------------------------------- */
+/* Display results and data like results of commands */
+/* ----------------------------------------------------------------- */
+pre.output{
+	font-style: monospace;
+	font-weight: bold;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* ----------------------------------------------------------------- */
 /* Tables to display results and data like logs, captured data, etc. */
 /* ----------------------------------------------------------------- */
-
 table.results-table{
 	border-width: 1px;
 	border-color: #000000;
@@ -297,7 +312,7 @@ table.results-table{
 
 table tr td.form-header{
 	font-weight: bold;
-	background-color: #ffcccc;
+	background-color: #bc6c2550;
 	text-align: center;
 	border: 1px solid black;
 	padding-left: 30px;

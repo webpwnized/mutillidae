@@ -99,9 +99,9 @@
 </span>
 &nbsp;&nbsp;&nbsp;
 <span>
-	<a style="text-decoration: none; cursor: pointer;" href="index.php?page=user-info-xpath.php">
-		<img style="vertical-align: middle;" src="./images/xml-logo-64-64.png" />
-		<span style="font-weight:bold;">Switch to XPath version</span>
+	<a href="index.php?page=user-info-xpath.php">
+		<img src="./images/xml-logo-64-64.png" />
+		<span class="label">Switch to XPath version</span>
 	</a>
 </span>
 

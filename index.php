@@ -586,7 +586,7 @@
      * Set Content Security Policy (CSP) if needed
      * ------------------------------------------ */
     if ($lPage == "content-security-policy.php"){
-        $CSPNonce = bin2hex(openssl_random_pseudo_bytes(64));
+        $CSPNonce = bin2hex(openssl_random_pseudo_bytes(32));
         $lCSP = "Content-Security-Policy: " .
                 "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.local;" .
                 "style-src 'unsafe-inline' 'self' mutillidae.local;" .

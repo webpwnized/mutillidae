@@ -148,7 +148,7 @@
 	    try{
 	    	if ($lTargetHostValidated){
 	    		echo '<div class="report-header">Results for '.$lTargetHostText.'</div>';
-    			echo '<pre class="report-header" style="text-align:left;">'.shell_exec("nslookup " . $lTargetHost).'</pre>';
+    			echo '<pre class="output">'.shell_exec("nslookup " . $lTargetHost).'</pre>';
 				$LogHandler->writeToLog("Executed operating system command: nslookup " . $lTargetHostText);
 	    	}else{
 	    		echo '<script>document.getElementById("id-bad-cred-tr").style.display=""</script>';

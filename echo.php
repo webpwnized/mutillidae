@@ -61,7 +61,7 @@
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
-    
+
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
 	var onSubmitOfForm = function(/* HTMLForm */ theForm){
@@ -88,17 +88,17 @@
 	};// end JavaScript function onSubmitOfForm()
 </script>
 
+<a href="index.php?page=content-security-policy.php">
+    <img src="images/shield-icon-75-75.png" />
+    <span class="label">Switch to Content Security Policy (CSP)</span>
+</a>
+
 <form 	action="index.php?page=echo.php" 
 			method="post" 
 			enctype="application/x-www-form-urlencoded" 
 			onsubmit="return onSubmitOfForm(this);"
 			id="idEchoForm">		
 	<table style="margin-left:auto; margin-right:auto;">
-		<tr id="id-bad-cred-tr" style="display: none;">
-			<td colspan="2" class="error-message">
-				Error: Invalid Input
-			</td>
-		</tr>
 		<tr><td></td></tr>
 		<tr>
 			<td colspan="2" class="form-header">Enter message to echo</td>
@@ -136,10 +136,10 @@ if ($lFormSubmitted){
 	        echo '<div class="report-header">Results for '.$lMessageText.'</div>';
 	        
 	        if ($lProtectAgainstCommandInjection) {
-	            echo '<pre class="report-header" style="text-align:left;">'.$lMessage.'</pre>';
+	            echo '<pre class="output">'.$lMessage.'</pre>';
 	            $LogHandler->writeToLog("Executed PHP command: echo " . $lMessageText);
 	        }else{
-	            echo '<pre class="report-header" style="text-align:left;">'.shell_exec("echo " . $lMessage).'</pre>';
+	            echo '<pre class="output">'.shell_exec("echo " . $lMessage).'</pre>';
 	            $LogHandler->writeToLog("Executed operating system command: echo " . $lMessageText);
 	        }//end if
 

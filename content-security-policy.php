@@ -58,31 +58,30 @@ try {
 ?>
 
 <script src="javascript/on-page-scripts/content-security-policy.js"></script>
-<div class="page-title"><span style="font-size: 18pt;">Content Security Policy (CSP)</div>
+<div class="page-title">Content Security Policy (CSP)</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+
+<a href="index.php?page=echo.php">
+    <img src="images/vulnerable-icon-75-75.png" />
+    <span class="label">Switch to Page without CSP</span>
+</a>
 
 <form action="index.php?page=content-security-policy.php" 
 	  method="post" 
 	  enctype="application/x-www-form-urlencoded"
 	  id="idCSPForm">		
 	<table style="margin-left:auto; margin-right:auto;">
-		<tr id="id-bad-cred-tr" style="display: none;">
-			<td colspan="2" class="error-message">
-				Error: Invalid Input
-			</td>
-		</tr>
 		<tr><td></td></tr>
 		<tr>
-			<td colspan="2" class="form-header">Enter injection...errr...message</td>
+			<td colspan="2" class="form-header">Abandon Hope All Ye Who Enter XSS Here</td>
 		</tr>
 		<tr><td></td></tr>
 		<tr>
 			<td class="label">Message</td>
 			<td>
-				<input 	type="text" id="idMessageInput" name="message" size="20" 
-						autofocus="autofocus"
+				<input 	type="text" id="idMessageInput" name="message" size="20" autofocus="autofocus"
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="20" required="required"');
@@ -119,20 +118,26 @@ try {
 <?php
 /* Output results of shell command sent to operating system */
 if ($lFormSubmitted){
-	    try{
-	        echo '<div class="report-header">Results for '.$lMessageText.'</div>';
-	        
-	        if ($lProtectAgainstCommandInjection) {
-	            echo '<pre class="report-header" style="text-align:left;">You typed '.$lMessage.'</pre>';
-	            $LogHandler->writeToLog("Executed PHP command: echo " . $lMessageText);
-	        }else{
-	            echo '<pre class="report-header" style="text-align:left;">You typed "'.shell_exec("echo -n " . $lMessage).'"</pre>';
-	            $LogHandler->writeToLog("Executed operating system command: echo " . $lMessageText);
-	        }//end if
+    try{
+        echo '<div class="report-header">Results for '.$lMessageText.'</div>';
+        
+        if ($lProtectAgainstCommandInjection) {
+            echo '<pre class="output">'.$lMessage.'</pre>';
+            $LogHandler->writeToLog("Executed PHP command: echo " . $lMessageText);
+        }else{
+            echo '<pre class="output">'.shell_exec("echo -n " . $lMessage).'</pre>';
+            $LogHandler->writeToLog("Executed operating system command: echo " . $lMessageText);
+        }//end if
 
-    	}catch(Exception $e){
-			echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessage);
-    	}// end try
-    	
-	}// end if (isset($_POST)) 
+	}catch(Exception $e){
+		echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessage);
+	}// end try
+    
+}// end if
 ?>
+
+<br/>
+<fieldset>
+    <legend>Current Content Security Policy (CSP)</legend>
+    <?php echo $lCSP ?>
+</fieldset>

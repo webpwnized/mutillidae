@@ -1,14 +1,31 @@
 <?php
+    $lSecurityLevel = $_SESSION["security-level"];
+
+    switch ($lSecurityLevel){
+        case "0": // This code is insecure
+            $lSecurityLevelMessage = "Security Level: ".$lSecurityLevel." (Hosed)";
+            break;
+        case "1": // This code is insecure
+            // DO NOTHING: This is equivalent to using client side security
+            $lSecurityLevelMessage = "Security Level: ".$lSecurityLevel." (Client-Side Security)";
+            break;
+            
+        case "2":
+        case "3":
+        case "4":
+        case "5": // This code is fairly secure
+            $lSecurityLevelMessage = "Security Level: ".$lSecurityLevel." (Secure)";
+            break;
+    }// end switch	
+
 	if($_SESSION['loggedin'] == "True"){
 
-		switch ($_SESSION["security-level"]){
+	    switch ($lSecurityLevel){
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
 	   			// DO NOTHING: This is equivalent to using client side security		
 				$logged_in_user = $_SESSION['logged_in_user'];
-				$lUserAgentString = $_SERVER['HTTP_USER_AGENT'];
-				$lPHPVersion = "PHP Version: " . phpversion();
-	   		break;
+			break;
 		    
 	   		case "2":
 	   		case "3":
@@ -17,8 +34,6 @@
 	   			// encode the entire message following OWASP standards
 	   			// this is HTML encoding because we are outputting data into HTML
 				$logged_in_user = $Encoder->encodeForHTML($_SESSION['logged_in_user']);
-				$lUserAgentString = $Encoder->encodeForHTML($_SERVER['HTTP_USER_AGENT']);
-				$lPHPVersion = "PHP Version: Not Available (Secure mode doesn't blab the server version)";
 			break;
 	   	}// end switch		
 
@@ -34,8 +49,8 @@
 			'Logged In ' . 
 			$lUserAuthorizationLevelText . ": " . 
 			'<span class="logged-in-user">'.$logged_in_user.'</span>'.
-			'<a href="index.php?page=edit-account-profile.php&uid='.$lUserID.'">
-            <img src="images/edit-icon-20-20.png" /></a>';
+			'<a href="index.php?page=edit-account-profile.php&uid='.$lUserID.'">'.
+            '<img src="images/edit-icon-20-20.png" /></a>';
 	} else {
 		$logged_in_user = "anonymous";
 		$lAuthenticationStatusMessage = "Not Logged In";
@@ -48,23 +63,6 @@
 	}//end if	
 	
 	$lHintsMessage = "Hints: ".$_SESSION["hints-enabled"];
-	
-	switch ($_SESSION["security-level"]){
-	    case "0": // This code is insecure
-	        $lSecurityLevelDescription = "Hosed";
-	        break;
-	    case "1": // This code is insecure
-	        $lSecurityLevelDescription = "Client-Side Security";
-	        break;   
-	    case "2":
-	    case "3":
-	    case "4":
-	    case "5": // This code is fairly secure
-	        $lSecurityLevelDescription = "Secure";
-	        break;
-	}// end switch
-	
-	$lSecurityLevelMessage = "Security Level: ".$_SESSION["security-level"]." (".$lSecurityLevelDescription.")";
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -74,7 +72,6 @@
 	
 	<link rel="stylesheet" type="text/css" href="styles/global-styles.css" />
 	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu.css" />
-	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu-v.css" />
 	<link rel="stylesheet" type="text/css" href="javascript/jQuery/colorbox/colorbox.css" />
 	<link rel="stylesheet" type="text/css" href="styles/gritter/jquery.gritter.css" />
 	
@@ -88,7 +85,6 @@
 	<script src="javascript/inline-initializers/populate-web-storage.js"></script>
 	<script src="javascript/inline-initializers/gritter-init.js"></script>
 	<script src="javascript/inline-initializers/hints-menu-init.js"></script>
-	
 </head>
 <body>
 <table class="main-table-frame">
@@ -100,15 +96,16 @@
 	</tr>
 	<tr class="main-table-frame-dark">
 		<td class="main-table-frame-second-bar" colspan="2">
-			<?php /* Note: $C_VERSION_STRING in index.php */ ?>
-			<span class="version-header"><?php echo $C_VERSION_STRING;?></span>
-			<span class="version-header"><?php echo $lSecurityLevelMessage; ?></span>
-			<span class="version-header"><?php echo $lHintsMessage; ?></span>
-			<span class="version-header"><?php echo $lAuthenticationStatusMessage ?></span>
+			<?php /* Note: $C_VERSION_STRING in index.php */
+			    echo $C_VERSION_STRING; 
+			?>
+			<span><?php echo $lSecurityLevelMessage; ?></span>
+			<span><?php echo $lHintsMessage; ?></span>
+			<span><?php echo $lAuthenticationStatusMessage ?></span>
 		</td>
 	</tr>
-	<tr class="main-table-frame-third-bar">
-		<td class="main-table-frame-third-bar" colspan="2">
+	<tr class="main-table-frame-menu-bar">
+		<td class="main-table-frame-menu-bar" colspan="2">
 			<a href="index.php?page=home.php&popUpNotificationCode=HPH0">Home</a>
 			|
 			<?php
