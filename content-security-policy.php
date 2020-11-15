@@ -141,3 +141,8 @@ if ($lFormSubmitted){
     <legend>Current Content Security Policy (CSP)</legend>
     <?php echo $lCSP ?>
 </fieldset>
+<br/>
+<fieldset>
+    <legend>Current Content Security Policy (CSP) Report To Endpoints</legend>
+    <?php echo $lReportToHeader ?>
+</fieldset>

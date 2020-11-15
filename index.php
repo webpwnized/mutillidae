@@ -586,13 +586,18 @@
      * Set Content Security Policy (CSP) if needed
      * ------------------------------------------ */
     if ($lPage == "content-security-policy.php"){
+        $lReportToHeader = 'Report-To: {"group": "csp-endpoint", "max_age": 10886400, "endpoints":[{"url": "includes/capture-data.php"}]}';
+        
         $CSPNonce = bin2hex(openssl_random_pseudo_bytes(32));
         $lCSP = "Content-Security-Policy: " .
                 "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.local;" .
                 "style-src 'unsafe-inline' 'self' mutillidae.local;" .
                 "img-src 'self' mutillidae.local www.paypalobjects.com;" .
                 "default-src 'self';".
-                "report-uri includes/capture-data.php;";
+                "report-uri includes/capture-data.php;" .
+                "report-to csp-endpoint;";
+
+        header($lReportToHeader, TRUE);
         header($lCSP, TRUE);
     }// end if
     /* ------------------------------------------
@@ -622,7 +627,7 @@
 
 	require_once (__ROOT__."/includes/information-disclosure-comment.php");
 	require_once (__ROOT__."/includes/footer.php");
-	
+
    	/* ------------------------------------------
    	 * LOG USER VISIT TO PAGE
    	* ------------------------------------------ */
