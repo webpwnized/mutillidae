@@ -89,7 +89,7 @@
 		onsubmit="return onSubmitOfForm(this);"
 		style="background-color:#<?php echo $lBackgroundColor; ?>"
 	>
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr id="id-bad-cred-tr" style="display: none;">
 			<td colspan="2" class="error-message">
 				Error: Invalid Input

@@ -155,7 +155,7 @@
 			enctype="application/x-www-form-urlencoded" 
 			onsubmit="return onSubmitOfRepeaterForm(this);"
 			id="idRepeaterForm">
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr>
 				<td colspan="2" class="form-header">Please enter string to repeat</td>
 			</tr>

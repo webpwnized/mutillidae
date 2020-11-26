@@ -72,7 +72,7 @@ try {
 	  method="post" 
 	  enctype="application/x-www-form-urlencoded"
 	  id="idCSPForm">		
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr><td></td></tr>
 		<tr>
 			<td colspan="2" class="form-header">Abandon Hope All Ye Who Enter XSS Here</td>
@@ -96,29 +96,14 @@ try {
 				<input name="content-security-policy-php-submit-button" class="button" type="submit" value="Submit" />
 			</td>
 		</tr>
-		<tr><td></td></tr>
-		<tr><td></td></tr>
 	</table>
 </form>
-<script nonce="<?php echo $CSPNonce; ?>">
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('idCSPForm').addEventListener('submit', 
-            function(event){
-                <?php 
-                    if($lEnableJavaScriptValidation){
-            	         echo "if(!onSubmitOfForm(this)){event.preventDefault()}";
-                    }else{
-                         echo "return true;";
-                    }
-            	?>
-    		});
-	});
-</script>
 
 <?php
 /* Output results of shell command sent to operating system */
 if ($lFormSubmitted){
     try{
+        echo '<div>&nbsp;</div>';
         echo '<div class="report-header">Results for '.$lMessageText.'</div>';
         
         if ($lProtectAgainstCommandInjection) {
@@ -138,11 +123,31 @@ if ($lFormSubmitted){
 
 <br/>
 <fieldset>
-    <legend>Current Content Security Policy (CSP)</legend>
-    <?php echo $lCSP ?>
-</fieldset>
-<br/>
-<fieldset>
     <legend>Current Content Security Policy (CSP) Report To Endpoints</legend>
     <?php echo $lReportToHeader ?>
 </fieldset>
+<br/>
+<fieldset>
+    <legend>Current Content Security Policy (CSP)</legend>
+    <?php 
+        $l_string = str_replace(";", ";<br />", $lCSP);
+        $l_string = str_replace(": ", ": <br />", $l_string);
+        echo $l_string;
+    ?>
+</fieldset>
+<br />
+
+<script nonce="<?php echo $CSPNonce; ?>">
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('idCSPForm').addEventListener('submit', 
+            function(event){
+                <?php 
+                    if($lEnableJavaScriptValidation){
+            	         echo "if(!onSubmitOfForm(this)){event.preventDefault()}";
+                    }else{
+                         echo "return true;";
+                    }
+            	?>
+    		});
+	});
+</script>

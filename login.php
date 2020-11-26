@@ -83,7 +83,7 @@
 			enctype="application/x-www-form-urlencoded" 
 			onsubmit="return onSubmitOfLoginForm(this);"
 			id="idLoginForm">
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr id="id-authentication-failed-tr" style="display: none;">
 				<td id="id-authentication-failed-td" colspan="2" class="error-message"></td>
 			</tr>

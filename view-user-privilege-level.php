@@ -152,7 +152,7 @@
 ?>
 
 <div id="id-view-user-privilege-level-form-div" style="text-align:center;">
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr id="id-user-privilege-message" style="display: none;">
 			<td colspan="2" class="error-message">
 				User is root!

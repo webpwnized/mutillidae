@@ -98,7 +98,7 @@
 			enctype="application/x-www-form-urlencoded" 
 			onsubmit="return onSubmitOfForm(this);"
 			id="idEchoForm">		
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr><td></td></tr>
 		<tr>
 			<td colspan="2" class="form-header">Enter message to echo</td>

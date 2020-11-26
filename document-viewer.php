@@ -105,7 +105,7 @@
 			enctype="application/x-www-form-urlencoded" 
 			id="idDocumentForm">
 		<input type="hidden" name="page" value="document-viewer.php" />
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr id="id-bad-path-to-document-tr" style="display: none;">
 				<td class="error-message">
 					Validation Error: HTTP Parameter Pollution Detected. Input cannot be trusted.

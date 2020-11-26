@@ -214,7 +214,7 @@
 			onsubmit="return onSubmitOfForm(this);"
 			>
 		<input name="csrf-token" type="hidden" value="<?php echo $lNewCSRFTokenForNextRequest; ?>" />
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" class="form-header">Please choose your username, password and signature</td>

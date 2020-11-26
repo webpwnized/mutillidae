@@ -124,7 +124,7 @@
 		onsubmit="return onSubmitOfForm(this);"
 >
 	<input type="hidden" name="page" value="user-info-xpath.php" />	
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr id="id-bad-cred-tr" style="display: none;">
 			<td colspan="2" class="error-message">
 				Authentication Error: Bad user name or password

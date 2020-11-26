@@ -67,7 +67,7 @@
 	<title><?php echo $lPageTitle?></title>
 </head>
 <body>
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr><td>&nbsp;</td></tr>
 		<tr><td><div class="page-title"><?php echo $lPageTitle?></div></td></tr>
 		<tr><td>&nbsp;</td></tr>

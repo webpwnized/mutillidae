@@ -69,7 +69,7 @@
 <div id="id-generator-form-div">
 	<form 	enctype="application/x-www-form-urlencoded" 
 			id="idGeneratorForm">
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr>
 				<td class="form-header">Password Generator</td>
 			</tr>

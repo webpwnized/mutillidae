@@ -80,7 +80,7 @@
 		</a>
 	</span>
 	<form action="index.php?page=view-someones-blog.php" method="post" enctype="application/x-www-form-urlencoded">
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr id="id-bad-blog-entry-tr" style="display: none;">
 				<td class="error-message">
 					Validation Error: Please choose blog entries to view

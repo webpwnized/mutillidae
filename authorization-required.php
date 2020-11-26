@@ -10,7 +10,7 @@
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 
-<table style="margin-left:auto; margin-right:auto;">
+<table>
 	<tr>
 		<td class="error-message">
 			Authorization Error: 403 - Page Requires Higher Privileges Than Current User Possesses

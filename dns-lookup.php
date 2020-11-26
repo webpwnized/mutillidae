@@ -107,7 +107,7 @@
 			enctype="application/x-www-form-urlencoded" 
 			onsubmit="return onSubmitOfForm(this);"
 			id="idDNSLookupForm">		
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr id="id-bad-cred-tr" style="display: none;">
 			<td colspan="2" class="error-message">
 				Error: Invalid Input

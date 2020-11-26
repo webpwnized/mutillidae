@@ -137,7 +137,7 @@ class CSRFTokenHandler{
 			'<div>&nbsp;</div>'.PHP_EOL.
 			'<fieldset>'.PHP_EOL.
 			'<legend>CSRF Protection Information</legend>'.PHP_EOL.
-			'<table style="margin-left:auto; margin-right:auto;">'.PHP_EOL.
+			'<table>'.PHP_EOL.
 			'<tr><td></td></tr>'.PHP_EOL.
 			'<tr><td class="report-header">Posted Token: '.$lPostedCSRFToken.'<br/>('.$this->mTokenValid.')</td></tr>'.PHP_EOL.
 			'<tr><td>Expected Token For This Request: '.$lExpectedCSRFTokenForThisRequest.'</td></tr>'.PHP_EOL.

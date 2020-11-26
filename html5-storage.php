@@ -164,7 +164,7 @@
 		</tr>
 		<tr><td>&nbsp;<td></tr>
 	</table>
-	<table style="margin-left:auto; margin-right:auto;">
+	<table>
 		<tr>
 			<td class="sub-header" colspan="3">Web Storage</td>
 			<td>&nbsp;</td>

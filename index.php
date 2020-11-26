@@ -141,18 +141,6 @@
 	/* ------------------------------------------
 	 * initialize OWASP ESAPI for PHP
 	 * ------------------------------------------ */
-	/*
-	if (!is_object($_SESSION["Objects"]["ESAPIHandler"])){
-		$_SESSION["Objects"]["ESAPIHandler"] = new ESAPI(__ROOT__.'/owasp-esapi-php/src/ESAPI.xml');
-		$_SESSION["Objects"]["ESAPIEncoder"] = $_SESSION["Objects"]["ESAPIHandler"]->getEncoder();
-		$_SESSION["Objects"]["ESAPIRandomizer"] = $_SESSION["Objects"]["ESAPIHandler"]->getRandomizer();
-	}// end if
-	
-	// Set up an alias by reference so object can be referenced in memory without copying
-	$ESAPI = &$_SESSION["Objects"]["ESAPIHandler"];
-	$Encoder = &$_SESSION["Objects"]["ESAPIEncoder"];
-	$ESAPIRandomizer = &$_SESSION["Objects"]["ESAPIRandomizer"];
-	*/
 	$ESAPI = new ESAPI(__ROOT__.'/owasp-esapi-php/src/ESAPI.xml');
 	$Encoder = $ESAPI->getEncoder();
 	$ESAPIRandomizer = $ESAPI->getRandomizer();
@@ -188,50 +176,22 @@
 	/* ------------------------------------------
 	 * initialize custom error handler
 	 * ------------------------------------------ */
-	/*
-	if (!is_object($_SESSION["Objects"]["CustomErrorHandler"])){
-		$_SESSION["Objects"]["CustomErrorHandler"] = new CustomErrorHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
-	}// end if
-	
-	$CustomErrorHandler = &$_SESSION["Objects"]["CustomErrorHandler"];
-	*/
 	$CustomErrorHandler = new CustomErrorHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
 	
 	/* ------------------------------------------
  	* initialize log handler
  	* ------------------------------------------ */
-	/*
-	if (!is_object($_SESSION["Objects"]["LogHandler"])){
-		$_SESSION["Objects"]["LogHandler"] = new LogHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
-	}// end if
-	
-	$LogHandler = &$_SESSION["Objects"]["LogHandler"];
-	*/
 	$LogHandler = new LogHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);	
 		
 	/* ------------------------------------------
  	* initialize MySQL handler
  	* ------------------------------------------ */
-	/*
-	if (!is_object($_SESSION["Objects"]["MySQLHandler"])){
-		$_SESSION["Objects"]["MySQLHandler"] = new MySQLHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
-	}// end if
-	
-	$MySQLHandler = &$_SESSION["Objects"]["MySQLHandler"];
-	*/
 	$MySQLHandler = new MySQLHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
 	$MySQLHandler->connectToDefaultDatabase();
 
 	/* ------------------------------------------
  	* initialize SQL Query handler
  	* ------------------------------------------ */
-	/*
-	if (!is_object($_SESSION["Objects"]["SQLQueryHandler"])){
-		$_SESSION["Objects"]["SQLQueryHandler"] = new SQLQueryHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
-	}// end if
-	
-	$SQLQueryHandler = &$_SESSION["Objects"]["SQLQueryHandler"];
-	*/
 	$SQLQueryHandler = new SQLQueryHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
 
 	/* ------------------------------------------
@@ -286,7 +246,9 @@
 						$_SESSION['logged_in_user'] = $row->username;
 						$_SESSION['logged_in_usersignature'] = $row->mysignature;
 						$_SESSION['is_admin'] = $row->is_admin;
-   						header('Logged-In-User: '.$_SESSION['logged_in_user'], true);
+						if (isset($_SESSION['logged_in_user'])){
+						    header('Logged-In-User: '.$_SESSION['logged_in_user'], true);
+						}// end if
 			    	}// end if ($result->num_rows > 0)
 				    
 				} catch (Exception $e) {
@@ -300,7 +262,9 @@
 	   			 * (PHP defends itself against HTTP response splitting by
 	   			 * filtering "new line" characters)
 	   			 */
-   				header('Logged-In-User: '.$_SESSION['logged_in_user'], true);
+   			    if (isset($_SESSION['logged_in_user'])){
+   			        header('Logged-In-User: '.$_SESSION['logged_in_user'], true);
+   			    }// end if
    			}// end if
 
    		break;
@@ -317,7 +281,9 @@
   			 * prevent response splitting. The critical chars in response splitting
   			 * are CR-LF. Dont fall for filtering. Just encode it all.  			
   			 */
-   			header('Logged-In-User: '.$Encoder->encodeForHTML($_SESSION['logged_in_user']), TRUE);
+   		    if (isset($_SESSION['logged_in_user'])){
+   		        header('Logged-In-User: '.$Encoder->encodeForHTML($_SESSION['logged_in_user']), TRUE);
+   		    }// end if
    		break;
    	}// end switch
 	/* ------------------------------------------
@@ -325,162 +291,53 @@
      * ------------------------------------------ */
 
    	/* ------------------------------------------
-   	 * PHP Version Detection
-   	 * ------------------------------------------ */
-   	try{
-   	    /*
-   	     * This section detects if the header_remove() function should
-   	     * be supported. PHP 5.3 first includes this function.
-   	     */
-   	    $l_header_remove_supported = FALSE;
-   	    $l_phpversion = explode(".", phpversion());
-   	    $l_phpmajorversion = (int)$l_phpversion[0];
-   	    $l_phpminorversion = (int)$l_phpversion[1];
-   	    if (($l_phpmajorversion >= 5 && $l_phpminorversion >= 3) || $l_phpmajorversion > 5){
-   	        $l_header_remove_supported = TRUE;
-   	    }else{
-   	        $l_header_remove_supported = FALSE;
-   	    }// end if
-   	} catch (Exception $e) {
-   	    //Bummer: Not sure if we have support
-   	    $l_header_remove_supported = FALSE;
-   	}// end try
-   	
-   	/* ------------------------------------------
     * Security Headers (Modern Browsers)
     * ------------------------------------------ */
-
-   	/* If not security level 5, try to get rid of cache-control */
-   	if ($_SESSION["security-level"] < 5) {
-   	    
-   	    try{
-   	        /*
-   	         * This section is the cache-control. This only works in PHP 5.3
-   	         * and higher due to the header_remove function becoming
-   	         * available at that time.
-   	         */
-   	        if ($l_header_remove_supported){
-   	            /* Try to get rid of expires, last-modified, Pragma,
-   	             * cache control header, HTTP/1.1 and cookie cache control
-   	             * that would be created if the user
-   	             * enabled security level 5.
-   	             */
-   	            header_remove("Expires");
-   	            header_remove("Last-Modified");
-   	            header_remove("Cache-Control");
-   	            header_remove("Pragma");
-   	        }else{
-   	            /* Try to get rid of expires, last-modified, Pragma,
-   	             * cache control header, HTTP/1.1 and cookie cache control
-   	             * that would be created if the user
-   	             * enabled security level 5.
-   	             */
-   	            /*This line causes severe issues with the toggle security and toggle hints.
-   	             DO NOT uncomment until a patch is found.
-   	             header("Expires: Mon, 26 Jul 2050 05:00:00 GMT", TRUE);
-   	             */
-   	            header("Last-Modified: Mon, 26 Jul 2050 05:00:00 GMT", TRUE);
-   	            header('Cache-Control: public', TRUE);
-   	            header("Pragma: public", TRUE);
-   	        }// end if
-   	    } catch (Exception $e) {
-   	        //Bummer: The cahce-control exercise are not working
-   	    }// end try
-   	    
-    }//end if
-   	
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
-   			/* Built-in user-agent defenses */
-   			header("X-XSS-Protection: 0", TRUE);
-   			
-   			/* Disable HSTS */
-   			header("Strict-Transport-Security: max-age=0", TRUE);
-   			
-   		break;
-   		
    		case "1":
    		    /* Built-in user-agent defenses */
-   		    header("X-XSS-Protection: 0", TRUE);
-   		    
-			/* Disable HSTS */
-			header("Strict-Transport-Security: max-age=0", TRUE);
-			
+   			header("X-XSS-Protection: 0;", TRUE);
+   			
+   			/* Disable HSTS */
+   			header("Strict-Transport-Security: max-age=0;", TRUE);
+
+   			// HTTP/1.1 cache control
+   			header("Cache-Control: public;", TRUE);
+   			
+   			header_remove("Pragma");
+   			header_remove("Expires");
 		break;
 
    		case "2":
    		case "3":
    		case "4":
    		case "5": // This code is fairly secure
+   		    /* Built-in user-agent defenses */
+   		    header("X-XSS-Protection: 1; mode=block;", TRUE);
+
+   		    /* Enable HSTS - I would like to enable this but the problem is this header caches so messes
+   		     * up labs once the user sets the security level back to level 0*/
+   		    //header("Strict-Transport-Security: max-age=31536000; includeSubDomains", TRUE);
+   		    
+   		    // HTTP/1.1 cache control
+   		    header('Cache-Control: no-store, no-cache', TRUE);
+   		    
+   		    // HTTP/1.0 cache-control
+   		    header("Pragma: no-cache", TRUE);
+   		    header_remove("Expires");
    		    
    		    /* Cross-frame scripting and click-jacking */
-  			/* To prevent click-jacking and IE6 key-log-via-framing issue
-  			 * we can instruct the browser that it should not frame our site. 
-  			 * Unfortuneately only the latest browsers support this option.
-  			 * There are javascript frame-buster options that work reasonably well
-  			 * although the arms race continues. Use the x-frame-options as the
-  			 * primary defense and include the javascript frame-buster to help
-  			 * with older browsers.
-  			 */
-   			header('X-FRAME-OPTIONS: DENY', TRUE);
-   			
-   			/* Cache-control */
-   			/*
-   			 * Forms caching:
-   			 * In insecure mode, we do nothing (as is often the case with insecure mode)
-   			 * In secure mode, we set the proper caching directives to help prevent client side caching
-   			 *
-   			 * When the browser caches the information asset just walked out the door. HTML 5 combined
-   			 * with naive developers is going to make this problem much worse. HTML 5 includes advanced
-   			 * cookies called "offline" storage or "DOM" storage. This is going to be a nightmare
-   			 * for enterprises to protect their data from leakage.
-   			 */
-   			// Expires: past date tells browser that file is out of date
-   			header("Expires: Mon, 26 Jul 1997 05:00:00 GMT", TRUE);
-   			
-   			// Always modified - Tells browser that new content available
-   			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT", TRUE);
-   			
-   			// HTTP/1.1 cache control
-   			header('Cache-Control: no-store, no-cache', TRUE);
-   			
-   			// HTTP/1.0 cache-control
-   			header("Pragma: no-cache", TRUE);
-
+   		    header('X-FRAME-OPTIONS: DENY', TRUE);
+   		    header("Content-Security-Policy: frame-ancestors 'none';", TRUE);
+   		    
    			/* Content sniffing */
    			header("X-Content-Type-Options: nosniff", TRUE);
-   			
-   			/* Built-in user-agent defenses */
-   			header("X-XSS-Protection: 1", TRUE);
-
-   			/* Enable HSTS */
-   			//header("Strict-Transport-Security: max-age=31536000; includeSubDomains", TRUE);
-   			
+   			   			
    			/* Server version banners */
-   			try{
-   			    /*
-   			     * Remove x-powered-by header and server header for security.
-   			     * Server is hard to get rid of without modifying the Apache config because Apache
-   			     * adds the header after the PHP has already been rendered and sent to Apache,
-   			     * but atleast we discussed it here.
-   			     */
-   			    if ($l_header_remove_supported){
-   			        header_remove("X-Powered-By");
-   			        header_remove("Server");
-   			    }else{
-   			        /* Try to get rid of expires, last-modified, Pragma,
-   			         * cache control header, HTTP/1.1 and cookie cache control
-   			         * that would be created if the user
-   			         * enabled security level 5. Server is often over-ridden
-   			         * by Apache no matter what we do. Change Apache config to fix.
-   			         */
-   			        header("X-Powered-By: Ming Industries Draconian Power Ring", TRUE);
-   			        header("Server: Kentucky Wildcat Basketball", TRUE);
-   			    }// end if
-   			} catch (Exception $e) {
-   			    //Bummer: The server blabbermouth defense is not working
-   			}// end try
-   			
+   			header_remove("X-Powered-By");
+   			header_remove("Server");
+
    		break;
    	}// end switch
 	/* ------------------------------------------
@@ -490,7 +347,7 @@
    	/* ------------------------------------------
    	 * Set the HTTP content-type of this page
    	 * ------------------------------------------ */
-   	header("Content-Type: text/html", TRUE);
+   	header("Content-Type: text/html;charset=UTF-8", TRUE);
    	
 	/* ------------------------------------------
      * DISPLAY PAGE
@@ -593,6 +450,12 @@
                 "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.local;" .
                 "style-src 'unsafe-inline' 'self' mutillidae.local;" .
                 "img-src 'self' mutillidae.local www.paypalobjects.com;" .
+                "connect-src 'self' mutillidae.local;" .
+                "form-action 'self' mutillidae.local;" .
+                "font-src 'none';" .
+                "frame-src 'self' mutillidae.local;" .
+                "media-src 'none';" .
+                "object-src 'none';" .
                 "default-src 'self';".
                 "report-uri includes/capture-data.php;" .
                 "report-to csp-endpoint;";

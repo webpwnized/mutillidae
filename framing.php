@@ -5,7 +5,7 @@
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
-<table style="margin-left:auto; margin-right:auto;">
+<table>
 	<tr>
 		<td colspan="2" class="form-header">Click on portion of picture to enlarge</td>
 	</tr>

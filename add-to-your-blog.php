@@ -202,7 +202,7 @@
 			<span style="font-weight:bold;">&nbsp;View Blogs</span>
 			</a>
 		</span>
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr id="id-bad-blog-entry-tr" style="display: none;">
 				<td class="error-message">
 					Validation Error: Blog entry cannot be blank

@@ -32,7 +32,7 @@
 
 <div class="page-title">The database server appears to be offline.</div>
 
-<table style="margin-left:auto; margin-right:auto;">
+<table>
 	<tr><td>&nbsp;</td></tr>
 	<tr id="id-bad-page-tr">
 		<th>
@@ -79,7 +79,7 @@
 			method="post" 
 			enctype="application/x-www-form-urlencoded"
 			id="idDatabaseOffline">
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr><td></td></tr>
 			<tr>
 				<td colspan="2" class="form-header">Opt out of database warnings</td>

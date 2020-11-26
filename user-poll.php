@@ -150,7 +150,7 @@
 			id="idPollForm">
 		<input type="hidden" name="page" value="user-poll.php" />
 		<input name="csrf-token" type="hidden" value="<?php echo $lNewCSRFTokenForNextRequest; ?>" />
-		<table style="margin-left:auto; margin-right:auto;">
+		<table>
 			<tr id="id-bad-vote-tr" style="display: none;">
 				<td class="error-message">
 					Validation Error: HTTP Parameter Pollution Detected. Vote cannot be trusted.

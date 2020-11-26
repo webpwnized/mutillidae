@@ -72,6 +72,6 @@
 			echo phpinfo(INFO_ALL);
 		}// end if $lIncluded
 	}else{
-		echo '<table style="margin-left:auto; margin-right:auto;"><tr><td class="error-message">Secure sites do not expose administrative or configuration pages to the Internet</td></tr></table>';		
+		echo '<table><tr><td class="error-message">Secure sites do not expose administrative or configuration pages to the Internet</td></tr></table>';		
 	}//end if $lShowPHPInfo
 ?>
