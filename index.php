@@ -307,7 +307,11 @@
    			
    			header_remove("Pragma");
    			header_remove("Expires");
-		break;
+
+   			/* Content sniffing */
+   			header_remove("X-Content-Type-Options");
+
+   	    break;
 
    		case "2":
    		case "3":
