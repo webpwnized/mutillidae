@@ -15,18 +15,18 @@
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
 				/*
-				 * Grab username and password from parameters. 
+				 * Grab username and password from parameters.
 				 * Notice in insecure mode, we take parameters from "REQUEST" which
 				 * could be GET OR POST. This is not correct. The page
 				 * intends to receive parameters from POST and should
 				 * restrict parameters to POST only.
-				 */ 
+				 */
 				$lUsername = $_REQUEST["username"];
-				$lPassword = $_REQUEST["password"];	   			
+				$lPassword = $_REQUEST["password"];
 	   			$lProtectCookies = FALSE;
 	   			$lConfidentialityRequired = FALSE;
 	   		break;
-		    		
+
 			case "2":
 			case "3":
 			case "4":
@@ -46,7 +46,7 @@
 	   	$cAUTHENTICATION_SUCCESSFUL = 3;
 	   	$cAUTHENTICATION_EXCEPTION_OCCURED = 4;
 	   	$cUSERNAME_OR_PASSWORD_INCORRECT = 5;
-	   	
+
 	   	$lAuthenticationAttemptResult = $cUNSURE;
 	   	$lAuthenticationAttemptResultFound = FALSE;
 	   	$lKeepGoing = TRUE;
@@ -77,7 +77,7 @@
    		}//end if $lKeepGoing
 
 		$lQueryResult = $SQLQueryHandler->getUserAccount($lUsername, $lPassword);
-   	
+
 		if (isset($lQueryResult->num_rows)){
    			if ($lQueryResult->num_rows > 0) {
 	   			$lAuthenticationAttemptResultFound = TRUE;
@@ -91,7 +91,7 @@
 			$_SESSION['logged_in_user'] = $lRecord->username;
 			$_SESSION['logged_in_usersignature'] = $lRecord->mysignature;
 			$_SESSION['is_admin'] = $lRecord->is_admin;
-   				
+
    				/*
    				 /* Set client-side auth token. if we are in insecure mode, we will
    				* pay attention to client-side authorization tokens. If we are secure,
@@ -110,13 +110,29 @@
    				*/
 			if ($lProtectCookies){
 				$lUsernameCookie = $Encoder->encodeForURL($lRecord->username);
-				setcookie("username", $lUsernameCookie, 0, "", "", FALSE, TRUE);
-				setcookie("uid", $lRecord->cid, 0, "", "", FALSE, TRUE);
+				$l_cookie_options = array (
+				    'expires' => 0,              // 0 means session cookie
+				    'path' => '/',               // '/' means entire domain
+				    //'domain' => '.example.com', // default is current domain
+				    'secure' => FALSE,           // true or false
+				    'httponly' => TRUE,         // true or false
+				    'samesite' => 'Strict'          // None || Lax  || Strict
+				);
+				setcookie("username", $lUsernameCookie, $l_cookie_options);
+				setcookie("uid", $lRecord->cid, $l_cookie_options);
 			}else {
 				//setrawcookie() allows for response splitting
 				$lUsernameCookie = $lRecord->username;
-				setrawcookie("username", $lUsernameCookie);
-				setrawcookie("uid", $lRecord->cid);
+				$l_cookie_options = array (
+				    'expires' => 0,              // 0 means session cookie
+				    'path' => '/',               // '/' means entire domain
+				    //'domain' => '.example.com', // default is current domain
+				    'secure' => FALSE,           // true or false
+				    'httponly' => FALSE,         // true or false
+				    'samesite' => 'Lax'          // None || Lax  || Strict
+				);
+				setrawcookie("username", $lUsernameCookie, $l_cookie_options);
+				setrawcookie("uid", $lRecord->cid, $l_cookie_options);
 			}// end if $lProtectCookies
 
 			logLoginAttempt("Login Succeeded: Logged in user: {$lRecord->username} ({$lRecord->cid})");
@@ -128,7 +144,7 @@
 			exit(0);
 
 		}// end if $lAuthenticationAttemptResultFound
-	   				
+
    	} catch (Exception $e) {
 		echo $CustomErrorHandler->FormatError($e, "Error querying user account");
 		$lAuthenticationAttemptResult = $cAUTHENTICATION_EXCEPTION_OCCURED;

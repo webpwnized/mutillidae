@@ -122,11 +122,19 @@
 	   		break;
 	   	}// end switch
 
-		if ($lProtectCookies){
-			setcookie('showhints', $l_showhints.";HTTPOnly");
-		}else {
-			setcookie('showhints', $l_showhints);
-		}// end if $lProtectCookies
+	   	$l_cookie_options = array (
+	   	    'expires' => 0,              // 0 means session cookie
+	   	    'path' => '/',               // '/' means entire domain
+	   	    //'domain' => '.example.com', // default is current domain
+	   	    'secure' => FALSE,           // true or false
+	   	    'httponly' => FALSE,         // true or false
+	   	    'samesite' => 'Lax'          // None || Lax  || Strict
+	   	);
+	   	if ($lProtectCookies){
+	   	    $l_cookie_options['httponly'] = TRUE;
+	   	    $l_cookie_options['samesite'] = 'Strict';
+	   	}// end if
+	   	setcookie('showhints', $l_showhints, $l_cookie_options);
 	}// end if (isset($_COOKIE["showhints"])){
 
 	if (!isset($_SESSION["showhints"]) || ($_SESSION["showhints"] != $l_showhints)){
