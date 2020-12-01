@@ -280,6 +280,10 @@ td.main-table-frame-right{
 	padding-top: 10px;
 }
 
+td.main-table-frame-right a, a:active, a:visited{
+	color: blue;
+}
+
 /* ----------------------------------------------------------------- */
 /* Display results and data like results of commands */
 /* ----------------------------------------------------------------- */
