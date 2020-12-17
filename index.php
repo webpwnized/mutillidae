@@ -475,6 +475,7 @@
                 "media-src 'none';" .
                 "object-src 'none';" .
                 "default-src 'self';".
+                "frame-ancestors 'none';".
                 "report-uri includes/capture-data.php;" .
                 "report-to csp-endpoint;";
 

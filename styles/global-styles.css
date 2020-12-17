@@ -473,10 +473,10 @@ table tr td.error-detail{
 }
 
 *.error-message{
-	border-color: #990000;
+	border-color: #999999;
 	border-width: 1px;
 	border-style: dashed;
-	background-color: #FFCCCC;
+	background-color: #FFCCCC50;
 	text-align: center;
 	font-weight: bold;
 	color: #990000;
@@ -532,7 +532,7 @@ table tr td.success-header{
 	border-color: #003300;
 	border-width: 1px;
 	border-style: dashed;
-	background-color: #CCFFCC;
+	background-color: #92a33230;
 	text-align: center;
 	font-weight: bold;
 	color: #003300;
