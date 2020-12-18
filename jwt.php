@@ -25,9 +25,6 @@
    		case "3":
    		case "4":
     		case "5": // This code is fairly secure
-    			// add XSS fixes
-    			// add SQLi fixes- no need - SQLQueryHandler.php should take care of it (check)
-    			// add password disclosure fix
 				$lEnableSignatureValidation = TRUE;
 				$lKey = 'MIIBPAIBAAJBANBs46xCKgSt8vSgpGlDH0C8znhqhtOZQQjFCaQzcseGCVlrbI';
 			break;
