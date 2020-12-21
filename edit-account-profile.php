@@ -94,7 +94,7 @@
 		   	}// end if
 						   	
 		   	if (!$lValidationFailed){					
-		   		$lRowsAffected = $SQLQueryHandler->insertNewUserAccount($lUsername, $lPassword, $lUserSignature);
+		   		$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lUserSignature);
 				echo '<div class="success-message">Profile updated for ' . $lUsernameText . '</div>';
 				$LogHandler->writeToLog("Profile updated for: " . $lUsername);
 		   	}// end if (!$lValidationFailed)
