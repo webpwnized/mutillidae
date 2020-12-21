@@ -330,19 +330,16 @@ table tr td.form-header{
 /* ------------------------------------------------- */
 
 table tr td.sub-header{
-	border-color: #000077;
 	border-width: 1px;
 	border-style: solid;
-	background-color: #CCCCFF;
+	background-color: #bc6c2550;
 	text-align: center;
 	font-weight: bold;
-	color: #000077;
 	padding-left: 30px;
 	padding-right: 30px;
 }
 
 table tr td.sub-body{
-	border-color: #000077;
 	border-width: 1px;
 	border-style: solid;
 	text-align: center;

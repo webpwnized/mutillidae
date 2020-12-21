@@ -46,13 +46,21 @@
 	}
 ?>
 
+<div class="page-title">Current User Information</div>
+
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <!-- BEGIN HTML OUTPUT  -->
-<div class="page-title" style="margin-bottom: 25px">Current User Information</div>
 <div id="loading-div">Loading user information, please wait...</div>
+<div>&nbsp;</div>
 <table id="idDisplayTable" style="display:none;">
+	<thead>
+		<tr>
+			<td colspan="2" class="form-header">Current User Information</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+	</thead>
 	<tbody id="idDisplayTableBody"></tbody>
 </table>
 
