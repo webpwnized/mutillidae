@@ -11,13 +11,13 @@
 	require_once (__ROOT__ . '/classes/LogHandler.php');
 	require_once (__ROOT__ . '/classes/SQLQueryHandler.php');
 	require_once (__ROOT__ . '/classes/JWT.php');
-
-    /* ------------------------------------------
-     * INITIALIZE SESSION
-     * ------------------------------------------ */
-    if(strlen(session_id()) == 0){
-    	session_start();
-    }// end if
+		
+   /* ------------------------------------------
+   * INITIALIZE SESSION
+   * ------------------------------------------ */
+   if(strlen(session_id()) == 0){
+   	session_start();
+	}// end if
 
 	/* ------------------------------------------
 	 * initialize custom error handler
@@ -38,11 +38,13 @@
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure.
 				$lEnableSignatureValidation = FALSE;
-				$lKey = 'Butterfly';
+				$lKey = 'snowman';
+				$lObfuscatePassword = FALSE;
 				break;
     		case "1": // This code is insecure.
 				$lEnableSignatureValidation = TRUE;
-				$lKey = 'Butterfly';
+				$lKey = 'snowman';
+				$lObfuscatePassword = FALSE;
 				break;
    		case "2":
    		case "3":
@@ -50,6 +52,7 @@
     		case "5": // This code is fairly secure
 				$lEnableSignatureValidation = TRUE;
 				$lKey = 'MIIBPAIBAAJBANBs46xCKgSt8vSgpGlDH0C8znhqhtOZQQjFCaQzcseGCVlrbI';
+				$lObfuscatePassword = TRUE;
 			break;
     	}// end switch
 	}catch(Exception $e){
@@ -64,26 +67,17 @@
 		try {
 			$decoded = JWT::decode($token, $lKey, $lEnableSignatureValidation);
 		}catch(Exception $e){
-			echo ($CustomErrorHandler->getExceptionMessage($e, 'Test12'));
+			echo ($CustomErrorHandler->getExceptionMessage($e, 'Error decoding/validating token on page ajax/jwt.php'));
 			return;
 		}
 
 		// get user info from DB
 		$userInfo = $SQLQueryHandler->getUserAccountByID($decoded->userid);
-		$table  = "<table>";
 		$lUserDetailsJSON = "";
 		while($row = $userInfo->fetch_object()) {
+			if($lObfuscatePassword) $row->password = "********";
 			$lUserDetailsJSON .= json_encode($row);
-			$table .= "<tr><td>CID</td><td>" . $row->cid . "</td></tr>";
-			$table .= "<tr><td>User Name</td><td>" . $row->username . "</td></tr>";
-			$table .= "<tr><td>Password</td><td style='content: ***'>" . $row->password . "</td></tr>";
-			$table .= "<tr><td>Signature</td><td>" . $row->mysignature . "</td></tr>";
-			$table .= "<tr><td>Is Admin</td><td>" . $row->is_admin . "</td></tr>";
-			$table .= "<tr><td>First Name</td><td>" . $row->firstname . "</td></tr>";
-			$table .= "<tr><td>Last Name</td><td>" . $row->lastname . "</td></tr>";
-		}
-		$table .= "</table>";
-		//echo $table;
+		}		
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 		header('Content-type: application/json');

@@ -1,8 +1,5 @@
 <?php
 
-   /*
-      JSON Web Token (JWT) vulnerabilities
-   */
 	require_once (__ROOT__ . '/classes/JWT.php');
 
 	// attack requires user - if not logged in, just display message and return
@@ -47,7 +44,6 @@
 		$jwt = JWT::encode($payload, $key);
 		return $jwt;
 	}
-
 ?>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
