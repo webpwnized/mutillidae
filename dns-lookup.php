@@ -1,10 +1,10 @@
-<?php 
+<?php
 	/* Command Injection
 	 * Method Tampering
 	 * Cross Site Scripting
 	 * HTML Injection */
 
-	try {	    	
+	try {
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = FALSE;
@@ -30,21 +30,21 @@
 				$lEnableHTMLControls = TRUE;
     			$lEnableJavaScriptValidation = TRUE;
    				$lProtectAgainstMethodTampering = TRUE;
-   				$lProtectAgainstXSS = TRUE; 			
+   				$lProtectAgainstXSS = TRUE;
     		break;
     	}// end switch
-    	
+
     	$lFormSubmitted = FALSE;
 		if (isset($_POST["target_host"]) || isset($_REQUEST["target_host"])) {
 			$lFormSubmitted = TRUE;
 		}// end if
-		
+
 		if ($lFormSubmitted){
-			
+
 			$lProtectAgainstMethodTampering?$lTargetHost = $_POST["target_host"]:$lTargetHost = $_REQUEST["target_host"];
-	    	
+
 	    	if ($lProtectAgainstCommandInjection) {
-				/* Protect against command injection. 
+				/* Protect against command injection.
 				 * We validate that an IP is 4 octets, IPV6 fits the pattern, and that domain name is IANA format */
     			$lTargetHostValidated = preg_match(IPV4_REGEX_PATTERN, $lTargetHost) || preg_match(DOMAIN_NAME_REGEX_PATTERN, $lTargetHost) || preg_match(IPV6_REGEX_PATTERN, $lTargetHost);
 	    	}else{
@@ -55,10 +55,10 @@
     			/* Protect against XSS by output encoding */
     			$lTargetHostText = $Encoder->encodeForHTML($lTargetHost);
 	    	}else{
-				$lTargetHostText = $lTargetHost; 		//allow XSS by not encoding output	    		
+				$lTargetHostText = $lTargetHost; 		//allow XSS by not encoding output
 	    	}//end if
-	    	
-		}// end if $lFormSubmitted  
+
+		}// end if $lFormSubmitted
 	}catch(Exception $e){
 	    echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
 	}// end try
@@ -68,12 +68,12 @@
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
-    
+
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
 	var onSubmitOfForm = function(/* HTMLForm */ theForm){
 
-		<?php 
+		<?php
 		if($lEnableJavaScriptValidation){
 		    echo "var lOSCommandInjectionPattern = /[;&|<>]/;";
 		    echo "var lCrossSiteScriptingPattern = /[<>=()]/;";
@@ -82,13 +82,13 @@
 		    echo "var lCrossSiteScriptingPattern = /[]/;";
 		}// end if
 		?>
-		
+
 		if(theForm.target_host.value.search(lOSCommandInjectionPattern) > -1){
 			alert("Malicious characters are not allowed.\n\nDon\'t listen to security people. Everyone knows if we just filter dangerous characters, injection is not possible.\n\nWe use JavaScript defenses combined with filtering technology.\n\nBoth are such great defenses that you are stopped in your tracks.");
 			return false;
 		}else if(theForm.target_host.value.search(lCrossSiteScriptingPattern) > -1){
 			alert("Characters used in cross-site scripting are not allowed.\n\nDon\'t listen to security people. Everyone knows if we just filter dangerous characters, injection is not possible.\n\nWe use JavaScript defenses combined with filtering technology.\n\nBoth are such great defenses that you are stopped in your tracks.");
-			return false;			
+			return false;
 		}else{
 			return true;
 		}// end if
@@ -102,11 +102,11 @@
 	</a>
 </span>
 
-<form 	action="index.php?page=dns-lookup.php" 
-			method="post" 
-			enctype="application/x-www-form-urlencoded" 
+<form 	action="index.php?page=dns-lookup.php"
+			method="post"
+			enctype="application/x-www-form-urlencoded"
 			onsubmit="return onSubmitOfForm(this);"
-			id="idDNSLookupForm">		
+			id="idDNSLookupForm">
 	<table>
 		<tr id="id-bad-cred-tr" style="display: none;">
 			<td colspan="2" class="error-message">
@@ -121,7 +121,7 @@
 		<tr>
 			<td class="label">Hostname/IP</td>
 			<td>
-				<input 	type="text" id="idTargetHostInput" name="target_host" size="20" 
+				<input 	type="text" id="idTargetHostInput" name="target_host" size="20"
 						autofocus="autofocus"
 						<?php
 							if ($lEnableHTMLControls) {
@@ -148,15 +148,29 @@
 	    try{
 	    	if ($lTargetHostValidated){
 	    		echo '<div class="report-header">Results for '.$lTargetHostText.'</div>';
-    			echo '<pre class="output">'.shell_exec("nslookup " . $lTargetHost).'</pre>';
+	    		if ($lProtectAgainstCommandInjection) {
+	    		    $lResults = dns_get_record($lTargetHost, DNS_A);
+	    		    echo '<pre class="output">';
+	    		    foreach ($lResults as $lItem => $lArray) {
+	    		        foreach ($lArray as $lRecord => $lValue) {
+	    		            if ($lRecord == "host" || $lRecord == "ip") {
+    	    		            echo $lRecord.': '.$lValue.'<br />';
+    	    		        }// end if
+	    		        }// end foreach
+	    		        echo '<br />';
+	    		    }// end foreach
+	    		    echo '</pre>';
+	    		}else{
+	    		    echo '<pre class="output">'.shell_exec("nslookup " . $lTargetHost).'</pre>';
+	    		}//end if $lProtectAgainstCommandInjection
 				$LogHandler->writeToLog("Executed operating system command: nslookup " . $lTargetHostText);
 	    	}else{
 	    		echo '<script>document.getElementById("id-bad-cred-tr").style.display=""</script>';
-	    	}// end if ($lTargetHostValidated){
+	    	}// end if $lTargetHostValidated
 
     	}catch(Exception $e){
 			echo $CustomErrorHandler->FormatError($e, "Input: " . $lTargetHost);
     	}// end try
-    	
-	}// end if (isset($_POST)) 
+
+	}// end if (isset($_POST))
 ?>
