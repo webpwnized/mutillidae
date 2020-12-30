@@ -13,7 +13,7 @@ try {
             $lProtectAgainstCommandInjection=FALSE;
             $lProtectAgainstXSS = FALSE;
             break;
-            
+
         case "1": // This code is insecure. No input validation is performed.
             $lEnableJavaScriptValidation = TRUE;
             $lEnableHTMLControls = TRUE;
@@ -21,7 +21,7 @@ try {
             $lProtectAgainstCommandInjection=FALSE;
             $lProtectAgainstXSS = FALSE;
             break;
-            
+
         case "2":
         case "3":
         case "4":
@@ -33,25 +33,25 @@ try {
             $lProtectAgainstXSS = TRUE;
             break;
     }// end switch
-    
+
     $lFormSubmitted = FALSE;
     if (isset($_POST["message"]) || isset($_REQUEST["message"])) {
         $lFormSubmitted = TRUE;
     }// end if
-    
+
     if ($lFormSubmitted){
-        
+
         $lProtectAgainstMethodTampering?$lMessage = $_POST["message"]:$lMessage = $_REQUEST["message"];
-        
+
         if ($lProtectAgainstXSS) {
             /* Protect against XSS by output encoding */
             $lMessageText = $Encoder->encodeForHTML($lMessage);
         }else{
             $lMessageText = $lMessage; 		//allow XSS by not encoding output
         }//end if
-        
+
     }// end if $lFormSubmitted
-    
+
 }catch(Exception $e){
     echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page content-security-policy.php");
 }// end try
@@ -68,10 +68,10 @@ try {
     <span class="label">Switch to Page without CSP</span>
 </a>
 
-<form action="index.php?page=content-security-policy.php" 
-	  method="post" 
+<form action="index.php?page=content-security-policy.php"
+	  method="post"
 	  enctype="application/x-www-form-urlencoded"
-	  id="idCSPForm">		
+	  id="idCSPForm">
 	<table>
 		<tr><td></td></tr>
 		<tr>
@@ -105,9 +105,9 @@ if ($lFormSubmitted){
     try{
         echo '<div>&nbsp;</div>';
         echo '<div class="report-header">Results for '.$lMessageText.'</div>';
-        
+
         if ($lProtectAgainstCommandInjection) {
-            echo '<pre class="output">'.$lMessage.'</pre>';
+            echo '<pre class="output">'.$lMessageText.'</pre>';
             $LogHandler->writeToLog("Executed PHP command: echo " . $lMessageText);
         }else{
             echo '<pre class="output">'.shell_exec("echo -n " . $lMessage).'</pre>';
@@ -117,7 +117,7 @@ if ($lFormSubmitted){
 	}catch(Exception $e){
 		echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessage);
 	}// end try
-    
+
 }// end if
 ?>
 
@@ -129,7 +129,7 @@ if ($lFormSubmitted){
 <br/>
 <fieldset>
     <legend>Current Content Security Policy (CSP)</legend>
-    <?php 
+    <?php
         $l_string = str_replace(";", ";<br />", $lCSP);
         $l_string = str_replace(": ", ": <br />", $l_string);
         echo $l_string;
@@ -139,9 +139,9 @@ if ($lFormSubmitted){
 
 <script nonce="<?php echo $CSPNonce; ?>">
     document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('idCSPForm').addEventListener('submit', 
+        document.getElementById('idCSPForm').addEventListener('submit',
             function(event){
-                <?php 
+                <?php
                     if($lEnableJavaScriptValidation){
             	         echo "if(!onSubmitOfForm(this)){event.preventDefault()}";
                     }else{

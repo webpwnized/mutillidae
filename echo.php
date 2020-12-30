@@ -1,10 +1,10 @@
-<?php 
+<?php
 	/* Command Injection
 	 * Method Tampering
 	 * Cross Site Scripting
 	 * HTML Injection */
 
-	try {	    	
+	try {
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = FALSE;
@@ -30,31 +30,31 @@
 				$lEnableHTMLControls = TRUE;
     			$lEnableJavaScriptValidation = TRUE;
    				$lProtectAgainstMethodTampering = TRUE;
-   				$lProtectAgainstXSS = TRUE; 			
+   				$lProtectAgainstXSS = TRUE;
     		break;
     	}// end switch
-    	
+
     	$lFormSubmitted = FALSE;
 		if (isset($_POST["message"]) || isset($_REQUEST["message"])) {
 			$lFormSubmitted = TRUE;
 		}// end if
-		
+
 		if ($lFormSubmitted){
-			
+
 			$lProtectAgainstMethodTampering?$lMessage = $_POST["message"]:$lMessage = $_REQUEST["message"];
 
 	    	if ($lProtectAgainstXSS) {
     			/* Protect against XSS by output encoding */
     			$lMessageText = $Encoder->encodeForHTML($lMessage);
 	    	}else{
-				$lMessageText = $lMessage; 		//allow XSS by not encoding output	    		
+				$lMessageText = $lMessage; 		//allow XSS by not encoding output
 	    	}//end if
-	    	
+
 		}// end if $lFormSubmitted
 
 	}catch(Exception $e){
         echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
-    }// end try	
+    }// end try
 ?>
 
 <div class="page-title"><span style="font-size: 18pt;">Echo</span>, <span style="font-size: 16pt;">Echo</span>, <span style="font-size: 14pt;">Echo</span>...</div>
@@ -66,7 +66,7 @@
 <script type="text/javascript">
 	var onSubmitOfForm = function(/* HTMLForm */ theForm){
 
-		<?php 
+		<?php
 		if($lEnableJavaScriptValidation){
 			echo "var lOSCommandInjectionPattern = /[;&|<>]/;";
 			echo "var lCrossSiteScriptingPattern = /[<>=()]/;";
@@ -81,7 +81,7 @@
 			return false;
 		}else if(theForm.message.value.search(lCrossSiteScriptingPattern) > -1){
 			alert("Characters used in cross-site scripting are not allowed.\n\nDon\'t listen to security people. Everyone knows if we just filter dangerous characters, injection is not possible.\n\nWe use JavaScript defenses combined with filtering technology.\n\nBoth are such great defenses that you are stopped in your tracks.");
-			return false;			
+			return false;
 		}else{
 			return true;
 		}// end if
@@ -93,11 +93,11 @@
     <span class="label">Switch to Content Security Policy (CSP)</span>
 </a>
 
-<form 	action="index.php?page=echo.php" 
-			method="post" 
-			enctype="application/x-www-form-urlencoded" 
+<form 	action="index.php?page=echo.php"
+			method="post"
+			enctype="application/x-www-form-urlencoded"
 			onsubmit="return onSubmitOfForm(this);"
-			id="idEchoForm">		
+			id="idEchoForm">
 	<table>
 		<tr><td></td></tr>
 		<tr>
@@ -107,9 +107,9 @@
 		<tr>
 			<td class="label">Message</td>
 			<td>
-				<input 	type="text" id="idMessageInput" name="message" size="20" 
+				<input 	type="text" id="idMessageInput" name="message" size="20"
 						autofocus="autofocus"
-						
+
 						<?php
 							if ($lEnableHTMLControls) {
 								echo('minlength="1" maxlength="20" required="required"');
@@ -134,9 +134,9 @@
 if ($lFormSubmitted){
 	    try{
 	        echo '<div class="report-header">Results for '.$lMessageText.'</div>';
-	        
+
 	        if ($lProtectAgainstCommandInjection) {
-	            echo '<pre class="output">'.$lMessage.'</pre>';
+	            echo '<pre class="output">'.$lMessageText.'</pre>';
 	            $LogHandler->writeToLog("Executed PHP command: echo " . $lMessageText);
 	        }else{
 	            echo '<pre class="output">'.shell_exec("echo " . $lMessage).'</pre>';
@@ -146,6 +146,6 @@ if ($lFormSubmitted){
     	}catch(Exception $e){
 			echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessage);
     	}// end try
-    	
-	}// end if (isset($_POST)) 
+
+	}// end if (isset($_POST))
 ?>
