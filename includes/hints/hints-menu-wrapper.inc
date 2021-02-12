@@ -1,12 +1,18 @@
 <?php
-	if ($_SESSION["showhints"] > 0) {
+    if(isset($_SESSION["showhints"])){
+        $lShowhint = $_SESSION["showhints"];
+    }else{
+        $lShowhint = 0;
+    }
+
+    if ($lShowhint > 0) {
 		$lDisplayHintStyle = "block";
 	}else{
 		$lDisplayHintStyle = "none";
 	}//end if
 ?>
 
-<div  	class="hint-wrapper-header" 
+<div  	class="hint-wrapper-header"
 		id="idHintWrapperHeader"
 		title="Click to open this section"
 		style="display: <?php echo $lDisplayHintStyle; ?>";
@@ -17,14 +23,14 @@
 <div id="idHintWrapperBody" class="hint-wrapper-body" style="display: none;">
 	<?php
 	try{
-		if ($_SESSION["showhints"] > 0) {
-		    
+	    if ($lShowhint > 0) {
+
 		    if(array_key_exists("page", $_GET)){
 		        $lPageName = $_GET["page"];
 		    }else{
 		        $lPageName = "home.php";
 		    }//end if
-		        
+
 			$lIncludeFileRecords = $SQLQueryHandler->getPageLevelOneHelpIncludeFiles($lPageName);
 
 			if ($SQLQueryHandler->affected_rows()>0) {

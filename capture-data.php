@@ -1,4 +1,4 @@
-<?php include_once (__ROOT__.'/includes/capture-data.php');?>
+<?php include_once (dirname(__FILE__).'/includes/capture-data.php');?>
 
 <link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
 <div class="page-title">Capture Data</div>
@@ -11,7 +11,7 @@
 <div>
 	<a href="./index.php?page=captured-data.php" style="text-decoration: none;">
 	<img style="vertical-align: middle;" src="./images/cage-48-48.png" />
-	<span style="font-weight:bold; cursor: pointer;">&nbsp;View Captured Data</span>
+	<span style="font-weight:bold; cursor: pointer;">View Captured Data</span>
 	</a>
 </div>
 <table style="margin-left:auto; margin-right:auto; width: 650px;">
@@ -22,7 +22,7 @@
 	<tr>
 		<td>
 			This page is designed to capture any parameters sent and store them in a file and a database table. It loops through
-			the POST and GET parameters and records them to a file named <span class="label"><?php print $lFilename; ?></span>. On this system, the 
+			the POST and GET parameters and records them to a file named <span class="label"><?php print $lFilename; ?></span>. On this system, the
 			file should be found at <span class="label"><?php print $lFilepath; ?></span>. The page
 			also tries to store the captured data in a database table named captured_data and <a href="./index.php?page=show-log.php">logs</a> the captured data. There is another page named
 			<a href="index.php?page=captured-data.php">captured-data.php</a> that attempts to list the contents of this table.

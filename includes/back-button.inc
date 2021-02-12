@@ -1,6 +1,11 @@
 <?php
+    if(isset($_SESSION["security-level"])){
+        $lSecurityLevel = $_SESSION["security-level"];
+    }else{
+        $lSecurityLevel = 0;
+    }
 
-	switch ($_SESSION["security-level"]){
+    switch ($lSecurityLevel){
    		case "0": // This code is insecure
    		case "1":
    			// DO NOTHING: This is insecure
