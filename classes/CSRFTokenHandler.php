@@ -5,23 +5,25 @@ class CSRFTokenHandler{
 	protected $ESAPI = null;
 	protected $ESAPIEncoder = null;
 	protected $ESAPIRandomizer = null;
-	
+
 	/* flag properties */
 	protected $mEncodeOutput = FALSE;
 	protected $mSecurityLevel = 0;
 	protected $mCSRFTokenStrength = "NONE";
 	protected $mProtectAgainstCSRF = FALSE;
-	
+
 	protected $mExpectedCSRFTokenForThisRequest = "";
 	protected $mNewCSRFTokenForNextRequest = "";
 	protected $mPageBeingProtected = "";
 	protected $mPostedCSRFToken = "";
 	protected $mTokenValid = "Validation not performed";
-	
+
+	protected $mRandomTokenBytes = 64;
+
 	private function doSetSecurityLevel($pSecurityLevel){
-		
+
 		$this->mSecurityLevel = $pSecurityLevel;
-	
+
 		switch ($this->mSecurityLevel){
 			case "0": // This code is insecure, we are not encoding output
 				$this->mEncodeOutput = FALSE;
@@ -33,7 +35,7 @@ class CSRFTokenHandler{
 				$this->mCSRFTokenStrength = "LOW";
 				$this->mProtectAgainstCSRF = TRUE;
 			break;
-	
+
 			case "2":
 			case "3":
 			case "4":
@@ -44,36 +46,36 @@ class CSRFTokenHandler{
 				$this->mProtectAgainstCSRF = TRUE;
 			break;
 		}// end switch
-		
+
 	}// end function
-	
+
 	public function __construct($pPathToESAPI, $pSecurityLevel, $pPageBeingProtected){
-	
+
 		$this->doSetSecurityLevel($pSecurityLevel);
-	
+
 		//initialize OWASP ESAPI for PHP
 		require_once $pPathToESAPI . 'ESAPI.php';
 		$this->ESAPI = new ESAPI($pPathToESAPI . 'ESAPI.xml');
 		$this->ESAPIEncoder = $this->ESAPI->getEncoder();
 		$this->ESAPIRandomizer = $this->ESAPI->getRandomizer();
 		$this->mPageBeingProtected = $pPageBeingProtected;
-		
+
 		if (isset($_SESSION['register-user']['csrf-token'])){
 			$this->mExpectedCSRFTokenForThisRequest = $_SESSION[$this->mPageBeingProtected]['csrf-token'];
 		}//end if
 
 	}// end function
-	 
+
 	public function setSecurityLevel($pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
 	}// end function setSecurityLevel
 
 	private function doGenerateCSRFToken(){
-	
+
 		$lCurrentCSRFToken = 0;
 		switch ($this->mCSRFTokenStrength){
 			case "HIGH":
-				$lCSRFToken = $this->ESAPIRandomizer->getRandomString(32, "ABCDEFGEHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890");
+			    $lCSRFToken = base64_encode(random_bytes($this->mRandomTokenBytes));
 			break;
 			case "MEDIUM":
 				$lCSRFToken = mt_rand();
@@ -90,18 +92,18 @@ class CSRFTokenHandler{
 			break;
 			default:break;
 		}//end switch on $lCSRFTokenStrength
-		
+
 		return $lCSRFToken;
-		
+
 	}// end private function doGenerateCSRFToken()
-	
+
 	public function generateCSRFToken(){
-		
-		$lCSRFToken = $_SESSION[$this->mPageBeingProtected]['csrf-token'] = $this->mNewCSRFTokenForNextRequest = $this->doGenerateCSRFToken(); 
+
+		$lCSRFToken = $_SESSION[$this->mPageBeingProtected]['csrf-token'] = $this->mNewCSRFTokenForNextRequest = $this->doGenerateCSRFToken();
 		return $lCSRFToken;
-		
+
 	}// end public function generateCSRFToken()
-	
+
 	public function validateCSRFToken($pPostedCSRFToken){
 		$this->mPostedCSRFToken = $pPostedCSRFToken;
 		if($this->mProtectAgainstCSRF){
@@ -117,14 +119,14 @@ class CSRFTokenHandler{
 			return TRUE;
 		}// end if
 	}// end function validateCSRFToken()
-	
+
 	public function generateCSRFHTMLReport(){
-		
+
 		if($this->mEncodeOutput){
 			$lPostedCSRFToken = $this->ESAPIEncoder->encodeForHTML($this->mPostedCSRFToken);
 			$lExpectedCSRFTokenForThisRequest = $this->ESAPIEncoder->encodeForHTML($this->mExpectedCSRFTokenForThisRequest);
 			$lNewCSRFTokenForNextRequest = $this->ESAPIEncoder->encodeForHTML($this->mNewCSRFTokenForNextRequest);
-			$lTokenStoredInSession = $this->ESAPIEncoder->encodeForHTML($_SESSION[$this->mPageBeingProtected]['csrf-token']);				
+			$lTokenStoredInSession = $this->ESAPIEncoder->encodeForHTML($_SESSION[$this->mPageBeingProtected]['csrf-token']);
 		}else{
 			$lPostedCSRFToken = $this->mPostedCSRFToken;
 			$lExpectedCSRFTokenForThisRequest = $this->mExpectedCSRFTokenForThisRequest;
