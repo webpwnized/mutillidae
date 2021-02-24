@@ -57,9 +57,9 @@
 		$lClientPort = $lClientInformationHandler->getClientPort();
 
 		if ($lProtectAgainstSQLInjection) {
-			$lClientHostname = $MySQLHandler->escapeDangerousCharacters($lClientHostname);
-			$lClientUserAgentString = $MySQLHandler->escapeDangerousCharacters($lClientUserAgentString);
-			$lClientReferrer = $MySQLHandler->escapeDangerousCharacters($lClientReferrer);
+		    $lClientHostname = $SQLQueryHandler->escapeDangerousCharacters($lClientHostname);
+		    $lClientUserAgentString = $SQLQueryHandler->escapeDangerousCharacters($lClientUserAgentString);
+		    $lClientReferrer = $SQLQueryHandler->escapeDangerousCharacters($lClientReferrer);
 		}// end if $lProtectAgainstSQLInjection
 
 	} catch (Exception $e) {
