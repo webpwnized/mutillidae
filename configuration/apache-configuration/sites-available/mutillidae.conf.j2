@@ -2,7 +2,8 @@
 	ServerName {{ website_domain_name }}
 	ServerAlias {{ website_domain_aliases }}
 	DocumentRoot {{ www_path }}{{ website_name }}
-	Include error-pages.conf
+	Include conf/error-pages.conf
+	Include conf/headers.conf
 
 	<Directory {{ www_path }}{{ website_name }}>
 		AllowOverride All
@@ -18,7 +19,8 @@
 	ServerName {{ website_domain_name }}
 	ServerAlias {{ website_domain_aliases }}
 	DocumentRoot {{ www_path }}{{ website_name }}
-	Include error-pages.conf
+	Include conf/error-pages.conf
+	Include conf/headers.conf
 
 	<Directory {{ www_path }}{{ website_name }}>
 		AllowOverride All
