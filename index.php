@@ -317,7 +317,6 @@
    			header("Referrer-Policy: unsafe-url", TRUE);
 
    			header_remove("Pragma");
-   			header_remove("Expires");
 
    			/* Content sniffing */
    			header_remove("X-Content-Type-Options");
@@ -340,7 +339,6 @@
 
    		    // HTTP/1.0 cache-control
    		    header("Pragma: no-cache", TRUE);
-   		    header_remove("Expires");
 
    		    /* Cross-frame scripting and click-jacking */
    		    header('X-FRAME-OPTIONS: DENY', TRUE);
