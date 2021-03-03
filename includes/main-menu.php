@@ -257,6 +257,12 @@
 								<li><a href="./webservices/rest/ws-user-account.php">User Account Management (REST Web Service)</a></li>
 							</ul>
 						</li>
+        				<li>
+        					<a href="">JSON Web Token (JWT)</a>
+        					<ul>
+        						<li><a href="index.php?page=jwt.php">Current User Information</a></li>
+        					</ul>
+        				</li>
 					</ul>
 				</li>
 				<li>
@@ -296,6 +302,12 @@
 							</ul>
 						</li>
 						<li><a href="index.php?page=ssl-misconfiguration.php">SSL Misconfiguration</a></li>
+        				<li>
+        					<a href="">JSON Web Token (JWT)</a>
+        					<ul>
+        						<li><a href="index.php?page=jwt.php">Current User Information</a></li>
+        					</ul>
+        				</li>
 					</ul>
 				</li>
 				<li>
@@ -332,6 +344,12 @@
 								<li><a href="index.php?page=robots-txt.php">Robots.txt</a></li>
 							</ul>
 						</li>
+        				<li>
+        					<a href="">JSON Web Token (JWT)</a>
+        					<ul>
+        						<li><a href="index.php?page=jwt.php">Current User Information</a></li>
+        					</ul>
+        				</li>
 					</ul>
 				</li>
 				<li>
@@ -775,11 +793,11 @@
 					</ul>
 				</li>
 				<li>
-					<a href="">JWT (JSON Web Token)</a>
+					<a href="">JSON Web Token (JWT)</a>
 					<ul>
 						<li><a href="index.php?page=jwt.php">Current User Information</a></li>
-					</ul>		
-				</li>				
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li>
