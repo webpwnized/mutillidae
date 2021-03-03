@@ -19,6 +19,12 @@
    	session_start();
 	}// end if
 
+	// user session required to have security-level available
+	if(!isset($_SESSION['uid']) || !is_numeric($_SESSION['uid'])) {
+		echo '<p>Not logged in. Please <a href="index.php?page=login.php">login/register</a> first...</p>';
+		return;
+	}
+
 	/* ------------------------------------------
 	 * initialize custom error handler
 	 * ------------------------------------------ */

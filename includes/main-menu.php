@@ -767,6 +767,12 @@
 						<li><a href="index.php?page=captured-data.php">View Captured Data</a></li>
 					</ul>		
 				</li>
+				<li>
+					<a href="">JWT (JSON Web Token)</a>
+					<ul>
+						<li><a href="index.php?page=jwt.php">Current User Information</a></li>
+					</ul>		
+				</li>				
 			</ul>
 		</li>
 		<li>

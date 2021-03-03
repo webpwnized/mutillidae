@@ -652,7 +652,8 @@ try{
 			('xml-validator.php', 36, 2),
 			('xml-validator.php', 58, 1),
 			('xml-validator.php', 56, 1),
-			('xml-validator.php', 59, 1)
+			('xml-validator.php', 59, 1),
+			('jwt.php', 66, 1)
 			;";
 	
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -736,6 +737,7 @@ try{
 		(63, 'LDAP Injection', 'ldap-injection-hint.inc'),
 		(64, 'Setting up LDAP Server', 'ldap-setup-hint.inc'),
 		(65, 'Content Security Policy (CSP)', 'content-security-policy-hint.inc'),
+		(66, 'JSON Web Tokens (JWT)', 'jwt-hint.inc'),
 		(99, 'Hints Not Found', 'hints-not-found.inc')";
 	
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
