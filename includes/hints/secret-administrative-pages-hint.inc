@@ -8,12 +8,12 @@
 			<br/><br/>
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>
-			Try brute forcing the page names in the page parameter with 
-			Burp-Intruder in sniper mode. Include some of the following 
-			page names in the brute force list: 
-			secret.php, admin.php, _adm.php, _admin.php, root.php, 
+			Try brute forcing the page names in the page parameter with
+			Burp-Intruder in sniper mode. Include some of the following
+			page names in the brute force list:
+			secret.php, admin.php, _adm.php, _admin.php, root.php,
 			administrator.php, auth.php, hidden.php,
-	 		console.php, conf.php, _private.php, private.php, 
+	 		console.php, conf.php, _private.php, private.php,
 	 		access.php, control.php, control-panel.php, phpMyAdmin.php
 			<br/><br/>
 			<span class="report-header">Exploitation</span>
@@ -28,14 +28,14 @@
 			<span id="videos" class="report-header">Videos</span>
 			<br/><br/>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeHowtoShowSecretPageinSecurityLevel5);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BruteForcePageNamesusingBurpSuiteIntruder);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoFuzzingWebApplicationswithBurpSuiteIntruderTool);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingBurpIntruderSnipertoFuzzParameters);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoBurpSuiteComparerTool);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->GainingAdministrativeShellAccessviaCommandInjection);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoLocatetheEastereggFileusingCommandInjection);?>
+			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallOWASPZaponLinux);?>
+			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoSpideraWebSitewithOWASPZAP);?>
+			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtouseWGETtocloneaWebSite);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstalldirbonLinux);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoUsedirbtoLocateHiddenDirectoriesonaWebSite);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallOWASPDirBusteronLinux);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtouseOWASPDirBustertoDiscoverHiddenDirectoriesonWebSites);?>
-			<br/><br/>	
+
+			<br/><br/>

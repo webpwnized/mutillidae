@@ -41,26 +41,8 @@ class YouTubeVideoHandler {
 	private $mRemoteFileHandler = null;
 
 	/* public properties */
-	public $SpideringWebApplicationswithBurpSuite = 10;
-	public $BasicsofBurpSuiteTargetsTab = 11;
-	public $BruteForcePageNamesusingBurpSuiteIntruder = 12;
 	public $UsingBurpIntruderSnipertoFuzzParameters = 13;
-	public $ComparingBurpSuiteIntruderModesSniperBatteringramPitchforkClusterbomb = 14;
-	public $IntroductiontoBurpSuiteComparerTool = 15;
-	public $UsingBurpSuiteSequencertoCompareCSRFtokenstrengths = 16;
-	public $BasicsofWebRequestandResponseInterceptionwithBurpSuite = 17;
-	public $ISSA2013WebPentestingWorkshopPart1IntrotoMutillidaeBurpSuiteInjection = 18;
-	public $OverviewofUsefulPenTestingAddonsforFirefox = 19;
-	public $BypassAuthenticationusingSQLInjection = 20;
-	public $AutomateSQLInjectionusingsqlmap = 21;
-	public $BasicsofSQLInjectionTimingAttacks = 22;
-	public $IntroductiontoUnionBasedSQLInjection = 23;
-	public $BasicsofInsertingDatawithSQLInjection = 24;
-	public $InjectWebShellBackdoorviaSQLInjection = 25;
-	public $BasicsofusingSQLInjectiontoReadFiles = 26;
-	public $GenerateCrossSiteScriptswithSQLInjection = 27;
-	public $SQLInjectionviaAJAXrequestwithJSONresponse = 28;
-	public $BasicsofusingsqlmapISSAKYWorkshopFebruary2013 = 29;
+
 	public $ExplanationofHTTPOnlyCookiesinPresenceCrossSiteScripting = 30;
 	public $TwoMethodstoStealSessionTokenusingCrossSiteScripting = 31;
 	public $InjectingaCrossSiteScriptviaCascadingStylesheetContext = 32;
