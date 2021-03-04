@@ -9,26 +9,27 @@ is provided below to help get started with Burp-Suite.
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallBurpSuiteonLinux);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallBurpSuiteCommunityEditiononLinux);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallandConfigureFoxyProxywithFirefox);?>	
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoInstallingConfiguringandUsingBurpSuiteProxy);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoinstallandconfigureBurpSuitewithFirefox);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofWebRequestandResponseInterceptionwithBurpSuite);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofBurpSuiteTargetsTab);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoBurpSuiteRepeaterTool);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->SpideringWebApplicationswithBurpSuite);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingBurpIntruderSnipertoFuzzParameters);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ComparingBurpSuiteIntruderModesSniperBatteringramPitchforkClusterbomb);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoBurpSuiteIntrudersGrepExtractFeature);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoBurpSuiteComparerTool);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoFuzzingWebApplicationswithBurpSuiteIntruderTool);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BruteForcePageNamesusingBurpSuiteIntruder);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AnalyzeSessionTokenRandomnessusingBurpSuiteSequencer);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingBurpSuiteSequencertoCompareCSRFtokenstrengths);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingOWASPZAPwithBurpSuite);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ISSA2013WebPentestingWorkshopPart1IntrotoMutillidaeBurpSuiteInjection);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BruteForceAuthenticationusingBurpIntruder);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoExploitLocalFileInclusionVulnerabilityusingBurpSuite);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallJavaonWindows); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoinstallJavaonLinuxDebianUbuntuKali); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2HowtoInstallonWindows); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2HowtoInstallonLinux); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2CreateShortcutonDesktopLinux); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2ConfigureFirefoxwithBurpSuite); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2AddingBurpsCertificatetoFirefox); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallandConfigureFoxyProxywithFirefox); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2ConfiguringInterceptFeature); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2SettingScope); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2ConfiguringSiteMapandTargets); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2SiteMapFilters); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2ProxyHistory); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2RepeaterTool); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2IntruderToolSniperMode); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2IntruderToolBatteringRamMode); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2IntruderToolPitchforkMode); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2IntruderToolClusterMode); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2ComparerTool); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2DecoderTool); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2AddingExtentions); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2ConfiguringUpstreamProxy); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingOWASPZAPwithBurpSuiteBestofBothWorlds); ?>
 <br/><br/>

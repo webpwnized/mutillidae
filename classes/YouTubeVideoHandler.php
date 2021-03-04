@@ -16,9 +16,9 @@ class YouTubeVideos{
 		 * initialize SQLQuery handler
 		* ------------------------------------------ */
 		$this->mSQLQueryHandler = new SQLQueryHandler($pPathToESAPI, $pSecurityLevel);
-	
+
 	}//end function
-	
+
 	public function getYouTubeVideo($pRecordIdentifier){
 		$lQueryResult = $this->mSQLQueryHandler->getYouTubeVideo($pRecordIdentifier);
 		$lNewYouTubeVideo = new YouTubeVideo();
@@ -32,7 +32,7 @@ class YouTubeVideos{
 class YouTubeVideoHandler {
 
 	const TWO_SECONDS = 2;
-	
+
 	/* private properties */
 	private $mSecurityLevel = 0;
 	private $mYouTubeVideos = null;
@@ -41,14 +41,6 @@ class YouTubeVideoHandler {
 	private $mRemoteFileHandler = null;
 
 	/* public properties */
-	public $InstallingOWASPMutillidaeIIonWindowswithXAMPP = 2;
-	public $InstallingMetasploitable2withMutillidaeonVirtualBox = 3;
-	public $HowtoinstalllatestMutillidaeonSamuraiWTF20 = 4;
-	public $IntroductiontoInstallingConfiguringandUsingBurpSuiteProxy = 5;
-	public $HowtoinstallandconfigureBurpSuitewithFirefox = 6;
-	public $HowtoremovePHPerrorsafterinstallingMutillidaeonWindowsXAMPP = 7;
-	public $BuildingaVirtualLabtoPracticePenTesting = 8;
-	public $HowtoUpgradetotheLatestMutillidaeonSamuraiWTF20 = 9;
 	public $SpideringWebApplicationswithBurpSuite = 10;
 	public $BasicsofBurpSuiteTargetsTab = 11;
 	public $BruteForcePageNamesusingBurpSuiteIntruder = 12;
@@ -116,7 +108,7 @@ class YouTubeVideoHandler {
 	public $IntroductiontoFuzzingWebApplicationswithBurpSuiteIntruderTool = 77;
 	public $MutillidaeHowtoShowSecretPageinSecurityLevel5 = 78;
 	public $SolvingPasswordChallengeInMutillidaeWithCommandInjection = 79;
-	public $IntroductiontotheBrowserExploitationFramework= 80;	
+	public $IntroductiontotheBrowserExploitationFramework= 80;
 	public $HowtoInstallBurpSuiteonLinux = 81;
 	public $HowtoIdentifyWebTechnologywithWappalyzer = 82;
 	public $HowtoSweepaWebSiteforHTMLComments = 83;
@@ -138,25 +130,13 @@ class YouTubeVideoHandler {
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;
 	public $HowtograbrobotstxtfilewithCURL = 101;
-	public $HowtoInstallandConfigureFoxyProxywithFirefox = 102;
-	public $HowtoSpideraWebSitewithOWASPZAP = 103;
-	public $HowtoProxyWebTrafficthroughOWASPZAP = 104;
-	public $HowtoInterceptHTTPRequestswithOWASPZAP = 105;
-	public $HowtoFuzzWebApplicationswithOWASPZAPPart1 = 106;
-	public $HowtoFuzzWebApplicationswithOWASPZAPPart2 = 107;	
 	public $HowtolistHTTPMethodswithCURL = 108;
 	public $HowtolistHTTPMethodswithNMap = 109;
 	public $HowtograbHTTPServerBannerswithCURL = 110;
 	public $HowtograbHTTPServerBannerswithNMap = 111;
 	public $HowtoInstallBurpSuiteCommunityEditiononLinux = 112;
 	public $OWASPZAPUsingForcedBrowseFeatureFindHiddenDirectories = 113;
-	public $OWASPZAPWebAppVulnerabilityAssessmentPartialSite = 114;
-	public $OWASPZAPAutomatedWebAppVulnerabilityAssessmentEntireSite = 115;
-	public $OWASPZAPWebAppVulnerabilityAssessmentSinglePage = 116;
 	public $HowtoCreateWordlistsfromWebSitesusingCEWL = 117;
-	public $OWASPZAPBreakpointsPart1TrappingHTTPRequests = 118;
-	public $OWASPZAPBreakpointsPart2TrappingSpecificHTTPRequests = 119;
-	public $UsingOWASPZAPwithBurpSuite = 120;
 	public $CommandInjectionExplainedPart1TheBasics = 121;
 	public $CommandInjectionExplainedPart2Discovery = 122;
 	public $CommandInjectionExplainedPart3BlindInjection = 123;
@@ -198,21 +178,58 @@ class YouTubeVideoHandler {
 	public $LFIPart6BetterCommandShell = 159;
 	public $LFIPart7AlternativePHPShellFunctions = 160;
 	public $LFIPart8ReverseShellviaLFI = 161;
-	
-	
-	
-	
-	
-	
+
+	public $HowtoremovePHPerrorsafterinstallingMutillidae = 7;
+	public $BurpSuite2HowtoInstallonWindows = 163;
+	public $BurpSuite2HowtoInstallonLinux = 164;
+	public $BurpSuite2CreateShortcutonDesktopLinux = 165;
+	public $BurpSuite2ConfigureFirefoxwithBurpSuite = 166;
+	public $BurpSuite2AddingBurpsCertificatetoFirefox = 167;
+	public $BurpSuite2ConfiguringInterceptFeature = 168;
+	public $BurpSuite2SettingScope = 169;
+	public $BurpSuite2ConfiguringSiteMapandTargets = 170;
+	public $BurpSuite2SiteMapFilters = 171;
+	public $BurpSuite2ProxyHistory = 172;
+	public $BurpSuite2RepeaterTool = 173;
+	public $BurpSuite2IntruderToolSniperMode = 174;
+	public $BurpSuite2IntruderToolBatteringRamMode = 175;
+	public $BurpSuite2IntruderToolPitchforkMode = 176;
+	public $BurpSuite2IntruderToolClusterMode = 177;
+	public $BurpSuite2ComparerTool = 178;
+	public $BurpSuite2DecoderTool = 179;
+	public $BurpSuite2AddingExtentions = 180;
+	public $BurpSuite2ConfiguringUpstreamProxy = 181;
+
+	public $HowtoInstallJavaonWindows = 182;
+	public $HowtoInstallOWASPZAPonWindows = 183;
+	public $HowtoinstallJavaonLinuxDebianUbuntuKali = 184;
+	public $HowtoInstallOWASPZAPonUbuntu = 185;
+	public $HowtoInstallOWASPZAPonLinux = 186;
+	public $HowtoCreateShortcutforOWASPZAPLinux = 187;
+	public $HowtoInstallandConfigureFoxyProxywithFirefox = 188;
+	public $HowtoProxyWebTrafficthroughOWASPZAP = 189;
+	public $HowtoInterceptHTTPRequestswithOWASPZAP = 190;
+	public $HowtoSpideraWebSitewithOWASPZAP = 191;
+	public $OWASPZAPBreakpointsPart1TrappingHTTPRequests = 192;
+	public $OWASPZAPBreakpointsPart2TrappingSpecificHTTPRequests = 193;
+	public $HowtoFuzzWebApplicationswithOWASPZAPPart1 = 194;
+	public $HowtoFuzzWebApplicationswithOWASPZAPPart2 = 195;
+	public $OWASPZAPWebAppVulnerabilityAssessmentSinglePage = 196;
+	public $OWASPZAPAutomatedWebAppVulnerabilityAssessmentEntireSite = 197;
+	public $OWASPZAPWebAppVulnerabilityAssessmentPartialSite = 198;
+	public $HowtoStartOWASPZAPfromCommandLine = 199;
+	public $ExtendingOWASPZAPwithAddOns = 200;
+	public $UsingOWASPZAPwithBurpSuiteBestofBothWorlds = 201;
+
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){
 		$this->mSecurityLevel = $pSecurityLevel;
-	
+
 		switch ($this->mSecurityLevel){
 			case "0": // This code is insecure, we are not encoding output
 			case "1": // This code is insecure, we are not encoding output
 				break;
-	
+
 			case "2":
 			case "3":
 			case "4":
@@ -220,7 +237,7 @@ class YouTubeVideoHandler {
 				break;
 		}// end switch
 	}// end function
-		
+
 	private function fetchVideoPropertiesFromYouTube($pVideoIdentificationToken){
 		$lYouTubeResponse = "";
 
@@ -240,15 +257,15 @@ class YouTubeVideoHandler {
 
 		return $lYouTubeResponse;
 	}// end function fetchVideoPropertiesFromYouTube
-	
+
 	private function getYouTubeIsNotReachableAdvice(){
 		return '<br/><span style="background-color: #ffff99;">Warning: Could not reach YouTube via network connection. Failed to embed video.</span><br/>';
 	}// end function getYouTubeIsNotReachableAdvice
-	
+
 	private function getNoCurlAdviceBasedOnOperatingSystem(){
 		$lOperatingSystemAdvice = "";
 		$lHTML = "";
-		
+
 		switch (PHP_OS){
 			case "Linux":
 				$lOperatingSystemAdvice = "The server operating system seems to be Linux. You may be able to install with sudo apt-get install php[verion]-curl where [version] is the version of PHP installed. For example, apt-get install php7.2-curl if PHP 7.2 is installed.";
@@ -260,7 +277,7 @@ class YouTubeVideoHandler {
 				break;
 			default: $lOperatingSystemAdvice = ""; break;
 		}// end switch
-		
+
 		$lHTML = '<br/><span style="background-color: #ffff99;">Warning: Failed to embed video because PHP Curl is not installed on the server. '.$lOperatingSystemAdvice.'</span><br/>';
 		return $lHTML;
 	}// end function getNoCurlAdviceBasedOnOperatingSystem
@@ -268,7 +285,7 @@ class YouTubeVideoHandler {
 	private function curlIsInstalled(){
 		return function_exists("curl_init");
 	}// end function curlIsInstalled
-	
+
 	private function generateYouTubeFrameHTML($pVideoIdentificationToken){
 		$lRandomNumber = rand(1, 10000000);
 		$lHTML = '
@@ -298,9 +315,9 @@ class YouTubeVideoHandler {
 		}// end if $mCurlIsInstalled
 		return (strlen($lYouTubeResponse) > 0);
 	}// end function isYouTubeReachable()
-	
+
 	/* public methods */
-	
+
 	/* constructor */
 	public function __construct($pPathToESAPI, $pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
@@ -343,7 +360,7 @@ class YouTubeVideoHandler {
 		}//end try
 
 		return $lHTML;
-		
+
 	}// end function getYouTubeVideo
-	
+
 }// end class YouTubeVideoHandler

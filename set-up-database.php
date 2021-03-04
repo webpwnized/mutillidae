@@ -28,7 +28,7 @@ session_start();
 //initialize custom error handler
 require_once 'classes/CustomErrorHandler.php';
 if (!isset($CustomErrorHandler)){
-	$CustomErrorHandler = 
+	$CustomErrorHandler =
 	new CustomErrorHandler("owasp-esapi-php/src/", 0);
 }// end if
 
@@ -43,7 +43,7 @@ function format($pMessage, $pLevel ) {
 		case "F": $lStyle = "database-failure-message";break;
 		case "W": $lStyle = "database-warning-message";break;
 	}// end switch
-	
+
 	return "<div class=\"".$lStyle."\">" . $pMessage . "</div>";
 }// end function
 
@@ -51,7 +51,7 @@ try{
 	echo format("Attempting to connect to MySQL server on host " . MySQLHandler::$mMySQLDatabaseHost . " with user name " . MySQLHandler::$mMySQLDatabaseUsername,"I");
 	$MySQLHandler->openDatabaseConnection();
 	echo format("Connected to MySQL server at " . MySQLHandler::$mMySQLDatabaseHost . " as " . MySQLHandler::$mMySQLDatabaseUsername,"I");
-		
+
 	try{
 		echo format("Preparing to drop database " . MySQLHandler::$mMySQLDatabaseName,"I");
 		$lQueryString = "DROP DATABASE IF EXISTS " . MySQLHandler::$mMySQLDatabaseName;
@@ -78,7 +78,7 @@ try{
 	}else{
 		echo format("Executed query 'CREATE DATABASE' for database " . MySQLHandler::$mMySQLDatabaseName . " with result ".$lQueryResult,"S");
 	}// end if
-	
+
 	echo format("Switching to use database " . MySQLHandler::$mMySQLDatabaseName,"I");
 	$lQueryString = "USE " . MySQLHandler::$mMySQLDatabaseName;
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -101,20 +101,20 @@ try{
 	}else{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
-	
+
 	$lQueryString = 'CREATE TABLE blogs_table( '.
 			 'cid INT NOT NULL AUTO_INCREMENT, '.
 	         'blogger_name TEXT, '.
 	         'comment TEXT, '.
 			 'date DATETIME, '.
-			 'PRIMARY KEY(cid))';	
+			 'PRIMARY KEY(cid))';
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
 	}else{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
-	
+
 	$lQueryString = 'CREATE TABLE accounts( '.
 			 'cid INT NOT NULL AUTO_INCREMENT, '.
 	         'username TEXT, '.
@@ -130,7 +130,7 @@ try{
 	}else{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
-	
+
 	$lQueryString = 'CREATE TABLE hitlog( '.
 			 'cid INT NOT NULL AUTO_INCREMENT, '.
 	         'hostname TEXT, '.
@@ -138,14 +138,14 @@ try{
 			 'browser TEXT, '.
 			 'referer TEXT, '.
 			 'date DATETIME, '.
-			 'PRIMARY KEY(cid))';		 
+			 'PRIMARY KEY(cid))';
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
 	}else{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
-	
+
 	$lQueryString = "INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname) VALUES
 		('admin', 'adminpass', 'g0t r00t?', 'TRUE' ,'System' ,'Administrator'),
 		('adrian', 'somepassword', 'Zombie Films Rock!', 'TRUE' ,'Adrian' ,'Crenshaw'),
@@ -176,7 +176,7 @@ try{
 	}else{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
-	
+
 	$lQueryString ="INSERT INTO `blogs_table` (`cid`, `blogger_name`, `comment`, `date`) VALUES
 		(1, 'adrian', 'Well, I''ve been working on this for a bit. Welcome to my crappy blog software. :)', '2009-03-01 22:26:12'),
 		(2, 'adrian', 'Looks like I got a lot more work to do. Fun, Fun, Fun!!!', '2009-03-01 22:26:54'),
@@ -196,7 +196,7 @@ try{
 	}else{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
-	
+
 	$lQueryString = 'CREATE TABLE credit_cards( '.
 			 'ccid INT NOT NULL AUTO_INCREMENT, '.
 	         'ccnumber TEXT, '.
@@ -216,7 +216,7 @@ try{
 		(3, '8242325748474749', '461', '2016-03-01 11:55:12'),
 		(4, '7725653200487633', '230', '2017-06-01 04:33:12'),
 		(5, '1234567812345678', '627', '2018-11-01 13:31:13')";
-	
+
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
@@ -224,7 +224,7 @@ try{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
 
-	$lQueryString = 
+	$lQueryString =
 			'CREATE TABLE pen_test_tools('.
 			'tool_id INT NOT NULL AUTO_INCREMENT, '.
 	        'tool_name TEXT, '.
@@ -248,7 +248,7 @@ try{
 		(6, 'Netsparker Community Edition', 'Discovery', 'Scanner', 'Excellent spider abilities and reporting. GUI driven. Runs on Windows. Good at SQLi and XSS detection. From Mavituna Security. Professional version available for purchase.'),
 		(7, 'NeXpose', 'Discovery', 'Scanner', 'GUI driven. Runs on Windows. From Rapid7. Professional version available for purchase. Updates automatically. Requires large amounts of memory.'),
 		(8, 'Hailstorm', 'Discovery', 'Scanner', 'From Cenzic. Professional version requires dedicated staff, multiple dediciated servers, professional pen-tester to analyze results, and very large license fee. Extensive scanning ability. Very large vulnerability database. Highly configurable. Excellent reporting. Can scan entire networks of web applications. Extremely expensive. Requires large amounts of memory.'),
-		(9, 'Tamper Data', 'Discovery', 'Interception Proxy', 'Firefox add-on. Easy to use. Tampers with POST parameters and HTTP Headers. Does not tamper with URL query parameters. Requires manual browsing.'),		
+		(9, 'Tamper Data', 'Discovery', 'Interception Proxy', 'Firefox add-on. Easy to use. Tampers with POST parameters and HTTP Headers. Does not tamper with URL query parameters. Requires manual browsing.'),
 		(10, 'DirBuster', 'Discovery', 'Fuzzer', 'OWASP tool. Fuzzes directory names to brute force directories.'),
 		(11, 'SQL Inject Me', 'Discovery', 'Fuzzer', 'Firefox add-on. Attempts common strings which elicit XSS responses. Not compatible with Firefox 8.0.'),
 		(12, 'XSS Me', 'Discovery', 'Fuzzer', 'Firefox add-on. Attempts common strings which elicit responses from databases when SQL injection is present. Not compatible with Firefox 8.0.'),
@@ -267,7 +267,7 @@ try{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
 
-	$lQueryString = 
+	$lQueryString =
 			'CREATE TABLE captured_data('.
 				'data_id INT NOT NULL AUTO_INCREMENT, '.
 				'ip_address TEXT, '.
@@ -286,7 +286,7 @@ try{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
 
-	$lQueryString = 
+	$lQueryString =
 			'CREATE TABLE page_hints('.
 				'page_name VARCHAR(64) NOT NULL, '.
 				'hint_key INT, '.
@@ -299,8 +299,8 @@ try{
 	}else{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
-	
-	$lQueryString = 
+
+	$lQueryString =
 			'CREATE TABLE page_help('.
 				'page_name VARCHAR(64) NOT NULL, '.
 				'help_text_key INT, '.
@@ -655,7 +655,7 @@ try{
 			('xml-validator.php', 59, 1),
 			('jwt.php', 66, 1)
 			;";
-	
+
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
@@ -663,7 +663,7 @@ try{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
 
-	$lQueryString = 
+	$lQueryString =
 		'CREATE TABLE level_1_help_include_files('.
 			'level_1_help_include_file_key INT, '.
 			'level_1_help_include_file_description TEXT, '.
@@ -676,7 +676,7 @@ try{
 	}else{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
-	
+
 	/* NOTE: Be sure to keep indexes in the help_texts table
 	 * relatively the same as the level_1_help_include_files
 	 * table so we can reuse the keys in the page_help table.
@@ -702,7 +702,7 @@ try{
 		(22, 'Click-Jacking', 'click-jacking-hint.inc'),
 		(23, 'Document Object Model (DOM) Injection', 'dom-injection-hint.inc'),
 		(25, 'Authentication Bypass', 'authentication-bypass-hint.inc'),
-		(26, 'JavaScript Object Notation (JSON) Injection', 'json-injection-hint.inc'),		
+		(26, 'JavaScript Object Notation (JSON) Injection', 'json-injection-hint.inc'),
 		(27, 'Platform Path Disclosure', 'platform-path-disclosure-hint.inc'),
 		(28, 'Application Path Disclosure', 'application-path-disclosure-hint.inc'),
 		(29, 'Information Disclosure', 'information-disclosure-hint.inc'),
@@ -739,15 +739,15 @@ try{
 		(65, 'Content Security Policy (CSP)', 'content-security-policy-hint.inc'),
 		(66, 'JSON Web Tokens (JWT)', 'jwt-hint.inc'),
 		(99, 'Hints Not Found', 'hints-not-found.inc')";
-	
+
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
 	}else{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
-	
-	$lQueryString = 
+
+	$lQueryString =
 			'CREATE TABLE help_texts('.
 				'help_text_key INT, '.
 				'help_text TEXT, '.
@@ -819,7 +819,7 @@ try{
 		(53, '<span class=\"label\">SQL Injection with SQLMap</span>: This page contains an sql injection vulnerability. The SQLMap tool may be able to automate testing and confirming this vulnerability.'),
 		(54, '<span class=\"label\">Insufficent Transport Layer Protection</span>: This page is vulnerable to interception with wireshark or tcpdump.'),
 	    (63, '<span class=\"label\">LDAP Injection</span>: This page is vulnerable to LDAP injection.')";
-	
+
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
@@ -840,16 +840,9 @@ try{
 		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
 	}// end if
 
-	$lQueryString = "INSERT INTO youTubeVideos(recordIndetifier, identificationToken, title) 
+	$lQueryString = "INSERT INTO youTubeVideos(recordIndetifier, identificationToken, title)
 		VALUES
-			(1, 'YouTubeVideoIdentifier', 'Video Title'),
-			(2, '1hF0Q6ihvjc', 'Installing OWASP Mutillidae II on Windows with XAMPP'),
-			(3, 'e0vpBKRZPGc', 'Installing Metasploitable-2 with Mutillidae on Virtual Box'),
-			(4, 'y-Cz3YRNc9U', 'How to install latest Mutillidae on Samurai WTF 2.0'),
-			(5, 'L4un5IppoY4', 'Introduction to Installing, Configuring, and Using Burp-Suite Proxy'),
-			(6, 'Fj0n17Jtnzw', 'How to install and configure Burp-Suite with Firefox'),
 			(7, 'kDo52RySRME', 'How to remove PHP errors after installing Mutillidae on Windows XAMPP'),
-			(8, '5egBxI5Nnwo', 'Building a Virtual Lab to Practice Pen Testing'),
 			(9, 'obOLDQ-66oQ', 'How to Upgrade to the Latest Mutillidae on Samurai WTF 2.0'),
 			(10, 'P52EuH9MnTs', 'Spidering Web Applications with Burp-Suite'),
 			(11, 'q3iG7YMjcmE', 'Basics of Burp-Suite Targets Tab'),
@@ -911,7 +904,7 @@ try{
 			(70, 'Zl8U2YVp2lw', 'ISSA KY September 2013 Workshop - Introduction to XML External Entity Injection'),
 			(71, 'VAGG4uC1ogw', 'Introduction to User-agent Impersonation'),
 			(72, 'yh3S8YzrysE', 'Cross-Site Scripting Explained - Part 10: Path Relative Stylesheet Injection'),
-			(73, 'rQ6R4B9m-nk', 'Introduction to SQL Injection for Beginners'),	
+			(73, 'rQ6R4B9m-nk', 'Introduction to SQL Injection for Beginners'),
 			(74, 'dzj9Y2ahYx8', 'Introduction to SQL Injection with SQLMap'),
 			(75, 'PDpWDojO2yk', 'How to Show hints in security level 5'),
 			(76, 'pNedfUt0F8k', 'Introduction to Password Cracking with John the Ripper'),
@@ -923,7 +916,6 @@ try{
 			(82, '4ye8n6MV1AY', 'How to Identify Web Technology with Wappalyzer'),
 			(83, 'EvMj3UzbN6o', 'How to Sweep a Web Site for HTML Comments'),
 			(84, 'BNFOHWLq340', 'How to Use dirb to Locate Hidden Directories on a Web Site'),
-			(85, 'MpuFW_mkJ3M', 'How to Install OWASP Zap on Linux'),
 			(86, '4Kxg5rAHKjY', 'How to Install OWASP DirBuster on Linux'),
 			(87, 'TcOHYFizzoo', 'How to use OWASP DirBuster to Discover Hidden Directories on Web Sites'),
 			(88, 'Z9HkZJ-qju0', 'How to Install dirb on Linux'),
@@ -940,25 +932,12 @@ try{
 			(99, '7vWTEbOfa-8', 'Introduction to Burp-Suite Intruders Character Frobber Payload'),
 	        (100, 't0uMReqs8Ng', 'Introduction to Burp-Suite Intruders Grep-Extract Feature'),
 	        (101, 'fqKjLrdxrJ0', 'How to grab robots.txt file with CURL'),
-            (102, 'jHGNLvSpaLs', 'How to Install and Configure Foxy Proxy with Firefox'),
-            (103, 'pGCBivHNRn8', 'How to Spider a Web Site with OWASP ZAP'),
-            (104, 'ICPqz1Al9fk', 'How to Proxy Web Traffic through OWASP ZAP'),
-            (105, 'fa5LAfXmwoo', 'How to Intercept HTTP Requests with OWASP ZAP'),
-            (106, 'uSfGeyJKIVA', 'How to Fuzz Web Applications with OWASP ZAP (Part 1)'),
-            (107, 'tBXX_GAK7BU', 'How to Fuzz Web Applications with OWASP ZAP (Part 2)'),
             (108, 'd6BlRIShKWU', 'How to list HTTP Methods with CURL'),
             (109, '4c6WaMF2joQ', 'How to list HTTP Methods with NMap'),
             (110, 'rt8Mi2njee0', 'How to grab HTTP Server Banners with CURL'),
             (111, '9kNXvcoqerY', 'How to grab HTTP Server Banners with NMap'),
             (112, '9gsNMf-rf9U', 'How to Install Burp-Suite Community Edition on Linux'),
-            (113, 'zgrfx2xO0NU', 'OWASP ZAP: Using Forced Browse Feature (Find Hidden Directories)'),
-            (114, 'RVzs8aCnpHw', 'OWASP ZAP: Web App Vulnerability Assessment (Partial Site)'),
-            (115, 'KeSUiCr-WGo', 'OWASP ZAP: Automated Web App Vulnerability Assessment (Entire Site)'),
-            (116, 'K6qwqMt_Ldc', 'OWASP ZAP: Web App Vulnerability Assessment (Single Page)'),	
         	(117, 'aTY4F9vzSpQ', 'How to Create Wordlists from Web Sites using CEWL'),
-        	(118, 'b6IR2KgiOcw', 'OWASP ZAP Breakpoints: Part 1 - Trapping HTTP Requests'),
-        	(119, 'H2tKdwMcKnk', 'OWASP ZAP Breakpoints: Part 2 - Trapping Specific HTTP Requests'),
-        	(120, '1CJB8BtW0pQ', 'Using OWASP ZAP with Burp-Suite'),
         	(121, 'dQ-_TO1zuvA', 'Command Injection Explained - Part 1: The Basics'),
         	(122, 'YYzWvXG7mjQ', 'Command Injection Explained - Part 2: Discovery'),
         	(123, 'L_qqJvabctY', 'Command Injection Explained - Part 3: Blind Injection'),
@@ -999,8 +978,48 @@ try{
         	(158, 'HMkWjjKMc54', 'LFI - Part 5: Command Shell and LFI'),
         	(159, '4W-sIZX_9xU', 'LFI - Part 6: Better Command Shell'),
         	(160, 'Nkpgm8-2zfY', 'LFI - Part 7: Alternative PHP Shell Functions'),
-        	(161, 'b6ugC1TcW64', 'LFI - Part 8: Reverse Shell via LFI')";
-	
+        	(161, 'b6ugC1TcW64', 'LFI - Part 8: Reverse Shell via LFI'),
+
+            (163, 'MB_96xLh4As', 'Burp Suite 2: How to Install on Windows'),
+            (164, 'ItUvwGu4Lo4', 'Burp Suite 2: How to Install on Linux'),
+            (165, 'lUDrlP9x6hA', 'Burp Suite 2: Create Shortcut on Desktop (Linux)'),
+            (166, '7ePmWhypzBI', 'Burp-Suite 2: Configure Firefox with Burp Suite'),
+            (167, 'tsZdiuRNWRg', 'Burp Suite 2: Adding Burps Certificate to Firefox'),
+            (168, 'l18nZpYiQZM', 'Burp Suite 2: Configuring Intercept Feature'),
+            (169, 'K_92lb0k9FU', 'Burp Suite 2: Setting Scope'),
+            (170, 'AsZqWHk7_bw', 'Burp Suite 2: Configuring Site Map and Targets'),
+            (171, '9SL9968PgUk', 'Burp Suite 2: Site Map Filters'),
+            (172, 'k0U47sS2o8g', 'Burp Suite 2: Proxy History'),
+            (173, '5ZpM1gQ5PuQ', 'Burp Suite 2: Repeater Tool'),
+            (174, 'QLDk5zI2cdM', 'Burp Suite 2: Intruder Tool - Sniper Mode'),
+            (175, 'NPVddIPYn6M', 'Burp Suite 2: Intruder Tool - Battering Ram Mode'),
+            (176, 'iG7003AC8ys', 'Burp Suite 2: Intruder Tool - Pitchfork Mode'),
+            (177, 'ehGsDQbMXn8', 'Burp Suite 2: Intruder Tool - Cluster Mode'),
+            (178, 'lT56Z54K-Jo', 'Burp Suite 2: Comparer Tool'),
+            (179, 'KlWZ5pKg-PM', 'Burp Suite 2: Decoder Tool'),
+            (180, 'C03EUbgRLNE', 'Burp Suite 2: Adding Extentions'),
+            (181, 'ISb60TrNp8U', 'Burp Suite 2: Configuring Upstream Proxy'),
+            (182, 'abqyFbeFIq4', 'How to Install Java on Windows'),
+            (183, 'fJYyfZNNk5A', 'How to Install OWASP ZAP on Windows'),
+            (184, 'bPr8yO_3kOg', 'How to install Java on Linux (Debian, Ubuntu, Kali)'),
+            (185, 'a6_TprVx7LE', 'How to Install OWASP ZAP on Ubuntu'),
+            (186, 'MpuFW_mkJ3M', 'How to Install OWASP ZAP on Linux'),
+            (187, '1lblqC2Favk', 'How to Create Shortcut for OWASP ZAP (Linux)'),
+            (188, 'jHGNLvSpaLs', 'How to Install and Configure Foxy Proxy with Firefox'),
+            (189, 'ICPqz1Al9fk', 'How to Proxy Web Traffic through OWASP ZAP'),
+            (190, 'fa5LAfXmwoo', 'How to Intercept HTTP Requests with OWASP ZAP'),
+            (191, 'pGCBivHNRn8', 'How to Spider a Web Site with OWASP ZAP'),
+            (192, 'b6IR2KgiOcw', 'OWASP ZAP Breakpoints: Part 1 - Trapping HTTP Requests'),
+            (193, 'H2tKdwMcKnk', 'OWASP ZAP Breakpoints: Part 2 - Trapping Specific HTTP Requests'),
+            (194, 'uSfGeyJKIVA', 'How to Fuzz Web Applications with OWASP ZAP (Part 1)'),
+            (195, 'tBXX_GAK7BU', 'How to Fuzz Web Applications with OWASP ZAP (Part 2)'),
+            (196, 'K6qwqMt_Ldc', 'OWASP ZAP: Web App Vulnerability Assessment (Single Page)'),
+            (197, 'KeSUiCr-WGo', 'OWASP ZAP: Automated Web App Vulnerability Assessment (Entire Site)'),
+            (198, 'RVzs8aCnpHw', 'OWASP ZAP: Web App Vulnerability Assessment (Partial Site)'),
+            (199, 'ySzxNgQ6Qpk', 'How to Start OWASP ZAP from Command Line'),
+            (200, 'dId4FS_Gyn4', 'Extending OWASP ZAP with Add-Ons'),
+            (201, '1CJB8BtW0pQ', 'Using OWASP ZAP with Burp-Suite: Best of Both Worlds')";
+
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
@@ -1008,24 +1027,24 @@ try{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
 
-	
+
 	/* ***********************************************************************************
-	 * Create accounts.xml password.txt file from MySQL accounts table 
+	 * Create accounts.xml password.txt file from MySQL accounts table
 	 * ************************************************************************************/
 	$lAccountXMLFilePath="data/accounts.xml";
 	$lPasswordFilePath="passwords/accounts.txt";
-	
+
 	echo format("Trying to build XML version of accounts table to update accounts XML ".$lAccountXMLFilePath,"I");
 	echo format("Do not worry. A default version of the file is included if this does not work.","I");
 
 	echo format("Trying to build text version of accounts table to update password text file ".$lPasswordFilePath,"I");
 	echo format("Do not worry. A default version of the file is included if this does not work.","I");
-	
+
 	$lAccountsXML = "";
 	$lAccountsText = "";
 	$lQueryString = "SELECT username, password, mysignature, is_admin FROM accounts;";
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-	
+
 	if (isset($lQueryResult->num_rows)){
 		if ($lQueryResult->num_rows > 0) {
 			$lResultsFound = TRUE;
@@ -1034,14 +1053,14 @@ try{
 	}//end if
 
 	if ($lResultsFound){
-		
+
 		echo format("Executed query 'SELECT * FROM accounts'. Found ".$lRecordsFound." records.","S");
-		
+
 		$lAccountsXML='<?xml version="1.0" encoding="utf-8"?>'.PHP_EOL;
 		$lAccountsXML.="<Employees>".PHP_EOL;
 		$lCounter=1;
 		$cTAB = CHR(9);
-		
+
 		while($row = $lQueryResult->fetch_object()){
 			$lAccountType = $row->is_admin?"Admin":"User";
 		   	$lAccountsXML.=$cTAB.'<Employee ID="'.$lCounter.'">'.PHP_EOL;
@@ -1050,7 +1069,7 @@ try{
 		   	$lAccountsXML.=$cTAB.$cTAB.'<Signature>'.htmlspecialchars($row->mysignature).'</Signature>'.PHP_EOL;
 		   	$lAccountsXML.=$cTAB.$cTAB.'<Type>'.htmlspecialchars($lAccountType).'</Type>'.PHP_EOL;
 		   	$lAccountsXML.=$cTAB.'</Employee>'.PHP_EOL;
-		   	
+
 		   	$lAccountsText.=$lCounter.",".$row->username.",".$row->password.",".$row->mysignature.",".$lAccountType.PHP_EOL;
 		   	$lCounter+=1;
 		}// end while
@@ -1070,9 +1089,9 @@ try{
 			}//end if
 		}catch(Exception $e){
 			echo format("Could not write accounts XML to ".$lAccountXMLFilePath." - ".$e->getMessage(),"W");
-			echo format("Using default version of accounts.xml","W");			
+			echo format("Using default version of accounts.xml","W");
 		};// end try
-		
+
 		try{
 			/* Ubuntu 12.04LTS PHP cannot parse short syntax of
 			 * is_writable(pathinfo($lAccountXMLFilePath)['dirname']).
@@ -1086,14 +1105,14 @@ try{
 			}//end if
 		}catch(Exception $e){
 			echo format("Could not write accounts XML to ".$lPasswordFilePath." - ".$e->getMessage(),"W");
-			echo format("Using default version of accounts.txt","W");			
+			echo format("Using default version of accounts.txt","W");
 		};// end try
-		
+
 	} else {
 		$lErrorDetected = TRUE;
 		echo format("Warning: No records found when trying to build XML and text version of accounts table ".$lQueryResult,"W");
-	}// end if ($lResultsFound)	
-			
+	}// end if ($lResultsFound)
+
 	$MySQLHandler->closeDatabaseConnection();
 
 } catch (Exception $e) {
@@ -1104,17 +1123,17 @@ try{
 // if no errors were detected, send the user back to the page that requested the database be reset.
 //We use JS instead of HTTP Location header so that HTML5 clearing JS above will run
 if(!$lErrorDetected){
-	/*If the user came from the database error page but we do not have 
+	/*If the user came from the database error page but we do not have
 	 * database errors anymore, send them to the home page.
 	 */
 	$lHTTPReferer = "";
 	if (isset($_SERVER["HTTP_REFERER"])) {
-		$lHTTPReferer = $_SERVER["HTTP_REFERER"];	
+		$lHTTPReferer = $_SERVER["HTTP_REFERER"];
 	}//end if
-	
+
 	$lReferredFromDBOfflinePage = preg_match("/database-offline.php/", $lHTTPReferer);
 	$lReferredFromPageWithURLParameters = preg_match("/\?/", $lHTTPReferer);
-	
+
 	if ($lReferredFromDBOfflinePage || $lReferredFromPageWithURLParameters){
 		$lPopUpNotificationCode = "&popUpNotificationCode=SUD1";
 	}else{
