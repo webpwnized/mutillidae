@@ -48,17 +48,9 @@ class YouTubeVideoHandler {
 	public $HowtoInstallOWASPZaponLinux = 85;
 	public $HowtoInstallOWASPDirBusteronLinux = 86;
 	public $HowtoInstalldirbonLinux = 88;
-
-	public $IntroductiontoUnvalidatedRedirectsandForwards = 93;
-	public $IntroductiontoParameterAddition = 94;
-	public $HowtoTestforWeakSSLTLSHTTPSciphers = 95;
-	public $IntroductiontoMethodTampering = 96;
-	public $IntroductiontoBurpSuiteRepeaterTool = 98;
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;
 	public $HowtoInstallBurpSuiteCommunityEditiononLinux = 112;
-	public $OWASPZAPUsingForcedBrowseFeatureFindHiddenDirectories = 113;
-	public $HowtoCreateWordlistsfromWebSitesusingCEWL = 117;
 	public $HowtoCreateUbuntuVirtualMachineVirtualBox = 137;
 	public $HowtoInstallVirtualBoxGuestAdditionsLinux = 138;
 	public $HowtoCreateUbuntuVirtualMachineVMware = 139;
@@ -73,7 +65,6 @@ class YouTubeVideoHandler {
 	public $HowtoInstallMutillidaeonLinux = 148;
 	public $HowtoCreateSelfSignedCertificateinApache = 149;
 	public $HowtoCreateVirtualHostsinApache = 150;
-
 	public $HowtoremovePHPerrorsafterinstallingMutillidae = 7;
 	public $BurpSuite2HowtoInstallonWindows = 163;
 	public $BurpSuite2HowtoInstallonLinux = 164;
@@ -94,7 +85,6 @@ class YouTubeVideoHandler {
 	public $BurpSuite2DecoderTool = 179;
 	public $BurpSuite2AddingExtentions = 180;
 	public $BurpSuite2ConfiguringUpstreamProxy = 181;
-
 	public $HowtoInstallJavaonWindows = 182;
 	public $HowtoInstallOWASPZAPonWindows = 183;
 	public $HowtoinstallJavaonLinuxDebianUbuntuKali = 184;

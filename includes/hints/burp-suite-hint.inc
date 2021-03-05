@@ -27,6 +27,8 @@ is provided below to help get started with Burp-Suite.
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2IntruderToolBatteringRamMode); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2IntruderToolPitchforkMode); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2IntruderToolClusterMode); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload); ?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoBurpSuiteIntrudersGrepExtractFeature); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2ComparerTool); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2DecoderTool); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2AddingExtentions); ?>
