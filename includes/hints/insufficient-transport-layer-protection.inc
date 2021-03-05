@@ -2,7 +2,7 @@
 <span class="report-header">Overview</span>
 <br/><br/>
 Without a properly configured HTTPS connection from the web server
-to the client, traffic traveling over the HTTP protocol can be 
+to the client, traffic traveling over the HTTP protocol can be
 interecepted with packet sniffers.
 <br/><br/>
 <a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
@@ -15,14 +15,14 @@ in the HTTP responses.
 <br/><br/>
 <span class="report-header">Exploitation</span>
 <br/><br/>
-While on the same subnet as either the client or the server, use a packet sniffer to 
+While on the same subnet as either the client or the server, use a packet sniffer to
 capture the HTTP packets while a user authenticates or performs other
 sensitive transactions.
 <br/><br/>
 <span class="report-header">Example</span>
 <br/><br/>
 Proceed to the login page in Mutillidae (<a href="index.php?page=login.php">Login</a>).
-Start a packet sniffer to capture packets. Be careful to start the sniffer on a 
+Start a packet sniffer to capture packets. Be careful to start the sniffer on a
 network inteface that is listening to the same subnet as Mutillidae.
 <br/><br/>
 Ping or other programs can be used  to confirm connectivity with the web
@@ -42,18 +42,18 @@ server and confirm the subnet being used to connect.
 	eth0      Link encap:Ethernet  HWaddr 00:0c:29:f0:34:2a
 	inet addr:10.0.0.133  Bcast:10.0.0.255  Mask:255.255.255.0
 	...SNIP...
-	
+
 	eth1      Link encap:Ethernet  HWaddr 00:0c:29:f0:34:34
 	inet addr:172.16.0.248  Bcast:172.16.0.255  Mask:255.255.255.0
 	...SNIP...
-	
+
 	lo        Link encap:Local Loopback
 	inet addr:127.0.0.1  Mask:255.0.0.0
 	...SNIP...
 </code>
 			<br/>
 			Wireshark can capture packets, but using a dedicated packet capture
-			tool like tcpdump or tshark can give the advanage of low overhead. 
+			tool like tcpdump or tshark can give the advanage of low overhead.
 			<br/>
 <code>
 	root@ubuntu:~# tcpdump -i lo -nn -v -w /tmp/login-packets.pcap
@@ -66,6 +66,5 @@ server and confirm the subnet being used to connect.
 <code>
 	root@ubuntu:~# wireshark /tmp/login-packets.pcap &amp;
 </code>
-	<br/><br/>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingEttercapandSSLstriptoCaptureCredentials);?>
-	<br/><br/>
+<br/><br/>
+<br/><br/>

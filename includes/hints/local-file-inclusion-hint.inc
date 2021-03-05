@@ -8,15 +8,15 @@
 			<br/><br/>
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>
-			The page displayed in Mutillidae is determined 
-			by the value of the "page" parameter. What would happen the "page" 
+			The page displayed in Mutillidae is determined
+			by the value of the "page" parameter. What would happen the "page"
 			parameter was changed to a filename which is on the server but not
-			intended to be served? This defect can be combined with other defects. 
+			intended to be served? This defect can be combined with other defects.
 			For example, the "page" parameter might be able to be passed in via either
 			GET or POST due to the parameters pollutition flaw. Using the parent
 			traversal operator ("..") can help break out of the web server file
 			folders. Also, direct file paths can be tried. For example, if Mutillidae
-			is running on a Windows XP system, the following values for "page" 
+			is running on a Windows XP system, the following values for "page"
 			can be tried.
 			<br/><br/>
 			<span class="report-header">Exploitation</span>
@@ -71,7 +71,7 @@
 	/etc/chttp.conf
 	/etc/lighttpd.conf
 	/etc/cups/cupsd.confcda
-	/etc/inetd.conf   
+	/etc/inetd.conf
 	/opt/lampp/etc/httpd.conf
 	/etc/samba/smb.conf
 	/etc/openldap/ldap.conf
@@ -81,17 +81,7 @@
 	/etc/auto_master
 	/etc/fstab
 </code>
-	<br/><br/>
-	<span id="videos" class="report-header">Videos</span>
-	<br/><br/>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoExploitLocalFileInclusionVulnerabilityusingBurpSuite);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ISSA2013WebPentestingWorkshopPart6LocalRemoteFileInclusion);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart1LocalFileInclusionExplained);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart2AccessingLogFiles);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart3DirectoryTraversal);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart4ServerSideInjectionandLFI);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart5CommandShellandLFI);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart6BetterCommandShell);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart7AlternativePHPShellFunctions);?>
-	<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->LFIPart8ReverseShellviaLFI);?>
-	<br/><br/>
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<br/><br/>

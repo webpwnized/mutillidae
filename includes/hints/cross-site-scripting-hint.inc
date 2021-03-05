@@ -371,19 +371,17 @@ sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);
 for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\\n&quot;;};
 for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\\n&quot;;};alert(&quot;HTML-5 web storage:\\n\\n&quot; + m);}catch(e){alert(e.message);};localStorage.clear();sessionStorage.clear();try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\\n&quot;;};alert(&quot;HTML-5 web storage:\\n\\n&quot; + m);}catch(e){alert(e.message);}&lt;/script&gt;
 </code>
-			<br/><br/>
-			<span class="report-header">Cross Site Scripting Defenses</span>
-			<br/><br/>
-			To defend against Cross-Site Scripting, encode all output per context.
-			Just because the application sanitized/validated/filtered the input
-			when the user sent the input doesnt mean the application is safe. The
-			database could be altered by a rouge insider, a database attack such as
-			ASPROX, or a mallicious programmer. Developers should not have access to
-			production database data; ever. Developers should not be able to copy
-			their own code into production; ever. That is what change control is for.
-			<br/><br/>
-			<span id="videos" class="report-header">Videos</span>
-			<br/><br/>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ExplanationofHTTPOnlyCookiesinPresenceCrossSiteScripting);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ReadingHiddenValuesfromHTML5DomStorage);?>
+<br/><br/>
+<span class="report-header">Cross Site Scripting Defenses</span>
+<br/><br/>
+To defend against Cross-Site Scripting, encode all output per context.
+Just because the application sanitized/validated/filtered the input
+when the user sent the input doesnt mean the application is safe. The
+database could be altered by a rouge insider, a database attack such as
+ASPROX, or a mallicious programmer. Developers should not have access to
+production database data; ever. Developers should not be able to copy
+their own code into production; ever. That is what change control is for.
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
 <br/><br/>

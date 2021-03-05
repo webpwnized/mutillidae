@@ -36,16 +36,13 @@ grep -r -A 10 "&lt;\!--" *
 <code>
 nmap -p 80,443 -v -Pn --script=http-comments-displayer --open -iL hosts.txt
 </code>
-			<br/>
-			<span class="report-header">Example</span>
-			<br/><br/>
-			There is a sensitive comment on the Mutillidae Home page. Visit the 
-			<a href="index.php?page=home.php">Home</a> page. View the page source
-			to see comments.
-			<br/><br/>
-			<span id="videos" class="report-header">Videos</span>
-			<br/><br/>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtouseWGETtocloneaWebSite);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoSweepaWebSiteforHTMLComments);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->FindingCommentsandFileMetadatausingMultipleTechniques);?>
-			<br/><br/>			
+<br/>
+<span class="report-header">Example</span>
+<br/><br/>
+There is a sensitive comment on the Mutillidae Home page. Visit the
+<a href="index.php?page=home.php">Home</a> page. View the page source
+to see comments.
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<br/><br/>

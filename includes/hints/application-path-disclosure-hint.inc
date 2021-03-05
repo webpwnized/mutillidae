@@ -1,7 +1,7 @@
 			<br/><br/>
 			<span class="report-header">Overview</span>
 			<br/><br/>
-			Application Path Disclosure may result when internal application paths 
+			Application Path Disclosure may result when internal application paths
 			are disclosed to the user-agent (browser). These paths can be
 			used in other attacks such as forced browsing.
 <br/><br/>
@@ -18,15 +18,12 @@
 			<br/><br/>
 			Search pages with and without injection. Use the grep feature of
 			Burp-Suite to seach for application path patterns that match
-			the web application framework type. 
+			the web application framework type.
 			<br/><br/>
 			<span id="videos" class="report-header">Videos</span>
 			<br/><br/>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoFuzzingWebApplicationswithBurpSuiteIntruderTool);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->FindingCommentsandFileMetadatausingMultipleTechniques);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoSweepaWebSiteforHTMLComments);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstalldirbonLinux);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoUsedirbtoLocateHiddenDirectoriesonaWebSite);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallOWASPDirBusteronLinux);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtouseOWASPDirBustertoDiscoverHiddenDirectoriesonWebSites);?>
 			<br/><br/>

@@ -2,10 +2,10 @@
 			<span class="report-header">Overview</span>
 			<br/><br/>
 			Javascript injection (or Javascript source code injection)
-			is closely related to HTML injection and 
+			is closely related to HTML injection and
 			Cross site scripting. In all these cases the input is interpreted as
-			code rather than data. The code may 
-			break out of the current context and switch to another context. 
+			code rather than data. The code may
+			break out of the current context and switch to another context.
 			Alternatively
 			an injection may stay in the current context but modify the source code.
 <br/><br/>
@@ -16,9 +16,9 @@
 			being dynamically set.
 			<br/><br/>
 		  	An example of breaking context is injecting script tags into HTML output. The developer
-		  	believes the context should be HTML (perhaps a table), but the input of 
+		  	believes the context should be HTML (perhaps a table), but the input of
 		  	script tags (with embedded script) causes the browser to stop processing HTML
-		  	and switch to processing script. The context switch occurs when the browser 
+		  	and switch to processing script. The context switch occurs when the browser
 		  	stops executing the HTML instructions and instead executes the JS.
 			<br/><br/>
 			Injection within context could be injecting HTML into HTML output. Although
@@ -30,10 +30,10 @@
 			is user supplied or user controlled input is incorporated into Javascript. The second
 			condition is that input is not encoded when output.
 			<br/>
-			Identify the possible input parameters. Does the page 
+			Identify the possible input parameters. Does the page
 			take input from a form, URL parameter, cookie, or other input? HTTPFox and Burp Suite
-			are a good tools to see all the input as you "GET" a page (the request) and 
-			all the output with which the server responds (the response). 
+			are a good tools to see all the input as you "GET" a page (the request) and
+			all the output with which the server responds (the response).
 			<br/><br/>
 			Once you find the page input, try injecting a simple canary like "CANARY-INPUT-1"
 			then search the resulting page to see where the canary showed up. If the input
@@ -48,22 +48,22 @@
 			<br/><br/>
 			<span class="report-header">Exploitation</span>
 			<br/><br/>
-			Once the canary(ies) is located, identify what characters need to be injected to 
+			Once the canary(ies) is located, identify what characters need to be injected to
 			"end" the current instruction. Identify the characters that are needed to block out
 			any instruction that comes after the canary. Put your injection in the middle.
 			<br/><br/>
 			<span class="report-header">Example</span>
 			<br/><br/>
-			The 
+			The
 			<a href="./index.php?page=password-generator.php&username=canary">
 			Password Generator
 			</a>
-			page allows JS injection. The JS that builds 
+			page allows JS injection. The JS that builds
 			the password is a diversion. The injection point is elsewhere.
 			<br/><br/>
 			To help see if your Javascript injection forms valid syntax when
 			incorporated with the sites Javascript, try validating
-			the resulting Javascript at an online validator like 
+			the resulting Javascript at an online validator like
 			<a href="http://www.jslint.com/">http://www.jslint.com/</a>
 			<br/><br/>
 			An injection that works on the Password generator page is
@@ -71,8 +71,7 @@
 <code>
 	canary";}catch(e){}alert(1);try{a="
 </code>
-			<br/><br/>
-			<span id="videos" class="report-header">Videos</span>
-			<br/><br/>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoCrossSiteScriptingXSSviaJavaScriptStringInjection);?>
-			<br/><br/>
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<br/><br/>

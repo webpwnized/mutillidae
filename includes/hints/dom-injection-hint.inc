@@ -9,7 +9,7 @@
 			<br/><br/>
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>
-			Locate pages which use DOM manipulation to update the page without 
+			Locate pages which use DOM manipulation to update the page without
 			returning to the server. This can often be detected when a client proxy
 			such as Burp does NOT intercept a request when a page updates.
 			<br/><br/>
@@ -23,10 +23,9 @@
 			Use Firebug or similar to examine the message that appears when a new
 			item is added to storage. The message appears in a label below the two input fields.
 			Inject XSS into the "key" field. This is output
-			into the message. Craft a XSS to read the DOM storage or perform other 
-			action.  
+			into the message. Craft a XSS to read the DOM storage or perform other
+			action.
 			<br/><br/>
 			<span id="videos" class="report-header">Videos</span>
 			<br/><br/>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BasicsofInjectingCrossSiteScriptintoHTMLonclickEvent);?>
 			<br/><br/>

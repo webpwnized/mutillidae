@@ -11,10 +11,10 @@
 			<span class="report-header">Discovery Methodology</span>
 			<br/><br/>
 			Attempt to inject XML or reserved characters into input
-			parameters and observe if XML parsing errors are 
-			generated. 
+			parameters and observe if XML parsing errors are
+			generated.
 			<br/><br/>
-			For web services, check each input parameter specified in the 
+			For web services, check each input parameter specified in the
 			WSDL document for those of type XML.
 			<br/><br/>
 			<span class="report-header">Exploitation</span>
@@ -24,7 +24,7 @@
 			malformed XML, XML that starts with whitespace or null characters,
 			and XML that does not meet the XSL specification.
 			<br/><br/>
-			Also try to load files that dont exist in order to determine operating system type 
+			Also try to load files that dont exist in order to determine operating system type
 			and the path at which interpretation is taking place.
 			<br/><br/>
 			For examples, see the XML Entity Attack example
@@ -34,11 +34,11 @@
 			XML is well-known for containing data (text nodes) which are marked-up by
 			tags (element nodes). XML has the ability to have place-holders called entities.
 			Web developers often used pre-defined entities without realizing they are using
-			an XML entity. For example the less than symbol &lt; can be represented by the 
+			an XML entity. For example the less than symbol &lt; can be represented by the
 			pre-defined entity &amp;lt;. The &amp;lt; entity is defined in the parser itself.
 			There is no need to declare the &amp;lt; before using it. However developers
-			are allowed to declare their own entities. XML documents also contain a mechanism 
-			by which they can import and include external files as part of themselves. The 
+			are allowed to declare their own entities. XML documents also contain a mechanism
+			by which they can import and include external files as part of themselves. The
 			imported file will be included into the XML docment whereever the entity exists.
 			<br/><br/>
 			Here are some examples to try
@@ -74,11 +74,11 @@
 			To declare an external entity, the &lt;!ENTITY&gt; directive defines the resource
 			represented and the symbol that will represent the entity. In this example, the type
 			of entity is a local system resource as indicated by the "SYSTEM" type, the resource
-			is a local file (./robots.txt), and the symbol that represents the entity is 
+			is a local file (./robots.txt), and the symbol that represents the entity is
 			"systemEntity". Entities do not have to be external but in this example the system
-			file happens to be an external resource. Entities can also be strings or other 
+			file happens to be an external resource. Entities can also be strings or other
 			local variables.
-			<br/><br/> 
+			<br/><br/>
 <code>
 	<span class="important-code">&lt;!ENTITY systemEntity SYSTEM &quot;robots.txt&quot;&gt;</span>
 </code>
@@ -93,8 +93,8 @@
 	&lt;/change-log&gt;
 </code>
 			<br/>
-			In an external entity attack, XML is injected or uploaded to the site in an effort to 
-			get the XML parser import the injected entity into the XML, then output the 
+			In an external entity attack, XML is injected or uploaded to the site in an effort to
+			get the XML parser import the injected entity into the XML, then output the
 			contents of the entity.
 			<br/>
 <code>
@@ -118,21 +118,21 @@
 	&lt;change-log&gt;
 		&lt;text&gt;<span class="important-code">&amp;systemEntity;</span>&lt;/text&gt;
 	&lt;/change-log&gt;
-</code> 
+</code>
 			<br/>
 			The output will look similar to the following
 			<br/>
 <code>
-	[boot loader] timeout=30 default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS [operating systems] multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn ; 			
+	[boot loader] timeout=30 default=multi(0)disk(0)rdisk(0)partition(1)\WINDOWS [operating systems] multi(0)disk(0)rdisk(0)partition(1)\WINDOWS="Microsoft Windows XP Professional" /fastdetect /NoExecute=OptIn ;
 </code>
 		<br/>
-		Other injections are possible. This version uses injected comment symbols to alter XML. 
+		Other injections are possible. This version uses injected comment symbols to alter XML.
 		This is useful for filter bypass.
 		<br/>
 <code>
 &lt;somexml&gt;
-&lt;message&gt;Hello World &amp;lt;!--&lt;/message&gt; 
-&lt;place&gt; NJ &lt;/place&gt; 
+&lt;message&gt;Hello World &amp;lt;!--&lt;/message&gt;
+&lt;place&gt; NJ &lt;/place&gt;
 &lt;/somexml&gt;
 </code>
 		<br/>
@@ -159,10 +159,8 @@
 		<br/>
 <code>
 &lt;?xml version=&quot;1.0&quot;?&gt;&lt;change-log&gt;&lt;text&gt;&amp;lt;script&amp;gt;alert(&amp;quot;Hello World&amp;quot;)&amp;lt;/script&amp;gt;&lt;/text&gt;&lt;/change-log&gt;
-</code>	
-		<br/><br/>
-		<span id="videos" class="report-header">Videos</span>
-		<br/><br/>
-		<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoXMLExternalEntityInjection);?>
-		<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ISSAIntroductiontoXMLExternalEntityInjection);?>
-		<br/><br/>
+</code>
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<br/><br/>

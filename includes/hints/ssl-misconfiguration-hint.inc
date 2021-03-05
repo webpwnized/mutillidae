@@ -8,9 +8,9 @@ accessible via HTTP, use of weak SSL ciphers, and SSL stripping.
 <br/><br/>
 <span class="report-header">Discovery Methodology</span>
 <br/><br/>
-Use an SSL cipher audit tool such as SSLScan to test cipher strength. Observe 
-how the site handles an HTTP request. If the site redirects the user to 
-HTTPS, the site can be stripped. 
+Use an SSL cipher audit tool such as SSLScan to test cipher strength. Observe
+how the site handles an HTTP request. If the site redirects the user to
+HTTPS, the site can be stripped.
 <br/><br/>
 <span class="report-header">Exploitation</span>
 <br/><br/>
@@ -22,7 +22,7 @@ To test cipher strength, the following tools are helpful
 <span class="label">sslscan</span>
 <br/>
 <code>
-sslscan --targets=hosts.txt	
+sslscan --targets=hosts.txt
 </code>
 <br/>
 <span class="label">NMap</span>
@@ -34,5 +34,4 @@ nmap -p 443 -v -Pn --script=ssl-enum-ciphers --open -iL hosts.txt
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoTestforWeakSSLTLSHTTPSciphers);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingEttercapandSSLstriptoCaptureCredentials);?>
 <br/><br/>

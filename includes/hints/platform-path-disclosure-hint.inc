@@ -1,7 +1,7 @@
 			<br/><br/>
 			<span class="report-header">Overview</span>
 			<br/><br/>
-			Platform Path Disclosure may result when internal system paths 
+			Platform Path Disclosure may result when internal system paths
 			are disclosed to the user-agent (browser). These paths can be
 			used in other attacks such as directory browsing.
 <br/><br/>
@@ -16,16 +16,11 @@
 			<br/><br/>
 			<span class="report-header">Exploitation</span>
 			<br/><br/>
-			Note if the web server is Linux or Windows based. 
+			Note if the web server is Linux or Windows based.
 			Search pages with and without injection. Use the grep feature of
 			Burp-Suite to seach for platform path patterns that match
-			the web server operating system type. 
+			the web server operating system type.
 			<br/><br/>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoFuzzingWebApplicationswithBurpSuiteIntruderTool);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->FindingCommentsandFileMetadatausingMultipleTechniques);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoSweepaWebSiteforHTMLComments);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstalldirbonLinux);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoUsedirbtoLocateHiddenDirectoriesonaWebSite);?>
 			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallOWASPDirBusteronLinux);?>
-			<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtouseOWASPDirBustertoDiscoverHiddenDirectoriesonWebSites);?>
 			<br/><br/>

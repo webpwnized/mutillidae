@@ -8,15 +8,15 @@ The attack executes on the LDAP server using the application account
 <br/><br/>
 LDAP injection allows an attacker to bypass access controls on LDAP data stores. This may
 result in data disclosure. Depending on how the application interprets the data extracted,
-LDAP injection may result in authentication or authorization bypass or other 
+LDAP injection may result in authentication or authorization bypass or other
 logical vulnerabilities.
 <br/><br/>
 <a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
 <br/><br/>
 <span class="report-header">Discovery Methodology</span>
 <br/><br/>
-Ideally, attempt to fuzz input fields to cause error message. For example, 
-injection of "(" produces an error. Even if system does not display an explicit 
+Ideally, attempt to fuzz input fields to cause error message. For example,
+injection of "(" produces an error. Even if system does not display an explicit
 message, injection may cause a change detectable with differential analysis
 <ul>
 	<li>Additional or missing output</li>
@@ -40,11 +40,11 @@ python -c 'for i in [0x20,0x23,0X22,0X2B,0X2C,0X3B,0X3C,0X3E,0x5C,0x00]:print(ch
 <br/><br/>
 <span class="report-header">Exploitation</span>
 <br/><br/>
-Similar to SQL injection, there is no particular pattern that will work. It depends on 
+Similar to SQL injection, there is no particular pattern that will work. It depends on
 the code implemented by the application.
 The correct injection to use may not be obvious.
 Error message do not always disclose query or search logic.
-Learning common design patterns helps know which injections might work. The following general patterns 
+Learning common design patterns helps know which injections might work. The following general patterns
 apply to many applications.
 <br/><br/>
 If there is no logic operator (OR or AND), the bolded injections may work assuming they fit
@@ -79,7 +79,4 @@ The following injections work in Mutillidae Conference Room Lookup page
 <br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntrotoLDAPInjectionPart1Overview);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntrotoLDAPInjectionPart2Discovery);?>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntrotoLDAPInjectionPart3PracticalUsage);?>
 <br/><br/>
