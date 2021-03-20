@@ -842,7 +842,6 @@ try{
 
 	$lQueryString = "INSERT INTO youTubeVideos(recordIndetifier, identificationToken, title)
 		VALUES
-			(7, 'kDo52RySRME', 'How to remove PHP errors after installing Mutillidae on Windows XAMPP'),
 			(13, 'la5hTlSDKWg', 'Using Burp Intruder Sniper to Fuzz Parameters'),
 			(99, '7vWTEbOfa-8', 'Introduction to Burp-Suite Intruders Character Frobber Payload'),
 	        (100, 't0uMReqs8Ng', 'Introduction to Burp-Suite Intruders Grep-Extract Feature'),

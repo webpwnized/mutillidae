@@ -42,12 +42,6 @@ class YouTubeVideoHandler {
 
 	/* public properties */
 	public $UsingBurpIntruderSnipertoFuzzParameters = 13;
-	public $AnalyzeSessionTokenRandomnessusingBurpSuiteSequencer = 57;
-	public $HowtoSolvetheShowHintsinSecurityLevel5Challenge = 75;
-	public $IntroductiontoFuzzingWebApplicationswithBurpSuiteIntruderTool = 77;
-	public $HowtoInstallOWASPZaponLinux = 85;
-	public $HowtoInstallOWASPDirBusteronLinux = 86;
-	public $HowtoInstalldirbonLinux = 88;
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;
 	public $HowtoInstallBurpSuiteCommunityEditiononLinux = 112;

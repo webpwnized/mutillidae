@@ -319,96 +319,108 @@ try{
 	alert(e.message);
 }
 </code>
-			<br /><br />
-			<span class="report-header">Read DOM Storage values from our browser</span>
-			<br/><br/>
-			<span class="label">Plan A (Run in firebug console):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}
-				</textarea>
-			</fieldset>
-			<br />
-			<span class="label">Plan B (DOM Injection in "new key" field):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				&lt;span onmouseover=&#39;try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
-				</textarea>
-			</fieldset>
-			<br /><br />
-			<span class="report-header">Add new values to our DOM storage and read them back to show new values</span>
-			<br/><br/>
-			<span class="label">Plan A (Run in firebug console):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				try{localStorage.setItem(&quot;AccountNumber&quot;,&quot;789456&quot;);sessionStorage.setItem(&quot;EnterpriseSelfDestructSequence&quot;,&quot;A1B2C3&quot;);sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);sessionStorage.setItem(&quot;CurrentlyLoggedInUser&quot;,&quot;1233456789&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}
-				</textarea>
-			</fieldset>
-			<br />
-			<span class="label">Plan B (DOM Injection in "new key" field):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				&lt;span onmouseover=&#39;try{localStorage.setItem(&quot;AccountNumber&quot;,&quot;789456&quot;);sessionStorage.setItem(&quot;EnterpriseSelfDestructSequence&quot;,&quot;A1B2C3&quot;);sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);sessionStorage.setItem(&quot;CurrentlyLoggedInUser&quot;,&quot;1233456789&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
-				</textarea>
-			</fieldset>
-			<br /><br />
-			<span class="report-header">Edit values currently in our DOM storage and read them back to show new values</span>
-			<br/><br/>
-			<span class="label">Plan A (Run in firebug console):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}try{localStorage.setItem(&quot;MessageOfTheDay&quot;,&quot;This was set by Firebug console!&quot;); sessionStorage.setItem(&quot;CartSession&quot;,&quot;ABCDEFG&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}
-				</textarea>
-			</fieldset>
-			<br />
-			<span class="label">Plan B (DOM Injection in "new key" field):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				&lt;span onmouseover=&#39;try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}try{localStorage.setItem(&quot;MessageOfTheDay&quot;,&quot;This was set by Firebug console!&quot;); sessionStorage.setItem(&quot;CartSession&quot;,&quot;ABCDEFG&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
-				</textarea>
-			</fieldset>
-			<br /><br />
-			<span class="report-header">Delete values currently in our DOM storage and read storage back</span>
-			<br/><br/>
-			<span class="label">Plan A (Run in firebug console using the removeItem() method):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.removeItem(&quot;MessageOfTheDay&quot;); sessionStorage.removeItem(&quot;CartSession&quot;); sessionStorage.removeItem(&quot;CurrentBrowser&quot;); sessionStorage.removeItem(&quot;SessionStorageTarget&quot;); localStorage.removeItem(&quot;LocalStorageTarget&quot;);}catch(e){console.log(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}
-				</textarea>
-			</fieldset>
-			<br />
-			<span class="label">Alternative: Use the clear method</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.clear(); sessionStorage.clear();}catch(e){console.log(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}
-				</textarea>
-			</fieldset>
-			<br />
-			<span class="label">Plan B (DOM Injection in "new key" field):</span>
-			<br />
-			<fieldset>
-				<legend>Copy and Paste</legend>
-				<textarea rows="5" cols="50">
-				&lt;span onmouseover=&#39;try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.alert(m);}catch(e){alert(e.message);}try{localStorage.removeItem(&quot;MessageOfTheDay&quot;); sessionStorage.removeItem(&quot;CartSession&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
-				</textarea>
-			</fieldset>
-			<br/><br/>
-			<span id="videos" class="report-header">Videos</span>
-			<br/><br/>
-			<br/><br/>
+<br /><br />
+<span class="report-header">Read DOM Storage values from our browser</span>
+<br/><br/>
+<span class="label">Plan A (Run in firebug console):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}
+	</textarea>
+</fieldset>
+<br />
+<span class="label">Plan B (DOM Injection in "new key" field):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	&lt;span onmouseover=&#39;try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
+	</textarea>
+</fieldset>
+<br /><br />
+<span class="report-header">Add new values to our DOM storage and read them back to show new values</span>
+<br/><br/>
+<span class="label">Plan A (Run in firebug console):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	try{localStorage.setItem(&quot;AccountNumber&quot;,&quot;789456&quot;);sessionStorage.setItem(&quot;EnterpriseSelfDestructSequence&quot;,&quot;A1B2C3&quot;);sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);sessionStorage.setItem(&quot;CurrentlyLoggedInUser&quot;,&quot;1233456789&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}
+	</textarea>
+</fieldset>
+<br />
+<span class="label">Plan B (DOM Injection in "new key" field):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	&lt;span onmouseover=&#39;try{localStorage.setItem(&quot;AccountNumber&quot;,&quot;789456&quot;);sessionStorage.setItem(&quot;EnterpriseSelfDestructSequence&quot;,&quot;A1B2C3&quot;);sessionStorage.setItem(&quot;SessionID&quot;,&quot;japurhgnalbjdgfaljkfr&quot;);sessionStorage.setItem(&quot;CurrentlyLoggedInUser&quot;,&quot;1233456789&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
+	</textarea>
+</fieldset>
+<br /><br />
+<span class="report-header">Edit values currently in our DOM storage and read them back to show new values</span>
+<br/><br/>
+<span class="label">Plan A (Run in firebug console):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}try{localStorage.setItem(&quot;MessageOfTheDay&quot;,&quot;This was set by Firebug console!&quot;); sessionStorage.setItem(&quot;CartSession&quot;,&quot;ABCDEFG&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};console.log(m);}catch(e){alert(e.message);}
+	</textarea>
+</fieldset>
+<br />
+<span class="label">Plan B (DOM Injection in "new key" field):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	&lt;span onmouseover=&#39;try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}try{localStorage.setItem(&quot;MessageOfTheDay&quot;,&quot;This was set by Firebug console!&quot;); sessionStorage.setItem(&quot;CartSession&quot;,&quot;ABCDEFG&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
+	</textarea>
+</fieldset>
+<br /><br />
+<span class="report-header">Delete values currently in our DOM storage and read storage back</span>
+<br/><br/>
+<span class="label">Plan A (Run in firebug console using the removeItem() method):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.removeItem(&quot;MessageOfTheDay&quot;); sessionStorage.removeItem(&quot;CartSession&quot;); sessionStorage.removeItem(&quot;CurrentBrowser&quot;); sessionStorage.removeItem(&quot;SessionStorageTarget&quot;); localStorage.removeItem(&quot;LocalStorageTarget&quot;);}catch(e){console.log(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}
+	</textarea>
+</fieldset>
+<br />
+<span class="label">Alternative: Use the clear method</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}try{localStorage.clear(); sessionStorage.clear();}catch(e){console.log(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.console.log(m);}catch(e){console.log(e.message);}
+	</textarea>
+</fieldset>
+<br />
+<span class="label">Plan B (DOM Injection in "new key" field):</span>
+<br />
+<fieldset>
+	<legend>Copy and Paste</legend>
+	<textarea rows="5" cols="50">
+	&lt;span onmouseover=&#39;try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.alert(m);}catch(e){alert(e.message);}try{localStorage.removeItem(&quot;MessageOfTheDay&quot;); sessionStorage.removeItem(&quot;CartSession&quot;);}catch(e){alert(e.message);}try{var m = &quot;&quot;;var l = window.localStorage;var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\n&quot;;};for(i=0;i&lt;s.length;i++){var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\n&quot;;};window.alert(m);}catch(e){alert(e.message);}&#39;&gt;DANGER: DONT MOUSEOVER&lt;/span&gt;
+	</textarea>
+</fieldset>
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart1);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart2);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart3);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart4);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart5);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ContentSecurityPolicyScriptSourcescriptsrc);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoSetHTTPHeadersUsingApacheServer);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CheckHTTPHeaderswithcURL);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CookiesPart1HowHTTPOnlyWorks);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatistheXSSProtectionHeader);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->OutputEncodingPart1HowItStopsCrosssiteScriptingXSS);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->OutputEncodingPart2HowtoTestifitWorks);?>
+<br/><br/>

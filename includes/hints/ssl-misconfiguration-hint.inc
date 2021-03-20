@@ -30,8 +30,19 @@ sslscan --targets=hosts.txt
 <code>
 nmap -p 443 -v -Pn --script=ssl-enum-ciphers --open -iL hosts.txt
 </code>
-<br/>
+<br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoTestforWeakSSLTLSHTTPSciphers);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtocheckHTTPScertificatefromcommandline);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtocheckHTTPSCertificatesforcommonIssues);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->cURLErrorSSLCertificateProblem);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoSetHTTPHeadersUsingApacheServer);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CheckHTTPHeaderswithcURL);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisHTTPStrictTransportSecurityHSTS);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatistheHSTSPreloadlist);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CookiesPart2HowSecureCookiesWork);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->SSLScanPart1HowtotestHTTPS);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->SSLScanPart2HowtoInterprettheResults);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallSSLScanonWindows);?>
 <br/><br/>
+
