@@ -99,7 +99,6 @@ class YouTubeVideoHandler {
 	public $HowtoStartOWASPZAPfromCommandLine = 199;
 	public $ExtendingOWASPZAPwithAddOns = 200;
 	public $UsingOWASPZAPwithBurpSuiteBestofBothWorlds = 201;
-	public $HowtoCreateShortcutforOWASPZAPLinux = 203;
 	public $HowtocheckHTTPScertificatefromcommandline = 204;
 	public $HowtocheckHTTPSCertificatesforcommonIssues = 205;
 	public $cURLErrorSSLCertificateProblem = 206;
@@ -126,10 +125,7 @@ class YouTubeVideoHandler {
 	public $SSLScanPart1HowtotestHTTPS = 227;
 	public $SSLScanPart2HowtoInterprettheResults = 228;
 	public $HowtoInstallSSLScanonWindows = 229;
-	public $HowtoInstallOWASPZAPonUbuntu = 230;
 	public $HowtoinstallJavaonLinuxDebian = 231;
-	public $HowtoInstallJavaonWindows = 232;
-	public $HowtoInstallOWASPZAPonWindows = 233;
 	public $OutputEncodingPart1HowItStopsCrosssiteScriptingXSS = 234;
 	public $OutputEncodingPart2HowtoTestifitWorks = 235;
 	public $HowCrosssiteRequestForgeryCSRFTokensWork = 236;
