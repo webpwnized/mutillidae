@@ -31,7 +31,15 @@
 			Example Target:&lt;body style="color:#{dynamic input}"&gt;
 			<br/><br/>
 			Possible Solution:<span class="label">style="&lt;body color:#"<span style="color:red;">"&gt;&lt;H1&gt;HELLO WORLD&lt;/H1&gt;&lt;</span> anything="</span>"&gt;
-			<br/><br/>
-			<span id="videos" class="report-header">Videos</span>
-			<br/><br/>
-			<br/><br/>
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart1);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart2);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart3);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart4);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart5);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ContentSecurityPolicyScriptSourcescriptsrc);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->OutputEncodingPart1HowItStopsCrosssiteScriptingXSS);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->OutputEncodingPart2HowtoTestifitWorks);?>
+<br/><br/>

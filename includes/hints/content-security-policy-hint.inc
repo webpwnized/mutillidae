@@ -1,11 +1,11 @@
 <br/><br/>
 <span class="report-header">Overview</span>
 <br/><br/>
-Content-Security-Policy (CSP) allows developers to tell the browser what client-side code can run in the browser. CSP may stop attacks that hackers launch against users of vulnerable web sites. These client-side code injection and click-jacking attacks take advantage of users using a vulnerable web application. 
+Content-Security-Policy (CSP) allows developers to tell the browser what client-side code can run in the browser. CSP may stop attacks that hackers launch against users of vulnerable web sites. These client-side code injection and click-jacking attacks take advantage of users using a vulnerable web application.
 <br/><br/>
 CSP protects sites by whitelisting which client-side source code files are allowed to execute. For this reason, except for HTML, all non-HTML client-side source code must be written in files rather than mixed the HTML. Otherwise, CSP has to effectively be disabled to allow the "unsafe inline" code to run or more complex "code hashes" or other identifiers have to be used to identify "friendly" code.
 <br/><br/>
-CSP does not patch vulnerabilities but may block certain attacks which may give developers time to issue patches. CSP also includes a reporting feature that can notify when CSP blocks. These reports can alert a suitably savvy developer that is auditing the reports that the site has a vulnerability. 
+CSP does not patch vulnerabilities but may block certain attacks which may give developers time to issue patches. CSP also includes a reporting feature that can notify when CSP blocks. These reports can alert a suitably savvy developer that is auditing the reports that the site has a vulnerability.
 <br/><br/>
 CSP requires the following for maximum effectiveness.
 <br/>
@@ -92,3 +92,16 @@ Content-Security-Policy: font-src 'self' https://&lt;partner domain&gt;
 <span class="report-header">Other directives</span>
 <br/><br/>
 There are several other directives that may be applicable for some sites. Implement the applicable CSP directives
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart1);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart2);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart3);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart4);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisContentSecurityPolicyPart5);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ContentSecurityPolicyScriptSourcescriptsrc);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ContentSecurityPolicyFrameAncestors);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoSetHTTPHeadersUsingApacheServer);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CheckHTTPHeaderswithcURL);?>
+<br/><br/>

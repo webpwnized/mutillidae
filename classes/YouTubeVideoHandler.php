@@ -105,6 +105,40 @@ class YouTubeVideoHandler {
 	public $HowtoStartOWASPZAPfromCommandLine = 199;
 	public $ExtendingOWASPZAPwithAddOns = 200;
 	public $UsingOWASPZAPwithBurpSuiteBestofBothWorlds = 201;
+	public $HowtoCreateShortcutforOWASPZAPLinux = 203;
+	public $HowtocheckHTTPScertificatefromcommandline = 204;
+	public $HowtocheckHTTPSCertificatesforcommonIssues = 205;
+	public $cURLErrorSSLCertificateProblem = 206;
+	public $WhatisContentSecurityPolicyPart1 = 207;
+	public $WhatisContentSecurityPolicyPart2 = 208;
+	public $WhatisContentSecurityPolicyPart3 = 209;
+	public $WhatisContentSecurityPolicyPart4 = 210;
+	public $WhatisContentSecurityPolicyPart5 = 211;
+	public $ContentSecurityPolicyScriptSourcescriptsrc = 212;
+	public $ContentSecurityPolicyFrameAncestors = 213;
+	public $WhatareWebServerBanners = 214;
+	public $HowtoSetHTTPHeadersUsingApacheServer = 215;
+	public $CheckHTTPHeaderswithcURL = 216;
+	public $HowCacheControlHeadersWork = 217;
+	public $WhatisHTTPStrictTransportSecurityHSTS = 218;
+	public $WhatistheHSTSPreloadlist = 219;
+	public $CookiesPart1HowHTTPOnlyWorks = 220;
+	public $CookiesPart2HowSecureCookiesWork = 221;
+	public $CookiesPart3HowSameSiteWorks = 222;
+	public $WhatistheXFrameOptionsHeader = 223;
+	public $WhatistheXContentTypeOptionsHeader = 224;
+	public $WhatistheReferrerPolicyHeader = 225;
+	public $WhatistheXSSProtectionHeader = 226;
+	public $SSLScanPart1HowtotestHTTPS = 227;
+	public $SSLScanPart2HowtoInterprettheResults = 228;
+	public $HowtoInstallSSLScanonWindows = 229;
+	public $HowtoInstallOWASPZAPonUbuntu = 230;
+	public $HowtoinstallJavaonLinuxDebian = 231;
+	public $HowtoInstallJavaonWindows = 232;
+	public $HowtoInstallOWASPZAPonWindows = 233;
+	public $OutputEncodingPart1HowItStopsCrosssiteScriptingXSS = 234;
+	public $OutputEncodingPart2HowtoTestifitWorks = 235;
+	public $HowCrosssiteRequestForgeryCSRFTokensWork = 236;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){
