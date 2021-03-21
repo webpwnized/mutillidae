@@ -48,36 +48,39 @@
 
 	try {
 
+	    header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://mutillidae.local");
+	    header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,PATCH,DELETE");
+	    header("Access-Control-Max-Age: 5");
+
 	    $lVerb = $_SERVER['REQUEST_METHOD'];
+	    $lReturnData = True;
 
 	    switch($lVerb){
+	        case "OPTIONS":
+	            $lReturnData = False;
+                break;
 	        case "GET":
-	            break;
+                break;
 	        case "POST"://create
-	            break;
+                break;
 	        case "PUT":	//create or update
-	            break;
+	        case "PATCH":	//create or update
 	        case "DELETE":
-	            /* $_POST array is not auto-populated for DELETE method. Parse input into an array. */
+	            /* $_POST array is not auto-populated for PUT,PATCH,DELETE method. Parse input into an array. */
 	            populatePOSTSuperGlobal();
-	            break;
+            break;
 	        default:
 	            throw new Exception("Could not understand HTTP REQUEST_METHOD verb");
-	            break;
+            break;
 	    }// end switch
-
-	    header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://mutillidae.local");
-	    header("Access-Control-Max-Age: 600");
 
     	switch ($_SESSION["security-level"]){
     	    case "0": // This code is insecure. No input validation is performed.
-    	        $lProtectAgainstMethodTampering = FALSE;
     	        $lProtectAgainstCommandInjection=FALSE;
     	        $lProtectAgainstXSS = FALSE;
     	        break;
 
     	    case "1": // This code is insecure. No input validation is performed.
-    	        $lProtectAgainstMethodTampering = FALSE;
     	        $lProtectAgainstCommandInjection=FALSE;
     	        $lProtectAgainstXSS = FALSE;
     	        break;
@@ -86,17 +89,18 @@
     	    case "3":
     	    case "4":
     	    case "5": // This code is fairly secure
-    	        $lProtectAgainstMethodTampering = TRUE;
     	        $lProtectAgainstCommandInjection=TRUE;
     	        $lProtectAgainstXSS = TRUE;
     	        break;
     	}// end switch
 
-    	if(isset($_REQUEST["message"])){
-    	    $lProtectAgainstMethodTampering?$lMessage = $_POST["message"]:$lMessage = $_REQUEST["message"];
+    	if (isset($_GET["message"])) {
+    	    $lMessage = $_GET["message"];
+    	} elseif (isset($_POST["message"])){
+    	    $lMessage = $_POST["message"];
     	}else{
     	    $lMessage="Hello";
-    	}
+    	}//end if
 
     	if ($lProtectAgainstXSS) {
     	    /* Protect against XSS by output encoding */
@@ -112,23 +116,19 @@
     	    $LogHandler->writeToLog("Executed operating system command: echo " . $lMessageText);
     	}//end if
 
+    	if ($lReturnData) {
+    	    echo '[';
+    	    echo '{"Message":'.json_encode($lMessage).'},';
+    	    echo '{"Method":'.json_encode($lVerb)."},";
+    	    echo '{"Parameters":[';
+    	    echo '{"GET":'.json_encode($_GET)."},";
+    	    echo '{"POST":'.json_encode($_POST)."}";
+    	    echo ']}';
+    	    echo ']';
+    	}
+
 	}catch(Exception $e){
+	    header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://mutillidae.local");
 	    echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
 	}// end try
-
-	try{
-
-		echo '[';
-		echo '{"Message":'.json_encode($lMessage).'},';
-		echo '{"Method":'.json_encode($lVerb)."},";
-		echo '{"Parameters":[';
-		echo '{"GET":'.json_encode($_GET)."},";
-		echo '{"POST":'.json_encode($_POST)."}";
-		echo ']}';
-		echo ']';
-
-	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatErrorJSON($e, "Unable to process request to web service ws-user-account");
-	}// end try
-
 ?>

@@ -1,6 +1,5 @@
 <?php
 	/* Command Injection
-	 * Method Tampering
 	 * Cross Site Scripting
 	 * HTML Injection */
 
@@ -36,9 +35,9 @@
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
-	var onSubmitOfForm = function(){
+	var onSubmitOfForm = function(theForm){
 
-		lText = document.getElementById('idMessageInput').value;
+		lText = theForm.idMessageInput.value;
 
 		<?php
 		if($lEnableJavaScriptValidation){
@@ -59,7 +58,11 @@
 		}// end if
 
         var lXMLHTTP = new XMLHttpRequest();
-
+		var lURL = "http://cors.mutillidae.local/webservices/rest/cors-server.php";
+		var lAsynchronously = true;
+		var lMessage = encodeURIComponent(lText);
+		var lMethod = encodeURIComponent(theForm.idMethod.value);
+		var lQueryParameters = "message="+lMessage+"&method="+lMethod;
 
         lXMLHTTP.onreadystatechange = function() {
             if (this.readyState == 4) {
@@ -67,8 +70,21 @@
                document.getElementById("idMessageOutput").innerHTML = lXMLHTTP.responseText;
             }
         };
-        lXMLHTTP.open("GET", "http://cors.mutillidae.local/webservices/rest/cors-server.php?message="+encodeURIComponent(lText), true);
-        lXMLHTTP.send();
+
+		switch(theForm.idMethod.value){
+			case "GET":
+                lXMLHTTP.open(lMethod, lURL+"?"+lQueryParameters, lAsynchronously);
+                lXMLHTTP.send();
+			break;
+			case "POST":
+			case "PUT":
+			case "PATCH":
+			case "DELETE":
+                lXMLHTTP.open(lMethod, lURL, lAsynchronously);
+				lXMLHTTP.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                lXMLHTTP.send(lQueryParameters);
+			break;
+        };
 
 	};// end JavaScript function onSubmitOfForm()
 </script>
@@ -78,32 +94,48 @@
     <span class="label">Switch to Content Security Policy (CSP)</span>
 </a>
 
-<table>
-	<tr><td></td></tr>
-	<tr>
-		<td colspan="2" class="form-header">Enter message to echo</td>
-	</tr>
-	<tr><td></td></tr>
-	<tr>
-		<td class="label">Message</td>
-		<td>
-			<input 	type="text" id="idMessageInput" name="message" size="20"
-					autofocus="autofocus" onkeypress="if(event.keyCode==13){onSubmitOfForm();}"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="20" required="required"');
-						}// end if
-					?>
-			/>
-		</td>
-	</tr>
-	<tr><td></td></tr>
-	<tr>
-		<td colspan="2" style="text-align:center;">
-			<input onclick="onSubmitOfForm();"
-			name="echo-php-submit-button" class="button" type="button" value="Echo Message" />
-		</td>
-	</tr>
-	<tr><td></td></tr>
-</table>
+<form>
+    <table>
+    	<tr><td></td></tr>
+    	<tr>
+    		<td colspan="2" class="form-header">Enter message to echo</td>
+    	</tr>
+    	<tr><td></td></tr>
+    	<tr>
+    		<td class="label">Message</td>
+    		<td>
+    			<input 	type="text" id="idMessageInput" name="message" size="20"
+    					autofocus="autofocus"
+    					onkeypress="if(event.keyCode==13){onSubmitOfForm(this.form);}"
+    					<?php if ($lEnableHTMLControls) {echo('minlength="1" maxlength="20" required="required"');} ?>
+    			/>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<input type="radio" id="idMethod" name="method" value="GET" checked="checked" />
+    			<label for="idMethod">GET</label><br>
+    			<input type="radio" id="idMethod" name="method" value="POST" />
+    			<label for="idMethod">POST</label><br>
+    			<input type="radio" id="idMethod" name="method" value="PUT" />
+    			<label for="idMethod">PUT</label><br>
+    			<input type="radio" id="idMethod" name="method" value="PATCH" />
+    			<label for="idMethod">PATCH</label><br>
+    			<input type="radio" id="idMethod" name="method" value="DELETE" />
+    			<label for="idMethod">DELETE</label><br>
+    		</td>
+    	</tr>
+    	<tr><td></td></tr>
+    	<tr><td></td></tr>
+    	<tr>
+    		<td colspan="2" style="text-align:center;">
+    			<input
+        			onclick="onSubmitOfForm(this.form);"
+        			onkeypress="if(event.keyCode==13){onSubmitOfForm(this.form);}"
+        			name="echo-php-submit-button" class="button" type="button" value="Echo Message" />
+    		</td>
+    	</tr>
+    	<tr><td></td></tr>
+    </table>
+</form>
 <div id="idMessageOutput"></div>
