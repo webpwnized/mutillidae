@@ -48,10 +48,6 @@
 
 	try {
 
-	    header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://mutillidae.local");
-	    header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,PATCH,DELETE");
-	    header("Access-Control-Max-Age: 5");
-
 	    $lVerb = $_SERVER['REQUEST_METHOD'];
 	    $lReturnData = True;
 
@@ -73,6 +69,27 @@
 	            throw new Exception("Could not understand HTTP REQUEST_METHOD verb");
             break;
 	    }// end switch
+
+	    if ($lVerb == "OPTIONS" ||
+	        (isset($_GET['acao']) && $_GET['acao']=="True") ||
+	        (isset($_POST['acao']) && $_POST['acao']=="True"))
+	    {
+	        header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://mutillidae.local");
+	    }
+
+	    if ($lVerb == "OPTIONS" ||
+	        (isset($_GET['acam']) && $_GET['acam']=="True") ||
+	        (isset($_POST['acam']) && $_POST['acam']=="True"))
+	    {
+	        header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,PATCH,DELETE");
+	    }
+
+	    if ($lVerb == "OPTIONS" ||
+	        (isset($_GET['acma']) && $_GET['acma']=="True") ||
+	        (isset($_POST['acma']) && $_POST['acma']=="True"))
+	    {
+	        header("Access-Control-Max-Age: 5");
+	    }
 
     	switch ($_SESSION["security-level"]){
     	    case "0": // This code is insecure. No input validation is performed.

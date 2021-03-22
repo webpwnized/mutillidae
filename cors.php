@@ -62,7 +62,10 @@
 		var lAsynchronously = true;
 		var lMessage = encodeURIComponent(lText);
 		var lMethod = encodeURIComponent(theForm.idMethod.value);
-		var lQueryParameters = "message="+lMessage+"&method="+lMethod;
+		var lSendACAOHeader = theForm.idACAO.checked?"True":"False";
+		var lSendACAMHeader = theForm.idACAM.checked?"True":"False";
+		var lSendACMAHeader = theForm.idACMA.checked?"True":"False";
+		var lQueryParameters = "message="+lMessage+"&method="+lMethod+"&acao="+lSendACAOHeader+"&acam="+lSendACAMHeader+"&acma="+lSendACMAHeader;
 
         lXMLHTTP.onreadystatechange = function() {
             if (this.readyState == 4) {
@@ -106,12 +109,13 @@
     		<td>
     			<input 	type="text" id="idMessageInput" name="message" size="20"
     					autofocus="autofocus"
-    					onkeypress="if(event.keyCode==13){onSubmitOfForm(this.form);}"
+    					onkeypress="if(event.keyCode==13){this.form.submit();}"
     					<?php if ($lEnableHTMLControls) {echo('minlength="1" maxlength="20" required="required"');} ?>
     			/>
     		</td>
     	</tr>
     	<tr>
+    		<td class="label">HTTP Method</td>
     		<td>
     			<input type="radio" id="idMethod" name="method" value="GET" checked="checked" />
     			<label for="idMethod">GET</label><br>
@@ -125,7 +129,17 @@
     			<label for="idMethod">DELETE</label><br>
     		</td>
     	</tr>
-    	<tr><td></td></tr>
+    	<tr>
+    		<td class="label">Response Headers to Send</td>
+    		<td>
+    			<input type="checkbox" id="idACAO" name="acao" checked="checked" />
+    			<label for="idACAO">Access-Control-Allow-Origin</label><br>
+    			<input type="checkbox" id="idACAM" name="acam" checked="checked" />
+    			<label for="idACAM">Access-Control-Allow-Methods</label><br>
+    			<input type="checkbox" id="idACMA" name="acma" checked="checked" />
+    			<label for="idACMA">Access-Control-Max-Age</label><br>
+    		</td>
+    	</tr>
     	<tr><td></td></tr>
     	<tr>
     		<td colspan="2" style="text-align:center;">
