@@ -129,6 +129,8 @@ class YouTubeVideoHandler {
 	public $OutputEncodingPart1HowItStopsCrosssiteScriptingXSS = 234;
 	public $OutputEncodingPart2HowtoTestifitWorks = 235;
 	public $HowCrosssiteRequestForgeryCSRFTokensWork = 236;
+	public $WhatisCORSPart1Explanation = 237;
+	public $WhatisCORSPart2Demonstration = 238;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){

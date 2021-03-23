@@ -409,6 +409,16 @@
     			('content-security-policy.php', 56, 1),
     			('content-security-policy.php', 59, 1),
     			('content-security-policy.php', 65, 1),
+    			('cors.php', 11, 3),
+    			('cors.php', 55, 3),
+    			('cors.php', 12, 1),
+    			('cors.php', 13, 1),
+    			('cors.php', 20, 1),
+    			('cors.php', 30, 1),
+    			('cors.php', 48, 1),
+    			('cors.php', 56, 1),
+    			('cors.php', 59, 1),
+    			('cors.php', 67, 1),
     			('credits.php', 19, 1),
     			('credits.php', 56, 1),
     			('credits.php', 59, 1),
@@ -738,6 +748,7 @@
     		(64, 'Setting up LDAP Server', 'ldap-setup-hint.inc'),
     		(65, 'Content Security Policy (CSP)', 'content-security-policy-hint.inc'),
     		(66, 'JSON Web Tokens (JWT)', 'jwt-hint.inc'),
+    		(67, 'Cross-origin Resource Sharing (CORS)', 'cross-origin-resource-sharing-hint.inc'),
     		(99, 'Hints Not Found', 'hints-not-found.inc')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -927,7 +938,10 @@
                 (229, 'zUwPhHigi_M', 'How to Install SSLScan on Windows'),
                 (234, '2-U2s0akMqE', 'Output Encoding: Part 1 - How It Stops Cross-site Scripting (XSS)'),
                 (235, 'JlLVhdlqe1Q', 'Output Encoding: Part 2 - How to Test if it Works'),
-                (236, '2uWAZsCm-W8', 'How Cross-site Request Forgery (CSRF) Tokens Work')";
+                (236, '2uWAZsCm-W8', 'How Cross-site Request Forgery (CSRF) Tokens Work'),
+            	(237, 'QDIppL_j6Vo', 'What is CORS? - Part 1 - Explanation'),
+            	(238, 'CxFuAcThKPA', 'What is CORS? - Part 2 - Demonstration')";
+
 
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
