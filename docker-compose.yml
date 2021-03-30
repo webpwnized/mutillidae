@@ -10,8 +10,7 @@ services:
       MYSQL_PASSWORD: mutillidae
 
   web:
-    build: .
-    image: mutillidae
+    image: costa89/mutillidae:latest
     hostname: mutillidae.local
     depends_on:
       - db
