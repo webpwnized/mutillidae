@@ -146,6 +146,34 @@ class YouTubeVideoHandler {
 	public $IntroductiontoPacketAnalysisPart9PacketAnalysiswithWiresharkPart1 = 250;
 	public $IntroductiontoPacketAnalysisPart10PacketAnalysiswithWiresharkPart2 = 251;
 	public $MutillidaeLab2Walkthrough = 252;
+	public $MutillidaeLab3Walkthrough = 253;
+	public $MutillidaeLab4Walkthrough = 254;
+	public $MutillidaeLab5Walkthrough = 255;
+	public $MutillidaeLab6Walkthrough = 256;
+	public $MutillidaeLab7Walkthrough = 257;
+	public $MutillidaeLab8Walkthrough = 258;
+	public $MutillidaeLab9Walkthrough = 259;
+	public $MutillidaeLab10Walkthrough = 260;
+	public $MutillidaeLab11Walkthrough = 261;
+	public $MutillidaeLab12Walkthrough = 262;
+	public $MutillidaeLab13Walkthrough = 263;
+	public $MutillidaeLab14Walkthrough = 264;
+	public $MutillidaeLab15Walkthrough = 265;
+	public $MutillidaeLab16Walkthrough = 266;
+	public $MutillidaeLab17Walkthrough = 267;
+	public $MutillidaeLab18Walkthrough = 268;
+	public $MutillidaeLab19Walkthrough = 269;
+	public $MutillidaeLab20Walkthrough = 270;
+	public $MutillidaeLab21Walkthrough = 271;
+	public $MutillidaeLab22Walkthrough = 272;
+	public $MutillidaeLab23Walkthrough = 273;
+	public $MutillidaeLab24Walkthrough = 274;
+	public $MutillidaeLab25Walkthrough = 275;
+	public $MutillidaeLab26Walkthrough = 276;
+	public $MutillidaeLab27Walkthrough = 277;
+	public $MutillidaeLab28Walkthrough = 278;
+	public $MutillidaeLab29Walkthrough = 279;
+	public $MutillidaeLab30Walkthrough = 280;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){
