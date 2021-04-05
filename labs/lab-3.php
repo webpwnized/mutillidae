@@ -10,18 +10,3 @@
 
     require_once("labs/lab-template.inc");
 ?>
-
-
-
-
-
-1.
-
-a.
-
-b.
-
-c.
-
-d.
-
