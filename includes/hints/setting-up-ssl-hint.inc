@@ -1,7 +1,7 @@
 <br/><br/>
 <span class="report-header">Overview</span>
 <br/><br/>
-While not appropriate for production environments, self-signed certificates work well for providing HTTPS in 
+While not appropriate for production environments, self-signed certificates work well for providing HTTPS in
 isolated lab environments; especially those running only locally
 <br/><br/>
 <a href="#videos" class="label"><img alt="YouTube" src="/images/youtube-play-icon-40-40.png" style="margin-right: 10px;" />Video Tutorials</a>
@@ -58,7 +58,7 @@ sudo nano /etc/apache2/sites-available/default-ssl.conf
 <span class="report-header">Change the owner of the certificate files to Apache (username: www-data)</span>
 <div>&nbsp;</div>
 <pre>
-sudo chown www-data:www-data /etc/ssl/certs/mutillidae-selfsigned.crt 
+sudo chown www-data:www-data /etc/ssl/certs/mutillidae-selfsigned.crt
 sudo chown www-data:www-data /etc/ssl/private/mutillidae-selfsigned.key
 </pre>
 
@@ -88,11 +88,13 @@ sudo service apache2 restart
 <span class="report-header">Test the site by browsing to the homepage over HTTPS</span>
 <div>&nbsp;</div>
 <pre>
-Note: Because the certficate is self-signed, it is not trusted. Firefox will show an 
+Note: Because the certficate is self-signed, it is not trusted. Firefox will show an
 "Untrusted Certificate" warning as result
 </pre>
 <br/>
 <span id="videos" class="report-header">Videos</span>
 <br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoCreateSelfSignedCertificateinApache);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisCertificateTransparencyPart1);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisCertificateTransparencyPart2ExpectCTHeader);?>
 <br/><br/>

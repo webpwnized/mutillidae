@@ -131,6 +131,12 @@ class YouTubeVideoHandler {
 	public $HowCrosssiteRequestForgeryCSRFTokensWork = 236;
 	public $WhatisCORSPart1Explanation = 237;
 	public $WhatisCORSPart2Demonstration = 238;
+	public $CheckforVulnerableLibrariesinYourWebApplication = 239;
+	public $HowtoEnableApacheModHeader = 240;
+	public $WhatisCertificateTransparencyPart1 = 241;
+	public $WhatisCertificateTransparencyPart2ExpectCTHeader = 242;
+	public $HowtoCheckHTTPHeadersCommandLine = 243;
+	public $HowtoCheckHTTPHeadersfromBrowser = 244;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){

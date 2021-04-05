@@ -472,6 +472,7 @@
     			('html5-storage.php', 42, 1),
     			('html5-storage.php', 56, 1),
     			('html5-storage.php', 59, 1),
+    			('labs.php', 68, 1),
     			('login.php', 1, 1),
     			('login.php', 10, 2),
     			('login.php', 53, 2),
@@ -749,6 +750,7 @@
     		(65, 'Content Security Policy (CSP)', 'content-security-policy-hint.inc'),
     		(66, 'JSON Web Tokens (JWT)', 'jwt-hint.inc'),
     		(67, 'Cross-origin Resource Sharing (CORS)', 'cross-origin-resource-sharing-hint.inc'),
+    		(68, 'Lab 1', 'lab-1-hint.inc'),
     		(99, 'Hints Not Found', 'hints-not-found.inc')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -940,8 +942,13 @@
                 (235, 'JlLVhdlqe1Q', 'Output Encoding: Part 2 - How to Test if it Works'),
                 (236, '2uWAZsCm-W8', 'How Cross-site Request Forgery (CSRF) Tokens Work'),
             	(237, 'QDIppL_j6Vo', 'What is CORS? - Part 1 - Explanation'),
-            	(238, 'CxFuAcThKPA', 'What is CORS? - Part 2 - Demonstration')";
-
+            	(238, 'CxFuAcThKPA', 'What is CORS? - Part 2 - Demonstration'),
+            	(239, 'qHhceEVLZvg', 'Check for Vulnerable Libraries in Your Web Application'),
+            	(240, 'xczzcxL6WY0', 'How to Enable Apache Mod-Headers'),
+            	(241, 'Ry884U5YTcs', 'What is Certificate Transparency - Part 1'),
+            	(242, 'eCOkyuLxhl8', 'What is Certificate Transparency? - Part 2 - Expect-CT Header'),
+            	(243, 'PcXZqUqBJeg', 'How to Check HTTP Headers (Command Line)'),
+                (244, 'lvi_NM1n5vw', 'How to Check HTTP Headers from Browser')";
 
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {

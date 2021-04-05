@@ -723,30 +723,6 @@
 			</ul>
 		</li>
 		<li>
-			<a href="">HTML 5</a>
-			<ul>
-				<li>
-					<a href="">HTML 5 Web Storage</a>
-					<ul>
-						<li><a href="index.php?page=html5-storage.php">HTML5 Web Storage</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="">JavaScript Object Notation (JSON)</a>
-					<ul>
-						<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
-						<li><a href="index.php?page=pen-test-tool-lookup-ajax.php">Pen Test Tool Lookup (AJAX)</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="">Asyncronous JavaScript and XML (AJAX)</a>
-					<ul>
-						<li><a href="index.php?page=pen-test-tool-lookup-ajax.php">Pen Test Tool Lookup (AJAX)</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li>
 			<a href="">Others</a>
 			<ul>
 				<li>
@@ -804,6 +780,17 @@
 					<a href="">JSON Web Token (JWT)</a>
 					<ul>
 						<li><a href="index.php?page=jwt.php">Current User Information</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="">Labs</a>
+			<ul>
+				<li>
+					<a href="">How the Web Works</a>
+					<ul>
+						<li><a href="index.php?page=labs.php">Lab 1: Sending HTTP Requests with Netcat</a></li>
 					</ul>
 				</li>
 			</ul>
