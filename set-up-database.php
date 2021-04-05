@@ -473,6 +473,7 @@
     			('html5-storage.php', 56, 1),
     			('html5-storage.php', 59, 1),
     			('labs/lab-1.php', 68, 1),
+    			('labs/lab-2.php', 69, 1),
     			('login.php', 1, 1),
     			('login.php', 10, 2),
     			('login.php', 53, 2),
@@ -751,6 +752,7 @@
     		(66, 'JSON Web Tokens (JWT)', 'jwt-hint.inc'),
     		(67, 'Cross-origin Resource Sharing (CORS)', 'cross-origin-resource-sharing-hint.inc'),
     		(68, 'Lab 1', 'lab-1-hint.inc'),
+    		(69, 'Lab 2', 'lab-2-hint.inc'),
     		(99, 'Hints Not Found', 'hints-not-found.inc')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -948,7 +950,14 @@
             	(241, 'Ry884U5YTcs', 'What is Certificate Transparency - Part 1'),
             	(242, 'eCOkyuLxhl8', 'What is Certificate Transparency? - Part 2 - Expect-CT Header'),
             	(243, 'PcXZqUqBJeg', 'How to Check HTTP Headers (Command Line)'),
-                (244, 'lvi_NM1n5vw', 'How to Check HTTP Headers from Browser')";
+                (244, 'lvi_NM1n5vw', 'How to Check HTTP Headers from Browser'),
+    	        (245, 'zneRNme9h3U', 'Mutillidae: Lab 1 Walkthrough'),
+    	        (246, 'oy9Ya7NxDUQ', 'How to Install Wireshark in Windows 10'),
+            	(247, 'akhB55S86kE', 'Introduction to Wireshark'),
+            	(248, 'AIQVNlI_A20', 'Introduction to Packet Analysis - Capturing Network Traffic with TCPDump (Part 1)'),
+            	(249, 'Gdmz3jtqjMM', 'Introduction to Packet Analysis - Capturing Network Traffic with TCPDump (Part 2)'),
+            	(250, 'bSHfehhCxZI', 'Introduction to Packet Analysis - Packet Analysis with Wireshark (Part 1)'),
+            	(251, '9bRoL-BOzr0', 'Introduction to Packet Analysis - Packet Analysis with Wireshark (Part 2)')";
 
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {

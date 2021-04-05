@@ -138,6 +138,13 @@ class YouTubeVideoHandler {
 	public $WhatisCertificateTransparencyPart2ExpectCTHeader = 242;
 	public $HowtoCheckHTTPHeadersCommandLine = 243;
 	public $HowtoCheckHTTPHeadersfromBrowser = 244;
+	public $MutillidaeLab1Walkthrough = 245;
+	public $HowtoInstallWiresharkinWindows10 = 246;
+	public $IntroductiontoNetworkPacketAnalysiswithWireshark = 247;
+	public $IntroductiontoPacketAnalysisPart7CapturingNetworkTrafficwithTCPDumpPart1 = 248;
+	public $IntroductiontoPacketAnalysisPart8CapturingNetworkTrafficwithTCPDumpPart2 = 249;
+	public $IntroductiontoPacketAnalysisPart9PacketAnalysiswithWiresharkPart1 = 250;
+	public $IntroductiontoPacketAnalysisPart10PacketAnalysiswithWiresharkPart2 = 251;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){
