@@ -753,6 +753,34 @@
     		(67, 'Cross-origin Resource Sharing (CORS)', 'cross-origin-resource-sharing-hint.inc'),
     		(68, 'Lab 1', 'lab-1-hint.inc'),
     		(69, 'Lab 2', 'lab-2-hint.inc'),
+    		(70, 'Lab 2', 'lab-3-hint.inc'),
+    		(71, 'Lab 2', 'lab-4-hint.inc'),
+    		(72, 'Lab 2', 'lab-5-hint.inc'),
+    		(73, 'Lab 2', 'lab-6-hint.inc'),
+    		(74, 'Lab 2', 'lab-7-hint.inc'),
+    		(75, 'Lab 2', 'lab-8-hint.inc'),
+    		(76, 'Lab 2', 'lab-9-hint.inc'),
+    		(77, 'Lab 2', 'lab-10-hint.inc'),
+    		(78, 'Lab 2', 'lab-11-hint.inc'),
+    		(79, 'Lab 2', 'lab-12-hint.inc'),
+    		(80, 'Lab 2', 'lab-13-hint.inc'),
+    		(81, 'Lab 2', 'lab-14-hint.inc'),
+    		(82, 'Lab 2', 'lab-15-hint.inc'),
+    		(83, 'Lab 2', 'lab-16-hint.inc'),
+    		(84, 'Lab 2', 'lab-17-hint.inc'),
+    		(85, 'Lab 2', 'lab-18-hint.inc'),
+    		(86, 'Lab 2', 'lab-19-hint.inc'),
+    		(87, 'Lab 2', 'lab-20-hint.inc'),
+    		(88, 'Lab 2', 'lab-21-hint.inc'),
+    		(89, 'Lab 2', 'lab-22-hint.inc'),
+    		(90, 'Lab 2', 'lab-23-hint.inc'),
+    		(91, 'Lab 2', 'lab-24-hint.inc'),
+    		(92, 'Lab 2', 'lab-25-hint.inc'),
+    		(93, 'Lab 2', 'lab-26-hint.inc'),
+    		(94, 'Lab 2', 'lab-27-hint.inc'),
+    		(95, 'Lab 2', 'lab-28-hint.inc'),
+    		(96, 'Lab 2', 'lab-29-hint.inc'),
+    		(97, 'Lab 2', 'lab-30-hint.inc'),
     		(99, 'Hints Not Found', 'hints-not-found.inc')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -957,9 +985,10 @@
             	(248, 'AIQVNlI_A20', 'Introduction to Packet Analysis - Capturing Network Traffic with TCPDump (Part 1)'),
             	(249, 'Gdmz3jtqjMM', 'Introduction to Packet Analysis - Capturing Network Traffic with TCPDump (Part 2)'),
             	(250, 'bSHfehhCxZI', 'Introduction to Packet Analysis - Packet Analysis with Wireshark (Part 1)'),
-            	(251, '9bRoL-BOzr0', 'Introduction to Packet Analysis - Packet Analysis with Wireshark (Part 2)')";
+            	(251, '9bRoL-BOzr0', 'Introduction to Packet Analysis - Packet Analysis with Wireshark (Part 2)'),
+    	        (252, 'ijsThXgSfHE', 'Mutillidae: Lab 2 Walkthrough')";
 
-	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
+    $lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = TRUE;
 	}else{

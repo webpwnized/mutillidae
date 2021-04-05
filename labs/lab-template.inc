@@ -42,7 +42,7 @@
 
 <?php
 	try{
-	    $lResult = "Choose the best answer";
+	    $lResult = "Choose the best answer or view Hints and Videos";
 
 	    if (isset($_POST["answer"])){
 

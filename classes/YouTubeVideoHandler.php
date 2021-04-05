@@ -145,6 +145,7 @@ class YouTubeVideoHandler {
 	public $IntroductiontoPacketAnalysisPart8CapturingNetworkTrafficwithTCPDumpPart2 = 249;
 	public $IntroductiontoPacketAnalysisPart9PacketAnalysiswithWiresharkPart1 = 250;
 	public $IntroductiontoPacketAnalysisPart10PacketAnalysiswithWiresharkPart2 = 251;
+	public $MutillidaeLab2Walkthrough = 252;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){
