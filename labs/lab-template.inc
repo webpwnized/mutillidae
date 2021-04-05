@@ -1,0 +1,62 @@
+<div class="page-title"><span style="font-size: 18pt;"><?php echo "{$lTitle}"; ?></div>
+
+<?php include_once (__ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+
+<!-- BEGIN HTML OUTPUT  -->
+<form 	action=""
+			method="post"
+			enctype="application/x-www-form-urlencoded"
+			id="idForm">
+	<table>
+		<tr><td></td></tr>
+		<tr>
+			<td class="form-header">
+			<?php echo "{$lQuestion}"; ?>
+			</td>
+		</tr>
+		<tr><td></td></tr>
+		<tr>
+			<td>
+                <input type="radio" name="answer" id="1" value="1">
+                <label for="1"><?php echo "{$lChoice_1}"; ?></label><br>
+                <input type="radio" name="answer" id="2" value="2">
+                <label for="2"><?php echo "{$lChoice_2}"; ?></label><br>
+                <input type="radio" name="answer" id="3" value="3">
+                <label for="3"><?php echo "{$lChoice_3}"; ?></label><br>
+                <input type="radio" name="answer" id="4" value="4">
+                <label for="4"><?php echo "{$lChoice_4}"; ?></label><br>
+                <input type="radio" name="answer" id="5" value="5">
+            	<label for="5"><?php echo "{$lChoice_5}"; ?></label><br>
+            </td>
+		</tr>
+		<tr><td></td></tr>
+		<tr>
+			<td style="text-align:center;">
+				<input name="submit-button" class="button" type="submit" value="Submit" />
+			</td>
+		</tr>
+		<tr><td></td></tr>
+	</table>
+</form>
+
+<?php
+	try{
+	    $lResult = "Choose the best answer";
+
+	    if (isset($_POST["answer"])){
+
+	    if ($_POST["answer"] == $lCorrectAnswer){
+           $lResult = "Correct";
+	    }else{
+	        $lResult = "Incorrect";
+	    }//end if
+
+	    }// end if (isset($_POST))
+
+	    echo "<div class='report-header'>{$lResult}</div>";
+
+    }catch(Exception $e){
+		echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessage);
+   	}// end try
+?>
