@@ -19,7 +19,7 @@
 		<tr>
 			<td>
                 <input type="radio" name="answer" id="1" value="1">
-                <label class="label" class="label" for="1"><?php echo "{$lChoice_1}"; ?></label><br>
+                <label class="label" for="1"><?php echo "{$lChoice_1}"; ?></label><br>
                 <input type="radio" name="answer" id="2" value="2">
                 <label class="label" for="2"><?php echo "{$lChoice_2}"; ?></label><br>
                 <input type="radio" name="answer" id="3" value="3">
