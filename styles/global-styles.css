@@ -323,6 +323,8 @@ table tr td.form-header{
 	padding-right: 30px;
 	font-size: 18px;
 	border-radius: 5px;
+	word-break: break-word;
+	width: 500px;
 }
 
 /* ------------------------------------------------- */
