@@ -790,7 +790,7 @@
 				<li>
 					<a href="">How the Web Works</a>
 					<ul>
-						<li><a href="index.php?page=labs.php">Lab 1: Sending HTTP Requests with Netcat</a></li>
+						<li><a href="index.php?page=labs/lab-1.php">Lab 1: Sending HTTP Requests with Netcat</a></li>
 					</ul>
 				</li>
 			</ul>

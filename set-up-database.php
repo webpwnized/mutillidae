@@ -472,7 +472,7 @@
     			('html5-storage.php', 42, 1),
     			('html5-storage.php', 56, 1),
     			('html5-storage.php', 59, 1),
-    			('labs.php', 68, 1),
+    			('labs/lab-1.php', 68, 1),
     			('login.php', 1, 1),
     			('login.php', 10, 2),
     			('login.php', 53, 2),
