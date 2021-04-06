@@ -1,4 +1,5 @@
-    <?php
+<?php
+    $lLabNumber = 4;
     $lTitle = "Lab 4: How the Web Really Works - Using Burp-Suite Proxy History";
     $lQuestion = "Use Burp-Suite Proxy History to determine the version of HTTP used by Mutillidae";
     $lChoice_1 = "HTTP/0.9";

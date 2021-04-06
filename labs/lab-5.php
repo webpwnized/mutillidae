@@ -1,6 +1,7 @@
     <?php
+    $lLabNumber = 5;
     $lTitle = "Lab 5: How the Web Really Works - Bypassing Client-side Security";
-    $lQuestion = "What attribute code causes the Vanishing Text Box input element to vanish?";
+    $lQuestion = "In the Client-site Security Control Challenge, what attribute code causes the Vanishing Text Box input element to vanish?";
     $lChoice_1 = 'type="hidden"';
     $lChoice_2 = 'input.hidden="true"';
     $lChoice_3 = 'readonly="readonly"';

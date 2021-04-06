@@ -60,3 +60,21 @@
 		echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessage);
    	}// end try
 ?>
+
+<br/>
+<div class="lab-links">
+<?php
+    $lLastLab = $lLabNumber-1;
+    $lNextLab = $lLabNumber+1;
+
+    if ($lLabNumber > 1){
+        echo "<a href=\"index.php?page=labs/lab-{$lLastLab}.php\">Previous Lab</a>";
+    }
+    if ($lLabNumber > 1 && $lLabNumber < 31){
+        echo "&nbsp;&nbsp;|&nbsp;&nbsp;";
+    }
+    if ($lLabNumber < 31){
+        echo "<a href=\"index.php?page=labs/lab-{$lNextLab}.php\" >Next Lab</a>";
+    }
+?>
+</div>

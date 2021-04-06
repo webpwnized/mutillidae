@@ -605,3 +605,11 @@ div.database-warning-message{
 	color: #999900;
 	padding: 3px;	
 }
+
+/* ------------------------------------------------- */
+/* Lab-specific styles							     */
+/* ------------------------------------------------- */
+
+div.lab-links{
+	text-align: center;
+}

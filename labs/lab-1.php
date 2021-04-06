@@ -1,4 +1,5 @@
 <?php
+    $lLabNumber = 1;
     $lTitle = "Lab 1: Sending HTTP Requests with Netcat";
     $lQuestion = "What version of web server is running according to the Server response header?";
     $lChoice_1 = "Apache 2.x";

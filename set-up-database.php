@@ -970,6 +970,7 @@
                 (200, 'dId4FS_Gyn4', 'Extending OWASP ZAP with Add-Ons'),
                 (201, '1CJB8BtW0pQ', 'Using OWASP ZAP with Burp-Suite: Best of Both Worlds'),
 
+    	        (202, 'ZSGE8EAHOdA', 'HTML Controls are not Security Controls'),
     	        (203, 'qkkFc_6Gr1k', 'Burp-Suite 2: Inspecting Web Sockets'),
     	        (204, 'Eqfe_HYX7MU', 'How to check HTTPS certificate from command line'),
                 (205, 'Hz29n-Swx1w', 'How to check HTTPS Certificates for common issues'),
@@ -1018,7 +1019,7 @@
     	        (252, 'ijsThXgSfHE', 'Mutillidae: Lab 2 Walkthrough'),
     	        (253, 'CUZgNTpJmJ4', 'Mutillidae: Lab 3 Walkthrough'),
     	        (254, '3yCX0MWV820', 'Mutillidae: Lab 4 Walkthrough'),
-    	        (255, '3', 'Mutillidae: Lab 5 Walkthrough'),
+    	        (255, 'lU_fu-B5QtI', 'Mutillidae: Lab 5 Walkthrough'),
     	        (256, '4', 'Mutillidae: Lab 6 Walkthrough'),
     	        (257, '5', 'Mutillidae: Lab 7 Walkthrough'),
     	        (258, '6', 'Mutillidae: Lab 8 Walkthrough'),
