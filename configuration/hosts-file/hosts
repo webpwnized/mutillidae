@@ -1,3 +1,2 @@
-127.0.0.1	localhost mutillidae.local www.mutillidae.local www.mutillidae.com mutillidae.com www.mutillidae.org mutillidae.org
-127.0.0.2	cors.mutillidae.local
-	
+127.0.0.1	localhost mutillidae.local www.mutillidae.local mutillidae.com www.mutillidae.com mutillidae.org www.mutillidae.org mutillidae
+127.0.0.2	cors.mutillidae.local webservice.mutillidae.local api.mutillidae.local
