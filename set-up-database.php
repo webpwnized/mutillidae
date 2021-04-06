@@ -1020,7 +1020,7 @@
     	        (253, 'CUZgNTpJmJ4', 'Mutillidae: Lab 3 Walkthrough'),
     	        (254, '3yCX0MWV820', 'Mutillidae: Lab 4 Walkthrough'),
     	        (255, 'lU_fu-B5QtI', 'Mutillidae: Lab 5 Walkthrough'),
-    	        (256, '4', 'Mutillidae: Lab 6 Walkthrough'),
+    	        (256, '6FXeO3Wx5wc', 'Mutillidae: Lab 6 Walkthrough'),
     	        (257, '5', 'Mutillidae: Lab 7 Walkthrough'),
     	        (258, '6', 'Mutillidae: Lab 8 Walkthrough'),
     	        (259, '7', 'Mutillidae: Lab 9 Walkthrough'),

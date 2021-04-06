@@ -797,6 +797,12 @@
 						<li><a href="index.php?page=labs/lab-5.php">Lab 5 - Bypassing Client-side Security</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="">SQL Injection</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-6.php">Lab 6 - Testing for SQL Errors</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li>
