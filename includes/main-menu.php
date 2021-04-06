@@ -793,6 +793,8 @@
 						<li><a href="index.php?page=labs/lab-1.php">Lab 1 - Sending HTTP Requests with Netcat</a></li>
 						<li><a href="index.php?page=labs/lab-2.php">Lab 2 - Capturing HTTP Packets with Wireshark</a></li>
 						<li><a href="index.php?page=labs/lab-3.php">Lab 3 - Intercepting HTTP Requests and Responses</a></li>
+						<li><a href="index.php?page=labs/lab-4.php">Lab 4 - Using Burp-Suite Proxy History</a></li>
+						<li><a href="index.php?page=labs/lab-5.php">Lab 5 - Bypassing Client-side Security</a></li>
 					</ul>
 				</li>
 			</ul>
