@@ -100,6 +100,7 @@ class YouTubeVideoHandler {
 	public $ExtendingOWASPZAPwithAddOns = 200;
 	public $UsingOWASPZAPwithBurpSuiteBestofBothWorlds = 201;
 
+	public $BurpSuite2InspectingWebSockets = 203;
 	public $HowtocheckHTTPScertificatefromcommandline = 204;
 	public $HowtocheckHTTPSCertificatesforcommonIssues = 205;
 	public $cURLErrorSSLCertificateProblem = 206;

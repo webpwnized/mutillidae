@@ -16,7 +16,7 @@ COPY . .
 
 # apache config
 COPY configuration/apache-configuration/sites-available/mutillidae.conf /etc/apache2/sites-available/mutillidae.conf
-COPY configuration/apache-configuration/error-pages.conf /etc/apache2/error-pages.conf
+COPY configuration/apache-configuration/conf/error-pages.conf /etc/apache2/conf/error-pages.conf
 COPY configuration/https-certificate/mutillidae-selfsigned.crt /etc/ssl/certs/mutillidae-selfsigned.crt
 COPY configuration/https-certificate/mutillidae-selfsigned.key /etc/ssl/private/mutillidae-selfsigned.key
 RUN sed -i 's/VirtualHost 127.0.0.1:80/VirtualHost *:80/' /etc/apache2/sites-available/mutillidae.conf
