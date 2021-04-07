@@ -801,6 +801,11 @@
 					<a href="">SQL Injection</a>
 					<ul>
 						<li><a href="index.php?page=labs/lab-6.php">Lab 6 - Testing for SQL Errors</a></li>
+						<li><a href="index.php?page=labs/lab-7.php">Lab 7 - Using SQLi to Bypass Authentication</a></li>
+						<li><a href="index.php?page=labs/lab-8.php">Lab 8 - Extracting data</a></li>
+						<li><a href="index.php?page=labs/lab-9.php">Lab 9 - Finding Number of Columns</a></li>
+						<li><a href="index.php?page=labs/lab-10.php">Lab 10 - Pivoting with SQL injection</a></li>
+						<li><a href="index.php?page=labs/lab-11.php">Lab 11 - SQLMap</a></li>
 					</ul>
 				</li>
 			</ul>
