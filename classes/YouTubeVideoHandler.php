@@ -41,6 +41,12 @@ class YouTubeVideoHandler {
 	private $mRemoteFileHandler = null;
 
 	/* public properties */
+	public $JWTSecurityPart1WhatisaJWT = 1;
+	public $JWTSecurityPart2HowtoViewJWTinBurpSuite = 2;
+	public $JWTSecurityPart3HowTimeoutsWork = 3;
+	public $JWTSecurityPart4HowSignaturesProtectAgainstForgery = 4;
+	public $JWTSecurityPart5WhyuseCertificatebasedSignatures = 5;
+	public $JWTSecurityPart6ImportanceofInputValidation = 6;
 	public $UsingBurpIntruderSnipertoFuzzParameters = 13;
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;

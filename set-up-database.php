@@ -925,6 +925,12 @@
 
     	$lQueryString = "INSERT INTO youTubeVideos(recordIndetifier, identificationToken, title)
     		VALUES
+    			(1, 'TQGblhhk-64', 'JWT Security: Part 1 - What is a JWT?'),
+    			(2, 'iZPoBXcSYww', 'JWT Security: Part 2 - How to View JWT in Burp-Suite'),
+    			(3, 'UAb0YZn6WjM', 'JWT Security: Part 3 - How Timeouts Work'),
+    			(4, 'f-v70H9xgFI', 'JWT Security: Part 4 - How Signatures Protect Against Forgery'),
+    			(5, 'plv4ilIJbYo', 'JWT Security: Part 5 - Why use Certificate-based Signatures?'),
+    			(6, 'JST-9GmWA2s', 'JWT Security: Part 6 - Importance of Input Validation'),
     			(13, 'la5hTlSDKWg', 'Using Burp Intruder Sniper to Fuzz Parameters'),
     			(99, '7vWTEbOfa-8', 'Introduction to Burp-Suite Intruders Character Frobber Payload'),
     	        (100, 't0uMReqs8Ng', 'Introduction to Burp-Suite Intruders Grep-Extract Feature'),
