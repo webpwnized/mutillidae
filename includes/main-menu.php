@@ -808,6 +808,55 @@
 						<li><a href="index.php?page=labs/lab-11.php">Lab 11 - SQLMap</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="">Command Injection</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-12.php">Lab 12 - Extracting User Accounts with Command Injection</a></li>
+						<li><a href="index.php?page=labs/lab-13.php">Lab 13 - Testing for Reverse Connection</a></li>
+						<li><a href="index.php?page=labs/lab-14.php">Lab 14 - Reverse Bash Shell with Command Injection</a></li>
+						<li><a href="index.php?page=labs/lab-15.php">Lab 15 - Reverse Meterpreter Shell with Command Injection</a></li>
+						<li><a href="index.php?page=labs/lab-16.php">Lab 16 - Web Shell with Command injection</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Lightweight Directory Access Protocol (LDAP) Injection</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-12.php">Lab 17 - Extract User Accounts with LDAP Injection</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Insecure Direct Object Referece (IDOR)</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-12.php">Lab 18 - Edit Another User's Profile</a></li>
+						<li><a href="index.php?page=labs/lab-13.php">Lab 19 - Extracting User Accounts with IDOR</a></li>
+						<li><a href="index.php?page=labs/lab-14.php">Lab 20 - Extracting User Accounts with Local File Inclusion</a></li>
+						<li><a href="index.php?page=labs/lab-15.php">Lab 21 - Web Shell with Local File Inclusion (LFI)</a></li>
+						<li><a href="index.php?page=labs/lab-16.php">Lab 22 - Web Shell with Remote File Inclusion (RFI)</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Open Redirect</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-12.php">Lab 23 - Open Redirects - Part 1</a></li>
+						<li><a href="index.php?page=labs/lab-13.php">Lab 24 - Open Redirects - Part 2</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Cross-site Scripting (XSS)</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-12.php">Lab 25 - Creating a Cross-site Script Proof of Concept (PoC)</a></li>
+						<li><a href="index.php?page=labs/lab-13.php">Lab 26 - Browser Exploitation Framework (BeEF)</a></li>
+						<li><a href="index.php?page=labs/lab-14.php">Lab 27 - Bypassing Client-side Defenses</a></li>
+						<li><a href="index.php?page=labs/lab-15.php">Lab 28 - Defending Against Cross-site Scripting</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Cross-site Request Forgery (CSRF)</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-12.php">Lab 29 - Voting for NMap</a></li>
+						<li><a href="index.php?page=labs/lab-13.php">Lab 30 - Adding a Blog</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li>
