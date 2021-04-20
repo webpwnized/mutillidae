@@ -821,40 +821,56 @@
 				<li>
 					<a href="">Lightweight Directory Access Protocol (LDAP) Injection</a>
 					<ul>
-						<li><a href="index.php?page=labs/lab-12.php">Lab 17 - Extract User Accounts with LDAP Injection</a></li>
+						<li><a href="index.php?page=labs/lab-17.php">Lab 17 - Extract User Accounts with LDAP Injection</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="">Insecure Direct Object Referece (IDOR)</a>
 					<ul>
-						<li><a href="index.php?page=labs/lab-12.php">Lab 18 - Edit Another User's Profile</a></li>
-						<li><a href="index.php?page=labs/lab-13.php">Lab 19 - Extracting User Accounts with IDOR</a></li>
-						<li><a href="index.php?page=labs/lab-14.php">Lab 20 - Extracting User Accounts with Local File Inclusion</a></li>
-						<li><a href="index.php?page=labs/lab-15.php">Lab 21 - Web Shell with Local File Inclusion (LFI)</a></li>
-						<li><a href="index.php?page=labs/lab-16.php">Lab 22 - Web Shell with Remote File Inclusion (RFI)</a></li>
+						<li><a href="index.php?page=labs/lab-18.php">Lab 18 - Edit Another User's Profile</a></li>
+						<li><a href="index.php?page=labs/lab-19.php">Lab 19 - Extracting User Accounts with IDOR</a></li>
+						<li><a href="index.php?page=labs/lab-20.php">Lab 20 - Extracting User Accounts with Local File Inclusion</a></li>
+						<li><a href="index.php?page=labs/lab-21.php">Lab 21 - Web Shell with Local File Inclusion (LFI)</a></li>
+						<li><a href="index.php?page=labs/lab-22.php">Lab 22 - Web Shell with Remote File Inclusion (RFI)</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="">Open Redirect</a>
 					<ul>
-						<li><a href="index.php?page=labs/lab-12.php">Lab 23 - Open Redirects - Part 1</a></li>
-						<li><a href="index.php?page=labs/lab-13.php">Lab 24 - Open Redirects - Part 2</a></li>
+						<li><a href="index.php?page=labs/lab-23.php">Lab 23 - Open Redirects - Part 1</a></li>
+						<li><a href="index.php?page=labs/lab-24.php">Lab 24 - Open Redirects - Part 2</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="">Cross-site Scripting (XSS)</a>
 					<ul>
-						<li><a href="index.php?page=labs/lab-12.php">Lab 25 - Creating a Cross-site Script Proof of Concept (PoC)</a></li>
-						<li><a href="index.php?page=labs/lab-13.php">Lab 26 - Browser Exploitation Framework (BeEF)</a></li>
-						<li><a href="index.php?page=labs/lab-14.php">Lab 27 - Bypassing Client-side Defenses</a></li>
-						<li><a href="index.php?page=labs/lab-15.php">Lab 28 - Defending Against Cross-site Scripting</a></li>
+						<li><a href="index.php?page=labs/lab-25.php">Lab 25 - Creating a Cross-site Script Proof of Concept (PoC)</a></li>
+						<li><a href="index.php?page=labs/lab-26.php">Lab 26 - Browser Exploitation Framework (BeEF)</a></li>
+						<li><a href="index.php?page=labs/lab-27.php">Lab 27 - Bypassing Client-side Defenses</a></li>
+						<li><a href="index.php?page=labs/lab-28.php">Lab 28 - Defending Against Cross-site Scripting</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="">Cross-site Request Forgery (CSRF)</a>
 					<ul>
-						<li><a href="index.php?page=labs/lab-12.php">Lab 29 - Voting for NMap</a></li>
-						<li><a href="index.php?page=labs/lab-13.php">Lab 30 - Adding a Blog</a></li>
+						<li><a href="index.php?page=labs/lab-29.php">Lab 29 - Voting for NMap</a></li>
+						<li><a href="index.php?page=labs/lab-30.php">Lab 30 - Adding a Blog</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">HTML5 Web Storage</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-31.php">Lab 31 - Capturing HTML 5 Web Storage</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Session Management</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-32.php">Lab 32 - Capture Session with XSS</a></li>
+						<li><a href="index.php?page=labs/lab-33.php">Lab 33 - Intercepting Session Token using Network Sniffer</a></li>
+						<li><a href="index.php?page=labs/lab-34.php">Lab 34 - Exfiltrating Data with XSS</a></li>
+						<li><a href="index.php?page=labs/lab-35.php">Lab 35 - Capture Session with XSS</a></li>
+						<li><a href="index.php?page=labs/lab-36.php">Lab 36 - Using a captured session token</a></li>
 					</ul>
 				</li>
 			</ul>
