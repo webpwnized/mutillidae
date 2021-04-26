@@ -873,6 +873,44 @@
 						<li><a href="index.php?page=labs/lab-36.php">Lab 36 - Using a captured session token</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="">Cookie Management</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-37.php">Lab 37 - Show Hints</a></li>
+						<li><a href="index.php?page=labs/lab-38.php">Lab 38 - Privilege Escalation</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Password Management</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-39.php">Lab 39 - Password Cracking</a></li>
+						<li><a href="index.php?page=labs/lab-40.php">Lab 40 - Intercepting Clear-Text Credentials</a></li>
+						<li><a href="index.php?page=labs/lab-41.php">Lab 41 - Hydra</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Input Validation</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-42.php">Lab 42 - Input Validation</a></li>
+						<li><a href="index.php?page=labs/lab-43.php">Lab 43 - File Identification</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Error Handling</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-44.php">Lab 44 - Grabbing Server Banners</a></li>
+						<li><a href="index.php?page=labs/lab-45.php">Lab 45 - Creating Injection Files</a></li>
+						<li><a href="index.php?page=labs/lab-46.php">Lab 46 - Scanning with Nikto</a></li>
+						<li><a href="index.php?page=labs/lab-47.php">Lab 47 - Testing for Errors</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Logging</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-48.php">Lab 48 - Log Poisoning</a></li>
+						<li><a href="index.php?page=labs/lab-49.php">Lab 49 - Log Disclosure</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li>
