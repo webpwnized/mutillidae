@@ -739,6 +739,12 @@
 					</ul>
 				</li>
 				<li>
+					<a href="">Tab-Nabbing</a>
+					<ul>
+   						<li><a href="index.php?page=nice-tabby-cat.php">Tabby Cat</a></li>
+					</ul>
+				</li>
+				<li>
 					<a href="">Unrestricted File Upload</a>
 					<ul>
 						<li><a href="index.php?page=upload-file.php">File Upload</a></li>

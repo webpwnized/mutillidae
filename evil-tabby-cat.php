@@ -1,5 +1,4 @@
 <script>
-	alert(parent.window.opener);
-	parent.window.opener.location="https://www.google.com";
+	parent.window.opener.location="https://www.duckduckgo.com";
 </script>
 So mean

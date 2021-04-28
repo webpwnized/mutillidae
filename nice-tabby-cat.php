@@ -1,1 +1,1 @@
-<a href="evil-tabby-cat.php" taerget="_blank" rel="opener">Go to the dark side</a>
+<a href="evil-tabby-cat.php" target="_blank" rel="opener">Go to the dark side</a>
