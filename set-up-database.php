@@ -931,6 +931,7 @@
     			(4, 'f-v70H9xgFI', 'JWT Security: Part 4 - How Signatures Protect Against Forgery'),
     			(5, 'plv4ilIJbYo', 'JWT Security: Part 5 - Why use Certificate-based Signatures?'),
     			(6, 'JST-9GmWA2s', 'JWT Security: Part 6 - Importance of Input Validation'),
+    			(7, 'eGXCK3YieaI', 'How to Scan for Web Vulnerabilities with Nikto'),
     			(13, 'la5hTlSDKWg', 'Using Burp Intruder Sniper to Fuzz Parameters'),
     			(99, '7vWTEbOfa-8', 'Introduction to Burp-Suite Intruders Character Frobber Payload'),
     	        (100, 't0uMReqs8Ng', 'Introduction to Burp-Suite Intruders Grep-Extract Feature'),

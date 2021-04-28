@@ -5,4 +5,13 @@ Start a TCPDump listener on your host, then inject a command that pings your hos
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
 No videos for this  hint
-<br/>
+<br/><br/>
+<span id="videos" class="report-header">Videos</span>
+<br/><br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallWiresharkinWindows10);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoNetworkPacketAnalysiswithWireshark);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoPacketAnalysisPart7CapturingNetworkTrafficwithTCPDumpPart1);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoPacketAnalysisPart8CapturingNetworkTrafficwithTCPDumpPart2);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoPacketAnalysisPart9PacketAnalysiswithWiresharkPart1);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->IntroductiontoPacketAnalysisPart10PacketAnalysiswithWiresharkPart2);?>
+<br/><br/>

@@ -911,6 +911,37 @@
 						<li><a href="index.php?page=labs/lab-49.php">Lab 49 - Log Disclosure</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="">Server Configuration</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-50.php">Lab 50 - Testing HTTP Response Headers</a></li>
+						<li><a href="index.php?page=labs/lab-51.php">Lab 51 - Scanning with Nikto</a></li>
+						<li><a href="index.php?page=labs/lab-52.php">Lab 52 - Scanning with SSLScan</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Content Security Policy (CSP)</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-53.php">Lab 53 - Testing HTTP Response Headers</a></li>
+						<li><a href="index.php?page=labs/lab-54.php">Lab 54 - Scanning with SSLScan</a></li>
+						<li><a href="index.php?page=labs/lab-55.php">Lab 55 - Testing Content Security Policy (CSP)</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">JSON Web Token (JWT) Security</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-56.php">Lab 56 - Session Timeout</a></li>
+						<li><a href="index.php?page=labs/lab-57.php">Lab 57 - Missing Signature Validation</a></li>
+						<li><a href="index.php?page=labs/lab-58.php">Lab 58 - Cracking Signature Password</a></li>
+						<li><a href="index.php?page=labs/lab-59.php">Lab 59 - SQL Injection via JWT</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">Cross-origin Resource Sharing (CORS)</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-60.php">Lab 60 - Access Control Allow Origin Header</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li>

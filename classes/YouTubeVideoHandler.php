@@ -47,6 +47,7 @@ class YouTubeVideoHandler {
 	public $JWTSecurityPart4HowSignaturesProtectAgainstForgery = 4;
 	public $JWTSecurityPart5WhyuseCertificatebasedSignatures = 5;
 	public $JWTSecurityPart6ImportanceofInputValidation = 6;
+	public $HowtoScanforWebVulnerabilitieswithNikto = 7;
 	public $UsingBurpIntruderSnipertoFuzzParameters = 13;
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;

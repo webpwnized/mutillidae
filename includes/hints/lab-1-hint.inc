@@ -3,7 +3,6 @@
 <br/><br/>
 Use Netcat or other means to observe the HTTP response headers
 <br/><br/>
-<br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatareWebServerBanners);?>

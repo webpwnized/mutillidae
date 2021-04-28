@@ -26,8 +26,6 @@ Mutillidae overlays the page with a div which follows the mouse around.
 When the user clicks anywhere, they inevitably click the div which then executes
 the JavaScript in the onclick event.
 <br/><br/>
-
-<br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatistheXFrameOptionsHeader);?>
