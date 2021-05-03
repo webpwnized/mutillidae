@@ -245,11 +245,12 @@ class MySQLHandler {
 		$lMySQLConnection = null;
 		$USERNAME = self::$mMySQLDatabaseUsername;
 		$HOSTNAME = self::$mMySQLDatabaseHost;
+		$PASSWORD = self::$mMySQLDatabasePassword;
 		$INCORRECT_DATABASE_CONFIGURATION_MESSAGE = "Error connecting to MySQL database First, try to reset the database (ResetDB button on menu). Next, check that the database service is running and that the database username, password, database name, and database location are configured correctly in includes/database-config.php";
 		$UNKNOWN_DATABASE_MESSAGE = "Unable to select default database " . self::$mMySQLDatabaseName. ". It appears that the database to which Mutillidae is configured to connect has not been created. Try to <a href=\"set-up-database.php\">setup/reset the DB</a> to see if that helps. Next, check that the database service is running and that the database username, password, database name, and database location are configured correctly in file includes/database-config.php";
 
 		try{
-			$lMySQLConnection = new mysqli($HOSTNAME, $USERNAME, self::$mMySQLDatabasePassword);
+		    $lMySQLConnection = new mysqli($HOSTNAME, $USERNAME, $PASSWORD);
 			if (strlen($lMySQLConnection->connect_error) > 0) {
 				$lMySQLConnection = new mysqli($HOSTNAME, $USERNAME, self::$SAMURAI_WTF_PASSWORD);
 				if (strlen($lMySQLConnection->connect_error) > 0) {
@@ -257,7 +258,7 @@ class MySQLHandler {
 					if (strlen($lMySQLConnection->connect_error) > 0) {
 						$lMySQLConnection = new mysqli($HOSTNAME, $USERNAME, self::$MUTILLIDAE_DBV2_PASSWORD);
 						if (strlen($lMySQLConnection->connect_error) > 0) {
-						    $lMySQLConnection = new mysqli(self::$MUTILLIDAE_DOCKER_HOSTNAME, $USERNAME, self::$mMySQLDatabasePassword);
+						    $lMySQLConnection = new mysqli(self::$MUTILLIDAE_DOCKER_HOSTNAME, $USERNAME, $PASSWORD);
     					}else{
     						self::$mDatabaseAvailableMessage = $INCORRECT_DATABASE_CONFIGURATION_MESSAGE . " Connection error: ".$lMySQLConnection->connect_error;
     						throw new Exception(self::$mDatabaseAvailableMessage);
