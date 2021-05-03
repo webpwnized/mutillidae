@@ -22,8 +22,9 @@ class MySQLHandler {
 	 * If using XAMPP or LAMP, this is almost certainly localhost.
 	 * 127.0.0.1 might work.
 	 * */
-    static public $mMySQLDatabaseHost = DB_HOST;
-
+	static public $mMySQLDatabaseHost = DB_HOST;
+	static public $MUTILLIDAE_DOCKER_HOSTNAME = "database";
+	
 	/* ----------------------------------------------
 	 * DATABASE USER NAME
 	 * ----------------------------------------------
@@ -158,6 +159,9 @@ class MySQLHandler {
 		            $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$MUTILLIDAE_DBV2_PASSWORD);
 		            if ($lResult <> 1){
 		                $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$SAMURAI_WTF_PASSWORD);
+				    if ($lResult <> 1){
+				        $lResult = $this->doConnectToDatabase($MUTILLIDAE_DOCKER_HOSTNAME, $USERNAME, self::$mMySQLDatabasePassword);
+				    }//end if
 		            }//end if
 		        }//end if
 		    }//end if
