@@ -160,7 +160,7 @@ class MySQLHandler {
 		            if ($lResult <> 1){
 		                $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$SAMURAI_WTF_PASSWORD);
 				    if ($lResult <> 1){
-				        $lResult = $this->doConnectToDatabase($MUTILLIDAE_DOCKER_HOSTNAME, $USERNAME, self::$mMySQLDatabasePassword);
+				        $lResult = $this->doConnectToDatabase(self::$MUTILLIDAE_DOCKER_HOSTNAME, $USERNAME, self::$mMySQLDatabasePassword);
 				    }//end if
 		            }//end if
 		        }//end if
