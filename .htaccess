@@ -1,13 +1,15 @@
-ErrorDocument 403 "By default, Mutillidae only allows access from localhost (127.*.*.*). Edit the .htaccess file to change this behavior (not recommended on a public network)."
+ErrorDocument 403 "By default, Mutillidae only allows access from non-routable network addresses. Edit the .htaccess file to change this behavior.
 Order Deny,Allow
 Deny from all
 
-## This allows access from localhost
-Allow from 127.
+## Allow access from localhost
+Allow from 127.0.0.0/8
 Allow from localhost
 
-## This is to allow access from other machines on Virtual Box host-only networks.
-Allow from 192.168.0.0/16
+## Allow access from other machines on non-routable networks
+Allow from 10.0.0.0/8
+Allow from 172.16.0.0/12
+Allow from 192.168.0.0/16   
 
 ## The following section disables PHP magic quoting feature.
 ## Turning these on will cause issues with Mutillidae.
@@ -19,3 +21,4 @@ Allow from 192.168.0.0/16
 php_flag magic_quotes_gpc off
 php_flag magic_quotes_sybase off
 php_flag magic_quotes_runtime off
+
