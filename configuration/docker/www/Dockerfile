@@ -13,12 +13,18 @@ COPY ./mutillidae/configuration/apache-configuration/sites-available/mutillidae.
 
 # Copy the mutillidae project to Apache directory
 COPY ./mutillidae /var/www/mutillidae
+
+# Change the hostname of the database server to the docker database hostname
 RUN sed -i 's/127.0.0.1/database/' /var/www/mutillidae/includes/database-config.inc
+
+# Change the hostname of the ldap server to the docker ldap hostname
+RUN sed -i 's/127.0.0.1/ldap/' /var/www/mutillidae/includes/ldap-config.inc
 
 # Update packages
 RUN apt-get update
 
 # Install PHP requirements used by Mutillidae II
+RUN apt-get install -y libldap2-dev && docker-php-ext-install ldap
 RUN docker-php-ext-install mysqli
 RUN apt-get install -y libxml2-dev && docker-php-ext-install xml
 RUN apt-get install -y libonig-dev && docker-php-ext-install mbstring

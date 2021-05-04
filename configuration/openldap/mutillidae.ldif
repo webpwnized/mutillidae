@@ -78,6 +78,16 @@ sn: d
 uid: jeremy
 userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
 
+dn: cn=phinius,ou=users,dc=mutillidae,dc=local
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: phinius
+sn: smith
+uid: phinius
+userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
+
 dn: cn=admins,ou=groups,dc=mutillidae,dc=local
 objectClass: top
 objectClass: groupOfNames
