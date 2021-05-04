@@ -16,5 +16,5 @@ services:
     - "./www/var-log-apache2/:/var/log/apache2/"
 
     ports:
-    - 80:80
-    - 443:443
+    - 127.0.0.1:80:80
+    - 127.0.0.1:443:443
