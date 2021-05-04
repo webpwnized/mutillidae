@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 
 	try{
 		/* ------------------------------------------
@@ -8,9 +8,12 @@
 		require_once ('./includes/constants.php');
 
 		/* We use the session on this page */
-		if (!isset($_SESSION["security-level"])){
+		if (session_status() == PHP_SESSION_NONE){
 			session_start();
-			$_SESSION["security-level"] = 0;
+		}// end if
+
+		if (!isset($_SESSION["security-level"])){
+		    $_SESSION["security-level"] = 0;
 		}// end if
 
 		/* ------------------------------------------
@@ -27,21 +30,21 @@
 		* ------------------------------------------ */
 		require_once (__ROOT__.'/classes/SQLQueryHandler.php');
 		$SQLQueryHandler = new SQLQueryHandler(__ROOT__."/owasp-esapi-php/src/", $_SESSION["security-level"]);
-		
+
 		/* ------------------------------------------
 		 * initialize You Tube Video Handler Handler
 		* ------------------------------------------ */
 		require_once (__ROOT__.'/classes/YouTubeVideoHandler.php');
-		$YouTubeVideoHandler = new YouTubeVideoHandler("owasp-esapi-php/src/", $_SESSION["security-level"]);
-  	 
+		$YouTubeVideoHandler = new YouTubeVideoHandler(__ROOT__."/owasp-esapi-php/src/", $_SESSION["security-level"]);
+
 		if (isset($_REQUEST["level1HintIncludeFile"])) {
 			$lIncludeFileKey = $_REQUEST["level1HintIncludeFile"];
 		}else{
 			$lIncludeFileKey = 52; // hints-not-found.inc;
 		}// end if
-		
+
 		$lIncludeFileRecord = $SQLQueryHandler->getLevelOneHelpIncludeFile($lIncludeFileKey);
-		
+
 		if ($SQLQueryHandler->affected_rows()>0) {
 			$lRecord = $lIncludeFileRecord->fetch_object();
 			$lIncludeFile = $lRecord->level_1_help_include_file;
@@ -50,7 +53,7 @@
 			$lIncludeFile = 'hint-not-found.inc';
 			$lIncludeFileDescription = 'Hint Not Found';
 		}// end if
-					
+
    	} catch (Exception $e) {
 		echo $CustomErrorHandler->FormatError($e, $lQueryString);
    	}// end try;
