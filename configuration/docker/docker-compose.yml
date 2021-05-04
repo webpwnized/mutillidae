@@ -1,10 +1,12 @@
 version: '3.7'
 services:
+
   database:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: mutillidae
+
   database_admin:
     depends_on:
     - database
@@ -16,6 +18,7 @@ services:
       PMA_PASSWORD: mutillidae
     ports:
     - 127.0.0.1:81:80
+
   www:
     depends_on:
     - database
@@ -26,10 +29,10 @@ services:
     volumes:
     # Make the Apache log files on the image available to localhost
     - "./www/var-log-apache2/:/var/log/apache2/"
-
     ports:
     - 127.0.0.1:80:80
     - 127.0.0.1:443:443
+
   ldap:
     build: ./ldap
     environment:
@@ -39,17 +42,17 @@ services:
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_config:/etc/ldap/slapd.d
+
   ldap_admin:
     depends_on:
     - ldap
-    image: docfactory/phpldapadmin
+    image: osixia/phpldapadmin:latest
     ports:
     - 127.0.0.1:82:80
     environment:
-      LDAP_NAME: mutillidae.local
-      LDAP_HOST: ldap
-      LDAP_PORT: 389
-      LDAP_DOMAIN: dc=mutillidae,dc=local
+      PHPLDAPADMIN_LDAP_HOSTS: "ldap"
+      PHPLDAPADMIN_HTTPS: "false"
+   
 volumes:
   ldap_data:
   ldap_config:
