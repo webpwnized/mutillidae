@@ -11,6 +11,9 @@ services:
     image: phpmyadmin:latest
     environment:
       MYSQL_ROOT_PASSWORD: mutillidae
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: mutillidae
     ports:
     - 127.0.0.1:81:80
   www:
@@ -50,3 +53,4 @@ services:
 volumes:
   ldap_data:
   ldap_config:
+
