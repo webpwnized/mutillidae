@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  database:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: mutillidae
+  www:
+    depends_on:
+    - database
+    build: ./www
+    environment:
+        - VIRTUAL_HOST=mutillidae.local,cors.mutillidae.local
+    volumes:
+    # Make the Apache log files on the image available to localhost
+    - "./www/var-log-apache2/:/var/log/apache2/"
+
+    ports:
+    - 80:80
+    - 443:443
