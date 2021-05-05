@@ -17,8 +17,8 @@ For detailed instructions, see [the comprehensive guide](https://www.youtube.com
 
 ## Docker
 
-How to Install Docker on Ubuntu(https://www.youtube.com/watch?v=Y_2JVREtDFk)
-How to Run Mutillidae on Docker(https://www.youtube.com/watch?v=Q3OD1lnw0ok)
+How to Install Docker on Ubuntu[https://www.youtube.com/watch?v=Y_2JVREtDFk]
+How to Run Mutillidae on Docker[https://www.youtube.com/watch?v=Q3OD1lnw0ok]
 
 ## Usage
 
