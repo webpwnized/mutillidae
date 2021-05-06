@@ -46,7 +46,6 @@
 				<li>Parameter addition</li>
 				<li>Password field submitted using GET method</li>
 				<li>Path Relative Style Sheet Injection</li>
-				<li>PHPMyAdmin Console</li>
 				<li>PHP server configuration disclosure</li>
 				<li>Phishing</li>
 				<li>Platform path disclosure</li>
@@ -65,7 +64,7 @@
 				<li>Unrestricted File Upload</li>
 				<li>Username enumeration</li>
 				<li>Un-validated Redirects and Forwards</li>
-			</ul>	
+			</ul>
 		</td>
 	</tr>
 </table>
@@ -194,7 +193,7 @@
 		<li>Contains unencrytped database credentials</li>
 		<li>
 			NOTE: This page is a canary; a target. It is not used
-			in the project. The credentials are only the default. If the 
+			in the project. The credentials are only the default. If the
 			project was set up differently the credentials may not be correct
 		</li>
 	</ul>
@@ -229,7 +228,7 @@
 		<li>This page writes to the log. SQLi and XSS on the log are possible</li>
 		<li>HTML injection</li>
 		<li>
-			GET for POST (method tampering) is possible because only reading 
+			GET for POST (method tampering) is possible because only reading
 			POSTed variables is not enforced.
 		</li>
 		<li>Application Log Injection</li>
@@ -257,7 +256,7 @@
 		<li>This page writes to the log. SQLi and XSS on the log are possible</li>
 		<li>HTML injection</li>
 		<li>
-			GET for POST (method tampering) is possible because only reading 
+			GET for POST (method tampering) is possible because only reading
 			POSTed variables is not enforced.
 		</li>
 		<li>Application Log Injection</li>
@@ -270,7 +269,7 @@
 	<ul>
 		<li>Insecure Direct Object Reference (IDOR) via UID parameter</li>
 		<li>
-			SQL injection, HTML injection and XSS 
+			SQL injection, HTML injection and XSS
 			via the username, signature and password field
 		</li>
 		<li>Method tampering</li>
@@ -338,7 +337,7 @@
 		<li>There are secret pages that if browsed to will redirect user to the phpinfo.php page.
 			This can be done via brute forcing
 		</li>
-		<li>The show-hints cookie can be changed by user to enable hints even though they are not suppose to show in secure mode</li>		
+		<li>The show-hints cookie can be changed by user to enable hints even though they are not suppose to show in secure mode</li>
 	</ul>
 </div>
 
@@ -416,16 +415,6 @@
 	</ul>
 </div>
 
-<p class="label">phpmyadmin.php</p>
-<div style="padding-left: 40px;">
-	<ul>
-		<li>This administrative console provides access to system configuration</li>
-		<li>Application path disclosure</li>
-		<li>Platform path disclosure</li>
-		<li>Information disclosure</li>
-	</ul>
-</div>
-
 <p class="label">privilege-escalation.php</p>
 <div style="padding-left: 40px;">
 	<ul>
@@ -458,7 +447,7 @@
 <div style="padding-left: 40px;">
 	<ul>
 		<li>
-			SQL injection, HTML injection and XSS 
+			SQL injection, HTML injection and XSS
 			via the username, signature and password field
 		</li>
 		<li>Method tampering</li>
@@ -505,7 +494,7 @@
 		<li>
 			There are secret pages that if browsed to will redirect user to the phpinfo.php page.
 			This can be done via brute forcing
-		</li>		
+		</li>
 	</ul>
 </div>
 
@@ -646,7 +635,7 @@
 <div style="padding-left: 40px;">
 	<ul>
 		<li>
-			Persistent XSS via any of the displayed fields. 
+			Persistent XSS via any of the displayed fields.
 			They are input on the add to your blog page.
 		</li>
 	</ul>

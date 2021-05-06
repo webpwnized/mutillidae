@@ -139,7 +139,6 @@ username=asdf&amp;password=asdf&amp;login-php-submit-button=Login
 	[*] owasp10
 	[*] owasp13
 	[*] performance_schema
-	[*] phpmyadmin
 	[*] test
 	[*] webauth
 </span>

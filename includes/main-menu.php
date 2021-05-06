@@ -275,7 +275,6 @@
 							<a href="">Information Disclosure</a>
 							<ul>
 								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
-								<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 								<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
 								<li><a href="index.php?page=robots-txt.php">Robots.txt</a></li>
 								<li><a href="index.php?page=secret-administrative-pages.php">"Secret" Administrative Pages</a></li>
@@ -292,7 +291,6 @@
 						<li>
 							<a href="">Application Path Disclosure</a>
 							<ul>
-								<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 								<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
 								<li><a href="index.php?page=robots-txt.php">Robots.txt</a></li>
 							</ul>
@@ -300,7 +298,6 @@
 						<li>
 							<a href="">Platform Path Disclosure</a>
 							<ul>
-								<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 								<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
 							</ul>
 						</li>
@@ -384,7 +381,6 @@
 						<li><a href="index.php?page=user-agent-impersonation.php">User-Agent Impersonation</a></li>
 						<li><a href="index.php?page=upload-file.php">Unrestricted File Upload</a></li>
 						<li><a href="index.php?page=ssl-misconfiguration.php">SSL Misconfiguration</a></li>
-						<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 						<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
 						<li><a href="index.php?page=robots-txt.php">Robots.txt</a></li>
 					</ul>
@@ -552,7 +548,6 @@
 				<li>
 					<a href="">A9 - Using Components with Known Vulnerabilities</a>
 					<ul>
-						<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 						<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
 						<li><a href="index.php?page=view-user-privilege-level.php&iv=6bc24fc1ab650b25b4114e93a98f1eba">CBC-bit Flipping</a></li>
 						<li><a href="index.php?page=ssl-misconfiguration.php">SSL Misconfiguration</a></li>
@@ -607,7 +602,6 @@
 					<a href="">A8 - Failure to Restrict URL Access</a>
 					<ul>
 						<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Edit User Profile</a></li>
-						<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 						<li><a href="index.php?page=source-viewer.php">Source Viewer</a></li>
 						<li><a href="index.php?page=secret-administrative-pages.php">"Secret" Administrative Pages</a></li>
 						<li><a href="index.php?page=robots-txt.php">Robots.txt</a></li>
@@ -648,7 +642,6 @@
 						<li><a href="index.php?page=framing.php">Click-Jacking</a></li>
 						<li><a href="framer.html">Cross-Site Framing (Third-Party Framing)</a></li>
 						<li><a href="index.php?page=html5-storage.php">HTML5 Web Storage</a></li>
-						<li><a href="index.php?page=phpmyadmin.php">PHP MyAdmin Console</a></li>
 						<li><a href="index.php?page=phpinfo.php">PHP Info Page</a></li>
 						<li><a href="index.php?page=robots-txt.php">Robots.txt</a></li>
 						<li><a href="index.php?page=ssl-misconfiguration.php">SSL Misconfiguration</a></li>

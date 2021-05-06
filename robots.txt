@@ -5,5 +5,4 @@ Disallow: classes/
 Disallow: javascript/
 Disallow: owasp-esapi-php/
 Disallow: documentation/
-Disallow: phpmyadmin/
 Disallow: includes/

@@ -14,15 +14,13 @@ all input parameters with characters that are reserved in various
 contexts.
 Search web page sources (view source) for internal information
 disclosure.
-Search for custom administrative pages and administrative consoles
-such as phpMyAdmin installations.
+Search for custom administrative pages and administrative consoles.
 <br/><br/>
 <span class="report-header">Exploitation</span>
 <br/><br/>
 Search pages with and without injection. Use the grep feature of
 Burp-Suite to seach for inappropriate information. Search for known
-common administrative consoles such as phpMyAdmin installations,
-Drupal and Wordpress consoles.
+common administrative consoles such as Drupal and Wordpress consoles.
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
