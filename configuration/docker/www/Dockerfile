@@ -6,7 +6,7 @@ COPY ./mutillidae/configuration/https-certificate/mutillidae-selfsigned.key /etc
 
 # Copy the Apache configuration
 COPY ./mutillidae/configuration/apache-configuration/conf/ /etc/apache2/conf/
-COPY ./mutillidae/configuration/apache-configuration/error-page/ /etc/apache2/error-pages
+COPY ./mutillidae/configuration/apache-configuration/error-pages/ /etc/apache2/error-pages
 COPY ./mutillidae/configuration/apache-configuration/conf-available/aliases.conf /etc/apache2/conf-available/aliases.conf
 COPY ./mutillidae/configuration/apache-configuration/conf/error-pages.conf /etc/apache2/conf/error-pages.conf
 COPY ./mutillidae/configuration/apache-configuration/sites-available/mutillidae.conf /etc/apache2/sites-available/mutillidae.conf
