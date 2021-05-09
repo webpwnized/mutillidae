@@ -6,3 +6,4 @@ Download a copy of the mutillidae source from GitHub into the www directory befo
 Docker requires files to be in the build path. Either adjust the buildpath or copy mutillidae/configuration/openldap/mutillidae.ldif into the openldap directory before building the openldap server. The command might look something like this depending on the directory structure
 
 	cp www/mutillidae/configuration/openldap/mutillidae.ldif ldap/
+	
