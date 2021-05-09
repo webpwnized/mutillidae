@@ -1,8 +1,8 @@
 <br/><br/>
 <span class="report-header">Setting up LDAP server for Mutillidae</span>
 <br/><br/>
-Install Stand-Alone LDAP Daemon (slapd). When asked, 
-set the admin password to "mutillidae" (without the quotes). If these settings are not desired, ensure 
+Install Stand-Alone LDAP Daemon (slapd). When asked,
+set the admin password to "mutillidae" (without the quotes). If these settings are not desired, ensure
 whatever settings are chosen match those in includes/ldap-config.inc
 <br/>
 <code>
@@ -45,12 +45,12 @@ Install the version of php-ldap that matches the version of PHP. For example
 	sudo service apache2 restart
 </code>
 <br/>
-Import the directory used by Mutillidae into the local the LDAP directory. 
-LDIF files are copies of an LDAP directory (database). 
-LDIF files can be imported with tools like Apache Directory Studio. A copy of the 
+Import the directory used by Mutillidae into the local the LDAP directory.
+LDIF files are copies of an LDAP directory (database).
+LDIF files can be imported with tools like Apache Directory Studio. A copy of the
 directory used by Mutillidae is available in file
 <br/>
 <code>
-	data/mutillidae.ldif
+	ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=local" -w mutillidae -H ldap:// -f /var/www/mutillidae/configuration/openldap/mutillidae.ldif
 </code>
 <br/><br/>
