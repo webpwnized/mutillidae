@@ -8,15 +8,14 @@
 
 * YouTube: [https://www.youtube.com/user/webpwnized](https://www.youtube.com/user/webpwnized)
 
-## Installation
+## Installation on LAMP Stack
 
 Video tutorials are available [for each step](README-INSTALLATION.md). If you have a LAMP stack set up
-aleady, [you might skip directly to installing Mutillidae](https://www.youtube.com/watch?v=TcgeRab7ayM).
+aleady, [you might skip directly to installing Mutillidae](https://www.youtube.com/watch?v=TcgeRab7ayM). For detailed instructions, see [the comprehensive guide](https://www.youtube.com/playlist?list=PLZOToVAK85MqxEyrjINe-LwDMhxJJKzmm)
 
-For detailed instructions, see [the comprehensive guide](https://www.youtube.com/playlist?list=PLZOToVAK85MqxEyrjINe-LwDMhxJJKzmm)
+## Installation on Docker
 
-## Docker
-
+The following video tutorials explain how to bring up Mutillidae on a set of 5 containers running Apache/PHP, MySQL, OpenLDAP, PHPMyAdmin, and PHPLDAPAdmin
 * [How to Install Docker on Ubuntu](https://www.youtube.com/watch?v=Y_2JVREtDFk)
 * [How to Run Mutillidae on Docker](https://www.youtube.com/watch?v=Q3OD1lnw0ok)
 
