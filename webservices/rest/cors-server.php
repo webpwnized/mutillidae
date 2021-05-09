@@ -1,17 +1,11 @@
 <?php
-	/*  --------------------------------
-	 *  We use the session on this page
-	 *  --------------------------------*/
-	if (!isset($_SESSION["security-level"])){
-		session_start();
-	}// end if
+    if (session_status() == PHP_SESSION_NONE){
+        session_start();
+    }// end if
 
-	/* ----------------------------------------
-	 *	initialize security level to "insecure"
-	 * ----------------------------------------*/
-	if (!isset($_SESSION['security-level'])){
-		$_SESSION['security-level'] = '0';
-	}// end if
+    if (!isset($_SESSION["security-level"])){
+        $_SESSION["security-level"] = 0;
+    }// end if
 
 	/* ------------------------------------------
 	 * Constants used in application

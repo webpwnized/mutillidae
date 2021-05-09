@@ -11,12 +11,12 @@
 	require_once (__ROOT__ . '/classes/LogHandler.php');
 	require_once (__ROOT__ . '/classes/SQLQueryHandler.php');
 	require_once (__ROOT__ . '/classes/JWT.php');
-		
+
    /* ------------------------------------------
    * INITIALIZE SESSION
    * ------------------------------------------ */
-   if(strlen(session_id()) == 0){
-   	session_start();
+	if (session_status() == PHP_SESSION_NONE){
+	    session_start();
 	}// end if
 
 	// user session required to have security-level available
@@ -83,7 +83,7 @@
 		while($row = $userInfo->fetch_object()) {
 			if($lObfuscatePassword) $row->password = "********";
 			$lUserDetailsJSON .= json_encode($row);
-		}		
+		}
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 		header('Content-type: application/json');

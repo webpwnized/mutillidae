@@ -1,7 +1,6 @@
 <?php
 
-    /* We use the session on this page */
-    if (!isset($_SESSION["security-level"])){
+    if (session_status() == PHP_SESSION_NONE){
         session_start();
     }// end if
 
@@ -10,7 +9,7 @@
     }else{
         $lSecurityLevel = 0;
     }
-    
+
     /* ------------------------------------------
 	 * initialize OWASP ESAPI for PHP
 	 * ------------------------------------------ */
@@ -19,13 +18,13 @@
 		$ESAPI = new ESAPI((__ROOT__.'/owasp-esapi-php/src/ESAPI.xml'));
 		$Encoder = $ESAPI->getEncoder();
 	}// end if
-	
+
 	/* ------------------------------------------
 	 * initialize custom error handler
 	 * ------------------------------------------ */
     require_once (__ROOT__.'/classes/CustomErrorHandler.php');
 	if (!isset($CustomErrorHandler)){
-		$CustomErrorHandler = 
+		$CustomErrorHandler =
 		new CustomErrorHandler(__ROOT__.'/owasp-esapi-php/src/', $lSecurityLevel);
 	}// end if
 
@@ -34,7 +33,7 @@
  	* ------------------------------------------ */
     require_once (__ROOT__.'/classes/LogHandler.php');
     $LogHandler = new LogHandler(__ROOT__.'/owasp-esapi-php/src/', $lSecurityLevel);
-	
+
 	/* ------------------------------------------
  	* initialize SQL Query Handler
  	* ------------------------------------------ */

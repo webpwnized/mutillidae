@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	try{
 		/* ------------------------------------------
@@ -6,10 +6,12 @@
 		* ------------------------------------------ */
 		require_once ('./includes/constants.php');
 
-		/* We use the session on this page */
+		if (session_status() == PHP_SESSION_NONE){
+		    session_start();
+		}// end if
+
 		if (!isset($_SESSION["security-level"])){
-			session_start();
-			$_SESSION["security-level"] = 0;
+		    $_SESSION["security-level"] = 0;
 		}// end if
 
 		/* ------------------------------------------
@@ -26,21 +28,21 @@
 		* ------------------------------------------ */
 		require_once (__ROOT__.'/classes/SQLQueryHandler.php');
 		$SQLQueryHandler = new SQLQueryHandler(__ROOT__."/owasp-esapi-php/src/", $_SESSION["security-level"]);
-		
+
 		/* ------------------------------------------
 		 * initialize You Tube Video Handler Handler
 		* ------------------------------------------ */
 		require_once (__ROOT__.'/classes/YouTubeVideoHandler.php');
 		$YouTubeVideoHandler = new YouTubeVideoHandler("owasp-esapi-php/src/", $_SESSION["security-level"]);
-  	 
+
 		if (isset($_REQUEST["level1HintIncludeFile"])) {
 			$lIncludeFileKey = $_REQUEST["level1HintIncludeFile"];
 		}else{
 			$lIncludeFileKey = 52; // hints-not-found.inc;
 		}// end if
-		
+
 		$lIncludeFileRecord = $SQLQueryHandler->getLevelOneHelpIncludeFile($lIncludeFileKey);
-		
+
 		if ($SQLQueryHandler->affected_rows()>0) {
 			$lRecord = $lIncludeFileRecord->fetch_object();
 			$lIncludeFile = $lRecord->level_1_help_include_file;
@@ -49,7 +51,7 @@
 			$lIncludeFile = 'hint-not-found.inc';
 			$lIncludeFileDescription = 'Hint Not Found';
 		}// end if
-					
+
    	} catch (Exception $e) {
 		echo $CustomErrorHandler->FormatError($e, $lQueryString);
    	}// end try;
@@ -62,11 +64,11 @@
 <table>
 	<tr>
 		<td style="width:800px;">
-			Mutillidae implements vulnerabilities from the 
-			<a href="http://www.owasp.org/index.php/OWASP_Top_Ten_Project" target="_blank">OWASP Top 10</a> 
+			Mutillidae implements vulnerabilities from the
+			<a href="http://www.owasp.org/index.php/OWASP_Top_Ten_Project" target="_blank">OWASP Top 10</a>
 			2013, 2010 and 2007 in PHP.
-			Additionally vulnerabilities from the SANS Top 25 Programming Errors and select information 
-			disclosure vulnerabilities have been added on various pages. 
+			Additionally vulnerabilities from the SANS Top 25 Programming Errors and select information
+			disclosure vulnerabilities have been added on various pages.
 			<br/><br/><br/>
 			<span class="report-header">Optional Configuration</span>
 			<br/><br/>
@@ -94,13 +96,13 @@
 			and/or multiple critical vulnerabilities on the same page. The page will appear in the menu
 			under each vulnerability.
 			<br/><br/>
-			A <a title="Listing of vulnerabilities" href="./index.php?page=./documentation/vulnerabilities.php">listing of vulnerabilities</a> 
-			is available in menu under documentation or by clicking 
+			A <a title="Listing of vulnerabilities" href="./index.php?page=./documentation/vulnerabilities.php">listing of vulnerabilities</a>
+			is available in menu under documentation or by clicking
 			<a title="Listing of vulnerabilities" href="./index.php?page=./documentation/vulnerabilities.php">here</a>.
 			<br/><br/><br/>
 			<span id="videos" class="report-header">Videos</span>
 			<br/><br/>
-			The videos on the Webpwnized YouTube Channel are likely to be a some assistance. Videos 
+			The videos on the Webpwnized YouTube Channel are likely to be a some assistance. Videos
 			cover installation, using tools like Burp-Suite and exploits for various
 			vulnerabilities.
 			<br/><br/>
@@ -114,20 +116,20 @@
 			Besides the menus, this will be the most important feature for newcomers. To enable hints,
 			toggle the "Show Hints" button (top menu bar). A hints section will appear IF the page contains
 			vulnerabilities. The Hints are "smart" showing only those hints that will help on the particular
-			page. 
+			page.
 			<br/><br/><br/>
 			<span class="report-header">Security Modes</span>
 			<br/><br/>
-			Mutillidae currently has three modes: completely insecure, client-side security and secure. 
-			In insecure and client-side mode, the pages are vulnerable to at least the topic they 
-			fall under in the menu. Note that client-side security mode is just as vulnerable as 
+			Mutillidae currently has three modes: completely insecure, client-side security and secure.
+			In insecure and client-side mode, the pages are vulnerable to at least the topic they
+			fall under in the menu. Note that client-side security mode is just as vulnerable as
 			insecure mode, but JavaScript validation or HTML controls make exploits somewhat more
 			difficult.
 			<br/><br/>
-			In secure mode, 
+			In secure mode,
 			Mutillidae attempts to protect the pages with server side scripts. Also, hints are disabled.
 			<br/><br/>
-			The mode can be changed using the "Toggle Security" button on the top menu bar. 
+			The mode can be changed using the "Toggle Security" button on the top menu bar.
 			<br/><br/><br/>
 			<span class="report-header">"Help Me" Button</span>
 			<br/><br/>
@@ -137,16 +139,16 @@
 			<br/><br/><br/>
 			<span class="report-header">Just give me the exploit</span>
 			<br/><br/>
-			Hints will typically provide some exploits. 
-			Known exploits that are used in testing Mutillidae are located in 
+			Hints will typically provide some exploits.
+			Known exploits that are used in testing Mutillidae are located in
 			/documentation/mutillidae-test-scripts.txt. There is some documentation for each exploit
 			which explains usage and location.
 			<br/><br/><br/>
 			<span class="report-header">Be Careful</span>
 			<br/><br/>
 			Mutillidae is a "live" system. The vulnerabilities are real rather than emulated. This eliminates
-			the frustration of having to "know what the author wants". Because of this, there are likely 
-			undocumented vulnerabilities. Also, this project endangers any machine on which it runs. Best practice 
+			the frustration of having to "know what the author wants". Because of this, there are likely
+			undocumented vulnerabilities. Also, this project endangers any machine on which it runs. Best practice
 			is to run Mutillidae in a virtual machine isolated from the network which is only booted
 			when using Mutillidae. Every effort has been made to make Mutillidae ables run entirely off-line.
 			<br/><br/><br/>
@@ -154,14 +156,14 @@
 			<br/><br/>
 			A project whitepaper is available to explain the features of Mutillidae and suggested use-cases.
 			<br/><br/>
-			<a 
-				href="https://www.sans.org/reading-room/whitepapers/application/introduction-owasp-mutillidae-ii-web-pen-test-training-environment-34380" 
+			<a
+				href="https://www.sans.org/reading-room/whitepapers/application/introduction-owasp-mutillidae-ii-web-pen-test-training-environment-34380"
 				target="_blank"
 				title="Whitepaper: Introduction to OWASP Mutillidae II Web Pen Test Training Environment"
-			>			
+			>
 				<img align="middle" alt="Webpwnized Twitter Channel" src="./images/pdf-icon-48-48.png" />
 				Introduction to OWASP Mutillidae II Web Pen Test Training Environment
-			</a>	
+			</a>
 		</td>
 	</tr>
 </table>

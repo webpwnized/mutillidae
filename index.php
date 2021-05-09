@@ -19,17 +19,13 @@
     /* ------------------------------------------
      * INITIALIZE SESSION
      * ------------------------------------------ */
-	//initialize session
-    if (strlen(session_id()) == 0){
-    	session_start();
-    }// end if
+	if (session_status() == PHP_SESSION_NONE){
+	    session_start();
+	}// end if
 
-    // ----------------------------------------
-	// initialize security level to "insecure"
-	// ----------------------------------------
-    if (!isset($_SESSION['security-level'])){
-    	$_SESSION['security-level'] = '0';
-    }// end if
+	if (!isset($_SESSION["security-level"])){
+	    $_SESSION["security-level"] = 0;
+	}// end if
 
     /* ----------------------------------------------------
      * ENFORCE SSL

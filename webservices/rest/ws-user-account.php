@@ -1,10 +1,14 @@
 <?php
 	/*  --------------------------------
-	 *  We use the session on this page 
+	 *  We use the session on this page
 	 *  --------------------------------*/
-	if (!isset($_SESSION["security-level"])){
-		session_start();
-	}// end if
+    if (session_status() == PHP_SESSION_NONE){
+        session_start();
+    }// end if
+
+    if (!isset($_SESSION["security-level"])){
+        $_SESSION["security-level"] = 0;
+    }// end if
 
 	/* ----------------------------------------
 	 *	initialize security level to "insecure"
@@ -18,7 +22,7 @@
 	 * ------------------------------------------ */
 	require_once('../../includes/constants.php');
 	require_once('../../includes/minimum-class-definitions.php');
-	
+
 	function populatePOSTSuperGlobal(){
 		$lParameters = Array();
 		parse_str(file_get_contents('php://input'), $lParameters);
@@ -42,14 +46,14 @@
 		while ($lDataRow = mysqli_fetch_assoc($pQueryResult)) {
 			$lDataRows[] = $lDataRow;
 		}// end while
-		
+
 		return json_encode($lDataRows);
 	}//end function jsonEncodeQueryResults
-	
+
 	try{
 		$lAccountUsername = "";
 		$lVerb = $_SERVER['REQUEST_METHOD'];
-		
+
 		switch($lVerb){
 			case "GET":
 				if(isset($_GET['username'])){
@@ -61,15 +65,15 @@
 						$lQueryResult = $SQLQueryHandler->getUsernames();
 					}else{
 						/* lookup user */
-						$lQueryResult = $SQLQueryHandler->getNonSensitiveAccountInformation($lAccountUsername);						
+						$lQueryResult = $SQLQueryHandler->getNonSensitiveAccountInformation($lAccountUsername);
 					}// end if
-											
+
 					if ($lQueryResult->num_rows > 0){
 						echo "Result: {Accounts: {".jsonEncodeQueryResults($lQueryResult)."}}";
 					}else{
 						echo "Result: {User '".$lAccountUsername."' does not exist}";
 					}// end if
-					
+
 				}else{
 
 					/* Display help and list accounts */
@@ -96,7 +100,7 @@
 						<div>
 						<span style='font-weight:bold;'>&nbsp;&nbsp;&nbsp;Example Exploit(s):</span><br /><br />
 							&nbsp;&nbsp;&nbsp;SQL injection: <a href='/mutillidae/webservices/rest/ws-user-account.php?username=%6a%65%72%65%6d%79%27%20%75%6e%69%6f%6e%20%73%65%6c%65%63%74%20%63%6f%6e%63%61%74%28%27%54%68%65%20%70%61%73%73%77%6f%72%64%20%66%6f%72%20%27%2c%75%73%65%72%6e%61%6d%65%2c%27%20%69%73%20%27%2c%20%70%61%73%73%77%6f%72%64%29%2c%6d%79%73%69%67%6e%61%74%75%72%65%20%66%72%6f%6d%20%61%63%63%6f%75%6e%74%73%20%2d%2d%20'>/mutillidae/webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',+password),mysignature+from+accounts+--+<br /></a>
-						
+
 						</div>
 						<br />
 						<hr />
@@ -119,11 +123,11 @@
 
 			break;
 			case "POST"://create
-				
+
 				$lAccountUsername = getPOSTParameter("username", TRUE);
 				$lAccountPassword = getPOSTParameter("password", TRUE);
 				$lAccountSignature = getPOSTParameter("signature", FALSE);
-								
+
 				if ($SQLQueryHandler->accountExists($lAccountUsername)){
 					echo "Result: {Account ".$lAccountUsername." already exists}";
 				}else{
@@ -135,11 +139,11 @@
 			case "PUT":	//create or update
 				/* $_POST array is not auto-populated for PUT method. Parse input into an array. */
 				populatePOSTSuperGlobal();
-				
+
 				$lAccountUsername = getPOSTParameter("username", TRUE);
 				$lAccountPassword = getPOSTParameter("password", TRUE);
 				$lAccountSignature = getPOSTParameter("signature", FALSE);
-								
+
 				if ($SQLQueryHandler->accountExists($lAccountUsername)){
 					$lQueryResult = $SQLQueryHandler->updateUserAccount($lAccountUsername, $lAccountPassword, $lAccountSignature);
 					echo "Result: {Updated account ".$lAccountUsername.". ".$lQueryResult." rows affected.}";
@@ -147,12 +151,12 @@
 					$lQueryResult = $SQLQueryHandler->insertNewUserAccount($lAccountUsername, $lAccountPassword, $lAccountSignature);
 					echo "Result: {Inserted account ".$lAccountUsername.". ".$lQueryResult." rows affected.}";
 				}// end if
-				
+
 			break;
 			case "DELETE":
 				/* $_POST array is not auto-populated for DELETE method. Parse input into an array. */
 				populatePOSTSuperGlobal();
-								
+
 				$lAccountUsername = getPOSTParameter("username", TRUE);
 				$lAccountPassword = getPOSTParameter("password", TRUE);
 
@@ -160,13 +164,13 @@
 
 					if($SQLQueryHandler->authenticateAccount($lAccountUsername,$lAccountPassword)){
 						$lQueryResult = $SQLQueryHandler->deleteUser($lAccountUsername);
-					
+
 						if ($lQueryResult){
 							echo "Result: {Deleted account ".$lAccountUsername."}";
 						}else{
 							echo "Result: {Attempted to delete account ".$lAccountUsername." but result returned was ".$lQueryResult."}";
 						}//end if
-						
+
 					}else{
 						echo "Result: {Could not authenticate account ".$lAccountUsername.". Password incorrect.}";
 					}// end if
@@ -174,7 +178,7 @@
 				}else{
 					echo "Result: {User '".$lAccountUsername."' does not exist}";
 				}// end if
-				
+
 			break;
 			default:
 				throw new Exception("Could not understand HTTP REQUEST_METHOD verb");
@@ -184,5 +188,5 @@
 	} catch (Exception $e) {
 		echo $CustomErrorHandler->FormatErrorJSON($e, "Unable to process request to web service ws-user-account");
 	}// end try
-	
+
 ?>

@@ -23,7 +23,9 @@
     <?php
 
     //Here because of very weird error
-    session_start();
+    if (session_status() == PHP_SESSION_NONE){
+        session_start();
+    }// end if
 
     //initialize custom error handler
     require_once 'classes/CustomErrorHandler.php';

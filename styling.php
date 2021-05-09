@@ -2,7 +2,7 @@
 	/*
 	 * If you are trying to cause path relative stylesheet
 	 * injection, a test case is
-	 * 
+	 *
 	 * http://172.16.0.130/mutillidae/index.php?page=styling-frame.php&page-to-frame=styling.php/foo/bar/%0A{}*{color:red;}///
 	 * This works in IE 11 if the browser is in compatibility mode
 	 */
@@ -10,19 +10,22 @@
 	try{
 		$ESAPI = NULL;
 		$Encoder = NULL;
-		
-		/* We use the session on this page */
-		if (!isset($_SESSION["security-level"])){
-			session_start();
+
+		if (session_status() == PHP_SESSION_NONE){
+		    session_start();
 		}// end if
-		
+
+		if (!isset($_SESSION["security-level"])){
+		    $_SESSION["security-level"] = 0;
+		}// end if
+
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure
     		case "1": // This code is insecure
 				$lProtectAgainstMethodTampering = FALSE;
 				$lEncodeOutput = FALSE;
 			break;
-	    		
+
 			case "2":
 			case "3":
 			case "4":
@@ -48,10 +51,10 @@
 	    	}else{
 				$lPageTitle = $_REQUEST["page-title"];
 	    	};// end if $lProtectAgainstMethodTampering
-	    	
+
 	    	if($lEncodeOutput){
 	    		$lPageTitle = $Encoder->encodeForHTML($lPageTitle);
-	    	};// end if	    	
+	    	};// end if
 		};// end if $lFormSubmitted
 
    	} catch (Exception $e) {
@@ -63,7 +66,7 @@
 <html>
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-	<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />	
+	<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
 	<title><?php echo $lPageTitle?></title>
 </head>
 <body>
