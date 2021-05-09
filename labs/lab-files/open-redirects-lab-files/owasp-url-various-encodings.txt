@@ -1,0 +1,15 @@
+http://mutillidae.local/index.php?forwardurl=http://www.owasp.org&page=redirectandlog.php
+
+http://mutillidae.local/index.php?forwardurl=http://104.130.219.202&page=redirectandlog.php
+
+http://mutillidae.local/index.php?forwardurl=http://1753406410&page=redirectandlog.php
+
+http://mutillidae.local/index.php?forwardurl=%68%74%74%70%3a%2f%2f%31%37%35%33%34%30%36%34%31%30&page=redirectandlog.php
+
+
+mutillidae.local/index.php?page=redirectandlog.php&forwardurl=http://www.google.com
+
+mutillidae.local/index.php?page=redirectandlog.php&forwardurl=http://172.217.12.228
+
+mutillidae.local/index.php?page=redirectandlog.php&forwardurl=%68%74%74%70%3a%2f%2f%32%38%39%39%39%30%35%37%36%34
+

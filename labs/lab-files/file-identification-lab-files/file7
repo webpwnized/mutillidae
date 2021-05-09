@@ -1,0 +1,83 @@
+** fgdump - A utility for dumping passwords on Windows NT/2000/XP/2003 machines **
+Written by fizzgig (fizzgig@foofus.net)
+
+Greets to all my fellow Foofites: j0m0-Kun (who is the inspiration for this program), 
+phenfen, omi, fade, pmonkey, grunch, rockdon, reefman and of course our namesake foofus.
+
+Many thanks to the awesome folks who created cachedump and pwdump3e as well! 
+
+More information: http://www.foofus.net
+
+fgdump was born out of frustration with current antivirus (AV) vendors who only partially
+handled execution of programs like pwdump. Certain vendors' solutions would
+sometimes allow pwdump to run, sometimes not, and sometimes lock up the box. As such,
+we as security engineers had to remember to shut off antivirus before running pwdump and
+similar utilities like cachedump. Needless to say, we're forgetful sometimes...
+
+So fgdump started as simply a wrapper around things we had to do to make pwdump work 
+effectively. Later, cachedump was added to the mix, as were a couple other variations
+of AV. Over time it has grown, and continues to grow, to support our assessments and
+other projects. We are beginning to use it extensively within Windows domains for
+broad password auditing, and in conjunction with other tools (ownr and pwdumpToMatrix.pl)
+for discovering implied trust relationships.
+
+fgdump is targetted at the security auditing community, and is designed to be used for 
+good, not evil. :) Note that, in order to effectively use fgdump, you're going to need 
+high-power credentials (Administrator or Domain Administrator, in most cases), thus
+limiting its usefulness as a hacking tool. However, hopefully some of you other security
+folks will find this helpful.
+
+In quick summary, the main code execution path of fgdump is as follows:
+
+1) Bind to a remote machine using IPC$ (or a list of machines)
+2) Stop AV, if it is installed
+3) Locate file shares exposed on that machine
+4) Find a writable share from the above list, bind it to a local drive
+5) Upload fgexec (used for remote command execution) for cachedump
+6) Run pwdump
+7) Run cachedump
+8) Run pstgdump
+8) Delete uploaded files from the file share
+9) Unbind the remote file share
+10) Restart AV if it was running
+11) Unbind from IPC$
+
+Many of the parameters associated with these operations are tweakable via the command line.
+Run fgdump with no parameters to get the current list of available parameters.
+
+fgdump embeds several programs within its resource tree. This means you only need a single 
+executable rather than dragging out a bunch of them. Of important note are the following:
+
+- cachedump: This is the popular cached credential program created by the folks at
+off-by-one.net (http://www.off-by-one.net/misc/cachedump.html). Currently, the executable 
+is included verbatim.
+- pwdump6: A substantially modified version of pwdump3e. It was tweaked to use other shares besides
+just ADMIN$, use named pipes for communication, eliminate dependencies on the CryptoAPI and
+be more resistant to exclusion by way of non-executable (NX) memory.
+
+The source for both of these programs is included in the fgdump source tree, as mandated by
+the GPL. If you modify fgdump and still use these programs, please continue to distribute
+the source code for these programs.
+
+Also in the source tree:
+- fgexec: A simple service that can be remotely installed that will run a remote executable.
+Its very similar in function to psservice or sc, just more limited.
+- pwdump6: The new version of pwdump as mentioned above
+- pstgdump: A protected storage dumper. This can reveal some VERY interesting information,
+including saved IE and Outlook Express passwords.
+
+NOTE:
+
+The code was all compiled using Visual Studio .NET 2003, and solution/project files for 
+it have been included. Ideally, everything should compile out of the box. :)
+
+Please let me know if this is useful to you, and I welcome (constructive) comments and
+suggestions at fizzgig@foofus.net.
+
+I, nor foofus.net, can take any responsibility for misuse of this program, nor can I
+guarantee that it will not have adverse affects on certain hosts. By using this program,
+you assume any and all risk associated with the execution of the program, including 
+but not limited to damage to a system or data loss. In other words,if you break 
+someone's stuff, don't come crying to me. :)
+
+--fizzgig

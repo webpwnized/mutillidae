@@ -1,0 +1,12 @@
+POST /index.php?page=client-side-control-challenge.php HTTP/1.1
+Host: mutillidae.local
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 423
+Cookie: PHPSESSID=f89jigjvb9painsrvd5628n249; showhints=1
+DNT: 1
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+textbox=1951369946&readonly_textbox=1951369946&short_textbox=1951369946&disabled_textbox=1951369946&hidden_textbox=1951369946&tricky_textbox=1951369946&vanishing_textbox=1951369946&shy_textbox=1951369946&search=1951369946&password=1951369946&select=1951369946&checkbox=1951369946&radio=1951369946&email=1951369946&file=1951369946&number=1951369946&range=1951369946&client_side_control_challenge_php_submit_button=1951369946

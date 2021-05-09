@@ -1,0 +1,14 @@
+<script>
+	try{
+		var m = ""; var l = window.localStorage; var s = window.sessionStorage;
+		for(i=0;i<l.length;i++){
+			var lKey = l.key(i);
+			m += lKey + "=" + l.getItem(lKey) + ";\n";
+		};
+		for(i=0;i<s.length;i++){
+			var lKey = s.key(i);
+			m += lKey + "=" + s.getItem(lKey) + ";\n";
+		};
+		alert(m);
+	}catch(e){alert(e.message);}
+</script>

