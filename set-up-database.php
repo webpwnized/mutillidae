@@ -22,20 +22,24 @@
     		<div class="database-success-message">HTML 5 Local and Session Storage cleared unless error popped-up already.</div>
     <?php
 
-    //Here because of very weird error
     if (session_status() == PHP_SESSION_NONE){
         session_start();
     }// end if
 
+    if(isset($_SESSION["security-level"])){
+        $lSecurityLevel = $_SESSION["security-level"];
+    }else{
+        $lSecurityLevel = 0;
+    }
+
     //initialize custom error handler
     require_once 'classes/CustomErrorHandler.php';
     if (!isset($CustomErrorHandler)){
-    	$CustomErrorHandler =
-    	new CustomErrorHandler("owasp-esapi-php/src/", 0);
+        $CustomErrorHandler = new CustomErrorHandler("owasp-esapi-php/src/", $lSecurityLevel);
     }// end if
 
     require_once 'classes/MySQLHandler.php';
-    $MySQLHandler = new MySQLHandler("owasp-esapi-php/src/", $_SESSION["security-level"]);
+    $MySQLHandler = new MySQLHandler("owasp-esapi-php/src/", $lSecurityLevel);
     $lErrorDetected = FALSE;
 
     function format($pMessage, $pLevel ) {
