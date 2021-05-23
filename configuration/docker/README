@@ -1,9 +1,1 @@
-Download a copy of the mutillidae source from GitHub into the www directory before buliding the web/php server. The command may look something like the following.
-
-	cd www
-	git clone https://github.com/webpwnized/mutillidae.git
-
-Docker requires files to be in the build path. Either adjust the buildpath or copy mutillidae/configuration/openldap/mutillidae.ldif into the openldap directory before building the openldap server. The command might look something like this depending on the directory structure
-
-	cp www/mutillidae/configuration/openldap/mutillidae.ldif ldap/
-	
+docker-compose up
