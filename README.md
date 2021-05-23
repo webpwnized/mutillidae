@@ -17,7 +17,7 @@ aleady, [you might skip directly to installing Mutillidae](https://www.youtube.c
 
 The following video tutorials explain how to bring up Mutillidae on a set of 5 containers running Apache/PHP, MySQL, OpenLDAP, PHPMyAdmin, and PHPLDAPAdmin
 * [How to Install Docker on Ubuntu](https://www.youtube.com/watch?v=Y_2JVREtDFk)
-* [How to Run Mutillidae on Docker](https://www.youtube.com/watch?v=Q3OD1lnw0ok)
+* [How to Run Mutillidae on Docker](https://www.youtube.com/watch?v=9RH4l8ff-yg)
 
 ## Usage
 
