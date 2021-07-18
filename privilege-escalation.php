@@ -35,7 +35,7 @@
 	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td>
-			Hydra and Burp Suite can be used to guess usernames and passwords quickly.
+			THC Hydra (http://www.thc.org/thc-hydra) and Burp Suite can be used to guess usernames and passwords quickly.
 			Both tools can attempt to log into sites and report the result.
 		</td>
 	</tr>
