@@ -112,21 +112,29 @@
 
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
 		try{
-			if(lValidateInput == "TRUE"){
-				var lUnsafeCharacters = /[`~!@#$%^&*()-_=+\[\]{}\\|;':",./<>?]/;
-				if (theForm.username.value.length > 15 || 
-					theForm.password.value.length > 15){
-						alert('Username too long. We dont want to allow too many characters.\n\nSomeone might have enough room to enter a hack attempt.');
-						return false;
-				};// end if
-				
-				if (theForm.username.value.search(lUnsafeCharacters) > -1 || 
-					theForm.password.value.search(lUnsafeCharacters) > -1){
-						alert('Dangerous characters detected. We can\'t allow these. This all powerful blacklist will stop such attempts.\n\nMuch like padlocks, filtering cannot be defeated.\n\nBlacklisting is l33t like l33tspeak.');
-						return false;
-				};// end if
-			};// end if(lValidateInput)
+			var hasSpecialCharacter = theForm.password.value.search(/(?=\S*[\W])/) > -1;
+			var hasUppercase = theForm.password.value.search(/(?=\S*[A-Z])/) > -1;
+			var hasLowercase = theForm.password.value.search(/(?=\S*[a-z])/) > -1;
+			var hasNumber = theForm.password.value.search(/(?=\S*[\d])/) > -1;
+			var enoughLength = theForm.password.value.search(/(?=\S{8,})/) > -1;
+			console.log(hasSpecialCharacter);
+			console.log(hasUppercase);
+			console.log(hasLowercase);
+			console.log(hasNumber);
+			console.log(enoughLength);
+
+			if (theForm.username.value.length > 15 || 
+				theForm.password.value.length > 15){
+					alert('Username too long.');
+					return false;
+			};// end if
 			
+			// password must have at least one of each type of character
+			if (!(hasUppercase && hasLowercase && hasNumber && hasSpecialCharacter && enoughLength)) {
+				alert('Password must have at least a length of 8 characters, one lowercase and one uppercase letter, a number and a special character.');
+				return false;
+			}
+
 			return true;
 		}catch(e){
 			alert("Error: " + e.message);
