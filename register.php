@@ -117,15 +117,10 @@
 			var hasLowercase = theForm.password.value.search(/(?=\S*[a-z])/) > -1;
 			var hasNumber = theForm.password.value.search(/(?=\S*[\d])/) > -1;
 			var enoughLength = theForm.password.value.search(/(?=\S{8,})/) > -1;
-			console.log(hasSpecialCharacter);
-			console.log(hasUppercase);
-			console.log(hasLowercase);
-			console.log(hasNumber);
-			console.log(enoughLength);
 
-			if (theForm.username.value.length > 15 || 
-				theForm.password.value.length > 15){
-					alert('Username too long.');
+			if (theForm.username.value.length > 25 || 
+				theForm.password.value.length > 25){
+					alert('Username or password too long.');
 					return false;
 			};// end if
 			

@@ -1,4 +1,5 @@
-<?php 
+<?php
+	$_SESSION['login_attempts'] = 0;
 	try {	    	
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure.
@@ -49,21 +50,12 @@
 
 	function onSubmitOfLoginForm(/*HTMLFormElement*/ theForm){
 		try{
-			if(lValidateInput == "TRUE"){
-				var lUnsafeCharacters = /[`~!@#$%^&*()-_=+\[\]{}\\|;':",./<>?]/;
-				if (theForm.username.value.length > 15 || 
-					theForm.password.value.length > 15){
-						alert('Username too long. We dont want to allow too many characters.\n\nSomeone might have enough room to enter a hack attempt.');
-						return false;
-				};// end if
-				
-				if (theForm.username.value.search(lUnsafeCharacters) > -1 || 
-					theForm.password.value.search(lUnsafeCharacters) > -1){
-						alert('Dangerous characters detected. We can\'t allow these. This all powerful blacklist will stop such attempts.\n\nMuch like padlocks, filtering cannot be defeated.\n\nBlacklisting is l33t like l33tspeak.');
-						return false;
-				};// end if
-			};// end if(lValidateInput)
-			
+			if (theForm.username.value.length > 25 || 
+				theForm.password.value.length > 25){
+					alert('Username or password too long.');
+					return false;
+			};// end if
+						
 			return true;
 		}catch(e){
 			alert("Error: " + e.message);
@@ -120,7 +112,13 @@
 			<tr><td></td></tr>
 			<tr>
 				<td colspan="2" style="text-align:center;">
-					<input name="login-php-submit-button" class="button" type="submit" value="Login" />
+					<input name="login-php-submit-button" class="button" type="submit" value="Login"
+					<?php
+						if ($_SESSION['login_attempts'] >= 3) {
+							echo('disabled');
+						}
+					?>
+					/>
 				</td>
 			</tr>
 			<tr><td></td></tr>
@@ -161,6 +159,8 @@
    	var lAuthenticationFailed = "FALSE";
    	
 	switch(lAuthenticationAttemptResultFlag){
+
+
    		case cACCOUNT_DOES_NOT_EXIST: 
    	   		lMessage="Account does not exist"; lAuthenticationFailed = "TRUE";
    	   		break;

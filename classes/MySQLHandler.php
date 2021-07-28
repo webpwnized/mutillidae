@@ -324,6 +324,22 @@ class MySQLHandler {
 		return $this->doExecuteQuery($pQueryString);
 	}// end public function executeQuery
 
+	public function procedureQuery($pQueryString) {
+		if ($this->mMySQLConnection->multi_query($pQueryString)) {
+			$result = $this->mMySQLConnection->store_result();
+
+			global $LogHandler;
+			$LogHandler->writeToLog($result);
+			// while ($this->mMySQLConnection->more_results()) {
+			// 	$this->mMySQLConnection->store_result();
+			// }
+
+			return $result;
+		}
+
+		return FALSE;
+	}
+
 	public function closeDatabaseConnection(){
 		$this->doCloseDatabaseConnection();
 	}// end public function closeDatabaseConnection

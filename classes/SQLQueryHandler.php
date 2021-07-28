@@ -285,19 +285,12 @@ class SQLQueryHandler {
 
 	public function authenticateAccount($pUsername, $pPassword){
 
-		if ($this->stopSQLInjection == TRUE){
-			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
-			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
-		}// end if
+		$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
+		$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
 
-		$lQueryString =
-			"SELECT username ".
-			"FROM accounts ".
-			"WHERE username='".$pUsername."' ".
-			"AND password='".$pPassword."';";
-
-		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
-
+		$lQuery = "CALL login_attempt('".$pUsername."', '".$pPassword."');";
+		$lQueryResult = $this->mMySQLHandler->procedureQuery($lQuery);
+		
 		if (isset($lQueryResult->num_rows)){
 			return ($lQueryResult->num_rows > 0);
 		}else{
@@ -335,22 +328,11 @@ class SQLQueryHandler {
 	}//end public function getUserAccountByID
 
 	public function getUserAccount($pUsername, $pPassword){
-   		/*
-  		 * Note: While escaping works ok in some case, it is not the best defense.
- 		 * Using stored procedures is a much stronger defense.
- 		 */
 
-		if ($this->stopSQLInjection == TRUE){
-			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
-			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
-		}// end if
+		$lQuery = "CALL login_attempt('".$pUsername."', '".$pPassword."');";
+		$lQueryResult = $this->mMySQLHandler->procedureQuery($lQuery);
 
-		$lQueryString =
-			"SELECT * FROM accounts
-			WHERE username='".$pUsername.
-			"' AND password='".$pPassword."'";
-
-		return $this->mMySQLHandler->executeQuery($lQueryString);
+		return $lQueryResult;
 	}//end public function getUserAccount
 
 	/* -----------------------------------------
@@ -361,11 +343,9 @@ class SQLQueryHandler {
   		 * Note: While escaping works ok in some case, it is not the best defense.
  		 * Using stored procedures is a much stronger defense.
  		 */
-		if ($this->stopSQLInjection == TRUE){
-			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
-			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
-			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
-		}// end if
+		$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
+		$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
+		$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 
 		$lQueryString = "INSERT INTO accounts (username, password, mysignature) VALUES ('" .
 			$pUsername ."', '" .

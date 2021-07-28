@@ -52,7 +52,7 @@
 	   	$lKeepGoing = TRUE;
 	   	$lQueryResult=NULL;
 
-   		logLoginAttempt("User {$lUsername} attempting to authenticate");
+   		logLoginAttempt("User {$lUsername} attempting to authenticate.");
 
    		if (!$SQLQueryHandler->accountExists($lUsername)){
    		    if ($lConfidentialityRequired){
@@ -63,6 +63,7 @@
    			$lKeepGoing = FALSE;
    			logLoginAttempt("Login Failed: Account {$lUsername} does not exist");
    		}// end if accountExists
+
 
 		if ($lKeepGoing){
    			if (!$SQLQueryHandler->authenticateAccount($lUsername, $lPassword)){
@@ -76,7 +77,11 @@
 	   		}//end if authenticateAccount
    		}//end if $lKeepGoing
 
+
 		$lQueryResult = $SQLQueryHandler->getUserAccount($lUsername, $lPassword);
+
+		logLoginAttempt($lQueryResult);
+
 
 		if (isset($lQueryResult->num_rows)){
    			if ($lQueryResult->num_rows > 0) {
@@ -84,7 +89,9 @@
    			}//end if
 		}//end if
 
+
 		if ($lAuthenticationAttemptResultFound){
+
 			$lRecord = $lQueryResult->fetch_object();
 			$_SESSION['loggedin'] = 'True';
 			$_SESSION['uid'] = $lRecord->cid;
@@ -109,6 +116,7 @@
    				* and escalate any requests for HTTP to HTTPS.
    				*/
 			if ($lProtectCookies){
+
 				$lUsernameCookie = $Encoder->encodeForURL($lRecord->username);
 				$l_cookie_options = array (
 				    'expires' => 0,              // 0 means session cookie
@@ -146,6 +154,8 @@
 		}// end if $lAuthenticationAttemptResultFound
 
    	} catch (Exception $e) {
+		logLoginAttempt($e);
+
 		echo $CustomErrorHandler->FormatError($e, "Error querying user account");
 		$lAuthenticationAttemptResult = $cAUTHENTICATION_EXCEPTION_OCCURED;
 	}// end try;

@@ -909,6 +909,25 @@
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
 
+
+        /*
+         *
+         * Stored Procedure for login
+         *
+        */
+        $lQueryString =
+            "SELECT username ".
+            "FROM accounts ".
+            "WHERE username=lLogin ".
+            "AND password=lPassword; ";
+
+        if (!$MySQLHandler->executeQuery("DROP PROCEDURE IF EXISTS login_attempt") ||
+            !$MySQLHandler->executeQuery("CREATE PROCEDURE login_attempt(IN lLogin TEXT, IN lPassword TEXT) READS SQL DATA BEGIN ".$lQueryString." END;")) {
+            throw new Exception("error on procedure creation.");
+        } else {
+            echo format("Created procedure succesfully.");
+        }
+
     	/* NOTE: Be sure to keep indexes in the help_texts table
     	 * relatively the same as the level_1_help_include_files
     	 * table so we can reuse the keys in the page_help table.
