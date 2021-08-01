@@ -1,26 +1,4 @@
-    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-    <html>
-    	<head>
-    		<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-    		<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
-    	</head>
-    	<body>
-    		<div>&nbsp;</div>
-    		<div class="page-title">Setting up the database...</div><br /><br />
-    		<div class="label" style="text-align: center;">If you see no error messages, it should be done.</div>
-    		<div>&nbsp;</div>
-    		<div class="label" style="text-align: center;"><a href="index.php">Continue back to the frontpage.</a></div>
-    		<br />
-    		<script>
-    			try{
-    				window.sessionStorage.clear();
-    				window.localStorage.clear();
-    			}catch(e){
-    				alert("Error clearing HTML 5 Local and Session Storage" + e.toString());
-    			};
-    		</script>
-    		<div class="database-success-message">HTML 5 Local and Session Storage cleared unless error popped-up already.</div>
-    <?php
+<?php
 
     if (session_status() == PHP_SESSION_NONE){
         session_start();
@@ -52,6 +30,31 @@
 
     	return "<div class=\"".$lStyle."\">" . $pMessage . "</div>";
     }// end function
+?>
+
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+    <html>
+    	<head>
+    		<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    		<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
+    	</head>
+    	<body>
+    		<div>&nbsp;</div>
+    		<div class="page-title">Setting up the database...</div><br /><br />
+    		<div class="label" style="text-align: center;">If you see no error messages, it should be done.</div>
+    		<div>&nbsp;</div>
+    		<div class="label" style="text-align: center;"><a href="index.php">Continue back to the frontpage.</a></div>
+    		<br />
+    		<script>
+    			try{
+    				window.sessionStorage.clear();
+    				window.localStorage.clear();
+    			}catch(e){
+    				alert("Error clearing HTML 5 Local and Session Storage" + e.toString());
+    			};
+    		</script>
+    		<div class="database-success-message">HTML 5 Local and Session Storage cleared unless error popped-up already.</div>
+<?php
 
     try{
     	echo format("Attempting to connect to MySQL server on host " . MySQLHandler::$mMySQLDatabaseHost . " with user name " . MySQLHandler::$mMySQLDatabaseUsername,"I");
