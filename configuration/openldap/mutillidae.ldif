@@ -43,7 +43,7 @@ cn: 2F204
 description: 2nd Floor Conference Room
 roomNumber: 204
 
-dn: cn=Joe's Place,ou=rooms,dc=mutillidae,dc=local
+dn: cn=Joes Place,ou=rooms,dc=mutillidae,dc=local
 objectClass: top
 objectClass: room
 cn: Joe's Place
