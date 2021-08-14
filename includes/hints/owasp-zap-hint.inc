@@ -28,4 +28,6 @@ is provided below to help get started with Burp-Suite.
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoStartOWASPZAPfromCommandLine);?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->ExtendingOWASPZAPwithAddOns);?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->UsingOWASPZAPwithBurpSuiteBestofBothWorlds);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->OWASPDependencyCheckPart1HowtoInstall);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->OWASPDependencyCheckPart2HowtoScanYourProject);?>
 <br/><br/>

@@ -5,5 +5,6 @@ It is possible to use SQL injection on the User Info page to determine the numbe
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-No videos for this  hint
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisSQLInjection);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab9Walkthrough);?>
 <br/>

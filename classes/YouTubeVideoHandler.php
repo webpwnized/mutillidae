@@ -48,6 +48,9 @@ class YouTubeVideoHandler {
 	public $JWTSecurityPart5WhyuseCertificatebasedSignatures = 5;
 	public $JWTSecurityPart6ImportanceofInputValidation = 6;
 	public $HowtoScanforWebVulnerabilitieswithNikto = 7;
+	public $WhatisSQLInjection = 8;
+	public $OWASPDependencyCheckPart1HowtoInstall = 9;
+	public $OWASPDependencyCheckPart2HowtoScanYourProject = 10;
 	public $UsingBurpIntruderSnipertoFuzzParameters = 13;
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;
@@ -106,7 +109,6 @@ class YouTubeVideoHandler {
 	public $HowtoStartOWASPZAPfromCommandLine = 199;
 	public $ExtendingOWASPZAPwithAddOns = 200;
 	public $UsingOWASPZAPwithBurpSuiteBestofBothWorlds = 201;
-
 	public $HTMLControlsarenotSecurityControls = 202;
 	public $BurpSuite2InspectingWebSockets = 203;
 	public $HowtocheckHTTPScertificatefromcommandline = 204;

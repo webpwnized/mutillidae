@@ -454,4 +454,8 @@
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-<br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisSQLInjection);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab7Walkthrough);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab8Walkthrough);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab9Walkthrough);?>
+<br/><br/>
