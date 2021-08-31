@@ -7,7 +7,7 @@
     $lChoice_3 = "george";
     $lChoice_4 = "fred";
     $lChoice_5 = "cmdline";
-    $lCorrectAnswer = 4;
+    $lCorrectAnswer = 2;
 
     require_once("labs/lab-template.inc");
 ?>
