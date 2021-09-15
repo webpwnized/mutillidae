@@ -7,35 +7,56 @@
 	$lErrorMessage = "";
 	$lHostResolvedIP = "";
 	$lPortScanMessage = "";
+	$lPingResult = "";
+	$lTracerouteResult = "";
 	$lDatabaseHost = MySQLHandler::$mMySQLDatabaseHost;
 	$lDatabaseUsername = MySQLHandler::$mMySQLDatabaseUsername;
 	$lDatabasePassword = MySQLHandler::$mMySQLDatabasePassword;
 	$lDatabaseName = MySQLHandler::$mMySQLDatabaseName;
 	$lDatabasePort = MySQLHandler::$mMySQLDatabasePort;
 
+	try{
+	    $lHostResolvedIP = gethostbyname($lDatabaseHost);
+	}catch (Exception $e){
+	    // do nothing
+	} //end try
+
+	try{
+	    $lPingResult = shell_exec("ping $lDatabaseHost -c 1");
+	}catch (Exception $e){
+	    // do nothing
+	} //end try
+
+	try{
+	    $lTracerouteResult = shell_exec("traceroute $lDatabaseHost 2>&1");
+	}catch (Exception $e){
+	    // do nothing
+	} //end try
+
+	try{
+	    $lTracerouteTCPResult = shell_exec("traceroute --tcp -p $lDatabasePort $lDatabaseHost 2>&1");
+	}catch (Exception $e){
+	    // do nothing
+	} //end try
+
+	try{
+	    $lWaitTimeoutInSeconds = 2;
+	    $lErrorCode = "";
+	    $lErrorMessage = "";
+	    if($fp = fsockopen($lDatabaseHost,$lDatabasePort,$lErrorCode,$lErrorMessage,$lWaitTimeoutInSeconds)){
+	        $lPortScanMessage = "The database is reachable. Connected to database host " . $lDatabaseHost . " on port " . $lDatabasePort;
+	    } else {
+	        $lPortScanMessage = "Cound not connect to database host " . $lDatabaseHost . " on port " . $lDatabasePort. ". The hostname or port may be incorrect, the server offline, the service is down, or a firewall is blocking the connection.";
+	    } // end if
+	    fclose($fp);
+	}catch (Exception $e){
+	    // do nothing
+	} //end try
+
 	try {
 		MySQLHandler::databaseAvailable();
 	} catch (Exception $e) {
 		$lErrorMessage = $e->getMessage();
-
-		try{
-		    $lHostResolvedIP = gethostbyname($lDatabaseHost);
-		}catch (Exception $e){
-		    // do nothing
-		}
-
-		try{
-		    $waitTimeoutInSeconds = 2;
-		    if($fp = fsockopen($lDatabaseHost,$lDatabasePort,$errCode,$errStr,$waitTimeoutInSeconds)){
-		        $lPortScanMessage = "Connected to database host " . $lDatabaseHost . " on port " . $lDatabasePort;
-		    } else {
-		        $lPortScanMessage = "Cound not connect to database host " . $lDatabaseHost . " on port " . $lDatabasePort. ". The hostname or port may be incorrect, the server offline, the service is down, or a firewall is blocking the connection.";
-		    }
-		    fclose($fp);
-    	}catch (Exception $e){
-    	    // do nothing
-    	}
-
 	}// end try MySQLHandler::databaseAvailable()
 
 	if (session_status() == PHP_SESSION_NONE){
@@ -59,6 +80,7 @@
 	<title>Database Offline</title>
 </head>
 
+<div>&nbsp;</div>
 <div class="page-title">The database server at
 	<span class="label" style="color: #cc3333">
 		<?php echo MySQLHandler::$mMySQLDatabaseHost ?>
@@ -67,7 +89,6 @@
 </div>
 
 <table>
-	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td>
 			<ol>
@@ -80,13 +101,25 @@
 			</ol>
 		</td>
 	</tr>
-	<tr><td class="warning-message">Error Message</td></tr>
 	<tr>
-		<td style="width:700px;" class="warning-message">
-			<?php echo "Error: ".$lErrorMessage ?>
+		<td style="width:700px;">
+            <div class="warning-message">Diagnostics Information</div>
+            <div>&nbsp;</div>
+            <div><span class="label">Error message: </span><?php echo $lErrorMessage; ?></div>
+            <div>&nbsp;</div>
+            <div><span class="label">Database host: </span><?php echo $lDatabaseHost; ?></div>
+            <div><span class="label">Database post: </span><?php echo $lDatabasePort; ?></div>
+            <div><span class="label">Database username: </span><?php echo $lDatabaseUsername; ?></div>
+            <div><span class="label">Database password: </span><?php echo $lDatabasePassword; ?></div>
+            <div><span class="label">Database name: </span><?php echo $lDatabaseName; ?></div>
+            <div>&nbsp;</div>
+            <div><span class="label">IP resolved from hostname: </span><?php echo $lHostResolvedIP; ?></div>
+            <div>&nbsp;</div>
+            <div><span class="label">Ping database results: </span><pre><?php echo $lPingResult; ?></pre></div>
+            <div><span class="label">Traceroute database results: </span><pre><?php echo $lTracerouteResult; ?></pre></div>
+            <div><span class="label">Port scan database results: </span><?php echo $lPortScanMessage; ?></div>
 		</td>
 	</tr>
-	<tr><td>&nbsp;</td></tr>
 </table>
 
 <div>
@@ -95,7 +128,7 @@
 			enctype="application/x-www-form-urlencoded"
 			id="idDatabaseOffline">
 		<table>
-			<tr><td></td></tr>
+			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" class="form-header">Opt out of database warnings</td>
 			</tr>
@@ -111,12 +144,3 @@
 		</table>
 	</form>
 </div>
-
-<div class="report-header">Diagnostics Information</div>
-<div><?php echo "Error message: ".$lErrorMessage; ?></div>
-<div><?php echo "Database host: ".$lDatabaseHost; ?></div>
-<div><?php echo "IP resolved from hostname: ".$lHostResolvedIP; ?></div>
-<div><?php echo "Database username: ".$lDatabaseUsername; ?></div>
-<div><?php echo "Database password: ".$lDatabasePassword; ?></div>
-<div><?php echo "Database name: ".$lDatabaseName; ?></div>
-<div><?php echo "Port scan results: ".$lPortScanMessage; ?></div>
