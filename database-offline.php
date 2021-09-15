@@ -3,12 +3,40 @@
 	 * INCLUDE CLASS DEFINITION PRIOR TO INITIALIZING
 	 * ------------------------------------------------------ */
 	require_once 'classes/MySQLHandler.php';
-	$lErrorMessage="";
+
+	$lErrorMessage = "";
+	$lHostResolvedIP = "";
+	$lPortScanMessage = "";
+	$lDatabaseHost = MySQLHandler::$mMySQLDatabaseHost;
+	$lDatabaseUsername = MySQLHandler::$mMySQLDatabaseUsername;
+	$lDatabasePassword = MySQLHandler::$mMySQLDatabasePassword;
+	$lDatabaseName = MySQLHandler::$mMySQLDatabaseName;
+	$lDatabasePort = MySQLHandler::$mMySQLDatabasePort;
+
 	try {
 		MySQLHandler::databaseAvailable();
 	} catch (Exception $e) {
 		$lErrorMessage = $e->getMessage();
-	}
+
+		try{
+		    $lHostResolvedIP = gethostbyname($lDatabaseHost);
+		}catch (Exception $e){
+		    // do nothing
+		}
+
+		try{
+		    $waitTimeoutInSeconds = 2;
+		    if($fp = fsockopen($lDatabaseHost,$lDatabasePort,$errCode,$errStr,$waitTimeoutInSeconds)){
+		        $lPortScanMessage = "Connected to database host " . $lDatabaseHost . " on port " . $lDatabasePort;
+		    } else {
+		        $lPortScanMessage = "Cound not connect to database host " . $lDatabaseHost . " on port " . $lDatabasePort. ". The hostname or port may be incorrect, the server offline, the service is down, or a firewall is blocking the connection.";
+		    }
+		    fclose($fp);
+    	}catch (Exception $e){
+    	    // do nothing
+    	}
+
+	}// end try MySQLHandler::databaseAvailable()
 
 	if (session_status() == PHP_SESSION_NONE){
 	    session_start();
@@ -31,36 +59,22 @@
 	<title>Database Offline</title>
 </head>
 
-<div class="page-title">The database server appears to be offline.</div>
+<div class="page-title">The database server at
+	<span class="label" style="color: #cc3333">
+		<?php echo MySQLHandler::$mMySQLDatabaseHost ?>
+	</span>
+	appears to be offline.
+</div>
 
 <table>
 	<tr><td>&nbsp;</td></tr>
-	<tr id="id-bad-page-tr">
-		<th>
-			The database server at
-			<span class="label" style="color: #cc3333">
-			<?php echo MySQLHandler::$mMySQLDatabaseHost ?>
-			</span>
-			appears to be offline.
-		</th>
-	</tr>
 	<tr>
 		<td>
 			<ol>
+				<li><a class="label" href="set-up-database.php">Click here</a> to attempt to setup the database. Sometimes this works.</li>
 				<li>Be sure the username and password to MySQL is the same as configured in includes/database-config.inc</li>
 				<li>Be aware that MySQL disables password authentication for root user upon installation or update in some systems. This may happen even for a minor update. Please check the username and password to MySQL is the same as configured in includes/database-config.inc</li>
-				<li>Try to <a style="font-weight: bold" href="set-up-database.php">setup/reset the DB</a> to see if that helps</li>
 				<li>A <a style="font-weight: bold" href="https://www.youtube.com/watch?v=sG5Z4JqhRx8" target="_blank">video is available</a> to help reset MySQL root password</li>
-				<li>The commands vary by system and version, but may be something similar to the following
-					<ul>
-						<li>mysql -u root</li>
-						<li>use mysql;</li>
-						<li>update user set authentication_string=PASSWORD('mutillidae') where user='root';</li>
-						<li>update user set plugin='mysql_native_password' where user='root';</li>
-						<li>flush privileges;</li>
-						<li>quit;</li>
-					</ul>
-				</li>
 				<li>Check the error message below for more hints</li>
 				<li>If you think this message is a false-positive, you can opt-out of these warnings below</li>
 			</ol>
@@ -97,3 +111,12 @@
 		</table>
 	</form>
 </div>
+
+<div class="report-header">Diagnostics Information</div>
+<div><?php echo "Error message: ".$lErrorMessage; ?></div>
+<div><?php echo "Database host: ".$lDatabaseHost; ?></div>
+<div><?php echo "IP resolved from hostname: ".$lHostResolvedIP; ?></div>
+<div><?php echo "Database username: ".$lDatabaseUsername; ?></div>
+<div><?php echo "Database password: ".$lDatabasePassword; ?></div>
+<div><?php echo "Database name: ".$lDatabaseName; ?></div>
+<div><?php echo "Port scan results: ".$lPortScanMessage; ?></div>

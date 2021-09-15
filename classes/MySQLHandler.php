@@ -19,11 +19,16 @@ class MySQLHandler {
 	 * DATABASE HOST
 	 * ----------------------------------------------
 	 * This is the host/server which has the database.
-	 * If using XAMPP or LAMP, this is almost certainly localhost.
-	 * 127.0.0.1 might work.
 	 * */
 	static public $mMySQLDatabaseHost = DB_HOST;
 	static public $MUTILLIDAE_DOCKER_HOSTNAME = "database";
+
+	/* ----------------------------------------------
+	 * DATABASE PORT
+	 * ----------------------------------------------
+	 * MySQL uses 3306 by default
+	 * */
+	static public $mMySQLDatabasePort = DB_PORT;
 
 	/* ----------------------------------------------
 	 * DATABASE USER NAME
@@ -125,12 +130,12 @@ class MySQLHandler {
 
 	}// end function
 
-	private function doConnectToDatabase($pHOSTNAME, $pUSERNAME, $pPASSWORD){
+	private function doConnectToDatabase($pHOSTNAME, $pUSERNAME, $pPASSWORD, $pPORT){
 	    $lResult = 1;
 	    $ACCESS_DENIED = "Access denied for user";
 
 	    try{
-	        $this->mMySQLConnection = new mysqli($pHOSTNAME, $pUSERNAME, $pPASSWORD);
+	        $this->mMySQLConnection = new mysqli($pHOSTNAME, $pUSERNAME, $pPASSWORD, NULL, $pPORT);
 	        if (strlen($this->mMySQLConnection->connect_error) > 0) {
 	            if (substr_count($this->mMySQLConnection->connect_error, $ACCESS_DENIED) > 0){
 	                $lResult = 2;
@@ -150,18 +155,19 @@ class MySQLHandler {
 		$USERNAME = self::$mMySQLDatabaseUsername;
 		$HOSTNAME = self::$mMySQLDatabaseHost;
 		$PASSWORD = self::$mMySQLDatabasePassword;
+		$PORT = self::$mMySQLDatabasePort;
 
 		try{
 		    # Try password from configuration file, then blank, then mutillidae, then samurai
-		    $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, $PASSWORD);
+		    $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, $PASSWORD, $PORT);
 		    if ($lResult <> 1){
-		        $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$MUTILLIDAE_DBV1_PASSWORD);
+		        $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$MUTILLIDAE_DBV1_PASSWORD, $PORT);
 		        if ($lResult <> 1){
-		            $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$MUTILLIDAE_DBV2_PASSWORD);
+		            $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$MUTILLIDAE_DBV2_PASSWORD, $PORT);
 		            if ($lResult <> 1){
-		                $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$SAMURAI_WTF_PASSWORD);
+		                $lResult = $this->doConnectToDatabase($HOSTNAME, $USERNAME, self::$SAMURAI_WTF_PASSWORD, $PORT);
     				    if ($lResult <> 1){
-    				        $lResult = $this->doConnectToDatabase(self::$MUTILLIDAE_DOCKER_HOSTNAME, $USERNAME, $PASSWORD);
+    				        $lResult = $this->doConnectToDatabase(self::$MUTILLIDAE_DOCKER_HOSTNAME, $USERNAME, $PASSWORD, $PORT);
     				    }//end if
 		            }//end if
 		        }//end if
