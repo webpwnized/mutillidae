@@ -126,10 +126,14 @@
 	   	    'httponly' => FALSE,         // true or false
 	   	    'samesite' => 'Lax'          // None || Lax  || Strict
 	   	);
+
 	   	if ($lProtectCookies){
-	   	    $l_cookie_options['httponly'] = TRUE;
+	   	    /* The showhints cookie is unprotected on purpose because
+	   	     * it is used in one of the lab assignments */
+	   	    //$l_cookie_options['httponly'] = TRUE;
 	   	    $l_cookie_options['samesite'] = 'Strict';
 	   	}// end if
+
 	   	setcookie('showhints', $l_showhints, $l_cookie_options);
 	}// end if (isset($_COOKIE["showhints"])){
 

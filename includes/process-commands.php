@@ -81,7 +81,9 @@
 			    'samesite' => 'Lax'          // None || Lax  || Strict
 			);
 			if ($lProtectCookies){
-			    $l_cookie_options['httponly'] = TRUE;
+			    /* The showhints cookie is unprotected on purpose because
+			     * it is used in one of the lab assignments */
+			    //$l_cookie_options['httponly'] = TRUE;
 			    $l_cookie_options['samesite'] = 'Strict';
 			}// end if
 			setcookie('showhints', $l_showhints, $l_cookie_options);
@@ -144,7 +146,8 @@
 				    'path' => '/',               // '/' means entire domain
 				    //'domain' => '.example.com', // default is current domain
 				    'secure' => FALSE,           // true or false
-				    'httponly' => TRUE,         // true or false
+				    'httponly' => FALSE,         /* The showhints cookie is unprotected on purpose because
+				                                  * it is used in one of the lab assignments */
 				    'samesite' => 'Strict'          // None || Lax  || Strict
 				);
 				setcookie('showhints', "0", $l_cookie_options);
