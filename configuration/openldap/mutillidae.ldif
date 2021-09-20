@@ -46,7 +46,7 @@ roomNumber: 204
 dn: cn=Joes Place,ou=rooms,dc=mutillidae,dc=local
 objectClass: top
 objectClass: room
-cn: Joe's Place
+cn: Joes Place
 
 dn: cn=fred,ou=users,dc=mutillidae,dc=local
 objectClass: top
