@@ -75,10 +75,10 @@
 				Helpful hints and scripts
 			</a>
 		</td>
-		<td>
-			<a href="https://github.com/webpwnized/mutillidae" target="_blank">
-				<img align="middle" alt="Feature Requests" src="./images/tools-icon-48-48.png" />
-				<a href="https://addons.mozilla.org/en-US/firefox/collections/jdruin/pro-web-developer-qa-pack/" target="_blank">Some Useful Firefox Add-ons</a>
+		<td class="label" title="Mutillidae LDIF File">
+			<a href="configuration/openldap/mutillidae.ldif" target="_blank">
+				<img align="middle" alt="Mutillidae LDIF File" src="./images/ldap-server-48-59.png" />
+				Mutillidae LDIF File
 			</a>
 		</td>
 	</tr>

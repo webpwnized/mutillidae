@@ -183,9 +183,9 @@
             <div>&nbsp;</div>
             <div><span class="label">LDAP host: </span><?php echo $lLDAPHost; ?></div>
             <div><span class="label">LDAP post: </span><?php echo $lLDAPPort; ?></div>
-            <div><span class="label">LDAP username: </span><?php echo $lLDAPBaseDN; ?></div>
-            <div><span class="label">LDAP password: </span><?php echo $lLDAPBindDN; ?></div>
-            <div><span class="label">LDAP name: </span><?php echo $lLDAPBindPassword; ?></div>
+            <div><span class="label">LDAP username: </span><?php echo $lLDAPBindDN; ?></div>
+            <div><span class="label">LDAP password: </span><?php echo $lLDAPBindPassword; ?></div>
+            <div><span class="label">LDAP base DN: </span><?php echo $lLDAPBaseDN; ?></div>
             <div>&nbsp;</div>
             <div><span class="label">IP resolved from LDAP service hostname: </span><?php echo $lLDAPHostResolvedIP; ?></div>
             <div>&nbsp;</div>
