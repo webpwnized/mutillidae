@@ -1,5 +1,7 @@
 # <span style="color:darkblue">*OWASP Mutillidae II*</span>
 
+OWASP Mutillidae II is a free, open-source, deliberately vulnerable web application providing a target for web-security enthusiasts. Mutillidae can be installed on Linux and Windows using LAMP, WAMP, and XAMMP. It is pre-installed on SamuraiWTF and OWASP BWA. The existing version can be updated on these platforms. With dozens of vulnerabilities and hints to help the user; this is an easy-to-use web hacking environment designed for labs, security enthusiast, classrooms, CTF, and vulnerability assessment tool targets. Mutillidae has been used in graduate security courses, corporate web sec training courses, and as an "assess the assessor" target for vulnerability assessment software.
+
 ## Project Announcements
 
 * Twitter: [https://twitter.com/webpwnized](https://twitter.com/webpwnized)
@@ -19,7 +21,7 @@ The following video tutorials explain how to bring up Mutillidae on a set of 5 c
 * **YouTube**: [How to Install Docker on Ubuntu](https://www.youtube.com/watch?v=Y_2JVREtDFk)
 * **YouTube**: [How to Run Mutillidae on Docker](https://www.youtube.com/watch?v=9RH4l8ff-yg)
 * **YouTube**: [How to Run Mutillidae from DockerHub Images](https://www.youtube.com/watch?v=c1nOSp3nagw)
-* **YouTube**: [How to Run Mutillidae on Google Kubernetes Engine (GKE)](https://www.youtube.com/watch?v=)
+* **YouTube**: [How to Run Mutillidae on Google Kubernetes Engine (GKE)](https://www.youtube.com/watch?v=uU1eEjrp93c)
 
 ## Usage
 
