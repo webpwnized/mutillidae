@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 	function PrettyPrintStringtoHex($lString) {
 		$lHexText = "";
-		for($i=0;$i<strlen($lString);$i++){ 
-			$lHexText .= "0X" . str_pad(dechex(ord($lString{$i})), 2, "0", STR_PAD_LEFT) . " "; 
+		for($i=0;$i<strlen($lString);$i++){
+			$lHexText .= "0X" . str_pad(dechex(ord($lString[$i])), 2, "0", STR_PAD_LEFT) . " ";
 		}//end for
 		return $lHexText;
 	}
@@ -12,18 +12,18 @@
 		$lBlocksize = 16;
    		$lResult = "";
 		for($i=0;$i<$lBlocksize*2;$i+=2){
-			$lResult .= str_pad(dechex(hexdec(substr($lHexString1,$i,2)) ^ hexdec(substr($lHexString2,$i,2))), 2, "0", STR_PAD_LEFT); 
+			$lResult .= str_pad(dechex(hexdec(substr($lHexString1,$i,2)) ^ hexdec(substr($lHexString2,$i,2))), 2, "0", STR_PAD_LEFT);
 		}//end for
 		return $lResult;
    	}// end function
-   	
+
    	try {
    		if(!(isset($_REQUEST["iv"]) || isset($_GET["iv"]))){
    			//header("Location: index.php?page=view-user-privilege-level.php&iv=6bc24fc1ab650b25b4114e93a98f1eba", true, 302);
 			echo "<meta http-equiv=\"refresh\" content=\"0;URL='index.php?page=view-user-privilege-level.php&iv=6bc24fc1ab650b25b4114e93a98f1eba'\">";
    		}//end if
    	} catch (Exception $e) {
-		// oh well, keep going   		
+		// oh well, keep going
    	}//end try
 
 	try{
@@ -64,7 +64,7 @@
 				$lUserGroupID = "999";
 			break;
     	}// end switch
-    	
+
 		// if we want to enforce POST method, we need to be careful to specify $_POST
     	if(!$lProtectAgainstMethodSwitching){
 	   		$lInitializationVector = $_REQUEST["iv"];
@@ -82,7 +82,7 @@
 		if (strlen($lInitializationVector) != $lBlocksize*2){
 	   		$lInitializationVector = $lDefaultInitializationVector;
 	   	}//end if
-	   	
+
 	   	// if site is secure, ignore user input
 		if ($lIgnoreUserInfluence){
 	   		$lInitializationVector = $lDefaultInitializationVector;
@@ -93,49 +93,49 @@
 		}else{
 			$lInitializationVectorValue = "Undisclosed";
 		}//end if
-	   	
+
 	   	/* ******************************
 	   	 * CONVERT PLAINTEXT INTO HEX
 	   	 ******************************** */
 		$lHexText = "";
-		for($i=0;$i<$lBlocksize;$i++){ 
-			$lHexText .= str_pad(dechex(ord($lPlaintext{$i})), 2, "0", STR_PAD_LEFT); 
+		for($i=0;$i<$lBlocksize;$i++){
+			$lHexText .= str_pad(dechex(ord($lPlaintext[$i])), 2, "0", STR_PAD_LEFT);
 		}//end for
 
 	   	/* **********
-	   	 * ENCRYPTION 
+	   	 * ENCRYPTION
 	   	 ************ */
 		$lCiphertext = __xor($lHexText, $lCryptoKey);
-		$lChainedCipherBlock = __xor($lDefaultInitializationVector, $lCiphertext); 
+		$lChainedCipherBlock = __xor($lDefaultInitializationVector, $lCiphertext);
 
 	   	/* **********
-	   	 * DECRYPTION 
-	   	 ************ */		
+	   	 * DECRYPTION
+	   	 ************ */
 		$lUnchainedCiphertext = __xor($lInitializationVector, $lChainedCipherBlock);
 		$lUnchainedHexText = __xor($lUnchainedCiphertext, $lCryptoKey);
 
 		/* ******************************
-	   	 * CONVERT HEX TO PLAINTEXT 
-	   	 ******************************** */		
+	   	 * CONVERT HEX TO PLAINTEXT
+	   	 ******************************** */
 		$lUnchainedPlaintext = "";
 		for($i=0;$i<$lBlocksize*2;$i+=2){
-			$lUnchainedPlaintext .= chr(hexdec(substr($lUnchainedHexText,$i,2))); 
+			$lUnchainedPlaintext .= chr(hexdec(substr($lUnchainedHexText,$i,2)));
 		}//end for
 
 		$lApplicationIDValue = substr($lUnchainedPlaintext,0,4);
 		$lUserIDValue = substr($lUnchainedPlaintext,4,3);
 		$lUserGroupIDValue = substr($lUnchainedPlaintext,7,3);
-		
+
 		$lUserIsRoot = FALSE;
 		if ($lUserIDValue == "000" && $lUserGroupIDValue == "000"){
 			$lUserIsRoot = TRUE;
 		}// end if
-		
+
 	} catch(Exception $e){
 		//$lSubmitButtonClicked = FALSE;
 		echo "<div class=\"error-message\">".$lErrorMessage."</div>";
 		echo $CustomErrorHandler->FormatError($e, "Error attempting to repeat string.");
-	}// end try	
+	}// end try
 ?>
 
 <div class="page-title">View User Privilege Level</div>
@@ -143,7 +143,7 @@
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
-<?php 
+<?php
 	if ($lCreateParameterAdditionVulnerability) {
 		echo "<!-- Diagnostics: Request Parameters - ";
 		echo var_dump($_REQUEST);
@@ -174,7 +174,7 @@
 		<tr>
 			<td class="label" style="text-align: left;">Group ID</td>
 			<td style="text-align: left;"><?php echo $lUserGroupIDValue . " ( Hint: " . PrettyPrintStringtoHex($lUserGroupIDValue) . ")"; ?></td>
-		</tr>			
+		</tr>
 		<tr><td></td></tr>
 		<tr><td class="label" colspan="2">Note: UID/GID "000" is root.<br />You need to make User ID and Group ID equal to<br />"000" to become root user.</td></tr>
 		<tr><td></td></tr>
@@ -189,11 +189,11 @@
 			<td colspan="2" class="hint-header"><?php echo $lBuffer; ?></td>
 		</tr>
 		<tr><td></td></tr>
-	</table>	
+	</table>
 </div>
 
 <script type="text/javascript">
-<?php 
+<?php
 	if ($lUserIsRoot) {
 		echo "var l_user_is_root = true;" . PHP_EOL;
 	}else {
@@ -201,6 +201,6 @@
 	}// end if
 ?>
 	if (l_user_is_root){
-		document.getElementById("id-user-privilege-message").style.display="";		
+		document.getElementById("id-user-privilege-message").style.display="";
 	}// end if l_user_is_root
 </script>
