@@ -958,6 +958,7 @@
 					<a href="">Cross-origin Resource Sharing (CORS)</a>
 					<ul>
 						<li><a href="index.php?page=labs/lab-60.php">Lab 60 - Access Control Allow Origin Header</a></li>
+						<li><a href="index.php?page=labs/lab-61.php">Lab 61 - Pre-Flight Requests</a></li>
 					</ul>
 				</li>
 			</ul>

@@ -553,6 +553,7 @@
     			('labs/lab-58.php', 125, 1),
     			('labs/lab-59.php', 126, 1),
     			('labs/lab-60.php', 127, 1),
+    			('labs/lab-61.php', 128, 1),
     			('login.php', 1, 1),
     			('login.php', 10, 2),
     			('login.php', 53, 2),
@@ -890,6 +891,7 @@
     		(125, 'Lab 58', 'lab-58-hint.inc'),
     		(126, 'Lab 59', 'lab-59-hint.inc'),
     		(127, 'Lab 60', 'lab-60-hint.inc'),
+    		(128, 'Lab 61', 'lab-61-hint.inc'),
     		(999, 'Hints Not Found', 'hints-not-found.inc')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
