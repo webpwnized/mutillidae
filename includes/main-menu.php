@@ -350,11 +350,23 @@
         						<li><a href="index.php?page=jwt.php">Current User Information</a></li>
         					</ul>
         				</li>
+        				<li>
+        					<a href="">Cross-origin Resource Sharing (CORS)</a>
+        					<ul>
+								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
+        					</ul>
+        				</li>
 					</ul>
 				</li>
 				<li>
 					<a href="">A6 - Security Misconfiguration</a>
 					<ul>
+        				<li>
+        					<a href="">Cross-origin Resource Sharing (CORS)</a>
+        					<ul>
+								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
+        					</ul>
+        				</li>
 						<li><a href="index.php?page=directory-browsing.php">Directory Browsing</a></li>
 						<li>
 							<a href="">Method Tampering (GET for POST)</a>
@@ -373,6 +385,7 @@
 						<li>
 							<a href="">HTTP Headers</a>
 							<ul>
+								<li><a href="index.php?page=cors.php">Cross-Origin Resource Sharing (CORS)</a></li>
         						<li><a href="index.php?page=cache-control.php">Cache-Control</a></li>
         						<li><a href="index.php?page=framing.php">Click-Jacking</a></li>
         						<li><a href="framer.html">Cross-Site Framing (Third-Party Framing)</a></li>
@@ -718,6 +731,12 @@
 		<li>
 			<a href="">Others</a>
 			<ul>
+				<li>
+					<a href="">Cross-origin Resource Sharing (CORS)</a>
+					<ul>
+						<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
+					</ul>
+				</li>
 				<li>
 					<a href="">Client-side "Security" Controls</a>
 					<ul>
