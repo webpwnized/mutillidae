@@ -3,9 +3,8 @@
 <br/><br/>
 Use Burp-Suite to examine a websocket connection
 <br/><br/>
-<br/><br/>
 <span id="videos" class="report-header">Videos</span>
-<br/>
+<br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoInstallJavaonWindows); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoinstallJavaonLinuxDebianUbuntuKali); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2HowtoInstallonWindows); ?>

@@ -2,7 +2,6 @@
 <span class="report-header">Lab Hint</span>
 <br/><br/>
 Use a URL decoder to decode the URL encoded portion of the URL. Burp-Suite includes a decoder.
-<span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>

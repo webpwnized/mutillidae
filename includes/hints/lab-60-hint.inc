@@ -2,7 +2,6 @@
 <span class="report-header">Lab Hint</span>
 <br/><br/>
 Cross-origin Resource Sharing (CORS) does not allow responses from another domain to be read unless the response contains the ACAO header
-<span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>

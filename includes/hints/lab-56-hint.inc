@@ -2,10 +2,9 @@
 <span class="report-header">Lab Hint</span>
 <br/><br/>
 Decode the JWT, get the IAT and EXP claims, and calculate the difference
-<span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
-<br/>
+<br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->JWTSecurityPart1WhatisaJWT); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->JWTSecurityPart2HowtoViewJWTinBurpSuite); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->JWTSecurityPart3HowTimeoutsWork); ?>

@@ -2,10 +2,9 @@
 <span class="report-header">Lab Hint</span>
 <br/><br/>
 SQL inject the value of the user claim in the JWT
-<span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
-<br/>
+<br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->JWTSecurityPart1WhatisaJWT); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->JWTSecurityPart2HowtoViewJWTinBurpSuite); ?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->JWTSecurityPart3HowTimeoutsWork); ?>
