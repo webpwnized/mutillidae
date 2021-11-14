@@ -64,8 +64,13 @@ try {
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <a href="index.php?page=echo.php">
-    <img src="images/vulnerable-icon-75-75.png" />
-    <span class="label">Switch to Page without CSP</span>
+    <img src="images/malware-icon-75-75.png" />
+    <span class="label">Switch to Cross-Site Scripting (XSS)</span>
+</a>
+<span class="buffer"></span>
+<a href="index.php?page=cors.php">
+    <img src="images/cors-icon-75-75.png" />
+    <span class="label">Switch to Cross-Origin Resource Sharing (CORS)</span>
 </a>
 
 <form action="index.php?page=content-security-policy.php"

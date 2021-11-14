@@ -92,6 +92,11 @@
     <img src="images/shield-icon-75-75.png" />
     <span class="label">Switch to Content Security Policy (CSP)</span>
 </a>
+<span class="buffer"></span>
+<a href="index.php?page=cors.php">
+    <img src="images/cors-icon-75-75.png" />
+    <span class="label">Switch to Cross-Origin Resouce Sharing</span>
+</a>
 
 <form 	action="index.php?page=echo.php"
 			method="post"

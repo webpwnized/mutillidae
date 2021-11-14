@@ -92,6 +92,11 @@
 	};// end JavaScript function onSubmitOfForm()
 </script>
 
+<a href="index.php?page=echo.php">
+    <img src="images/malware-icon-75-75.png" />
+    <span class="label">Switch to Cross-Site Scripting (XSS)</span>
+</a>
+<span class="buffer"></span>
 <a href="index.php?page=content-security-policy.php">
     <img src="images/shield-icon-75-75.png" />
     <span class="label">Switch to Content Security Policy (CSP)</span>

@@ -494,7 +494,10 @@
 
         header($lReportToHeader, TRUE);
         header($lCSP, TRUE);
+    }else{
+        $CSPNonce = "";
     }// end if
+
     /* ------------------------------------------
      * END Content Security Policy (CSP)
      * ------------------------------------------ */
