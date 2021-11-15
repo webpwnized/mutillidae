@@ -80,4 +80,6 @@ http://[PATH TO MUTILLIDAE]/index.php?page=http://127.0.0.1:8888/simple-web-shel
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisInsecureDirectObjectReferenceIDOR);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisanOpenRedirect);?>
 <br/><br/>
