@@ -5,5 +5,5 @@ Load the BeEF JavaScript file in the browser. This JavaScript file is the code l
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-No videos for this  hint
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab26Walkthrough);?>
 <br/>

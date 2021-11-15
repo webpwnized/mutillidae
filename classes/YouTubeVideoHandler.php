@@ -52,6 +52,11 @@ class YouTubeVideoHandler {
 	public $OWASPDependencyCheckPart1HowtoInstall = 9;
 	public $OWASPDependencyCheckPart2HowtoScanYourProject = 10;
 	public $UsingBurpIntruderSnipertoFuzzParameters = 13;
+	public $CrossSiteScriptingPart1WhatisReflectedXSS = 14;
+	public $CrossSiteScriptingPart2WhatisDOMbasedXSS = 15;
+	public $CrossSiteScriptingPart3WhatisPersistentXSS = 16;
+	public $WhatisInsecureDirectObjectReferenceIDOR = 17;
+	public $WhatisanOpenRedirect = 18;
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;
 	public $HowtoInstallBurpSuiteCommunityEditiononLinux = 112;
@@ -185,6 +190,37 @@ class YouTubeVideoHandler {
 	public $MutillidaeLab28Walkthrough = 278;
 	public $MutillidaeLab29Walkthrough = 279;
 	public $MutillidaeLab30Walkthrough = 280;
+	public $MutillidaeLab31Walkthrough = 281;
+	public $MutillidaeLab32Walkthrough = 282;
+	public $MutillidaeLab33Walkthrough = 283;
+	public $MutillidaeLab34Walkthrough = 284;
+	public $MutillidaeLab35Walkthrough = 285;
+	public $MutillidaeLab36Walkthrough = 286;
+	public $MutillidaeLab37Walkthrough = 287;
+	public $MutillidaeLab38Walkthrough = 288;
+	public $MutillidaeLab39Walkthrough = 289;
+	public $MutillidaeLab40Walkthrough = 290;
+	public $MutillidaeLab41Walkthrough = 291;
+	public $MutillidaeLab42Walkthrough = 292;
+	public $MutillidaeLab43Walkthrough = 293;
+	public $MutillidaeLab44Walkthrough = 294;
+	public $MutillidaeLab45Walkthrough = 295;
+	public $MutillidaeLab46Walkthrough = 296;
+	public $MutillidaeLab47Walkthrough = 297;
+	public $MutillidaeLab48Walkthrough = 298;
+	public $MutillidaeLab49Walkthrough = 299;
+	public $MutillidaeLab50Walkthrough = 300;
+	public $MutillidaeLab51Walkthrough = 301;
+	public $MutillidaeLab52Walkthrough = 302;
+	public $MutillidaeLab53Walkthrough = 303;
+	public $MutillidaeLab54Walkthrough = 304;
+	public $MutillidaeLab55Walkthrough = 305;
+	public $MutillidaeLab56Walkthrough = 306;
+	public $MutillidaeLab57Walkthrough = 307;
+	public $MutillidaeLab58Walkthrough = 308;
+	public $MutillidaeLab59Walkthrough = 309;
+	public $MutillidaeLab60Walkthrough = 310;
+	public $MutillidaeLab61Walkthrough = 311;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){

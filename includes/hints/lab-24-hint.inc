@@ -6,4 +6,5 @@ Use a URL decoder tool to read the message
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->BurpSuite2DecoderTool);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab24Walkthrough);?>
 <br/>

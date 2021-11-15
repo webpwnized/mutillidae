@@ -5,5 +5,5 @@ The script HTML element, often called the script tag, tells the browser to stop 
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-No videos for this  hint
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab25Walkthrough);?>
 <br/>
