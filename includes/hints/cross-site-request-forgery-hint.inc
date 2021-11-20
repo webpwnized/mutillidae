@@ -406,6 +406,7 @@ If injecting into JavaScript context, do not include script tags. */
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisCrossSiteRequestForgeryCSRF);?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowCrosssiteRequestForgeryCSRFTokensWork);?>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->CookiesPart3HowSameSiteWorks);?>
 <br/><br/>

@@ -5,5 +5,6 @@ Create a web shell on your host. Serve the web shell using a web server. Use the
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-No videos for this  hint
-<br/>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisInsecureDirectObjectReferenceIDOR);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab22Walkthrough);?>
+<br/><br/>

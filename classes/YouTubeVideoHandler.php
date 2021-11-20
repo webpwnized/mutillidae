@@ -57,6 +57,7 @@ class YouTubeVideoHandler {
 	public $CrossSiteScriptingPart3WhatisPersistentXSS = 16;
 	public $WhatisInsecureDirectObjectReferenceIDOR = 17;
 	public $WhatisanOpenRedirect = 18;
+	public $WhatisCrossSiteRequestForgeryCSRF = 19;
 	public $IntroductiontoBurpSuiteIntrudersCharacterFrobberPayload = 99;
 	public $IntroductiontoBurpSuiteIntrudersGrepExtractFeature = 100;
 	public $HowtoInstallBurpSuiteCommunityEditiononLinux = 112;
