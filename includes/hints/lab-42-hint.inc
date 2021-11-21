@@ -5,5 +5,5 @@ Open the source code for page dns-lookup.php. This page is found in the mutillda
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-No videos for this hint
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab42Walkthrough);?>
 <br/>

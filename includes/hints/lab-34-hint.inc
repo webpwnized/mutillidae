@@ -5,5 +5,5 @@ Use a cross-site script to capture the contents of the session cookie and send t
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-No videos for this  hint
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab34Walkthrough);?>
 <br/>
