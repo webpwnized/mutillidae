@@ -222,6 +222,8 @@ class YouTubeVideoHandler {
 	public $MutillidaeLab59Walkthrough = 309;
 	public $MutillidaeLab60Walkthrough = 310;
 	public $MutillidaeLab61Walkthrough = 311;
+	public $MutillidaeLab62Walkthrough = 312;
+	public $MutillidaeLab63Walkthrough = 313;
 
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){

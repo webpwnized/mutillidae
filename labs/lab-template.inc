@@ -64,16 +64,18 @@
 <br/>
 <div class="lab-links">
 <?php
+    $lFirstLab = 1;
+    $lFinalLab = 63;
     $lLastLab = $lLabNumber-1;
     $lNextLab = $lLabNumber+1;
 
-    if ($lLabNumber > 1){
+    if ($lLabNumber > $lFirstLab){
         echo "<a href=\"index.php?page=labs/lab-{$lLastLab}.php\">Previous Lab</a>";
     }
-    if ($lLabNumber > 1 && $lLabNumber < 61){
+    if ($lLabNumber > $lFirstLab && $lLabNumber < $lFinalLab){
         echo "&nbsp;&nbsp;|&nbsp;&nbsp;";
     }
-    if ($lLabNumber < 61){
+    if ($lLabNumber < $lFinalLab){
         echo "<a href=\"index.php?page=labs/lab-{$lNextLab}.php\" >Next Lab</a>";
     }
 ?>

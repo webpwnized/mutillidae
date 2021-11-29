@@ -554,6 +554,8 @@
     			('labs/lab-59.php', 126, 1),
     			('labs/lab-60.php', 127, 1),
     			('labs/lab-61.php', 128, 1),
+    			('labs/lab-62.php', 129, 1),
+    			('labs/lab-63.php', 130, 1),
     			('login.php', 1, 1),
     			('login.php', 10, 2),
     			('login.php', 53, 2),
@@ -892,6 +894,8 @@
     		(126, 'Lab 59', 'lab-59-hint.inc'),
     		(127, 'Lab 60', 'lab-60-hint.inc'),
     		(128, 'Lab 61', 'lab-61-hint.inc'),
+    		(129, 'Lab 62', 'lab-62-hint.inc'),
+    		(130, 'Lab 63', 'lab-63-hint.inc'),
     		(999, 'Hints Not Found', 'hints-not-found.inc')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -1173,7 +1177,9 @@
                 (308, '56', 'Mutillidae: Lab 58 Walkthrough'),
                 (309, '57', 'Mutillidae: Lab 59 Walkthrough'),
     	        (310, 'sVgXHH9GSyk', 'Mutillidae: Lab 60 Walkthrough'),
-    	        (311, '6BIdjAYCyKc', 'Mutillidae: Lab 61 Walkthrough')";
+    	        (311, '6BIdjAYCyKc', 'Mutillidae: Lab 61 Walkthrough'),
+    	        (312, 'z0USLZLCPPE', 'Mutillidae: Lab 62 Walkthrough'),
+    	    	(313, '2fQfma45UMc', 'Mutillidae: Lab 63 Walkthrough')";
 
     $lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {

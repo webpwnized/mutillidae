@@ -961,6 +961,13 @@
 						<li><a href="index.php?page=labs/lab-61.php">Lab 61 - Pre-Flight Requests</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="">Software Composition Analysis (SCA)</a>
+					<ul>
+						<li><a href="index.php?page=labs/lab-62.php">Lab 62 - Retire.js</a></li>
+						<li><a href="index.php?page=labs/lab-63.php">Lab 63 - OWASP Depenency Check</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li>
