@@ -136,7 +136,7 @@ class MySQLHandler {
 
 	    try{
 	        $this->mMySQLConnection = new mysqli($pHOSTNAME, $pUSERNAME, $pPASSWORD, NULL, $pPORT);
-	        if (strlen($this->mMySQLConnection->connect_error) > 0) {
+	        if (!is_null($this->mMySQLConnection->connect_error)) {
 	            if (substr_count($this->mMySQLConnection->connect_error, $ACCESS_DENIED) > 0){
 	                $lResult = 2;
 	            }else{
