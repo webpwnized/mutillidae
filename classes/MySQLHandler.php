@@ -258,7 +258,7 @@ class MySQLHandler {
 
 		try{
 		    $lMySQLConnection = new mysqli($HOSTNAME, $USERNAME, $PASSWORD);
-			if (strlen($lMySQLConnection->connect_error) > 0) {
+			if (!is_null($lMySQLConnection->connect_error)) {
 				$lMySQLConnection = new mysqli($HOSTNAME, $USERNAME, self::$SAMURAI_WTF_PASSWORD);
 				if (strlen($lMySQLConnection->connect_error) > 0) {
 					$lMySQLConnection = new mysqli($HOSTNAME, $USERNAME, self::$MUTILLIDAE_DBV1_PASSWORD);

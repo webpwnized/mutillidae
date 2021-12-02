@@ -18,12 +18,12 @@
  */
 
 /**
- * ConsoleAppender appends log events to STDOUT or STDERR using a layout specified by the user. 
- * 
+ * ConsoleAppender appends log events to STDOUT or STDERR using a layout specified by the user.
+ *
  * <p>Optional parameter is {@link $target}. The default target is Stdout.</p>
- * <p><b>Note</b>: Use this Appender with command-line php scripts. 
+ * <p><b>Note</b>: Use this Appender with command-line php scripts.
  * On web scripts this appender has no effects.</p>
- * <p>This appender requires a layout.</p>	
+ * <p>This appender requires a layout.</p>
  *
  * @version $Revision: 806678 $
  * @package log4php
@@ -35,28 +35,28 @@ class LoggerAppenderConsole extends LoggerAppender {
 	const STDERR = 'php://stderr';
 
 	/**
-	 * Can be 'php://stdout' or 'php://stderr'. But it's better to use keywords <b>STDOUT</b> and <b>STDERR</b> (case insensitive). 
+	 * Can be 'php://stdout' or 'php://stderr'. But it's better to use keywords <b>STDOUT</b> and <b>STDERR</b> (case insensitive).
 	 * Default is STDOUT
-	 * @var string	  
+	 * @var string
 	 */
 	private $target = self::STDOUT;
-	
+
 	/**
 	 * @var boolean
-	 * @access private	   
+	 * @access private
 	 */
 	protected $requiresLayout = true;
 
 	/**
 	 * @var mixed the resource used to open stdout/stderr
-	 * @access private	   
+	 * @access private
 	 */
 	protected $fp = null;
 
 	public function __destruct() {
        $this->close();
    	}
-   	
+
 	/**
 	 * Set console target.
 	 * @param mixed $value a constant or a string
@@ -67,34 +67,34 @@ class LoggerAppenderConsole extends LoggerAppender {
 			$this->target = self::STDOUT;
 		} elseif ($v == self::STDERR || strtoupper($v) == 'STDERR') {
 			$this->target = self::STDERR;
-		} 
+		}
 	}
 
 	public function activateOptions() {
 		$this->fp = fopen($this->target, 'w');
-		if(is_resource($this->fp) && $this->layout !== null) {
+		if(!is_null($this->fp) && is_resource($this->fp) && $this->layout !== null) {
 			fwrite($this->fp, $this->layout->getHeader());
 		}
-		$this->closed = (bool)is_resource($this->fp) === false; 
+		$this->closed = (bool)is_resource($this->fp) === false;
 	}
-	
+
 	/**
 	 * @see LoggerAppender::close()
 	 */
 	public function close() {
 		if($this->closed != true) {
-			if (is_resource($this->fp) && $this->layout !== null) {
+		    if (!is_null($this->fp) && is_resource($this->fp) && $this->layout !== null) {
 				fwrite($this->fp, $this->layout->getFooter());
 				fclose($this->fp);
 			}
 			$this->closed = true;
-		}			 
+		}
 	}
 
 	public function append(LoggerLoggingEvent $event) {
 		if (is_resource($this->fp) && $this->layout !== null) {
 			fwrite($this->fp, $this->layout->format($event));
-		} 
+		}
 	}
 }
 
