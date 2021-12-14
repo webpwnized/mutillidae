@@ -121,7 +121,7 @@
 		     * show the hints again */
 		    if ($lSecurityLevel == 0){
 		    	$_SESSION["showhints"] = 1;
-		    	$_SESSION["hints-enabled"] = "Enabled (1 - 5cr1pt K1dd1e))";
+		    	$_SESSION["hints-enabled"] = "Enabled";
 
 		    	$l_cookie_options = array (
 		    	    'expires' => 0,              // 0 means session cookie
@@ -139,7 +139,7 @@
 		     * There is a way to defeat this */
 			if ($lSecurityLevel > 1){
 		    	$_SESSION["showhints"] = 0;
-				$_SESSION["hints-enabled"] = "Disabled (0 - I try harder)";
+				$_SESSION["hints-enabled"] = "Disabled";
 
 				$l_cookie_options = array (
 				    'expires' => 0,              // 0 means session cookie
