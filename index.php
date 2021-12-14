@@ -141,8 +141,8 @@
 		// make session = cookie
 		$_SESSION["showhints"] = $l_showhints;
 		switch ($l_showhints){
-			case 0: $_SESSION["hints-enabled"] = "Disabled (".$l_showhints." - I try harder)"; break;
-			case 1: $_SESSION["hints-enabled"] = "Enabled (".$l_showhints." - Try easier)"; break;
+			case 0: $_SESSION["hints-enabled"] = "Disabled"; break;
+			case 1: $_SESSION["hints-enabled"] = "Enabled"; break;
 		}// end switch
 	}//end if
 
