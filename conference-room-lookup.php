@@ -11,7 +11,7 @@
 			if (ctype_alnum($pString[$i])){
 				$EncodedString.=$pString[$i];
 			}else{
-				$EncodedString.=$cBACKSLASH.strval(ord($pString[$i]));
+				$EncodedString.=$cBACKSLASH.strval(bin2hex($pString[$i]));
 			}
 		}
 		return $EncodedString;
