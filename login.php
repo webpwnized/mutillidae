@@ -6,15 +6,11 @@
 				$lEnableHTMLControls = FALSE;
 			break;
 
-    		case "1": // This code is insecure.
-				$lEnableJavaScriptValidation = TRUE;
-				$lEnableHTMLControls = TRUE;
-			break;
-
-	   		case "2":
-	   		case "3":
-	   		case "4":
-    		case "5": // This code is fairly secure
+    		case "1": // This code is fairly secure.
+	   	case "2":
+	   	case "3":
+	   	case "4":
+    		case "5": 
     			$lEnableJavaScriptValidation = TRUE;
 				$lEnableHTMLControls = TRUE;
     		break;
