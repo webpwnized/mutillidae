@@ -1,7 +1,7 @@
 <br/><br/>
 <span class="report-header">Lab Hint</span>
 <br/><br/>
-It is possible to use SQL injection on the User Info page to determine the number of columns in the user database table
+It is possible to use command injection on the DNS Lookup page to display the contents of the /etc/passwd file
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
