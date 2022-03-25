@@ -66,7 +66,7 @@
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<html lang="en">
 <head>
 	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
 
@@ -85,95 +85,139 @@
 	<script src="javascript/inline-initializers/populate-web-storage.js"></script>
 	<script src="javascript/inline-initializers/gritter-init.js"></script>
 	<script src="javascript/inline-initializers/hints-menu-init.js"></script>
+	<!-- Implementation of new Frontend -->
+	<title>OWASP Mutillidae II</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-<table class="main-table-frame">
-	<tr class="main-table-frame-dark">
-		<td class="main-table-frame-first-bar" colspan="2">
-			<img src="images/coykillericon-50-38.png"/>
-			OWASP Mutillidae II: Keep Calm and Pwn On
-		</td>
-	</tr>
-	<tr class="main-table-frame-dark">
-		<td class="main-table-frame-second-bar" colspan="2">
-			<?php /* Note: $C_VERSION_STRING in index.php */
-			    echo $C_VERSION_STRING;
-			?>
-			<span><?php echo $lSecurityLevelMessage; ?></span>
-			<span><?php echo $lHintsMessage; ?></span>
-			<span><?php echo $lAuthenticationStatusMessage ?></span>
-		</td>
-	</tr>
-	<tr class="main-table-frame-menu-bar">
-		<td class="main-table-frame-menu-bar" colspan="2">
-			<a href="index.php?page=home.php&popUpNotificationCode=HPH0">Home</a>
-			|
-			<?php
-				if ($_SESSION['loggedin'] == 'True'){
-					echo '<a href="index.php?do=logout">Logout</a>';
-				} else {
-					echo '<a href="index.php?page=login.php">Login/Register</a>';
-				}// end if
-			?>
-			|
-			<?php
-				if ($_SESSION['security-level'] == 0){
-					echo '<a href="index.php?do=toggle-hints&page='.$lPage.'">Toggle Hints</a> |';
-				}// end if
-			?>
-			<a href="index.php?do=toggle-security&page=<?php echo $lPage?>">Toggle Security</a>
-			|
-			<a href="index.php?do=toggle-enforce-ssl&page=<?php echo $lPage?>"><?php echo $lEnforceSSLLabel; ?></a>
-			|
-			<a href="set-up-database.php">Reset DB</a>
-			|
-			<a href="index.php?page=show-log.php">View Log</a>
-			|
-			<a href="index.php?page=captured-data.php">View Captured Data</a>
-		</td>
-	</tr>
-	<tr>
-		<td class="main-table-frame-left">
-			<?php require_once 'main-menu.php'; ?>
-			<div>&nbsp;</div>
-			<div>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="45R3YEXENU97S">
-					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="Donate Today!">
-					<img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-				</form>
-				Want to Help?
+<body class="">
+	<header>
+		<!-- Header - Section 1 -->
+		<div class="section">
+			<div class="row">
+				<div class="col text-center">
+					<h1>
+						<img src="images/coykillericon-50-38.png" alt="logo"/>
+					OWASP Mutillidae II: Keep Calm and Pwn On
+					</h1>
+				</div>
 			</div>
-			<div>&nbsp;</div>
-			<div>
-				<a href="http://www.youtube.com/user/webpwnized" target="_blank">
-					<img alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
-					<br/>
-					Video Tutorials
-				</a>
+			<div class="row">
+				<div class="col text-center">
+				<?php /* Note: $C_VERSION_STRING in index.php */
+					echo $C_VERSION_STRING; ?>
+				<span class="px-2"><?php echo $lSecurityLevelMessage; ?></span>
+				<span class="px-2"><?php echo $lHintsMessage; ?></span>
+				<span class="px-2"><?php echo $lAuthenticationStatusMessage ?></span>
+				</div>
+				
 			</div>
-			<div>&nbsp;</div>
-			<div>
-				<a href="https://twitter.com/webpwnized" target="_blank">
-					<img alt="Webpwnized Twitter Channel" src="./images/twitter-bird-48-48.png" />
-					<br/>
-					Announcements
-				</a>
-			</div>
-			<div>&nbsp;</div>
-			<div>
-				<a
-					href="https://www.sans.org/reading-room/whitepapers/application/introduction-owasp-mutillidae-ii-web-pen-test-training-environment-34380"
-					target="_blank"
-					title="Whitepaper: Introduction to OWASP Mutillidae II Web Pen Test Training Environment"
-				>
-					<img align="middle" alt="Webpwnized Twitter Channel" src="./images/pdf-icon-48-48.png" />
-					<br/>
-					Getting Started
-				</a>
-			</div>
-			<div>&nbsp;</div>
-		</td>
-		<td class="main-table-frame-right">
-			<!-- Begin Content -->
+		</div>
+		<!-- Header - NavBar -->
+		<div class="section">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+					<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link text-white" href="index.php?page=home.php&popUpNotificationCode=HPH0">Home</a>
+							</li>
+							<li class="nav-item">
+							<?php
+								if ($_SESSION['loggedin'] == 'True'){
+									echo '<a class="nav-link text-white" href="index.php?do=logout">Logout</a>';
+								} else {
+									echo '<a class="nav-link text-white" href="index.php?page=login.php">Login/Register</a>';
+								}// end if
+							?>
+							</li>
+							<li class="nav-item">
+							<?php
+								if ($_SESSION['security-level'] == 0){
+									echo '<a class="nav-link text-white" href="index.php?do=toggle-hints&page='.$lPage.'">Toggle Hints</a>';
+								}// end if
+							?>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="index.php?do=toggle-security&page=<?php echo $lPage?>">Toggle Security</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="index.php?do=toggle-enforce-ssl&page=<?php echo $lPage?>"><?php echo $lEnforceSSLLabel; ?></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="set-up-database.php">Reset DB</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="index.php?page=show-log.php">View Log</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="index.php?page=captured-data.php">View Captured Data</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</nav>
+		</div>
+	</header>
+	<main>
+				
+<!-- Header - Sidebar -->
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Owasp</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+					<?php require_once 'main-menu.php'; ?>
+					<p class="text-white">_____________________</p>
+                    <li class="nav-item">
+						<i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Want to help?</span>
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+							<input type="hidden" name="cmd" value="_s-xclick">
+							<input type="hidden" name="hosted_button_id" value="45R3YEXENU97S">
+							<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="Donate Today!">
+							<img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						</form>
+                        
+                    </li>
+					
+					<p class="text-white">_____________________</p>
+                    <li>
+                        <a href="http://www.youtube.com/user/webpwnized" target="_blank" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+							<i class="fs-4 bi-speedometer2"></i> 
+							<span class="ms-1 d-none d-sm-inline">
+								Video Tutorials
+							</span>
+							<img alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
+						</a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/webpwnized" target="_blank" class="nav-link px-0 align-middle text-white">
+							<i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Announcements</span>
+							<img alt="Webpwnized Twitter Channel" src="./images/twitter-bird-48-48.png" width="40"/>
+							</a>
+                    </li>
+                    <li>
+                        <a
+						 	href="https://www.sans.org/reading-room/whitepapers/application/introduction-owasp-mutillidae-ii-web-pen-test-training-environment-34380"
+							target="_blank"
+							title="Whitepaper: Introduction to OWASP Mutillidae II Web Pen Test Training Environment" 
+							data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white"
+						>
+                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Getting Started</span>
+							<img align="middle" alt="Webpwnized Twitter Channel" src="./images/pdf-icon-48-48.png" width="40"/>
+						</a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+        <div class="col py-3">
+
+		<!-- Section - Content -->

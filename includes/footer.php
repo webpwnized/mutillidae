@@ -1,3 +1,10 @@
+		</div>
+    </div>
+</div>
+
+<!-- End Content -->
+
+<!-- Section - Footer -->
 <?php
 
     $lUserAgentString = "";
@@ -23,16 +30,22 @@
 		break;
    	}// end switch
 ?>
-				<!-- End Content -->
-    			</td>
-    		</tr>
-    		<tr class="main-table-frame-dark">
-    			<td colspan="2">
-    				Browser: <?php echo $lUserAgentString; ?>
-    				<br/>
-    				<?php echo $lPHPVersion; ?>
-    			</td>
-    		</tr>
-    	</table>
+
+	   		<footer class="container-fluid bg-dark text-white">
+				   <div class="row p-3 ">
+					   
+					   <div class="col text-center">
+						   <span class="span">Browser: <?php echo $lUserAgentString; ?></span>
+						   <br>
+						   <span class="span"><?php echo $lPHPVersion; ?></span>
+					   </div>
+					   
+				   </div>
+			</footer>
+
+<!-- End Footer -->
+		
+		<!-- Section - Javascript -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>
