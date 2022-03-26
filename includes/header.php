@@ -100,13 +100,16 @@
 			<div class="row">
 				<div class="col text-center">
 					<h1>
-						<img src="images/coykillericon-50-38.png" alt="logo"/>
+						<!-- <img src="images/coykillericon-50-38.png" alt="logo"/> -->
+						<span class="material-icons md-48 align-middle text-danger">
+						bug_report
+						</span>
 					OWASP Mutillidae II: Keep Calm and Pwn On
 					</h1>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col text-center">
+			<div class="row py-2">
+				<div class="col text-center text-muted">
 				<?php /* Note: $C_VERSION_STRING in index.php */
 					echo $C_VERSION_STRING; ?>
 				<span class="px-2"><?php echo $lSecurityLevelMessage; ?></span>
@@ -193,17 +196,21 @@
 					<p class="text-white">_____________________</p>
                     <li>
                         <a href="http://www.youtube.com/user/webpwnized" target="_blank" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
-							<i class="fs-4 bi-speedometer2"></i> 
+							
 							<span class="ms-1 d-none d-sm-inline">
 								Video Tutorials
 							</span>
-							<img alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
+							<span class="material-icons md-48 align-middle text-danger">
+								ondemand_video
+							</span>
 						</a>
                     </li>
                     <li>
                         <a href="https://twitter.com/webpwnized" target="_blank" class="nav-link px-0 align-middle text-white">
-							<i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Announcements</span>
-							<img alt="Webpwnized Twitter Channel" src="./images/twitter-bird-48-48.png" width="40"/>
+							<span class="ms-1 d-none d-sm-inline">Announcements</span>
+							<span class="material-icons md-48 align-middle text-primary">
+								announcement
+							</span>
 							</a>
                     </li>
                     <li>
@@ -213,8 +220,10 @@
 							title="Whitepaper: Introduction to OWASP Mutillidae II Web Pen Test Training Environment" 
 							data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white"
 						>
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Getting Started</span>
-							<img align="middle" alt="Webpwnized Twitter Channel" src="./images/pdf-icon-48-48.png" width="40"/>
+                            <span class="ms-1 d-none d-sm-inline">Getting Started</span>
+							<span class="material-icons md-48 align-middle text-warning">
+								assignment
+							</span>
 						</a>
                     </li>
                 </ul>

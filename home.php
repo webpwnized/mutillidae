@@ -21,8 +21,8 @@
 	<div class="col-md-4 offset-md-8">
 		<div class="alert alert-info alert-dismissible fade show" role="alert">
 		<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
-		<span class="material-icons">
-		arrow_upward
+		<span class="material-icons align-middle">
+			help
 		</span>
 		TIP: Click <strong><em>Hint and Videos</em></strong> on each page
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -39,12 +39,12 @@
 			<div class="card-body">
 			<a title="Usage Instructions" href="./index.php?page=documentation/usage-instructions.php">
 				
-				<span class="material-icons md-48 align-middle">
-				help
+				<span class="material-icons md-48 align-middle text-primary">
+					help
 				</span>
-				<span class="align-middle">
+				
 					What Should I Do?
-				</span>
+				
 			</a>
 			</div>
 		</div>
@@ -65,8 +65,8 @@
 			<div class="card-body">
 			<a href="./index.php?page=./documentation/vulnerabilities.php">
 				
-				<span class="material-icons md-48 align-middle">
-				playlist_add_check_circle
+				<span class="material-icons md-48 align-middle text-danger">
+					security
 				</span>
 				Listing of vulnerabilities
 			</a>
@@ -78,8 +78,8 @@
 			<div class="card-body">
 			<a href="http://www.youtube.com/user/webpwnized" target="_blank">
 			
-				<span class="material-icons md-48 align-middle">
-				subscriptions
+				<span class="material-icons md-48 align-middle text-danger">
+					ondemand_video
 				</span>
 				Video Tutorials
 			</a>
@@ -95,7 +95,7 @@
 		<div class="card">
 			<div class="card-body">
 			<a href="https://twitter.com/webpwnized" target="_blank">
-				<span class="material-icons md-48 align-middle">
+				<span class="material-icons md-48 align-middle text-warning">
 				new_releases
 				</span>
 				Release Announcements
@@ -107,7 +107,7 @@
 		<div class="card">
 			<div class="card-body">
 			<span class="material-icons md-48 align-middle">
-				get_app
+				settings
 			</span>
 			<a title="Latest Version" href="https://github.com/webpwnized/mutillidae" target="_blank">Latest Version</a>
 			</div>
@@ -122,7 +122,7 @@
 			<div class="card-body">
 			<a href="documentation/mutillidae-test-scripts.txt" target="_blank">
 			<span class="material-icons md-48 align-middle">
-			collections_bookmark
+				assignment
 			</span>
 				Helpful hints and scripts
 			</a>
@@ -133,9 +133,9 @@
 		<div class="card">
 			<div class="card-body">
 			<a href="configuration/openldap/mutillidae.ldif" target="_blank">
-			<span class="material-icons md-48 align-middle">
-			description
-			</span>
+			<span class="material-icons md-48 align-middle text-primary">
+			playlist_add_check_circle
+				</span>
 				Mutillidae LDIF File
 			</a>
 			</div>
