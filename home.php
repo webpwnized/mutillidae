@@ -38,8 +38,13 @@
 		<div class="card">
 			<div class="card-body">
 			<a title="Usage Instructions" href="./index.php?page=documentation/usage-instructions.php">
-				<img alt="What Should I Do?" align="middle" src="./images/question-mark-40-61.png" />
-				What Should I Do?
+				
+				<span class="material-icons md-48 align-middle">
+				help
+				</span>
+				<span class="align-middle">
+					What Should I Do?
+				</span>
 			</a>
 			</div>
 		</div>
@@ -59,7 +64,10 @@
 		<div class="card">
 			<div class="card-body">
 			<a href="./index.php?page=./documentation/vulnerabilities.php">
-				<img alt="Help" align="middle" src="./images/siren-48-48.png" />
+				
+				<span class="material-icons md-48 align-middle">
+				playlist_add_check_circle
+				</span>
 				Listing of vulnerabilities
 			</a>
 			</div>
@@ -69,7 +77,10 @@
 		<div class="card">
 			<div class="card-body">
 			<a href="http://www.youtube.com/user/webpwnized" target="_blank">
-			<img align="middle" alt="Webpwnized YouTube Channel" src="./images/youtube-play-icon-40-40.png" />
+			
+				<span class="material-icons md-48 align-middle">
+				subscriptions
+				</span>
 				Video Tutorials
 			</a>
 			</div>
@@ -84,7 +95,9 @@
 		<div class="card">
 			<div class="card-body">
 			<a href="https://twitter.com/webpwnized" target="_blank">
-				<img align="middle" alt="Webpwnized Twitter Channel" src="./images/twitter-bird-48-48.png" />
+				<span class="material-icons md-48 align-middle">
+				new_releases
+				</span>
 				Release Announcements
 			</a>
 			</div>
@@ -93,7 +106,9 @@
 	<div class="col">
 		<div class="card">
 			<div class="card-body">
-			<img alt="Latest Version" align="middle" src="./images/installation-icon-48-48.png" />
+			<span class="material-icons md-48 align-middle">
+				get_app
+			</span>
 			<a title="Latest Version" href="https://github.com/webpwnized/mutillidae" target="_blank">Latest Version</a>
 			</div>
 		</div>
@@ -106,7 +121,9 @@
 		<div class="card">
 			<div class="card-body">
 			<a href="documentation/mutillidae-test-scripts.txt" target="_blank">
-				<img alt="Helpful hints and scripts" align="middle" src="./images/help-icon-48-48.png" />
+			<span class="material-icons md-48 align-middle">
+			collections_bookmark
+			</span>
 				Helpful hints and scripts
 			</a>
 			</div>
@@ -116,7 +133,9 @@
 		<div class="card">
 			<div class="card-body">
 			<a href="configuration/openldap/mutillidae.ldif" target="_blank">
-				<img align="middle" alt="Mutillidae LDIF File" src="./images/ldap-server-48-59.png" />
+			<span class="material-icons md-48 align-middle">
+			description
+			</span>
 				Mutillidae LDIF File
 			</a>
 			</div>

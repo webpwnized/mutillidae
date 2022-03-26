@@ -617,3 +617,13 @@ div.database-warning-message{
 div.lab-links{
 	text-align: center;
 }
+
+
+/* ------------------------------------------------- */
+/* Material design specific styles 					 */
+/* ------------------------------------------------- */
+
+span.material-icons.md-18 { font-size: 18px !important; }
+span.material-icons.md-24 { font-size: 24px !important; }
+span.material-icons.md-36 { font-size: 36px !important; }
+span.material-icons.md-48 { font-size: 48px !important; }
