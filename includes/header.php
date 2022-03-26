@@ -69,7 +69,11 @@
 <html lang="en">
 <head>
 	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-
+	<!-- Implementation of new Frontend -->
+	<title>OWASP Mutillidae II</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- End custom implementation head -->
 	<link rel="stylesheet" type="text/css" href="styles/global-styles.css" />
 	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu.css" />
 	<link rel="stylesheet" type="text/css" href="javascript/jQuery/colorbox/colorbox.css" />
@@ -85,10 +89,7 @@
 	<script src="javascript/inline-initializers/populate-web-storage.js"></script>
 	<script src="javascript/inline-initializers/gritter-init.js"></script>
 	<script src="javascript/inline-initializers/hints-menu-init.js"></script>
-	<!-- Implementation of new Frontend -->
-	<title>OWASP Mutillidae II</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body class="">
 	<header>

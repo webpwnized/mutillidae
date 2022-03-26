@@ -1,8 +1,6 @@
 /* Global */
 /* ------------------------------------------------- */
-html{
-	font-family: sans-serif, tahoma, verdana, serif;
-}
+
 
 img{
 	border: none;
@@ -31,8 +29,9 @@ code{
 	 font-weight: bold;
 }
 
+
+
 *.important-code{
-	font-family: monospace;
 	font-weight:bold;
 	color:#770000;
 }

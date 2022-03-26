@@ -119,14 +119,14 @@ buildmenu:function($, setting){
 			}
 		) //end hover
 	}) //end $headers.each()
-	if (smoothmenu.shadow.enable && smoothmenu.css3support){ //if shadows enabled and browser supports CSS3 shadows
-		var $toplevelul=$('#'+setting.mainmenuid+' ul li ul')
-		var css3shadow=parseInt(smoothmenu.shadow.offsetx)+"px "+parseInt(smoothmenu.shadow.offsety)+"px 5px #aaa" //construct CSS3 box-shadow value
-		var shadowprop=["boxShadow", "MozBoxShadow", "WebkitBoxShadow", "MsBoxShadow"] //possible vendor specific CSS3 shadow properties
-		for (var i=0; i<shadowprop.length; i++){
-			$toplevelul.css(shadowprop[i], css3shadow)
-		}
-	}
+	// if (smoothmenu.shadow.enable && smoothmenu.css3support){ //if shadows enabled and browser supports CSS3 shadows
+	// 	var $toplevelul=$('#'+setting.mainmenuid+' ul li ul')
+	// 	var css3shadow=parseInt(smoothmenu.shadow.offsetx)+"px "+parseInt(smoothmenu.shadow.offsety)+"px 5px #aaa" //construct CSS3 box-shadow value
+	// 	var shadowprop=["boxShadow", "MozBoxShadow", "WebkitBoxShadow", "MsBoxShadow"] //possible vendor specific CSS3 shadow properties
+	// 	for (var i=0; i<shadowprop.length; i++){
+	// 		$toplevelul.css(shadowprop[i], css3shadow)
+	// 	}
+	// }
 	$mainmenu.find("ul").css({display:'none', visibility:'visible'})
 },
 
