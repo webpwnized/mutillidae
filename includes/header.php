@@ -69,27 +69,18 @@
 <html lang="en">
 <head>
 	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="styles/global-styles.css" />
+	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu.css" />
+	<link rel="stylesheet" type="text/css" href="javascript/jQuery/colorbox/colorbox.css" />
+	<link rel="stylesheet" type="text/css" href="styles/gritter/jquery.gritter.css" />
+
 	<!-- Implementation of new Frontend -->
 	<title>OWASP Mutillidae II</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- End custom implementation head -->
-	<link rel="stylesheet" type="text/css" href="styles/global-styles.css" />
-	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu.css" />
-	<link rel="stylesheet" type="text/css" href="javascript/jQuery/colorbox/colorbox.css" />
-	<link rel="stylesheet" type="text/css" href="styles/gritter/jquery.gritter.css" />
-
-	<script src="javascript/jQuery/jquery.js"></script>
-	<script src="javascript/jQuery/colorbox/jquery.colorbox-min.js"></script>
-	<script src="javascript/ddsmoothmenu/ddsmoothmenu.js"></script>
-	<script src="javascript/gritter/jquery.gritter.min.js"></script>
-	<script src="javascript/hints/hints-menu.js"></script>
-	<script src="javascript/inline-initializers/jquery-init.js"></script>
-	<script src="javascript/inline-initializers/ddsmoothmenu-init.js"></script>
-	<script src="javascript/inline-initializers/populate-web-storage.js"></script>
-	<script src="javascript/inline-initializers/gritter-init.js"></script>
-	<script src="javascript/inline-initializers/hints-menu-init.js"></script>
 
 </head>
 <body class="">
@@ -180,6 +171,7 @@
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 					<?php require_once 'main-menu.php'; ?>
+					<div>&nbsp;</div>
 					<p class="text-white">_____________________</p>
                     <li class="nav-item">
 						<span class="ms-1 d-none d-sm-inline">Want to help?</span>

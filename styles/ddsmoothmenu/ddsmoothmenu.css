@@ -23,7 +23,6 @@
 /*Top level menu link items style*/
 .ddsmoothmenu ul li a{
 	display: block;
-	/*background of menu items (default state)*/
 	background: #212529; 
 	color: white;
 	padding: 8px 10px;
@@ -42,20 +41,22 @@
 }
 
 .ddsmoothmenu ul li a.selected{ /*CSS class that's dynamically added to the currently active menu items' LI A element*/
-	background: black; 
+	background: #0d6efd; 
 	color: white;
 }
 
 .ddsmoothmenu ul li a:hover{
-	background: white; /*background of menu items during onmouseover (hover state)*/
-	color: black;
+	background: #20c997; /*background of menu items during onmouseover (hover state)*/
+	color: #fff;
 }
 	
 /*1st sub level menu*/
 .ddsmoothmenu ul li ul{
-	position: absolute;
-	left: 0;
-	display: none; /*collapse all sub menus to begin with*/
+	
+	background: #414141;
+	
+	/* collapse all sub menus to begin with */
+	display: none; 
 	visibility: hidden;
 }
 
@@ -74,8 +75,7 @@
 .ddsmoothmenu ul li ul li a{
 	font: normal 13px Verdana;
 	width: 225px; /*width of sub menus*/
-		padding: 8px 10px;
-	
+	padding: 8px 10px;
 	margin: 0;
 	border-top-width: 0;
 	border-bottom: 1px solid gray;

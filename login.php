@@ -68,66 +68,76 @@
 //-->
 </script>
 
-<div class="page-title">Login</div>
 
 <?php include_once (__ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
-<div id="id-log-in-form-div" style="display: none; text-align:center;">
-	<form 	action="index.php?page=login.php"
-			method="post"
-			enctype="application/x-www-form-urlencoded"
-			onsubmit="return onSubmitOfLoginForm(this);"
-			id="idLoginForm">
-		<table>
-			<tr id="id-authentication-failed-tr" style="display: none;">
-				<td id="id-authentication-failed-td" colspan="2" class="error-message"></td>
-			</tr>
-			<tr><td></td></tr>
-			<tr>
-				<td colspan="2" class="form-header">Please sign-in</td>
-			</tr>
-			<tr><td></td></tr>
-			<tr>
-				<td class="label">Username</td>
-				<td>
-					<input	type="text" name="username" size="20"
-							autofocus="autofocus"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="15" required="required"');
-						}// end if
-					?>
-					/>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Password</td>
-				<td>
-					<input type="password" name="password" size="20"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="15" required="required"');
-						}// end if
-					?>
-					/>
-				</td>
-			</tr>
-			<tr><td></td></tr>
-			<tr>
-				<td colspan="2" style="text-align:center;">
-					<input name="login-php-submit-button" class="button" type="submit" value="Login" />
-				</td>
-			</tr>
-			<tr><td></td></tr>
-			<tr>
-				<td colspan="2" style="text-align:center; font-style: italic;">
-					Dont have an account? <a href="index.php?page=register.php">Please register here</a>
-				</td>
-			</tr>
-		</table>
-	</form>
+<div class="row">
+	<div class="col-md-8 offset-md-2 text-center">
+		<h2>Login</h2>
+	</div>
 </div>
+
+<div class="row justify-content-center">
+	<div class="col-md-4 text-center card">
+		<div class="card-body">
+
+			<form action="index.php?page=login.php"
+				method="post"
+				enctype="application/x-www-form-urlencoded"
+				onsubmit="return onSubmitOfLoginForm(this);"
+				id="idLoginForm">
+	
+				<div class="alert alert-info text-center" role="alert">
+				Please sign-in
+				</div>
+
+				<div class="alert alert-warning text-center" role="alert" id="id-authentication-failed-container">
+					<strong id="id-authentication-failed-message" ></strong>
+				</div>
+
+				<!-- Username field -->
+				<div class="mb-3">
+					<label for="username"></label>
+					<input	type="text" name="username" id="username" autofocus="autofocus" class="form-control" placeholder="username"
+						<?php
+							if ($lEnableHTMLControls) {
+								echo('minlength="1" maxlength="15" required="required"');
+							}// end if
+						?>
+						/>
+				</div>
+	
+				<!-- Password field -->
+				<div class="mb-3">
+					<label for="password"></label>
+					<input	type="password" name="password" id="password" class="form-control" placeholder="password"
+								<?php
+									if ($lEnableHTMLControls) {
+										echo 'minlength="1" maxlength="15" required="required"';
+									}// end if
+								?>
+						/>
+				</div>
+	
+				<!-- Submit button -->
+				<div class="mb-3">
+					<input name="login-php-submit-button" type="submit" value="Login" class="btn btn-primary" />
+				</div>
+	
+				<!-- Register text -->
+				<div class="mb-3">
+					<div class="text-muted">
+						<em>
+							Dont have an account? <a href="index.php?page=register.php">Please register here</a>
+						</em>
+					</div>
+				</div>
+	
+			</form>
+		</div>
+</div>
+
 
 <div id="id-log-out-div" style="text-align: center; display: none;">
 	<table>
@@ -175,9 +185,11 @@
    	};
 
 	if(lAuthenticationFailed=="TRUE"){
-		document.getElementById("id-authentication-failed-tr").style.display="";
-		document.getElementById("id-authentication-failed-td").innerHTML=lMessage;
-	}// end if AuthenticationAttemptResultFlag
+		document.getElementById("id-authentication-failed-container").style.display="";
+		document.getElementById("id-authentication-failed-message").innerHTML=lMessage;
+	}else{
+		document.getElementById("id-authentication-failed-container").style.display="none";
+	}
 
 	if (!l_loggedIn){
 		document.getElementById("id-log-in-form-div").style.display="";
