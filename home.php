@@ -20,12 +20,14 @@
 	
 	<div class="col-md-4 offset-md-8">
 		<div class="alert alert-info alert-dismissible fade show" role="alert">
-		<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
-		<span class="material-icons align-middle">
-			help
-		</span>
-		TIP: Click <strong><em>Hint and Videos</em></strong> on each page
+			<span class="material-icons align-middle">
+				help
+			</span>
+			<strong>TIP</strong> <br>
+			<hr>
+			Click <strong><em>Hint and Videos</em></strong> on each page
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 		</div>
 
 	</div>

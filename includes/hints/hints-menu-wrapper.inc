@@ -11,14 +11,14 @@
 		$lDisplayHintStyle = "none";
 	}//end if
 ?>
-
+<div class="col d-flex justify-content-end">
 <div  	class="dropdown"
 		id="idHintWrapperHeader"
 		title="Click to open this section"
 		style="display: <?php echo $lDisplayHintStyle; ?>";
 >
-	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-	<span class="material-icons align-middle">expand_more</span>
+
+	<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 	Hints and Videos
   	</button>
 
@@ -61,5 +61,7 @@
 	?>
 </ul>
 
+
+</div>
 
 </div>

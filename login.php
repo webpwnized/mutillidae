@@ -68,9 +68,10 @@
 //-->
 </script>
 
-
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<div class="row">
+	<?php include_once (__ROOT__.'/includes/back-button.inc');?>
+	<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+</div>
 
 <div class="row">
 	<div class="col-md-8 offset-md-2 text-center">

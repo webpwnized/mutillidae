@@ -66,8 +66,10 @@
 
 <!-- <div class="page-title">Captured Data</div> -->
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<div class="row">
+	<?php include_once (__ROOT__.'/includes/back-button.inc');?>
+	<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+</div>
 
 
 <!-- Section Content -->

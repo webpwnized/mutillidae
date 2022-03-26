@@ -42,7 +42,7 @@
    		$lHTTPReferer = $Encoder->encodeForJavaScript($lHTTPReferer);
    	}// end if
 ?>
-
+<div class="col">
 <div style="margin: 5px;">
 	<span style="font-weight: bold; margin-right: 50px;">
 	<a id="back-button-anchor">
@@ -53,6 +53,7 @@
 	</a>
 	</span>
 	<?php include_once('./includes/help-button.inc');?>
+</div>
 </div>
 <script nonce="<?php echo $CSPNonce; ?>">
     document.addEventListener('DOMContentLoaded', function () {
