@@ -73,8 +73,7 @@
 	<title>OWASP Mutillidae II</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- End custom implementation head -->
 	<link rel="stylesheet" type="text/css" href="styles/global-styles.css" />
 	<link rel="stylesheet" type="text/css" href="styles/ddsmoothmenu/ddsmoothmenu.css" />
@@ -183,7 +182,7 @@
 					<?php require_once 'main-menu.php'; ?>
 					<p class="text-white">_____________________</p>
                     <li class="nav-item">
-						<i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Want to help?</span>
+						<span class="ms-1 d-none d-sm-inline">Want to help?</span>
 						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 							<input type="hidden" name="cmd" value="_s-xclick">
 							<input type="hidden" name="hosted_button_id" value="45R3YEXENU97S">
