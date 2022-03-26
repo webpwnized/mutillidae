@@ -101,77 +101,66 @@
 	</div>
 </div>
 
+<div class="row justify-content-center my-4">
+	<div class="col-md-4 text-center card">
+		<div class="card-body">
 
+			<form 	action="./index.php?page=user-info.php"
+			method="<?php echo $lFormMethod; ?>" 
+			enctype="application/x-www-form-urlencoded"
+			onsubmit="return onSubmitOfForm(this);"
+			>
+			<input type="hidden" name="page" value="user-info.php" />	
+				<div class="alert alert-info text-center" role="alert">
+				Please enter username and password<br/> to view account details
+				</div>
 
-<span>
-	<a style="text-decoration: none; cursor: pointer;" href="./webservices/soap/ws-user-account.php">
-		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" />
-		<span style="font-weight:bold;">Switch to SOAP Web Service version</span>
-	</a>
-</span>
-&nbsp;&nbsp;&nbsp;
-<span>
-	<a href="index.php?page=user-info-xpath.php">
-		<img src="./images/xml-logo-64-64.png" />
-		<span class="label">Switch to XPath version</span>
-	</a>
-</span>
+				<div class="alert alert-warning text-center" role="alert" id="id-bad-cred-tr" style="display: none;">
+					<strong id="id-authentication-failed-message" >Authentication Error: Bad user name or password</strong>
+				</div>
 
-<form 	action="./index.php?page=user-info.php"
-		method="<?php echo $lFormMethod; ?>" 
-		enctype="application/x-www-form-urlencoded"
-		onsubmit="return onSubmitOfForm(this);"
->
-	<input type="hidden" name="page" value="user-info.php" />	
-	<table>
-		<tr id="id-bad-cred-tr" style="display: none;">
-			<td colspan="2" class="error-message">
-				Authentication Error: Bad user name or password
-			</td>
-		</tr>
-		<tr><td></td></tr>
-		<tr>
-			<td colspan="2" class="form-header">Please enter username and password<br/> to view account details</td>
-		</tr>
-		<tr><td></td></tr>
-		<tr>
-			<td class="label">Name</td>
-			<td>
-				<input type="text" name="username" size="20" autofocus="autofocus" 
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="20" required="required"');
-						}// end if
-					?>
-				/>
-			</td>
-		</tr>
-		<tr>
-			<td class="label">Password</td>
-			<td>
-				<input type="password" name="password" size="20"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="20" required="required"');
-						}// end if
-					?>
-				/>
-			</td>
-		</tr>
-		<tr><td></td></tr>
-		<tr>
-			<td colspan="2" style="text-align:center;">
-				<input name="user-info-php-submit-button" class="button" type="submit" value="View Account Details" />
-			</td>
-		</tr>
-		<tr><td></td></tr>
-		<tr>
-			<td colspan="2" style="text-align:center; font-style: italic;">
-				Dont have an account? <a href="?page=register.php">Please register here</a>
-			</td>
-		</tr>
-	</table>	
-</form>
+				<!-- Username field -->
+				<div class="mb-3">
+					<label for="username"></label>
+					<input	type="text" name="username" id="username" autofocus="autofocus" class="form-control" placeholder="username"
+						<?php
+							if ($lEnableHTMLControls) {
+								echo('minlength="1" maxlength="15" required="required"');
+							}// end if
+						?>
+						/>
+				</div>
+	
+				<!-- Password field -->
+				<div class="mb-3">
+					<label for="password"></label>
+					<input	type="password" name="password" id="password" class="form-control" placeholder="password"
+								<?php
+									if ($lEnableHTMLControls) {
+										echo 'minlength="1" maxlength="15" required="required"';
+									}// end if
+								?>
+						/>
+				</div>
+	
+				<!-- Submit button -->
+				<div class="mb-3">
+					<input name="user-info-php-submit-button"class="btn btn-primary" type="submit" value="View Account Details" />
+				</div>
+	
+				<!-- Register text -->
+				<div class="mb-3">
+					<div class="text-muted">
+						<em>
+							Dont have an account? <a href="index.php?page=register.php">Please register here</a>
+						</em>
+					</div>
+				</div>
+	
+			</form>
+		</div>
+</div>
+
 
 <?php
 	if ($lFormSubmitted){
@@ -237,3 +226,39 @@
     	
 	}// end if (isset($_POST)) 
 ?>
+
+<div class="row justify-content-center">
+
+	<div class="col-md-6 text-center card mt-3">
+		<div class="card-title mt-3">
+			<h3>
+				Other options
+			</h3>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col">
+					<span>
+						<a href="./webservices/soap/ws-user-account.php" class="text-decoration-none">
+							<img style="vertical-align: middle;" src="./images/ajax.png" width="40" alt="ajax-logo"/>
+							<span style="font-weight:bold;">Switch to SOAP Web Service version</span>
+						</a>
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<span>
+						<a href="index.php?page=user-info-xpath.php" class="text-decoration-none">
+							<img src="./images/xml.png" width="40" alt="xml-logo"/>
+							<span class="label">Switch to XPath version</span>
+						</a>
+					</span>
+				</div>
+			</div>
+				
+				
+			
+		</div>
+	</div>
+</div>
