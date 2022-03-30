@@ -169,7 +169,7 @@
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Owasp</span>
                 </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-baseline" id="menu">
 					<?php require_once 'main-menu.php'; ?>
 					<div>&nbsp;</div>
 					<p class="text-white">_____________________</p>
@@ -191,7 +191,7 @@
 							<span class="ms-1 d-none d-sm-inline">
 								Video Tutorials
 							</span>
-							<span class="material-icons md-48 align-middle text-danger">
+							<span class="material-icons md-36 align-middle text-danger mx-2">
 								ondemand_video
 							</span>
 						</a>
@@ -199,7 +199,7 @@
                     <li>
                         <a href="https://twitter.com/webpwnized" target="_blank" class="nav-link px-0 align-middle text-white">
 							<span class="ms-1 d-none d-sm-inline">Announcements</span>
-							<span class="material-icons md-48 align-middle text-primary">
+							<span class="material-icons md-36 align-middle text-primary">
 								announcement
 							</span>
 							</a>
@@ -212,7 +212,7 @@
 							data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white"
 						>
                             <span class="ms-1 d-none d-sm-inline">Getting Started</span>
-							<span class="material-icons md-48 align-middle text-warning">
+							<span class="material-icons md-36 align-middle text-warning mx-1">
 								assignment
 							</span>
 						</a>
