@@ -1,7 +1,6 @@
 /* Global */
 /* ------------------------------------------------- */
 
-
 img{
 	border: none;
 	vertical-align:middle;
@@ -21,13 +20,7 @@ input,textarea{
 	border-radius: 5px;
 }
 
-code{
-	 margin-left:50px;
-	 white-space: pre-wrap;
-	 width: 400px;
-	 font-family: monospace;
-	 font-weight: bold;
-}
+
 
 
 
