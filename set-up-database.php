@@ -1010,6 +1010,7 @@
     			(8, 'Mv7wpCIAdp4', 'What is SQL Injection?'),
                 (9, 'DF22sTpcE6w', 'OWASP Dependency Check: Part 1 - How to Install'),
                 (10, 'X47ZkdYnGZI', 'OWASP Dependency Check: Part 2 - How to Scan Your Project'),
+                (11, '1a652-fvQLA', 'Linux Basics: How to Identify File Type'),
     			(13, 'la5hTlSDKWg', 'Using Burp Intruder Sniper to Fuzz Parameters'),
     			(14, 'YoNlia7B5F0', 'Cross-Site Scripting: Part 1- What is Reflected XSS?'),
     			(15, 'yN6hjtNvhMo', 'Cross-Site Scripting: Part 2 - What is DOM-based XSS?'),

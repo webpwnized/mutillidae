@@ -1,5 +1,5 @@
 <?php
-$lLabNumber = 5x;
+$lLabNumber = 55;
 $lTitle = "Lab 55: Content Security Policy - Testing Content Security Policy (CSP)";
 $lQuestion = "Using the Content Security Policy page in Mutillidae, CSP was effective against this attack";
 $lChoice_1 = "Cross-site Scripting";

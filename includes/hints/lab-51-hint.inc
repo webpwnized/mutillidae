@@ -5,5 +5,6 @@ Scan the Mutillidae web site with Nikto
 <br/><br/>
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
-No videos for this hint
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->HowtoScanforWebVulnerabilitieswithNikto);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->MutillidaeLab51Walkthrough);?>
 <br/>
