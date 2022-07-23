@@ -129,92 +129,277 @@
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
+
 <head>
 	<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Database Offline</title>
+
 </head>
 
-<div>&nbsp;</div>
-<div class="page-title">The database server at
-	<span class="label" style="color: #cc3333">
-		<?php echo MySQLHandler::$mMySQLDatabaseHost ?>
-	</span>
-	appears to be offline.
-</div>
+<main class="container">
+	<div class="alert alert-danger" role="alert">
+		The database server at host
+		<span class="label" style="color: #cc3333">
+			<?php echo MySQLHandler::$mMySQLDatabaseHost ?>
+		</span>
+		appears to be offline.
+	</div>
 
-<table>
-	<tr>
-		<td>
-			<ol>
-				<li><a class="label" href="set-up-database.php">Click here</a> to attempt to setup the database. Sometimes this works.</li>
-				<li>Be sure the username and password to MySQL is the same as configured in includes/database-config.inc</li>
-				<li>Be aware that MySQL disables password authentication for root user upon installation or update in some systems. This may happen even for a minor update. Please check the username and password to MySQL is the same as configured in includes/database-config.inc</li>
-				<li>A <a style="font-weight: bold" href="https://www.youtube.com/watch?v=sG5Z4JqhRx8" target="_blank">video is available</a> to help reset MySQL root password</li>
-				<li>Check the error message below for more hints</li>
-				<li>If you think this message is a false-positive, you can opt-out of these warnings below</li>
+	<div class="h2">
+		¿What can i do?
+	</div>
+	<div class="row">
+		<div class="col">
+
+			<ol class="list-group list-group-numbered">
+				<li class="list-group-item"><a class="label" href="set-up-database.php">Click here</a> to attempt to
+					setup the database. Sometimes this works.</li>
+				<li class="list-group-item">Be sure the username and password to MySQL is the same as configured in
+					includes/database-config.inc</li>
+				<li class="list-group-item">Be aware that MySQL disables password authentication for root user upon
+					installation or update in some systems. This may happen even for a minor update. Please check the
+					username and password to MySQL is the same as configured in includes/database-config.inc</li>
+				<li class="list-group-item">A <a style="font-weight: bold"
+						href="https://www.youtube.com/watch?v=sG5Z4JqhRx8" target="_blank">video is available</a> to
+					help reset MySQL root password</li>
+				<li class="list-group-item">Check the error message below for more hints</li>
+				<li class="list-group-item">If you think this message is a false-positive, you can opt-out of these
+					warnings below</li>
 			</ol>
-		</td>
-	</tr>
-	<tr>
-		<td style="width:700px;">
-            <div class="warning-message">Database Diagnostics Information</div>
-            <div>&nbsp;</div>
-            <div><span class="label">Database Error message: </span><?php echo $lErrorMessage; ?></div>
-            <div>&nbsp;</div>
-            <div><span class="label">Database host: </span><?php echo $lDatabaseHost; ?></div>
-            <div><span class="label">Database post: </span><?php echo $lDatabasePort; ?></div>
-            <div><span class="label">Database username: </span><?php echo $lDatabaseUsername; ?></div>
-            <div><span class="label">Database password: </span><?php echo $lDatabasePassword; ?></div>
-            <div><span class="label">Database name: </span><?php echo $lDatabaseName; ?></div>
-            <div>&nbsp;</div>
-            <div><span class="label">IP resolved from database hostname: </span><?php echo $lDatabaseHostResolvedIP; ?></div>
-            <div>&nbsp;</div>
-            <div><span class="label">Ping database results: </span><pre><?php echo $lDatabasePingResult; ?></pre></div>
-            <div><span class="label">Traceroute database results: </span><pre><?php echo $lDatabaseTracerouteResult; ?></pre></div>
-            <div><span class="label">Port scan database results: </span><?php echo $lDatabasePortScanMessage; ?></div>
-		</td>
-	</tr>
-	<tr>
-		<td style="width:700px;">
-            <div>&nbsp;</div>
-            <div class="warning-message">LDAP Diagnostics Information</div>
-            <div>&nbsp;</div>
-            <div><span class="label">LDAP host: </span><?php echo $lLDAPHost; ?></div>
-            <div><span class="label">LDAP post: </span><?php echo $lLDAPPort; ?></div>
-            <div><span class="label">LDAP username: </span><?php echo $lLDAPBindDN; ?></div>
-            <div><span class="label">LDAP password: </span><?php echo $lLDAPBindPassword; ?></div>
-            <div><span class="label">LDAP base DN: </span><?php echo $lLDAPBaseDN; ?></div>
-            <div>&nbsp;</div>
-            <div><span class="label">IP resolved from LDAP service hostname: </span><?php echo $lLDAPHostResolvedIP; ?></div>
-            <div>&nbsp;</div>
-            <div><span class="label">Ping LDAP service results: </span><pre><?php echo $lLDAPPingResult; ?></pre></div>
-            <div><span class="label">Traceroute LDAP service results: </span><pre><?php echo $lLDAPTracerouteResult; ?></pre></div>
-            <div><span class="label">Port scan LDAP service results: </span><?php echo $lLDAPPortScanMessage; ?></div>
-		</td>
-	</tr>
-</table>
+		</div>
+	</div>
+	<div class="row my-5">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">
+						Database Diagnostics Information
+					</h5>
+					<h6 class="card-subtitle">
+						<div class="alert alert-danger" role="alert">
+							Database Error message: <?php echo $lErrorMessage; ?>
+						</div>
+					</h6>
 
-<div>
-	<form 	action="database-offline.php"
-			method="post"
-			enctype="application/x-www-form-urlencoded"
-			id="idDatabaseOffline">
-		<table>
-			<tr><td>&nbsp;</td></tr>
-			<tr>
-				<td colspan="2" class="form-header">Opt out of database warnings</td>
-			</tr>
-			<tr><td></td></tr>
-			<tr>
-				<td class="label">You can opt out of database connection warnings for the remainder of this session</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align:center;">
-					<input name="database-offline-php-submit-button" class="button" type="submit" value="Opt Out" />
-				</td>
-			</tr>
-		</table>
-	</form>
-</div>
+					<table class="table table-hover">
+						<caption>Database Diagnostics Information</caption>
+						<thead class="table-dark">
+							<tr>
+								<th scope="col">
+									Name
+								</th>
+								<th scope="col">
+									Value
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">
+									MySQL Host
+								</th>
+								<td>
+									<?php echo $lDatabaseHost; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									MySQL Port
+								</th>
+								<td>
+									<?php echo $lDatabasePort; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									MySQL Username
+								</th>
+								<td>
+									<?php echo $lDatabaseUsername; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									MySQL Password
+								</th>
+								<td>
+									<?php echo $lDatabasePassword; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									MySQL Database Name
+								</th>
+								<td>
+									<?php echo $lDatabaseName; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									IP resolved from database hostname
+								</th>
+								<td>
+									<?php echo $lDatabaseHostResolvedIP; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									Traceroute database results
+								</th>
+								<td>
+									<code>
+
+										<?php echo $lDatabaseTracerouteResult; ?>
+									</code>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									Port scan database results
+								</th>
+								<td>
+									<?php echo $lDatabasePortScanMessage; ?>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row my-5">
+		<div class="col">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">
+						LDAP Diagnostics Information
+					</h5>
+					<table class="table table-hover">
+						<caption>LDAP Diagnostics Information</caption>
+						<thead class="table-dark">
+							<tr>
+								<th scope="col">
+									Name
+								</th>
+								<th scope="col">
+									Value
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">
+									LDAP Host
+								</th>
+								<td>
+									<?php echo $lLDAPHost; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									LDAP Port
+								</th>
+								<td>
+									<?php echo $lLDAPPort; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									LDAP Username
+								</th>
+								<td>
+									<?php echo $lLDAPBindDN; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									LDAP Password
+								</th>
+								<td>
+									<?php echo $lLDAPBindPassword; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									LDAP Base DN
+								</th>
+								<td>
+									<?php echo $lLDAPBaseDN; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope=row>
+									IP resolved from LDAP service hostname
+								</th>
+								<td>
+									<?php echo $lLDAPHostResolvedIP; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									Ping LDAP service results
+								</th>
+								<td>
+									<?php echo $lLDAPPingResult; ?>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									LDAP Traceroute results
+								</th>
+								<td>
+									<code>
+										<?php echo $lLDAPTracerouteResult; ?>
+									</code>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									LDAP Port scan results
+								</th>
+								<td>
+									<?php echo $lLDAPPortScanMessage; ?>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<div class="card text-dark bg-warning">
+				<div class="card-body">
+					<h5 class="card-title">
+						Opt out of database warnings
+					</h5>
+					<p>
+						You can opt out of database connection warnings for the remainder of this session
+					</p>
+					<form action="database-offline.php" method="post" enctype="application/x-www-form-urlencoded"
+						id="idDatabaseOffline">
+						<input name="database-offline-php-submit-button" class="btn btn-primary" type="submit"
+							value="Opt Out" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>

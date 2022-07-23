@@ -64,51 +64,71 @@
 	};
 </script>
 
-<div class="page-title">Captured Data</div>
+<!-- <div class="page-title">Captured Data</div> -->
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<div class="row">
+	<?php include_once (__ROOT__.'/includes/back-button.inc');?>
+	<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+</div>
 
-<!-- BEGIN HTML OUTPUT  -->
-<table style="margin-left:auto; margin-right:auto; width: 600px;">
-	<tr>
-		<td class="form-header">Captured Data Page</td>
-	</tr>
-	<tr><td>&nbsp;</td></tr>
-	<tr>
-		<td>
+
+<!-- Section Content -->
+
+<div class="row">
+	<div class="col-md-8 offset-md-2 text-center">
+		<h2>Captured Data</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		<p>
 			This page shows the data captured by page <a href="index.php?page=capture-data.php">capture-data.php</a>.
 			There should also be a file with the same data since capture-data.php tries to save the data to a table
 			and a file. The table contents are being displayed on this page. On this system, the 
 			file should be found in <?php print pathinfo($_SERVER["SCRIPT_FILENAME"], PATHINFO_DIRNAME); ?>.
 			The database table is named captured_data.
-		</td>
-	</tr>
-</table>
-<span title="Click to refresh captured data log" onclick="document.location.reload(true);" style="cursor: pointer;margin-right:35px;font-weight: bold;">
-	<img width="32px" height="32px" src="./images/refresh-button-48px-by-48px.png" style="vertical-align:middle;" />
-	Refresh
-</span>
-<span 	title="Click to delete captured data log. This deletes the database table only. The text file is not affected." 
-		onclick="DeleteCapturedData();" 
-		style="margin-right:35px;cursor: pointer;font-weight: bold;">
-	<img width="32px" height="32px" src="./images/delete-icon-48-48.png" style="vertical-align:middle;" />
-	Delete Capured Data
-</span>
-<span title="Click to visit capture data page. Your data will be captured." onclick="document.location='./index.php?page=capture-data.php';" style="cursor: pointer;font-weight: bold;">
-	<img width="32px" height="32px" src="./images/spider-in-web-48-48.png" style="vertical-align:middle;" />
-	Capture Data
-</span>
-<br/>
+		</p>
+	</div>
+</div>
+
+<ul class="nav py-3">
+	<li class="nav-item">
+		<span class="material-icons md-36 text-primary align-middle">
+		replay_circle_filled
+		</span>
+		<span title="Click to refresh captured data log" onclick="document.location.reload(true);" style="cursor: pointer;margin-right:35px;font-weight: bold;">
+			Refresh
+		</span>
+	</li>
+	<li class="nav-item">
+	<span class="material-icons md-36 text-danger align-middle">
+		delete_forever
+	</span>
+		<span title="Click to delete captured data log. This deletes the database table only. The text file is not affected." onclick="DeleteCapturedData();" style="cursor: pointer;margin-right:35px;font-weight: bold;">
+			Delete Captured Data
+		</span>
+	</li>
+	<li class="nav-item">
+		<span class="material-icons md-36 text-warning align-middle">
+			file_copy
+		</span>
+		<span title="Click to visit capture data page. Your data will be captured." onclick="document.location='./index.php?page=capture-data.php';" style="cursor: pointer;font-weight: bold;">
+			Capture Data
+		</span>
+	</li>
+</ul>
+
+<!-- BEGIN HTML OUTPUT  -->
 
 <?php
 	try{// to draw table
 		$lQueryResult = $SQLQueryHandler->getCapturedData();
 
 		// we have rows. Begin drawing output.
-		echo '<table border="1px;" width="100%" class="results-table">';
-		echo '<tr class="report-header"><td colspan="7">'.$lQueryResult->num_rows.' captured records found</td></tr>';
-	    echo '<tr class="report-header">
+		echo '<table class="table table-hover">';
+		
+	    echo '<thead class="table-dark">
 			    <td>Hostname</td>
 			    <td>Client IP Address</td>
 			    <td>Client Port</td>
@@ -116,8 +136,8 @@
     			<td>Referrer</td>			    
 			    <td>Data</td>
 			    <td>Date/Time</td>
-		    </tr>';
-
+		    </thead>';
+		echo '<tbody>';
 	    if ($lLimitOutput){
 	    	echo '<tr><td class="error-header" colspan="10">Note: DOS defenses enabled. Rows limited to last 20.</td></tr>';
 	    }// end if
@@ -154,6 +174,9 @@
 					<td>{$lCaptureDate}</td>
 				</tr>\n";
 		}//end while $row
+
+		echo '</tbody>';
+		echo '<tfoot><td colspan="7">'.$lQueryResult->num_rows.' captured records found</tfoot></tr>';
 		echo "</table>";
 	} catch (Exception $e) {
 		echo $CustomErrorHandler->FormatError($e, "Error writing rows.");
