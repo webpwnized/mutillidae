@@ -8,7 +8,7 @@
 		require_once ('./includes/constants.php');
 
 		/* We use the session on this page */
-		if (session_status() == PHP_SESSION_NONE){
+		if (session_status() === PHP_SESSION_NONE){
 			session_start();
 		}// end if
 
