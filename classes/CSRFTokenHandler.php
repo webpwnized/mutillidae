@@ -2,9 +2,7 @@
 class CSRFTokenHandler{
 
 	/* objects */
-	protected $ESAPI = null;
-	protected $ESAPIEncoder = null;
-	protected $ESAPIRandomizer = null;
+	protected $Encoder = null;
 
 	/* flag properties */
 	protected $mEncodeOutput = FALSE;
@@ -49,15 +47,13 @@ class CSRFTokenHandler{
 
 	}// end function
 
-	public function __construct($pPathToESAPI, $pSecurityLevel, $pPageBeingProtected){
+	public function __construct($pSecurityLevel, $pPageBeingProtected){
 
 		$this->doSetSecurityLevel($pSecurityLevel);
 
-		//initialize OWASP ESAPI for PHP
-		require_once $pPathToESAPI . 'ESAPI.php';
-		$this->ESAPI = new ESAPI($pPathToESAPI . 'ESAPI.xml');
-		$this->ESAPIEncoder = $this->ESAPI->getEncoder();
-		$this->ESAPIRandomizer = $this->ESAPI->getRandomizer();
+		//initialize encoder
+		require_once (__ROOT__.'/classes/EncodingHandler.php');
+		$this->Encoder = new EncodingHandler();
 		$this->mPageBeingProtected = $pPageBeingProtected;
 
 		if (isset($_SESSION['register-user']['csrf-token'])){
@@ -123,10 +119,10 @@ class CSRFTokenHandler{
 	public function generateCSRFHTMLReport(){
 
 		if($this->mEncodeOutput){
-			$lPostedCSRFToken = $this->ESAPIEncoder->encodeForHTML($this->mPostedCSRFToken);
-			$lExpectedCSRFTokenForThisRequest = $this->ESAPIEncoder->encodeForHTML($this->mExpectedCSRFTokenForThisRequest);
-			$lNewCSRFTokenForNextRequest = $this->ESAPIEncoder->encodeForHTML($this->mNewCSRFTokenForNextRequest);
-			$lTokenStoredInSession = $this->ESAPIEncoder->encodeForHTML($_SESSION[$this->mPageBeingProtected]['csrf-token']);
+			$lPostedCSRFToken = $this->Encoder->encodeForHTML($this->mPostedCSRFToken);
+			$lExpectedCSRFTokenForThisRequest = $this->Encoder->encodeForHTML($this->mExpectedCSRFTokenForThisRequest);
+			$lNewCSRFTokenForNextRequest = $this->Encoder->encodeForHTML($this->mNewCSRFTokenForNextRequest);
+			$lTokenStoredInSession = $this->Encoder->encodeForHTML($_SESSION[$this->mPageBeingProtected]['csrf-token']);
 		}else{
 			$lPostedCSRFToken = $this->mPostedCSRFToken;
 			$lExpectedCSRFTokenForThisRequest = $this->mExpectedCSRFTokenForThisRequest;

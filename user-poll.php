@@ -10,7 +10,7 @@
 	*/
 
 	require_once (__ROOT__.'/classes/CSRFTokenHandler.php');
-	$lCSRFTokenHandler = new CSRFTokenHandler("owasp-esapi-php/src/", $_SESSION["security-level"], "register-user");
+	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
 	if (!isSet($logged_in_user)) {
 		throw new Exception("$logged_in_user is not set. Page add-to-your-blog.php requires this variable.");

@@ -8,7 +8,6 @@
 	 */
 
 	try{
-		$ESAPI = NULL;
 		$Encoder = NULL;
 
 		if (session_status() == PHP_SESSION_NONE){
@@ -31,9 +30,8 @@
 			case "4":
     		case "5": // This code is fairly secure
 				require_once ('./includes/constants.php');
-    			require_once (__ROOT__.'/owasp-esapi-php/src/ESAPI.php');
-				$ESAPI = new ESAPI(__ROOT__.'/owasp-esapi-php/src/ESAPI.xml');
-				$Encoder = $ESAPI->getEncoder();
+				require_once (__ROOT__.'/classes/EncodingHandler.php');
+    			$Encoder = new EncodingHandler();
     			$lProtectAgainstMethodTampering = TRUE;
 				$lEncodeOutput = TRUE;
 			break;

@@ -6,18 +6,18 @@ class RequiredSoftwareHandler {
 	private $mPHPCurlIsInstalled = false;
 	private $mPHPJSONIsInstalled = false;
 	private $mPHPXMLIsInstalled = false;
-	
+
 	/* --------------------------------
 	 *  private methods
-	* --------------------------------*/	
+	* --------------------------------*/
 	private function doSetSecurityLevel($pSecurityLevel){
 		$this->mSecurityLevel = $pSecurityLevel;
-	
+
 		switch ($this->mSecurityLevel){
 			case "0": // This code is insecure, we are not encoding output
 			case "1": // This code is insecure, we are not encoding output
 				break;
-	
+
 			case "2":
 			case "3":
 			case "4":
@@ -33,17 +33,17 @@ class RequiredSoftwareHandler {
 	private function doPHPCurlIsInstalled(){
 	    return function_exists("curl_init");
 	}// end function doPHPCurlIsInstalled
-	
+
 	private function doPHPJSONIsInstalled(){
 		return function_exists("json_encode");
 	}// end function doPHPJSONIsInstalled
-	
+
 	/* --------------------------------
-	 *  public methods 
+	 *  public methods
 	 * --------------------------------*/
-	
+
 	/* constructor */
-	public function __construct($pPathToESAPI, $pSecurityLevel){
+	public function __construct($pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
 		$this->mPHPCurlIsInstalled = $this->doPHPCurlIsInstalled();
 		$this->mPHPJSONIsInstalled = $this->doPHPJSONIsInstalled();
@@ -53,19 +53,19 @@ class RequiredSoftwareHandler {
 	public function setSecurityLevel($pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
 	}// end function
-	
+
 	public function getSecurityLevel($pSecurityLevel){
 		return $this->mSecurityLevel;
 	}// end function
-	
+
 	public function isPHPXMLIsInstalled(){
 	    return $this->isPHPXMLIsInstalled;
 	}// end function isPHPXMLIsInstalled()
-	
+
 	public function isPHPCurlIsInstalled(){
 	    return $this->mPHPCurlIsInstalled;
 	}// end function isPHPCurlIsInstalled()
-	
+
 	public function isPHPJSONIsInstalled(){
 		return $this->mPHPJSONIsInstalled;
 	}// end function isPHPJSONIsInstalled()
@@ -73,7 +73,7 @@ class RequiredSoftwareHandler {
 	public function getNoXMLAdviceBasedOnOperatingSystem(){
 	    $lOperatingSystemAdvice = "";
 	    $lHTML = "";
-	    
+
 	    switch (PHP_OS){
 	        case "Linux":
 	            $lOperatingSystemAdvice = "The server operating system seems to be Linux. You may be able to install with sudo apt-get install php5-xml";
@@ -85,15 +85,15 @@ class RequiredSoftwareHandler {
 	            break;
 	        default: $lOperatingSystemAdvice = ""; break;
 	    }// end switch
-	    
+
 	    $lHTML = '<br/><span style="background-color: #ffff99;">Warning: Detected PHP XML is not installed on the server. This will cause issues with pages and services that use the extention. '.$lOperatingSystemAdvice.'</span><br/><br/>';
 	    return $lHTML;
 	}// end function getNoXMLAdviceBasedOnOperatingSystem
-	
+
 	public function getNoCurlAdviceBasedOnOperatingSystem(){
 		$lOperatingSystemAdvice = "";
 		$lHTML = "";
-		
+
 		switch (PHP_OS){
 			case "Linux":
 			    $lOperatingSystemAdvice = "The server operating system seems to be Linux. You may be able to install with sudo apt-get install php[verion]-curl where [version] is the version of PHP installed. For example, apt-get install php7.2-curl if PHP 7.2 is installed.";
@@ -105,7 +105,7 @@ class RequiredSoftwareHandler {
 				break;
 			default: $lOperatingSystemAdvice = ""; break;
 		}// end switch
-		
+
 		$lHTML = '<br/><span style="background-color: #ffff99;">Warning: Detected PHP Curl is not installed on the server. This may cause issues detecting or downloading remote files. '.$lOperatingSystemAdvice.'</span><br/><br/>';
 		return $lHTML;
 	}// end function getNoCurlAdviceBasedOnOperatingSystem
@@ -113,7 +113,7 @@ class RequiredSoftwareHandler {
 	public function getNoJSONAdviceBasedOnOperatingSystem(){
 		$lOperatingSystemAdvice = "";
 		$lHTML = "";
-	
+
 		switch (PHP_OS){
 			case "Linux":
 				$lOperatingSystemAdvice = "The server operating system seems to be Linux. You may be able to install with sudo apt-get install php5-json";
@@ -125,7 +125,7 @@ class RequiredSoftwareHandler {
 				break;
 			default: $lOperatingSystemAdvice = ""; break;
 		}// end switch
-	
+
 		$lHTML = '<br/><span style="background-color: #ffff99;">Warning: Detected PHP JSON is not installed on the server. This may cause issues with pages and services that parse JSON messages. '.$lOperatingSystemAdvice.'</span><br/><br/>';
 		return $lHTML;
 	}// end function getNoJSONAdviceBasedOnOperatingSystem

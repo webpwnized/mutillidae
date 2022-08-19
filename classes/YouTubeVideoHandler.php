@@ -11,11 +11,11 @@ class YouTubeVideos{
 
 	private $mSQLQueryHandler = null;
 
-	public function __construct($pPathToESAPI, $pSecurityLevel){
+	public function __construct($pSecurityLevel){
 		/* ------------------------------------------
 		 * initialize SQLQuery handler
 		* ------------------------------------------ */
-		$this->mSQLQueryHandler = new SQLQueryHandler($pPathToESAPI, $pSecurityLevel);
+		$this->mSQLQueryHandler = new SQLQueryHandler($pSecurityLevel);
 
 	}//end function
 
@@ -325,10 +325,10 @@ class YouTubeVideoHandler {
 	/* public methods */
 
 	/* constructor */
-	public function __construct($pPathToESAPI, $pSecurityLevel){
+	public function __construct($pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
-		$this->mYouTubeVideos = new YouTubeVideos($pPathToESAPI, $pSecurityLevel);
-		$this->mRemoteFileHandler = new RemoteFileHandler($pPathToESAPI, $pSecurityLevel);
+		$this->mYouTubeVideos = new YouTubeVideos($pSecurityLevel);
+		$this->mRemoteFileHandler = new RemoteFileHandler($pSecurityLevel);
 		$this->mCurlIsInstalled = $this->curlIsInstalled();
 		$this->mYouTubeIsReachable = $this->isYouTubeReachable();
 	}// end function __construct

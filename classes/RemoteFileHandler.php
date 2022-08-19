@@ -3,19 +3,19 @@ class RemoteFileHandler {
 
 	/* private properties */
 	private $mSecurityLevel = 0;
-	
+
 	/* private objects */
 	protected $mRequiredSoftwareHandler = null;
-		
+
 	/* private methods */
 	private function doSetSecurityLevel($pSecurityLevel){
 		$this->mSecurityLevel = $pSecurityLevel;
-	
+
 		switch ($this->mSecurityLevel){
 			case "0": // This code is insecure, we are not encoding output
 			case "1": // This code is insecure, we are not encoding output
 				break;
-	
+
 			case "2":
 			case "3":
 			case "4":
@@ -28,27 +28,27 @@ class RemoteFileHandler {
 		$length = strlen($needle);
 		return (substr($haystack, 0, $length) === $needle);
 	}// end startsWith()
-	
+
 	/* public methods */
 	/* constructor */
-	public function __construct($pPathToESAPI, $pSecurityLevel){
+	public function __construct($pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
-		
+
 		/* Initialize Required Software Handler */
 		require_once ('RequiredSoftwareHandler.php');
-		$this->mRequiredSoftwareHandler = new RequiredSoftwareHandler($pPathToESAPI, $pSecurityLevel);
-				
+		$this->mRequiredSoftwareHandler = new RequiredSoftwareHandler($pSecurityLevel);
+
 	}// end function __construct
 
 	public function setSecurityLevel($pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
 		$this->mRequiredSoftwareHandler->setSecurityLevel($pSecurityLevel);
 	}// end function
-	
+
 	public function getSecurityLevel($pSecurityLevel){
 		return $this->mSecurityLevel;
 	}// end function
-	
+
 	public function curlIsInstalled(){
 		return $this->mRequiredSoftwareHandler->isPHPCurlIsInstalled();
 	}// end function isCurlInstalled

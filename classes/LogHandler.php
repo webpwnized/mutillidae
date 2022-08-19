@@ -4,7 +4,6 @@ class LogHandler {
 	protected $encodeOutput = FALSE;
 	protected $stopSQLInjection = FALSE;
 	protected $mSecurityLevel = 0;
-	protected $ESAPI = null;
 	protected $Encoder = null;
 	protected $mMySQLHandler = null;
 
@@ -37,18 +36,17 @@ class LogHandler {
 	   	}// end switch
 	}// end function
 
-	public function __construct($pPathToESAPI, $pSecurityLevel){
+	public function __construct($pSecurityLevel){
 
 		$this->doSetSecurityLevel($pSecurityLevel);
 
-		//initialize OWASP ESAPI for PHP
-		require_once $pPathToESAPI . 'ESAPI.php';
-		$this->ESAPI = new ESAPI($pPathToESAPI . 'ESAPI.xml');
-		$this->Encoder = $this->ESAPI->getEncoder();
+		//initialize encoder
+		require_once (__ROOT__.'/classes/EncodingHandler.php');
+		$this->Encoder = new EncodingHandler();
 
 		/* Initialize MySQL Connection handler */
 		require_once 'MySQLHandler.php';
-		$this->mMySQLHandler = new MySQLHandler($pPathToESAPI, $pSecurityLevel);
+		$this->mMySQLHandler = new MySQLHandler($pSecurityLevel);
 		$this->mMySQLHandler->connectToDefaultDatabase();
 
 	}// end function

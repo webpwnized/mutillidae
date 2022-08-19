@@ -21,20 +21,20 @@
 		require_once (__ROOT__.'/classes/CustomErrorHandler.php');
 		if (!isset($CustomErrorHandler)){
 			$CustomErrorHandler =
-			new CustomErrorHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
+			new CustomErrorHandler($_SESSION["security-level"]);
 		}// end if
 
 		/* ------------------------------------------
 		 * initialize SQL Query Handler
 		* ------------------------------------------ */
 		require_once (__ROOT__.'/classes/SQLQueryHandler.php');
-		$SQLQueryHandler = new SQLQueryHandler(__ROOT__."/owasp-esapi-php/src/", $_SESSION["security-level"]);
+		$SQLQueryHandler = new SQLQueryHandler($_SESSION["security-level"]);
 
 		/* ------------------------------------------
 		 * initialize You Tube Video Handler Handler
 		* ------------------------------------------ */
 		require_once (__ROOT__.'/classes/YouTubeVideoHandler.php');
-		$YouTubeVideoHandler = new YouTubeVideoHandler(__ROOT__."/owasp-esapi-php/src/", $_SESSION["security-level"]);
+		$YouTubeVideoHandler = new YouTubeVideoHandler($_SESSION["security-level"]);
 
 		if (isset($_REQUEST["level1HintIncludeFile"])) {
 			$lIncludeFileKey = $_REQUEST["level1HintIncludeFile"];

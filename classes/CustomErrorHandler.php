@@ -1,31 +1,30 @@
-<?php 
+<?php
 
 /* Error output gets overlooked sometimes. On the one hand, no website
- * should actually output error diagnostic error information to 
+ * should actually output error diagnostic error information to
  * the web page because the user can see it. However, that is not the responsibility
  * of this class anyway. This class is responsible for formatting the error. It is
  * up to the caller to decide where to output this information. Errors should be logged
- * then reported to the support team, but not shown on the web page. 
- * This error handler is responsible for outputting the information safety. If the 
+ * then reported to the support team, but not shown on the web page.
+ * This error handler is responsible for outputting the information safety. If the
  * input that caused the error is XSS for enample, then the log will have XSS in it.
  * If this error is emailed to support staff, then the email would have XSS in it.
- * So it is important that this error handler make sure all dynamic output is properly 
+ * So it is important that this error handler make sure all dynamic output is properly
  * encoded. For both email and error logs, this typically calls for HTML encoding.
- * 
+ *
  * Known Vulnerabilities In This Class: Cross Site Scripting,
  * Cross Site Request Forgery, Application Exception,
  * SQL Exception
  */
 
 class CustomErrorHandler{
-	
+
 	//default insecure: no output encoding.
 	protected $encodeOutput = FALSE;
 	protected $mSecurityLevel = 0;
-	protected $ESAPI = null;
 	protected $Encoder = null;
 	protected $supressErrorMessages = FALSE;
-	
+
 	protected $mLine = "";
 	protected $mCode = "";
 	protected $mFile = "";
@@ -36,13 +35,13 @@ class CustomErrorHandler{
 	private function doFormatErrorAsHTMLTable(Exception $e, $pDiagnosticInformation){
 
 		$lSupressedMessage = "Sorry. An error occured. Support has been notified. Not allowed to give out errors at this security level.";
-		
+
 		$this->setErrorProperties($e, $pDiagnosticInformation);
-		
+
 		if($this->supressErrorMessages){
 			$lHTML = '<tr><td class="error-label">Message</td><td class="error-detail">' . $lSupressedMessage . '</td></tr>';
 		}else{
-			$lHTML = 
+			$lHTML =
 				'<tr><td class="error-label">Line</td><td class="error-detail">' . $this->mLine . '</td></tr>
 				<tr><td class="error-label">Code</td><td class="error-detail">' . $this->mCode . '</td></tr>
 				<tr><td class="error-label">File</td><td class="error-detail">' . $this->mFile . '</td></tr>
@@ -68,10 +67,10 @@ class CustomErrorHandler{
 		</fieldset>';
 
 	}// end private function FormatErrorTable
-	
+
 	private function doSetSecurityLevel($pSecurityLevel){
 		$this->mSecurityLevel = $pSecurityLevel;
-		
+
 		switch ($this->mSecurityLevel){
 	   		case "0": // This code is insecure, we are not encoding output
 	   		case "1": // This code is insecure, we are not encoding output
@@ -87,7 +86,7 @@ class CustomErrorHandler{
 	   			$this->encodeOutput = TRUE;
 	   			$this->supressErrorMessages = TRUE;
 	   		break;
-	   	}// end switch		
+	   	}// end switch
 	}// end function
 
 	private function formatExceptionMessage(Exception $e, $pDiagnosticInformation){
@@ -115,55 +114,54 @@ class CustomErrorHandler{
 			$this->mDiagnosticInformation = $this->Encoder->encodeForHTML($pDiagnosticInformation);
 		}// end if
 
-	}// end private function setErrorProperties()	
-	
-	public function __construct($pPathToESAPI, $pSecurityLevel){
-		
+	}// end private function setErrorProperties()
+
+	public function __construct($pSecurityLevel){
+
 		$this->doSetSecurityLevel($pSecurityLevel);
-		
-		//initialize OWASP ESAPI for PHP
-		require_once $pPathToESAPI . 'ESAPI.php';
-		$this->ESAPI = new ESAPI($pPathToESAPI . 'ESAPI.xml');
-		$this->Encoder = $this->ESAPI->getEncoder();
+
+		//initialize encoder
+		require_once (__ROOT__.'/classes/EncodingHandler.php');
+		$this->Encoder = new EncodingHandler();
 	}// end function
-	   	
+
 	public function setSecurityLevel($pSecurityLevel){
 		$this->doSetSecurityLevel($pSecurityLevel);
 	}// end function setSecurityLevel
 
-	public function getExceptionMessage(Exception $e, $pDiagnosticInformation){		
+	public function getExceptionMessage(Exception $e, $pDiagnosticInformation){
 		$lExceptionMessage = "";
-		
+
 		/* getPrevious introduced in PHP 5.3.0 */
 		if (method_exists($e,"getPrevious")){
 			do {
 	        	$lExceptionMessage .= $this->formatExceptionMessage($e, $pDiagnosticInformation);
 	    	} while($e = $e->getPrevious());
 		}else{
-			$lExceptionMessage = $this->formatExceptionMessage($e, $pDiagnosticInformation);						
+			$lExceptionMessage = $this->formatExceptionMessage($e, $pDiagnosticInformation);
 		}// end if method_exists
-		
+
     	return $lExceptionMessage;
 	}//end function getExceptionMessage
-	
+
 	public function FormatError(Exception $e, $pDiagnosticInformation){
 		return $this->doFormatErrorAsHTMLTable($e, $pDiagnosticInformation);
 	}// end public function FormatError()
 
 	private function doFormatErrorJSON(Exception $e, $pDiagnosticInformation){
-		
+
 		$lSupressedMessage = "Sorry. An error occured. Support has been notified. Not allowed to give out errors at this security level.";
-		
+
 		$this->setErrorProperties($e, $pDiagnosticInformation);
-		
+
 		if($this->supressErrorMessages){
-			$lJSON = 
+			$lJSON =
 			'{
 				"Exception": [
 				"Message": "'.$lSupressedMessage.'",
 				"DiagnoticInformation": "'.$lSupressedMessage.'"
 				]
-			}';			
+			}';
 		}else{
 			$lJSON =
 				'{
@@ -177,16 +175,16 @@ class CustomErrorHandler{
 					]
 				}';
 		}// end if
-		
+
 		return $lJSON;
 	}// end private function doFormatErrorJSON()
 
 	private function doFormatErrorXML(Exception $e, $pDiagnosticInformation){
 		$lXML = "";
 		$lSupressedMessage = "Sorry. An error occured. Support has been notified. Not allowed to give out errors at this security level.";
-	
+
 		$this->setErrorProperties($e, $pDiagnosticInformation);
-	
+
 		if($this->supressErrorMessages){
 			$lXML .= "<exception>";
 			$lXML .= "<message>{$lSupressedMessage}</message>";
@@ -202,10 +200,10 @@ class CustomErrorHandler{
 			$lXML .= "<diagnoticInformation>{$this->mDiagnosticInformation}</diagnoticInformation>";
 			$lXML .= "</exception>";
 		}// end if
-	
+
 		return $lXML;
 	}// end private function doFormatErrorXML()
-	
+
 	public function FormatErrorJSON(Exception $e, $pDiagnosticInformation){
 		return $this->doFormatErrorJSON($e, $pDiagnosticInformation);
 	}// end public function FormatErrorJSON()
@@ -213,7 +211,7 @@ class CustomErrorHandler{
 	public function FormatErrorXML(Exception $e, $pDiagnosticInformation){
 		return $this->doFormatErrorXML($e, $pDiagnosticInformation);
 	}// end public function FormatErrorXML()
-	
+
 }// end class
 
 ?>

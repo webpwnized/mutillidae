@@ -95,9 +95,7 @@ try{
 </code>
 			<br/>
 			Note the developer outputs the value of the "ToolID" parameter into the JSON.
-			If the developer encodes the output as a JavaScript string, this is ok. The
-			OWASP ESAPI includes a method "encodeForJavaScript()" which performs this
-			encoding.
+			If the developer encodes the output as a JavaScript string, this is ok.
 			<br/><br/>
 			Did the developer encode the output? We will check to find out. If the developer
 			did not encode, chances are the JSON is vulnerable. (What if the developer used

@@ -8,7 +8,7 @@
 	/* ------------------------------------------------------
 	 * INCLUDE CLASS DEFINITION PRIOR TO INITIALIZING SESSION
 	 * ------------------------------------------------------ */
-	require_once (__ROOT__.'/owasp-esapi-php/src/ESAPI.php');
+	require_once (__ROOT__.'/classes/EncodingHandler.php');
 	require_once (__ROOT__.'/classes/MySQLHandler.php');
 	require_once (__ROOT__.'/classes/SQLQueryHandler.php');
 	require_once (__ROOT__.'/classes/CustomErrorHandler.php');
@@ -147,11 +147,9 @@
 	}//end if
 
 	/* ------------------------------------------
-	 * initialize OWASP ESAPI for PHP
+	 * initialize Encoder
 	 * ------------------------------------------ */
-	$ESAPI = new ESAPI(__ROOT__.'/owasp-esapi-php/src/ESAPI.xml');
-	$Encoder = $ESAPI->getEncoder();
-	$ESAPIRandomizer = $ESAPI->getRandomizer();
+	$Encoder = new EncodingHandler();
 
 	/* ------------------------------------------
  	* Test for database availability
@@ -184,33 +182,33 @@
 	/* ------------------------------------------
 	 * initialize custom error handler
 	 * ------------------------------------------ */
-	$CustomErrorHandler = new CustomErrorHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
+	$CustomErrorHandler = new CustomErrorHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
  	* initialize log handler
  	* ------------------------------------------ */
-	$LogHandler = new LogHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
+	$LogHandler = new LogHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
  	* initialize MySQL handler
  	* ------------------------------------------ */
-	$MySQLHandler = new MySQLHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
+	$MySQLHandler = new MySQLHandler($_SESSION["security-level"]);
 	$MySQLHandler->connectToDefaultDatabase();
 
 	/* ------------------------------------------
  	* initialize SQL Query handler
  	* ------------------------------------------ */
-	$SQLQueryHandler = new SQLQueryHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
+	$SQLQueryHandler = new SQLQueryHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
  	* initialize remote file handler
  	* ------------------------------------------ */
-	$RemoteFileHandler = new RemoteFileHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
+	$RemoteFileHandler = new RemoteFileHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
 	 * initialize required software handler
 	* ------------------------------------------ */
-	$RequiredSoftwareHandler = new RequiredSoftwareHandler(__ROOT__.'/owasp-esapi-php/src/', $_SESSION["security-level"]);
+	$RequiredSoftwareHandler = new RequiredSoftwareHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
 	* PROCESS REQUESTS

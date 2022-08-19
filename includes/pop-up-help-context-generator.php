@@ -8,13 +8,13 @@
  	* initialize SQL Query handler
  	* ------------------------------------------ */
 	require_once '../classes/SQLQueryHandler.php';
-	$SQLQueryHandler = new SQLQueryHandler("../owasp-esapi-php/src/", $_SESSION["security-level"]);
+	$SQLQueryHandler = new SQLQueryHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
  	* initialize custom error handler
  	* ------------------------------------------ */
 	require_once '../classes/CustomErrorHandler.php';
-	$CustomErrorHandler = new CustomErrorHandler("../owasp-esapi-php/src/", $_SESSION["security-level"]);
+	$CustomErrorHandler = new CustomErrorHandler($_SESSION["security-level"]);
 
 	try {
 		$lPageName = $_GET["pagename"];

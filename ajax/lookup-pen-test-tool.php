@@ -21,17 +21,17 @@
 	/* ------------------------------------------
 	 * initialize custom error handler
 	 * ------------------------------------------ */
-	$CustomErrorHandler = new CustomErrorHandler("../owasp-esapi-php/src/", $_SESSION["security-level"]);
+	$CustomErrorHandler = new CustomErrorHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
  	* initialize log handler
  	* ------------------------------------------ */
-	$LogHandler = new LogHandler("../owasp-esapi-php/src/", $_SESSION["security-level"]);
+	$LogHandler = new LogHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
  	* initialize SQLQuery handler
  	* ------------------------------------------ */
-	$SQLQueryHandler = new SQLQueryHandler("../owasp-esapi-php/src/", $_SESSION["security-level"]);
+	$SQLQueryHandler = new SQLQueryHandler($_SESSION["security-level"]);
 
 	try {
     	switch ($_SESSION["security-level"]){

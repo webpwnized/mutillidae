@@ -1,6 +1,6 @@
 <?php 
 	require_once (__ROOT__.'/classes/CSRFTokenHandler.php');
-	$lCSRFTokenHandler = new CSRFTokenHandler("owasp-esapi-php/src/", $_SESSION["security-level"], "register-user");
+	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
 	switch ($_SESSION["security-level"]){
 		case "0": // This code is insecure

@@ -13,11 +13,11 @@
     //initialize custom error handler
     require_once 'classes/CustomErrorHandler.php';
     if (!isset($CustomErrorHandler)){
-        $CustomErrorHandler = new CustomErrorHandler("owasp-esapi-php/src/", $lSecurityLevel);
+        $CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
     }// end if
 
     require_once 'classes/MySQLHandler.php';
-    $MySQLHandler = new MySQLHandler("owasp-esapi-php/src/", $lSecurityLevel);
+    $MySQLHandler = new MySQLHandler($lSecurityLevel);
     $lErrorDetected = FALSE;
 
     function format($pMessage, $pLevel ) {
