@@ -2,7 +2,7 @@
 
 /* Determine the root of the entire project.
  * Recall this file is in the "includes" folder so its "2 levels deep". */
-define('__SITE_ROOT__', dirname(dirname(__FILE__)));
+if (!defined('__SITE_ROOT__')){define('__SITE_ROOT__', dirname(dirname(__FILE__)));}
 
 /* Read database configuration file and populate class parameters */
 require_once(__SITE_ROOT__ . '/includes/database-config.inc');
@@ -92,7 +92,7 @@ class MySQLHandler {
 	    $this->doSetSecurityLevel($pSecurityLevel);
 
 	    /* initialize encoder */
-	    require_once (__ROOT__.'/classes/EncodingHandler.php');
+	    require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
 	    $this->Encoder = new EncodingHandler();
 
 	    /* initialize custom error handler */

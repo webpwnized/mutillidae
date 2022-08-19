@@ -68,8 +68,8 @@
 
 <div class="page-title">View Blogs</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <fieldset>
 	<legend>View Blog Entries</legend>

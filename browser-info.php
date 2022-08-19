@@ -37,7 +37,7 @@
 	   		break;
 	   	}// end switch		
 	
-		require_once (__ROOT__.'/classes/ClientInformationHandler.php');
+		require_once (__SITE_ROOT__.'/classes/ClientInformationHandler.php');
 		$lClientInformationHandler = new ClientInformationHandler();
 
 		if ($lEncodeOutput){
@@ -67,8 +67,8 @@
 
 <div class="page-title">Browser Information</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <table style="width:75%;" class="results-table">
 	<tr class="report-header"><td colspan="3">Info obtained by PHP</td></tr>

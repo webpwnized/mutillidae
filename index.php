@@ -8,13 +8,13 @@
 	/* ------------------------------------------------------
 	 * INCLUDE CLASS DEFINITION PRIOR TO INITIALIZING SESSION
 	 * ------------------------------------------------------ */
-	require_once (__ROOT__.'/classes/EncodingHandler.php');
-	require_once (__ROOT__.'/classes/MySQLHandler.php');
-	require_once (__ROOT__.'/classes/SQLQueryHandler.php');
-	require_once (__ROOT__.'/classes/CustomErrorHandler.php');
-	require_once (__ROOT__.'/classes/LogHandler.php');
-	require_once (__ROOT__.'/classes/RemoteFileHandler.php');
-	require_once (__ROOT__.'/classes/RequiredSoftwareHandler.php');
+	require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
+	require_once (__SITE_ROOT__.'/classes/MySQLHandler.php');
+	require_once (__SITE_ROOT__.'/classes/SQLQueryHandler.php');
+	require_once (__SITE_ROOT__.'/classes/CustomErrorHandler.php');
+	require_once (__SITE_ROOT__.'/classes/LogHandler.php');
+	require_once (__SITE_ROOT__.'/classes/RemoteFileHandler.php');
+	require_once (__SITE_ROOT__.'/classes/RequiredSoftwareHandler.php');
 
     /* ------------------------------------------
      * INITIALIZE SESSION
@@ -214,14 +214,14 @@
 	* PROCESS REQUESTS
 	* ------------------------------------------ */
 	if (isset($_GET["do"])){
-		include_once(__ROOT__.'/includes/process-commands.php');
+		include_once(__SITE_ROOT__.'/includes/process-commands.php');
 	}// end if
 
 	/* ------------------------------------------
 	* PROCESS LOGIN ATTEMPT (IF ANY)
 	* ------------------------------------------ */
 	if (isset($_POST["login-php-submit-button"])){
-		include_once(__ROOT__.'/includes/process-login-attempt.php');
+		include_once(__SITE_ROOT__.'/includes/process-login-attempt.php');
 	}// end if
 
 	/* ------------------------------------------
@@ -371,7 +371,7 @@
     * "PAGE" VARIABLE INJECTION
     * ------------------------------------------ */
    	global $lPage;
-   	$lPage = __ROOT__.'/home.php';
+   	$lPage = __SITE_ROOT__.'/home.php';
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
    		case "1": // This code is insecure
@@ -398,7 +398,7 @@
 
    			$lPageIsAllowed = (preg_match("/^[a-zA-Z0-9\.\-\/]+[\.php|\.html]$/", $lPage) == 1);
    			if (!$lPageIsAllowed){
-		    	$lPage = __ROOT__.'/page-not-found.php';
+		    	$lPage = __SITE_ROOT__.'/page-not-found.php';
    			}// end if
    		break;
    	}// end switch
@@ -435,7 +435,7 @@
    			switch ($_SESSION["security-level"]){
 		   		case "0": // This code is insecure
 		   		case "1": // This code is insecure
-	    			$lPage=__ROOT__.'/phpinfo.php';
+	    			$lPage=__SITE_ROOT__.'/phpinfo.php';
 		   		break;
 
 		   		case "2":
@@ -453,9 +453,9 @@
 		   			}// end if isseet $_SESSION['is_admin']
 
 		   			if($lUserAuthorized){
-		   				$lPage=__ROOT__.'/phpinfo.php';
+		   				$lPage=__SITE_ROOT__.'/phpinfo.php';
 		   			}else{
-		   				$lPage=__ROOT__.'/authorization-required.php';
+		   				$lPage=__SITE_ROOT__.'/authorization-required.php';
 		   			}// end if $lUserAuthorized
 
 		   		break;//case 5
@@ -503,11 +503,11 @@
 	/* ------------------------------------------
 	* BEGIN OUTPUT RESPONSE
 	* ------------------------------------------ */
-	require_once (__ROOT__."/includes/header.php");
+	require_once (__SITE_ROOT__."/includes/header.php");
 
 	if (strlen($lPage)==0 || !isset($lPage)){
 		/* Default Page */
-		require_once(__ROOT__."/home.php");
+		require_once(__SITE_ROOT__."/home.php");
 	}else{
 		/* All Other Pages */
 	    if (file_exists($lPage) || $RemoteFileHandler->remoteSiteIsReachable($lPage)){
@@ -516,18 +516,18 @@
 			if(!$RemoteFileHandler->curlIsInstalled()){
 				echo $RemoteFileHandler->getNoCurlAdviceBasedOnOperatingSystem();
 			}//end if
-			require_once (__ROOT__."/page-not-found.php");
+			require_once (__SITE_ROOT__."/page-not-found.php");
 		}//end if
 
 	}// end if page variable not set
 
-	require_once (__ROOT__."/includes/information-disclosure-comment.php");
-	require_once (__ROOT__."/includes/footer.php");
+	require_once (__SITE_ROOT__."/includes/information-disclosure-comment.php");
+	require_once (__SITE_ROOT__."/includes/footer.php");
 
    	/* ------------------------------------------
    	 * LOG USER VISIT TO PAGE
    	* ------------------------------------------ */
-   	include_once (__ROOT__."/includes/log-visit.php");
+   	include_once (__SITE_ROOT__."/includes/log-visit.php");
 
    	/* ------------------------------------------
    	 * CLOSE DATABASE CONNECTION

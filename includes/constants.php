@@ -2,7 +2,7 @@
 	/* ------------------------------------------
 	 * @VERSION
 	 * ------------------------------------------*/
-	$C_VERSION = "2.9.0";
+	$C_VERSION = "2.9.1";
 	$C_VERSION_STRING = "Version: " . $C_VERSION;
 	$C_MAX_HINT_LEVEL = 1;
 
@@ -11,7 +11,7 @@
      * Recall this file is in the "includes" folder
      * so its "2 levels deep".
 	 * ------------------------------------------*/
-	define('__ROOT__', dirname(dirname(__FILE__)));
+	if (!defined('__SITE_ROOT__')){define('__SITE_ROOT__', dirname(dirname(__FILE__)));}
 
 	/* ------------------------------------------
 	 * @DANGEROUS TAG TOKENIZATION CONSTANTS

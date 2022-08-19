@@ -1,5 +1,5 @@
 <?php 
-	require_once (__ROOT__.'/classes/CSRFTokenHandler.php');
+	require_once (__SITE_ROOT__.'/classes/CSRFTokenHandler.php');
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
 	switch ($_SESSION["security-level"]){
@@ -40,8 +40,8 @@
 
 <div class="page-title">Register for an Account</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <?php
 	if ($lFormSubmitted){

@@ -30,7 +30,7 @@
 			case "4":
     		case "5": // This code is fairly secure
 				require_once ('./includes/constants.php');
-				require_once (__ROOT__.'/classes/EncodingHandler.php');
+				require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
     			$Encoder = new EncodingHandler();
     			$lProtectAgainstMethodTampering = TRUE;
 				$lEncodeOutput = TRUE;

@@ -17,6 +17,10 @@
  * SQL Exception
  */
 
+/* Determine the root of the entire project.
+ * Recall this file is in the "includes" folder so its "2 levels deep". */
+if (!defined('__SITE_ROOT__')){if (!defined('__SITE_ROOT__')){define('__SITE_ROOT__', dirname(dirname(__FILE__)));}}
+
 class CustomErrorHandler{
 
 	//default insecure: no output encoding.
@@ -121,7 +125,7 @@ class CustomErrorHandler{
 		$this->doSetSecurityLevel($pSecurityLevel);
 
 		//initialize encoder
-		require_once (__ROOT__.'/classes/EncodingHandler.php');
+		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
 		$this->Encoder = new EncodingHandler();
 	}// end function
 

@@ -71,8 +71,8 @@
 
 <div class="page-title">Conference Room Lookup</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">

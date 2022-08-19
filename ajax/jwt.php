@@ -7,10 +7,10 @@
 	/* ------------------------------------------------------
 	 * INCLUDE CLASS DEFINITION PRIOR TO INITIALIZING SESSION
 	 * ------------------------------------------------------ */
-	require_once (__ROOT__ . '/classes/CustomErrorHandler.php');
-	require_once (__ROOT__ . '/classes/LogHandler.php');
-	require_once (__ROOT__ . '/classes/SQLQueryHandler.php');
-	require_once (__ROOT__ . '/classes/JWT.php');
+	require_once (__SITE_ROOT__ . '/classes/CustomErrorHandler.php');
+	require_once (__SITE_ROOT__ . '/classes/LogHandler.php');
+	require_once (__SITE_ROOT__ . '/classes/SQLQueryHandler.php');
+	require_once (__SITE_ROOT__ . '/classes/JWT.php');
 
    /* ------------------------------------------
    * INITIALIZE SESSION

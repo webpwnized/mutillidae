@@ -56,8 +56,8 @@
 
 <div class="page-title">Source Code Viewer</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <form 	action="index.php?page=source-viewer.php" 
 		method="post" 

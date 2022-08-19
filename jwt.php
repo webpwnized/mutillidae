@@ -1,6 +1,6 @@
 <?php
 
-	require_once (__ROOT__ . '/classes/JWT.php');
+	require_once (__SITE_ROOT__ . '/classes/JWT.php');
 
 	// attack requires user - if not logged in, just display message and return
 	if(!isset($_SESSION['uid']) || !is_numeric($_SESSION['uid'])) {
@@ -48,8 +48,8 @@
 
 <div class="page-title">Current User Information</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <!-- BEGIN HTML OUTPUT  -->
 <div id="loading-div">Loading user information, please wait...</div>

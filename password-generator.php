@@ -63,8 +63,8 @@
 
 <div class="page-title">Password Generator</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <div id="id-generator-form-div">
 	<form 	enctype="application/x-www-form-urlencoded" 

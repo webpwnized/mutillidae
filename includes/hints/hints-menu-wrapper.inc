@@ -46,7 +46,7 @@
 						'</div>';
 				}// end while
 			}else{
-				include_once (__ROOT__.'/includes/hints/hints-not-found.inc');
+				include_once (__SITE_ROOT__.'/includes/hints/hints-not-found.inc');
 			}// end if
 		}//end if $_SESSION["showhints"] > 0
 

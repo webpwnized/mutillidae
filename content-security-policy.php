@@ -60,8 +60,8 @@ try {
 <script src="javascript/on-page-scripts/content-security-policy.js"></script>
 <div class="page-title">Content Security Policy (CSP)</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <a href="index.php?page=echo.php">
     <img src="images/malware-icon-75-75.png" />

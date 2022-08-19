@@ -43,7 +43,7 @@
 				$this->mDLList->setIteratorMode(SplDoublyLinkedList::IT_MODE_FIFO|SplDoublyLinkedList::IT_MODE_KEEP);
 
 				//initialize encoder
-				require_once (__ROOT__.'/classes/EncodingHandler.php');
+				require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
 				$Encoder = new EncodingHandler();
 
 			} catch(Exception $e){
@@ -348,8 +348,8 @@
 
 <div class="page-title">Client-side Control Challenge</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <div id="id-client-side-control-challenge-form-div" style="text-align:center;">
 	<form 	action="index.php?page=client-side-control-challenge.php"

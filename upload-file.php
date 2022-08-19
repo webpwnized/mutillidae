@@ -1,6 +1,6 @@
-<?php include_once (__ROOT__.'/classes/FileUploadExceptionHandler.php');?>
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/classes/FileUploadExceptionHandler.php');?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 <?php	
 	try{
     	switch ($_SESSION["security-level"]){
@@ -32,7 +32,7 @@
 			break;
     	}// end switch
     	
-		//$lWebServerUploadDirectory = __ROOT__.DIRECTORY_SEPARATOR.'uploads';
+		//$lWebServerUploadDirectory = __SITE_ROOT__.DIRECTORY_SEPARATOR.'uploads';
     	$lWebServerUploadDirectory = sys_get_temp_dir();
     	$lFormSubmitted = $lFileMovedSuccessfully = FALSE;
 		if (isset($_POST["upload-file-php-submit-button"]) || isset($_REQUEST["upload-file-php-submit-button"])) {

@@ -59,8 +59,8 @@
 
 <div class="page-title"><span style="font-size: 18pt;">Echo</span>, <span style="font-size: 16pt;">Echo</span>, <span style="font-size: 14pt;">Echo</span>...</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">

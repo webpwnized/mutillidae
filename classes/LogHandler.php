@@ -41,7 +41,7 @@ class LogHandler {
 		$this->doSetSecurityLevel($pSecurityLevel);
 
 		//initialize encoder
-		require_once (__ROOT__.'/classes/EncodingHandler.php');
+		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
 		$this->Encoder = new EncodingHandler();
 
 		/* Initialize MySQL Connection handler */

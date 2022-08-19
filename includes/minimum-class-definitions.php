@@ -13,7 +13,7 @@
     /* ------------------------------------------
 	 * initialize encoder
 	 * ------------------------------------------ */
-    require_once (__ROOT__.'/classes/EncodingHandler.php');
+    require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
     if (!isset($Encoder)){
         $Encoder = new EncodingHandler();
     }// end if
@@ -21,7 +21,7 @@
 	/* ------------------------------------------
 	 * initialize custom error handler
 	 * ------------------------------------------ */
-    require_once (__ROOT__.'/classes/CustomErrorHandler.php');
+    require_once (__SITE_ROOT__.'/classes/CustomErrorHandler.php');
 	if (!isset($CustomErrorHandler)){
 		$CustomErrorHandler =
 		new CustomErrorHandler($lSecurityLevel);
@@ -30,12 +30,12 @@
 	/* ------------------------------------------
  	* initialize log error handler
  	* ------------------------------------------ */
-    require_once (__ROOT__.'/classes/LogHandler.php');
+    require_once (__SITE_ROOT__.'/classes/LogHandler.php');
     $LogHandler = new LogHandler($lSecurityLevel);
 
 	/* ------------------------------------------
  	* initialize SQL Query Handler
  	* ------------------------------------------ */
-	require_once (__ROOT__.'/classes/SQLQueryHandler.php');
+	require_once (__SITE_ROOT__.'/classes/SQLQueryHandler.php');
 	$SQLQueryHandler = new SQLQueryHandler($lSecurityLevel);
 ?>

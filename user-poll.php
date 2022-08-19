@@ -9,7 +9,7 @@
 		SQL Injection
 	*/
 
-	require_once (__ROOT__.'/classes/CSRFTokenHandler.php');
+	require_once (__SITE_ROOT__.'/classes/CSRFTokenHandler.php');
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
 	if (!isSet($logged_in_user)) {
@@ -139,8 +139,8 @@
 
 <div class="page-title">User Poll</div>
 
-<?php include_once (__ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
 
 <fieldset>
 	<legend>User Poll</legend>
