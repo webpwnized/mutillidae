@@ -302,56 +302,54 @@
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
    		case "1":
-   		    /* Built-in user-agent defenses */
-   			header("X-XSS-Protection: 0;", TRUE);
+			/* Built-in user-agent defenses */
+			header("X-XSS-Protection: 0;", TRUE);
 
-   			/* Disable HSTS */
-   			header("Strict-Transport-Security: max-age=0", TRUE);
+			/* Disable HSTS */
+			header("Strict-Transport-Security: max-age=0", TRUE);
 
-   			// HTTP/1.1 cache control
-   			header("Cache-Control: public", TRUE);
+			// HTTP/1.1 cache control
+			header("Cache-Control: public", TRUE);
 
-   			/* Referrer Policy */
-   			header("Referrer-Policy: unsafe-url", TRUE);
+			/* Referrer Policy */
+			header("Referrer-Policy: unsafe-url", TRUE);
 
-   			header_remove("Pragma");
+			header_remove("Pragma");
 
-   			/* Content sniffing */
-   			header_remove("X-Content-Type-Options");
-
-   	    break;
+			/* Content sniffing */
+			header_remove("X-Content-Type-Options");
+   	    	break;
 
    		case "2":
    		case "3":
    		case "4":
    		case "5": // This code is fairly secure
-   		    /* Built-in user-agent defenses */
-   		    header("X-XSS-Protection: 1; mode=block;", TRUE);
+			/* Built-in user-agent defenses */
+			header("X-XSS-Protection: 1; mode=block;", TRUE);
 
-   		    /* Enable HSTS - I would like to enable this but the problem is this header caches so messes
-   		     * up labs once the user sets the security level back to level 0*/
-   		    //header("Strict-Transport-Security: max-age=31536000; includeSubDomains", TRUE);
+			/* Enable HSTS - I would like to enable this but the problem is this header caches so messes
+			* up labs once the user sets the security level back to level 0*/
+			//header("Strict-Transport-Security: max-age=31536000; includeSubDomains", TRUE);
 
-   		    // HTTP/1.1 cache control
-   		    header('Cache-Control: no-store, no-cache', TRUE);
+			// HTTP/1.1 cache control
+			header('Cache-Control: no-store, no-cache', TRUE);
 
-   		    // HTTP/1.0 cache-control
-   		    header("Pragma: no-cache", TRUE);
+			// HTTP/1.0 cache-control
+			header("Pragma: no-cache", TRUE);
 
-   		    /* Cross-frame scripting and click-jacking */
-   		    header('X-FRAME-OPTIONS: DENY', TRUE);
-   		    header("Content-Security-Policy: frame-ancestors 'none';", TRUE);
+			/* Cross-frame scripting and click-jacking */
+			header('X-FRAME-OPTIONS: DENY', TRUE);
+			header("Content-Security-Policy: frame-ancestors 'none';", TRUE);
 
-   			/* Content sniffing */
-   			header("X-Content-Type-Options: nosniff", TRUE);
+			/* Content sniffing */
+			header("X-Content-Type-Options: nosniff", TRUE);
 
-   			/* Referrer Policy */
-   			header("Referrer-Policy: no-referrer", TRUE);
+			/* Referrer Policy */
+			header("Referrer-Policy: no-referrer", TRUE);
 
-   			/* Server version banners */
-   			header_remove("X-Powered-By");
-   			header_remove("Server");
-
+			/* Server version banners */
+			header_remove("X-Powered-By");
+			header_remove("Server");
    		break;
    	}// end switch
 	/* ------------------------------------------

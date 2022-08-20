@@ -1,4 +1,10 @@
 <br/><br/>
+<span class="report-header">LDAP Server Credentials</span>
+<br/><br/>
+When logging into PHP Ldap Admin, use the following credentials:<br/><br/>
+<span class="label">Username:</span> cn=admin,dc=mutillidae,dc=local<br/>
+<span class="label">Password:</span> mutillidae<br/>
+<br/><br/>
 <span class="report-header">Setting up LDAP server for Mutillidae</span>
 <br/><br/>
 Install Stand-Alone LDAP Daemon (slapd). When asked,
@@ -53,4 +59,8 @@ directory used by Mutillidae is available in file
 <code>
 	ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=local" -w mutillidae -H ldap:// -f /var/www/mutillidae/configuration/openldap/mutillidae.ldif
 </code>
+<br/><br/>
+When logging into PHP Ldap Admin, use the following credentials:<br/><br/>
+<span class="label">Username:</span> cn=admin,dc=mutillidae,dc=local<br/>
+<span class="label">Password:</span> mutillidae<br/>
 <br/><br/>
