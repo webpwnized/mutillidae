@@ -37,19 +37,19 @@
 	} //end try
 
 	try{
-	    $lDatabasePingResult = shell_exec("ping $lDatabaseHost -c 1");
+	    $lDatabasePingResult = shell_exec("ping -c 1 $lDatabaseHost");
 	}catch (Exception $e){
 	    // do nothing
 	} //end try
 
 	try{
-	    $lDatabaseTracerouteResult = shell_exec("traceroute $lDatabaseHost 2>&1");
+	    $lDatabaseTracerouteResult = shell_exec("traceroute --max-hops=3 --wait=2 $lDatabaseHost 2>&1");
 	}catch (Exception $e){
 	    // do nothing
 	} //end try
 
 	try{
-	    $lTracerouteTCPResult = shell_exec("traceroute --tcp -p $lDatabasePort $lDatabaseHost 2>&1");
+	    $lTracerouteTCPResult = shell_exec("traceroute --max-hops=3 --wait=2 --tcp -p $lDatabasePort $lDatabaseHost 2>&1");
 	}catch (Exception $e){
 	    // do nothing
 	} //end try
@@ -83,19 +83,19 @@
 	} //end try
 
 	try{
-	    $lLDAPPingResult = shell_exec("ping $lLDAPHost -c 1");
+	    $lLDAPPingResult = shell_exec("ping -c 1 $lLDAPHost");
 	}catch (Exception $e){
 	    // do nothing
 	} //end try
 
 	try{
-	    $lLDAPTracerouteResult = shell_exec("traceroute $lLDAPHost 2>&1");
+	    $lLDAPTracerouteResult = shell_exec("traceroute --max-hops=3 --wait=2 $lLDAPHost 2>&1");
 	}catch (Exception $e){
 	    // do nothing
 	} //end try
 
 	try{
-	    $lTracerouteTCPResult = shell_exec("traceroute --tcp -p $lLDAPPort $lLDAPHost 2>&1");
+	    $lTracerouteTCPResult = shell_exec("traceroute --max-hops=3 --wait=2 --tcp -p $lLDAPPort $lLDAPHost 2>&1");
 	}catch (Exception $e){
 	    // do nothing
 	} //end try
