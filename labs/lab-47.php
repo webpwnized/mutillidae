@@ -1,7 +1,7 @@
 <?php
 $lLabNumber = 47;
-$lTitle = "What does the error message reveal when a single-quote is injected into the login page within Mutillidae?";
-$lQuestion = "Lab 47: Error Handling - Testing for Errors";
+$lTitle = "Lab 47: Error Handling - Testing for Errors";
+$lQuestion = "What does the error message reveal when a single-quote is injected into the login page within Mutillidae?";
 $lChoice_1 = "The brand of database in use";
 $lChoice_2 = "The kernel version of Linux operating system";
 $lChoice_3 = "The password for user Kevin";
