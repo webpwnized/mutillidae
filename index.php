@@ -474,13 +474,13 @@
 
         $CSPNonce = bin2hex(openssl_random_pseudo_bytes(32));
         $lCSP = "Content-Security-Policy: " .
-                "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.local;" .
-                "style-src 'unsafe-inline' 'self' mutillidae.local;" .
-                "img-src 'self' mutillidae.local www.paypalobjects.com;" .
-                "connect-src 'self' mutillidae.local;" .
-                "form-action 'self' mutillidae.local;" .
+                "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.localhost;" .
+                "style-src 'unsafe-inline' 'self' mutillidae.localhost;" .
+                "img-src 'self' mutillidae.localhost www.paypalobjects.com;" .
+                "connect-src 'self' mutillidae.localhost;" .
+                "form-action 'self' mutillidae.localhost;" .
                 "font-src 'none';" .
-                "frame-src 'self' mutillidae.local;" .
+                "frame-src 'self' mutillidae.localhost;" .
                 "media-src 'none';" .
                 "object-src 'none';" .
                 "default-src 'self';".

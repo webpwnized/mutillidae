@@ -35,8 +35,8 @@
 
 	function generate_token($key) {
      	$payload = array(
-			"iss" => "http://mutillidae.local",
-			"aud" => "http://mutillidae.local",
+			"iss" => "http://mutillidae.localhost",
+			"aud" => "http://mutillidae.localhost",
 			"iat" => time(),
 			"exp" => time() + (30 * 60),
 			"userid" => $_SESSION["uid"]

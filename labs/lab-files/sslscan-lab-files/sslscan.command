@@ -1,1 +1,1 @@
-sslscan mutillidae.local
+sslscan mutillidae.localhost

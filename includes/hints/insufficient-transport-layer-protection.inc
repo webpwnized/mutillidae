@@ -29,13 +29,13 @@ Ping or other programs can be used  to confirm connectivity with the web
 server and confirm the subnet being used to connect.
 <br/>
 <code>
-	root@ubuntu:~# ping mutillidae.local
-	PING mutillidae.local (127.0.0.1) 56(84) bytes of data
+	root@ubuntu:~# ping mutillidae.localhost
+	PING mutillidae.localhost (127.0.0.1) 56(84) bytes of data
 	64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.017 ms
 </code>
 			<br/>
 			The ifconfig program shows the names of the network interfaces. Notice the interface that
-			provides the route to mutillidae.local (127.0.0.1) is the "lo" interface.
+			provides the route to mutillidae.localhost (127.0.0.1) is the "lo" interface.
 			<br/>
 <code>
 	root@ubuntu:~# ifconfig

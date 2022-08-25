@@ -15,7 +15,7 @@ An example of a possible configuration is below. This example limits mutillidae 
 on localhost only at IP address 127.0.0.1 on standard ports 80 and 443 respectively.
 
 &#x3C;VirtualHost 127.0.0.1:80&#x3E;
-&#x9;ServerName mutillidae.local
+&#x9;ServerName mutillidae.localhost
 &#x9;DocumentRoot /var/www/html/mutillidae
 
 &#x9;ErrorLog ${APACHE_LOG_DIR}/mutillidae-error.log
@@ -24,7 +24,7 @@ on localhost only at IP address 127.0.0.1 on standard ports 80 and 443 respectiv
 
 &#x3C;VirtualHost 127.0.0.1:443&#x3E;
 &#x9;DocumentRoot /var/www/html/mutillidae
-&#x9;ServerName mutillidae.local
+&#x9;ServerName mutillidae.localhost
 
 &#x9;ErrorLog ${APACHE_LOG_DIR}/mutillidae-error.log
 &#x9;CustomLog ${APACHE_LOG_DIR}/mutillidae-access.log combined
@@ -47,7 +47,7 @@ environments. In this example, we enable the default web site located at
 /var/www/html and enable mutillidae at /var/www/html/mutillidae. Both sites
 are running on IP address 127.0.0.1. However, the default site will respond to
 http://localhost while Mutillidae will respond to http://mutillidae or 
-http://mutillidae.local. In the case of a tie, "first match wins". For example,
+http://mutillidae.localhost. In the case of a tie, "first match wins". For example,
 http://127.0.0.1 will load the default site because there is no hostname on
 which to match and the default site is listed first.
 
@@ -78,7 +78,7 @@ which to match and the default site is listed first.
     # Mutillidae
     
     &lt;VirtualHost 127.0.0.1:80&gt;
-        ServerName mutillidae.local
+        ServerName mutillidae.localhost
     	ServerAlias mutillidae
         DocumentRoot /var/www/html/mutillidae
     
@@ -87,7 +87,7 @@ which to match and the default site is listed first.
     &lt;/VirtualHost&gt;
     
     &lt;VirtualHost 127.0.0.1:443&gt;
-        ServerName mutillidae.local
+        ServerName mutillidae.localhost
     	ServerAlias mutillidae
         DocumentRoot /var/www/html/mutillidae
     
@@ -105,7 +105,7 @@ which to match and the default site is listed first.
 name on which Apache can match. To add localhost names for IP address
 127.0.0.1, we can use the following.
 
-    echo -e "\n127.0.0.1\tmutillidae.local" &gt;&gt; /etc/hosts
+    echo -e "\n127.0.0.1\tmutillidae.localhost" &gt;&gt; /etc/hosts
     echo -e "\n127.0.0.1\tmutillidae" &gt;&gt; /etc/hosts
 
 The resulting /etc/hosts file might look something like this
@@ -120,7 +120,7 @@ The resulting /etc/hosts file might look something like this
     ff02::2 ip6-allrouters
     ff02::3 ip6-allhosts
     
-    127.0.0.1	mutillidae.local
+    127.0.0.1	mutillidae.localhost
     127.0.0.1	mutillidae
 </pre>
 <br/>

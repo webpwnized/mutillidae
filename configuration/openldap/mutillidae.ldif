@@ -1,54 +1,54 @@
 version: 1
 
-dn: dc=mutillidae,dc=local
+dn: dc=mutillidae,dc=localhost
 objectClass: organization
 objectClass: dcObject
 objectClass: top
 dc: mutillidae
 o: mutillidae
 
-dn: cn=admin,dc=mutillidae,dc=local
+dn: cn=admin,dc=mutillidae,dc=localhost
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
 cn: admin
 userPassword: {SSHA}jnKvM5dTUPJGYEwAiAqdHrEG/Yavkiyc
 description: LDAP administrator
 
-dn: ou=rooms,dc=mutillidae,dc=local
+dn: ou=rooms,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: organizationalUnit
 ou: rooms
 
-dn: ou=users,dc=mutillidae,dc=local
+dn: ou=users,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: organizationalUnit
 ou: users
 
-dn: ou=groups,dc=mutillidae,dc=local
+dn: ou=groups,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: organizationalUnit
 ou: groups
 
-dn: cn=1F104,ou=rooms,dc=mutillidae,dc=local
+dn: cn=1F104,ou=rooms,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: room
 cn: 1F104
 description: 1st Floor Conference Room
 roomNumber: 104
 
-dn: cn=2F204,ou=rooms,dc=mutillidae,dc=local
+dn: cn=2F204,ou=rooms,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: room
 cn: 2F204
 description: 2nd Floor Conference Room
 roomNumber: 204
 
-dn: cn=Joes Place,ou=rooms,dc=mutillidae,dc=local
+dn: cn=Joes Place,ou=rooms,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: room
 cn: Joes Place
 
-dn: cn=fred,ou=users,dc=mutillidae,dc=local
+dn: cn=fred,ou=users,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -58,7 +58,7 @@ sn: mack
 uid: fred
 userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
 
-dn: cn=sally,ou=users,dc=mutillidae,dc=local
+dn: cn=sally,ou=users,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -68,7 +68,7 @@ sn: up
 uid: sally
 userPassword: {SHA}cMzZAHM41tgd07YnFiG5z5qX6gA=
 
-dn: cn=jeremy,ou=users,dc=mutillidae,dc=local
+dn: cn=jeremy,ou=users,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -78,7 +78,7 @@ sn: d
 uid: jeremy
 userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
 
-dn: cn=phinius,ou=users,dc=mutillidae,dc=local
+dn: cn=phinius,ou=users,dc=mutillidae,dc=localhost
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person
@@ -88,10 +88,10 @@ sn: smith
 uid: phinius
 userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
 
-dn: cn=admins,ou=groups,dc=mutillidae,dc=local
+dn: cn=admins,ou=groups,dc=mutillidae,dc=localhost
 objectClass: top
 objectClass: groupOfNames
 cn: admins
-member: cn=jeremy,ou=users,dc=mutillidae,dc=local
-member: cn=fred,ou=users,dc=mutillidae,dc=local
+member: cn=jeremy,ou=users,dc=mutillidae,dc=localhost
+member: cn=fred,ou=users,dc=mutillidae,dc=localhost
 

@@ -608,7 +608,7 @@
             "include":[
                 {
                     "enabled":true,
-                    "host":"mutillidae.local",
+                    "host":"mutillidae.localhost",
                     "protocol":"any"
                 }
             ]

@@ -43,6 +43,11 @@
 	try {
 
 	    $lVerb = $_SERVER['REQUEST_METHOD'];
+
+	    $lDomain = $_SERVER['SERVER_NAME'];
+	    $lDomainParts = explode('.', $lDomain);
+	    $lDomainParts = array_reverse($lDomainParts);
+	    $lParentDomain = $lDomainParts[1] . '.' . $lDomainParts[0];
 	    $lReturnData = True;
 
 	    switch($lVerb){
@@ -68,7 +73,7 @@
 	        (isset($_GET['acao']) && $_GET['acao']=="True") ||
 	        (isset($_POST['acao']) && $_POST['acao']=="True"))
 	    {
-	        header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://mutillidae.local");
+	        header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
 	    }
 
 	    if ($lVerb == "OPTIONS" ||
@@ -139,7 +144,7 @@
     	}
 
 	}catch(Exception $e){
-	    header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://mutillidae.local");
+	    header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
 	    echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
 	}// end try
 ?>
