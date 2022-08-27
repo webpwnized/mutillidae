@@ -2,4 +2,4 @@ This file is an example of a Metasploit Meterpreter PHP stager, so easily mistak
 
 The file is zipped and encrypted using the password "mutillidae". To decrypt the file, use the follwing command:
 
-unzip commented-php-meter-script.txt (enter password "mutillidae" when prompted)
+unzip commented-php-meter-script.zip (enter password "mutillidae" when prompted)
