@@ -5,6 +5,10 @@
         $lSecurityLevel = 0;
     }
 
+    if(!isset($CSPNonce)){
+        $CSPNonce = "";
+    }
+
     switch ($lSecurityLevel){
    		case "0": // This code is insecure
    		case "1":

@@ -98,7 +98,6 @@
 			};
 
 			lXMLHTTP.open(lMethod, lAction, true);
-			lXMLHTTP.setRequestHeader(&quot;Host&quot;, lHost);
 			lXMLHTTP.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
 			lXMLHTTP.send(lData);
 		}catch(e){

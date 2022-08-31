@@ -24,7 +24,6 @@
 
 		lXMLHTTP.onreadystatechange = function(){};
 		lXMLHTTP.open(lMethod, lAction, true);
-		lXMLHTTP.setRequestHeader("Host", lHost); 
 		lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");			
 		lXMLHTTP.send(lData);
 

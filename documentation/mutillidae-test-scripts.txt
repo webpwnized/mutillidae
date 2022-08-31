@@ -880,8 +880,7 @@ Value:
 					}// end if 
 				};
 		
-				lXMLHTTP.open(lMethod, lAction, true);
-				lXMLHTTP.setRequestHeader("Host", lHost); 
+				lXMLHTTP.open(lMethod, lAction, true); 
 				lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
 				lXMLHTTP.send(lData);		
 			}catch(e){ 
@@ -932,7 +931,6 @@ Value:
 
 		lXMLHTTP.onreadystatechange = function(){} 
 		lXMLHTTP.open(lMethod, lAction, true);
-		lXMLHTTP.setRequestHeader("Host", lHost); 
 		lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");			
 		lXMLHTTP.send(lData);
 
@@ -1214,7 +1212,6 @@ Generic XHR to steal cookies (prefix and suffix as necessary)
 		///////////////////////////// 
 		//UNCOMMENT FOR POST REQUESTS 
 		///////////////////////////// 
-		//lXMLHTTP.setRequestHeader("Host", lHost); 
 		//lXMLHTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
 		///////////////////////////// 
 		
