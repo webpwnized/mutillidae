@@ -2,7 +2,7 @@
 	/* ------------------------------------------
 	 * @VERSION
 	 * ------------------------------------------*/
-	$C_VERSION = "2.10.2";
+	$C_VERSION = "2.10.3";
 	$C_VERSION_STRING = "Version: " . $C_VERSION;
 	$C_MAX_HINT_LEVEL = 1;
 

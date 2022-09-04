@@ -36,7 +36,7 @@
        			$lhintsPopUpNotificationCode = "SSLO1";
     		}//end if
 		    header("Location: ".$_SERVER['SCRIPT_NAME'].'?popUpNotificationCode='.$lhintsPopUpNotificationCode.'&'.str_ireplace('do=toggle-enforce-ssl&', '', $_SERVER['QUERY_STRING']), true, 302);
-			exit();
+			exit(0);
     	break;//case "toggle-enforce-ssl"
 
     	case "logout":
@@ -48,7 +48,7 @@
 			$_SESSION['is_admin'] = 'FALSE';
 	    	setcookie("uid", "deleted", time()-3600);
 	    	setcookie("username", "deleted", time()-3600);
-	    	header("Location: index.php?page=login.php&popUpNotificationCode=LOU1", TRUE, 302);
+	    	header("Location: index.php?page=home.php&popUpNotificationCode=LOU1", TRUE, 302);
 	    	exit(0);
 	    break;//case "logout"
 
@@ -102,7 +102,7 @@
 			 * The "exit()" function makes sure we do not accidentally write any "body" lines.
 			 */
 		    header("Location: ".$_SERVER['SCRIPT_NAME'].'?popUpNotificationCode='.$lhintsPopUpNotificationCode.'&'.str_ireplace('do=toggle-hints&', '', $_SERVER['QUERY_STRING']), true, 302);
-			exit();
+			exit(0);
 		break;//case "toggle-hints"
 
 		case "toggle-security":
@@ -170,7 +170,7 @@
 			}//end switch
 
 		    header("Location: ".$_SERVER['SCRIPT_NAME'].'?popUpNotificationCode='.$lhintsPopUpNotificationCode.'&'.str_ireplace('do=toggle-security&', '', $_SERVER['QUERY_STRING']), true, 302);
-		    exit();
+		    exit(0);
 		break;//case "toggle-hints"
 
 		default: break;
