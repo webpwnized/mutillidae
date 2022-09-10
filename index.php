@@ -134,6 +134,7 @@
 	   	    $l_cookie_options['samesite'] = 'Strict';
 	   	}// end if
 
+	   	# setcookie accepts array of options starting in PHP 7.3
 	   	setcookie('showhints', $l_showhints, $l_cookie_options);
 	}// end if (isset($_COOKIE["showhints"])){
 
