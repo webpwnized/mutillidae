@@ -182,6 +182,8 @@
 
 	function doXMLEncodeQueryResults($pUsername, $pQueryResult, $pEncodeOutput){
 
+	    global $Encoder;
+
 		$lResults = "<accounts message=\"Results for {$pUsername}\">";
 		$lUsername = "";
 		$lSignature = "";
