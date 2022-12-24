@@ -53,7 +53,7 @@
 		}// end if $lFormSubmitted
 
 	}catch(Exception $e){
-        echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
+        echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page echo.php");
     }// end try
 ?>
 
@@ -149,7 +149,7 @@ if ($lFormSubmitted){
 	        }//end if
 
     	}catch(Exception $e){
-			echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessage);
+			echo $CustomErrorHandler->FormatError($e, "Input: " . $lMessageText);
     	}// end try
 
 	}// end if (isset($_POST))

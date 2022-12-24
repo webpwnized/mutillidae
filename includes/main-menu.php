@@ -86,6 +86,7 @@
 								<li><a href="index.php?page=login.php">Login</a></li>
 								<li><a href="index.php?page=register.php">Register User</a></li>
 								<li><a href="index.php?page=source-viewer.php">Source Viewer</a></li>
+								<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 							</ul>
 						</li>
@@ -112,6 +113,7 @@
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
+								<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 							</ul>
 						</li>
 						<li>
@@ -130,6 +132,7 @@
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
+								<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -325,14 +328,35 @@
 					<a href="">A5 - Broken Access Control</a>
 					<ul>
 						<li>
-							<a href="">Insecure Direct Object References</a>
+							<a href="">Insecure Direct Object References (IDOR)</a>
 							<ul>
 								<li><a href="index.php?page=edit-account-profile.php<?php echo $lUserIDString; ?>">Via Account Hijacking</a></li>
-								<li><a href="index.php?page=arbitrary-file-inclusion.php">Local File Inclusion</a></li>
-								<li><a href="index.php?page=arbitrary-file-inclusion.php">Remote File Inclusion</a></li>
-								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=source-viewer.php">Source Viewer</a></li>
-								<li><a href="index.php?page=credits.php">Credits</a></li>
+								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
+								<li>
+									<a href="">Local File Inclusiion (LFI)</a>
+										<ul>
+											<li><a href="index.php?page=arbitrary-file-inclusion.php">Local File Inclusion (LFI)</a></li>
+										</ul>
+								</li>
+								<li>
+									<a href="">Remote File Inclusiion (RFI)</a>
+										<ul>
+											<li><a href="index.php?page=arbitrary-file-inclusion.php">Remote File Inclusion (RFI)</a></li>
+										</ul>
+								</li>
+								<li>
+									<a href="">Open Redirect</a>
+										<ul>
+											<li><a href="index.php?page=credits.php">Credits</a></li>
+										</ul>
+								</li>
+								<li>
+									<a href="">Server-side Request Forgery (SSRF)</a>
+										<ul>
+											<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
+										</ul>
+								</li>
 							</ul>
 						</li>
 						<li>
@@ -379,6 +403,7 @@
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
+								<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 							</ul>
 						</li>
 
@@ -408,6 +433,7 @@
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
+								<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -463,6 +489,7 @@
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
+								<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
 								<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
 								<li><a href="index.php">Missing HTTPOnly Attribute</a></li>
@@ -538,6 +565,7 @@
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
+								<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
 								<li><a href="index.php?page=text-file-viewer.php">Text File Viewer</a></li>
 								<li><a href="index.php?page=user-info.php">User Info (SQL)</a></li>
@@ -782,6 +810,7 @@
 						<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 						<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
 						<li><a href="index.php?page=repeater.php">Repeater</a></li>
+						<li><a href="index.php?page=test-connectivity.php">Test Connectivity to Server</a></li>
 					</ul>
 				</li>
 				<li>
@@ -847,7 +876,7 @@
 					<ul>
 						<li><a href="index.php?page=labs/lab-18.php">Lab 18 - Edit Another User's Profile</a></li>
 						<li><a href="index.php?page=labs/lab-19.php">Lab 19 - Extracting User Accounts with IDOR</a></li>
-						<li><a href="index.php?page=labs/lab-20.php">Lab 20 - Extracting User Accounts with Local File Inclusion</a></li>
+						<li><a href="index.php?page=labs/lab-20.php">Lab 20 - Extracting User Accounts with Local File Inclusion (LFI)</a></li>
 						<li><a href="index.php?page=labs/lab-21.php">Lab 21 - Web Shell with Local File Inclusion (LFI)</a></li>
 						<li><a href="index.php?page=labs/lab-22.php">Lab 22 - Web Shell with Remote File Inclusion (RFI)</a></li>
 					</ul>

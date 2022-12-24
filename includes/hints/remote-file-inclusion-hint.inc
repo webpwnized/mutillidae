@@ -1,7 +1,7 @@
 			<br/><br/>
 			<span class="report-header">Overview</span>
 			<br/><br/>
-			Remote file inclusion allows an attacker to include file remote
+			Remote File Inclusion (RFI) allows an attacker to include file remote
 			(from the web servers point of view)
 			possibly allowing code execution, denial of service, and data disclosure.
 <br/><br/>
@@ -36,7 +36,7 @@
 </code>
 			<br/>
 			Once the web shell is ready to pull from the attacking server, create a hyperlink that will exploit
-			the remote file inclusion vulnerability in the index.php page to incorporate the web shell into the
+			the Remote File Inclusion (RFI) vulnerability in the index.php page to incorporate the web shell into the
 			web page.
 			<br/>
 <code>

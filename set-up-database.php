@@ -666,6 +666,16 @@
     			('ssl-misconfiguration.php', 56, 1),
     			('ssl-misconfiguration.php', 59, 1),
     			('ssl-misconfiguration.php', 60, 1),
+    			('test-connectivity.php', 11, 3),
+    			('test-connectivity.php', 55, 3),
+    			('test-connectivity.php', 12, 1),
+    			('test-connectivity.php', 13, 1),
+    			('test-connectivity.php', 20, 1),
+    			('test-connectivity.php', 30, 1),
+    			('test-connectivity.php', 48, 1),
+    			('test-connectivity.php', 56, 1),
+    			('test-connectivity.php', 59, 1),
+    			('test-connectivity.php', 131, 1),
     			('text-file-viewer.php', 11, 3),
     			('text-file-viewer.php', 55, 3),
     			('text-file-viewer.php', 12, 1),
@@ -896,6 +906,7 @@
     		(128, 'Lab 61', 'lab-61-hint.inc'),
     		(129, 'Lab 62', 'lab-62-hint.inc'),
     		(130, 'Lab 63', 'lab-63-hint.inc'),
+    		(131, 'Server-side Request Forgery (SSRF)', 'server-side-request-forgery-hint.inc'),
     		(999, 'Hints Not Found', 'hints-not-found.inc')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
@@ -976,7 +987,11 @@
     		(51, '<span class=\"label\">Client-side Security Control Bypass</span>: This page attempts to implement security using client-side security controls. Any page using such controls, including this page, is vulnerable to security control bypass.'),
     		(53, '<span class=\"label\">SQL Injection with SQLMap</span>: This page contains an sql injection vulnerability. The SQLMap tool may be able to automate testing and confirming this vulnerability.'),
     		(54, '<span class=\"label\">Insufficent Transport Layer Protection</span>: This page is vulnerable to interception with wireshark or tcpdump.'),
-    	    (63, '<span class=\"label\">LDAP Injection</span>: This page is vulnerable to LDAP injection.')";
+    		(55, '<span class=\"label\">Cross-site Scripting with BeEF Framework</span>: Some inputs on this page are vulnerable to Cross-site Scripting (XSS). The input may be hidden.'),
+            (63, '<span class=\"label\">LDAP Injection</span>: This page is vulnerable to LDAP injection.'),
+    	    (66, '<span class=\"label\">JSON Web Tokens (JWT)</span>: This page is vulnerable to JWT injection.'),
+    	    (67, '<span class=\"label\">Cross-origin Resource Sharing (CORS)</span>: This page is vulnerable to CORS injection.'),
+    	    (131, '<span class=\"label\">Server-side Request Forgery (SSRF)</span>: Some inputs on this page are vulnerable to Server-side Request Forgery (SSRF). The input may be hidden.')";
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
