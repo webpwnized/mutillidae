@@ -7,7 +7,7 @@ if (!defined('__SITE_ROOT__')){if (!defined('__SITE_ROOT__')){define('__SITE_ROO
 class CSRFTokenHandler{
 
 	/* objects */
-	protected $Encoder = null;
+	protected $mEncoder = null;
 
 	/* flag properties */
 	protected $mEncodeOutput = FALSE;
@@ -58,7 +58,7 @@ class CSRFTokenHandler{
 
 		//initialize encoder
 		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
-		$this->Encoder = new EncodingHandler();
+		$this->mEncoder = new EncodingHandler();
 		$this->mPageBeingProtected = $pPageBeingProtected;
 
 		if (isset($_SESSION['register-user']['csrf-token'])){
@@ -124,10 +124,10 @@ class CSRFTokenHandler{
 	public function generateCSRFHTMLReport(){
 
 		if($this->mEncodeOutput){
-			$lPostedCSRFToken = $this->Encoder->encodeForHTML($this->mPostedCSRFToken);
-			$lExpectedCSRFTokenForThisRequest = $this->Encoder->encodeForHTML($this->mExpectedCSRFTokenForThisRequest);
-			$lNewCSRFTokenForNextRequest = $this->Encoder->encodeForHTML($this->mNewCSRFTokenForNextRequest);
-			$lTokenStoredInSession = $this->Encoder->encodeForHTML($_SESSION[$this->mPageBeingProtected]['csrf-token']);
+			$lPostedCSRFToken = $this->mEncoder->encodeForHTML($this->mPostedCSRFToken);
+			$lExpectedCSRFTokenForThisRequest = $this->mEncoder->encodeForHTML($this->mExpectedCSRFTokenForThisRequest);
+			$lNewCSRFTokenForNextRequest = $this->mEncoder->encodeForHTML($this->mNewCSRFTokenForNextRequest);
+			$lTokenStoredInSession = $this->mEncoder->encodeForHTML($_SESSION[$this->mPageBeingProtected]['csrf-token']);
 		}else{
 			$lPostedCSRFToken = $this->mPostedCSRFToken;
 			$lExpectedCSRFTokenForThisRequest = $this->mExpectedCSRFTokenForThisRequest;

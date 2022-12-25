@@ -43,7 +43,7 @@ class SQLQueryHandler {
 
 		//initialize encoder
 		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
-		$this->Encoder = new EncodingHandler();
+		$this->mEncoder = new EncodingHandler();
 
 		/* Initialize MySQL Connection handler */
 		require_once 'MySQLHandler.php';

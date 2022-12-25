@@ -9,7 +9,7 @@ class LogHandler {
 	protected $encodeOutput = FALSE;
 	protected $stopSQLInjection = FALSE;
 	protected $mSecurityLevel = 0;
-	protected $Encoder = null;
+	protected $mEncoder = null;
 	protected $mMySQLHandler = null;
 
 	private function doSetSecurityLevel($pSecurityLevel){
@@ -47,7 +47,7 @@ class LogHandler {
 
 		//initialize encoder
 		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
-		$this->Encoder = new EncodingHandler();
+		$this->mEncoder = new EncodingHandler();
 
 		/* Initialize MySQL Connection handler */
 		require_once 'MySQLHandler.php';
@@ -76,7 +76,7 @@ class LogHandler {
 			/* Cross site scripting defense */
    			// encode the entire message following OWASP standards
    			// this is HTML encoding because we are outputting data into HTML
-		    $lUserAgent = $this->Encoder->encodeForHTML($lUserAgent);
+		    $lUserAgent = $this->mEncoder->encodeForHTML($lUserAgent);
 		}// end if
 
 		/*Here we are protecting against SQL injection and other types of

@@ -26,7 +26,7 @@ class CustomErrorHandler{
 	//default insecure: no output encoding.
 	protected $encodeOutput = FALSE;
 	protected $mSecurityLevel = 0;
-	protected $Encoder = null;
+	protected $mEncoder = null;
 	protected $supressErrorMessages = FALSE;
 
 	protected $mLine = "";
@@ -110,12 +110,12 @@ class CustomErrorHandler{
 			$this->mDiagnosticInformation = $pDiagnosticInformation;
 		}else{
 			/* Cross site scripting defense */
-			$this->mLine = $this->Encoder->encodeForHTML($pException->getLine());
-			$this->mCode = $this->Encoder->encodeForHTML($pException->getCode());
-			$this->mFile = $this->Encoder->encodeForHTML($pException->getFile());
-			$this->mMessage = $this->Encoder->encodeForHTML($pException->getMessage());
-			$this->mTrace = $this->Encoder->encodeForHTML($pException->getTraceAsString());
-			$this->mDiagnosticInformation = $this->Encoder->encodeForHTML($pDiagnosticInformation);
+			$this->mLine = $this->mEncoder->encodeForHTML($pException->getLine());
+			$this->mCode = $this->mEncoder->encodeForHTML($pException->getCode());
+			$this->mFile = $this->mEncoder->encodeForHTML($pException->getFile());
+			$this->mMessage = $this->mEncoder->encodeForHTML($pException->getMessage());
+			$this->mTrace = $this->mEncoder->encodeForHTML($pException->getTraceAsString());
+			$this->mDiagnosticInformation = $this->mEncoder->encodeForHTML($pDiagnosticInformation);
 		}// end if
 
 	}// end private function setErrorProperties()
@@ -126,7 +126,7 @@ class CustomErrorHandler{
 
 		//initialize encoder
 		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
-		$this->Encoder = new EncodingHandler();
+		$this->mEncoder = new EncodingHandler();
 	}// end function
 
 	public function setSecurityLevel($pSecurityLevel){

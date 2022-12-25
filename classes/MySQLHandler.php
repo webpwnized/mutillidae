@@ -70,7 +70,7 @@ class MySQLHandler {
 	protected $encodeOutput = FALSE;
 	protected $stopSQLInjection = FALSE;
 	protected $mSecurityLevel = 0;
-	protected $Encoder = null;
+	protected $mEncoder = null;
 
 	/* Helper Objects */
 	protected $mCustomErrorHandler = null;
@@ -93,7 +93,7 @@ class MySQLHandler {
 
 	    /* initialize encoder */
 	    require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
-	    $this->Encoder = new EncodingHandler();
+	    $this->mEncoder = new EncodingHandler();
 
 	    /* initialize custom error handler */
 	    require_once 'CustomErrorHandler.php';
@@ -235,7 +235,7 @@ class MySQLHandler {
 
 		    return $lResult;
 		} catch (Exception $e) {
-			throw(new Exception($this->mCustomErrorHandler->getExceptionMessage($e, "Query: " . $this->Encoder->encodeForHTML($pQueryString))));
+			throw(new Exception($this->mCustomErrorHandler->getExceptionMessage($e, "Query: " . $this->mEncoder->encodeForHTML($pQueryString))));
 		}// end function
 
 	}// end private function executeQuery
