@@ -52,6 +52,7 @@ class YouTubeVideoHandler {
 	public $OWASPDependencyCheckPart1HowtoInstall = 9;
 	public $OWASPDependencyCheckPart2HowtoScanYourProject = 10;
 	public $HowtoIdentifyaFilesType = 11;
+	public $WhatisServerSideRequestForgerySSRF = 12;
 	public $UsingBurpIntruderSnipertoFuzzParameters = 13;
 	public $CrossSiteScriptingPart1WhatisReflectedXSS = 14;
 	public $CrossSiteScriptingPart2WhatisDOMbasedXSS = 15;

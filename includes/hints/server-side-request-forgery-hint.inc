@@ -21,4 +21,5 @@
 <span id="videos" class="report-header">Videos</span>
 <br/><br/>
 <?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisInsecureDirectObjectReferenceIDOR);?>
+<?php echo $YouTubeVideoHandler->getYouTubeVideo($YouTubeVideoHandler->WhatisServerSideRequestForgerySSRF);?>
 <br/><br/>
