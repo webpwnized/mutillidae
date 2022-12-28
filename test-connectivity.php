@@ -63,7 +63,7 @@
     }// end try
 ?>
 
-<div class="page-title"><span style="font-size: 18pt;">Echo</span>, <span style="font-size: 16pt;">Echo</span>, <span style="font-size: 14pt;">Echo</span>...</div>
+<div class="page-title"><span style="font-size: 18pt;">Can you hear me now?</div>
 
 <?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
 <?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
@@ -77,13 +77,13 @@
 	<table>
 		<tr><td></td></tr>
 		<tr>
-			<td colspan="2" class="form-header">Click the Test  Connectivity Button to Test Server Connection</td>
+			<td colspan="2" class="form-header">Click the Test Connectivity Button to Test Webservice Connection</td>
 		</tr>
 		<tr><td></td></tr>
 		<tr>
 			<td colspan="2" style="text-align:center;">
 				<input name="ServerURL" value="<?php echo $lDefaultServerURL; ?>" type="hidden" id="idServerURLInput" />
-				<input name="echo-php-submit-button" class="button" type="submit" value="Echo ServerURL" />
+				<input name="echo-php-submit-button" class="button" type="submit" value="Test Connectivity" />
 			</td>
 		</tr>
 		<tr><td></td></tr>
