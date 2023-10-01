@@ -4802,7 +4802,10 @@ class wsdl extends nusoap_base
     var $password = '';                // Password for HTTP authentication
     var $authtype = '';                // Type of HTTP authentication
     var $certRequest = array();        // Certificate for HTTP SSL authentication
-
+    
+    /* BUG FIX: Deprecated: Creation of dynamic property wsdl::$serviceName is deprecated */
+    var $serviceName = '';
+    
     /**
      * constructor
      *
