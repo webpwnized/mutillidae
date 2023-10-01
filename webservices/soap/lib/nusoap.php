@@ -3748,6 +3748,8 @@ class nusoap_server extends nusoap_base
      */
     var $debug_flag = false;
 
+    /* BUG FIX: Creation of dynamic property soap_server::$opData is deprecated */
+    var $opData = "";
 
     /**
      * constructor
@@ -6759,6 +6761,9 @@ class nusoap_parser extends nusoap_base
     // toggle for auto-decoding element content
     var $decode_utf8 = true;
 
+    /* BUG FIX: Deprecated: Creation of dynamic property nusoap_parser::$parser is deprecated */
+    var $parser = null;
+        
     /**
      * constructor that actually does the parsing
      *
@@ -6775,9 +6780,6 @@ class nusoap_parser extends nusoap_base
         $this->xml_encoding = $encoding;
         $this->method = $method;
         $this->decode_utf8 = $decode_utf8;
-        
-        /* BUG FIX: Deprecated: Creation of dynamic property nusoap_parser::$parser is deprecated */
-        $this->parser = null;
 
         // Check whether content has been read.
         if (!empty($xml)) {
