@@ -6775,6 +6775,9 @@ class nusoap_parser extends nusoap_base
         $this->xml_encoding = $encoding;
         $this->method = $method;
         $this->decode_utf8 = $decode_utf8;
+        
+        /* BUG FIX: Deprecated: Creation of dynamic property nusoap_parser::$parser is deprecated */
+        $this->parser = null;
 
         // Check whether content has been read.
         if (!empty($xml)) {
