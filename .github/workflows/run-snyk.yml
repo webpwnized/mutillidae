@@ -1,7 +1,10 @@
 name: Scan PHP code with Snyk
-on: push
-    - development
-    - main
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
 jobs:
   security:
     runs-on: ubuntu-latest
