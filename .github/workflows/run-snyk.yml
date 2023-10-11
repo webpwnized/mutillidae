@@ -22,12 +22,12 @@ jobs:
           
       - name: Run Snyk Code
         run: |
-          snyk code test --sarif  > results.sarif
+          snyk code test --sarif  > snyk-results.sarif
         continue-on-error: true
 
       - name: Upload results from Snyk to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: snyk.sarif
+          sarif_file: snyk-results.sarif
           
 
