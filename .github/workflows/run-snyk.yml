@@ -1,4 +1,4 @@
-name: Scan PHP code with Snyk
+name: Scan PHP code with Snyk Code
 on:
   push:
     branches:
@@ -9,16 +9,25 @@ jobs:
   security:
     runs-on: ubuntu-latest
     name: run-snyk
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/php@master
-        continue-on-error: true # To make sure that SARIF upload gets called
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --sarif-file-output=snyk.sarif
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Snyk & Authenticate
+        run: |
+          sudo npm install -g snyk
+          snyk auth ${SNYK_TOKEN}
+          
+      - name: Run Snyk Code
+        run: |
+          snyk code test --sarif  > results.sarif
+        continue-on-error: true
+
       - name: Upload results from Snyk to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
+          
+
