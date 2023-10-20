@@ -44,3 +44,8 @@ jobs:
           # GitHub will generate a default category name for you
           category: "Scan-JavaScript-code-with-CodeQL"
 
+      - name: Upload CodeQL SARIF Results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: javascript.sarif
+          # Specify the path to your SARIF file (code analysis results)
