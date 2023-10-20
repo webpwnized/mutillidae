@@ -44,4 +44,9 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk-results.sarif
-        # Action to upload the results of the Snyk scan in SARIF format
+          # Action to upload the results of the Snyk scan in SARIF format
+          category: "Scan-PHP-code-with-CodeQL"
+          # Specify a category to distinguish between multiple analyses
+          # for the same tool and ref. If you don't use `category` in your workflow,
+          # GitHub will generate a default category name for you
+      
