@@ -10,10 +10,9 @@ on:
 # Define the jobs to be executed within the workflow
 jobs:
   build:
-    name: Build
+    name: Scan PHP code with CodeQL
     runs-on: ubuntu-latest # Use the latest version of Ubuntu
-
-    steps: Scan PHP code with CodeQL
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
         # Action to check out the code from the repository
@@ -23,24 +22,24 @@ jobs:
         uses: github/codeql-action/init@v2
         # Action to initialize the CodeQL environment
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
-      with:
-        # Specify a category to distinguish between multiple analyses
-        # for the same tool and ref. If you don't use `category` in your workflow,
-        # GitHub will generate a default category name for you
-        category: "Scan-PHP-code-with-CodeQL"
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          # Specify a category to distinguish between multiple analyses
+          # for the same tool and ref. If you don't use `category` in your workflow,
+          # GitHub will generate a default category name for you
+          category: "Scan-PHP-code-with-CodeQL"
     
-    - name: Add Metadata to SARIF
+      - name: Add Metadata to SARIF
         run: |
-          # Create a JSON object with metadata
-          metadata='{ "name": "CodeQL", "Language": "PHP" }'
+            # Create a JSON object with metadata
+            metadata='{ "name": "CodeQL", "Language": "PHP" }'
 
-          # Merge the metadata with the existing SARIF file
-          jq --argjson metadata "$metadata" '. + { "tool": $metadata }' < codeql-results.sarif > codeql-results-with-metadata.sarif
+            # Merge the metadata with the existing SARIF file
+            jq --argjson metadata "$metadata" '. + { "tool": $metadata }' < codeql-results.sarif > codeql-results-with-metadata.sarif
 
-	    # Replace the original SARIF file with the one containing metadata
-	    mv codeql-results-with-metadata.sarif codeql-results.sarif
+            # Replace the original SARIF file with the one containing metadata
+            mv codeql-results-with-metadata.sarif codeql-results.sarif
     
       - name: Upload CodeQL Analysis
         uses: github/codeql-action/upload-sarif@v2
