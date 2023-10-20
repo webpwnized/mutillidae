@@ -31,12 +31,12 @@ jobs:
           project: 'Mutillidae'
           path: '.'
           format: 'SARIF'
-          out: 'reports' # this is the default, no need to specify unless you wish to override it
+          out: '.' # this is the default, no need to specify unless you wish to override it
           args: >
             --enableRetired
 
       - name: Upload results from Snyk to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: snyk-results.sarif
+          sarif_file: dependency-check-report.sarif
           # Action to upload the results of the Snyk scan in SARIF format
