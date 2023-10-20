@@ -1,18 +1,21 @@
+# Name of the GitHub Actions workflow
 name: Scan with OWASP Dependency Check
 
 # Define when the workflow should be triggered
 on:
-    push:
-      branches:
-        - development # Trigger when code is pushed to the 'development' branch
-        - main # Trigger when code is pushed to the 'main' branch
+  push:
+    branches:
+      - development # Trigger when code is pushed to the 'development' branch
+      - main # Trigger when code is pushed to the 'main' branch
 
+# Define the job(s) to be executed within the workflow
 jobs:
   depchecktest:
     name: Scan with OWASP Dependency Check
-    
+
     runs-on: [ 'ubuntu-latest' ] # Use the latest version of Ubuntu
-    
+
+    # Define permissions for specific actions
     permissions:
       actions: read
       contents: read
@@ -21,6 +24,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        # Step: Checkout code
         # Action to check out the code from the repository
         # This step fetches the codebase from the GitHub repository
 
@@ -28,15 +32,21 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         id: Depcheck
         with:
-          project: 'Mutillidae'
-          path: '.'
-          format: 'SARIF'
-          out: '.' # this is the default, no need to specify unless you wish to override it
+          project: 'Mutillidae' # Project name for Dependency Check
+          path: '.' # Scan all files in the current directory
+          format: 'SARIF' # Output format for scan results
+          out: '.' # Output directory (default is the current directory)
           args: >
-            --enableRetired
+            --enableRetired # Additional scan arguments for Dependency Check
+        continue-on-error: true
+        # Step: Scan with OWASP Dependency Check
+        # Action to run OWASP Dependency Check to scan dependencies
+        # It identifies vulnerabilities in project dependencies
 
-      - name: Upload results from Snyk to GitHub Code Scanning
+      - name: Upload results from OWASP Dependency Check to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: dependency-check-report.sarif
-          # Action to upload the results of the Snyk scan in SARIF format
+        # Step: Upload results to GitHub Code Scanning
+        # Action to upload the results of the OWASP Dependency Check scan in SARIF format
+        # This allows viewing and analyzing the scan results in the GitHub repository
