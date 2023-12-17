@@ -1,8 +1,10 @@
-<?php
+	<?php
 
 /* Determine the root of the entire project.
- * Recall this file is in the "includes" folder so its "2 levels deep". */
-if (!defined('__SITE_ROOT__')){if (!defined('__SITE_ROOT__')){define('__SITE_ROOT__', dirname(dirname(__FILE__)));}}
+ * This file is in the "classes" folder so its "2 levels deep". */
+if (!defined('__SITE_ROOT__')){
+	define('__SITE_ROOT__', dirname(dirname(__FILE__)));
+}
 
 class CSRFTokenHandler{
 
@@ -61,7 +63,7 @@ class CSRFTokenHandler{
 		$this->mEncoder = new EncodingHandler();
 		$this->mPageBeingProtected = $pPageBeingProtected;
 
-		if (isset($_SESSION['register-user']['csrf-token'])){
+		if (isset($_SESSION[$this->mPageBeingProtected]['csrf-token'])){
 			$this->mExpectedCSRFTokenForThisRequest = $_SESSION[$this->mPageBeingProtected]['csrf-token'];
 		}//end if
 
