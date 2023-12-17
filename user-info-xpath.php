@@ -76,7 +76,7 @@
 
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
 		try{
-			var lUnsafeCharacters = /[`~!@#$%^&*()-_=+\[\]{}\\|;':",./<>?]/;
+			var lUnsafeCharacters = /[\W]/g;
 
 			if(lValidateInput == "TRUE"){
 				if (theForm.username.value.length > 15){

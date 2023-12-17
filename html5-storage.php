@@ -96,7 +96,7 @@
 			var lKey = theForm.DOMStorageKey.value;
 			var lItem = theForm.DOMStorageItem.value;
 			var lType = "";
-			var lUnacceptableKeyPattern = "[^A-Za-z0-9]";
+			var lUnacceptableKeyPattern = "[\W]";
 
 			if (gUseJavaScriptValidation == "TRUE" && lKey.match(lUnacceptableKeyPattern)){
 				setMessage("Unable to add key " + lKey.toString() + " because it contains non-alphanumeric characters");

@@ -62,14 +62,14 @@
 			
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
 		try{
-			var lUnsafeCharacters = /[`~!@#$%^&*()-_=+\[\]{}\\|;':",./<>?]/;
+			var lUnsafeCharacters = /[\W]/g;
 
 			if(lValidateInput == "TRUE"){
 				if (theForm.username.value.length > 15){
 						alert('Username too long. We dont want to allow too many characters.\n\nSomeone might have enough room to enter a hack attempt.');
 						return false;
 				}// end if
-				
+		
 				if (theForm.username.value.search(lUnsafeCharacters) > -1){
 						alert('Dangerous characters detected. We can\'t allow these. This all powerful blacklist will stop such attempts.\n\nMuch like padlocks, filtering cannot be defeated.\n\nBlacklisting is l33t like l33tspeak.');
 						return false;
