@@ -180,7 +180,7 @@
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
 		try{
 			if(lValidateInput == "TRUE"){
-				var lUnsafeCharacters = /[`~!@#$%^&*()-_=+\[\]{}\\|;':",./<>?]/;
+				var lUnsafeCharacters = /[\W]/;
 				if (theForm.username.value.length > 15){
 						alert('Username too long. We dont want to allow too many characters.\n\nSomeone might have enough room to enter a hack attempt.');
 						return false;
