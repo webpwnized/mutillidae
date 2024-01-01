@@ -13,8 +13,17 @@ on:
 # Define the job(s) to be executed within the workflow
 jobs:
   security:
+
     runs-on: ubuntu-latest
+    
+    # Define permissions for specific actions
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      
     name: Run Snyk
+    
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       # Define an environment variable 'SNYK_TOKEN' to securely store your Snyk token
@@ -45,7 +54,7 @@ jobs:
         with:
           sarif_file: snyk-results.sarif
           # Action to upload the results of the Snyk scan in SARIF format
-          category: "Scan-PHP-code-with-CodeQL"
+          category: "Scan-PHP-code-with-Snyk"
           # Specify a category to distinguish between multiple analyses
           # for the same tool and ref. If you don't use `category` in your workflow,
           # GitHub will generate a default category name for you
