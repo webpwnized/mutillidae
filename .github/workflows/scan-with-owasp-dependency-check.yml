@@ -44,7 +44,7 @@ jobs:
         # It identifies vulnerabilities in project dependencies
 
       - name: Upload results from OWASP Dependency Check to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@main
         with:
           sarif_file: dependency-check-report.sarif
           # Step: Upload results to GitHub Code Scanning

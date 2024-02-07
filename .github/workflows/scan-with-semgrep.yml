@@ -57,7 +57,7 @@ jobs:
         # Continue the workflow even if there are errors during the scan.
 
       - name: Upload XSS SARIF file for GitHub Advanced Security Dashboard
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@main
         with:
           sarif_file: semgrep-xss-results.sarif
           category: "Semgrep XSS Scan"
@@ -65,7 +65,7 @@ jobs:
         # Upload the SARIF file with scan results to the GitHub Advanced Security Dashboard.
 
       - name: Upload CI SARIF file for GitHub Advanced Security Dashboard
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@main
         with:
           sarif_file: semgrep-ci-results.sarif
           category: "Semgrep High-Confidence SAST Scan"

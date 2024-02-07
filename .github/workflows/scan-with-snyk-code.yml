@@ -50,7 +50,7 @@ jobs:
         # Continue to the next step even if Snyk encounters errors
 
       - name: Upload results from Snyk to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@main
         with:
           sarif_file: snyk-results.sarif
           # Action to upload the results of the Snyk scan in SARIF format
