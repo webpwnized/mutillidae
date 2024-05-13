@@ -1,0 +1,14 @@
+# This .htaccess file helps prevent access to Mutillidae II from external IP addresses in case someone deploys the project accidentially. If this file is deleted, there is no network access control
+
+ErrorDocument 403 "By default, Mutillidae II only allows access from non-routable network addresses. Edit the .htaccess file to change this behavior. Delete the .htaccess file if network access is controlled using a different method."
+Order Deny,Allow
+Deny from all
+
+## Allow access from localhost
+Allow from 127.0.0.0/8
+Allow from localhost
+
+## Allow access from other machines on non-routable networks
+Allow from 10.0.0.0/8
+Allow from 172.16.0.0/12
+Allow from 192.168.0.0/16
