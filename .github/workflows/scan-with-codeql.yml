@@ -32,15 +32,16 @@ jobs:
         # This step fetches the codebase from the GitHub repository
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript
         # Action to initialize the CodeQL environment
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
           # Specify a category to distinguish between multiple analyses
           # for the same tool and ref. If you don't use `category` in your workflow,
           # GitHub will generate a default category name for you
           category: "Scan-JavaScript-code-with-CodeQL"
+          
