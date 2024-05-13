@@ -1,39 +1,64 @@
-# <span style="color:darkblue">*OWASP Mutillidae II*</span>
+# OWASP Mutillidae II
 
-OWASP Mutillidae II is a free, open-source, deliberately vulnerable web application providing a target for web-security enthusiasts. Mutillidae can be installed on Linux and Windows using LAMP, WAMP, and XAMMP. It is pre-installed on SamuraiWTF and OWASP BWA. The existing version can be updated on these platforms. With dozens of vulnerabilities and hints to help the user; this is an easy-to-use web hacking environment designed for labs, security enthusiast, classrooms, CTF, and vulnerability assessment tool targets. Mutillidae has been used in graduate security courses, corporate web sec training courses, and as an "assess the assessor" target for vulnerability assessment software.
+OWASP Mutillidae II is a free, open-source, deliberately vulnerable web application designed for web-security enthusiasts. It serves as a target for learning and practicing web security skills. Mutillidae can be easily installed on Linux and Windows systems using LAMP, WAMP, and XAMMP stacks. Additionally, it comes pre-installed on SamuraiWTF and OWASP BWA, and the existing version can be updated on these platforms. With dozens of vulnerabilities and hints to guide the user, Mutillidae provides an accessible web hacking environment suitable for labs, security enthusiasts, classrooms, CTFs, and vulnerability assessment tool targets. It has been widely used in graduate security courses, corporate web security training, and as an assessment target for vulnerability assessment software. OWASP Mutillidae II provides a comprehensive platform for learning and practicing web security techniques in a controlled environment.
 
 ## Project Announcements
 
-* Twitter: [https://twitter.com/webpwnized](https://twitter.com/webpwnized)
+Stay updated with project announcements on Twitter: [webpwnized](https://twitter.com/webpwnized)
 
 ## Tutorials
 
-* YouTube: [https://www.youtube.com/user/webpwnized](https://www.youtube.com/user/webpwnized)
+Explore our tutorials on YouTube: [webpwnized YouTube channel](https://www.youtube.com/user/webpwnized)
 
-## Installation on LAMP Stack
+## Installation Guides
 
-Video tutorials are available [for each step](README-INSTALLATION.md). If you have a LAMP stack set up
-aleady, [you might skip directly to installing Mutillidae](https://www.youtube.com/watch?v=TcgeRab7ayM). For detailed instructions, see [the comprehensive guide](https://www.youtube.com/playlist?list=PLZOToVAK85MqxEyrjINe-LwDMhxJJKzmm)
+### Location of source code
 
-## Installation on Docker
+Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
 
-The following video tutorials explain how to bring up Mutillidae on a set of 5 containers running Apache/PHP, MySQL, OpenLDAP, PHPMyAdmin, and PHPLDAPAdmin
-* **YouTube**: [How to Install Docker on Ubuntu](https://www.youtube.com/watch?v=Y_2JVREtDFk)
-* **YouTube**: [How to Run Mutillidae on Docker](https://www.youtube.com/watch?v=9RH4l8ff-yg)
-* **YouTube**: [How to Run Mutillidae from DockerHub Images](https://www.youtube.com/watch?v=c1nOSp3nagw)
-* **YouTube**: [How to Run Mutillidae on Google Kubernetes Engine (GKE)](https://www.youtube.com/watch?v=uU1eEjrp93c)
+### LAMP Stack
+
+Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.** If you have a LAMP stack set up already, you can skip directly to installing Mutillidae. Check out our [comprehensive installation guide](README-INSTALLATION.md) for detailed instructions. Watch the video tutorial: [How to Install Mutillidae on LAMP Stack](https://www.youtube.com/watch?v=TcgeRab7ayM)
+
+### Docker
+
+Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
+
+Learn how to set up Mutillidae using Docker with our video tutorials:
+
+- [How to Install Docker on Ubuntu](https://www.youtube.com/watch?v=Y_2JVREtDFk)
+- [How to Run Mutillidae on Docker](https://www.youtube.com/watch?v=9RH4l8ff-yg)
+- [How to Run Mutillidae from DockerHub Images](https://www.youtube.com/watch?v=c1nOSp3nagw)
+- [How to Run Mutillidae on Google Kubernetes Engine (GKE)](https://www.youtube.com/watch?v=uU1eEjrp93c)
 
 ## Usage
 
-A [large number of video tutorials](https://www.youtube.com/playlist?list=PLZOToVAK85MrsyNmNp0yyUTBXqKRTh623) are available on the [webpwnized YouTube channel](https://www.youtube.com/user/webpwnized)
+Explore a large number of video tutorials available on the [webpwnized YouTube channel](https://www.youtube.com/playlist?list=PLZOToVAK85MrsyNmNp0yyUTBXqKRTh623) for guidance on using Mutillidae.
 
-## Features
+## Key Features
 
-* Has over 40 vulnerabilities and challenges. Contains at least one vulnerability for each of the OWASP Top Ten 2007, 2010, 2013 and 2017
-* Actually Vulnerable (User not asked to enter “magic” statement)
-* Mutillidae can be installed on Linux or Windows *AMP stacks making it easy for users who do not want to install or administrate their own webserver. Mutillidae is confirmed to work on XAMPP, WAMP, and LAMP.
-* Preinstalled on Rapid7 Metasploitable 2, Samurai Web Testing Framework (WTF), and OWASP Broken Web Apps (BWA)
-* System can be restored to default with single-click of "Setup" button
-* User can switch between secure and insecure modes
-* Used in graduate security courses, in corporate web sec training courses, and as an "assess the assessor" target for vulnerability software
-* Updated frequently
+- Contains over 40 vulnerabilities and challenges, covering each of the OWASP Top Ten from 2007 to 2017
+- Mutillidae is actually vulnerable, eliminating the need for users to enter a "magic" statement
+- Easy installation on Linux or Windows *AMP stacks, including XAMPP, WAMP, and LAMP
+- Preinstalled on Rapid7 Metasploitable 2, Samurai Web Testing Framework (WTF), and OWASP Broken Web Apps (BWA)
+- One-click system restoration to default settings with the "Setup" button
+- Users can switch between secure and insecure modes
+- Widely used in graduate security courses, corporate web security training, and as an assessment target for vulnerability assessment software
+- Regularly updated to maintain relevance and effectiveness
+
+### Directory Descriptions
+
+configurations.
+- `src`: Main source directory.
+    - `ajax`: Contains files related to AJAX functionality.
+    - `classes`: Contains PHP class files.
+    - `configuration`: Configuration files for Apache, hosts, HTTPS certificates, and OpenLDAP.
+    - `documentation`: Documentation files.
+    - `images`: Image files, including those used for gritter.
+    - `includes`: Contains files with reusable code snippets or 
+    - `javascript`: JavaScript files, including libraries and scripts.
+    - `labs`: Lab files for security testing, including various challenges and vulnerabilities.
+    - `passwords`: Password-related files.
+    - `styles`: CSS stylesheets.
+    - `webservices`: Web services files, including REST and SOAP services.
+        - `soap/lib`: Library files for SOAP services.
