@@ -144,7 +144,7 @@ if ($lFormSubmitted){
 	try{
 		require_once(__SITE_ROOT__ . '/includes/ldap-config.inc');
 
-		$ldapconn=ldap_connect(LDAP_HOST, LDAP_PORT);
+		$ldapconn = ldap_connect("ldap://" . LDAP_HOST . ":" . LDAP_PORT);
 		ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
 		ldap_bind($ldapconn, LDAP_BIND_DN, LDAP_BIND_PASSWORD);
 
