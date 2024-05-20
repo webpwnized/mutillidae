@@ -3,7 +3,7 @@
 I will describe almost full installation, starting with installing VirtualBox and creating and configuring VM, ending with accessing the working website.<br>
 I will use Ubuntu 24.04.3 LTS as OS, Apache2 as web-server, php 8.2 and MariaDB as database server.<br>
 My host OS is EndeavourOS. In case you use Windows, the only difference is in installing the VirtualBox. You can find Windows instructions on web and/or use any other hypervisor.<br>
-Be sure, that virtualization is enabled in your BIOS settings! On AMD CPUs it is named as **AMD-V** and on Intel CPUs it is named as **Intel VT** (Intel Virtualization Technology). In case you don't want or can't enable virtualization on your host, you could **proceed with your host OS**, but this way **should be avoidable in any ways!**
+Be sure, that virtualization is enabled in your BIOS settings! On AMD CPUs it is named as **AMD-V** and on Intel CPUs it is named as **Intel VT** (Intel Virtualization Technology). In case you don't want or can't enable virtualization on your host, you could **proceed with your host OS**, but this way **should be avoided in any ways!**
 
 ## Installing the VirtualBox
 
@@ -13,7 +13,7 @@ Not sure about other distros, so you can visit [official VirtualBox site](https:
 ## Creating the VM
 
 - Go to [Old Ubuntu Releases](https://old-releases.ubuntu.com/releases/) page and press **Ubuntu 22.04.3 LTS (Jammy Jellyfish)**;
-- Find and click **ubuntu-22.04.3-live-server-amd64.iso** to download installation iso file. It should be at the bottom of the page. Or you can just press [this link.](https://old-releases.ubuntu.com/releases/jammy/ubuntu-22.04.3-live-server-amd64.iso);
+- Find and click **ubuntu-22.04.3-live-server-amd64.iso** to download the installation iso file. It should be at the bottom of the page. Or you can just press [this link.](https://old-releases.ubuntu.com/releases/jammy/ubuntu-22.04.3-live-server-amd64.iso);
 - Start VirtualBox. We would need only two buttons: **New (1)** and **Settings (2)**;
 
 ![main_virtualbox_window](.github/installation_screenshots/virtualbox_main.png)
@@ -29,5 +29,12 @@ Not sure about other distros, so you can visit [official VirtualBox site](https:
 
 ![cpu_and_ram_configuration](.github/installation_screenshots/virtualbox_new_2.png)
 
-- Configure RAM and CPUs availbale for VM. For our puproses it would be enough to set 1024MB RAM and 1 CPU.
+- Configure RAM and CPUs availbale for VM. For our puproses it would be enough to set 1024MB RAM and 1 CPU. Press **Next**.
 
+![disk_configuration](.github/installation_screenshots/virtualbox_new_3.png)
+
+- Specify the VM's disk size. 10GB would be enough in our case. By default, the disk size would be minimal and would be expanding as needed. To allocate full size from the beginning check the corresponding checkbox. Then press **Next**.
+
+![summary_configuration](.github/installation_screenshots/virtualbox_new_4.png)
+
+- Here you could check all the configuration parameters. If everything is fine, then press **Finish** button and wait a bit, while VM is creating. It would be enough fast.
