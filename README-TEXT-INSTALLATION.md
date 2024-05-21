@@ -57,11 +57,19 @@ We need to install database server (MariaDB), PHP and web-server (Apache).
 - Run `sudo apt install -y mariadb-server` and wait until installation is completed;
 - Enter the database server, entering `sudo mysql`;
 	- Set the password for root user, using `ALTER USER 'root'@'localhost' IDENTIFIED BY 'my_password';`;
-	- 
+	- Create database, entering `CREATE DATABASE mutillidae;`;
+	- Exit from database management with `quit`;
 
 ### Apache installation
 
+- Install Apache web-server with `sudo apt install -y apache2` command;
+
 ### PHP installation
+
+- Enable PHP PPA repository with `sudo add-apt-repository ppa:ondrej/php`;
+- By default, php8.3 is installed in Ubuntu 22.04.3. Check installation with `php -v` command;
+	- If it's installed, then install required packages with `sudo apt install libapache2-mod-php php8.3-{cli,fpm,xml,curl,mbstring,intl}`;
+	- If it isn't installed, then install PHP and required modules with `sudo apt update && sudo apt install -y php8.2 libapache2-mod-php php8.2-{cli,fpm,xml,curl,mbstring,intl}`
 
 ### Mutillidae installation
 
