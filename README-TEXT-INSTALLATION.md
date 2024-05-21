@@ -2,21 +2,21 @@
 
 I will describe almost full installation, starting with installing VirtualBox and creating and configuring VM, ending with accessing the working website.<br>
 <br>
-I will use Ubuntu 24.04.3 LTS as OS, Apache2 as web-server, php 8.2 and MariaDB as database server.<br>
+I will use Ubuntu 24.04.3 LTS as the OS, Apache2 as web-server, PHP 8.2 and MariaDB as database server.<br>
 <br>
-This instruction doesn't pretend to be full and/or fully accurate. I just didn't find really working text description of installation and decided to make my own.
+This instruction doesn't pretend to be full and/or fully accurate. I just didn't find really working text description of the installation and decided to make my own.
 <br>
-My host OS is EndeavourOS. In case you use Windows, the only difference is in installing the VirtualBox. You can find Windows instructions on web and/or use any other hypervisor.<br>
-:warning: Be sure, that virtualization is enabled in your BIOS settings! On AMD CPUs it is named as **AMD-V** and on Intel CPUs it is named as **Intel VT** (Intel Virtualization Technology). In case you don't want or can't enable virtualization on your host, you could **proceed with your host OS**, but this way **should be avoided in any ways!!!. I'm not responsible for your device and OS.**
+My host OS is EndeavourOS. If you use Windows, the only difference is in installing VirtualBox. You can find Windows instructions on web and/or use any other hypervisor.<br>
+:warning: Be sure that virtualization is enabled in your BIOS settings! On AMD CPUs it is named **AMD-V** and on Intel CPUs it is named **Intel VT** (Intel Virtualization Technology). In case you don't want or can't enable virtualization on your host, you could **proceed with your host OS**, but this way **should be avoided in any way!!!. I'm not responsible for your device or OS.**
 
 ## Installing the VirtualBox
 
-In case you use Arch linux too, the VirtualBox should be available via package manager. Just use `sudo pacman -S virtualbox virtualbox-guest-iso`.<br>
-Not sure about other distros, so you can visit [official VirtualBox site](https://www.virtualbox.org/wiki/Linux_Downloads) and download required package. Then install it with `sudo dpkg -i downloaded_file.deb`, `sudo dnf install downloaded_file.rpm` or with another package manager from your system.
+In case you use Arch Linux too, the VirtualBox should be available via package manager. Just use `sudo pacman -S virtualbox virtualbox-guest-iso`.<br>
+I'm not sure about other distros, so you can visit [the official VirtualBox site](https://www.virtualbox.org/wiki/Linux_Downloads) and download the required package. Then install it with `sudo dpkg -i downloaded_file.deb`, `sudo dnf install downloaded_file.rpm` or with another package manager from your system.
 
 ## Creating the VM
 
-- Go to [Old Ubuntu Releases](https://old-releases.ubuntu.com/releases/) page and press **Ubuntu 22.04.3 LTS (Jammy Jellyfish)**;
+- Go to the [Old Ubuntu Releases](https://old-releases.ubuntu.com/releases/) page and press **Ubuntu 22.04.3 LTS (Jammy Jellyfish)**;
 - Find and click **ubuntu-22.04.3-live-server-amd64.iso** to download the installation iso file. It should be at the bottom of the page. Or you can just press [this link.](https://old-releases.ubuntu.com/releases/jammy/ubuntu-22.04.3-live-server-amd64.iso);
 - Start VirtualBox. We would need only two buttons: **New (1)** and **Settings (2)**;
 
@@ -26,8 +26,8 @@ Not sure about other distros, so you can visit [official VirtualBox site](https:
 
 ![first_configuration_window](.github/installation_screenshots/virtualbox_new_1.png)
 
-1. Enter any conveninent name for new VM. It's up to you;
-2. Choose the folder, where the subfolder with all required files for this VM would be created. Assume, that this path is "/home/user/VMs" and VM's name is "Test VM", all VM's files would be placed in "/home/user/VMs/Test VM" folder;
+1. Enter any suitable name for the new VM. It's up to you;
+2. Choose the folder where the subfolder with all required files for this VM will be created. Assume, that this path is "/home/user/VMs" and VM's name is "Test VM", all VM's files would be placed in "/home/user/VMs/Test VM" folder;
 3. Choose downloaded previously iso installation image;
 4. Check this box to disable automatic OS installation to configure it manually. Then press **Next** button.
 
@@ -37,25 +37,25 @@ Not sure about other distros, so you can visit [official VirtualBox site](https:
 
 ![disk_configuration](.github/installation_screenshots/virtualbox_new_3.png)
 
-- Specify the VM's disk size. 10GB would be enough in our case. By default, the disk image's size would be minimal and would be expanding as needed. To allocate full size from the beginning check the corresponding checkbox. Then press **Next**.
+- Specify the VM's disk size. 10GB would be enough in our case. By default, the disk image's size would be minimal and would be expanding as needed. To allocate full size from the beginning, check the corresponding checkbox. Then press **Next**.
 
 ![summary_configuration](.github/installation_screenshots/virtualbox_new_4.png)
 
-- Here you could check all the configuration parameters. If everything is fine, then press **Finish** button and wait a bit, while VM is creating. It would be enough fast;
+- Here you could check all the configuration parameters. If everything is fine, then press the **Finish** button and wait a bit, while VM is creating. It would be enough fast;
 - Then press the **Settings** button from the first screenshot. The VM's configuration window would appear.
 
 ![vm_network_configuration](.github/installation_screenshots/network_settings.png)
 
-- Open **Network** section and change **Attached to** to **Bridged adapter**. In that mode your VM would got own IP address in your subnet, so any other hosts in subnet could access it. It's the simpliest way. You can check [VirtualBox documentation](https://www.virtualbox.org/manual/ch06.html) to know more about network modes in VirtualBox;
-- After changing network settings, press **Ok** button;
-- Launch the VM via **Start** button and wait until the initial OS configuration window would appear.
+- Open **Network** section and change **Attached to** to **Bridged adapter**. In that mode your VM would got own IP address in your subnet, so any other hosts in subnet could access it. It's the simplest way. You can check the [VirtualBox documentation](https://www.virtualbox.org/manual/ch06.html) to learn more about network modes in VirtualBox;
+- After changing network settings, press the **Ok** button;
+- Launch the VM via the **Start** button and wait until the initial OS configuration window appears.
 
-I wouldn't describe the OS installation, because it's enough simple and there are plenty of instructions on the web. Nothing special should be configured during installation, but I recommend to enable **ssh server** checkbox;
+I wouldn't describe the OS installation, because it's enough simple and there are plenty of instructions on the web. Nothing special should be configured during installation, but I recommend enabling **ssh server** checkbox;
 
 ## Services installation
 
 :warning: **Take attention, that all following configurations are absolutely insecure and shouldn't be used in any production environment!**
-We need to install database server (MariaDB), PHP and web-server (Apache).
+We need to install a database server (MariaDB), PHP and web-server (Apache).
 
 ### MariaDB installation
 
@@ -85,7 +85,7 @@ We need to install database server (MariaDB), PHP and web-server (Apache).
 Now we need to configure Apache web-server to serve this directory with service in it. Follow next steps:
 
 - Run `cd /etc/apache2` to cd into web-server config directory;
-- Run `sudo a2dissite 000-default && sudo a2enmod rewrite` to disable default welcome page and enable rewrite mode;
+- Run `sudo a2dissite 000-default && sudo a2enmod rewrite` to disable default the welcome page and enable rewrite mode;
 - Run `sudo vi ./sites-available/mutillidae.conf` and paste here the following config:
 
 ```apacheconf
