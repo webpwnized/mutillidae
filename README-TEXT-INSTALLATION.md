@@ -1,9 +1,13 @@
 # Installation
 
 I will describe almost full installation, starting with installing VirtualBox and creating and configuring VM, ending with accessing the working website.<br>
+<br>
 I will use Ubuntu 24.04.3 LTS as OS, Apache2 as web-server, php 8.2 and MariaDB as database server.<br>
+<br>
+This instruction doesn't pretend to be full and/or fully accurate. I just didn't find really working text description of installation and decided to make my own.
+<br>
 My host OS is EndeavourOS. In case you use Windows, the only difference is in installing the VirtualBox. You can find Windows instructions on web and/or use any other hypervisor.<br>
-Be sure, that virtualization is enabled in your BIOS settings! On AMD CPUs it is named as **AMD-V** and on Intel CPUs it is named as **Intel VT** (Intel Virtualization Technology). In case you don't want or can't enable virtualization on your host, you could **proceed with your host OS**, but this way **should be avoided in any ways!**
+:warning: Be sure, that virtualization is enabled in your BIOS settings! On AMD CPUs it is named as **AMD-V** and on Intel CPUs it is named as **Intel VT** (Intel Virtualization Technology). In case you don't want or can't enable virtualization on your host, you could **proceed with your host OS**, but this way **should be avoided in any ways!!!. I'm not responsible for your device and OS.**
 
 ## Installing the VirtualBox
 
@@ -50,6 +54,7 @@ I wouldn't describe the OS installation, because it's enough simple and there ar
 
 ## Services installation
 
+:warning: **Take attention, that all following configurations are absolutely insecure and shouldn't be used in any production environment!**
 We need to install database server (MariaDB), PHP and web-server (Apache).
 
 ### MariaDB installation
@@ -74,7 +79,8 @@ We need to install database server (MariaDB), PHP and web-server (Apache).
 ### Mutillidae installation
 
 - Now `cd /var/www` or into any other folder, which web-server could access and clone the mutillidae repo from github with `sudo git clone https://github.com/webpwnized/mutillidae.git`;
-- Edit `sudo vi /var/www/mutillidae/src/include/database-config.inc` and change only **DB_PASSWORD** to those, which you set for root user in MariaDB. The save and exit with **Shift+:** and **wq**;
+- Give permissions to web-server for this folder with `sudo chown -R www-data: /var/www/mutillidae && sudo chmod -R 775 /var/www/mutillidae`;
+- Edit `sudo vi /var/www/mutillidae/src/include/database-config.inc` and change only **DB_PASSWORD** to those, which you set for root user in MariaDB. Then save and exit with **Shift+:** and **wq**;
 
 Now we need to configure Apache web-server to serve this directory with service in it. Follow next steps:
 
