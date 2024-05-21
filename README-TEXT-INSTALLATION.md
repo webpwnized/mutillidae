@@ -42,10 +42,13 @@ Not sure about other distros, so you can visit [official VirtualBox site](https:
 
 ![vm_network_configuration](.github/installation_screenshots/network_settings.png)
 
-- Open **Network** section and change **Attached to** to **Bridged adapter**. In that mode your VM would got own IP addresses in your subnet, so any other hosts in subnet could access it. It's the most simpliest way. You can check [VirtualBox documentation](https://www.virtualbox.org/manual/ch06.html) to know more about network modes in VirtualBox;
+- Open **Network** section and change **Attached to** to **Bridged adapter**. In that mode your VM would got own IP address in your subnet, so any other hosts in subnet could access it. It's the simpliest way. You can check [VirtualBox documentation](https://www.virtualbox.org/manual/ch06.html) to know more about network modes in VirtualBox;
 - After changing network settings, press **Ok** button;
 - Launch the VM via **Start** button and wait until the initial OS configuration window would appear.
 
-## Installing OS
+I wouldn't describe the OS installation, because it's enough simple and there are plenty of instructions on the web. Nothing special should be configured during installation, but I recommend to enable **ssh server** checkbox;
+
+## Mutillidae installation
+
 
 
