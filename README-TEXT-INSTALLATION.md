@@ -33,7 +33,7 @@ Not sure about other distros, so you can visit [official VirtualBox site](https:
 
 ![disk_configuration](.github/installation_screenshots/virtualbox_new_3.png)
 
-- Specify the VM's disk size. 10GB would be enough in our case. By default, the disk size would be minimal and would be expanding as needed. To allocate full size from the beginning check the corresponding checkbox. Then press **Next**.
+- Specify the VM's disk size. 10GB would be enough in our case. By default, the disk image's size would be minimal and would be expanding as needed. To allocate full size from the beginning check the corresponding checkbox. Then press **Next**.
 
 ![summary_configuration](.github/installation_screenshots/virtualbox_new_4.png)
 
@@ -48,7 +48,20 @@ Not sure about other distros, so you can visit [official VirtualBox site](https:
 
 I wouldn't describe the OS installation, because it's enough simple and there are plenty of instructions on the web. Nothing special should be configured during installation, but I recommend to enable **ssh server** checkbox;
 
-## Mutillidae installation
+## Services installation
 
+We need to install database server (MariaDB), PHP and web-server (Apache).
 
+### MariaDB installation
+
+- Run `sudo apt install -y mariadb-server` and wait until installation is completed;
+- Enter the database server, entering `sudo mysql`;
+	- Set the password for root user, using `ALTER USER 'root'@'localhost' IDENTIFIED BY 'my_password';`;
+	- 
+
+### Apache installation
+
+### PHP installation
+
+### Mutillidae installation
 
