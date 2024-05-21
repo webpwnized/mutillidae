@@ -68,8 +68,45 @@ We need to install database server (MariaDB), PHP and web-server (Apache).
 
 - Enable PHP PPA repository with `sudo add-apt-repository ppa:ondrej/php`;
 - By default, php8.3 is installed in Ubuntu 22.04.3. Check installation with `php -v` command;
-	- If it's installed, then install required packages with `sudo apt install libapache2-mod-php php8.3-{cli,fpm,xml,curl,mbstring,intl}`;
-	- If it isn't installed, then install PHP and required modules with `sudo apt update && sudo apt install -y php8.2 libapache2-mod-php php8.2-{cli,fpm,xml,curl,mbstring,intl}`
+	- If it's installed, then install required packages with `sudo apt install libapache2-mod-php php8.3-{cli,fpm,xml,curl,mbstring,intl,mysql}`;
+	- If it isn't installed, then install PHP and required modules with `sudo apt update && sudo apt install -y php8.2 libapache2-mod-php php8.2-{cli,fpm,xml,curl,mbstring,intl,mysql}`
 
 ### Mutillidae installation
 
+- Now `cd /var/www` or into any other folder, which web-server could access and clone the mutillidae repo from github with `sudo git clone https://github.com/webpwnized/mutillidae.git`;
+- Edit `sudo vi /var/www/mutillidae/src/include/database-config.inc` and change only **DB_PASSWORD** to those, which you set for root user in MariaDB. The save and exit with **Shift+:** and **wq**;
+
+Now we need to configure Apache web-server to serve this directory with service in it. Follow next steps:
+
+- Run `cd /etc/apache2` to cd into web-server config directory;
+- Run `sudo a2dissite 000-default && sudo a2enmod rewrite` to disable default welcome page and enable rewrite mode;
+- Run `sudo vi ./sites-available/mutillidae.conf` and paste here the following config:
+
+```apacheconf
+<VirtualHost *:80>
+	ServerName mutillidae.localhost
+	ServerAlias www.mutillidae.localhost mutillidae
+	DocumentRoot /var/www/mutillidae/src
+	Include conf/headers.conf
+	Include conf/error-pages.conf
+
+	<IfModule dir_module>
+    		DirectoryIndex index.php
+	</IfModule>
+
+	<Directory /var/www/mutillidae/src>
+		AllowOverride All
+		Options +Indexes +FollowSymLinks +MultiViews
+		Require all granted
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/mutillidae-error.log
+	CustomLog ${APACHE_LOG_DIR}/mutillidae-access.log combined
+</VirtualHost>
+```
+
+- Then run `sudo cp -r /var/www/mutillidae/src/configuration/apache-configuration/conf /etc/apache2`;
+- Run `sudo bash -c 'cat /var/www/mutillidae/src/configuration/hosts-file/hosts > /etc/hosts'`
+- Run `sudo systemctl restart apache2 php8.3-fpm`.
+
+Now you can try to access this server from yout browser, just entering it's IP, which could be found with `ip -brief a`, for example.
