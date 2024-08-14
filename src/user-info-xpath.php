@@ -55,7 +55,7 @@
     	/* ------------------------------------------
     	 * initialize XML handler
     	* ------------------------------------------ */
-		$lXMLAccountFilePath = __SITE_ROOT__.'/configuration/accounts.xml';
+		$lXMLAccountFilePath = __SITE_ROOT__.'/data/accounts.xml';
     	$XMLHandler = new XMLHandler($_SESSION["security-level"]);
     	$XMLHandler->SetDataSource($lXMLAccountFilePath);
 
