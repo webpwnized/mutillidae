@@ -11,19 +11,3 @@ Note carefully that the source code ishas moved to the ***src*** project directo
 * [How to Install VirtualBox Guest Additions](https://www.youtube.com/watch?v=8VCeFRwRmRU)
 * [How to Install Apache Web Server](https://www.youtube.com/watch?v=cZtkVOHRYts)
 * [How to Install PHP](https://www.youtube.com/watch?v=Z6IhGGxJidM)
-* [How to Install MySQL Server](https://www.youtube.com/watch?v=PsfuaRySts4)
-* [How to Reset Root Password in MySQL](https://www.youtube.com/watch?v=yHCUd_5A8vo)
-* [How to Install Mutillidae on Linux](https://www.youtube.com/watch?v=TcgeRab7ayM)
-
-## Additional Features
-
-Additional features such as HTTPS certificates and virtual hosts can be enabled
-
-* [How to Create Self-Signed Certificate in Apache](https://www.youtube.com/watch?v=sJd0ir9-jSc)
-* [How to Create Virtual Hosts in Apache](https://www.youtube.com/watch?v=79mOiU3GfnQ)
-
-## Detailed Instructions
-
-Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
-
-For detailed instructions, see [the comprehensive guide](https://www.youtube.com/playlist?list=PLZOToVAK85MqxEyrjINe-LwDMhxJJKzmm)
