@@ -23,6 +23,7 @@
 				Running SQLMAP &quot;Manually&quot;
 			</span>
 			<br/><br/>
+			sqlmap.py --url=&quot;http://192.168.56.102/mutillidae/index.php?page=login.php&quot; --data=&quot;username=asdf&amp;password=asdf&amp;login-php-submit
 			sqlmap.py --url=&quot;http://192.168.56.102/mutillidae/index.php?page=login.php&quot; --data=&quot;username=asdf&amp;password=asdf&amp;login-php-submit-button=Login&quot; --banner
 			<br/><br/>
 			<span class="report-header">Capturing Request To Pass To SQLMAP</span>
