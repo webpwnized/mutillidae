@@ -1,42 +1,43 @@
-name: SonarQube Analysis
-
 on:
+  # Trigger analysis when pushing to your main branches, and when creating a pull request.
   push:
     branches:
       - main
+      - master
+      - development
+      - 'releases/**'
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize, reopened]
+
+name: Mutillidae II SonarQube Workflow
 
 jobs:
   sonarqube:
-    name: SonarQube Scan
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        # Disabling shallow clones is recommended for improving the relevancy of reporting
+        fetch-depth: 0
 
-      - name: Set up JDK 11 (Required for SonarQube)
-        uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          java-package: 'jdk'
+    - name: Set up JDK 11 (Required for SonarQube)
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        java-package: 'jdk'
 
-      - name: Install SonarQube Scanner
-        run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.0.4578-linux.zip
-          unzip sonar-scanner-cli-6.2.0.4578-linux.zip -d $HOME
-          export PATH="$HOME/sonar-scanner-6.2.0.4578-linux/bin:$PATH"
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@v2.3.0 # Latest version of SonarQube scan action
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarQube authentication token
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }} # SonarQube URL
 
-      - name: Run SonarQube Scanner
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
-        run: |
-          sonar-scanner \
-          -Dsonar.projectKey=mutillidae \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=$SONAR_HOST_URL \
-          -Dsonar.login=$SONAR_TOKEN
+    - name: Report Quality Gate Status
+      if: always() # Ensure the status is reported even if the scan fails
+      uses: sonarsource/sonarqube-quality-gate-action@v2
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
