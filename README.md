@@ -125,6 +125,8 @@ Please check the installation steps in [README-INSTALLATION.md](README-INSTALLAT
         ├── rest
         └── soap
             └── lib
+
+67 directories
 ```
 - `src`: Main source directory.
     - `ajax`: Contains files related to AJAX functionality.
