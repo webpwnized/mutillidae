@@ -8,7 +8,7 @@ OWASP Mutillidae II is a free, open-source, deliberately vulnerable web applicat
 > [!TIP]
 > Stay updated with project announcements on Twitter: [webpwnized](https://twitter.com/webpwnized)
 
-## $\color{red}{Tutorials\}$
+## $\color{Melon}{Tutorials\}$
 
 > [!TIP]
 > Explore our tutorials on YouTube: [webpwnized YouTube channel](https://www.youtube.com/user/webpwnized)
@@ -17,17 +17,17 @@ OWASP Mutillidae II is a free, open-source, deliberately vulnerable web applicat
 
 Please check the installation steps in [README-INSTALLATION.md](README-INSTALLATION.md)
 
-### $\color{CarnationPink}{Location\ of\ source\ code\}$
+## $\color{CarnationPink}{Location\ of\ source\ code\}$
 
 > [!IMPORTANT]
 > Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
 
-### $\color{Goldenrod}{LAMP\ Stack\}$
+## $\color{Goldenrod}{LAMP\ Stack\}$
 
 > [!IMPORTANT]
 > Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.** If you have a LAMP stack set up already, you can skip directly to installing Mutillidae. Check out our [comprehensive installation guide](README-INSTALLATION.md) for detailed instructions. Watch the video tutorial: [How to Install Mutillidae on LAMP Stack](https://www.youtube.com/watch?v=TcgeRab7ayM)
 
-### $\color{ProcessBlue}{Docker\}$
+## $\color{ProcessBlue}{Docker\}$
 
 > [!NOTE]
 > Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
@@ -55,9 +55,77 @@ Please check the installation steps in [README-INSTALLATION.md](README-INSTALLAT
 - Widely used in graduate security courses, corporate web security training, and as an assessment target for vulnerability assessment software
 - Regularly updated to maintain relevance and effectiveness
 
-### $\color{Silver}{Directory\ Descriptions\}$
+## $\color{purple}{Directory\ Descriptions\}$
 
-configurations.
+```
+.
+└── src
+    ├── ajax
+    ├── classes
+    ├── data
+    ├── documentation
+    ├── images
+    │   └── gritter
+    ├── includes
+    │   └── hints
+    ├── javascript
+    │   ├── ddsmoothmenu
+    │   ├── gritter
+    │   ├── hints
+    │   ├── inline-initializers
+    │   ├── jQuery
+    │   │   └── colorbox
+    │   │       └── images
+    │   │           └── ie6
+    │   └── on-page-scripts
+    ├── labs
+    │   └── lab-files
+    │       ├── click-jacking-lab-files
+    │       ├── client-side-control-challenge
+    │       ├── command-injection-lab-files
+    │       ├── content-security-policy
+    │       ├── cookie-lab-files
+    │       ├── cross-site-request-forgery-lab-files
+    │       ├── cross-site-scripting-lab-files
+    │       ├── dependency-check-lab-files
+    │       ├── file-identification-lab-files
+    │       ├── hydra-lab-files
+    │       ├── insecure-direct-object-references-lab-files
+    │       ├── ldap-lab-files
+    │       ├── local-file-inclusion-lab-files
+    │       ├── mutillidae-project-options
+    │       ├── netcat-lab-files
+    │       ├── nikto-lab-files
+    │       ├── open-redirects-lab-files
+    │       ├── open-ssl-lab-files
+    │       ├── password-cracking-lab-files
+    │       ├── remote-file-inclusion-lab-files
+    │       ├── scanning-scripts
+    │       ├── sql-injection-lab-files
+    │       ├── sqlmap-lab-files
+    │       ├── sslscan-lab-files
+    │       ├── tcpdump-lab-files
+    │       ├── web-application-fuzzing-values
+    │       │   ├── ascii
+    │       │   ├── databases
+    │       │   │   ├── mysql
+    │       │   │   ├── oracle
+    │       │   │   └── sql-server
+    │       │   ├── ldap
+    │       │   ├── operating-systems
+    │       │   │   ├── linux
+    │       │   │   └── windows
+    │       │   └── overflow
+    │       └── wireshark-lab-files
+    ├── passwords
+    ├── styles
+    │   ├── ddsmoothmenu
+    │   └── gritter
+    └── webservices
+        ├── rest
+        └── soap
+            └── lib
+```
 - `src`: Main source directory.
     - `ajax`: Contains files related to AJAX functionality.
     - `classes`: Contains PHP class files.
