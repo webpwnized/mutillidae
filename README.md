@@ -15,6 +15,8 @@ OWASP Mutillidae II is a free, open-source, deliberately vulnerable web applicat
 
 ## Installation Guides
 
+Please check the installation steps in [README-INSTALLATION.md](README-INSTALLATION.md)
+
 ### Location of source code
 
 > [!IMPORTANT]
