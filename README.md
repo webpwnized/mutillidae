@@ -5,11 +5,13 @@ OWASP Mutillidae II is a free, open-source, deliberately vulnerable web applicat
 
 ## Project Announcements
 
-Stay updated with project announcements on Twitter: [webpwnized](https://twitter.com/webpwnized)
+> [!TIP]
+> Stay updated with project announcements on Twitter: [webpwnized](https://twitter.com/webpwnized)
 
 ## Tutorials
 
-Explore our tutorials on YouTube: [webpwnized YouTube channel](https://www.youtube.com/user/webpwnized)
+> [!TIP]
+> Explore our tutorials on YouTube: [webpwnized YouTube channel](https://www.youtube.com/user/webpwnized)
 
 ## Installation Guides
 
