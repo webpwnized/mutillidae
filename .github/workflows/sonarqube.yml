@@ -37,7 +37,7 @@ jobs:
 
     - name: Report Quality Gate Status
       if: always() # Ensure the status is reported even if the scan fails
-      uses: sonarsource/sonarqube-quality-gate-action@v2
+      uses: sonarsource/sonarqube-quality-gate-action@v1
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
