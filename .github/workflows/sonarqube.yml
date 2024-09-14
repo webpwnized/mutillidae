@@ -1,0 +1,43 @@
+on:
+  # Trigger analysis when pushing to your main branches, and when creating a pull request.
+  push:
+    branches:
+      - main
+      - master
+      - development
+      - 'releases/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+name: Mutillidae II SonarQube Workflow
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        # Disabling shallow clones is recommended for improving the relevancy of reporting
+        fetch-depth: 0
+
+    - name: Set up JDK 11 (Required for SonarQube)
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        java-package: 'jdk'
+
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@v2.3.0 # Latest version of SonarQube scan action
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarQube authentication token
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }} # SonarQube URL
+
+    - name: Report Quality Gate Status
+      if: always() # Ensure the status is reported even if the scan fails
+      uses: sonarsource/sonarqube-quality-gate-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}

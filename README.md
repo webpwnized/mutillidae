@@ -1,4 +1,5 @@
-# OWASP Mutillidae II
+<a name="top"></a>
+# $\color{LimeGreen}{OWASP\ Mutillidae\ II\ -\ Forked\ to\ showcase\ DevSecOps\ pipelines\}$
 
 OWASP Mutillidae II is a free, open-source, deliberately vulnerable web application designed for web-security enthusiasts. It serves as a target for learning and practicing web security skills. Mutillidae can be easily installed on Linux and Windows systems using LAMP, WAMP, and XAMMP stacks. Additionally, it comes pre-installed on SamuraiWTF and OWASP BWA, and the existing version can be updated on these platforms. With dozens of vulnerabilities and hints to guide the user, Mutillidae provides an accessible web hacking environment suitable for labs, security enthusiasts, classrooms, CTFs, and vulnerability assessment tool targets. It has been widely used in graduate security courses, corporate web security training, and as an assessment target for vulnerability assessment software. OWASP Mutillidae II provides a comprehensive platform for learning and practicing web security techniques in a controlled environment.
 
@@ -14,15 +15,18 @@ Explore our tutorials on YouTube: [webpwnized YouTube channel](https://www.youtu
 
 ### Location of source code
 
-Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
+> [!IMPORTANT]
+> Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
 
 ### LAMP Stack
 
-Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.** If you have a LAMP stack set up already, you can skip directly to installing Mutillidae. Check out our [comprehensive installation guide](README-INSTALLATION.md) for detailed instructions. Watch the video tutorial: [How to Install Mutillidae on LAMP Stack](https://www.youtube.com/watch?v=TcgeRab7ayM)
+> [!IMPORTANT]
+> Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.** If you have a LAMP stack set up already, you can skip directly to installing Mutillidae. Check out our [comprehensive installation guide](README-INSTALLATION.md) for detailed instructions. Watch the video tutorial: [How to Install Mutillidae on LAMP Stack](https://www.youtube.com/watch?v=TcgeRab7ayM)
 
 ### Docker
 
-Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
+> [!NOTE]
+> Note carefully that the source code ishas moved to the ***src*** project directory. **Be careful to adjust accordingly.**
 
 Learn how to set up Mutillidae using Docker with our video tutorials:
 
@@ -33,7 +37,8 @@ Learn how to set up Mutillidae using Docker with our video tutorials:
 
 ## Usage
 
-Explore a large number of video tutorials available on the [webpwnized YouTube channel](https://www.youtube.com/playlist?list=PLZOToVAK85MrsyNmNp0yyUTBXqKRTh623) for guidance on using Mutillidae.
+> [!TIP]
+> Explore a large number of video tutorials available on the [webpwnized YouTube channel](https://www.youtube.com/playlist?list=PLZOToVAK85MrsyNmNp0yyUTBXqKRTh623) for guidance on using Mutillidae.
 
 ## Key Features
 
@@ -62,3 +67,5 @@ configurations.
     - `styles`: CSS stylesheets.
     - `webservices`: Web services files, including REST and SOAP services.
         - `soap/lib`: Library files for SOAP services.
+
+[:arrow_up:](#top)
