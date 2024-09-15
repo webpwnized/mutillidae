@@ -37,7 +37,7 @@ jobs:
         docker run -d --name sonar-server -p 9000:9000 sonarqube
         # Wait for SonarQube to be fully up
         echo "Waiting for SonarQube to start..."
-        while ! curl -s http://localhost:9000/api/system/status | grep UP; do sleep 5; done
+        while ! curl -s http://localhost:9000/api/system/status | grep UP; do sleep 9; done
 
     # Step 4: Run the SonarQube Scan
     - name: SonarQube Scan
