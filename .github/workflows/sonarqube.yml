@@ -14,33 +14,41 @@ name: Mutillidae II SonarQube Workflow
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
-
+    
     steps:
+    # Step 1: Check out your repository code
     - name: Checkout Code
       uses: actions/checkout@v4
       with:
         # Disabling shallow clones is recommended for improving the relevancy of reporting
         fetch-depth: 0
 
+    # Step 2: Set up Java
     - name: Set up JDK 17 (Required for SonarQube)
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         java-package: 'jdk'
-        
+    
+    # Step 3: Start SonarQube Docker container
     - name: Start SonarQube
       run: |
         docker run -d --name sonar-server -p 9000:9000 sonarqube
         # Wait for SonarQube to be fully up
+        echo "Waiting for SonarQube to start..."
         while ! curl -s http://localhost:9000/api/system/status | grep UP; do sleep 5; done
 
+    # Step 4: Run the SonarQube Scan
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@v2.3.0 # Latest version of SonarQube scan action
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarQube authentication token
         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }} # SonarQube URL
+      with:
+        projectBaseDir: .
 
+    # Step 5: Quality Gate Check (Optional)
     - name: Report Quality Gate Status
       if: always() # Ensure the status is reported even if the scan fails
       uses: sonarsource/sonarqube-quality-gate-action@master
