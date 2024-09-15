@@ -30,28 +30,50 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         java-package: 'jdk'
+
+    # Step 3: Create a Docker network
+    - name: Create Docker network
+      run: docker network create sonarnet
     
-    # Step 3: Start SonarQube Docker container
+    # Step 4: Start SonarQube Docker container
     - name: Start SonarQube
       run: |
-        docker run -d --name sonar-server -p 9000:9000 sonarqube
-        # Wait for SonarQube to be fully up
+        docker run -d --name sonar-server --network sonarnet -p 9000:9000 sonarqube
         echo "Waiting for SonarQube to start..."
-        while ! curl -s http://localhost:9000/api/system/status | grep UP; do sleep 9; done
+        while ! curl -s http://localhost:9000/api/system/status | grep -q "UP"; do sleep 10; done
 
-    # Step 4: Run the SonarQube Scan
+    # Step 5: Run the SonarQube Scan
     - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@v2.3.0 # Latest version of SonarQube scan action
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarQube authentication token
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }} # SonarQube URL
-      with:
-        projectBaseDir: .
+      run: |
+        docker run --rm --network sonarnet \
+          -e SONAR_HOST_URL="http://sonar-server:9000" \
+          -e SONAR_TOKEN="${{ secrets.SONAR_TOKEN }}" \
+          -v $(pwd):/usr/src \
+          sonarsource/sonar-scanner-cli
 
-    # Step 5: Quality Gate Check (Optional)
-    - name: Report Quality Gate Status
-      if: always() # Ensure the status is reported even if the scan fails
+    # Check the Quality Gate status.
+    - name: SonarQube Quality Gate check
+      id: sonarqube-quality-gate-check
       uses: sonarsource/sonarqube-quality-gate-action@master
+      # Force to fail step after specific time.
+      timeout-minutes: 5
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    # Optionally you can use the output from the Quality Gate in another step.
+    # The possible outputs of the `quality-gate-status` variable are `PASSED`, `WARN` or `FAILED`.
+    - name: Show SonarQube Quality Gate Status value
+      run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
+
+    # Step 6: Stop SonarQube Docker container
+    - name: Stop SonarQube
+      run: docker stop sonar-server
+
+    # Step 7: Remove SonarQube Docker network
+    - name: Remove SonarQube network
+      run: docker network rm sonarnet
+
+    # Step 8: Remove SonarQube Docker container
+    - name: Remove SonarQube
+      run: docker rm sonar-server
+  
