@@ -50,6 +50,8 @@ jobs:
           -e SONAR_TOKEN="${{ secrets.SONAR_TOKEN }}" \
           -v $(pwd):/usr/src \
           sonarsource/sonar-scanner-cli -X
+          -Dsonar.projectKey=Mutillidae-II \
+          -Dsonar.sources=.
 
     # Check the Quality Gate status.
     - name: SonarQube Quality Gate check
