@@ -40,12 +40,7 @@ jobs:
         # Action to check out the code from the repository.
         # This step fetches the codebase from the GitHub repository.
 
-      - name: Run Trufflehog Secret Scan
-        uses: trufflesecurity/trufflehog@main
+      - name: TruffleHog Enterprise scan
+        uses: trufflesecurity/TruffleHog-Enterprise-Github-Action@main
         with:
-            # Specify the path to the codebase to scan.
-            base: ./src
-        continue-on-error: true
-        # Execute Trufflehog to scan the repository for secrets.
-        # Save the results in JSON format to trufflehog-results.json.
-        # Continue the workflow even if there are errors during the scan.
+            args: --fail-verified ${{ github.event.repository.default_branch }} HEAD
