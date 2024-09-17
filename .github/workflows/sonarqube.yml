@@ -46,7 +46,7 @@ jobs:
     - name: SonarQube Scan
       run: |
         docker run --rm --network sonarnet \
-          -e SONAR_HOST_URL="http://sonar-server:9000" \
+          -e SONAR_HOST_URL="http://localhost:9000" \
           -e SONAR_TOKEN="${{ secrets.SONAR_TOKEN }}" \
           -v $(pwd):/usr/src \
           sonarsource/sonar-scanner-cli -X
