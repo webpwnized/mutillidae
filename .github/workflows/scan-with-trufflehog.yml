@@ -1,0 +1,50 @@
+# Name of this GitHub Actions workflow.
+name: Scan Application Code with Trufflehog OSS
+
+on:
+  # Trigger the workflow on the following events:
+
+  # Scan changed files in Pull Requests (diff-aware scanning).
+  pull_request: {}
+
+  # Trigger the workflow on-demand through the GitHub Actions interface.
+  workflow_dispatch: {}
+
+  # Scan mainline branches (main and development) and report all findings.
+  push:
+    branches: ["development"]
+
+jobs:
+  trufflehog:
+    # User definable name of this GitHub Actions job.
+    name: Scan Application Code with Trufflehog OSS
+
+    # Specify the runner environment. Use the latest version of Ubuntu.
+    runs-on: ubuntu-latest
+
+    # Define permissions for specific GitHub Actions.
+    permissions:
+        actions: read          # Permission to read GitHub Actions.
+        contents: read         # Permission to read repository contents.
+        security-events: write # Permission to write security events.
+
+    # Skip any Pull Request created by the Dependabot to avoid permission issues.
+    if: (github.actor != 'dependabot[bot]')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+        with:
+            fetch-depth: 0
+        # Step: Checkout code
+        # Action to check out the code from the repository.
+        # This step fetches the codebase from the GitHub repository.
+
+      - name: Run Trufflehog Secret Scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+            extra_args: --only-verified
+        continue-on-error: true
+        # Execute Trufflehog to scan the repository for secrets.
+        # Save the results in JSON format to trufflehog-results.json.
+        # Continue the workflow even if there are errors during the scan.

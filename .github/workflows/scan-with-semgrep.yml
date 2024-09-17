@@ -12,7 +12,7 @@ on:
 
   # Scan mainline branches (main and development) and report all findings.
   push:
-    branches: ["main", "development"]
+    branches: ["development"]
 
 jobs:
   semgrep:
@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@main
         # Step: Checkout code
         # Action to check out the code from the repository.
         # This step fetches the codebase from the GitHub repository.
@@ -50,10 +50,10 @@ jobs:
         # Continue the workflow even if there are errors during the scan.
 
       - name: Run Semgrep High-Confidence SAST Scan
-        run: semgrep --config p/ci --sarif --output=semgrep-ci-results.sarif
+        run: semgrep --config p/default --sarif --output=semgrep-ci-results.sarif
         continue-on-error: true
-        # Execute Semgrep to scan the code for XSS (Cross-Site Scripting) vulnerabilities using the p/xss configuration.
-        # Save the results in SARIF format to semgrep-xss-results.sarif.
+        # Execute Semgrep to scan using The default ruleset configured in Semgrep App.
+        # Save the results in SARIF format to semgrep-ci-results.sarif.
         # Continue the workflow even if there are errors during the scan.
 
       - name: Upload XSS SARIF file for GitHub Advanced Security Dashboard

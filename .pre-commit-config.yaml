@@ -1,0 +1,17 @@
+# Pre-commit configuration for running Yelp's detect-secrets
+# https://github.com/Yelp/detect-secrets
+
+repos:
+  - repo: https://github.com/Yelp/detect-secrets  # Yelp's original repository for detect-secrets
+    rev: v1.5.0  # Use the latest version from the master branch (you can pin to a specific version if needed)
+    hooks:
+      - id: detect-secrets  # Run the detect-secrets hook to scan for sensitive information
+        name: "Detect Secrets Pre-Commit Scan"  # Add a name for better readability in the commit output
+        args: 
+          - '--baseline'  # Use a baseline file to track known secrets and avoid false positives
+          - '.secrets.baseline'
+        exclude: 'package-lock.json|yarn.lock|go.sum'  # Use a single string (regex) to exclude multiple files
+        additional_dependencies: []  # If specific plugins or dependencies are needed, add them here
+        stages:
+          - commit  # Run the hook before committing code
+          - push    # (Optional) Run the hook before pushing to the remote repository
