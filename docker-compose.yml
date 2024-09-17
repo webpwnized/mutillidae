@@ -32,7 +32,7 @@ services:
       - sonarnet
     environment:
       - SONAR_HOST_URL=http://sonar-server:9000
-      - SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}  # GitHub Secret for SonarQube Token
+      - SONAR_TOKEN=${SONAR_TOKEN}  # Use standard Docker variable interpolation here
     volumes:
       - .:/usr/src
     entrypoint: ["/bin/bash", "-c", "sonar-scanner -Dsonar.projectKey=Mutillidae-II-2 -Dsonar.sources=."]

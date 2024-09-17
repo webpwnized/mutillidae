@@ -17,6 +17,9 @@ jobs:
       - name: Set up Docker Compose
         run: sudo apt-get install docker-compose
 
+      - name: Create .env file
+        run: echo "SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}" > .env  
+
       - name: Build and Run SonarQube with Docker Compose
         run: docker-compose up -d
 
