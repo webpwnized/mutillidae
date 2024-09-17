@@ -20,6 +20,15 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        # Step 5: Run the SonarQube Scan
+      - name: SonarQube Scan
+        run: |
+          -e SONAR_HOST_URL="http://sonar-server:9000" \
+          -e SONAR_TOKEN="${{ secrets.SONAR_TOKEN }}" \
+          -v $(pwd):/usr/src \
+          sonarsource/sonar-scanner-cli -X
+          -Dsonar.projectKey=Mutillidae-II \
+          -Dsonar.sources=.
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
       # - uses: sonarsource/sonarqube-quality-gate-action@master
