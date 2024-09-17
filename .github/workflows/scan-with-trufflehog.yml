@@ -43,7 +43,8 @@ jobs:
       - name: Run Trufflehog Secret Scan
         uses: trufflesecurity/trufflehog@main
         with:
-            extra_args: --only-verified
+            # Specify the path to the codebase to scan.
+            ./src
         continue-on-error: true
         # Execute Trufflehog to scan the repository for secrets.
         # Save the results in JSON format to trufflehog-results.json.
