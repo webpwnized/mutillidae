@@ -51,7 +51,7 @@ print_message "Creating tag $VERSION with annotation \"$ANNOTATION\""
 git tag -a "$VERSION" -m "$ANNOTATION" || handle_error "Failed to create tag"
 
 print_message "Committing version $VERSION to local branch"
-git commit -a -m "$VERSION $ANNOTATION" # || handle_error "Failed to commit changes"
+git commit -a -m "$VERSION $ANNOTATION" || handle_error "Failed to commit changes"
 
 print_message "Pushing tag $VERSION to upstream"
 git push --tag || handle_error "Failed to push tag to upstream"
