@@ -12,20 +12,20 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Docker Compose
         run: sudo apt-get install docker-compose
 
-      - name: Create .env file
-        run: echo "SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}" > .env  
-
       - name: Build and Run SonarQube with Docker Compose
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: docker-compose up -d
 
-      - name: Run SonarScanner
-        run: |
-          docker-compose run sonar-scanner
+      - name: Run SonarScanner with the environment variable
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: docker-compose run sonar-scanner
 
       - name: Tear down Docker Compose
         if: always()
