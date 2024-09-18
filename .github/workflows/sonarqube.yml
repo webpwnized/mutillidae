@@ -18,11 +18,18 @@ jobs:
         run: sudo apt-get install docker-compose
 
       - name: Build and Run SonarQube with Docker Compose
-        run: SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} docker-compose up -d
+        # Pass the SONAR_TOKEN from GitHub Secrets as an environment variable
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: docker-compose up -d sonar-server
 
-      - name: Run SonarScanner
-        run: |
-          SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} docker-compose run sonar-scanner
+      - name: Wait for SonarQube to be ready
+        run: sleep 60  # Adjust this time if needed, depending on your server startup time
+
+      - name: Run SonarScanner with the environment variable
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: docker-compose run sonar-scanner
 
       - name: Tear down Docker Compose
         if: always()

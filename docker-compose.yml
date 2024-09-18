@@ -35,7 +35,7 @@ services:
       - SONAR_TOKEN=${SONAR_TOKEN}  # Use standard Docker variable interpolation here
     volumes:
       - .:/usr/src
-    entrypoint: ["/bin/bash", "-c", "sonar-scanner -Dsonar.projectKey=Mutillidae-II-2 -Dsonar.sources=."]
+    entrypoint: ["/bin/bash", "-c", "sonar-scanner -X -Dsonar.projectKey=Mutillidae-II-2 -Dsonar.sources=."]
 
 networks:
   sonarnet:
