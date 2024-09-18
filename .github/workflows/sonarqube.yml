@@ -24,7 +24,7 @@ jobs:
         run: docker-compose up -d sonar-server
 
       - name: Wait for SonarQube to be ready
-        run: sleep 60  # Adjust this time if needed, depending on your server startup time
+        run: sleep 180  # Adjust this time if needed, depending on your server startup time
 
       - name: Run SonarScanner with the environment variable
         env: 
