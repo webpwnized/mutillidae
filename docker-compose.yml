@@ -5,38 +5,24 @@ services:
     image: sonarqube:latest
     container_name: sonar-server
     ports:
-      - "9000:9000"  # Expose port 9000 for SonarQube
+      - "9000:9000"
     networks:
       - sonarnet
-    environment:
-      - SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonarqube
-      - SONAR_JDBC_USERNAME=sonar
-      - SONAR_JDBC_PASSWORD=sonar
-
-  db:
-    image: postgres:latest
-    container_name: sonar-db
-    networks:
-      - sonarnet
-    environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
-      - POSTGRES_DB=sonarqube
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
 
   sonar-scanner:
     image: sonarsource/sonar-scanner-cli:latest
-    container_name: sonar-scanner
     depends_on:
       - sonar-server
     networks:
       - sonarnet
     environment:
       - SONAR_HOST_URL=http://sonar-server:9000
-      - SONAR_TOKEN=${SONAR_TOKEN}  # Use standard Docker variable interpolation here
+      - SONAR_TOKEN=${SONAR_TOKEN}
     volumes:
       - .:/usr/src
     entrypoint: ["/bin/bash", "-c", "sonar-scanner -X -Dsonar.projectKey=Mutillidae-II-2 -Dsonar.sources=."]
-
-networks:
-  sonarnet:
-    driver: bridge
