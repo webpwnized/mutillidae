@@ -26,3 +26,8 @@ services:
     volumes:
       - .:/usr/src
     entrypoint: ["/bin/bash", "-c", "sonar-scanner -X -Dsonar.projectKey=Mutillidae-II-2 -Dsonar.sources=."]
+
+networks:
+  sonarnet:
+    driver: bridge  # This defines the 'sonarnet' network with the bridge driver
+    
