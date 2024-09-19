@@ -26,19 +26,18 @@ jobs:
             distribution: 'temurin'
             java-package: 'jdk'
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: SonarCloud Scan
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Install SonarScanner
         run: |
-          sonar-scanner \
+            curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+            unzip sonar-scanner-cli.zip
+            mv sonar-scanner-4.8.0.2856-linux sonar-scanner
+            export PATH="$PATH:${{ github.workspace }}/sonar-scanner/bin"
+
+      - name: Run SonarScanner for PHP
+        run: |
+            sonar-scanner \
             -Dsonar.organization=meleksabit \
             -Dsonar.projectKey=meleksabit_mutillidae \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            
