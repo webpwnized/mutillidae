@@ -1,3 +1,5 @@
+name: SonarQube Analysis
+
 on:
   # Trigger analysis when pushing to your main branches, and when creating a pull request.
   push:
@@ -9,35 +11,31 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-name: Mutillidae II SonarQube Workflow
-
 jobs:
-  sonarqube:
+  sonar-scan:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-      with:
-        # Disabling shallow clones is recommended for improving the relevancy of reporting
-        fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 11 (Required for SonarQube)
-      uses: actions/setup-java@v4
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        java-package: 'jdk'
+      - name: Set up Docker Compose
+        run: sudo apt-get install docker-compose
 
-    - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@v2.3.0 # Latest version of SonarQube scan action
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarQube authentication token
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }} # SonarQube URL
+      - name: Build and Run SonarQube with Docker Compose
+        # Pass the SONAR_TOKEN from GitHub Secrets as an environment variable
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: docker-compose up -d sonar-server
 
-    - name: Report Quality Gate Status
-      if: always() # Ensure the status is reported even if the scan fails
-      uses: sonarsource/sonarqube-quality-gate-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      - name: Wait for SonarQube to be ready
+        run: sleep 180  # Adjust this time if needed, depending on your server startup time
+
+      - name: Run SonarScanner with the environment variable
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: docker-compose run sonar-scanner
+
+      - name: Tear down Docker Compose
+        if: always()
+        run: docker-compose down

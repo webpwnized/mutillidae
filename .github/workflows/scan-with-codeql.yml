@@ -1,47 +1,50 @@
-# Name of the GitHub Actions workflow
-name: CodeQL Analysis for JavaScript
+name: JavaScript CodeQL Analysis
 
-# Define when the workflow should be triggered
 on:
-  push:
+  pull_request:
     branches:
-      - development # Trigger when code is pushed to the 'development' branch
-      - main # Trigger when code is pushed to the 'main' branch
+      - development
+      - main
 
-# Define the jobs to be executed within the workflow
 jobs:
-  build:
-    name: Scan JavaScript code with CodeQL
-    runs-on: [ 'ubuntu-latest' ] # Use the latest version of Ubuntu
+  analyze:
+    name: Analyze JavaScript code with CodeQL
+    runs-on: ubuntu-latest
+    needs: init
     permissions:
       actions: read
       contents: read
       security-events: write
-    strategy:
-        fail-fast: false
-        matrix:
-          language: [ 'javascript' ]
-          # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
-          # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
-          # Use only 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
-          # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        # Action to check out the code from the repository
-        # This step fetches the codebase from the GitHub repository
+        if: github.event.pull_request.head.sha == github.event.pull_request.base.sha
 
       - name: Initialize CodeQL
+        id: initialize-codeql
         uses: github/codeql-action/init@v3
         with:
           languages: javascript
-        # Action to initialize the CodeQL environment
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+        if: github.event.pull_request.head.sha == github.event.pull_request.base.sha
         with:
-          # Specify a category to distinguish between multiple analyses
-          # for the same tool and ref. If you don't use `category` in your workflow,
-          # GitHub will generate a default category name for you
-          category: "Scan-JavaScript-code-with-CodeQL"
+          category: "JavaScript CodeQL Analysis"
           
+  init:
+    name: Initialize CodeQL environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        id: initialize-codeql
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+    outputs:
+      needs: initialize-codeql
+      codeql-version: ${{ steps.initialize-codeql.outputs.codeql-version }}
