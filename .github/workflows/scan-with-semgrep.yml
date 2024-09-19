@@ -34,24 +34,44 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
+    # Step to set the environment variables dynamically based on the event
+    - name: Set Config and Output Paths
+      id: vars
+      run: |
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          echo "xss_config=${{ github.event.inputs.xss_config }}" >> $GITHUB_ENV
+          echo "xss_output=${{ github.event.inputs.xss_output }}" >> $GITHUB_ENV
+          echo "ci_config=${{ github.event.inputs.ci_config }}" >> $GITHUB_ENV
+          echo "ci_output=${{ github.event.inputs.ci_output }}" >> $GITHUB_ENV
+        else
+          echo "xss_config=.github/semgrep/xss-config.yml" >> $GITHUB_ENV
+          echo "xss_output=xss-output.sarif" >> $GITHUB_ENV
+          echo "ci_config=.github/semgrep/ci-config.yml" >> $GITHUB_ENV
+          echo "ci_output=ci-output.sarif" >> $GITHUB_ENV
+      shell: bash
+
+    # Run Semgrep XSS Scan using the dynamically set environment variables
     - name: Run Semgrep XSS Scan
-      run: semgrep --config ${{ inputs.xss_config }} --sarif --output=${{ inputs.xss_output }}
+      run: semgrep --config "$xss_config" --sarif --output="$xss_output"
       continue-on-error: true
 
+    # Run Semgrep High-Confidence SAST Scan using the dynamically set environment variables
     - name: Run Semgrep High-Confidence SAST Scan
-      run: semgrep --config ${{ inputs.ci_config }} --sarif --output=${{ inputs.ci_output }}
+      run: semgrep --config "$ci_config" --sarif --output="$ci_output"
       continue-on-error: true
 
+    # Upload the XSS SARIF file
     - name: Upload XSS SARIF file
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@main
       with:
-        sarif_file: ${{ inputs.xss_output }}
+        sarif_file: "$xss_output"
         category: "Semgrep XSS Scan"
 
+    # Upload the High-Confidence SAST SARIF file
     - name: Upload CI SARIF file
       uses: github/codeql-action/upload-sarif@main
       with:
-        sarif_file: ${{ inputs.ci_output }}
+        sarif_file: "$ci_output"
         category: "Semgrep High-Confidence SAST Scan"
