@@ -50,6 +50,7 @@ jobs:
           echo "xss_output=xss-output.sarif" >> $GITHUB_ENV
           echo "ci_config=.github/semgrep/ci-config.yml" >> $GITHUB_ENV
           echo "ci_output=ci-output.sarif" >> $GITHUB_ENV
+        fi
       shell: bash
 
     # Run Semgrep XSS Scan using the dynamically set environment variables
