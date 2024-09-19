@@ -1,73 +1,57 @@
-# Name of this GitHub Actions workflow.
 name: Scan Application Code with Semgrep SAST
 
 on:
-  # Trigger the workflow on the following events:
-
-  # Scan changed files in Pull Requests (diff-aware scanning).
   pull_request: {}
-
-  # Trigger the workflow on-demand through the GitHub Actions interface.
-  workflow_dispatch: {}
-
-  # Scan mainline branches (main and development) and report all findings.
+  workflow_dispatch:
+    inputs:
+      xss_config:
+        description: 'Path to Semgrep configuration file'
+        required: true
+      xss_output:
+        description: 'Path to Semgrep output file'
+        required: true
+      ci_config:
+        description: 'Path to Semgrep configuration file'
+        required: true
+      ci_output:
+        description: 'Path to Semgrep output file'
+        required: true
   push:
     branches: ["main", "development"]
 
 jobs:
   semgrep:
-    # User definable name of this GitHub Actions job.
     name: Scan Application Code with Semgrep SAST
-
-    # Specify the runner environment. Use the latest version of Ubuntu.
     runs-on: ubuntu-latest
-
-    # Define permissions for specific GitHub Actions.
     permissions:
-        actions: read          # Permission to read GitHub Actions.
-        contents: read         # Permission to read repository contents.
-        security-events: write # Permission to write security events.
-
+      actions: read
+      contents: read
+      security-events: write
     container:
-      # Use a Docker image with Semgrep installed. Do not change this.
-      image: returntocorp/semgrep
+      image: returntocorp/semgrep:latest
 
-    # Skip any Pull Request created by the Dependabot to avoid permission issues.
-    if: (github.actor != 'dependabot[bot]')
+    if: github.actor != 'dependabot[bot]'
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        # Step: Checkout code
-        # Action to check out the code from the repository.
-        # This step fetches the codebase from the GitHub repository.
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Run Semgrep XSS Scan
-        run: semgrep --config p/xss --sarif --output=semgrep-xss-results.sarif
-        continue-on-error: true
-        # Execute Semgrep to scan the code for XSS (Cross-Site Scripting) vulnerabilities using the p/xss configuration.
-        # Save the results in SARIF format to semgrep-xss-results.sarif.
-        # Continue the workflow even if there are errors during the scan.
+    - name: Run Semgrep XSS Scan
+      run: semgrep --config ${{ inputs.xss_config }} --sarif --output=${{ inputs.xss_output }}
+      continue-on-error: true
 
-      - name: Run Semgrep High-Confidence SAST Scan
-        run: semgrep --config p/ci --sarif --output=semgrep-ci-results.sarif
-        continue-on-error: true
-        # Execute Semgrep to scan the code for XSS (Cross-Site Scripting) vulnerabilities using the p/xss configuration.
-        # Save the results in SARIF format to semgrep-xss-results.sarif.
-        # Continue the workflow even if there are errors during the scan.
+    - name: Run Semgrep High-Confidence SAST Scan
+      run: semgrep --config ${{ inputs.ci_config }} --sarif --output=${{ inputs.ci_output }}
+      continue-on-error: true
 
-      - name: Upload XSS SARIF file for GitHub Advanced Security Dashboard
-        uses: github/codeql-action/upload-sarif@main
-        with:
-          sarif_file: semgrep-xss-results.sarif
-          category: "Semgrep XSS Scan"
-        if: always()
-        # Upload the SARIF file with scan results to the GitHub Advanced Security Dashboard.
+    - name: Upload XSS SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: ${{ inputs.xss_output }}
+        category: "Semgrep XSS Scan"
 
-      - name: Upload CI SARIF file for GitHub Advanced Security Dashboard
-        uses: github/codeql-action/upload-sarif@main
-        with:
-          sarif_file: semgrep-ci-results.sarif
-          category: "Semgrep High-Confidence SAST Scan"
-        if: always()
-        # Upload the SARIF file with scan results to the GitHub Advanced Security Dashboard.
+    - name: Upload CI SARIF file
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: ${{ inputs.ci_output }}
+        category: "Semgrep High-Confidence SAST Scan"
