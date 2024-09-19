@@ -53,6 +53,20 @@ pipeline {
         }
     }
 
+        stage('Quality Gate') {
+            steps {
+                script {
+                    // Wait for the quality gate result from SonarQube
+                    timeout(time: 10, unit: 'MINUTES') {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline failed due to SonarQube quality gate failure: ${qg.status}"
+                        }
+                    }
+                }
+            }
+        }
+
     post {
         always {
             stage('Tear Down') {
