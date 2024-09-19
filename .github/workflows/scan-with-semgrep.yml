@@ -51,7 +51,7 @@ jobs:
         category: "Semgrep XSS Scan"
 
     - name: Upload CI SARIF file
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@main
       with:
         sarif_file: ${{ inputs.ci_output }}
         category: "Semgrep High-Confidence SAST Scan"
