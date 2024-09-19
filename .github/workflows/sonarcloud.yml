@@ -26,18 +26,7 @@ jobs:
             distribution: 'temurin'
             java-package: 'jdk'
 
-      - name: Install SonarScanner
-        run: |
-            curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-            unzip sonar-scanner-cli.zip
-            mv sonar-scanner-4.8.0.2856-linux sonar-scanner
-            export PATH="$PATH:${{ github.workspace }}/sonar-scanner/bin"
-
-      - name: Run SonarScanner for PHP
-        run: |
-            sonar-scanner \
-            -Dsonar.organization=meleksabit \
-            -Dsonar.projectKey=meleksabit_mutillidae \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v3 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
+        env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
