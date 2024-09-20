@@ -65,7 +65,7 @@ jobs:
     
     - name: List files after Semgrep XSS Scan
       run: ls -la
-
+      
     # Upload the XSS SARIF file
     - name: Upload XSS SARIF file
       uses: github/codeql-action/upload-sarif@main
