@@ -62,6 +62,9 @@ jobs:
     - name: Run Semgrep High-Confidence SAST Scan
       run: semgrep --config "$ci_config" --sarif --output="$ci_output"
       continue-on-error: true
+    
+    - name: List files after Semgrep XSS Scan
+      run: ls -la
 
     # Upload the XSS SARIF file
     - name: Upload XSS SARIF file
