@@ -53,10 +53,22 @@ jobs:
         fi
       shell: bash
 
+    # Debug: Print environment variables to check they are set correctly
+    - name: Print environment variables
+      run: |
+        echo "xss_config=$xss_config"
+        echo "xss_output=$xss_output"
+        echo "ci_config=$ci_config"
+        echo "ci_output=$ci_output"
+
     # Run Semgrep XSS Scan using the dynamically set environment variables
     - name: Run Semgrep XSS Scan
       run: semgrep --config "$xss_config" --sarif --output="$xss_output"
       continue-on-error: true
+
+    # Debug: List files to check if SARIF file was generated
+    - name: List files after Semgrep XSS Scan
+      run: ls -la
 
     # Run Semgrep High-Confidence SAST Scan using the dynamically set environment variables
     - name: Run Semgrep High-Confidence SAST Scan
@@ -65,7 +77,7 @@ jobs:
     
     - name: List files after Semgrep XSS Scan
       run: ls -la
-      
+  
     # Upload the XSS SARIF file
     - name: Upload XSS SARIF file
       uses: github/codeql-action/upload-sarif@main
