@@ -21,16 +21,9 @@ on:
 
 jobs:
   semgrep:
-    name: Scan Application Code with Semgrep SAST
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
     container:
       image: returntocorp/semgrep:latest
-
-    if: github.actor != 'dependabot[bot]'
 
     steps:
     - name: Checkout code
@@ -53,31 +46,24 @@ jobs:
         fi
       shell: bash
 
-    # Debug: Print environment variables to check they are set correctly
-    - name: Print environment variables
-      run: |
-        echo "xss_config=$xss_config"
-        echo "xss_output=$xss_output"
-        echo "ci_config=$ci_config"
-        echo "ci_output=$ci_output"
-
     # Run Semgrep XSS Scan using the dynamically set environment variables
     - name: Run Semgrep XSS Scan
-      run: semgrep --config "$xss_config" --sarif --output="$xss_output"
+      shell: bash  # Switch to bash for better variable handling
+      run: |
+        semgrep --config "$xss_config" --sarif --output="$xss_output" .
       continue-on-error: true
 
-    # Debug: List files to check if SARIF file was generated
+    # Debug: List files to ensure the SARIF file is generated
     - name: List files after Semgrep XSS Scan
       run: ls -la
 
     # Run Semgrep High-Confidence SAST Scan using the dynamically set environment variables
     - name: Run Semgrep High-Confidence SAST Scan
-      run: semgrep --config "$ci_config" --sarif --output="$ci_output"
+      shell: bash  # Switch to bash for better variable handling
+      run: |
+        semgrep --config "$ci_config" --sarif --output="$ci_output" .
       continue-on-error: true
-    
-    - name: List files after Semgrep XSS Scan
-      run: ls -la
-  
+
     # Upload the XSS SARIF file
     - name: Upload XSS SARIF file
       uses: github/codeql-action/upload-sarif@main
