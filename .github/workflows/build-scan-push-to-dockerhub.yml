@@ -1,0 +1,131 @@
+# Define the name of your workflow.
+name: build-scan-push-to-dockerhub
+
+# Specify when this workflow should run (on a push event to the 'main' branch).
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    
+    # Define permissions for specific actions
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      
+    # Use matrix strategy to define multiple Dockerfiles to scan.
+    strategy:
+      matrix:
+        container_name:
+          - database
+          - database_admin
+          - ldap
+          - ldap_admin
+          - www
+
+    steps:
+      # Step 1: Prepare the runner and check out the codebase.
+      name: Check out the codebase
+        uses: actions/checkout@main
+        with:
+          repository: webpwnized/mutillidae-docker
+          path: mutillidae-docker
+        
+      # Step 2: Change into the docker build directory.
+      name: Change into the Docker Build directory
+        id: change_current_directory
+        run: |
+          echo "STATUS: Current directory:$(pwd)"
+          echo "STATUS: Directory contents:"
+          echo "$(ls -la)"
+          echo "STATUS: Changing directory to mutillidae-docker"
+          cd mutillidae-docker
+          echo "STATUS: Changed directory to mutillidae-docker"
+          echo "STATUS: Current directory:$(pwd)"
+          echo "STATUS: Directory contents:"
+          echo "$(ls -la)"
+        shell: bash
+
+      # Step 3: Get the version from a file and set it as an environment variable.
+      - name: Get version from version file
+        id: get_version
+        run: |
+          echo "Version: $(cat version)"
+          VERSION=$(cat version)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        shell: bash
+
+      # Step 4: Set up QEMU on the runner.
+      - name: Set up QEMU on the runner
+        uses: docker/setup-qemu-action@master
+
+      # Step 5: Set up Docker Buildx on the runner.
+      - name: Set up Docker Buildx on the runner
+        uses: docker/setup-buildx-action@master
+
+      # Step 6: Login to Docker Hub using secrets for authentication.
+      - name: Login to Docker Hub
+        uses: docker/login-action@master
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # ----------------------------------------------------------------------------
+      # Loop Over Each Container
+      # Equivalent to 
+      #   docker build --file ./Dockerfile --tag webpwnized/mutillidae:${{ matrix.container_name }} .build/${{ matrix.container_name }}/
+      # ----------------------------------------------------------------------------
+      
+      - name: Print Current Container Name
+        id: print_current_container_name
+        run: |
+          echo ""
+          echo "STATUS: Currently working on container:${{ matrix.container_name }}"
+          echo ""
+        shell: bash
+
+      - name: Build and Load Container
+        uses: docker/build-push-action@master
+        with:
+          context: .build/${{ matrix.container_name }}/
+          file: .build/${{ matrix.container_name }}/Dockerfile
+          load: true
+          tags: webpwnized/mutillidae:${{ matrix.container_name }}
+
+      - name: Run Trivy vulnerability scanner on Container
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'webpwnized/mutillidae:${{ matrix.container_name }}'
+          format: 'sarif'
+          output: '${{ matrix.container_name }}-trivy-scan-results.sarif'
+    
+      - name: Print Trivy scan results to the console
+        id: print_results
+        run: |
+          cat '${{ matrix.container_name }}-trivy-scan-results.sarif'
+        shell: bash
+      
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@main
+        with:
+          sarif_file: '${{ matrix.container_name }}-trivy-scan-results.sarif'
+          category: ${{ matrix.container_name }}
+
+      - name: Push Container
+        uses: docker/build-push-action@master
+        with:
+          context: .build/${{ matrix.container_name }}/
+          file: .build/${{ matrix.container_name }}/Dockerfile
+          push: true
+          tags: webpwnized/mutillidae:${{ matrix.container_name }}
+
+      - name: Push Container with version number
+        uses: docker/build-push-action@master
+        with:
+          context: .build/${{ matrix.container_name }}/
+          file: .build/${{ matrix.container_name }}/Dockerfile
+          push: true
+          tags: webpwnized/mutillidae:${{ matrix.container_name }}-${{ env.VERSION }}
