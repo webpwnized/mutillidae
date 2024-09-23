@@ -28,14 +28,14 @@ jobs:
 
     steps:
       # Step 1: Prepare the runner and check out the codebase.
-      name: Check out the codebase
+      - name: Check out the codebase
         uses: actions/checkout@main
         with:
           repository: webpwnized/mutillidae-docker
           path: mutillidae-docker
         
       # Step 2: Change into the docker build directory.
-      name: Change into the Docker Build directory
+      - name: Change into the Docker Build directory
         id: change_current_directory
         run: |
           echo "STATUS: Current directory:$(pwd)"
