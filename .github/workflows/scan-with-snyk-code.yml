@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@main
         # Action to check out the code from the repository
         # This step fetches the codebase from your GitHub repository
 
