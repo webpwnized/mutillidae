@@ -12,7 +12,7 @@ on:
 
   # Scan mainline branches (main and development) and report all findings.
   push:
-    branches: ["development"]
+    branches: ["main"]
 
 jobs:
   trufflehog:
