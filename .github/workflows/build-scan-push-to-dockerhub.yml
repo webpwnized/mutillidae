@@ -28,7 +28,7 @@ jobs:
 
     steps:
       # Step 1: Prepare the runner and check out the codebase.
-      - name: Check out the codebase
+      name: Check out the codebase
         uses: actions/checkout@main
         with:
           repository: webpwnized/mutillidae-docker
