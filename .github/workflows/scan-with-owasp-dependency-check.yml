@@ -4,9 +4,7 @@ name: Scan with OWASP Dependency Check
 # Define when the workflow should be triggered
 on:
   push:
-    branches:
-      - development # Trigger when code is pushed to the 'development' branch
-      - main # Trigger when code is pushed to the 'main' branch
+    branches: ["main"]
 
 # Define the job(s) to be executed within the workflow
 jobs:

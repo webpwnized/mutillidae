@@ -4,9 +4,7 @@ name: Scan PHP code with Snyk Code
 # Define when the workflow should be triggered
 on:
   push:
-    branches:
-      - main
-      - development
+    branches: ["main"]
   pull_request:
     # Trigger when code is pushed or pull requests are opened/updated on 'main' and 'development' branches
 
