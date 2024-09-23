@@ -27,8 +27,23 @@ jobs:
           - www
 
     steps:
+      # Step 2: Change into the docker build directory.
+      - name: Change into the main work directory
+        id: change_to_parent_directory
+        run: |
+          echo "STATUS: Current directory:$(pwd)"
+          echo "STATUS: Directory contents:"
+          echo "$(ls -la)"
+          echo "STATUS: Changing directory to .."
+          cd ..
+          echo "STATUS: Changed directory to .."
+          echo "STATUS: Current directory:$(pwd)"
+          echo "STATUS: Directory contents:"
+          echo "$(ls -la)"
+        shell: bash
+
       # Step 1: Prepare the runner and check out the codebase.
-      - name: Check out the codebase
+      - name: Check out the mutillidae-docker codebase
         uses: actions/checkout@main
         with:
           repository: webpwnized/mutillidae-docker
@@ -36,7 +51,7 @@ jobs:
         
       # Step 2: Change into the docker build directory.
       - name: Change into the Docker Build directory
-        id: change_current_directory
+        id: change_into_mutillidae_docker_directory
         run: |
           echo "STATUS: Current directory:$(pwd)"
           echo "STATUS: Directory contents:"
