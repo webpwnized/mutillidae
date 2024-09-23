@@ -2,6 +2,8 @@
 name: build-scan-push-to-dockerhub
 
 # Specify when this workflow should run (on a push event to the 'main' branch).
+# This will run after the push event completes successfully.
+# The code will already be in the repository, so the workflow can access it.
 on:
   push:
     branches: ["main"]
