@@ -32,6 +32,13 @@ jobs:
 
     # Define the steps that should be executed in this job.
     steps:
+      # Step 1: Check out the mutillidae repository codebase into the `mutillidae` directory.
+      - name: Check out the mutillidae codebase
+        uses: actions/checkout@main
+        with:
+          repository: webpwnized/mutillidae
+          path: mutillidae  # Check out the code to this directory
+
       # Step 1: Check out the mutillidae-docker repository codebase into the `mutillidae-docker` directory.
       - name: Check out the mutillidae-docker codebase
         uses: actions/checkout@main
@@ -94,6 +101,6 @@ jobs:
         uses: stackhawk/hawkscan-action@main
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}     # Secret key for authentication.
-          configurationFiles: .github/workflows/config/stackhawk.yml  # Path to configuration file.
+          configurationFiles: mutillidae/.github/workflows/config/stackhawk.yml  # Path to configuration file.
           codeScanningAlerts: true   # Enable code scanning alerts.
           githubToken: ${{ github.token }}   # GitHub token for authentication to Code Scanning Alerts
