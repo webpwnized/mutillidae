@@ -50,8 +50,7 @@ jobs:
     - name: Run Semgrep XSS Scan
       shell: bash  # Switch to bash for better variable handling
       run: |
-        semgrep --config "$xss_config" --sarif --output="$xss_output" --verbose .
-      working-directory: /home/runner/work/mutillidae/mutillidae  
+        semgrep --config "${{ env.xss_config }}" --sarif --output="${{ env.xss_output }}" .  
       continue-on-error: true
 
     # Debug: List files to ensure the SARIF file is generated
