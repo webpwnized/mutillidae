@@ -37,6 +37,7 @@ jobs:
         uses: actions/checkout@main
         with:
           repository: webpwnized/mutillidae
+          fetch-depth: 0  # Pulls the entire Git history, ensuring .git is present
           path: mutillidae  # Check out the code to this directory
 
       # Step 1: Check out the mutillidae-docker repository codebase into the `mutillidae-docker` directory.
@@ -100,7 +101,7 @@ jobs:
       - name: Run StackHawk Scan
         uses: stackhawk/hawkscan-action@main
         with:
-          workspace: ./mutillidae  # Path to the workspace.
+          workspace: mutillidae  # Path to the workspace.
           apiKey: ${{ secrets.HAWK_API_KEY }}     # Secret key for authentication.
           configurationFiles: .github/workflows/config/stackhawk.yml  # Path to configuration file relative to workspace.
           codeScanningAlerts: true   # Enable code scanning alerts.
