@@ -1,78 +1,101 @@
+# Name of this GitHub Actions workflow.
 name: Scan Application Code with Semgrep SAST
 
 on:
+  # Trigger the workflow on the following events:
+
+  # Scan changed files in Pull Requests (diff-aware scanning).
   pull_request: {}
-  workflow_dispatch:
-    inputs:
-      xss_config:
-        description: 'Path to Semgrep configuration file'
-        required: true
-      xss_output:
-        description: 'Path to Semgrep output file'
-        required: true
-      ci_config:
-        description: 'Path to Semgrep configuration file'
-        required: true
-      ci_output:
-        description: 'Path to Semgrep output file'
-        required: true
+
+  # Trigger the workflow on-demand through the GitHub Actions interface.
+  workflow_dispatch: {}
+
+  # Scan mainline branches (main and development) and report all findings.
   push:
     branches: ["main", "development"]
 
 jobs:
   semgrep:
+    # User-defined name of this GitHub Actions job.
     name: Scan Application Code with Semgrep SAST
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    container:
-      image: returntocorp/semgrep:latest
 
-    if: github.actor != 'dependabot[bot]'
+    # Specify the runner environment. Use the latest version of Ubuntu.
+    runs-on: ubuntu-latest
+
+    # Define permissions for specific GitHub Actions.
+    permissions:
+        actions: read          # Permission to read GitHub Actions.
+        contents: read         # Permission to read repository contents.
+        security-events: write # Permission to write security events (SARIF reports).
+
+    container:
+      # Use a Docker image with Semgrep pre-installed.
+      image: semgrep/semgrep:latest
+
+    # Skip any Pull Request created by the Dependabot to avoid permission issues.
+    if: (github.actor != 'dependabot[bot]')
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      # Step 1: Checkout the repository code.
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    # Step to set the environment variables dynamically based on the event
-    - name: Set Config and Output Paths
-      id: vars
-      run: |
-        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-          echo "xss_config=${{ github.event.inputs.xss_config }}" >> $GITHUB_ENV
-          echo "xss_output=${{ github.event.inputs.xss_output }}" >> $GITHUB_ENV
-          echo "ci_config=${{ github.event.inputs.ci_config }}" >> $GITHUB_ENV
-          echo "ci_output=${{ github.event.inputs.ci_output }}" >> $GITHUB_ENV
-        else
-          echo "xss_config=.github/semgrep/xss-config.yml" >> $GITHUB_ENV
-          echo "xss_output=xss-output.sarif" >> $GITHUB_ENV
-          echo "ci_config=.github/semgrep/ci-config.yml" >> $GITHUB_ENV
-          echo "ci_output=ci-output.sarif" >> $GITHUB_ENV
-        fi
-      shell: bash
+      # Step 2: Run Semgrep XSS Scan using the Semgrep Registry (p/xss).
+      - name: Run Semgrep XSS Scan
+        run: |
+          echo "Starting XSS scan with Semgrep..."
+          semgrep --config p/xss --sarif --output=semgrep-xss-results.sarif
+        continue-on-error: true
 
-    # Run Semgrep XSS Scan using the dynamically set environment variables
-    - name: Run Semgrep XSS Scan
-      run: semgrep --config "$xss_config" --sarif --output="$xss_output"
-      continue-on-error: true
+      # Step 3: Check if XSS SARIF file exists and log the result
+      - name: Check and log XSS SARIF file
+        run: |
+          if [ -f semgrep-xss-results.sarif ]; then
+            echo "XSS SARIF file generated successfully."
+          else
+            echo "XSS SARIF file not found!"
+            exit 1
+          fi
 
-    # Run Semgrep High-Confidence SAST Scan using the dynamically set environment variables
-    - name: Run Semgrep High-Confidence SAST Scan
-      run: semgrep --config "$ci_config" --sarif --output="$ci_output"
-      continue-on-error: true
+      # Step 4: Run Semgrep High-Confidence SAST Scan using the Semgrep Registry (p/ci).
+      - name: Run Semgrep High-Confidence SAST Scan
+        run: |
+          echo "Starting High-Confidence SAST scan with Semgrep..."
+          semgrep --config p/ci --sarif --output=semgrep-ci-results.sarif --verbose
+        continue-on-error: true
 
-    # Upload the XSS SARIF file
-    - name: Upload XSS SARIF file
-      uses: github/codeql-action/upload-sarif@main
-      with:
-        sarif_file: "$xss_output"
-        category: "Semgrep XSS Scan"
+      # Step 5: Check if CI SARIF file exists and log the result
+      - name: Check and log CI SARIF file
+        run: |
+          if [ -f semgrep-ci-results.sarif ]; then
+            echo "CI SARIF file generated successfully."
+          else
+            echo "CI SARIF file not found!"
+            exit 1
+          fi
 
-    # Upload the High-Confidence SAST SARIF file
-    - name: Upload CI SARIF file
-      uses: github/codeql-action/upload-sarif@main
-      with:
-        sarif_file: "$ci_output"
-        category: "Semgrep High-Confidence SAST Scan"
+      # Step 6: Upload the XSS SARIF file to GitHub Advanced Security Dashboard.
+      - name: Upload XSS SARIF file for GitHub Advanced Security Dashboard
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep-xss-results.sarif
+          category: "Semgrep XSS Scan"
+        if: always()
+
+      # Step 7: Upload the CI SARIF file to GitHub Advanced Security Dashboard.
+      - name: Upload CI SARIF file for GitHub Advanced Security Dashboard
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep-ci-results.sarif
+          category: "Semgrep High-Confidence SAST Scan"
+        if: always()
+
+      # Step 8: Cache Semgrep results for faster future runs (optional).
+      - name: Cache Semgrep results
+        uses: actions/cache@v4
+        with:
+          path: |
+            semgrep-xss-results.sarif
+            semgrep-ci-results.sarif
+          key: ${{ runner.os }}-semgrep-${{ github.sha }}
+        continue-on-error: true
