@@ -1,10 +1,18 @@
 # Name of the GitHub Actions workflow
 name: Scan with OWASP Dependency Check
 
-# Define when the workflow should be triggered
 on:
+  # Trigger the workflow on the following events:
+
+  # Scan changed files in Pull Requests (diff-aware scanning).
+  pull_request: {}
+
+  # Trigger the workflow on-demand through the GitHub Actions interface.
+  workflow_dispatch: {}
+
+  # Scan mainline branches (main and development) and report all findings.
   push:
-    branches: ["main"]
+    branches: ["development"]
 
 # Define the job(s) to be executed within the workflow
 jobs:
