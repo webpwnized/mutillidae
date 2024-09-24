@@ -50,7 +50,7 @@ jobs:
     - name: Run Semgrep XSS Scan
       shell: bash  # Switch to bash for better variable handling
       run: |
-        semgrep --config "$xss_config" --sarif --output="$xss_output" .
+        semgrep --config "$xss_config" --sarif --output="$xss_output" --verbose .
       continue-on-error: true
 
     # Debug: List files to ensure the SARIF file is generated
