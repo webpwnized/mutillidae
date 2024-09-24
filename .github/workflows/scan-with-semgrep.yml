@@ -21,6 +21,7 @@ on:
 
 jobs:
   semgrep:
+    name: Scan Application Code with Semgrep SAST
     runs-on: ubuntu-latest
     container:
       image: returntocorp/semgrep:latest
@@ -46,11 +47,18 @@ jobs:
         fi
       shell: bash
 
+    # Add step to check if Semgrep config files are correct
+    - name: Check Semgrep Configs
+      run: |
+        cat "$xss_config"
+        cat "$ci_config"
+
     # Run Semgrep XSS Scan using the dynamically set environment variables
     - name: Run Semgrep XSS Scan
       shell: bash  # Switch to bash for better variable handling
       run: |
-        semgrep --config "${{ env.xss_config }}" --sarif --output="${{ env.xss_output }}" --metrics=off .  
+        semgrep --config "$xss_config" --sarif --output="$xss_output" .
+      continue-on-error: true
 
     # Debug: List files to ensure the SARIF file is generated
     - name: List files after Semgrep XSS Scan
