@@ -100,7 +100,8 @@ jobs:
       - name: Run StackHawk Scan
         uses: stackhawk/hawkscan-action@main
         with:
+          workspace: ./mutillidae  # Path to the workspace.
           apiKey: ${{ secrets.HAWK_API_KEY }}     # Secret key for authentication.
-          configurationFiles: mutillidae/.github/workflows/config/stackhawk.yml  # Path to configuration file.
+          configurationFiles: .github/workflows/config/stackhawk.yml  # Path to configuration file relative to workspace.
           codeScanningAlerts: true   # Enable code scanning alerts.
           githubToken: ${{ github.token }}   # GitHub token for authentication to Code Scanning Alerts
