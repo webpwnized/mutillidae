@@ -36,9 +36,10 @@ jobs:
           repository: webpwnized/mutillidae-docker
           path: mutillidae-docker  # Check out the code to this directory
 
-      # Step 2: Set the working directory to the `mutillidae-docker` folder for subsequent steps.
+      # Step 2: Set the version to the version of Mutillidae, 
+      # not the mutillidae-docker build project.
       - name: Get version from version file
-        working-directory: .  # Set working directory to mutillidae
+        # working-directory: mutillidae  # Set working directory to mutillidae
         run: |
           echo "Version: $(cat version)"
           VERSION=$(cat version)
