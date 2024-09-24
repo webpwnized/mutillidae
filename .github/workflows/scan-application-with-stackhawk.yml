@@ -1,0 +1,99 @@
+# Define the name of the workflow.
+name: Scan Application with StackHawk
+
+# Define when the workflow should be triggered.
+on:
+  # Trigger the workflow on the following events:
+
+  # Scan changed files in Pull Requests (diff-aware scanning).
+  pull_request: {}
+
+  # Trigger the workflow on-demand through the GitHub Actions interface.
+  workflow_dispatch: {}
+
+  # Scan mainline branches (main and development) and report all findings.
+  push:
+    branches: ["development"]
+
+# Define the jobs that should be executed in this workflow.
+jobs:
+  # Job to run StackHawk HawkScan as a GitHub Action.
+  hawkscan-job:
+    name: StackHawk HawkScan Github Action
+
+    # Specify the runner environment. Use the latest version of Ubuntu.
+    runs-on: ubuntu-latest
+
+    # Define permissions for specific GitHub Actions.
+    permissions:
+      actions: read          # Permission to read GitHub Actions.
+      contents: read         # Permission to read repository contents.
+      security-events: write # Permission to write security events.
+
+    # Define the steps that should be executed in this job.
+    steps:
+      # Step 1: Check out the mutillidae-docker repository codebase into the `mutillidae-docker` directory.
+      - name: Check out the mutillidae-docker codebase
+        uses: actions/checkout@main
+        with:
+          repository: webpwnized/mutillidae-docker
+          path: mutillidae-docker  # Check out the code to this directory
+
+      # Step 2: Install LDAP Utilities
+      - name: Install LDAP Utilities
+        run: |
+
+          # Install LDAP Utilities including ldapadd
+          sudo apt-get update
+          sudo apt-get install -y ldap-utils
+
+      # Step 3: Build and Start Containers 
+      - name: Build and Start Containers
+        working-directory: mutillidae-docker  # Set working directory to mutillidae-docker
+        run: |
+
+          # Starting containers using Docker Compose.
+          docker compose --file .build/docker-compose.yml up --build --detach
+
+      # Step 4: Load Users into LDAP Directory
+      - name: Load Users into LDAP Directory
+        working-directory: mutillidae-docker  # Set working directory to mutillidae-docker
+        run: |
+
+          # Uploading Mutillidae LDIF file to LDAP directory server.
+          # ldapadd will exit with non-zero exit code if user already exists in the directory
+          # Use || true to force zero exit code
+          CURRENT_DIRECTORY=$(pwd);
+          ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap:// -f $CURRENT_DIRECTORY/.build/ldap/configuration/ldif/mutillidae.ldif || true;
+
+      # Step 5: Run Database Build Script
+      - name: Run Database Build Script
+        run: |
+
+          # Wait for the database to start.
+          sleep 30;
+
+          # Requesting Mutillidae database be built.
+          curl http://127.0.0.1/set-up-database.php;
+
+      # Step 6: Check if web application up
+      - name: Check Web Application
+        run: |
+
+          # This should return the index.php home page content
+          curl http://127.0.0.1:8888/;
+
+      # Step 7: Set up Java for StackHawk
+      - uses: actions/setup-java@main
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      # Step 8: Run StackHawk Scan
+      - name: Run StackHawk Scan
+        uses: stackhawk/hawkscan-action@main
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}     # Secret key for authentication.
+          configurationFiles: .github/workflows/config/stackhawk.yml  # Path to configuration file.
+          codeScanningAlerts: true   # Enable code scanning alerts.
+          githubToken: ${{ github.token }}   # GitHub token for authentication to Code Scanning Alerts
