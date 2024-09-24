@@ -10,7 +10,8 @@
 	*/
 
 	/* Instantiate CSRF Protection object */
-	require_once (__SITE_ROOT__.'/classes/CSRFTokenHandler.php');
+	use CSRFTokenHandler;
+	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
 	if (!isSet($logged_in_user)) {
