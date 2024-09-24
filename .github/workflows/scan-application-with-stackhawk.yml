@@ -72,7 +72,7 @@ jobs:
           # ldapadd will exit with non-zero exit code if user already exists in the directory
           # Use || true to force zero exit code
           CURRENT_DIRECTORY=$(pwd);
-          ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap:// -f $CURRENT_DIRECTORY/.build/ldap/configuration/ldif/mutillidae.ldif || true;
+          ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap://localhost:389 -f $CURRENT_DIRECTORY/.build/ldap/configuration/ldif/mutillidae.ldif || true;
 
       # Step 5: Run Database Build Script
       - name: Run Database Build Script
