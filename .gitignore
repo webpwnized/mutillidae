@@ -1,0 +1,10 @@
+# Ignore dotenv environment variable file
+.env
+.env.*
+
+# Ignore log files
+*.log
+
+# Ignore VS Code settings
+.vscode/
+

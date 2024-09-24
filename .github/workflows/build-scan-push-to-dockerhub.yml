@@ -48,7 +48,7 @@ jobs:
       - name: Get version from version file
         working-directory: mutillidae  # Set working directory to mutillidae
         run: |
-          echo "Version: $(cat version)"
+          echo "Version of Mutillidae: $(cat version)"
           VERSION=$(cat version)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
         shell: bash
