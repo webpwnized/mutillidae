@@ -30,7 +30,7 @@ jobs:
 
     container:
       # Use a Docker image with Semgrep pre-installed.
-      image: returntocorp/semgrep:latest
+      image: semgrep/semgrep:latest
 
     # Skip any Pull Request created by the Dependabot to avoid permission issues.
     if: (github.actor != 'dependabot[bot]')
