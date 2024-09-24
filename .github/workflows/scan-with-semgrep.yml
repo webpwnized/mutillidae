@@ -61,7 +61,7 @@ jobs:
       - name: Run Semgrep High-Confidence SAST Scan
         run: |
           echo "Starting High-Confidence SAST scan with Semgrep..."
-          semgrep --config p/ci --sarif --output=semgrep-ci-results.sarif
+          semgrep --config p/ci --sarif --output=semgrep-ci-results.sarif --verbose
         continue-on-error: true
 
       # Step 5: Check if CI SARIF file exists and log the result
