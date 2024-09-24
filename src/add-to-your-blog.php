@@ -14,7 +14,7 @@
 	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
-	if (!isSet($logged_in_user)) {
+	if (!isset($logged_in_user)) {
 		throw new Exception("$logged_in_user is not set. Page add-to-your-blog.php requires this variable.");
 	}// end if
 
