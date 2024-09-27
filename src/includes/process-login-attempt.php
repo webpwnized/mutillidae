@@ -6,13 +6,14 @@
 			$LogHandler->writeToLog($lMessage);
 		} catch (Exception $e) {
 			/*do nothing*/
-		};
-	};//end function logLoginAttempt
+		}
+	}//end function logLoginAttempt
 
     try {
 		$lQueryString = "";
     	switch ($_SESSION["security-level"]){
-	   		case "0": // This code is insecure
+			default: // Default case: This code is insecure
+			case "0": // This code is insecure
 	   		case "1": // This code is insecure
 				/*
 				 * Grab username and password from parameters.
@@ -23,8 +24,8 @@
 				 */
 				$lUsername = $_REQUEST["username"];
 				$lPassword = $_REQUEST["password"];
-	   			$lProtectCookies = FALSE;
-	   			$lConfidentialityRequired = FALSE;
+	   			$lProtectCookies = false;
+	   			$lConfidentialityRequired = false;
 	   		break;
 
 			case "2":
@@ -34,8 +35,8 @@
 	   			/* Restrict paramters to POST */
 				$lUsername = $_POST["username"];
 				$lPassword = $_POST["password"];
-	   			$lProtectCookies = TRUE;
-	   			$lConfidentialityRequired = TRUE;
+	   			$lProtectCookies = true;
+	   			$lConfidentialityRequired = true;
 	   		break;
 	   	}// end switch
 
@@ -48,8 +49,8 @@
 	   	$cUSERNAME_OR_PASSWORD_INCORRECT = 5;
 
 	   	$lAuthenticationAttemptResult = $cUNSURE;
-	   	$lAuthenticationAttemptResultFound = FALSE;
-	   	$lKeepGoing = TRUE;
+	   	$lAuthenticationAttemptResultFound = false;
+	   	$lKeepGoing = true;
 	   	$lQueryResult=NULL;
 
    		logLoginAttempt("User {$lUsername} attempting to authenticate");
@@ -60,36 +61,34 @@
    		    }else{
    		        $lAuthenticationAttemptResult = $cACCOUNT_DOES_NOT_EXIST;
    		    }// end if
-   			$lKeepGoing = FALSE;
+   			$lKeepGoing = false;
    			logLoginAttempt("Login Failed: Account {$lUsername} does not exist");
    		}// end if accountExists
 
-		if ($lKeepGoing){
-   			if (!$SQLQueryHandler->authenticateAccount($lUsername, $lPassword)){
-   			    if ($lConfidentialityRequired){
-   			        $lAuthenticationAttemptResult = $cUSERNAME_OR_PASSWORD_INCORRECT;
-   			    }else{
-   			        $lAuthenticationAttemptResult = $cPASSWORD_INCORRECT;
-   			    }// end if
-	   			$lKeepGoing = FALSE;
-	   			logLoginAttempt("Login Failed: Password for {$lUsername} incorrect");
-	   		}//end if authenticateAccount
-   		}//end if $lKeepGoing
-
+		if ($lKeepGoing && !$SQLQueryHandler->authenticateAccount($lUsername, $lPassword)){
+			if ($lConfidentialityRequired){
+				$lAuthenticationAttemptResult = $cUSERNAME_OR_PASSWORD_INCORRECT;
+			}else{
+				$lAuthenticationAttemptResult = $cPASSWORD_INCORRECT;
+			}// end if
+			$lKeepGoing = false;
+			logLoginAttempt("Login Failed: Password for {$lUsername} incorrect");
+		}//end if authenticateAccount
+   		
 		$lQueryResult = $SQLQueryHandler->getUserAccount($lUsername, $lPassword);
 
 		if (isset($lQueryResult->num_rows)){
    			if ($lQueryResult->num_rows > 0) {
-	   			$lAuthenticationAttemptResultFound = TRUE;
+	   			$lAuthenticationAttemptResultFound = true;
    			}//end if
 		}//end if
 
 		if ($lAuthenticationAttemptResultFound){
 			$lRecord = $lQueryResult->fetch_object();
-			$_SESSION['loggedin'] = 'True';
+			$_SESSION["user_is_logged_in"] = 'True';
 			$_SESSION['uid'] = $lRecord->cid;
-			$_SESSION['logged_in_user'] = $lRecord->username;
-			$_SESSION['logged_in_usersignature'] = $lRecord->mysignature;
+			$_SESSION["logged_in_user"] = $lRecord->username;
+			$_SESSION["logged_in_user_signature"] = $lRecord->mysignature;
 			$_SESSION['is_admin'] = $lRecord->is_admin;
 
    				/*
@@ -114,8 +113,8 @@
 				    'expires' => 0,              // 0 means session cookie
 				    'path' => '/',               // '/' means entire domain
 				    //'domain' => '.example.com', // default is current domain
-				    'secure' => FALSE,           // true or false
-				    'httponly' => TRUE,         // true or false
+				    'secure' => false,           // true or false
+				    'httponly' => true,         // true or false
 				    'samesite' => 'Strict'          // None || Lax  || Strict
 				);
 				setcookie("username", $lUsernameCookie, $l_cookie_options);
@@ -127,8 +126,8 @@
 				    'expires' => 0,              // 0 means session cookie
 				    'path' => '/',               // '/' means entire domain
 				    //'domain' => '.example.com', // default is current domain
-				    'secure' => FALSE,           // true or false
-				    'httponly' => FALSE,         // true or false
+				    'secure' => false,           // true or false
+				    'httponly' => false,         // true or false
 				    'samesite' => 'Lax'          // None || Lax  || Strict
 				);
 				setrawcookie("username", $lUsernameCookie, $l_cookie_options);

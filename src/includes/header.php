@@ -18,13 +18,13 @@
             break;
     }// end switch
 
-	if($_SESSION['loggedin'] == "True"){
+	if($_SESSION["user_is_logged_in"] == "True"){
 
 	    switch ($lSecurityLevel){
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
 	   			// DO NOTHING: This is equivalent to using client side security
-				$logged_in_user = $_SESSION['logged_in_user'];
+				$logged_in_user = $_SESSION["logged_in_user"];
 			break;
 
 	   		case "2":
@@ -33,7 +33,7 @@
 	   		case "5": // This code is fairly secure
 	   			// encode the entire message following OWASP standards
 	   			// this is HTML encoding because we are outputting data into HTML
-				$logged_in_user = $Encoder->encodeForHTML($_SESSION['logged_in_user']);
+				$logged_in_user = $Encoder->encodeForHTML($_SESSION["logged_in_user"]);
 			break;
 	   	}// end switch
 
@@ -54,7 +54,7 @@
 	} else {
 		$logged_in_user = "anonymous";
 		$lAuthenticationStatusMessage = "Not Logged In";
-	}// end if($_SESSION['loggedin'] == "True")
+	}// end if($_SESSION["user_is_logged_in"] == "True")
 
 	if ($_SESSION["EnforceSSL"] == "True"){
 		$lEnforceSSLLabel = "Drop TLS";
@@ -109,7 +109,7 @@
 			<a href="index.php?page=home.php&popUpNotificationCode=HPH0">Home</a>
 			|
 			<?php
-				if ($_SESSION['loggedin'] == 'True'){
+				if ($_SESSION["user_is_logged_in"] == 'True'){
 					echo '<a href="index.php?do=logout">Logout</a>';
 				} else {
 					echo '<a href="index.php?page=login.php">Login/Register</a>';

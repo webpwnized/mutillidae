@@ -3,18 +3,18 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
-	require_once ('./includes/constants.php');
+	require_once './includes/constants.php';
 
 	/* ------------------------------------------------------
 	 * INCLUDE CLASS DEFINITION PRIOR TO INITIALIZING SESSION
 	 * ------------------------------------------------------ */
-	require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
-	require_once (__SITE_ROOT__.'/classes/MySQLHandler.php');
-	require_once (__SITE_ROOT__.'/classes/SQLQueryHandler.php');
-	require_once (__SITE_ROOT__.'/classes/CustomErrorHandler.php');
-	require_once (__SITE_ROOT__.'/classes/LogHandler.php');
-	require_once (__SITE_ROOT__.'/classes/RemoteFileHandler.php');
-	require_once (__SITE_ROOT__.'/classes/RequiredSoftwareHandler.php');
+	require_once __SITE_ROOT__.'/classes/EncodingHandler.php';
+	require_once __SITE_ROOT__.'/classes/MySQLHandler.php';
+	require_once __SITE_ROOT__.'/classes/SQLQueryHandler.php';
+	require_once __SITE_ROOT__.'/classes/CustomErrorHandler.php';
+	require_once __SITE_ROOT__.'/classes/LogHandler.php';
+	require_once __SITE_ROOT__.'/classes/RemoteFileHandler.php';
+	require_once __SITE_ROOT__.'/classes/RequiredSoftwareHandler.php';
 
     /* ------------------------------------------
      * INITIALIZE SESSION
@@ -39,7 +39,8 @@
     }// end if
 
     switch ($_SESSION["security-level"]){
-    	case "0": // This code is insecure
+    	default: // Add a default case. This code is insecure.
+		case "0": // This code is insecure
     	case "1": // This code is insecure
 		    if ($_SESSION["EnforceSSL"] == "True"){
 		    	if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS']!="on"){
@@ -56,7 +57,7 @@
     	case "5": // This code is fairly secure
 		    if ($_SESSION["EnforceSSL"] == "True"){
 		    	if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS']!="on"){
-		    		require_once('ssl-enforced.php');
+		    		require_once 'ssl-enforced.php';
 		    		exit();
 		    	}//end if
 		    }//end if
@@ -68,10 +69,10 @@
      * ----------------------------------------------------
      * user is logged out by default
      */
-    if (!isset($_SESSION["loggedin"])){
-	    $_SESSION['loggedin'] = 'False';
-	    $_SESSION['logged_in_user'] = '';
-	    $_SESSION['logged_in_usersignature'] = '';
+    if (!isset($_SESSION["user_is_logged_in"])){
+	    $_SESSION["user_is_logged_in"] = 'False';
+	    $_SESSION["logged_in_user"] = '';
+	    $_SESSION["logged_in_user_signature"] = '';
     }// end if
 
     /* ----------------------------------------------------
@@ -107,14 +108,14 @@
 	   	switch ($_SESSION["security-level"]){
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
-	   			$lProtectCookies = FALSE;
+	   			$lProtectCookies = false;
 	   		break;
 
 			case "2":
 			case "3":
 			case "4":
 	   		case "5": // This code is fairly secure
-	   			$lProtectCookies = TRUE;
+	   			$lProtectCookies = true;
 	   		break;
 	   	}// end switch
 
@@ -122,15 +123,15 @@
 	   	    'expires' => 0,              // 0 means session cookie
 	   	    'path' => '/',               // '/' means entire domain
 	   	    //'domain' => '.example.com', // default is current domain
-	   	    'secure' => FALSE,           // true or false
-	   	    'httponly' => FALSE,         // true or false
+	   	    'secure' => false,           // true or false
+	   	    'httponly' => false,         // true or false
 	   	    'samesite' => 'Lax'          // None || Lax  || Strict
 	   	);
 
 	   	if ($lProtectCookies){
-	   	    /* The showhints cookie is unprotected on purpose because
-	   	     * it is used in one of the lab assignments */
-	   	    //$l_cookie_options['httponly'] = TRUE;
+	   	    /* The showhints cookie does not have HTTPOnly
+			 on purpose because
+	   	     it is used in one of the lab assignments */
 	   	    $l_cookie_options['samesite'] = 'Strict';
 	   	}// end if
 
@@ -144,6 +145,7 @@
 		switch ($l_showhints){
 			case 0: $_SESSION["hints-enabled"] = "Disabled"; break;
 			case 1: $_SESSION["hints-enabled"] = "Enabled"; break;
+			default: $_SESSION["hints-enabled"] = "Enabled"; break;
 		}// end switch
 	}//end if
 
@@ -156,27 +158,15 @@
  	* Test for database availability
  	* ------------------------------------------ */
 
-	function handleError($errno, $errstr, $errfile, $errline, array $errcontext){
-		/*
-		restore_error_handler();
-		restore_exception_handler();
-		header("Location: database-offline.php", true, 302);
-		exit();
-		*/
-	}// end function
-
-	function handleException($exception){
-		//restore_error_handler();
+	function handleException(){
 		restore_exception_handler();
 		header("Location: database-offline.php", true, 302);
 		exit();
 	}// end function
 
 	if ($_SESSION["UserOKWithDatabaseFailure"] == "FALSE") {
-		//set_error_handler('handleError', E_ALL & ~E_NOTICE);
 		set_exception_handler('handleException');
-	    	MySQLHandler::databaseAvailable();
-		//restore_error_handler();
+	    MySQLHandler::databaseAvailable();
 		restore_exception_handler();
 	}//end if
 
@@ -248,13 +238,13 @@
 				    // should never be in cookies.
 				    if ($lQueryResult->num_rows > 0) {
 					    $row = $lQueryResult->fetch_object();
-						$_SESSION['loggedin'] = 'True';
+						$_SESSION["user_is_logged_in"] = 'True';
 						$_SESSION['uid'] = $row->cid;
-						$_SESSION['logged_in_user'] = $row->username;
-						$_SESSION['logged_in_usersignature'] = $row->mysignature;
+						$_SESSION["logged_in_user"] = $row->username;
+						$_SESSION["logged_in_user_signature"] = $row->mysignature;
 						$_SESSION['is_admin'] = $row->is_admin;
-						if (isset($_SESSION['logged_in_user'])){
-						    header('Logged-In-User: '.$_SESSION['logged_in_user'], true);
+						if (isset($_SESSION["logged_in_user"])){
+						    header('Logged-In-User: '.$_SESSION["logged_in_user"], true);
 						}// end if
 			    	}// end if ($result->num_rows > 0)
 
@@ -269,8 +259,8 @@
 	   			 * (PHP defends itself against HTTP response splitting by
 	   			 * filtering "new line" characters)
 	   			 */
-   			    if (isset($_SESSION['logged_in_user'])){
-   			        header('Logged-In-User: '.$_SESSION['logged_in_user'], true);
+   			    if (isset($_SESSION["logged_in_user"])){
+   			        header('Logged-In-User: '.$_SESSION["logged_in_user"], true);
    			    }// end if
    			}// end if
 
@@ -288,8 +278,8 @@
   			 * prevent response splitting. The critical chars in response splitting
   			 * are CR-LF. Dont fall for filtering. Just encode it all.
   			 */
-   		    if (isset($_SESSION['logged_in_user'])){
-   		        header('Logged-In-User: '.$Encoder->encodeForHTML($_SESSION['logged_in_user']), TRUE);
+   		    if (isset($_SESSION["logged_in_user"])){
+   		        header('Logged-In-User: '.$Encoder->encodeForHTML($_SESSION["logged_in_user"]), true);
    		    }// end if
    		break;
    	}// end switch
@@ -304,16 +294,16 @@
    		case "0": // This code is insecure
    		case "1":
 			/* Built-in user-agent defenses */
-			header("X-XSS-Protection: 0;", TRUE);
+			header("X-XSS-Protection: 0;", true);
 
 			/* Disable HSTS */
-			header("Strict-Transport-Security: max-age=0", TRUE);
+			header("Strict-Transport-Security: max-age=0", true);
 
 			// HTTP/1.1 cache control
-			header("Cache-Control: public", TRUE);
+			header("Cache-Control: public", true);
 
 			/* Referrer Policy */
-			header("Referrer-Policy: unsafe-url", TRUE);
+			header("Referrer-Policy: unsafe-url", true);
 
 			header_remove("Pragma");
 
@@ -326,27 +316,27 @@
    		case "4":
    		case "5": // This code is fairly secure
 			/* Built-in user-agent defenses */
-			header("X-XSS-Protection: 1; mode=block;", TRUE);
+			header("X-XSS-Protection: 1; mode=block;", true);
 
 			/* Enable HSTS - I would like to enable this but the problem is this header caches so messes
 			* up labs once the user sets the security level back to level 0*/
-			//header("Strict-Transport-Security: max-age=31536000; includeSubDomains", TRUE);
+			//header("Strict-Transport-Security: max-age=31536000; includeSubDomains", true);
 
 			// HTTP/1.1 cache control
-			header('Cache-Control: no-store, no-cache', TRUE);
+			header('Cache-Control: no-store, no-cache', true);
 
 			// HTTP/1.0 cache-control
-			header("Pragma: no-cache", TRUE);
+			header("Pragma: no-cache", true);
 
 			/* Cross-frame scripting and click-jacking */
-			header('X-FRAME-OPTIONS: DENY', TRUE);
-			header("Content-Security-Policy: frame-ancestors 'none';", TRUE);
+			header('X-FRAME-OPTIONS: DENY', true);
+			header("Content-Security-Policy: frame-ancestors 'none';", true);
 
 			/* Content sniffing */
-			header("X-Content-Type-Options: nosniff", TRUE);
+			header("X-Content-Type-Options: nosniff", true);
 
 			/* Referrer Policy */
-			header("Referrer-Policy: no-referrer", TRUE);
+			header("Referrer-Policy: no-referrer", true);
 
 			/* Server version banners */
 			header_remove("X-Powered-By");
@@ -360,7 +350,7 @@
    	/* ------------------------------------------
    	 * Set the HTTP content-type of this page
    	 * ------------------------------------------ */
-   	header("Content-Type: text/html;charset=UTF-8", TRUE);
+   	header("Content-Type: text/html;charset=UTF-8", true);
 
 	/* ------------------------------------------
      * DISPLAY PAGE
@@ -444,10 +434,10 @@
 		  			/* To prevent unauthorized access, we start with the basic priciple
 		  			 * of "DENY ALL".
 		  			 */
-		   			$lUserAuthorized = FALSE;
+		   			$lUserAuthorized = false;
 		   			if(isset($_SESSION['is_admin'])){
 		   				if($_SESSION['is_admin'] == 'TRUE'){
-		   					$lUserAuthorized = TRUE;
+		   					$lUserAuthorized = true;
 		   				}// end if is_admin
 		   			}// end if isseet $_SESSION['is_admin']
 
@@ -489,8 +479,8 @@
                 "report-uri includes/capture-data.php;" .
                 "report-to csp-endpoint;";
 
-        header($lReportToHeader, TRUE);
-        header($lCSP, TRUE);
+        header($lReportToHeader, true);
+        header($lCSP, true);
     }else{
         $CSPNonce = "";
     }// end if
