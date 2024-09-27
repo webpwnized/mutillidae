@@ -40,10 +40,10 @@
     	break;//case "toggle-enforce-ssl"
 
     	case "logout":
-    	    logMessage("Logout user: {$_SESSION['logged_in_user']} ({$_SESSION['uid']})");
-		    $_SESSION["loggedin"] = "False";
-		    $_SESSION['logged_in_user'] = '';
-		    $_SESSION['logged_in_usersignature'] = '';
+    	    logMessage("Logout user: {$_SESSION["logged_in_user"]} ({$_SESSION['uid']})");
+		    $_SESSION["user_is_logged_in"] = "False";
+		    $_SESSION["logged_in_user"] = '';
+		    $_SESSION["logged_in_user_signature"] = '';
 			$_SESSION['uid'] = '';
 			$_SESSION['is_admin'] = 'FALSE';
 

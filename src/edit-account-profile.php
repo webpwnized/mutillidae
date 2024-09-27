@@ -1,26 +1,27 @@
 <?php
-    require_once (__SITE_ROOT__.'/classes/CSRFTokenHandler.php');
+    require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
     $lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "edit-account-profile");
     
     switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure
         case "0": // This code is insecure
             // DO NOTHING: This is equivalent to using client side security
-            $lEnableJavaScriptValidation = FALSE;
-            $lEnableHTMLControls = FALSE;
-            $lProtectAgainstMethodTampering = FALSE;
-            $lProtectAgainstIDOR = FALSE;
-            $lProtectAgainstPasswordLeakage = FALSE;
-            $lEncodeOutput = FALSE;
+            $lEnableJavaScriptValidation = false;
+            $lEnableHTMLControls = false;
+            $lProtectAgainstMethodTampering = false;
+            $lProtectAgainstIDOR = false;
+            $lProtectAgainstPasswordLeakage = false;
+            $lEncodeOutput = false;
             break;
             
         case "1": // This code is insecure
             // DO NOTHING: This is equivalent to using client side security
-            $lEnableJavaScriptValidation = TRUE;
-            $lEnableHTMLControls = TRUE;
-            $lProtectAgainstMethodTampering = FALSE;
-            $lProtectAgainstIDOR = FALSE;
-            $lProtectAgainstPasswordLeakage = FALSE;
-            $lEncodeOutput = FALSE;
+            $lEnableJavaScriptValidation = true;
+            $lEnableHTMLControls = true;
+            $lProtectAgainstMethodTampering = false;
+            $lProtectAgainstIDOR = false;
+            $lProtectAgainstPasswordLeakage = false;
+            $lEncodeOutput = false;
             break;
             
         case "2":
@@ -31,12 +32,12 @@
              * Concerning SQL Injection, use parameterized stored procedures. Parameterized
              * queries is not good enough. You cannot use least privilege with queries.
              */
-            $lEnableJavaScriptValidation = TRUE;
-            $lEnableHTMLControls = TRUE;
-            $lProtectAgainstMethodTampering = TRUE;
-            $lProtectAgainstIDOR = TRUE;
-            $lProtectAgainstPasswordLeakage = TRUE;
-            $lEncodeOutput = TRUE;
+            $lEnableJavaScriptValidation = true;
+            $lEnableHTMLControls = true;
+            $lProtectAgainstMethodTampering = true;
+            $lProtectAgainstIDOR = true;
+            $lProtectAgainstPasswordLeakage = true;
+            $lEncodeOutput = true;
             break;
     }// end switch
     
@@ -46,14 +47,14 @@
 
 <div class="page-title">Edit Profile</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <?php
 
 	if ($lFormSubmitted){
 		
-		try {					
+		try {
 			$lValidationFailed = false;
 					
 	   		if ($lProtectAgainstMethodTampering) {
@@ -84,16 +85,16 @@
 			}// end if
 					
 		   	if (strlen($lUsername) == 0) {
-		   		$lValidationFailed = TRUE;
+		   		$lValidationFailed = true;
 				echo '<h2 class="error-message">Username cannot be blank</h2>';
 		   	}// end if
 					
 		   	if ($lPassword != $lConfirmedPassword ) {
-				$lValidationFailed = TRUE;
+				$lValidationFailed = true;
 		   		echo '<h2 class="error-message">Passwords do not match</h2>';
 		   	}// end if
 						   	
-		   	if (!$lValidationFailed){					
+		   	if (!$lValidationFailed){
 		   		$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lUserSignature);
 				echo '<div class="success-message">Profile updated for ' . $lUsernameText . '</div>';
 				$LogHandler->writeToLog("Profile updated for: " . $lUsername);
@@ -110,7 +111,7 @@
 	    if(isset($_SESSION['uid'])){
 	       $lUserUID = $_SESSION['uid'];
 	    }else{
-	        $lUserUID = NULL;
+			$lUserUID = null;
 	    } // if isset
 	}else{
 	    if(isset($_REQUEST['uid'])){
@@ -119,7 +120,7 @@
 	        if(isset($_COOKIE['uid'])){
 	            $lUserUID = $_COOKIE['uid'];
 	        }else{
-	            $lUserUID = NULL;
+				$lUserUID = null;
 	        } // if isset
 	    } // if isset
 	} // $lProtectAgainstIDOR
@@ -129,7 +130,7 @@
 	$lUsername = "";
 	$lPassword = "";
 	$lSignature = "";
-	$lResultsFound = FALSE;
+	$lResultsFound = false;
 	
 	if($lUserLoggedIn){
 	    try {
@@ -137,9 +138,7 @@
 	           $LogHandler->writeToLog("Got account with UID : " . $lUserUID);
 	           
 	           if (isset($lQueryResult->num_rows)){
-	               if ($lQueryResult->num_rows > 0) {
-	                   $lResultsFound = TRUE;
-	               }//end if
+				   $lResultsFound = $lQueryResult->num_rows > 0;
 	           }//end if
 
 	           if($lResultsFound){
@@ -294,7 +293,7 @@
 				Dont have an account? <a href="index.php?page=register.php">Please register here</a>
 			</td>
 		</tr>
-	</table>	
+	</table>
 </div>
 
 <script>

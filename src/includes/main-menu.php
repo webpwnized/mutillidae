@@ -1,6 +1,6 @@
 <?php
 	$lUserIDString = "";
-	if($_SESSION['loggedin'] == "True"){
+	if($_SESSION["user_is_logged_in"] == "True"){
 	    $lUserIDString = "&uid=" . $lUserID;
 	} //end if
 ?>

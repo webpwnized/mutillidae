@@ -1,20 +1,25 @@
 <?php
 	try {
-    	switch ($_SESSION["security-level"]){
-    		case "0": // This code is insecure.
-				$lEnableJavaScriptValidation = FALSE;
-				$lEnableHTMLControls = FALSE;
+		switch ($_SESSION["security-level"]){
+			case "0": // This code is insecure.
+				$lEnableJavaScriptValidation = false;
+				$lEnableHTMLControls = false;
 			break;
-
-    		case "1": // This code is insecure.
-	   		case "2":
-	   		case "3":
-	   		case "4":
-    		case "5": // This code is fairly secure
-    			$lEnableJavaScriptValidation = TRUE;
-				$lEnableHTMLControls = TRUE;
-    		break;
-    	}// end switch
+		
+			case "1": // This code is insecure.
+			case "2":
+			case "3":
+			case "4":
+			case "5": // This code is fairly secure
+				$lEnableJavaScriptValidation = true;
+				$lEnableHTMLControls = true;
+			break;
+		
+			default: // Add a default case
+				$lEnableJavaScriptValidation = false;
+				$lEnableHTMLControls = false;
+			break;
+		}// end switch
 
 	} catch(Exception $e){
 		echo $CustomErrorHandler->FormatError($e, "Error setting up configuration.");
@@ -24,7 +29,7 @@
 <script type="text/javascript">
 <!--
 	<?php
-		if ($_SESSION["loggedin"]=="True") {
+		if ($_SESSION["user_is_logged_in"]=="True") {
 			echo "var l_loggedIn = true;" . PHP_EOL;
 		}else {
 			echo "var l_loggedIn = false;" . PHP_EOL;
@@ -93,7 +98,7 @@
 							autofocus="autofocus"
 					<?php
 						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="15" required="required"');
+							echo 'minlength="1" maxlength="15" required="required"';
 						}// end if
 					?>
 					/>
@@ -105,7 +110,7 @@
 					<input type="password" name="password" size="20"
 					<?php
 						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="15" required="required"');
+							echo 'minlength="1" maxlength="15" required="required"';
 						}// end if
 					?>
 					/>
@@ -130,7 +135,7 @@
 <div id="id-log-out-div" style="text-align: center; display: none;">
 	<table>
 		<tr>
-			<td colspan="2" class="hint-header">You are logged in as <?php echo $_SESSION['logged_in_user']; ?></td>
+			<td colspan="2" class="hint-header">You are logged in as <?php echo $_SESSION["logged_in_user"]; ?></td>
 		</tr>
 		<tr><td></td></tr>
 		<tr><td></td></tr>
