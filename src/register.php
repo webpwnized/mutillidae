@@ -1,22 +1,33 @@
-<?php 
-	require_once (__SITE_ROOT__.'/classes/CSRFTokenHandler.php');
+<?php
+
+	function generateApiToken($length = 32 /* 32 bytes = 256 bits */){ {
+		// Generates a secure 32-byte token for use in API calls
+		// The token is generated using a cryptographically secure pseudorandom number generator
+		// The token is then converted to hexadecimal format
+		// The token will be 64 characters long
+		return bin2hex(random_bytes($length));
+	}
+
+	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
+	$lHTMLControls = 'minlength="1" maxlength="15" required="required"';
 
 	switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure
 		case "0": // This code is insecure
 			// DO NOTHING: This is equivalent to using client side security
-			$lEnableJavaScriptValidation = FALSE;
-			$lEnableHTMLControls = FALSE;
-			$lProtectAgainstMethodTampering = FALSE;
-			$lEncodeOutput = FALSE;
+			$lEnableJavaScriptValidation = false;
+			$lEnableHTMLControls = false;
+			$lProtectAgainstMethodTampering = false;
+			$lEncodeOutput = false;
 			break;
 	
 		case "1": // This code is insecure
 			// DO NOTHING: This is equivalent to using client side security
-			$lEnableJavaScriptValidation = TRUE;
-			$lEnableHTMLControls = TRUE;
-			$lProtectAgainstMethodTampering = FALSE;
-			$lEncodeOutput = FALSE;
+			$lEnableJavaScriptValidation = true;
+			$lEnableHTMLControls = true;
+			$lProtectAgainstMethodTampering = false;
+			$lEncodeOutput = false;
 			break;
 	
 		case "2":
@@ -27,10 +38,10 @@
 			 * Concerning SQL Injection, use parameterized stored procedures. Parameterized
 			 * queries is not good enough. You cannot use least privilege with queries.
 			 */
-			$lEnableJavaScriptValidation = TRUE;
-			$lEnableHTMLControls = TRUE;
-			$lProtectAgainstMethodTampering = TRUE;
-			$lEncodeOutput = TRUE;
+			$lEnableJavaScriptValidation = true;
+			$lEnableHTMLControls = true;
+			$lProtectAgainstMethodTampering = true;
+			$lEncodeOutput = true;
 			break;
 	}// end switch
 
@@ -40,13 +51,13 @@
 
 <div class="page-title">Register for an Account</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <?php
 	if ($lFormSubmitted){
 		
-		try {					
+		try {
 			$lValidationFailed = false;
 					
 	   		if ($lProtectAgainstMethodTampering) {
@@ -77,21 +88,22 @@
 			}// end if
 					
 		   	if (strlen($lUsername) == 0) {
-		   		$lValidationFailed = TRUE;
+		   		$lValidationFailed = true;
 				echo '<h2 class="error-message">Username cannot be blank</h2>';
 		   	}// end if
 					
 		   	if ($lPassword != $lConfirmedPassword ) {
-				$lValidationFailed = TRUE;
+				$lValidationFailed = true;
 		   		echo '<h2 class="error-message">Passwords do not match</h2>';
 		   	}// end if
 						   	
-		   	if (!$lValidationFailed){					
-		   		$lRowsAffected = $SQLQueryHandler->insertNewUserAccount($lUsername, $lPassword, $lUserSignature);
+		   	if (!$lValidationFailed){
+				$lAPIToken = generateApiToken();
+		   		$lRowsAffected = $SQLQueryHandler->insertNewUserAccount($lUsername, $lPassword, $lUserSignature, $lAPIToken);
 				echo '<h2 class="success-message">Account created for ' . $lUsernameText .'. '.$lRowsAffected.' rows inserted.</h2>';
 				$LogHandler->writeToLog("Added account for: " . $lUsername);
 		   	}// end if (!$lValidationFailed)
-			
+
 		} catch (Exception $e) {
 			echo $CustomErrorHandler->FormatError($e, "Failed to add account");
 			$LogHandler->writeToLog("Failed to add account for: " . $lUsername);			
@@ -107,7 +119,7 @@
 			echo "var lValidateInput = \"TRUE\"" . PHP_EOL;
 		}else{
 			echo "var lValidateInput = \"FALSE\"" . PHP_EOL;
-		}// end if		
+		}// end if
 	?>
 
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
@@ -136,7 +148,7 @@
 
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/rest/ws-user-account.php">
-		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" />
+		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" alt="AJAX" />
 		<span style="font-weight:bold;">Switch to RESTful Web Service Version of this Page</span>
 	</a>
 </span>
@@ -158,7 +170,7 @@
 					<input type="text" name="username" size="15" autofocus="autofocus"
 						<?php
 							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="15" required="required"');
+								echo 'minlength="1" maxlength="15" required="required"';
 							}// end if
 						?>
 					/>
@@ -168,11 +180,7 @@
 				<td class="label">Password</td>
 				<td>
 					<input type="password" name="password" size="15" 
-						<?php
-							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="15" required="required"');
-							}// end if
-						?>
+						<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>
 					&nbsp;
 					<a href="index.php?page=password-generator.php&username=<?php echo $logged_in_user ?>" target="_blank">Password Generator</a>
@@ -182,11 +190,7 @@
 				<td class="label">Confirm Password</td>
 				<td>
 					<input type="password" name="confirm_password" size="15"
-						<?php
-							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="15" required="required"');
-							}// end if
-						?>
+						<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>
 				</td>
 			</tr>
@@ -194,14 +198,10 @@
 				<td class="label">Signature</td>
 				<td>
 					<textarea rows="3" cols="50" name="my_signature"
-						<?php
-							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="100" required="required"');
-							}// end if
-						?>
+						<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					></textarea>
 				</td>
-			</tr>			
+			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" style="text-align:center;">

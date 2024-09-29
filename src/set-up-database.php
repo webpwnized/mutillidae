@@ -132,6 +132,7 @@
     			 'is_admin VARCHAR(5),'.
     			 'firstname TEXT, '.
     			 'lastname TEXT, '.
+				 'api_token VARCHAR(64),' .
     			 'PRIMARY KEY(cid))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {

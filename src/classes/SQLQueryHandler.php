@@ -5,9 +5,9 @@
 if (!defined('__SITE_ROOT__')){if (!defined('__SITE_ROOT__')){define('__SITE_ROOT__', dirname(dirname(__FILE__)));}}
 
 class SQLQueryHandler {
-	protected $encodeOutput = FALSE;
-	protected $stopSQLInjection = FALSE;
-	protected $mLimitOutput = FALSE;
+	protected $encodeOutput = false;
+	protected $stopSQLInjection = false;
+	protected $mLimitOutput = false;
 	protected $mSecurityLevel = 0;
 
 	// private objects
@@ -18,11 +18,12 @@ class SQLQueryHandler {
 		$this->mSecurityLevel = $pSecurityLevel;
 
 		switch ($this->mSecurityLevel){
+			default: // Default case: This code is insecure, we are not encoding output
 	   		case "0": // This code is insecure, we are not encoding output
 			case "1": // This code is insecure, we are not encoding output
-				$this->encodeOutput = FALSE;
-				$this->stopSQLInjection = FALSE;
-				$this->mLimitOutput = FALSE;
+				$this->encodeOutput = false;
+				$this->stopSQLInjection = false;
+				$this->mLimitOutput = false;
 	   		break;
 
 			case "2":
@@ -30,9 +31,9 @@ class SQLQueryHandler {
 			case "4":
 	   		case "5": // This code is fairly secure
 	  			// If we are secure, then we encode all output.
-	   			$this->encodeOutput = TRUE;
-	   			$this->stopSQLInjection = TRUE;
-	   			$this->mLimitOutput = TRUE;
+	   			$this->encodeOutput = true;
+	   			$this->stopSQLInjection = true;
+	   			$this->mLimitOutput = true;
 	   		break;
 	   	}// end switch
 	}// end function
@@ -42,7 +43,7 @@ class SQLQueryHandler {
 		$this->doSetSecurityLevel($pSecurityLevel);
 
 		//initialize encoder
-		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
+		require_once __SITE_ROOT__.'/classes/EncodingHandler.php';
 		$this->mEncoder = new EncodingHandler();
 
 		/* Initialize MySQL Connection handler */
@@ -74,7 +75,7 @@ class SQLQueryHandler {
 
 	public function getPageHelpTexts($pPageName){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pPageName = $this->mMySQLHandler->escapeDangerousCharacters($pPageName);
 		}// end if
 
@@ -96,7 +97,7 @@ class SQLQueryHandler {
 
 	public function getPageLevelOneHelpIncludeFiles($pPageName){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pPageName = $this->mMySQLHandler->escapeDangerousCharacters($pPageName);
 		}// end if
 
@@ -115,8 +116,8 @@ class SQLQueryHandler {
 
 	public function getLevelOneHelpIncludeFile($pIncludeFileKey){
 
-		if ($this->stopSQLInjection == TRUE){
-			$pPageName = $this->mMySQLHandler->escapeDangerousCharacters($pIncludeFileKey);
+		if ($this->stopSQLInjection){
+			$pIncludeFileKey = $this->mMySQLHandler->escapeDangerousCharacters($pIncludeFileKey);
 		}// end if
 
 		$lQueryString  = "
@@ -139,7 +140,7 @@ class SQLQueryHandler {
 			FROM captured_data
 			ORDER BY capture_date DESC";
 
-		if ($this->mLimitOutput == TRUE){
+		if ($this->mLimitOutput){
 	    	$lQueryString .= " LIMIT 20";
 	    }// end if
 
@@ -148,7 +149,7 @@ class SQLQueryHandler {
 
 	public function insertVoteIntoUserPoll(/*Text*/ $pToolName, /*Text*/ $pUserName){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pToolName = $this->mMySQLHandler->escapeDangerousCharacters($pToolName);
 			$pUserName = $this->mMySQLHandler->escapeDangerousCharacters($pUserName);
 		}// end if
@@ -174,7 +175,7 @@ class SQLQueryHandler {
 
 	public function insertBlogRecord($pBloggerName, $pBlogEntry){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pBloggerName = $this->mMySQLHandler->escapeDangerousCharacters($pBloggerName);
 			$pBlogEntry = $this->mMySQLHandler->escapeDangerousCharacters($pBlogEntry);
 		}// end if
@@ -190,7 +191,7 @@ class SQLQueryHandler {
 
 	public function getBlogRecord($pBloggerName){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pBloggerName = $this->mMySQLHandler->escapeDangerousCharacters($pBloggerName);
 		}// end if
 
@@ -208,7 +209,7 @@ class SQLQueryHandler {
   		 * Note: While escaping works ok in some case, it is not the best defense.
  		 * Using stored procedures is a much stronger defense.
  		 */
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pPostedToolID = $this->mMySQLHandler->escapeDangerousCharacters($pPostedToolID);
 		}// end if
 
@@ -238,7 +239,7 @@ class SQLQueryHandler {
 		* is static.
 	*/
 		$lLimitString = "";
-		if ($this->mLimitOutput == TRUE){
+		if ($this->mLimitOutput){
 		$lLimitString .= " LIMIT 20";
 	}// end if
 
@@ -251,7 +252,7 @@ class SQLQueryHandler {
 	* Note: While escaping works ok in some case, it is not the best defense.
 		* Using stored procedures is a much stronger defense.
 	*/
-	if ($this->stopSQLInjection == TRUE){
+	if ($this->stopSQLInjection){
 		$pRecordIdentifier = $this->mMySQLHandler->escapeDangerousCharacters($pRecordIdentifier);
 	}// end if
 
@@ -269,7 +270,7 @@ class SQLQueryHandler {
 
 	public function accountExists($pUsername){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 		}// end if
 
@@ -279,16 +280,16 @@ class SQLQueryHandler {
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 
 		if (isset($lQueryResult->num_rows)){
-			return ($lQueryResult->num_rows > 0);
+			return $lQueryResult->num_rows > 0;
 		}else{
-			return FALSE;
+			return false;
 		}// end if
 
 	}//end public function getUsernames
 
 	public function authenticateAccount($pUsername, $pPassword){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
 		}// end if
@@ -302,9 +303,9 @@ class SQLQueryHandler {
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 
 		if (isset($lQueryResult->num_rows)){
-			return ($lQueryResult->num_rows > 0);
+			return $lQueryResult->num_rows > 0;
 		}else{
-			return FALSE;
+			return false;
 		}// end if
 
 	}//end public function getUsernames
@@ -314,7 +315,7 @@ class SQLQueryHandler {
 		 * Note: While escaping works ok in some case, it is not the best defense.
 		* Using stored procedures is a much stronger defense.
 		*/
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 		}// end if
 
@@ -328,7 +329,7 @@ class SQLQueryHandler {
 
 	public function getUserAccountByID($pUserID){
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUserID = $this->mMySQLHandler->escapeDangerousCharacters($pUserID);
 		}// end if
 
@@ -343,7 +344,7 @@ class SQLQueryHandler {
  		 * Using stored procedures is a much stronger defense.
  		 */
 
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
 		}// end if
@@ -359,21 +360,22 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Insert Queries
 	 * ----------------------------------------- */
-	public function insertNewUserAccount($pUsername, $pPassword, $pSignature){
+	public function insertNewUserAccount($pUsername, $pPassword, $pSignature, $pAPIToken){
    		/*
   		 * Note: While escaping works ok in some case, it is not the best defense.
  		 * Using stored procedures is a much stronger defense.
  		 */
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 
-		$lQueryString = "INSERT INTO accounts (username, password, mysignature) VALUES ('" .
+		$lQueryString = "INSERT INTO accounts (username, password, mysignature, api_token) VALUES ('" .
 			$pUsername ."', '" .
 			$pPassword . "', '" .
-			$pSignature .
+			$pSignature . "', '" .
+			$pAPIToken .
 			"')";
 
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
@@ -391,7 +393,7 @@ class SQLQueryHandler {
 		$pClientReferrer,
 		$pCapturedData
 	){
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pClientIP = $this->mMySQLHandler->escapeDangerousCharacters($pClientIP);
 			$pClientHostname = $this->mMySQLHandler->escapeDangerousCharacters($pClientHostname);
 			$pClientPort = $this->mMySQLHandler->escapeDangerousCharacters($pClientPort);
@@ -426,7 +428,7 @@ class SQLQueryHandler {
 		 * Note: While escaping works ok in some case, it is not the best defense.
 		* Using stored procedures is a much stronger defense.
 		*/
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
@@ -452,7 +454,7 @@ class SQLQueryHandler {
 	 * Delete Queries
 	* ----------------------------------------- */
 	public function deleteUser($pUsername){
-		if ($this->stopSQLInjection == TRUE){
+		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 		}// end if
 

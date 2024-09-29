@@ -51,7 +51,7 @@
 	   	$lAuthenticationAttemptResult = $cUNSURE;
 	   	$lAuthenticationAttemptResultFound = false;
 	   	$lKeepGoing = true;
-	   	$lQueryResult=NULL;
+	   	$lQueryResult=null;
 
    		logLoginAttempt("User {$lUsername} attempting to authenticate");
 
