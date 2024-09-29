@@ -1,5 +1,4 @@
 <?php
-
 	function generateApiToken($length = 32 /* 32 bytes = 256 bits */){ {
 		// Generates a secure 32-byte token for use in API calls
 		// The token is generated using a cryptographically secure pseudorandom number generator
@@ -106,7 +105,7 @@
 
 		} catch (Exception $e) {
 			echo $CustomErrorHandler->FormatError($e, "Failed to add account");
-			$LogHandler->writeToLog("Failed to add account for: " . $lUsername);			
+			$LogHandler->writeToLog("Failed to add account for: " . $lUsername);
 		}// end try
 			
 	}// end if $lFormSubmitted
@@ -114,12 +113,8 @@
 
 <script type="text/javascript">
 <!--
-	<?php 
-		if($lEnableJavaScriptValidation){
-			echo "var lValidateInput = \"TRUE\"" . PHP_EOL;
-		}else{
-			echo "var lValidateInput = \"FALSE\"" . PHP_EOL;
-		}// end if
+	<?php
+		echo "var lValidateInput = \"" . ($lEnableJavaScriptValidation ? "TRUE" : "FALSE") . "\"" . PHP_EOL;
 	?>
 
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
@@ -168,11 +163,7 @@
 				<td class="label">Username</td>
 				<td>
 					<input type="text" name="username" size="15" autofocus="autofocus"
-						<?php
-							if ($lEnableHTMLControls) {
-								echo 'minlength="1" maxlength="15" required="required"';
-							}// end if
-						?>
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
 					/>
 				</td>
 			</tr>
@@ -180,7 +171,7 @@
 				<td class="label">Password</td>
 				<td>
 					<input type="password" name="password" size="15" 
-						<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
 					/>
 					&nbsp;
 					<a href="index.php?page=password-generator.php&username=<?php echo $logged_in_user ?>" target="_blank">Password Generator</a>
@@ -190,7 +181,7 @@
 				<td class="label">Confirm Password</td>
 				<td>
 					<input type="password" name="confirm_password" size="15"
-						<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
 					/>
 				</td>
 			</tr>
