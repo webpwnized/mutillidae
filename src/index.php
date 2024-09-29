@@ -79,7 +79,6 @@
      * Check if user wants to disregard any detected
      * database errors
      * ----------------------------------------------------
-     * user is logged out by default
      */
     if (!isset($_SESSION["UserOKWithDatabaseFailure"])) {
     	$_SESSION["UserOKWithDatabaseFailure"] = "FALSE";
@@ -106,7 +105,8 @@
 		 * provide an example to developers of proper coding techniques.
 		 */
 	   	switch ($_SESSION["security-level"]){
-	   		case "0": // This code is insecure
+	   		default: // Add a default case. This code is insecure
+			case "0": // This code is insecure
 	   		case "1": // This code is insecure
 	   			$lProtectCookies = false;
 	   		break;
@@ -142,11 +142,7 @@
 	if (!isset($_SESSION["showhints"]) || ($_SESSION["showhints"] != $l_showhints)){
 		// make session = cookie
 		$_SESSION["showhints"] = $l_showhints;
-		switch ($l_showhints){
-			case 0: $_SESSION["hints-enabled"] = "Disabled"; break;
-			case 1: $_SESSION["hints-enabled"] = "Enabled"; break;
-			default: $_SESSION["hints-enabled"] = "Enabled"; break;
-		}// end switch
+		$_SESSION["hints-enabled"] = ($l_showhints === 0) ? "Disabled" : "Enabled";
 	}//end if
 
 	/* ------------------------------------------
@@ -202,7 +198,7 @@
 	$RequiredSoftwareHandler = new RequiredSoftwareHandler($_SESSION["security-level"]);
 
 	/* ------------------------------------------
-	* PROCESS REQUESTS
+	* PROCESS REQUESTS (IF ANY)
 	* ------------------------------------------ */
 	if (isset($_GET["do"])){
 		include_once(__SITE_ROOT__.'/includes/process-commands.php');
@@ -219,6 +215,7 @@
      * REACT TO CLIENT SIDE CHANGES
      * ------------------------------------------ */
 	switch ($_SESSION["security-level"]){
+		default: // Add a default case. This code is insecure
    		case "0": // This code is insecure
    		case "1": // This code is insecure
 			/* Use the clients authorization token which is stored in
@@ -291,6 +288,7 @@
     * Security Headers (Modern Browsers)
     * ------------------------------------------ */
 	switch ($_SESSION["security-level"]){
+		default: // Add a default case. This code is insecure
    		case "0": // This code is insecure
    		case "1":
 			/* Built-in user-agent defenses */
@@ -362,6 +360,7 @@
    	global $lPage;
    	$lPage = __SITE_ROOT__.'/home.php';
 	switch ($_SESSION["security-level"]){
+		default: // Add a default case. This code is insecure
    		case "0": // This code is insecure
    		case "1": // This code is insecure
 		    // Get the value of the "page" URL query parameter
@@ -422,6 +421,7 @@
 		case ".htpasswd.php":
 
    			switch ($_SESSION["security-level"]){
+				default: // Add a default case. This code is insecure
 		   		case "0": // This code is insecure
 		   		case "1": // This code is insecure
 	    			$lPage=__SITE_ROOT__.'/phpinfo.php';
@@ -492,11 +492,11 @@
 	/* ------------------------------------------
 	* BEGIN OUTPUT RESPONSE
 	* ------------------------------------------ */
-	require_once (__SITE_ROOT__."/includes/header.php");
+	require_once __SITE_ROOT__."/includes/header.php";
 
 	if (strlen($lPage)==0 || !isset($lPage)){
 		/* Default Page */
-		require_once(__SITE_ROOT__."/home.php");
+		require_once __SITE_ROOT__."/home.php";
 	}else{
 		/* All Other Pages */
 	    if (file_exists($lPage) || $RemoteFileHandler->remoteSiteIsReachable($lPage)){
@@ -505,18 +505,18 @@
 			if(!$RemoteFileHandler->curlIsInstalled()){
 				echo $RemoteFileHandler->getNoCurlAdviceBasedOnOperatingSystem();
 			}//end if
-			require_once (__SITE_ROOT__."/page-not-found.php");
+			require_once __SITE_ROOT__."/page-not-found.php";
 		}//end if
 
 	}// end if page variable not set
 
-	require_once (__SITE_ROOT__."/includes/information-disclosure-comment.php");
-	require_once (__SITE_ROOT__."/includes/footer.php");
+	require_once __SITE_ROOT__."/includes/information-disclosure-comment.php";
+	require_once __SITE_ROOT__."/includes/footer.php";
 
    	/* ------------------------------------------
    	 * LOG USER VISIT TO PAGE
    	* ------------------------------------------ */
-   	include_once (__SITE_ROOT__."/includes/log-visit.php");
+   	include_once __SITE_ROOT__."/includes/log-visit.php";
 
    	/* ------------------------------------------
    	 * CLOSE DATABASE CONNECTION
