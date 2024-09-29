@@ -1,5 +1,5 @@
 <?php
-	function generateApiToken($length = 32 /* 32 bytes = 256 bits */){ {
+	function generateApiToken($length = 32 /* 32 bytes = 256 bits */){
 		// Generates a secure 32-byte token for use in API calls
 		// The token is generated using a cryptographically secure pseudorandom number generator
 		// The token is then converted to hexadecimal format
