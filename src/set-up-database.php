@@ -1276,16 +1276,16 @@
 		try {
 			// Ensure the directories exist and are writable
 			if (!is_dir(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
-				throw new Exception("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " does not exist.");
+				echo format("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " does not exist.","E");
 			}
 			if (!is_dir(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
-				throw new Exception("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " does not exist.");
+				echo format("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " does not exist.","E");
 			}
 			if (!is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
-				throw new Exception("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " is not writable.");
+				echo format("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " is not writable.","E");
 			}
 			if (!is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
-				throw new Exception("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " is not writable.");
+				echo format("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " is not writable.","E");
 			}
 
 			// XML File Writing
