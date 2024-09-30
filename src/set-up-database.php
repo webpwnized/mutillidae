@@ -1273,38 +1273,46 @@
 		
 		$lAccountsXML .= "</Accounts>".PHP_EOL;
 		
-		try{
-			/* Ubuntu 12.04LTS PHP cannot parse short syntax of
-			 * is_writable(pathinfo($lAccountXMLFilePath)['dirname']).
-			 * Replacing with long form version.
-			 */
-			if (is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
-				file_put_contents($lAccountXMLFilePath,$lAccountsXML);
-				echo format("Wrote accounts to ".$lAccountXMLFilePath,"S");
-			}else{
-				throw new Exception("Oh snap. Trying to create an XML version of the accounts file did not work out.");
-			}//end if
-		}catch(Exception $e){
-			echo format("Could not write accounts XML to ".$lAccountXMLFilePath." - ".$e->getMessage(),"W");
-			echo format("Using default version of accounts.xml","W");
-		};// end try
-
-		try{
-			/* Ubuntu 12.04LTS PHP cannot parse short syntax of
-			 * is_writable(pathinfo($lAccountXMLFilePath)['dirname']).
-			 * Replacing with long form version.
-			 */
-			if (is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
-				file_put_contents($lPasswordFilePath,$lAccountsText);
-				echo format("Wrote accounts to ".$lPasswordFilePath,"S");
-			}else{
-				throw new Exception("Oh snap. Trying to create an text version of the accounts file did not work out.");
-			}//end if
-		}catch(Exception $e){
-			echo format("Could not write accounts XML to ".$lPasswordFilePath." - ".$e->getMessage(),"W");
-			echo format("Using default version of accounts.txt","W");
-		};// end try
-
+		try {
+			// Ensure the directories exist and are writable
+			if (!is_dir(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
+				throw new Exception("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " does not exist.");
+			}
+			if (!is_dir(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
+				throw new Exception("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " does not exist.");
+			}
+		
+			// XML File Writing
+			try {
+				if (is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
+					file_put_contents($lAccountXMLFilePath, $lAccountsXML);
+					echo format("Wrote accounts to " . $lAccountXMLFilePath, "S");
+				} else {
+					throw new Exception("Oh snap. Trying to create an XML version of the accounts file did not work out.");
+				}
+			} catch (Exception $e) {
+				echo format("Could not write accounts XML to " . $lAccountXMLFilePath . " - " . $e->getMessage(), "W");
+				echo format("Using default version of accounts.xml", "W");
+			}
+		
+			// Text File Writing
+			try {
+				if (is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
+					file_put_contents($lPasswordFilePath, $lAccountsText);
+					echo format("Wrote accounts to " . $lPasswordFilePath, "S");
+				} else {
+					throw new Exception("Oh snap. Trying to create a text version of the accounts file did not work out.");
+				}
+			} catch (Exception $e) {
+				echo format("Could not write accounts text to " . $lPasswordFilePath . " - " . $e->getMessage(), "W");
+				echo format("Using default version of accounts.txt", "W");
+			}
+		
+		} catch (Exception $e) {
+			$lErrorDetected = TRUE;
+			echo $CustomErrorHandler->FormatError($e, $lQueryString);
+		}
+		
 	} else {
 		$lErrorDetected = TRUE;
 		echo format("Warning: No records found when trying to build XML and text version of accounts table ".$lQueryResult,"W");
