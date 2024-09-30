@@ -102,11 +102,10 @@
 
 <div id="id-edit-account-profile-form-div" style="display: hidden;">
     <table>
-        <tr><td>&nbsp;</td></tr>
-        <tr>
+		<tr><td>&nbsp;</td></tr>
+        <th>
             <td colspan="2" class="form-header">User Profile</td>
-        </tr>
-        <tr><td>&nbsp;</td></tr>
+        </th>
         <tr>
             <td class="label">Username</td>
             <td><?php echo $lUsername; ?></td>
