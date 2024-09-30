@@ -100,11 +100,11 @@
 	</a>
 </span>
 
-<div id="id-edit-account-profile-form-div" style="display: hidden;">
+<div id="id-edit-account-profile-form-div" style="display:hidden;">
     <table>
 		<tr><td>&nbsp;</td></tr>
         <tr>
-			<th colspan="2" class="form-header" id="user-profile-header">User Profile</th>
+			<td colspan="2" class="form-header" id="user-profile-header">User Profile</td>
         </tr>
         <tr>
             <td class="label">Username</td>
