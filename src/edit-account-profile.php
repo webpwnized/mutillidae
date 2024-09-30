@@ -1,7 +1,8 @@
 <?php
     require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
     $lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "edit-account-profile");
-    
+    $lHTMLControls = 'minlength="1" maxlength="15" required="required"';
+
     switch ($_SESSION["security-level"]){
 		default: // Default case: This code is insecure
         case "0": // This code is insecure
@@ -173,7 +174,7 @@
 			echo "var lValidateInput = \"TRUE\"" . PHP_EOL;
 		}else{
 			echo "var lValidateInput = \"FALSE\"" . PHP_EOL;
-		}// end if		
+		}// end if
 	?>
 
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
@@ -201,7 +202,7 @@
 
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/rest/ws-user-account.php">
-		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" />
+		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" alt="AJAX" />
 		<span style="font-weight:bold;">Switch to RESTful Web Service Version of this Page</span>
 	</a>
 </span>
@@ -221,12 +222,7 @@
 				<td class="label">Username</td>
 				<td>
 					<input type="text" name="username" size="15" autofocus="autofocus"
-						<?php
-							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="15" required="required"');
-							}// end if
-						    echo('value="' . $lUsername . '"');
-						?>
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
 					/>
 				</td>
 			</tr>
@@ -234,12 +230,7 @@
 				<td class="label">Password</td>
 				<td>
 					<input type="password" name="password" size="15" 
-						<?php
-							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="15" required="required"');
-							}// end if
-						    echo('value="' . $lPassword . '"');
-						?>
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
 					/>
 					&nbsp;
 					<a href="index.php?page=password-generator.php&username=<?php echo $logged_in_user ?>" target="_blank">Password Generator</a>
@@ -249,12 +240,7 @@
 				<td class="label">Confirm Password</td>
 				<td>
 					<input type="password" name="confirm_password" size="15"
-						<?php
-							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="15" required="required"');
-							}// end if
-							echo('value="' . $lPassword . '"');
-						?>
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
 					/>
 				</td>
 			</tr>
@@ -269,7 +255,7 @@
 						?>
 					><?php echo $lSignature; ?></textarea>
 				</td>
-			</tr>			
+			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" style="text-align:center;">
@@ -283,9 +269,9 @@
 
 <div id="id-profile-not-found-div" style="text-align: center; display: none;">
 	<table>
-		<tr>
+		<th>
 			<td class="label">User profile not found. You may <a href="index.php?page=login.php">login here</a></td>
-		</tr>
+		</th>
 		<tr><td></td></tr>
 		<tr><td></td></tr>
 		<tr>
@@ -304,7 +290,7 @@
 	}else{
 		document.getElementById("id-edit-account-profile-form-div").style.display="none";
 		document.getElementById("id-profile-not-found-div").style.display="";		
-	}// end if lResultsFound	
+	}// end if lResultsFound
 </script>
 	
 <?php

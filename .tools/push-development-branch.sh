@@ -1,9 +1,8 @@
 #!/bin/bash
-# Purpose: Merge development branch into main branch and tag with version
+# Purpose: Push the development branch and avoid any interaction with the main branch
 # Usage: ./push-development-branch.sh <version> <annotation>
-# Description: This script merges the development branch into the main branch,
-# tags the main branch with the specified version, and
-# calls another script 'git.sh' with the version and annotation.
+# Description: This script pushes the development branch only and calls another script 'git.sh'
+# with the version and annotation.
 
 # Function to print messages with a timestamp
 print_message() {
@@ -19,9 +18,8 @@ show_help() {
     echo "  -h, --help     Display this help message."
     echo ""
     echo "Description:"
-    echo "This script merges the development branch into the main branch,"
-    echo "tags the main branch with the specified version, and"
-    echo "calls another script 'git.sh' with the version and annotation."
+    echo "This script pushes the development branch with the specified version,"
+    echo "and calls another script 'git.sh' with the version and annotation."
     exit 0
 }
 
@@ -55,21 +53,17 @@ if [[ ! -x "$GIT_SCRIPT" ]]; then
     handle_error "'git.sh' script not found or not executable"
 fi
 
-# Tag and merge operations
+# Call git.sh script for tagging or other operations
 print_message "Calling git.sh with tag $VERSION with annotation \"$ANNOTATION\""
 "$GIT_SCRIPT" "$VERSION" "$ANNOTATION" || handle_error "Failed to call git.sh"
 
-print_message "Checking out main branch"
-git checkout main || handle_error "Failed to checkout main branch"
-
-print_message "Merging development branch"
-git merge development || handle_error "Failed to merge development branch"
-
-print_message "Calling git.sh with tag $VERSION with annotation \"$ANNOTATION\""
-"$GIT_SCRIPT" "$VERSION" "$ANNOTATION" || handle_error "Failed to call git.sh"
-
+# Check out the development branch
 print_message "Checking out development branch"
 git checkout development || handle_error "Failed to checkout development branch"
+
+# Push the development branch
+print_message "Pushing development branch to origin"
+git push origin development || handle_error "Failed to push development branch"
 
 # Show git status
 print_message "Git status"

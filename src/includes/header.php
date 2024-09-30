@@ -2,6 +2,7 @@
     $lSecurityLevel = $_SESSION["security-level"];
 
     switch ($lSecurityLevel){
+		default: // Default case: This code is insecure
         case "0": // This code is insecure
             $lSecurityLevelMessage = "Security Level: ".$lSecurityLevel." (Hosed)";
             break;
@@ -21,7 +22,8 @@
 	if($_SESSION["user_is_logged_in"] == "True"){
 
 	    switch ($lSecurityLevel){
-	   		case "0": // This code is insecure
+			default: // Default case: This code is insecure
+			case "0": // This code is insecure
 	   		case "1": // This code is insecure
 	   			// DO NOTHING: This is equivalent to using client side security
 				$logged_in_user = $_SESSION["logged_in_user"];
@@ -49,6 +51,8 @@
 			'Logged In ' .
 			$lUserAuthorizationLevelText . ": " .
 			'<span class="logged-in-user">'.$logged_in_user.'</span>'.
+			'<a href="index.php?page=view-account-profile.php&uid='.$lUserID.'">'.
+            '<img src="images/view-icon-20-20.png" /></a>' .
 			'<a href="index.php?page=edit-account-profile.php&uid='.$lUserID.'">'.
             '<img src="images/edit-icon-20-20.png" /></a>';
 	} else {
@@ -66,7 +70,7 @@
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<html lang="en">
 <head>
 	<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
 
@@ -90,7 +94,7 @@
 <table class="main-table-frame">
 	<tr class="main-table-frame-dark">
 		<td class="main-table-frame-first-bar" colspan="2">
-			<img src="images/coykillericon-50-38.png"/>
+			<img src="images/coykillericon-50-38.png" alt="Coykiller Icon"/>
 			OWASP Mutillidae II: Keep Calm and Pwn On
 		</td>
 	</tr>
