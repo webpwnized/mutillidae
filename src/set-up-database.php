@@ -1281,15 +1281,17 @@
 			if (!is_dir(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
 				throw new Exception("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " does not exist.");
 			}
-		
+			if (!is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
+				throw new Exception("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " is not writable.");
+			}
+			if (!is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
+				throw new Exception("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " is not writable.");
+			}
+
 			// XML File Writing
 			try {
-				if (is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
-					file_put_contents($lAccountXMLFilePath, $lAccountsXML);
-					echo format("Wrote accounts to " . $lAccountXMLFilePath, "S");
-				} else {
-					throw new Exception("Oh snap. Trying to create an XML version of the accounts file did not work out.");
-				}
+				file_put_contents($lAccountXMLFilePath, $lAccountsXML);
+				echo format("Wrote accounts to " . $lAccountXMLFilePath, "S");
 			} catch (Exception $e) {
 				echo format("Could not write accounts XML to " . $lAccountXMLFilePath . " - " . $e->getMessage(), "W");
 				echo format("Using default version of accounts.xml", "W");
@@ -1297,12 +1299,8 @@
 		
 			// Text File Writing
 			try {
-				if (is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
-					file_put_contents($lPasswordFilePath, $lAccountsText);
-					echo format("Wrote accounts to " . $lPasswordFilePath, "S");
-				} else {
-					throw new Exception("Oh snap. Trying to create a text version of the accounts file did not work out.");
-				}
+				file_put_contents($lPasswordFilePath, $lAccountsText);
+				echo format("Wrote accounts to " . $lPasswordFilePath, "S");
 			} catch (Exception $e) {
 				echo format("Could not write accounts text to " . $lPasswordFilePath . " - " . $e->getMessage(), "W");
 				echo format("Using default version of accounts.txt", "W");
