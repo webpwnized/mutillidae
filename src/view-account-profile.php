@@ -103,9 +103,9 @@
 <div id="id-edit-account-profile-form-div" style="display: hidden;">
     <table>
 		<tr><td>&nbsp;</td></tr>
-        <th>
-            <td colspan="2" class="form-header">User Profile</td>
-        </th>
+        <tr>
+			<th colspan="2" class="form-header" id="user-profile-header">User Profile</th>
+        </tr>
         <tr>
             <td class="label">Username</td>
             <td><?php echo $lUsername; ?></td>
