@@ -3,20 +3,8 @@
     switch ($_SESSION["security-level"]){
 		default: // Default case: This code is insecure
         case "0": // This code is insecure
-            // DO NOTHING: This is equivalent to using client side security
-            $lEnableJavaScriptValidation = false;
-            $lEnableHTMLControls = false;
-            $lProtectAgainstMethodTampering = false;
-            $lProtectAgainstIDOR = false;
-            $lProtectAgainstPasswordLeakage = false;
-            $lEncodeOutput = false;
-            break;
-            
         case "1": // This code is insecure
             // DO NOTHING: This is equivalent to using client side security
-            $lEnableJavaScriptValidation = true;
-            $lEnableHTMLControls = true;
-            $lProtectAgainstMethodTampering = false;
             $lProtectAgainstIDOR = false;
             $lProtectAgainstPasswordLeakage = false;
             $lEncodeOutput = false;
@@ -30,9 +18,6 @@
              * Concerning SQL Injection, use parameterized stored procedures. Parameterized
              * queries is not good enough. You cannot use least privilege with queries.
              */
-            $lEnableJavaScriptValidation = true;
-            $lEnableHTMLControls = true;
-            $lProtectAgainstMethodTampering = true;
             $lProtectAgainstIDOR = true;
             $lProtectAgainstPasswordLeakage = true;
             $lEncodeOutput = true;
@@ -98,7 +83,7 @@
 	                   }
 	                   $lSignature = $Encoder->encodeForHTML($row->mysignature);
 	               }// end if
-                   $lAPIKey = $row->apikey; // immutable data
+                   $lAPIKey = $row->api_token; // immutable data
 	           }
 	           
 	    } catch (Exception $e) {
@@ -110,14 +95,6 @@
 
 <script type="text/javascript">
 <!--
-	<?php 
-		if($lEnableJavaScriptValidation){
-			echo "var lValidateInput = \"TRUE\"" . PHP_EOL;
-		}else{
-			echo "var lValidateInput = \"FALSE\"" . PHP_EOL;
-		}// end if
-	?>
-
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/rest/ws-user-account.php">
 		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" alt="AJAX" />
