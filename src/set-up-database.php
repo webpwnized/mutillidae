@@ -1294,8 +1294,10 @@
 
 			// XML File Writing
 			try {
-				file_put_contents($lAccountXMLFilePath, $lAccountsXML);
-				echo format("Wrote accounts to " . $lAccountXMLFilePath, "S");
+				if (is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
+					file_put_contents($lAccountXMLFilePath, $lAccountsXML);
+					echo format("Wrote accounts to " . $lAccountXMLFilePath, "S");
+				}
 			} catch (Exception $e) {
 				echo format("Could not write accounts XML to " . $lAccountXMLFilePath . " - " . $e->getMessage(), "W");
 				echo format("Using default version of accounts.xml", "W");
@@ -1303,8 +1305,10 @@
 		
 			// Text File Writing
 			try {
-				file_put_contents($lPasswordFilePath, $lAccountsText);
-				echo format("Wrote accounts to " . $lPasswordFilePath, "S");
+				if (is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
+					file_put_contents($lPasswordFilePath, $lAccountsText);
+					echo format("Wrote accounts to " . $lPasswordFilePath, "S");
+				}
 			} catch (Exception $e) {
 				echo format("Could not write accounts text to " . $lPasswordFilePath . " - " . $e->getMessage(), "W");
 				echo format("Using default version of accounts.txt", "W");
