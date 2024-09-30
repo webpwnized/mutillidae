@@ -122,14 +122,13 @@
             <td class="label">API Key</td>
             <td><?php echo $lAPIKey; ?></td>
         </tr>
-        <tr><td>&nbsp;</td></tr>
     </table>
 </div>
 
 <div id="id-profile-not-found-div" style="text-align: center; display: none;">
 	<table>
 		<th>
-			<td class="label">User profile not found. You may <a href="index.php?page=login.php">login here</a></td>
+			<td style="text-align:center;" class="label">User profile not found. You may <a href="index.php?page=login.php">login here</a></td>
 		</th>
 		<tr><td></td></tr>
 		<tr><td></td></tr>
