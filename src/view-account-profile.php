@@ -93,8 +93,6 @@
 	} // if $lUserLoggedIn
 ?>
 
-<script type="text/javascript">
-<!--
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/rest/ws-user-account.php">
 		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" alt="AJAX" />
@@ -151,6 +149,6 @@
 		document.getElementById("id-profile-not-found-div").style.display="none";
 	}else{
 		document.getElementById("id-edit-account-profile-form-div").style.display="none";
-		document.getElementById("id-profile-not-found-div").style.display="";		
+		document.getElementById("id-profile-not-found-div").style.display="";
 	}// end if lResultsFound
 </script>
