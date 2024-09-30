@@ -18,18 +18,22 @@
 
     require_once 'classes/MySQLHandler.php';
     $MySQLHandler = new MySQLHandler($lSecurityLevel);
-    $lErrorDetected = FALSE;
+    $lErrorDetected = false;
 
-    function format($pMessage, $pLevel ) {
-    	switch ($pLevel){
-    		case "I": $lStyle = "database-informative-message";break;
-    		case "S": $lStyle = "database-success-message";break;
-    		case "F": $lStyle = "database-failure-message";break;
-    		case "W": $lStyle = "database-warning-message";break;
-    	}// end switch
-
-    	return "<div class=\"".$lStyle."\">" . $pMessage . "</div>";
-    }// end function
+	function format($pMessage, $pLevel) {
+		$styles = [
+			"I" => "database-informative-message",
+			"S" => "database-success-message",
+			"F" => "database-failure-message",
+			"W" => "database-warning-message"
+		];
+	
+		// Use the level-specific style if it exists, otherwise default to "database-informative-message"
+		$lStyle = $styles[$pLevel] ?? "database-informative-message";
+	
+		return "<div class=\"".$lStyle."\">" . htmlspecialchars($pMessage) . "</div>";
+	}
+	
 ?>
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -66,7 +70,7 @@
     		$lQueryString = "DROP DATABASE IF EXISTS " . MySQLHandler::$mMySQLDatabaseName;
     		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     		if (!$lQueryResult) {
-    			$lErrorDetected = TRUE;
+    			$lErrorDetected = true;
     			echo format("Was not able to drop database " . MySQLHandler::$mMySQLDatabaseName,"F");
     		}else{
     			echo format("Executed query 'DROP DATABASE IF EXISTS' for database " . MySQLHandler::$mMySQLDatabaseName . " with result ".$lQueryResult,"S");
@@ -82,7 +86,7 @@
     	$lQueryString = "CREATE DATABASE " . MySQLHandler::$mMySQLDatabaseName;
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     		echo format("Was not able to create database " . MySQLHandler::$mMySQLDatabaseName,"F");
     	}else{
     		echo format("Executed query 'CREATE DATABASE' for database " . MySQLHandler::$mMySQLDatabaseName . " with result ".$lQueryResult,"S");
@@ -92,7 +96,7 @@
     	$lQueryString = "USE " . MySQLHandler::$mMySQLDatabaseName;
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     		echo format("Was not able to use database " . MySQLHandler::$mMySQLDatabaseName,"F");
     	}else{
     		echo format("Executed query 'USE DATABASE' " . MySQLHandler::$mMySQLDatabaseName . " with result ".$lQueryResult,"I");
@@ -106,7 +110,7 @@
     			'PRIMARY KEY(cid))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -119,7 +123,7 @@
     			 'PRIMARY KEY(cid))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -136,7 +140,7 @@
     			 'PRIMARY KEY(cid))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -151,7 +155,7 @@
     			 'PRIMARY KEY(cid))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -182,7 +186,7 @@
 			('ed', 'pentest', 'Commandline KungFu anyone?', 'FALSE' ,'Ed' ,'Skoudis', '".bin2hex(random_bytes(32))."')";
 		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
     	}// end if
@@ -202,7 +206,7 @@
     		(12, 'asprox', 'Fear me, for I am asprox!', '2009-03-01 22:31:13')";
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
     	}// end if
@@ -215,7 +219,7 @@
     			 'PRIMARY KEY(ccid))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -229,7 +233,7 @@
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
     	}// end if
@@ -244,7 +248,7 @@
     			'PRIMARY KEY(tool_id))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -272,7 +276,7 @@
     		(20, 'Google intitle', 'Discovery', 'Search Engine','intitle and site directives allow directory discovery. GHDB available to provide hints. See Hackers for Charity site.')";
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
     	}// end if
@@ -291,7 +295,7 @@
     			')';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -305,7 +309,7 @@
     			')';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -319,7 +323,7 @@
     			')';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -763,7 +767,7 @@
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
     	}// end if
@@ -777,7 +781,7 @@
     		')';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -912,7 +916,7 @@
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -925,7 +929,7 @@
     			')';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -996,7 +1000,7 @@
 
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
     	}// end if
@@ -1009,7 +1013,7 @@
     			UNIQUE KEY (identificationToken))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
-    		$lErrorDetected = TRUE;
+    		$lErrorDetected = true;
     	}else{
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
@@ -1202,7 +1206,7 @@
 
     $lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
-		$lErrorDetected = TRUE;
+		$lErrorDetected = true;
 	}else{
 		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
 	}// end if
@@ -1307,19 +1311,19 @@
 			}
 		
 		} catch (Exception $e) {
-			$lErrorDetected = TRUE;
+			$lErrorDetected = true;
 			echo $CustomErrorHandler->FormatError($e, $lQueryString);
 		}
 		
 	} else {
-		$lErrorDetected = TRUE;
+		$lErrorDetected = true;
 		echo format("Warning: No records found when trying to build XML and text version of accounts table ".$lQueryResult,"W");
 	}// end if ($lResultsFound)
 
 	$MySQLHandler->closeDatabaseConnection();
 
 } catch (Exception $e) {
-	$lErrorDetected = TRUE;
+	$lErrorDetected = true;
 	echo $CustomErrorHandler->FormatError($e, $lQueryString);
 }// end try
 
