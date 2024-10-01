@@ -1280,16 +1280,16 @@
 		try {
 			// Ensure the directories exist and are writable
 			if (!is_dir(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
-				echo format("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " does not exist.","E");
+				echo format("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " does not exist.","F");
 			}
 			if (!is_dir(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
-				echo format("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " does not exist.","E");
+				echo format("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " does not exist.","F");
 			}
 			if (!is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
-				echo format("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " is not writable.","E");
+				echo format("Oh no. Trying to create an XML version of the accounts file did not work out. The directory " . $lAccountXMLFilePath . " is not writable.","F");
 			}
 			if (!is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
-				echo format("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " is not writable.","E");
+				echo format("Oh no. Trying to create a text version of the accounts file did not work out. The directory " . $lPasswordFilePath . " is not writable.","F");
 			}
 
 			// XML File Writing
@@ -1297,6 +1297,9 @@
 				if (is_writable(pathinfo($lAccountXMLFilePath, PATHINFO_DIRNAME))) {
 					file_put_contents($lAccountXMLFilePath, $lAccountsXML);
 					echo format("Wrote accounts to " . $lAccountXMLFilePath, "S");
+				}else{
+					echo format("Could not write accounts XML to " . $lAccountXMLFilePath . " - Directory not writable", "W");
+					echo format("Using default version of accounts.xml", "W");
 				}
 			} catch (Exception $e) {
 				echo format("Could not write accounts XML to " . $lAccountXMLFilePath . " - " . $e->getMessage(), "W");
@@ -1308,6 +1311,9 @@
 				if (is_writable(pathinfo($lPasswordFilePath, PATHINFO_DIRNAME))) {
 					file_put_contents($lPasswordFilePath, $lAccountsText);
 					echo format("Wrote accounts to " . $lPasswordFilePath, "S");
+				}else{
+					echo format("Could not write accounts text to " . $lPasswordFilePath . " - Directory not writable", "W");
+					echo format("Using default version of accounts.txt", "W");
 				}
 			} catch (Exception $e) {
 				echo format("Could not write accounts text to " . $lPasswordFilePath . " - " . $e->getMessage(), "W");
