@@ -7,4 +7,4 @@
 
 # Ignore VS Code settings
 .vscode/
-
+.secrets.baseline
