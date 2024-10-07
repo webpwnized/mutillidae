@@ -261,8 +261,6 @@
                 <td class="label">API Key</td>
                 <td class="label">
 					<?php echo $lAPIKey; ?>
-                    <input type="checkbox" id="generate_new_api_key" name="generate_new_api_key" />
-                    <label for="generate_new_api_key">Generate New API Key</label>
                 </td>
             </tr>
 			<tr>
@@ -272,7 +270,6 @@
 					<label for="generate_new_api_key">Generate New API Key</label>
 				</td>
 			</tr>
-			<tr><td colspan="2">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" style="text-align:center;">
 					<input name="edit-account-profile-php-submit-button" class="button" type="submit" value="Update Profile" />
