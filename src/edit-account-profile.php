@@ -157,7 +157,8 @@
 	                       $lPassword = $Encoder->encodeForHTML($row->password);
 	                   }
 	                   $lSignature = $Encoder->encodeForHTML($row->mysignature);
-	               }// end if
+	               }// end 
+				   $lAPIKey = $row->api_token; // immutable data
 	           }
 	           
 	    } catch (Exception $e) {
@@ -259,7 +260,7 @@
 			<tr>
                 <td class="label">API Key</td>
                 <td>
-                    <input type="text" name="api_key" size="40" value="<?php echo $lUserAPIKey; ?>" readonly />
+					<?php echo $lAPIKey; ?>
                     <input type="checkbox" id="generate_new_api_key" name="generate_new_api_key" />
                     <label for="generate_new_api_key">Generate New API Key</label>
                 </td>
