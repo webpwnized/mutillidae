@@ -34,20 +34,19 @@ $server->register('hello',                // method name
 		<br/>   &lt;/soapenv:Body&gt;
 		<br/>&lt;/soapenv:Envelope&gt;'            // end documentation
 );
+
 // Define the method as a PHP function
 function hello($name) {
         return 'Hello, ' . $name;
 }
-// Use the request to (try to) invoke the service
-$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
-$php_version = phpversion();
-$php_major_version = (int)substr($php_version, 0, 1);
-if ($php_major_version >= 7) { 
+
+// Handle the SOAP request with error handling
+try {
+    // Use the request to (try to) invoke the service
     $server->service(file_get_contents("php://input"));
-} else {
-    $server->service($HTTP_RAW_POST_DATA);
+} catch (Exception $e) {
+    error_log("SOAP Server Error: " . $e->getMessage()); // Log the error for debugging
+    // Optionally send a fault response back to the client
+    $server->fault('Server', "SOAP Server Error: " . $e->getMessage());
 }
-
-
 ?>
-
