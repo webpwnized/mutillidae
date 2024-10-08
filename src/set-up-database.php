@@ -207,20 +207,31 @@
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
     	}// end if
 
-    	$lQueryString ="INSERT INTO `blogs_table` (`cid`, `blogger_name`, `comment`, `date`) VALUES
-    		(1, 'adrian', 'Well, I''ve been working on this for a bit. Welcome to my crappy blog software. :)', '2009-03-01 22:26:12'),
-    		(2, 'adrian', 'Looks like I got a lot more work to do. Fun, Fun, Fun!!!', '2009-03-01 22:26:54'),
-    		(3, 'anonymous', 'An anonymous blog? Huh? ', '2009-03-01 22:27:11'),
-    		(4, 'ed', 'I love me some Netcat!!!', '2009-03-01 22:27:48'),
-    		(5, 'john', 'Listen to Pauldotcom!', '2009-03-01 22:29:04'),
-    		(6, 'jeremy', 'Mutillidae is fun', '2009-03-01 22:29:49'),
-    		(7, 'john', 'Chocolate is GOOD!!!', '2009-03-01 22:30:06'),
-    		(8, 'admin', 'Fear me, for I am ROOT!', '2009-03-01 22:31:13'),
-    		(9, 'dave', 'Social Engineering is woot-tastic', '2009-03-01 22:31:13'),
-    		(10, 'kevin', 'Read more Douglas Adams', '2009-03-01 22:31:13'),
-    		(11, 'kevin', 'You should take SANS SEC542', '2009-03-01 22:31:13'),
-    		(12, 'asprox', 'Fear me, for I am asprox!', '2009-03-01 22:31:13')";
-    	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
+		$lQueryString = "INSERT INTO `blogs_table` (`cid`, `blogger_name`, `comment`, `date`) VALUES
+			(1, 'adrian', 'Welcome to my crappy blog software. :)', '2009-03-01 22:26:12'),
+			(2, 'adrian', 'Looks like I got a lot more work to do. Fun, Fun, Fun!!!', '2009-03-01 22:26:54'),
+			(3, 'anonymous', 'An anonymous blog? Huh?', '2009-03-01 22:27:11'),
+			(4, 'ed', 'I love me some Netcat!!!', '2009-03-01 22:27:48'),
+			(5, 'john', 'Listen to Pauldotcom!', '2009-03-01 22:29:04'),
+			(6, 'jeremy', 'Mutillidae is fun', '2009-03-01 22:29:49'),
+			(7, 'john', 'Chocolate is GOOD!!!', '2009-03-01 22:30:06'),
+			(8, 'admin', 'Fear me, for I am ROOT!', '2009-03-01 22:31:13'),
+			(9, 'dave', 'Social Engineering is woot-tastic', '2009-03-01 22:31:13'),
+			(10, 'kevin', 'Read more Douglas Adams', '2009-03-01 22:31:13'),
+			(11, 'jim', 'Bears eat beets', '2009-03-01 22:31:13'),
+			(12, 'michael_s', 'I declare BANKRUPTCY!', '2024-10-07 09:00:00'),
+			(13, 'jim', 'Just pulled off the ultimate prank on Dwight.', '2024-10-07 09:05:00'),
+			(14, 'pam', 'Art school has been really fulfilling.', '2024-10-07 09:10:00'),
+			(15, 'dwight', 'Bears. Beets. Battlestar Galactica.', '2024-10-07 09:15:00'),
+			(16, 'ryan', 'Starting my new tech venture.', '2024-10-07 09:20:00'),
+			(17, 'peter', 'Today, I didn’t really do much work. Feels great.', '2024-10-07 09:25:00'),
+			(18, 'milton', 'They took my stapler again...', '2024-10-07 09:30:00'),
+			(19, 'bill', 'Did you get the memo?', '2024-10-07 09:35:00'),
+			(20, 'samir', 'No one can still pronounce my last name...', '2024-10-07 09:40:00'),
+			(21, 'michael_b', 'It’s not that Michael Bolton!', '2024-10-07 09:45:00'),
+			(22, 'mugatu', 'The Derelicte campaign is going great!', '2024-10-07 09:50:00'),
+			(23, 'derek', 'Being ridiculously good looking has its perks.', '2024-10-07 09:55:00')";
+		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
     	}else{
@@ -240,13 +251,20 @@
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
 
-    	$lQueryString ="INSERT INTO `credit_cards` (`ccid`, `ccnumber`, `ccv`, `expiration`) VALUES
-    		(1, '4444111122223333', '745', '2012-03-01 10:01:12'),
-    		(2, '7746536337776330', '722', '2015-04-01 07:00:12'),
-    		(3, '8242325748474749', '461', '2016-03-01 11:55:12'),
-    		(4, '7725653200487633', '230', '2017-06-01 04:33:12'),
-    		(5, '1234567812345678', '627', '2018-11-01 13:31:13')";
-
+		$lQueryString = "INSERT INTO `credit_cards` (`ccid`, `ccnumber`, `ccv`, `expiration`) VALUES
+			(1, '4111111111111111', '123', '2024-10-01 10:01:12'), -- Visa Test Card
+			(2, '5555555555554444', '321', '2025-04-01 07:00:12'), -- Mastercard Test Card
+			(3, '378282246310005', '231', '2026-03-01 11:55:12'), -- American Express Test Card
+			(4, '6011111111111117', '456', '2027-06-01 04:33:12'), -- Discover Test Card
+			(5, '4222222222222', '789', '2028-11-01 13:31:13'), -- Visa Short Test Card
+			(6, '4000002760003184', '123', '2025-08-01 12:00:00'), -- Visa Debit Test Card
+			(7, '2223000048400011', '234', '2026-09-01 09:30:45'), -- Mastercard Debit Test Card
+			(8, '6011000990139424', '345', '2027-02-01 15:45:30'), -- Discover Debit Test Card
+			(9, '4000000000000002', '456', '2025-05-01 08:15:00'), -- Visa Credit Test Card
+			(10, '3566002020360505', '567', '2024-12-01 18:20:10'), -- JCB Test Card
+			(11, '5038370200000000', '678', '2026-07-01 11:00:00'), -- Maestro Test Card
+			(12, '6011111111111117', '789', '2028-06-01 14:22:25'), -- Discover Test Card
+			(13, '4000002760003184', '852', '2026-10-01 09:00:00') -- Visa Debit Test Card";
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;

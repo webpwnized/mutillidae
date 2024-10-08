@@ -1,4 +1,6 @@
 <?php 
+    $lHTMLControls = 'minlength="1" maxlength="20" required="required"';
+
 	try{
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure
@@ -86,19 +88,19 @@
 
 <div class="page-title">User Lookup (SQL)</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/soap/ws-user-account.php">
-		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" />
+		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" alt="AJAX Logo" />
 		<span style="font-weight:bold;">Switch to SOAP Web Service version</span>
 	</a>
 </span>
 &nbsp;&nbsp;&nbsp;
 <span>
 	<a href="index.php?page=user-info-xpath.php">
-		<img src="./images/xml-logo-64-64.png" />
+		<img src="./images/xml-logo-64-64.png" alt="XML Logo" />
 		<span class="label">Switch to XPath version</span>
 	</a>
 </span>
@@ -108,7 +110,7 @@
 		enctype="application/x-www-form-urlencoded"
 		onsubmit="return onSubmitOfForm(this);"
 >
-	<input type="hidden" name="page" value="user-info.php" />	
+	<input type="hidden" name="page" value="user-info.php" />
 	<table>
 		<tr id="id-bad-cred-tr" style="display: none;">
 			<td colspan="2" class="error-message">
@@ -124,11 +126,7 @@
 			<td class="label">Name</td>
 			<td>
 				<input type="text" name="username" size="20" autofocus="autofocus" 
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="20" required="required"');
-						}// end if
-					?>
+					<?php if ($lEnableHTMLControls) { echo $lHTMLControls; } ?>
 				/>
 			</td>
 		</tr>
@@ -136,11 +134,7 @@
 			<td class="label">Password</td>
 			<td>
 				<input type="password" name="password" size="20"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="20" required="required"');
-						}// end if
-					?>
+					<?php if ($lEnableHTMLControls) { echo $lHTMLControls; } ?>
 				/>
 			</td>
 		</tr>
@@ -156,7 +150,7 @@
 				Dont have an account? <a href="?page=register.php">Please register here</a>
 			</td>
 		</tr>
-	</table>	
+	</table>
 </form>
 
 <?php
@@ -174,7 +168,7 @@
 	   		$lRecordsFound = 0;
 	   		if (isset($lQueryResult->num_rows)){
 				if ($lQueryResult->num_rows > 0) {
-	   				$lResultsFound = TRUE;
+					$lResultsFound = true;
 	   				$lRecordsFound = $lQueryResult->num_rows;
 				}//end if
 			}//end if
@@ -199,19 +193,25 @@
 			    		// do nothing
 			    	}//end try
 					
-					if(!$lEncodeOutput){
+					if (!$lEncodeOutput) {
 						$lUsername = $row->username;
-						$lPassword = $row->password;
+						$lPassword = !$lProtectAgainstPasswordLeakage ? $row->password : '';
 						$lSignature = $row->mysignature;
-					}else{
+						$lFirstName = $row->firstname;
+						$lLastName = $row->lastname;
+					} else {
 						$lUsername = $Encoder->encodeForHTML($row->username);
-						$lPassword = $Encoder->encodeForHTML($row->password);
-						$lSignature = $Encoder->encodeForHTML($row->mysignature);			
-					}// end if
+						$lPassword = !$lProtectAgainstPasswordLeakage ? $Encoder->encodeForHTML($row->password) : '';
+						$lSignature = $Encoder->encodeForHTML($row->mysignature);
+						$lFirstName = $Encoder->encodeForHTML($row->firstname);
+						$lLastName = $Encoder->encodeForHTML($row->lastname);
+					}
 					
-					echo "<span style=\"font-weight:bold;\">Username=</span><span>{$lUsername}</span><br/>";
-					echo "<span style=\"font-weight:bold;\">Password=</span><span>{$lPassword}</span><br/>";
-					echo "<span style=\"font-weight:bold;\">Signature=</span><span>{$lSignature}</span><br/><br/>";
+					echo "<span class=\"label\">First Name=</span><span>{$lFirstName}</span><br/>";
+					echo "<span class=\"label\">Last Name=</span><span>{$lLastName}</span><br/>";
+					echo "<span class=\"label\">Username=</span><span>{$lUsername}</span><br/>";
+					echo "<span class=\"label\">Password=</span><span>{$lPassword}</span><br/>";
+					echo "<span class=\"label\">Signature=</span><span>{$lSignature}</span><br/><br/>";
 				}// end while
 	
 			} else {
