@@ -16,11 +16,23 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
-	require_once('../../includes/constants.php');
-	require_once('../../includes/minimum-class-definitions.php');
+	require_once '../../includes/constants.php';
+	require_once '../../includes/minimum-class-definitions.php';
+
+	class MissingPostParameterException extends Exception {
+		public function __construct($parameter) {
+			parent::__construct("POST parameter " . $parameter . " is required");
+		}
+	}
+
+	class UnsupportedHttpVerbException extends Exception {
+		public function __construct($verb) {
+			parent::__construct("Unsupported HTTP verb: " . $verb);
+		}
+	}
 
 	function populatePOSTSuperGlobal(){
-		$lParameters = Array();
+		$lParameters = array();
 		parse_str(file_get_contents('php://input'), $lParameters);
 		$_POST = $lParameters + $_POST;
 	}// end function populatePOSTArray
@@ -30,7 +42,7 @@
 			return $_POST[$pParameter];
 		}else{
 			if($lRequired){
-				throw new Exception("POST parameter ".$pParameter." is required");
+				throw new MissingPostParameterException($pParameter);
 			}else{
 				return "";
 			}
@@ -120,14 +132,16 @@
 			break;
 			case "POST"://create
 
-				$lAccountUsername = getPOSTParameter("username", TRUE);
-				$lAccountPassword = getPOSTParameter("password", TRUE);
-				$lAccountSignature = getPOSTParameter("signature", FALSE);
+				$lAccountUsername = getPOSTParameter("username", true);
+				$lAccountPassword = getPOSTParameter("password", true);
+				$lAccountFirstName = getPOSTParameter("firstname", true);
+				$lAccountLastName = getPOSTParameter("lastname", true);
+				$lAccountSignature = getPOSTParameter("signature", false);
 
 				if ($SQLQueryHandler->accountExists($lAccountUsername)){
 					echo "Result: {Account ".$lAccountUsername." already exists}";
 				}else{
-					$lQueryResult = $SQLQueryHandler->insertNewUserAccount($lAccountUsername, $lAccountPassword, $lAccountSignature);
+					$lQueryResult = $SQLQueryHandler->insertNewUserAccount($lAccountUsername, $lAccountPassword, $lAccountFirstName, $lAccountLastName, $lAccountSignature);
 					echo "Result: {Inserted account ".$lAccountUsername."}";
 				}// end if
 
@@ -136,15 +150,17 @@
 				/* $_POST array is not auto-populated for PUT method. Parse input into an array. */
 				populatePOSTSuperGlobal();
 
-				$lAccountUsername = getPOSTParameter("username", TRUE);
-				$lAccountPassword = getPOSTParameter("password", TRUE);
-				$lAccountSignature = getPOSTParameter("signature", FALSE);
+				$lAccountUsername = getPOSTParameter("username", true);
+				$lAccountPassword = getPOSTParameter("password", true);
+				$lAccountFirstName = getPOSTParameter("firstname", true);
+				$lAccountLastName = getPOSTParameter("lastname", true);
+				$lAccountSignature = getPOSTParameter("signature", false);
 
 				if ($SQLQueryHandler->accountExists($lAccountUsername)){
-					$lQueryResult = $SQLQueryHandler->updateUserAccount($lAccountUsername, $lAccountPassword, $lAccountSignature);
+					$lQueryResult = $SQLQueryHandler->updateUserAccount($lAccountUsername, $lAccountPassword, $lAccountFirstName, $lAccountLastName, $lAccountSignature, false);
 					echo "Result: {Updated account ".$lAccountUsername.". ".$lQueryResult." rows affected.}";
 				}else{
-					$lQueryResult = $SQLQueryHandler->insertNewUserAccount($lAccountUsername, $lAccountPassword, $lAccountSignature);
+					$lQueryResult = $SQLQueryHandler->insertNewUserAccount($lAccountUsername, $lAccountPassword, $lAccountFirstName, $lAccountLastName, $lAccountSignature);
 					echo "Result: {Inserted account ".$lAccountUsername.". ".$lQueryResult." rows affected.}";
 				}// end if
 
@@ -169,15 +185,15 @@
 
 					}else{
 						echo "Result: {Could not authenticate account ".$lAccountUsername.". Password incorrect.}";
-					}// end if
+					}// end if authenticateAccount
 
-				}else{
+				} else {
 					echo "Result: {User '".$lAccountUsername."' does not exist}";
-				}// end if
+				}// end if isset $lQueryResult
 
 			break;
 			default:
-				throw new Exception("Could not understand HTTP REQUEST_METHOD verb");
+				throw new UnsupportedHttpVerbException($lVerb);
 			break;
 		}// end switch
 

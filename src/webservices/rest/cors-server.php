@@ -10,8 +10,20 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
-	require_once('../../includes/constants.php');
-	require_once('../../includes/minimum-class-definitions.php');
+	require_once '../../includes/constants.php';
+	require_once '../../includes/minimum-class-definitions.php';
+
+	class UnsupportedHttpMethodException extends Exception {
+		public function __construct($message) {
+			parent::__construct($message);
+		}
+	}
+
+	class MissingPostParameterException extends Exception {
+		public function __construct($parameter) {
+			parent::__construct("POST parameter " . $parameter . " is required");
+		}
+	}
 
 	function populatePOSTSuperGlobal(){
 		$lParameters = Array();
@@ -24,7 +36,7 @@
 			return $_POST[$pParameter];
 		}else{
 			if($lRequired){
-				throw new Exception("POST parameter ".$pParameter." is required");
+				throw new MissingPostParameterException($pParameter);
 			}else{
 				return "";
 			}
@@ -48,24 +60,24 @@
 	    $lDomainParts = explode('.', $lDomain);
 	    $lDomainParts = array_reverse($lDomainParts);
 	    $lParentDomain = $lDomainParts[1] . '.' . $lDomainParts[0];
-	    $lReturnData = True;
+	    $lReturnData = true;
 
 	    switch($lVerb){
 	        case "OPTIONS":
-	            $lReturnData = False;
+	            $lReturnData = false;
                 break;
 	        case "GET":
                 break;
 	        case "POST"://create
                 break;
 	        case "PUT":	//create or update
-	        case "PATCH":	//create or update
+				throw new UnsupportedHttpMethodException("Could not understand HTTP REQUEST_METHOD verb");
 	        case "DELETE":
 	            /* $_POST array is not auto-populated for PUT,PATCH,DELETE method. Parse input into an array. */
 	            populatePOSTSuperGlobal();
             break;
 	        default:
-	            throw new Exception("Could not understand HTTP REQUEST_METHOD verb");
+				throw new UnsupportedHttpMethodException("Could not understand HTTP REQUEST_METHOD verb");
             break;
 	    }// end switch
 
@@ -91,22 +103,23 @@
 	    }
 
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure. No input validation is performed.
     	    case "0": // This code is insecure. No input validation is performed.
-    	        $lProtectAgainstCommandInjection=FALSE;
-    	        $lProtectAgainstXSS = FALSE;
+    	        $lProtectAgainstCommandInjection=false;
+    	        $lProtectAgainstXSS = false;
     	        break;
 
     	    case "1": // This code is insecure. No input validation is performed.
-    	        $lProtectAgainstCommandInjection=FALSE;
-    	        $lProtectAgainstXSS = FALSE;
+    	        $lProtectAgainstCommandInjection=false;
+    	        $lProtectAgainstXSS = false;
     	        break;
 
     	    case "2":
     	    case "3":
     	    case "4":
     	    case "5": // This code is fairly secure
-    	        $lProtectAgainstCommandInjection=TRUE;
-    	        $lProtectAgainstXSS = TRUE;
+    	        $lProtectAgainstCommandInjection=true;
+    	        $lProtectAgainstXSS = true;
     	        break;
     	}// end switch
 

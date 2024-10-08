@@ -16,8 +16,8 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
-	require_once('../../includes/constants.php');
-	require_once('../../includes/minimum-class-definitions.php');
+	require_once '../../includes/constants.php';
+	require_once '../../includes/minimum-class-definitions.php';
 
 	try{
         echo "Connection succeeded...";
