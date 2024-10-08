@@ -64,12 +64,14 @@
 				$lConfirmedPassword = $_POST["confirm_password"];
 				$lUserSignature = $_POST["my_signature"];
 				$lPostedCSRFToken = $_POST['csrf-token'];
+				$lGenerateNewAPIKey = isset($_POST['generate_new_api_key']);
 	   		}else{
 	   			$lUsername = $_REQUEST["username"];
 				$lPassword = $_REQUEST["password"];
 				$lConfirmedPassword = $_REQUEST["confirm_password"];
 				$lUserSignature = $_REQUEST["my_signature"];
 				$lPostedCSRFToken = $_REQUEST['csrf-token'];
+				$lGenerateNewAPIKey = isset($_REQUEST['generate_new_api_key']);
 	   		}//end if
 	   		
 	   		if ($lEncodeOutput){
@@ -79,7 +81,7 @@
 	   			$lUsernameText = $lUsername;
 	   		}//end if
 	   		
-			$LogHandler->writeToLog("Attempting to add account for: " . $lUsername);				
+			$LogHandler->writeToLog("Attempting to add account for: " . $lUsername);
 		   	
 			if (!$lCSRFTokenHandler->validateCSRFToken($lPostedCSRFToken)){
 				throw (new Exception("Security Violation: Cross Site Request Forgery attempt detected.", 500));
@@ -94,16 +96,16 @@
 				$lValidationFailed = true;
 		   		echo '<h2 class="error-message">Passwords do not match</h2>';
 		   	}// end if
-						   	
+
 		   	if (!$lValidationFailed){
-		   		$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lUserSignature);
+		   		$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lUserSignature, $lGenerateNewAPIKey);
 				echo '<div class="success-message">Profile updated for ' . $lUsernameText . '</div>';
 				$LogHandler->writeToLog("Profile updated for: " . $lUsername);
 		   	}// end if (!$lValidationFailed)
 			
 		} catch (Exception $e) {
 			echo $CustomErrorHandler->FormatError($e, "Failed to add account");
-			$LogHandler->writeToLog("Failed to update profile for: " . $lUsername);			
+			$LogHandler->writeToLog("Failed to update profile for: " . $lUsername);
 		}// end try
 			
 	}// end if $lFormSubmitted
@@ -149,15 +151,15 @@
 	                   $lUsername = $row->username;
 	                   if (!$lProtectAgainstPasswordLeakage){
 	                       $lPassword = $row->password;
-	                   }
+	                   } // end if
 	                   $lSignature = $row->mysignature;
 	               }else{
 	                   $lUsername = $Encoder->encodeForHTML($row->username);
 	                   if (!$lProtectAgainstPasswordLeakage){
 	                       $lPassword = $Encoder->encodeForHTML($row->password);
-	                   }
+	                   } // end if
 	                   $lSignature = $Encoder->encodeForHTML($row->mysignature);
-	               }// end 
+	               }// end if
 				   $lAPIKey = $row->api_token; // immutable data
 	           }
 	           
@@ -214,7 +216,7 @@
 			>
 		<input name="csrf-token" type="hidden" value="<?php echo $lNewCSRFTokenForNextRequest; ?>" />
 		<table>
-			<tr><td>&nbsp;</td></tr>
+			<tr><td colspan="2">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" class="form-header">Please choose your username, password and signature</td>
 			</tr>
@@ -270,12 +272,13 @@
 					<label for="generate_new_api_key">Generate New API Key</label>
 				</td>
 			</tr>
+			<tr><td colspan="2">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" style="text-align:center;">
 					<input name="edit-account-profile-php-submit-button" class="button" type="submit" value="Update Profile" />
 				</td>
 			</tr>
-			<tr><td>&nbsp;</td></tr>
+			<tr><td colspan="2">&nbsp;</td></tr>
 		</table>
 	</form>
 </div>

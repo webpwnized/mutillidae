@@ -38,6 +38,14 @@ class SQLQueryHandler {
 	   	}// end switch
 	}// end function
 
+	private function generateApiToken($length = 32 /* 32 bytes = 256 bits */){
+		// Generates a secure 32-byte token for use in API calls
+		// The token is generated using a cryptographically secure pseudorandom number generator
+		// The token is then converted to hexadecimal format
+		// The token will be 64 characters long
+		return bin2hex(random_bytes($length));
+	}
+
 	public function __construct($pSecurityLevel){
 
 		$this->doSetSecurityLevel($pSecurityLevel);
@@ -360,7 +368,7 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Insert Queries
 	 * ----------------------------------------- */
-	public function insertNewUserAccount($pUsername, $pPassword, $pSignature, $pAPIToken){
+	public function insertNewUserAccount($pUsername, $pPassword, $pSignature){
    		/*
   		 * Note: While escaping works ok in some case, it is not the best defense.
  		 * Using stored procedures is a much stronger defense.
@@ -371,11 +379,13 @@ class SQLQueryHandler {
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 
+		$lAPIToken = $this->generateApiToken();
+
 		$lQueryString = "INSERT INTO accounts (username, password, mysignature, api_token) VALUES ('" .
 			$pUsername ."', '" .
 			$pPassword . "', '" .
 			$pSignature . "', '" .
-			$pAPIToken .
+			$lAPIToken .
 			"')";
 
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
@@ -423,7 +433,7 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Update Queries
 	* ----------------------------------------- */
-	public function updateUserAccount($pUsername, $pPassword, $pSignature){
+	public function updateUserAccount($pUsername, $pPassword, $pSignature, $pUpdateAPIToken){
 		/*
 		 * Note: While escaping works ok in some case, it is not the best defense.
 		* Using stored procedures is a much stronger defense.
@@ -434,13 +444,27 @@ class SQLQueryHandler {
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 
+		if ($pUpdateAPIToken){
+			$lAPIToken = $this->generateApiToken();
+		} else {
+			$lAPIToken = "";
+		}// end if
+		
 		$lQueryString =
 			"UPDATE accounts
 			SET
 				username = '".$pUsername."',
 				password = '".$pPassword."',
-				mysignature = '".$pSignature."'
-			WHERE
+				mysignature = '".$pSignature."
+			";
+		
+		if ($pUpdateAPIToken){
+			$lQueryString .= "'," .
+				"api_token = '".$lAPIToken."'";
+		}// end if
+
+		$lQueryString .= "" .
+			"WHERE
 				username = '".$pUsername."';";
 
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){

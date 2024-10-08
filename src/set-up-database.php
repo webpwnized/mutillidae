@@ -160,32 +160,47 @@
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
 
-		$lQueryString = "INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, api_token) VALUES
-			('admin', 'adminpass', 'g0t r00t?', 'TRUE' ,'System' ,'Administrator', '".bin2hex(random_bytes(32))."'),
-			('adrian', 'somepassword', 'Zombie Films Rock!', 'TRUE' ,'Adrian' ,'Crenshaw', '".bin2hex(random_bytes(32))."'),
-			('john', 'monkey', 'I like the smell of confunk', 'FALSE' ,'John' ,'Pentest', '".bin2hex(random_bytes(32))."'),
-			('jeremy', 'password', 'd1373 1337 speak', 'FALSE' ,'Jeremy' ,'Druin', '".bin2hex(random_bytes(32))."'),
-			('bryce', 'password', 'I Love SANS', 'FALSE' ,'Bryce' ,'Galbraith', '".bin2hex(random_bytes(32))."'),
-			('samurai', 'samurai', 'Carving fools', 'FALSE' ,'Samurai' ,'WTF', '".bin2hex(random_bytes(32))."'),
-			('jim', 'password', 'Rome is burning', 'FALSE' ,'Jim' ,'Rome', '".bin2hex(random_bytes(32))."'),
-			('bobby', 'password', 'Hank is my dad', 'FALSE' ,'Bobby' ,'Hill', '".bin2hex(random_bytes(32))."'),
-			('simba', 'password', 'I am a super-cat', 'FALSE' ,'Simba' ,'Lion', '".bin2hex(random_bytes(32))."'),
-			('dreveil', 'password', 'Preparation H', 'FALSE' ,'Dr.' ,'Evil', '".bin2hex(random_bytes(32))."'),
-			('scotty', 'password', 'Scotty do', 'FALSE' ,'Scotty' ,'Evil', '".bin2hex(random_bytes(32))."'),
-			('cal', 'password', 'C-A-T-S Cats Cats Cats', 'FALSE' ,'John' ,'Calipari', '".bin2hex(random_bytes(32))."'),
-			('john', 'password', 'Do the Duggie!', 'FALSE' ,'John' ,'Wall', '".bin2hex(random_bytes(32))."'),
-			('kevin', '42', 'Doug Adams rocks', 'FALSE' ,'Kevin' ,'Johnson', '".bin2hex(random_bytes(32))."'),
-			('dave', 'set', 'Bet on S.E.T. FTW', 'FALSE' ,'Dave' ,'Kennedy', '".bin2hex(random_bytes(32))."'),
-			('patches', 'tortoise', 'meow', 'FALSE' ,'Patches' ,'Pester', '".bin2hex(random_bytes(32))."'),
-			('rocky', 'stripes', 'treats?', 'FALSE' ,'Rocky' ,'Paws', '".bin2hex(random_bytes(32))."'),
-			('tim', 'lanmaster53', 'Because reconnaissance is hard to spell', 'FALSE' ,'Tim' ,'Tomes', '".bin2hex(random_bytes(32))."'),
-			('ABaker', 'SoSecret', 'Muffin tops only', 'TRUE' ,'Aaron' ,'Baker', '".bin2hex(random_bytes(32))."'),
-			('PPan', 'NotTelling', 'Where is Tinker?', 'FALSE' ,'Peter' ,'Pan', '".bin2hex(random_bytes(32))."'),
-			('CHook', 'JollyRoger', 'Gator-hater', 'FALSE' ,'Captain' ,'Hook', '".bin2hex(random_bytes(32))."'),
-			('james', 'i<3devs', 'Occupation: Researcher', 'FALSE' ,'James' ,'Jardine', '".bin2hex(random_bytes(32))."'),
-			('ed', 'pentest', 'Commandline KungFu anyone?', 'FALSE' ,'Ed' ,'Skoudis', '".bin2hex(random_bytes(32))."')";
+		$lQueryString = "INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname) VALUES
+		('admin', 'adminpass', 'g0t r00t?', 'TRUE' ,'System' ,'Administrator'),
+		('adrian', 'somepassword', 'Zombie Films Rock!', 'TRUE' ,'Adrian' ,'Crenshaw'),
+		('john', 'monkey', 'I like the smell of confunk', 'FALSE' ,'John' ,'Pentest'),
+		('jeremy', 'password', 'd1373 1337 speak', 'FALSE' ,'Jeremy' ,'Druin'),
+		('bryce', 'password', 'I Love SANS', 'FALSE' ,'Bryce' ,'Galbraith'),
+		('samurai', 'samurai', 'Carving fools', 'FALSE' ,'Samurai' ,'WTF'),
+		('jim', 'password', 'Rome is burning', 'FALSE' ,'Jim' ,'Rome'),
+		('bobby', 'password', 'Hank is my dad', 'FALSE' ,'Bobby' ,'Hill'),
+		('simba', 'password', 'I am a super-cat', 'FALSE' ,'Simba' ,'Lion'),
+		('dreveil', 'password', 'Preparation H', 'FALSE' ,'Dr.' ,'Evil'),
+		('scotty', 'password', 'Scotty do', 'FALSE' ,'Scotty' ,'Evil'),
+		('cal', 'password', 'C-A-T-S Cats Cats Cats', 'FALSE' ,'John' ,'Calipari'),
+		('john', 'password', 'Do the Duggie!', 'FALSE' ,'John' ,'Wall'),
+		('kevin', '42', 'Doug Adams rocks', 'FALSE' ,'Kevin' ,'Johnson'),
+		('dave', 'set', 'Bet on S.E.T. FTW', 'FALSE' ,'Dave' ,'Kennedy'),
+		('patches', 'tortoise', 'meow', 'FALSE' ,'Patches' ,'Pester'),
+		('rocky', 'stripes', 'treats?', 'FALSE' ,'Rocky' ,'Paws'),
+		('tim', 'lanmaster53', 'Because reconnaissance is hard to spell', 'FALSE' ,'Tim' ,'Tomes'),
+		('ABaker', 'SoSecret', 'Muffin tops only', 'TRUE' ,'Aaron' ,'Baker'),
+		('PPan', 'NotTelling', 'Where is Tinker?', 'FALSE' ,'Peter' ,'Pan'),
+		('CHook', 'JollyRoger', 'Gator-hater', 'FALSE' ,'Captain' ,'Hook'),
+		('james', 'i<3devs', 'Occupation: Researcher', 'FALSE' ,'James' ,'Jardine'),
+		('ed', 'pentest', 'Commandline KungFu anyone?', 'FALSE' ,'Ed' ,'Skoudis'),
+		('peter', 'initech123', 'I dont like my job', 'FALSE', 'Peter', 'Gibbons'),
+		('milton', 'stapler', 'Wheres my stapler?', 'FALSE', 'Milton', 'Waddams'),
+		('bill', 'tpsreports', 'Did you get the memo?', 'TRUE', 'Bill', 'Lumbergh'),
+		('samir', 'nojoke123', 'No one can pronounce my last name', 'FALSE', 'Samir', 'Nagheenanajar'),
+		('michael_b', 'michael123', 'We fixed the glitch', 'FALSE', 'Michael', 'Bolton'),
+		('michael_s', 'worldsbestboss', 'Worlds Best Boss', 'TRUE', 'Michael', 'Scott'),
+		('jim', 'bearsbeatsbattlestar', 'Pranking Dwight', 'FALSE', 'Jim', 'Halpert'),
+		('dwight', 'assistant_to_the_regional_manager', 'Bears. Beets. Battlestar Galactica.', 'FALSE', 'Dwight', 'Schrute'),
+		('pam', 'pammy123', 'Dunder Mifflin', 'FALSE', 'Pam', 'Beesly'),
+		('ryan', 'temp123', 'I am the temp', 'FALSE', 'Ryan', 'Howard'),
+		('derek', 'bluestrike', 'Im pretty sure theres more to life than being really, really ridiculously good looking', 'FALSE', 'Derek', 'Zoolander'),
+		('hansel', 'hansel123', 'Hansel. Hes so hot right now.', 'FALSE', 'Hansel', ''),
+		('mugatu', 'mugatu123', 'I invented the piano key necktie!', 'TRUE', 'Jacobim', 'Mugatu'),
+		('matilda', 'journalist123', 'Investigative reporter', 'FALSE', 'Matilda', 'Jeffries'),
+		('maury', 'maury123', 'Youre the guy who cant turn left', 'FALSE', 'Maury', 'Ballstein')";
 		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-    	if (!$lQueryResult) {
+			if (!$lQueryResult) {
     		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";

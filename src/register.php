@@ -1,12 +1,4 @@
 <?php
-	function generateApiToken($length = 32 /* 32 bytes = 256 bits */){
-		// Generates a secure 32-byte token for use in API calls
-		// The token is generated using a cryptographically secure pseudorandom number generator
-		// The token is then converted to hexadecimal format
-		// The token will be 64 characters long
-		return bin2hex(random_bytes($length));
-	}
-
 	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 	$lHTMLControls = 'minlength="1" maxlength="15" required="required"';
@@ -97,8 +89,7 @@
 		   	}// end if
 						   	
 		   	if (!$lValidationFailed){
-				$lAPIToken = generateApiToken();
-		   		$lRowsAffected = $SQLQueryHandler->insertNewUserAccount($lUsername, $lPassword, $lUserSignature, $lAPIToken);
+		   		$lRowsAffected = $SQLQueryHandler->insertNewUserAccount($lUsername, $lPassword, $lUserSignature);
 				echo '<h2 class="success-message">Account created for ' . $lUsernameText .'. '.$lRowsAffected.' rows inserted.</h2>';
 				$LogHandler->writeToLog("Added account for: " . $lUsername);
 		   	}// end if (!$lValidationFailed)
