@@ -250,8 +250,7 @@
                 <td>
                     <textarea rows="3" cols="50" name="my_signature"
                         <?php if ($lEnableHTMLControls) { echo 'minlength="1" maxlength="100" required="required"'; } ?>
-                        <?php echo $lSignature; ?>
-                    </textarea>
+					><?php echo $lSignature; ?></textarea>
                 </td>
             </tr>
 			<tr>
