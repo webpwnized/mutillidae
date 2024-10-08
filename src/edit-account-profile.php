@@ -13,7 +13,7 @@
             $lProtectAgainstIDOR = false;
             $lProtectAgainstPasswordLeakage = false;
             $lEncodeOutput = false;
-            break;
+        break;
             
         case "1": // This code is insecure
             // DO NOTHING: This is equivalent to using client side security
@@ -23,7 +23,7 @@
             $lProtectAgainstIDOR = false;
             $lProtectAgainstPasswordLeakage = false;
             $lEncodeOutput = false;
-            break;
+        break;
             
         case "2":
         case "3":
@@ -39,7 +39,7 @@
             $lProtectAgainstIDOR = true;
             $lProtectAgainstPasswordLeakage = true;
             $lEncodeOutput = true;
-            break;
+        break;
     }// end switch
     
     $lNewCSRFTokenForNextRequest = $lCSRFTokenHandler->generateCSRFToken();
@@ -52,7 +52,6 @@
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <?php
-
 	if ($lFormSubmitted){
 		
 		try {

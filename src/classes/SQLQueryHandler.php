@@ -368,7 +368,7 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Insert Queries
 	 * ----------------------------------------- */
-	public function insertNewUserAccount($pUsername, $pPassword, $pSignature){
+	public function insertNewUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature){
    		/*
   		 * Note: While escaping works ok in some case, it is not the best defense.
  		 * Using stored procedures is a much stronger defense.
@@ -376,14 +376,18 @@ class SQLQueryHandler {
 		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
+			$pFirstName = $this->mMySQLHandler->escapeDangerousCharacters($pFirstName);
+			$pLastName = $this->mMySQLHandler->escapeDangerousCharacters($pLastName);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 
 		$lAPIToken = $this->generateApiToken();
 
-		$lQueryString = "INSERT INTO accounts (username, password, mysignature, api_token) VALUES ('" .
+		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, api_token) VALUES ('" .
 			$pUsername ."', '" .
 			$pPassword . "', '" .
+			$pFirstName . "', '" .
+			$pLastName . "', '" .
 			$pSignature . "', '" .
 			$lAPIToken .
 			"')";

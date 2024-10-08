@@ -6,9 +6,10 @@
     }// end if
 
 	switch ($_SESSION["security-level"]){
-   		case "0": // This code is insecure
-   		case "1": // This code is insecure
-   			// DO NOTHING: This is equivalent to using client side security
+		default: // Default case: This code is insecure
+		case "0": // This code is insecure
+		case "1": // This code is insecure
+			// DO NOTHING: This is equivalent to using client side security
 			$lPHPVersion = "PHP Version: " . phpversion();
    		break;
 

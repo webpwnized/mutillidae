@@ -51,19 +51,23 @@
 		try {
 			$lValidationFailed = false;
 					
-	   		if ($lProtectAgainstMethodTampering) {
-   				$lUsername = $_POST["username"];
+			if ($lProtectAgainstMethodTampering) {
+				$lUsername = $_POST["username"];
 				$lPassword = $_POST["password"];
 				$lConfirmedPassword = $_POST["confirm_password"];
 				$lUserSignature = $_POST["my_signature"];
+				$lFirstName = $_POST["firstname"];
+				$lLastName = $_POST["lastname"]; 
 				$lPostedCSRFToken = $_POST['csrf-token'];
-	   		}else{
-	   			$lUsername = $_REQUEST["username"];
+			} else {
+				$lUsername = $_REQUEST["username"];
 				$lPassword = $_REQUEST["password"];
 				$lConfirmedPassword = $_REQUEST["confirm_password"];
 				$lUserSignature = $_REQUEST["my_signature"];
+				$lFirstName = $_REQUEST["firstname"];
+				$lLastName = $_REQUEST["lastname"]; 
 				$lPostedCSRFToken = $_REQUEST['csrf-token'];
-	   		}//end if
+			}
 	   		
 	   		if ($lEncodeOutput){
 	   			$lUsernameText = $Encoder->encodeForHTML($lUsername);
@@ -82,12 +86,27 @@
 		   		$lValidationFailed = true;
 				echo '<h2 class="error-message">Username cannot be blank</h2>';
 		   	}// end if
-					
+
+			if (strlen($lPassword) == 0) {
+				$lValidationFailed = true;
+				echo '<h2 class="error-message">Password cannot be blank</h2>';
+		 	}// end if
+
 		   	if ($lPassword != $lConfirmedPassword ) {
 				$lValidationFailed = true;
 		   		echo '<h2 class="error-message">Passwords do not match</h2>';
 		   	}// end if
-						   	
+
+			if (strlen($lFirstName) == 0) {
+				$lValidationFailed = true;
+				echo '<h2 class="error-message">First Name cannot be blank</h2>';
+			}// end if
+
+			if (strlen($lLastName) == 0) {
+				$lValidationFailed = true;
+				echo '<h2 class="error-message">Last Name cannot be blank</h2>';
+			}// end if
+
 		   	if (!$lValidationFailed){
 		   		$lRowsAffected = $SQLQueryHandler->insertNewUserAccount($lUsername, $lPassword, $lUserSignature);
 				echo '<h2 class="success-message">Account created for ' . $lUsernameText .'. '.$lRowsAffected.' rows inserted.</h2>';
@@ -176,6 +195,22 @@
 					/>
 				</td>
 			</tr>
+			<tr>
+                <td class="label">First Name</td>
+                <td>
+                    <input type="text" name="firstname" size="15"
+                        <?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> 
+                    />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Last Name</td>
+                <td>
+                    <input type="text" name="lastname" size="15"
+                        <?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> 
+                    />
+                </td>
+            </tr>
 			<tr>
 				<td class="label">Signature</td>
 				<td>
