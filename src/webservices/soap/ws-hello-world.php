@@ -4,13 +4,13 @@
 	require_once './lib/nusoap.php';
 
 	// Create the SOAP server instance
-	$server = new soap_server();
+	$lSOAPWebService = new soap_server();
 
 	// Initialize WSDL (Web Service Definition Language) support
-	$server->configureWSDL('hellowsdl', 'urn:hellowsdl');
+	$lSOAPWebService->configureWSDL('hellowsdl', 'urn:hellowsdl');
 
 	// Register the "hello" method to expose as a SOAP function
-	$server->register(
+	$lSOAPWebService->register(
 		'hello',                          // method name
 		array('name' => 'xsd:string'),    // input parameter
 		array('return' => 'xsd:string'),  // output parameter
@@ -48,9 +48,9 @@
 	// Handle the SOAP request with error handling
 	try {
 		// Process the incoming SOAP request
-		$server->service(file_get_contents("php://input"));
+		$lSOAPWebService->service(file_get_contents("php://input"));
 	} catch (Exception $e) {
 		// Send a fault response back to the client
-		$server->fault('Server', "SOAP Service Error: " . $e->getMessage());
+		$lSOAPWebService->fault('Server', "SOAP Service Error: " . $e->getMessage());
 	}
 ?>

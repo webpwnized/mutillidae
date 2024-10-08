@@ -117,9 +117,9 @@
 	// Handle the SOAP request with error handling
 	try {
 		// Process the incoming SOAP request
-		$server->service(file_get_contents("php://input"));
+		$lSOAPWebService->service(file_get_contents("php://input"));
 	} catch (Exception $e) {
 		// Send a fault response back to the client
-		$server->fault('Server', "SOAP Service Error: " . $e->getMessage());
+		$lSOAPWebService->fault('Server', "SOAP Service Error: " . $e->getMessage());
 	}
 ?>
