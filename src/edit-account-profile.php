@@ -221,44 +221,39 @@
 				<td colspan="2" class="form-header">Please choose your username, password and signature</td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
-			<tr>
-				<td class="label">Username</td>
-				<td>
-					<input type="text" name="username" size="15" autofocus="autofocus"
-						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
-					/>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Password</td>
-				<td>
-					<input type="password" name="password" size="15" 
-						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
-					/>
-					&nbsp;
-					<a href="index.php?page=password-generator.php&username=<?php echo $logged_in_user ?>" target="_blank">Password Generator</a>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Confirm Password</td>
-				<td>
-					<input type="password" name="confirm_password" size="15"
-						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?>
-					/>
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Signature</td>
-				<td>
-					<textarea rows="3" cols="50" name="my_signature"
-						<?php
-							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="100" required="required"');
-							}// end if
-						?>
-					><?php echo $lSignature; ?></textarea>
-				</td>
-			</tr>
+            <tr>
+                <td class="label">Username</td>
+                <td>
+                    <input type="text" name="username" size="15" autofocus="autofocus" 
+                        value="<?php echo $lUsername; ?>" 
+                        <?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Password</td>
+                <td>
+                    <input type="password" name="password" size="15" value="<?php echo $lPassword; ?>" 
+                        <?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> />
+                    &nbsp;
+                    <a href="index.php?page=password-generator.php&username=<?php echo $logged_in_user ?>" target="_blank">Password Generator</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Confirm Password</td>
+                <td>
+                    <input type="password" name="confirm_password" size="15" value="<?php echo $lPassword; ?>"
+                        <?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Signature</td>
+                <td>
+                    <textarea rows="3" cols="50" name="my_signature"
+                        <?php if ($lEnableHTMLControls) { echo 'minlength="1" maxlength="100" required="required"'; } ?>
+                        <?php echo $lSignature; ?>
+                    </textarea>
+                </td>
+            </tr>
 			<tr>
                 <td class="label">API Key</td>
                 <td class="label">
