@@ -455,7 +455,7 @@ class SQLQueryHandler {
 			SET
 				username = '".$pUsername."',
 				password = '".$pPassword."',
-				mysignature = '".$pSignature."
+				mysignature = '".$pSignature."'
 			";
 		
 		if ($pUpdateAPIToken){
