@@ -1,5 +1,4 @@
 <?php
-
 	// nusoap_server is the class you need from the nusoap library
 	require_once './lib/nusoap.php';
 
@@ -41,8 +40,8 @@
 	);
 
 	// Define the "hello" method
-	function hello($name) {
-		return 'Hello, ' . $name;
+	function hello($pName) {
+		return 'Hello, ' . $pName;
 	}
 
 	// Handle the SOAP request with error handling
