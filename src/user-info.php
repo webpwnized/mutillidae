@@ -3,37 +3,41 @@
 
 	try{
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
     		case "0": // This code is insecure
 				$lEnableHTMLControls = FALSE;
     			$lFormMethod = "GET";
 				$lEnableJavaScriptValidation = FALSE;
 				$lProtectAgainstMethodTampering = FALSE;
 				$lEncodeOutput = FALSE;
+				$lProtectAgainstPasswordLeakage = FALSE;
 				break;
     		
     		case "1": // This code is insecure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     			$lFormMethod = "GET";
-				$lEnableJavaScriptValidation = TRUE;
+				$lEnableJavaScriptValidation = true;
 				$lProtectAgainstMethodTampering = FALSE;
 				$lEncodeOutput = FALSE;
+				$lProtectAgainstPasswordLeakage = FALSE;
 			break;
 	    		
 			case "2":
 			case "3":
 			case "4":
     		case "5": // This code is fairly secure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     			$lFormMethod = "POST";
-				$lEnableJavaScriptValidation = TRUE;
-				$lProtectAgainstMethodTampering = TRUE;
-				$lEncodeOutput = TRUE;
+				$lEnableJavaScriptValidation = true;
+				$lProtectAgainstMethodTampering = true;
+				$lEncodeOutput = true;
+				$lProtectAgainstPasswordLeakage = true;
 			break;
     	}//end switch
 
     	$lFormSubmitted = FALSE;
 		if (isset($_POST["user-info-php-submit-button"]) || isset($_REQUEST["user-info-php-submit-button"])) {
-			$lFormSubmitted = TRUE;
+			$lFormSubmitted = true;
 		}// end if
 		
 		if ($lFormSubmitted){
@@ -123,9 +127,9 @@
 		</tr>
 		<tr><td></td></tr>
 		<tr>
-			<td class="label">Name</td>
+			<td class="label">Username</td>
 			<td>
-				<input type="text" name="username" size="20" autofocus="autofocus" 
+				<input type="text" name="username" size="20" autofocus="autofocus"
 					<?php if ($lEnableHTMLControls) { echo $lHTMLControls; } ?>
 				/>
 			</td>
