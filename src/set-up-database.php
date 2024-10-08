@@ -18,7 +18,8 @@
 
     require_once 'classes/MySQLHandler.php';
     $MySQLHandler = new MySQLHandler($lSecurityLevel);
-    $lErrorDetected = false;
+    
+	$lErrorDetected = false;
 
 	function format($pMessage, $pLevel) {
 		$styles = [
@@ -201,8 +202,7 @@
 			('matilda', 'journalist123', 'Investigative reporter', 'FALSE', 'Matilda', 'Jeffries', '".bin2hex(random_bytes(32))."'),
 			('maury', 'maury123', 'Youre the guy who cant turn left', 'FALSE', 'Maury', 'Ballstein', '".bin2hex(random_bytes(32))."')";
 		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-			$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-			if (!$lQueryResult) {
+		if (!$lQueryResult) {
     		$lErrorDetected = true;
     	}else{
     		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
