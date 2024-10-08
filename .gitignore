@@ -1,0 +1,74 @@
+# PHP-specific
+*.log
+*.cache
+*.php_cs.cache
+vendor/
+composer.lock
+composer.phar
+
+# HTML-specific
+*.html
+*.htm
+
+# JavaScript-specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.eslintcache
+*.js.map
+
+# CSS-specific
+*.css.map
+
+# NASL-specific (assuming any generated files or unnecessary logs)
+*.nasl
+nasl-logs/
+
+# Shell-specific
+*.sh~
+*.bash_history
+*.bashrc
+*.bash_profile
+*.profile
+*.zshrc
+*.zprofile
+*.zsh_history
+
+# Common files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.lock
+
+# Logs and databases
+logs/
+*.log
+*.sql
+*.sqlite
+
+# Dependency directories
+node_modules/
+vendor/
+
+# IDE-specific (JetBrains, VSCode)
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.orig
