@@ -205,9 +205,11 @@
 			$lUsername = $pEncodeOutput ? $Encoder->encodeForHTML($row->username) : $row->username;
 	
 			// Handle encoding of signature if it exists
-			$lSignature = isset($row->mysignature) 
-				? ($pEncodeOutput ? $Encoder->encodeForHTML($row->mysignature) : $row->mysignature) 
-				: null;
+			$lSignature = null;
+			if (isset($row->mysignature)) {
+				$encodedSignature = $pEncodeOutput ? $Encoder->encodeForHTML($row->mysignature) : $row->mysignature;
+				$lSignature = $encodedSignature;
+			}
 	
 			// Construct the XML for each account
 			$lResults .= "<account>";
@@ -226,25 +228,26 @@
 		return $lResults;
 	}//end function doXMLEncodeQueryResults	
 
-	function xmlEncodeQueryResults($pUsername, $pEncodeOutput, $pSQLQueryHandler){
+	function xmlEncodeQueryResults($pUsername, $pEncodeOutput, $pSQLQueryHandler) {
 
-		$lQueryResult = "";
-
-		if ($pUsername == "*"){
-			/* List all accounts */
+		// Fetch query results based on the username
+		if ($pUsername == "*") {
+			// List all accounts
 			$lQueryResult = $pSQLQueryHandler->getUsernames();
-		}else{
-			/* lookup user */
+		} else {
+			// Lookup specific user account
 			$lQueryResult = $pSQLQueryHandler->getNonSensitiveAccountInformation($pUsername);
-		}// end if
-
-		if ($lQueryResult->num_rows > 0){
+		}
+	
+		// Check if the query returned valid results
+		if ($lQueryResult && $lQueryResult->num_rows > 0) {
 			return doXMLEncodeQueryResults($pUsername, $lQueryResult, $pEncodeOutput);
-		}else{
-			return "<accounts message=\"User {$pUsername} does not exist}\" />";
-		}// end if
-
-	}// end function xmlEncodeQueryResults()
+		} else {
+			// Return a message if no user is found
+			return "<accounts message=\"User {$pUsername} does not exist\" />";
+		}
+		
+	}//end function xmlEncodeQueryResults
 
 	function assertParameter($pParameter){
 		if(strlen($pParameter) == 0 || !isset($pParameter)){

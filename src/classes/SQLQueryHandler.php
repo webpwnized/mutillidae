@@ -329,8 +329,8 @@ class SQLQueryHandler {
 
 		$lQueryString =
 		"SELECT username, firstname, lastname, mysignature
-			FROM accounts
-			WHERE username='".$pUsername."'";
+		 FROM accounts
+		 WHERE username='".$pUsername."'";
 
 		return $this->mMySQLHandler->executeQuery($lQueryString);
 	}//end public function getNonSensitiveAccountInformation
