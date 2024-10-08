@@ -328,7 +328,7 @@ class SQLQueryHandler {
 		}// end if
 
 		$lQueryString =
-		"SELECT username, mysignature
+		"SELECT username, firstname, lastname, mysignature
 			FROM accounts
 			WHERE username='".$pUsername."'";
 
