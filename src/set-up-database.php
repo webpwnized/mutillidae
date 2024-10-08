@@ -37,9 +37,10 @@
 ?>
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-    <html>
-    	<head>
-    		<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+	<html lang="en" xml:lang="en">
+		<head>
+			<title>Set Up Database</title>
+			<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
     		<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
     	</head>
     	<body>

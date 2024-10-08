@@ -5,21 +5,21 @@
     	switch ($_SESSION["security-level"]){
 			default: // Default case: This code is insecure
     		case "0": // This code is insecure
-				$lEnableHTMLControls = FALSE;
+				$lEnableHTMLControls = false;
     			$lFormMethod = "GET";
-				$lEnableJavaScriptValidation = FALSE;
-				$lProtectAgainstMethodTampering = FALSE;
-				$lEncodeOutput = FALSE;
-				$lProtectAgainstPasswordLeakage = FALSE;
+				$lEnableJavaScriptValidation = false;
+				$lProtectAgainstMethodTampering = false;
+				$lEncodeOutput = false;
+				$lProtectAgainstPasswordLeakage = false;
 				break;
     		
     		case "1": // This code is insecure
 				$lEnableHTMLControls = true;
     			$lFormMethod = "GET";
 				$lEnableJavaScriptValidation = true;
-				$lProtectAgainstMethodTampering = FALSE;
-				$lEncodeOutput = FALSE;
-				$lProtectAgainstPasswordLeakage = FALSE;
+				$lProtectAgainstMethodTampering = false;
+				$lEncodeOutput = false;
+				$lProtectAgainstPasswordLeakage = false;
 			break;
 	    		
 			case "2":
@@ -35,7 +35,7 @@
 			break;
     	}//end switch
 
-    	$lFormSubmitted = FALSE;
+    	$lFormSubmitted = false;
 		if (isset($_POST["user-info-php-submit-button"]) || isset($_REQUEST["user-info-php-submit-button"])) {
 			$lFormSubmitted = true;
 		}// end if
@@ -63,7 +63,7 @@
 		echo "var lValidateInput = \"TRUE\"" . PHP_EOL;
 	}else{
 		echo "var lValidateInput = \"FALSE\"" . PHP_EOL;
-	}// end if		
+	}// end if
 	?>
 			
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
@@ -168,7 +168,7 @@
 	    			
 			$lQueryResult = $SQLQueryHandler->getUserAccount($lUsername, $lPassword);
 	    	
-	   		$lResultsFound = FALSE;
+	   		$lResultsFound = false;
 	   		$lRecordsFound = 0;
 	   		if (isset($lQueryResult->num_rows)){
 				if ($lQueryResult->num_rows > 0) {
@@ -182,11 +182,11 @@
 				$lUsername = $Encoder->encodeForHTML($lUsername);
 			}// end if
 
-			echo '	<div class="report-header">
-						Results for &quot;<span style="color:#770000;">'
-						.$lUsername.
-						'</span>&quot;.'.$lRecordsFound.' records found.
-					</div>';
+			echo '<div class="report-header">
+					Results for &quot;<span style="color:#770000;">'
+					.$lUsername.
+					'</span>&quot;. '.$lRecordsFound.' records found.
+				</div>';
 
     		/* Print out results */
 			if ($lResultsFound){
@@ -225,5 +225,5 @@
 			echo $CustomErrorHandler->FormatError($e, "Error attempting to display user information");
        	}// end try;
     	
-	}// end if (isset($_POST)) 
+	}// end if (isset($_POST))
 ?>
