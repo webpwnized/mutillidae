@@ -433,17 +433,19 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Update Queries
 	* ----------------------------------------- */
-	public function updateUserAccount($pUsername, $pPassword, $pSignature, $pUpdateAPIToken){
+	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateAPIToken){
 		/*
-		 * Note: While escaping works ok in some case, it is not the best defense.
-		* Using stored procedures is a much stronger defense.
-		*/
+		 * Note: While escaping works ok in some cases, it is not the best defense.
+		 * Using stored procedures is a much stronger defense.
+		 */
 		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
+			$pFirstName = $this->mMySQLHandler->escapeDangerousCharacters($pFirstName);
+			$pLastName = $this->mMySQLHandler->escapeDangerousCharacters($pLastName);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
-
+	
 		if ($pUpdateAPIToken){
 			$lAPIToken = $this->generateApiToken();
 		} else {
@@ -455,6 +457,8 @@ class SQLQueryHandler {
 			SET
 				username = '".$pUsername."',
 				password = '".$pPassword."',
+				firstname = '".$pFirstName."',
+				lastname = '".$pLastName."',
 				mysignature = '".$pSignature."'
 			";
 		
@@ -462,11 +466,11 @@ class SQLQueryHandler {
 			$lQueryString .= "," .
 				"api_token = '".$lAPIToken."'";
 		}// end if
-
+	
 		$lQueryString .= "" .
 			"WHERE
 				username = '".$pUsername."';";
-
+	
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
 			return $this->mMySQLHandler->affected_rows();
 		}else{

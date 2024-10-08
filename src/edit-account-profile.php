@@ -58,33 +58,45 @@
 		try {
 			$lValidationFailed = false;
 					
-	   		if ($lProtectAgainstMethodTampering) {
-   				$lUsername = $_POST["username"];
+			if ($lProtectAgainstMethodTampering) {
+				$lUsername = $_POST["username"];
 				$lPassword = $_POST["password"];
 				$lConfirmedPassword = $_POST["confirm_password"];
 				$lUserSignature = $_POST["my_signature"];
+				$lFirstName = $_POST["firstname"];
+				$lLastName = $_POST["lastname"];
 				$lPostedCSRFToken = $_POST['csrf-token'];
 				$lGenerateNewAPIKey = isset($_POST['generate_new_api_key']);
-	   		}else{
-	   			$lUsername = $_REQUEST["username"];
+			} else {
+				$lUsername = $_REQUEST["username"];
 				$lPassword = $_REQUEST["password"];
 				$lConfirmedPassword = $_REQUEST["confirm_password"];
 				$lUserSignature = $_REQUEST["my_signature"];
+				$lFirstName = $_REQUEST["firstname"];
+				$lLastName = $_REQUEST["lastname"];
 				$lPostedCSRFToken = $_REQUEST['csrf-token'];
 				$lGenerateNewAPIKey = isset($_REQUEST['generate_new_api_key']);
-	   		}//end if
+			}// end if $lProtectAgainstMethodTampering
 	   		
-	   		if ($lEncodeOutput){
-	   			$lUsernameText = $Encoder->encodeForHTML($lUsername);
-	   		}else{
-	   			//allow XSS by not encoding
-	   			$lUsernameText = $lUsername;
-	   		}//end if
+			if ($lEncodeOutput){
+				$lUsernameText = $Encoder->encodeForHTML($lUsername);
+				$lFirstNameText = $Encoder->encodeForHTML($lFirstName);
+				$lLastNameText = $Encoder->encodeForHTML($lLastName);
+			} else {
+				$lUsernameText = $lUsername;
+				$lFirstNameText = $lFirstName;
+				$lLastNameText = $lLastName;
+			}
 	   		
 			$LogHandler->writeToLog("Attempting to add account for: " . $lUsername);
 		   	
 			if (!$lCSRFTokenHandler->validateCSRFToken($lPostedCSRFToken)){
 				throw (new Exception("Security Violation: Cross Site Request Forgery attempt detected.", 500));
+			}// end if
+
+			if (strlen($lFirstName) == 0 || strlen($lLastName) == 0) {
+				$lValidationFailed = true;
+				echo '<h2 class="error-message">First Name and Last Name cannot be blank</h2>';
 			}// end if
 					
 		   	if (strlen($lUsername) == 0) {
@@ -98,7 +110,7 @@
 		   	}// end if
 
 		   	if (!$lValidationFailed){
-		   		$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lUserSignature, $lGenerateNewAPIKey);
+				$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lFirstName, $lLastName, $lUserSignature, $lGenerateNewAPIKey);
 				echo '<div class="success-message">Profile updated for ' . $lUsernameText . '</div>';
 				$LogHandler->writeToLog("Profile updated for: " . $lUsername);
 		   	}// end if (!$lValidationFailed)
@@ -132,6 +144,8 @@
 
 	$lUsername = "";
 	$lPassword = "";
+	$lFirstName = "";
+	$lLastName = "";
 	$lSignature = "";
 	$lResultsFound = false;
 	
@@ -144,24 +158,31 @@
 				   $lResultsFound = $lQueryResult->num_rows > 0;
 	           }//end if
 
-	           if($lResultsFound){
-	               $row = $lQueryResult->fetch_object();
-	               
-	               if(!$lEncodeOutput){
-	                   $lUsername = $row->username;
-	                   if (!$lProtectAgainstPasswordLeakage){
-	                       $lPassword = $row->password;
-	                   } // end if
-	                   $lSignature = $row->mysignature;
-	               }else{
-	                   $lUsername = $Encoder->encodeForHTML($row->username);
-	                   if (!$lProtectAgainstPasswordLeakage){
-	                       $lPassword = $Encoder->encodeForHTML($row->password);
-	                   } // end if
-	                   $lSignature = $Encoder->encodeForHTML($row->mysignature);
-	               }// end if
-				   $lAPIKey = $row->api_token; // immutable data
-	           }
+			   if($lResultsFound){
+				$row = $lQueryResult->fetch_object();
+				
+				if(!$lEncodeOutput){
+					$lUsername = $row->username;
+					$lFirstName = $row->firstname; // Retrieve the first name
+					$lLastName = $row->lastname;   // Retrieve the last name
+					
+					if (!$lProtectAgainstPasswordLeakage){
+						$lPassword = $row->password;
+					} // end if
+					$lSignature = $row->mysignature;
+				}else{
+					$lUsername = $Encoder->encodeForHTML($row->username);
+					$lFirstName = $Encoder->encodeForHTML($row->firstname); // Encode the first name
+					$lLastName = $Encoder->encodeForHTML($row->lastname);   // Encode the last name
+					
+					if (!$lProtectAgainstPasswordLeakage){
+						$lPassword = $Encoder->encodeForHTML($row->password);
+					} // end if
+					$lSignature = $Encoder->encodeForHTML($row->mysignature);
+				}// end if
+				
+				$lAPIKey = $row->api_token; // immutable data
+			} // if $lResultsFound
 	           
 	    } catch (Exception $e) {
 	        echo $CustomErrorHandler->FormatError($e, "Failed to get account");
@@ -245,6 +266,22 @@
                         <?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> />
                 </td>
             </tr>
+			<tr>
+				<td class="label">First Name</td>
+				<td>
+					<input type="text" name="firstname" size="15" 
+						value="<?php echo $lFirstName; ?>" 
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> />
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Last Name</td>
+				<td>
+					<input type="text" name="lastname" size="15" 
+						value="<?php echo $lLastName; ?>" 
+						<?php if ($lEnableHTMLControls) { echo $lHTMLControls; }?> />
+				</td>
+			</tr>
             <tr>
                 <td class="label">Signature</td>
                 <td>
