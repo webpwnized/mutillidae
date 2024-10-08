@@ -52,9 +52,9 @@
 			$lUserAuthorizationLevelText . ": " .
 			'<span class="logged-in-user">'.$logged_in_user.'</span>'.
 			'<a href="index.php?page=view-account-profile.php&uid='.$lUserID.'">'.
-            '<img src="images/view-icon-20-20.png" /></a>' .
+            '<img class="icon" src="images/view-icon-20-20.png" /></a>' .
 			'<a href="index.php?page=edit-account-profile.php&uid='.$lUserID.'">'.
-            '<img src="images/edit-icon-20-20.png" /></a>';
+            '<img class="icon" src="images/edit-icon-20-20.png" /></a>';
 	} else {
 		$logged_in_user = "anonymous";
 		$lAuthenticationStatusMessage = "Not Logged In";

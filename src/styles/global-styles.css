@@ -9,6 +9,10 @@ img{
 	vertical-align:middle;
 }
 
+img.icon{
+	margin-right: 16px;
+}
+
 a{
 	text-decoration: none;
 	cursor: pointer;
