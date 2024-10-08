@@ -54,9 +54,11 @@
 	$lUserLoggedIn = !(is_null($lUserUID));
 
 	$lUsername = "";
-	$lPassword = "";
-	$lSignature = "";
-	$lResultsFound = false;
+    $lPassword = "";
+    $lSignature = "";
+    $lFirstName = "";
+    $lLastName = "";
+    $lResultsFound = false;
 	
 	if($lUserLoggedIn){
 	    try {
@@ -70,21 +72,25 @@
 	           if($lResultsFound){
 	               $row = $lQueryResult->fetch_object();
 	               
-	               if(!$lEncodeOutput){
-	                   $lUsername = $row->username;
-	                   if (!$lProtectAgainstPasswordLeakage){
-	                       $lPassword = $row->password;
-	                   }
-	                   $lSignature = $row->mysignature;
-	               }else{
-	                   $lUsername = $Encoder->encodeForHTML($row->username);
-	                   if (!$lProtectAgainstPasswordLeakage){
-	                       $lPassword = $Encoder->encodeForHTML($row->password);
-	                   }
-	                   $lSignature = $Encoder->encodeForHTML($row->mysignature);
-	               }// end if
+				   	if(!$lEncodeOutput){
+						$lUsername = $row->username;
+						if (!$lProtectAgainstPasswordLeakage){
+							$lPassword = $row->password;
+						}
+						$lSignature = $row->mysignature;
+						$lFirstName = $row->firstname;  // Get first name
+						$lLastName = $row->lastname;    // Get last name
+					}else{
+						$lUsername = $Encoder->encodeForHTML($row->username);
+						if (!$lProtectAgainstPasswordLeakage){
+							$lPassword = $Encoder->encodeForHTML($row->password);
+						}
+						$lSignature = $Encoder->encodeForHTML($row->mysignature);
+						$lFirstName = $Encoder->encodeForHTML($row->firstname);  // Encoded first name
+						$lLastName = $Encoder->encodeForHTML($row->lastname);    // Encoded last name
+					} // if !$lEncodeOutput
                    $lAPIKey = $row->api_token; // immutable data
-	           }
+	        	} // if $lResultsFound
 	           
 	    } catch (Exception $e) {
 	        echo $CustomErrorHandler->FormatError($e, "Failed to get account");
@@ -105,6 +111,14 @@
 		<tr><td>&nbsp;</td></tr>
         <tr>
 			<td colspan="2" class="form-header" id="user-profile-header">User Profile</td>
+        </tr>
+        <tr>
+            <td class="label">First Name</td>
+            <td><?php echo $lFirstName; ?></td>
+        </tr>
+        <tr>
+            <td class="label">Last Name</td>
+            <td><?php echo $lLastName; ?></td>
         </tr>
         <tr>
             <td class="label">Username</td>
