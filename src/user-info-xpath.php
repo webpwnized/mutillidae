@@ -29,7 +29,7 @@
 				$lEnableHTMLControls = TRUE;
     			$lFormMethod = "POST";
 				$lEnableJavaScriptValidation = TRUE;
-				$lProtectAgainstMethodTampering = TRUE;
+				$lProtectAgainstMethodTampering = true;
 				$lEncodeOutput = TRUE;
 				$lProtectAgainstXPathInjection = TRUE;
 			break;

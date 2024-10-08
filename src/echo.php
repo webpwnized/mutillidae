@@ -10,16 +10,16 @@
 				$lEnableJavaScriptValidation = FALSE;
 				$lEnableHTMLControls = FALSE;
 				$lProtectAgainstMethodTampering = FALSE;
-				$lProtectAgainstCommandInjection=FALSE;
-				$lProtectAgainstXSS = FALSE;
+				$lProtectAgainstCommandInjection=false;
+				$lProtectAgainstXSS = false;
     		break;
 
     		case "1": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = TRUE;
 				$lEnableHTMLControls = TRUE;
 				$lProtectAgainstMethodTampering = FALSE;
-				$lProtectAgainstCommandInjection=FALSE;
-				$lProtectAgainstXSS = FALSE;
+				$lProtectAgainstCommandInjection=false;
+				$lProtectAgainstXSS = false;
     		break;
 
 	   		case "2":
@@ -29,8 +29,8 @@
     			$lProtectAgainstCommandInjection=TRUE;
 				$lEnableHTMLControls = TRUE;
     			$lEnableJavaScriptValidation = TRUE;
-   				$lProtectAgainstMethodTampering = TRUE;
-   				$lProtectAgainstXSS = TRUE;
+   				$lProtectAgainstMethodTampering = true;
+   				$lProtectAgainstXSS = true;
     		break;
     	}// end switch
 

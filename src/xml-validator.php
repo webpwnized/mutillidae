@@ -50,7 +50,7 @@
 				$lEnableJavaScriptValidation = TRUE;
 				$lEnableXMLValidation = TRUE;
 				$lEnableXMLEncoding = TRUE;
-				$lProtectAgainstMethodTampering = TRUE;
+				$lProtectAgainstMethodTampering = true;
 				libxml_disable_entity_loader(TRUE);
 			break;
     	}//end switch

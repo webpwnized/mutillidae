@@ -1,6 +1,6 @@
 <?php
 	// Pull in the NuSOAP code
-	require_once('./lib/nusoap.php');
+	require_once './lib/nusoap.php';
 
 	// Create the server instance
 	$lSOAPWebService = new soap_server();
@@ -21,7 +21,7 @@
 		<br/>
 		<br/>Sample Request (Copy and paste into Burp Repeater)
 		<br/>
-		<br/>POST /mutillidae/webservices/soap/ws-lookup-dns-record.php HTTP/1.1
+		<br/>POST /webservices/soap/ws-lookup-dns-record.php HTTP/1.1
 		<br/>Accept-Encoding: gzip,deflate
 		<br/>Content-Type: text/xml;charset=UTF-8
 		<br/>SOAPAction: &quot;urn:commandinjwsdl#commandinj&quot;
@@ -54,23 +54,24 @@
 		/* ------------------------------------------
 		 * Constants used in application
 		 * ------------------------------------------ */
-		require_once('../../includes/constants.php');
-		require_once('../../includes/minimum-class-definitions.php');
+		require_once '../../includes/constants.php';
+		require_once '../../includes/minimum-class-definitions.php';
 
 		try {
 	    	switch ($_SESSION["security-level"]){
+				default: // This code is insecure. No input validation is performed.
 	    		case "0": // This code is insecure. No input validation is performed.
 	    		case "1": // This code is insecure. No input validation is performed.
-					$lProtectAgainstCommandInjection=FALSE;
-					$lProtectAgainstXSS = FALSE;
+					$lProtectAgainstCommandInjection=false;
+					$lProtectAgainstXSS = false;
 	    		break;
 
 		   		case "2":
 		   		case "3":
 		   		case "4":
 	    		case "5": // This code is fairly secure
-	   				$lProtectAgainstMethodTampering = TRUE;
-	   				$lProtectAgainstXSS = TRUE;
+					$lProtectAgainstCommandInjection=true;
+	   				$lProtectAgainstXSS = true;
 	    		break;
 	    	}// end switch
 
@@ -79,7 +80,7 @@
 				 * We validate that an IP is 4 octets, IPV6 fits the pattern, and that domain name is IANA format */
     			$lTargetHostValidated = preg_match(IPV4_REGEX_PATTERN, $pTargetHost) || preg_match(DOMAIN_NAME_REGEX_PATTERN, $pTargetHost) || preg_match(IPV6_REGEX_PATTERN, $pTargetHost);
 	    	}else{
-    			$lTargetHostValidated=TRUE; 			// do not perform validation
+    			$lTargetHostValidated = true; 			// do not perform validation
 	    	}// end if
 
 	    	if ($lProtectAgainstXSS) {
@@ -91,7 +92,7 @@
 	    	}//end if
 
 		}catch(Exception $e){
-			echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page dns-lookup.php");
+			echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page ws-lookup-dns-record.php");
 		}// end try
 
 	    try{
@@ -113,13 +114,12 @@
 
 	}//end function
 
-	// Use the request to (try to) invoke the service
-	$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
-	$php_version = phpversion();
-    $php_major_version = (int)substr($php_version, 0, 1);
-    if ($php_major_version >= 7) {
-        $lSOAPWebService->service(file_get_contents("php://input"));
-    } else {
-        $lSOAPWebService->service($HTTP_RAW_POST_DATA);
-    }
+	// Handle the SOAP request with error handling
+	try {
+		// Process the incoming SOAP request
+		$server->service(file_get_contents("php://input"));
+	} catch (Exception $e) {
+		// Send a fault response back to the client
+		$server->fault('Server', "SOAP Service Error: " . $e->getMessage());
+	}
 ?>

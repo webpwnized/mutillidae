@@ -10,16 +10,16 @@
 				$lEnableJavaScriptValidation = FALSE;
 				$lEnableHTMLControls = FALSE;
 				$lProtectAgainstMethodTampering = FALSE;
-				$lProtectAgainstCommandInjection=FALSE;
-				$lProtectAgainstXSS = FALSE;
+				$lProtectAgainstCommandInjection=false;
+				$lProtectAgainstXSS = false;
     		break;
 
     		case "1": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = TRUE;
 				$lEnableHTMLControls = TRUE;
 				$lProtectAgainstMethodTampering = FALSE;
-				$lProtectAgainstCommandInjection=FALSE;
-				$lProtectAgainstXSS = FALSE;
+				$lProtectAgainstCommandInjection=false;
+				$lProtectAgainstXSS = false;
     		break;
 
 	   		case "2":
@@ -29,8 +29,8 @@
     			$lProtectAgainstCommandInjection=TRUE;
 				$lEnableHTMLControls = TRUE;
     			$lEnableJavaScriptValidation = TRUE;
-   				$lProtectAgainstMethodTampering = TRUE;
-   				$lProtectAgainstXSS = TRUE;
+   				$lProtectAgainstMethodTampering = true;
+   				$lProtectAgainstXSS = true;
     		break;
     	}// end switch
 
@@ -48,7 +48,7 @@
 				 * We validate that an IP is 4 octets, IPV6 fits the pattern, and that domain name is IANA format */
     			$lTargetHostValidated = preg_match(IPV4_REGEX_PATTERN, $lTargetHost) || preg_match(DOMAIN_NAME_REGEX_PATTERN, $lTargetHost) || preg_match(IPV6_REGEX_PATTERN, $lTargetHost);
 	    	}else{
-    			$lTargetHostValidated=TRUE; 			// do not perform validation
+    			$lTargetHostValidated = true; 			// do not perform validation
 	    	}// end if
 
 	    	if ($lProtectAgainstXSS) {

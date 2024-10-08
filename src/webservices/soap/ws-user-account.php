@@ -12,8 +12,8 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	* ------------------------------------------ */
-	require_once('../../includes/constants.php');
-	require_once('../../includes/minimum-class-definitions.php');
+	require_once '../../includes/constants.php';
+	require_once '../../includes/minimum-class-definitions.php';
 
 	try{
 		switch ($_SESSION["security-level"]){
@@ -35,7 +35,7 @@
 	}// end try;
 
 	// Pull in the NuSOAP code
-	require_once('./lib/nusoap.php');
+	require_once './lib/nusoap.php';
 
 	// Create the server instance
 	$lSOAPWebService = new soap_server();
@@ -55,7 +55,7 @@
 		<br/>
 		<br/>Sample Request (Copy and paste into Burp Repeater)
 		<br/>
-		<br/>POST /mutillidae/webservices/soap/ws-user-account.php HTTP/1.1
+		<br/>POST /webservices/soap/ws-user-account.php HTTP/1.1
 		<br/>Accept-Encoding: gzip,deflate
 		<br/>Content-Type: text/xml;charset=UTF-8
 		<br/>Content-Length: 458
@@ -89,7 +89,7 @@
 			<br/>
 			<br/>Sample Request (Copy and paste into Burp Repeater)
 			<br/>
-			<br />POST /mutillidae/webservices/soap/ws-user-account.php HTTP/1.1
+			<br />POST /webservices/soap/ws-user-account.php HTTP/1.1
 			<br />Accept-Encoding: gzip,deflate
 			<br />Content-Type: text/xml;charset=UTF-8
 			<br />Content-Length: 587
@@ -125,7 +125,7 @@
 			<br/>
 			<br/>Sample Request (Copy and paste into Burp Repeater)
 			<br/>
-			<br />POST /mutillidae/webservices/soap/ws-user-account.php HTTP/1.1
+			<br />POST /webservices/soap/ws-user-account.php HTTP/1.1
 			<br />Accept-Encoding: gzip,deflate
 			<br />Content-Type: text/xml;charset=UTF-8
 			<br />Content-Length: 587
@@ -160,7 +160,7 @@
 			<br/>
 			<br/>Sample Request (Copy and paste into Burp Repeater)
 			<br/>
-			<br/>POST /mutillidae/webservices/soap/ws-user-account.php HTTP/1.1
+			<br/>POST /webservices/soap/ws-user-account.php HTTP/1.1
 			<br/>Accept-Encoding: gzip,deflate
 			<br/>Content-Type: text/xml;charset=UTF-8
 			<br/>Content-Length: 587

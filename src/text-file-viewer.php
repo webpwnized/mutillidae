@@ -34,7 +34,7 @@
 				$lEnableHTMLControls = TRUE;
 	   			$lUseTokenization = TRUE;
 				$lEncodeOutput = TRUE;
-				$lProtectAgainstMethodTampering = TRUE;
+				$lProtectAgainstMethodTampering = true;
 			break;
 	   	}// end switch ($_SESSION["security-level"])
 

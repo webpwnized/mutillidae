@@ -95,7 +95,7 @@
 			 */
 			$lEnableJavaScriptValidation = TRUE;
 			$lEnableHTMLControls = TRUE;
-			$lProtectAgainstMethodTampering = TRUE;
+			$lProtectAgainstMethodTampering = true;
    		break;
    	}// end switch
 

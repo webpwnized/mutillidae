@@ -55,7 +55,7 @@
 			$lTokenizeAllowedMarkup = TRUE;
 			
 			/* If we are in secure mode, we need to protect against SQLi */
-			$lProtectAgainstMethodTampering = TRUE;
+			$lProtectAgainstMethodTampering = true;
    		break;
    	}// end switch
 

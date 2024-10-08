@@ -67,7 +67,7 @@
 		case "5": // This code is fairly secure
 			$lEnableHTMLControls = TRUE;
 			$lEncodeOutput = TRUE;
-			$lProtectAgainstMethodTampering = TRUE;
+			$lProtectAgainstMethodTampering = true;
 			$lHTTPParameterPollutionDetected = isParameterPollutionDetected($_SERVER['QUERY_STRING']);
 			$lLoggedInUser = $MySQLHandler->escapeDangerousCharacters($logged_in_user);
    		break;

@@ -32,7 +32,7 @@
 				require_once ('./includes/constants.php');
 				require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
     			$Encoder = new EncodingHandler();
-    			$lProtectAgainstMethodTampering = TRUE;
+    			$lProtectAgainstMethodTampering = true;
 				$lEncodeOutput = TRUE;
 			break;
     	};//end switch

@@ -9,15 +9,15 @@
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure. No input validation is performed.
 				$lProtectAgainstMethodTampering = FALSE;
-				$lProtectAgainstCommandInjection=FALSE;
-				$lProtectAgainstXSS = FALSE;
+				$lProtectAgainstCommandInjection=false;
+				$lProtectAgainstXSS = false;
 				$lProtectAgainstSSRF = FALSE;
     		break;
 
     		case "1": // This code is insecure. No input validation is performed.
 				$lProtectAgainstMethodTampering = FALSE;
-				$lProtectAgainstCommandInjection=FALSE;
-				$lProtectAgainstXSS = FALSE;
+				$lProtectAgainstCommandInjection=false;
+				$lProtectAgainstXSS = false;
 				$lProtectAgainstSSRF = FALSE;
     		break;
 
@@ -26,8 +26,8 @@
 	   		case "4":
     		case "5": // This code is fairly secure
     			$lProtectAgainstCommandInjection=TRUE;
-   				$lProtectAgainstMethodTampering = TRUE;
-   				$lProtectAgainstXSS = TRUE;
+   				$lProtectAgainstMethodTampering = true;
+   				$lProtectAgainstXSS = true;
    				$lProtectAgainstSSRF = TRUE;
     		break;
     	}// end switch

@@ -12,7 +12,7 @@
 			case "3":
 			case "4":
 			case "5": // This code is fairly secure
-				$lProtectAgainstMethodTampering = TRUE;
+				$lProtectAgainstMethodTampering = true;
 				$lEncodeOutput = TRUE;
 				break;
 		};//end switch

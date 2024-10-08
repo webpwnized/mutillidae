@@ -41,7 +41,7 @@
     			$lProtectAgainstLDAPInjection=TRUE;
 				$lEnableHTMLControls = TRUE;
     			$lEnableJavaScriptValidation = TRUE;
-   				$lProtectAgainstMethodTampering = TRUE;
+   				$lProtectAgainstMethodTampering = true;
     		break;
     	}// end switch
 

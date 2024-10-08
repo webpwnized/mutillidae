@@ -58,7 +58,7 @@
 	   		case "4":
     		case "5": // This code is fairly secure
     			$lUseServerSideValidation = TRUE;
-    			$lProtectAgainstMethodTampering = TRUE;
+    			$lProtectAgainstMethodTampering = true;
 	  			/*
 	  			 * NOTE: Input validation is excellent but not enough. The output must be
 	  			 * encoded per context. For example, if output is placed in HTML,

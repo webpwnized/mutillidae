@@ -24,7 +24,7 @@
     			$lUseSafeJSONParser = TRUE;
     			$lUseJavaScriptValidation = TRUE;
     			$lUseServerSideValidation = TRUE;
-    			$lProtectAgainstMethodTampering = TRUE;
+    			$lProtectAgainstMethodTampering = true;
 	  			/* 
 	  			 * NOTE: Input validation is excellent but not enough. The output must be
 	  			 * encoded per context. For example, if output is placed in HTML,
