@@ -255,7 +255,7 @@
             </tr>
 			<tr>
                 <td class="label">API Key</td>
-                <td class="label">
+                <td>
 					<?php echo $lAPIKey; ?>
                 </td>
             </tr>
