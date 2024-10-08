@@ -1,8 +1,6 @@
 <?php
-// Pull in the NuSOAP library
-use nusoap_server;
 
-// Assuming nusoap_server is the class you need from the nusoap library
+// nusoap_server is the class you need from the nusoap library
 require_once './lib/nusoap.php';
 
 // Create the SOAP server instance
