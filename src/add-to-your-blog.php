@@ -21,7 +21,7 @@
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
    			// DO NOTHING: This is insecure
-			$lEncodeOutput = FALSE;
+			$lEncodeOutput = false;
 			$lLoggedInUser = $logged_in_user;
 			$lTokenizeAllowedMarkup = FALSE;
 			$lProtectAgainstSQLInjection = FALSE;
@@ -32,7 +32,7 @@
 
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure
-			$lEncodeOutput = FALSE;
+			$lEncodeOutput = false;
 			$lLoggedInUser = $logged_in_user;
 			$lTokenizeAllowedMarkup = FALSE;
 			$lProtectAgainstSQLInjection = FALSE;
@@ -59,7 +59,7 @@
   			 */
    			// encode the output following OWASP standards
    			// this will be HTML encoding because we are outputting data into HTML
-			$lEncodeOutput = TRUE;
+			$lEncodeOutput = true;
 
 			/* Business Problem: Sometimes the business requirements define that users
 			 * should be allowed to use some HTML  markup. If unneccesary, this is a

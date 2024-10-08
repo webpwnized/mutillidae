@@ -5,7 +5,7 @@
 			case "0": // This code is insecure
 			case "1": // This code is insecure
 				$lProtectAgainstMethodTampering = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				break;
 		   
 			case "2":
@@ -13,7 +13,7 @@
 			case "4":
 			case "5": // This code is fairly secure
 				$lProtectAgainstMethodTampering = true;
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
 				break;
 		};//end switch
 	

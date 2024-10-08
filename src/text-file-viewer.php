@@ -16,14 +16,14 @@
    			case "0": // This code is insecure
 				$lEnableHTMLControls = FALSE;
    				$lUseTokenization = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				$lProtectAgainstMethodTampering = FALSE;
 			break;
 
    			case "1": // This code is insecure
 				$lEnableHTMLControls = TRUE;
    				$lUseTokenization = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				$lProtectAgainstMethodTampering = FALSE;
 			break;
 
@@ -33,7 +33,7 @@
 	   		case "5": // This code is fairly secure
 				$lEnableHTMLControls = TRUE;
 	   			$lUseTokenization = TRUE;
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
 				$lProtectAgainstMethodTampering = true;
 			break;
 	   	}// end switch ($_SESSION["security-level"])

@@ -9,7 +9,7 @@
     			$lFormMethod = "GET";
 				$lEnableJavaScriptValidation = FALSE;
 				$lProtectAgainstMethodTampering = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				$lProtectAgainstXPathInjection = FALSE;
 				break;
 
@@ -18,7 +18,7 @@
     			$lFormMethod = "GET";
 				$lEnableJavaScriptValidation = TRUE;
 				$lProtectAgainstMethodTampering = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				$lProtectAgainstXPathInjection = FALSE;
 			break;
 
@@ -30,7 +30,7 @@
     			$lFormMethod = "POST";
 				$lEnableJavaScriptValidation = TRUE;
 				$lProtectAgainstMethodTampering = true;
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
 				$lProtectAgainstXPathInjection = TRUE;
 			break;
     	}//end switch

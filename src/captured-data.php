@@ -9,7 +9,7 @@
    		case "0": // This code is insecure
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure		
-			$lEncodeOutput = FALSE;
+			$lEncodeOutput = false;
 			$lLimitOutput= FALSE;
 		break;
 	    		
@@ -31,7 +31,7 @@
   			 */
    			// encode the output following OWASP standards
    			// this will be HTML encoding because we are outputting data into HTML
-			$lEncodeOutput = TRUE;
+			$lEncodeOutput = true;
 			
 			/*
 			 *  If DOS defenses are enabled, we limit output. An attacker can easily cause 

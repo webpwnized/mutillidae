@@ -22,7 +22,7 @@
     		case "0": // This code is insecure
     		case "1": // This code is insecure
 				$lProtectAgainstMethodTampering = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 			break;
 
 			case "2":
@@ -33,7 +33,7 @@
 				require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
     			$Encoder = new EncodingHandler();
     			$lProtectAgainstMethodTampering = true;
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
 			break;
     	};//end switch
 

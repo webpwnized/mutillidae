@@ -3,7 +3,7 @@
    		case "0": // This code is insecure
    			// DO NOTHING: This is insecure
    			$lEnableHTMLControls = FALSE;
-   			$lEncodeOutput = FALSE;
+   			$lEncodeOutput = false;
    			$lTokenizeAllowedMarkup = FALSE;
    			$lProtectAgainstMethodTampering = FALSE;
    		break;
@@ -11,7 +11,7 @@
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure		
 			$lEnableHTMLControls = TRUE;
-   			$lEncodeOutput = FALSE;
+   			$lEncodeOutput = false;
 			$lTokenizeAllowedMarkup = FALSE;
 			$lProtectAgainstMethodTampering = FALSE;
 		break;
@@ -36,7 +36,7 @@
   			 */
    			// encode the output following OWASP standards
    			// this will be HTML encoding because we are outputting data into HTML
-			$lEncodeOutput = TRUE;
+			$lEncodeOutput = true;
 			
 			/* Business Problem: Sometimes the business requirements define that users
 			 * should be allowed to use some HTML  markup. If unneccesary, this is a

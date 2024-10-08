@@ -4,14 +4,14 @@
     		case "0": // This code is insecure.
     			$lUseJavaScriptValidation = FALSE;
     			$lUseServerSideValidation = FALSE;
-   				$lEncodeOutput = FALSE;
+   				$lEncodeOutput = false;
    				$lUseSafeJSONParser = FALSE;
 			break;
 
     		case "1": // This code is insecure.
     			$lUseJavaScriptValidation = TRUE;
     			$lUseServerSideValidation = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				$lUseSafeJSONParser = FALSE;
 			break;
 
@@ -35,7 +35,7 @@
 	  			 */
 	   			// encode the output following OWASP standards
 	   			// this will be HTML encoding because we are outputting data into HTML
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
 				$lUseSafeJSONParser = TRUE;
     		break;
     	}// end switch

@@ -3,7 +3,7 @@
 require_once './lib/nusoap.php';
 
 // Create the SOAP server instance
-$lSOAPWebService = new soap_server();  // Using 'lSOAPWebService' to follow a consistent naming pattern
+$lSOAPWebService = new soap_server();
 
 // Initialize WSDL support for the SOAP service
 $lSOAPWebService->configureWSDL('commandinjwsdl', 'urn:commandinjwsdl');
@@ -66,21 +66,19 @@ function lookupDNS($pTargetHost) {
     try {
         // Determine security level and protection settings
         switch ($_SESSION["security-level"]) {
+			default: // Insecure
             case "0": // Insecure
             case "1": // Insecure
                 $lProtectAgainstCommandInjection = false;
                 $lProtectAgainstXSS = false;
-                break;
+            break;
             case "2": // Moderate security
             case "3": // More secure
             case "4": // Secure
             case "5": // Fairly secure
                 $lProtectAgainstCommandInjection = true;
                 $lProtectAgainstXSS = true;
-                break;
-            default:
-                $lProtectAgainstCommandInjection = false;
-                $lProtectAgainstXSS = false;
+            break;
         }
 
         // Validate the target host to protect against command injection, if security is enabled

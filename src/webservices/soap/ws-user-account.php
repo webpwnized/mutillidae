@@ -1,6 +1,9 @@
 <?php
 	/* Example SQL injection: jeremy' union select username,password from accounts -- */
 
+	// Define a dedicated exception class for missing parameters
+	class MissingParameterException extends Exception {}
+
     if (session_status() == PHP_SESSION_NONE){
         session_start();
     }// end if
@@ -17,17 +20,17 @@
 
 	try{
 		switch ($_SESSION["security-level"]){
+			default: // Insecure
 			case "0": // This code is insecure
 			case "1": // This code is insecure
-				$lEncodeOutput = FALSE;
-				break;
-
+				$lEncodeOutput = false;
+			break;
 			case "2":
 			case "3":
 			case "4":
 			case "5": // This code is fairly secure
-				$lEncodeOutput = TRUE;
-				break;
+				$lEncodeOutput = true;
+			break;
 		}//end switch
 
 	} catch (Exception $e) {
@@ -44,14 +47,16 @@
 	$lSOAPWebService->configureWSDL('ws-user-account', 'urn:ws-user-account');
 
 	// Register the method to expose
-	$lSOAPWebService->register('getUser',			                	// method name
-	    array('username' => 'xsd:string'),								// input parameters
-	    array('return' => 'xsd:xml'),      								// output parameters
-	    'urn:ws-user-account',                      					// namespace
-	    'urn:ws-user-account#getUser',                					// soapaction
-	    'rpc',                                							// style
-	    'encoded',                            							// use
-	    'Fetches user information is user exists else returns error message
+	$lSOAPWebService->register(
+		'getUser',                            // Method name
+		array('username' => 'xsd:string'),    // Input parameter (expects a username)
+		array('return' => 'xsd:xml'),         // Output parameter (returns XML)
+		'urn:ws-user-account',                // Namespace
+		'urn:ws-user-account#getUser',        // SOAP action
+		'rpc',                                // Style (remote procedure call)
+		'encoded',                            // Use (encoding style)
+		// Documentation: Functionality and Sample SOAP Request
+		'Fetches user information if the user exists, otherwise returns an error message.
 		<br/>
 		<br/>Sample Request (Copy and paste into Burp Repeater)
 		<br/>
@@ -70,19 +75,21 @@
 		<br/>         &lt;username xsi:type=&quot;xsd:string&quot;&gt;Jeremy&lt;/username&gt;
 		<br/>      &lt;/urn:getUser&gt;
 		<br/>   &lt;/soapenv:Body&gt;
-		<br/>&lt;/soapenv:Envelope&gt;'	// end documentation
+		<br/>&lt;/soapenv:Envelope&gt;' // End of documentation
 	);
-
+	
 	// Register the method to expose
-	$lSOAPWebService->register('createUser',			                	// method name
+	$lSOAPWebService->register('registerUser',			                	// method name
 			array(
 				'username' => 'xsd:string',
 				'password' => 'xsd:string',
+				'firstname' => 'xsd:string',
+				'lastname' => 'xsd:string',
 				'signature' => 'xsd:string'
 			),																// input parameters
 			array('return' => 'xsd:xml'),      								// output parameters
 			'urn:ws-user-account',                      					// namespace
-			'urn:ws-user-account#createUser',                				// soapaction
+			'urn:ws-user-account#registerUser',                				// soapaction
 			'rpc',                                							// style
 			'encoded',                            							// use
 			'Creates new user account
@@ -100,11 +107,13 @@
 			<br />&lt;soapenv:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:urn=&quot;urn:ws-user-account&quot;&gt;
 			<br />   &lt;soapenv:Header/&gt;
 			<br />   &lt;soapenv:Body&gt;
-			<br />      &lt;urn:createUser soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
+			<br />      &lt;urn:registerUser soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
 			<br />         &lt;username xsi:type=&quot;xsd:string&quot;&gt;Joe2&lt;/username&gt;
 			<br />         &lt;password xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/password&gt;
+			<br />         &lt;firstname xsi:type=&quot;xsd:string&quot;&gt;Joe&lt;/firstname&gt;
+			<br />         &lt;lastname xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/lastname&gt;
 			<br />         &lt;signature xsi:type=&quot;xsd:string&quot;&gt;Try Harder&lt;/signature&gt;
-			<br />      &lt;/urn:createUser&gt;
+			<br />      &lt;/urn:registerUser&gt;
 			<br />   &lt;/soapenv:Body&gt;
 			<br />&lt;/soapenv:Envelope&gt;'	// end documentation
 	);
@@ -114,6 +123,8 @@
 			array(
 					'username' => 'xsd:string',
 					'password' => 'xsd:string',
+					'firstname' => 'xsd:string',
+					'lastname' => 'xsd:string',
 					'signature' => 'xsd:string'
 			),																// input parameters
 			array('return' => 'xsd:xml'),      								// output parameters
@@ -139,6 +150,8 @@
 			<br />      &lt;urn:updateUser soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
 			<br />         &lt;username xsi:type=&quot;xsd:string&quot;&gt;Joe2&lt;/username&gt;
 			<br />         &lt;password xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/password&gt;
+			<br />         &lt;firstname xsi:type=&quot;xsd:string&quot;&gt;Joe&lt;/firstname&gt;
+			<br />         &lt;lastname xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/lastname&gt;
 			<br />         &lt;signature xsi:type=&quot;xsd:string&quot;&gt;Try Harder&lt;/signature&gt;
 			<br />      &lt;/urn:updateUser&gt;
 			<br />   &lt;/soapenv:Body&gt;
@@ -180,45 +193,49 @@
 			'	// documentation
 	);
 
-	function doXMLEncodeQueryResults($pUsername, $pQueryResult, $pEncodeOutput){
-
-	    global $Encoder;
-
+	function doXMLEncodeQueryResults($pUsername, $pQueryResult, $pEncodeOutput) {
+		global $Encoder;
+	
+		// Start the XML result with the root element and a message attribute
 		$lResults = "<accounts message=\"Results for {$pUsername}\">";
-		$lUsername = "";
-		$lSignature = "";
-
-		while($row = $pQueryResult->fetch_object()){
-
-			$pEncodeOutput?$lSignature = $lUsername = $Encoder->encodeForHTML($row->username):$lUsername = $row->username;;
-
-			if(isset($row->mysignature)){
-				$pEncodeOutput?$lSignature = $Encoder->encodeForHTML($row->mysignature):$lSignature = $row->mysignature;
-			}// end if
-
-			$lResults.= "<account>";
-			$lResults.= "<username>{$lUsername}</username>";
-			if(isset($row->mysignature)){$lResults.= "<signature>{$lSignature}</signature>";};
-			$lResults.= "</account>";
-
-		}// end while
-
-		$lResults.= "</accounts>";
-
+	
+		// Iterate over each row in the query result
+		while ($row = $pQueryResult->fetch_object()) {
+			// Handle encoding of username
+			$lUsername = $pEncodeOutput ? $Encoder->encodeForHTML($row->username) : $row->username;
+	
+			// Handle encoding of signature if it exists
+			$lSignature = isset($row->mysignature) 
+				? ($pEncodeOutput ? $Encoder->encodeForHTML($row->mysignature) : $row->mysignature) 
+				: null;
+	
+			// Construct the XML for each account
+			$lResults .= "<account>";
+			$lResults .= "<username>{$lUsername}</username>";
+			$lResults .= "<firstname>{$row->firstname}</firstname>";
+			$lResults .= "<lastname>{$row->lastname}</lastname>";
+			if ($lSignature) {
+				$lResults .= "<signature>{$lSignature}</signature>";
+			}
+			$lResults .= "</account>";
+		}
+	
+		// Close the root element
+		$lResults .= "</accounts>";
+	
 		return $lResults;
+	}//end function doXMLEncodeQueryResults	
 
-	}//end function doXMLEncodeQueryResults
-
-	function xmlEncodeQueryResults($pUsername, $pEncodeOutput, $SQLQueryHandler){
+	function xmlEncodeQueryResults($pUsername, $pEncodeOutput, $pSQLQueryHandler){
 
 		$lQueryResult = "";
 
 		if ($pUsername == "*"){
 			/* List all accounts */
-			$lQueryResult = $SQLQueryHandler->getUsernames();
+			$lQueryResult = $pSQLQueryHandler->getUsernames();
 		}else{
 			/* lookup user */
-			$lQueryResult = $SQLQueryHandler->getNonSensitiveAccountInformation($pUsername);
+			$lQueryResult = $pSQLQueryHandler->getNonSensitiveAccountInformation($pUsername);
 		}// end if
 
 		if ($lQueryResult->num_rows > 0){
@@ -231,7 +248,7 @@
 
 	function assertParameter($pParameter){
 		if(strlen($pParameter) == 0 || !isset($pParameter)){
-			throw new Exception("Parameter ".$pParameter." is required");
+			throw new MissingParameterException("Parameter ".$pParameter." is required");
 		}// end if
 	}// end function assertParameter
 
@@ -263,7 +280,7 @@
 
 	}// end function getUser()
 
-	function createUser($pUsername, $pPassword, $pSignature){
+	function registerUser($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature){
 
 		try{
 
@@ -274,22 +291,24 @@
 
 			assertParameter($pUsername);
 			assertParameter($pPassword);
+			assertParameter($pFirstname);
+			assertParameter($pLastname);
 			assertParameter($pSignature);
 
 			if ($SQLQueryHandler->accountExists($pUsername)){
 				return "<accounts message=\"User {$pUsername} already exists\" />";
 			}else{
-				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pSignature);
+				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
 				return "<accounts message=\"Inserted account {$pUsername}\" />";
 			}// end if
 
 		} catch (Exception $e) {
-			return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->createUser()");
+			return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->registerUser()");
 		}// end try
 
-	}// end function createUser()
+	}// end function registerUser()
 
-	function updateUser($pUsername, $pPassword, $pSignature){
+	function updateUser($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature){
 
 		try{
 
@@ -300,13 +319,15 @@
 
 			assertParameter($pUsername);
 			assertParameter($pPassword);
+			assertParameter($pFirstname);
+			assertParameter($pLastname);
 			assertParameter($pSignature);
 
 			if ($SQLQueryHandler->accountExists($pUsername)){
-				$lQueryResult = $SQLQueryHandler->updateUserAccount($pUsername, $pPassword, $pSignature);
+				$lQueryResult = $SQLQueryHandler->updateUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature, false);
 				return "<accounts message=\"Updated account {$pUsername}\" />";
 			}else{
-				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pSignature);
+				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
 				return "<accounts message=\"Inserted account {$pUsername}\" />";
 			}// end if
 
@@ -351,16 +372,15 @@
 			return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->deleteUser()");
 		}// end try
 
-	}// end function createUser()
+	}// end function registerUser()
 
-	// Use the request to (try to) invoke the service
-	$HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
-    $php_version = phpversion();
-    $php_major_version = (int)substr($php_version, 0, 1);
-    if ($php_major_version >= 7) {
-        $lSOAPWebService->service(file_get_contents("php://input"));
-    } else {
-        $lSOAPWebService->service($HTTP_RAW_POST_DATA);
-    }
+	// Handle the SOAP request with error handling
+	try {
+		// Process the incoming SOAP request
+		$lSOAPWebService->service(file_get_contents("php://input"));
+	} catch (Exception $e) {
+		// Send a fault response back to the client if an error occurs
+		$lSOAPWebService->fault('Server', "SOAP Service Error: " . $e->getMessage());
+	}
 
 ?>

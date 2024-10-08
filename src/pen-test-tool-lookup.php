@@ -5,7 +5,7 @@
     			$lUseSafeJSONParser = FALSE;
     			$lUseJavaScriptValidation = FALSE;
     			$lUseServerSideValidation = FALSE;
-   				$lEncodeOutput = FALSE;
+   				$lEncodeOutput = false;
 				$lProtectAgainstMethodTampering = FALSE;	
 			break;
 
@@ -13,7 +13,7 @@
     			$lUseSafeJSONParser = FALSE;
     			$lUseJavaScriptValidation = TRUE;
     			$lUseServerSideValidation = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				$lProtectAgainstMethodTampering = FALSE;    		
 			break;
 
@@ -39,7 +39,7 @@
 	  			 */
 	   			// encode the output following OWASP standards
 	   			// this will be HTML encoding because we are outputting data into HTML
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
     		break;
     	}// end switch
 	}catch(Exception $e){

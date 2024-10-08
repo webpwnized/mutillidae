@@ -5,7 +5,7 @@
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
 	   			// DO NOTHING: This is insecure		
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 				$luseSafeJavaScript = "false";
 			break;
 
@@ -32,7 +32,7 @@
 	  			 */
 	   			// encode the output following OWASP standards
 	   			// this will be HTML encoding because we are outputting data into HTML
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
 				$luseSafeJavaScript = "true";
 	   		break;
 	   	}// end switch		

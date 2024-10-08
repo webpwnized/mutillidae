@@ -11,14 +11,14 @@
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
    			// DO NOTHING: This is insecure		
-			$lEncodeOutput = FALSE;
+			$lEncodeOutput = false;
 			$lProtectAgainstMethodSwitching = FALSE;
 			$lHTTPParameterPollutionDetected = FALSE;
 			$lEnableHTMLControls = FALSE;
 		break;
 		case "1": // This code is insecure
    			// DO NOTHING: This is insecure		
-			$lEncodeOutput = FALSE;
+			$lEncodeOutput = false;
 			$lProtectAgainstMethodSwitching = FALSE;
 			$lHTTPParameterPollutionDetected = FALSE;
 			$lEnableHTMLControls = TRUE;
@@ -42,7 +42,7 @@
   			 */
    			// encode the output following OWASP standards
    			// this will be HTML encoding because we are outputting data into HTML
-			$lEncodeOutput = TRUE;
+			$lEncodeOutput = true;
 			$lProtectAgainstMethodSwitching = TRUE;
 			$lEnableHTMLControls = TRUE;
 				

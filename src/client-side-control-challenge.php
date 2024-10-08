@@ -133,14 +133,14 @@
 				$lEnableJavaScriptValidation = TRUE;
 				$lEnableHTMLControls = TRUE;
 				$lProtectAgainstMethodSwitching = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
     		break;
 
     		case "1": // This code is insecure.
 				$lEnableJavaScriptValidation = TRUE;
 				$lEnableHTMLControls = TRUE;
 				$lProtectAgainstMethodSwitching = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
     		break;
 
 	   		case "2":
@@ -150,7 +150,7 @@
     			$lEnableJavaScriptValidation = TRUE;
 				$lEnableHTMLControls = TRUE;
 				$lProtectAgainstMethodSwitching = TRUE;
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
     		break;
     	}// end switch
 

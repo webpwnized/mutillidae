@@ -46,7 +46,7 @@
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
    			$lEnableHTMLControls = FALSE;
-   			$lEncodeOutput = FALSE;
+   			$lEncodeOutput = false;
    			$lProtectAgainstMethodTampering = FALSE;
    			$lHTTPParameterPollutionDetected = FALSE;
    			$lLoggedInUser = $logged_in_user;
@@ -55,7 +55,7 @@
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure		
 			$lEnableHTMLControls = TRUE;
-   			$lEncodeOutput = FALSE;
+   			$lEncodeOutput = false;
 			$lProtectAgainstMethodTampering = FALSE;
 			$lHTTPParameterPollutionDetected = FALSE;
 			$lLoggedInUser = $logged_in_user;
@@ -66,7 +66,7 @@
 		case "4":
 		case "5": // This code is fairly secure
 			$lEnableHTMLControls = TRUE;
-			$lEncodeOutput = TRUE;
+			$lEncodeOutput = true;
 			$lProtectAgainstMethodTampering = true;
 			$lHTTPParameterPollutionDetected = isParameterPollutionDetected($_SERVER['QUERY_STRING']);
 			$lLoggedInUser = $MySQLHandler->escapeDangerousCharacters($logged_in_user);

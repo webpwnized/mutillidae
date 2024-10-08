@@ -18,13 +18,13 @@
 	   		case "0": // This code is insecure
 	   			$lEnableHTMLControls = FALSE;
 	   			$lValidateAndTokenize = FALSE;
-	   			$lEncodeOutput = FALSE;
+	   			$lEncodeOutput = false;
 	   		break;
 	   			 
 	   		case "1": // This code is insecure 
 				$lEnableHTMLControls = TRUE;
 	   			$lValidateAndTokenize = FALSE;
-				$lEncodeOutput = FALSE;
+				$lEncodeOutput = false;
 	   		break;
 	    		
 			case "2":
@@ -33,7 +33,7 @@
 	   		case "5": // This code is fairly secure
 				$lEnableHTMLControls = TRUE;
 	   			$lValidateAndTokenize = TRUE;
-				$lEncodeOutput = TRUE;
+				$lEncodeOutput = true;
 	   		break;
 	   	}// end switch ($_SESSION["security-level"])
 	   	
