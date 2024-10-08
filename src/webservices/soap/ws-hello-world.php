@@ -3,6 +3,7 @@
 require_once('./lib/nusoap.php');
 // Create the server instance
 $server = new soap_server();
+$server->setGlobalDebugLevel(9);
 // Initialize WSDL support
 $server->configureWSDL('hellowsdl', 'urn:hellowsdl');
 // Register the method to expose
