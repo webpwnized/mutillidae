@@ -459,7 +459,7 @@ class SQLQueryHandler {
 			";
 		
 		if ($pUpdateAPIToken){
-			$lQueryString .= "'," .
+			$lQueryString .= "," .
 				"api_token = '".$lAPIToken."'";
 		}// end if
 
