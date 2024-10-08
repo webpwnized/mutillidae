@@ -19,6 +19,7 @@
 
 	try {
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
     		case "0": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = FALSE;
 				$lEnableHTMLControls = FALSE;

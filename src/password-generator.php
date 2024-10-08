@@ -11,33 +11,34 @@
 		$lPasswordJSMessage = "";
 		
     	switch ($_SESSION["security-level"]){
-	    		case "0": // This code is insecure.
-	    		case "1": // This code is insecure.
-					// Grab inputs insecurely. $_REQUEST allows any input paramter. Not just POST.
-					if (isset($_REQUEST["username"])){
-	    				$lUsernameForJS = $_REQUEST["username"]; // allow javascript and xss injection
-					}//end if
-	    		break;
+			default: // Default case: This code is insecure.
+			case "0": // This code is insecure.
+			case "1": // This code is insecure.
+				// Grab inputs insecurely. $_REQUEST allows any input paramter. Not just POST.
+				if (isset($_REQUEST["username"])){
+					$lUsernameForJS = $_REQUEST["username"]; // allow javascript and xss injection
+				}//end if
+			break;
 
-	    		case "2":
-	    		case "3":
-	    		case "4":
-	    		case "5": // This code is fairly secure
-					/* Protect against one form of patameter pollution 
-					 * by grabbing inputs only from GET parameters. */ 
-					if (isset($_GET["username"])){
-	    				$lUsernameForJS = $Encoder->encodeForJavaScript($_GET["username"]);
-					}
-					break;
-	    	}// end switch
+			case "2":
+			case "3":
+			case "4":
+			case "5": // This code is fairly secure
+				/* Protect against one form of patameter pollution 
+					* by grabbing inputs only from GET parameters. */ 
+				if (isset($_GET["username"])){
+					$lUsernameForJS = $Encoder->encodeForJavaScript($_GET["username"]);
+				}
+			break;
+		}// end switch
+		
+		if (strlen($lUsernameForJS) > 0) {
+			$lPasswordJSMessage = "This password is for {$lUsernameForJS}";	
+		}
 	    	
-	    	if (strlen($lUsernameForJS) > 0) {
-	    		$lPasswordJSMessage = "This password is for {$lUsernameForJS}";	
-	    	}
-	    	
-    	} catch (Exception $e) {
-			echo $CustomErrorHandler->FormatError($e, "Input: " . $lUsernameForHTML);
-    	}// end try
+	} catch (Exception $e) {
+		echo $CustomErrorHandler->FormatError($e, "Input: " . $lUsernameForHTML);
+	}// end try
 ?>
 
 <script>
@@ -45,9 +46,9 @@
 		try{
 
 		    var lPasswordText = "";
-		    var lPasswordCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=[]{}\|;',./:?";
+		    var lPasswordCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-		    for( var i=0; i < 15; i++ ){
+		    for( var i=0; i < 31; i++ ){
 		    	lPasswordText += lPasswordCharset.charAt(Math.floor(Math.random() * lPasswordCharset.length));
 		    }// end for i
 			
@@ -63,8 +64,8 @@
 
 <div class="page-title">Password Generator</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <div id="id-generator-form-div">
 	<form 	enctype="application/x-www-form-urlencoded" 
