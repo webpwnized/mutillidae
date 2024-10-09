@@ -13,14 +13,15 @@ img.icon{
 	margin-right: 4px;
 }
 
-a{
-	text-decoration: none;
-	cursor: pointer;
+a {
+    text-decoration: none;
+    cursor: pointer;
 	border: none;
+    transition: color 0.3s ease;
 }
 
-a:HOVER{
-	font-weight: bold;
+a:hover {
+    font-weight: bold;
 }
 
 input,textarea{
