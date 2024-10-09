@@ -22,22 +22,22 @@
 	try {	    	
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure
-				$lEnableHTMLControls = FALSE;
+				$lEnableHTMLControls = false;
     			//$lFormMethod = "GET";
-				$lEnableJavaScriptValidation = FALSE;
+				$lEnableJavaScriptValidation = false;
 				$lEnableXMLValidation = FALSE;
 				$lEnableXMLEncoding = FALSE;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lProtectAgainstMethodTampering = false;
 				libxml_disable_entity_loader(FALSE);
 			break;
     		
     		case "1": // This code is insecure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     			//$lFormMethod = "GET";
-				$lEnableJavaScriptValidation = TRUE;
+				$lEnableJavaScriptValidation = true;
 				$lEnableXMLValidation = FALSE;
 				$lEnableXMLEncoding = FALSE;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lProtectAgainstMethodTampering = false;
 				libxml_disable_entity_loader(FALSE);
 			break;
 	    		
@@ -45,9 +45,9 @@
 			case "3":
 			case "4":
     		case "5": // This code is fairly secure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     			//$lFormMethod = "POST";
-				$lEnableJavaScriptValidation = TRUE;
+				$lEnableJavaScriptValidation = true;
 				$lEnableXMLValidation = TRUE;
 				$lEnableXMLEncoding = TRUE;
 				$lProtectAgainstMethodTampering = true;

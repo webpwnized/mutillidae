@@ -5,19 +5,19 @@
 
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure
-				$lEnableHTMLControls = FALSE;
+				$lEnableHTMLControls = false;
     			$lFormMethod = "GET";
-				$lEnableJavaScriptValidation = FALSE;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lEnableJavaScriptValidation = false;
+				$lProtectAgainstMethodTampering = false;
 				$lEncodeOutput = false;
 				$lProtectAgainstXPathInjection = FALSE;
 				break;
 
     		case "1": // This code is insecure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     			$lFormMethod = "GET";
-				$lEnableJavaScriptValidation = TRUE;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lEnableJavaScriptValidation = true;
+				$lProtectAgainstMethodTampering = false;
 				$lEncodeOutput = false;
 				$lProtectAgainstXPathInjection = FALSE;
 			break;
@@ -26,9 +26,9 @@
 			case "3":
 			case "4":
     		case "5": // This code is fairly secure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     			$lFormMethod = "POST";
-				$lEnableJavaScriptValidation = TRUE;
+				$lEnableJavaScriptValidation = true;
 				$lProtectAgainstMethodTampering = true;
 				$lEncodeOutput = true;
 				$lProtectAgainstXPathInjection = TRUE;

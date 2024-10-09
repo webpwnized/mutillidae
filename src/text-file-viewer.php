@@ -14,24 +14,24 @@
 	try {	    	
 		switch ($_SESSION["security-level"]){
    			case "0": // This code is insecure
-				$lEnableHTMLControls = FALSE;
+				$lEnableHTMLControls = false;
    				$lUseTokenization = FALSE;
 				$lEncodeOutput = false;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lProtectAgainstMethodTampering = false;
 			break;
 
    			case "1": // This code is insecure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
    				$lUseTokenization = FALSE;
 				$lEncodeOutput = false;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lProtectAgainstMethodTampering = false;
 			break;
 
 			case "2":
 			case "3":
 			case "4":
 	   		case "5": // This code is fairly secure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
 	   			$lUseTokenization = TRUE;
 				$lEncodeOutput = true;
 				$lProtectAgainstMethodTampering = true;

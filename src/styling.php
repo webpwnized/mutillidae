@@ -21,7 +21,7 @@
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure
     		case "1": // This code is insecure
-				$lProtectAgainstMethodTampering = FALSE;
+				$lProtectAgainstMethodTampering = false;
 				$lEncodeOutput = false;
 			break;
 

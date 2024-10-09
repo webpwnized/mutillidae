@@ -16,13 +16,13 @@
 	try {	    	
 		switch ($_SESSION["security-level"]){
 	   		case "0": // This code is insecure
-	   			$lEnableHTMLControls = FALSE;
+	   			$lEnableHTMLControls = false;
 	   			$lValidateAndTokenize = FALSE;
 	   			$lEncodeOutput = false;
 	   		break;
 	   			 
 	   		case "1": // This code is insecure 
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
 	   			$lValidateAndTokenize = FALSE;
 				$lEncodeOutput = false;
 	   		break;
@@ -31,7 +31,7 @@
 			case "3":
 			case "4":
 	   		case "5": // This code is fairly secure
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
 	   			$lValidateAndTokenize = TRUE;
 				$lEncodeOutput = true;
 	   		break;

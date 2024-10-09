@@ -4,12 +4,12 @@
     		case "0": // This code is insecure.
     			$lUseClientSideStorageForSensitiveData = TRUE;
     			$lUseJavaScriptValidation = FALSE;
-				$lEnableHTMLControls = FALSE;
+				$lEnableHTMLControls = false;
     		break;
     		case "1": // This code is insecure.
     			$lUseClientSideStorageForSensitiveData = TRUE;
     			$lUseJavaScriptValidation = TRUE;
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     		break;
 
 	   		case "2":
@@ -18,7 +18,7 @@
     		case "5": // This code is fairly secure
     			$lUseClientSideStorageForSensitiveData = FALSE;
     			$lUseJavaScriptValidation = TRUE;
-				$lEnableHTMLControls = TRUE;
+				$lEnableHTMLControls = true;
     		break;
     	}// end switch
 	}catch(Exception $e){

@@ -8,14 +8,14 @@
 	try {
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure. No input validation is performed.
-				$lProtectAgainstMethodTampering = FALSE;
+				$lProtectAgainstMethodTampering = false;
 				$lProtectAgainstCommandInjection=false;
 				$lProtectAgainstXSS = false;
 				$lProtectAgainstSSRF = FALSE;
     		break;
 
     		case "1": // This code is insecure. No input validation is performed.
-				$lProtectAgainstMethodTampering = FALSE;
+				$lProtectAgainstMethodTampering = false;
 				$lProtectAgainstCommandInjection=false;
 				$lProtectAgainstXSS = false;
 				$lProtectAgainstSSRF = FALSE;

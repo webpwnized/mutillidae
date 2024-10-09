@@ -6,21 +6,21 @@
 	try {
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure. No input validation is performed.
-				$lEnableJavaScriptValidation = FALSE;
-				$lEnableHTMLControls = FALSE;
+				$lEnableJavaScriptValidation = false;
+				$lEnableHTMLControls = false;
     		break;
 
     		case "1": // This code is insecure. No input validation is performed.
-				$lEnableJavaScriptValidation = TRUE;
-				$lEnableHTMLControls = TRUE;
+				$lEnableJavaScriptValidation = true;
+				$lEnableHTMLControls = true;
     		break;
 
 	   		case "2":
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-				$lEnableHTMLControls = TRUE;
-    			$lEnableJavaScriptValidation = TRUE;
+				$lEnableHTMLControls = true;
+    			$lEnableJavaScriptValidation = true;
     		break;
     	}// end switch
 	}catch(Exception $e){

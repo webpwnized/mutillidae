@@ -2,25 +2,25 @@
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
    			// DO NOTHING: This is insecure
-   			$lEnableHTMLControls = FALSE;
+   			$lEnableHTMLControls = false;
    			$lEncodeOutput = false;
-   			$lTokenizeAllowedMarkup = FALSE;
-   			$lProtectAgainstMethodTampering = FALSE;
+   			$lTokenizeAllowedMarkup = false;
+   			$lProtectAgainstMethodTampering = false;
    		break;
    		
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure		
-			$lEnableHTMLControls = TRUE;
+			$lEnableHTMLControls = true;
    			$lEncodeOutput = false;
-			$lTokenizeAllowedMarkup = FALSE;
-			$lProtectAgainstMethodTampering = FALSE;
+			$lTokenizeAllowedMarkup = false;
+			$lProtectAgainstMethodTampering = false;
 		break;
 	    		
 		case "2":
 		case "3":
 		case "4":
 		case "5": // This code is fairly secure
-			$lEnableHTMLControls = TRUE;
+			$lEnableHTMLControls = true;
 				
   			/* 
   			 * NOTE: Input validation is excellent but not enough. The output must be
@@ -52,7 +52,7 @@
 			 * we offer, or our system rejects the request. To put it bluntly, either the user
 			 * follows the rules, or their output is encoded. Period.
 			 */
-			$lTokenizeAllowedMarkup = TRUE;
+			$lTokenizeAllowedMarkup = true;
 			
 			/* If we are in secure mode, we need to protect against SQLi */
 			$lProtectAgainstMethodTampering = true;

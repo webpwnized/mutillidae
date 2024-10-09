@@ -31,14 +31,14 @@
 	    switch ($lSecurityLevel){
 	   		case "0": // this code is insecure
 	   		case "1": // this code is insecure
-				$lProtectAgainstSQLInjection = FALSE;
+				$lProtectAgainstSQLInjection = false;
 	   		break;//case "0"
 
 	   		case "2":
 	   		case "3":
 	   		case "4":
 	   		case "5": // This code is fairly secure
-				$lProtectAgainstSQLInjection = TRUE;
+				$lProtectAgainstSQLInjection = true;
 	   		break;//case "5"
 	   	}// end switch ($_SESSION["security-level"])
 

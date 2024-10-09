@@ -38,18 +38,18 @@
     		case "0": // This code is insecure.
     			$lUseServerSideValidation = FALSE;
    				$lEncodeOutput = false;
-				$lTokenizeAllowedMarkup = FALSE;
-				$lProtectAgainstSQLInjection = FALSE;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lTokenizeAllowedMarkup = false;
+				$lProtectAgainstSQLInjection = false;
+				$lProtectAgainstMethodTampering = false;
 				$lValidateInput = FALSE;
 				break;
 
     		case "1": // This code is insecure.
     			$lUseServerSideValidation = FALSE;
 				$lEncodeOutput = false;
-				$lTokenizeAllowedMarkup = FALSE;
-				$lProtectAgainstSQLInjection = FALSE;
-				$lProtectAgainstMethodTampering = FALSE;
+				$lTokenizeAllowedMarkup = false;
+				$lProtectAgainstSQLInjection = false;
+				$lProtectAgainstMethodTampering = false;
 				$lValidateInput = FALSE;
 			break;
 
@@ -89,10 +89,10 @@
 				 * we offer, or our system rejects the request. To put it bluntly, either the user
 				 * follows the rules, or their output is encoded. Period.
 				 */
-				$lTokenizeAllowedMarkup = TRUE;
+				$lTokenizeAllowedMarkup = true;
 
 				/* If we are in secure mode, we need to protect against SQLi */
-				$lProtectAgainstSQLInjection = TRUE;
+				$lProtectAgainstSQLInjection = true;
 
 				/* If we are in secure mode, we need to validate input */
 				$lValidateInput = TRUE;

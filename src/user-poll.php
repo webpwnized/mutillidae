@@ -45,18 +45,18 @@
 	
 	switch ($_SESSION["security-level"]){
    		case "0": // This code is insecure
-   			$lEnableHTMLControls = FALSE;
+   			$lEnableHTMLControls = false;
    			$lEncodeOutput = false;
-   			$lProtectAgainstMethodTampering = FALSE;
+   			$lProtectAgainstMethodTampering = false;
    			$lHTTPParameterPollutionDetected = FALSE;
    			$lLoggedInUser = $logged_in_user;
    		break;
    			   			
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure		
-			$lEnableHTMLControls = TRUE;
+			$lEnableHTMLControls = true;
    			$lEncodeOutput = false;
-			$lProtectAgainstMethodTampering = FALSE;
+			$lProtectAgainstMethodTampering = false;
 			$lHTTPParameterPollutionDetected = FALSE;
 			$lLoggedInUser = $logged_in_user;
 		break;
@@ -65,7 +65,7 @@
 		case "3":
 		case "4":
 		case "5": // This code is fairly secure
-			$lEnableHTMLControls = TRUE;
+			$lEnableHTMLControls = true;
 			$lEncodeOutput = true;
 			$lProtectAgainstMethodTampering = true;
 			$lHTTPParameterPollutionDetected = isParameterPollutionDetected($_SERVER['QUERY_STRING']);

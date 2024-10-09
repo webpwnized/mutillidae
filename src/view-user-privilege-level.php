@@ -29,7 +29,7 @@
 	try{
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure.
-				$lEnableJavaScriptValidation = FALSE;
+				$lEnableJavaScriptValidation = false;
 				$lEnableBufferOverflowProtection = FALSE;
 				$lProtectAgainstMethodSwitching = FALSE;
 				$lCreateParameterAdditionVulnerability = TRUE;
@@ -40,7 +40,7 @@
 			break;
 
     		case "1": // This code is insecure.
-				$lEnableJavaScriptValidation = TRUE;
+				$lEnableJavaScriptValidation = true;
 				$lEnableBufferOverflowProtection = FALSE;
 				$lProtectAgainstMethodSwitching = FALSE;
 				$lCreateParameterAdditionVulnerability = TRUE;
@@ -54,7 +54,7 @@
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-    			$lEnableJavaScriptValidation = TRUE;
+    			$lEnableJavaScriptValidation = true;
 				$lEnableBufferOverflowProtection = TRUE;
 				$lProtectAgainstMethodSwitching = TRUE;
 				$lCreateParameterAdditionVulnerability = FALSE;

@@ -14,14 +14,14 @@
 			$lEncodeOutput = false;
 			$lProtectAgainstMethodSwitching = FALSE;
 			$lHTTPParameterPollutionDetected = FALSE;
-			$lEnableHTMLControls = FALSE;
+			$lEnableHTMLControls = false;
 		break;
 		case "1": // This code is insecure
    			// DO NOTHING: This is insecure		
 			$lEncodeOutput = false;
 			$lProtectAgainstMethodSwitching = FALSE;
 			$lHTTPParameterPollutionDetected = FALSE;
-			$lEnableHTMLControls = TRUE;
+			$lEnableHTMLControls = true;
 		break;
 	    		
 		case "2":
@@ -44,7 +44,7 @@
    			// this will be HTML encoding because we are outputting data into HTML
 			$lEncodeOutput = true;
 			$lProtectAgainstMethodSwitching = TRUE;
-			$lEnableHTMLControls = TRUE;
+			$lEnableHTMLControls = true;
 				
 			// Detect multiple params with same name (HTTP Parameter Pollution)
 			$lQueryString  = explode('&', $_SERVER['QUERY_STRING']);

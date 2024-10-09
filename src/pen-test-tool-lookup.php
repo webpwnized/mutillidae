@@ -6,7 +6,7 @@
     			$lUseJavaScriptValidation = FALSE;
     			$lUseServerSideValidation = FALSE;
    				$lEncodeOutput = false;
-				$lProtectAgainstMethodTampering = FALSE;	
+				$lProtectAgainstMethodTampering = false;	
 			break;
 
     		case "1": // This code is insecure.
@@ -14,7 +14,7 @@
     			$lUseJavaScriptValidation = TRUE;
     			$lUseServerSideValidation = FALSE;
 				$lEncodeOutput = false;
-				$lProtectAgainstMethodTampering = FALSE;    		
+				$lProtectAgainstMethodTampering = false;    		
 			break;
 
 	   		case "2":

@@ -10,7 +10,6 @@
 	*/
 
 	/* Instantiate CSRF Protection object */
-	use CSRFTokenHandler;
 	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
@@ -19,26 +18,27 @@
 	}// end if
 
 	switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure
    		case "0": // This code is insecure
    			// DO NOTHING: This is insecure
 			$lEncodeOutput = false;
 			$lLoggedInUser = $logged_in_user;
-			$lTokenizeAllowedMarkup = FALSE;
-			$lProtectAgainstSQLInjection = FALSE;
-			$lEnableJavaScriptValidation = FALSE;
-			$lEnableHTMLControls = FALSE;
-			$lProtectAgainstMethodTampering = FALSE;
+			$lTokenizeAllowedMarkup = false;
+			$lProtectAgainstSQLInjection = false;
+			$lEnableJavaScriptValidation = false;
+			$lEnableHTMLControls = false;
+			$lProtectAgainstMethodTampering = false;
 		break;
 
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure
 			$lEncodeOutput = false;
 			$lLoggedInUser = $logged_in_user;
-			$lTokenizeAllowedMarkup = FALSE;
-			$lProtectAgainstSQLInjection = FALSE;
-			$lEnableJavaScriptValidation = TRUE;
-			$lEnableHTMLControls = TRUE;
-			$lProtectAgainstMethodTampering = FALSE;
+			$lTokenizeAllowedMarkup = false;
+			$lProtectAgainstSQLInjection = false;
+			$lEnableJavaScriptValidation = true;
+			$lEnableHTMLControls = true;
+			$lProtectAgainstMethodTampering = false;
 		break;
 
 		case "2":
@@ -75,10 +75,10 @@
 			 * we offer, or our system rejects the request. To put it bluntly, either the user
 			 * follows the rules, or their output is encoded. Period.
 			 */
-			$lTokenizeAllowedMarkup = TRUE;
+			$lTokenizeAllowedMarkup = true;
 
 			/* If we are in secure mode, we need to protect against SQLi */
-			$lProtectAgainstSQLInjection = TRUE;
+			$lProtectAgainstSQLInjection = true;
 
 			/* Note that $MySQLHandler->escapeDangerousCharacters is ok but not the best defense. Stored
 			 * Procedures are a much more powerful defense, run much faster, can be
@@ -93,8 +93,8 @@
 			 * There is no security in JS validation. You must validate on the server.
 			 * JS is easy to bypass.
 			 */
-			$lEnableJavaScriptValidation = TRUE;
-			$lEnableHTMLControls = TRUE;
+			$lEnableJavaScriptValidation = true;
+			$lEnableHTMLControls = true;
 			$lProtectAgainstMethodTampering = true;
    		break;
    	}// end switch
