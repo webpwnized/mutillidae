@@ -106,6 +106,7 @@ input.button{
 
 input.button:hover {
 	background-color: #4e5a30;
+	color: #ffffff;
 }
 
 span.buffer{
