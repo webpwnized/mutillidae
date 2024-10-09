@@ -61,6 +61,7 @@ div.page-title,span.page-title{
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 5px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 *.label{
