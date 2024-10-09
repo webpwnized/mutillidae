@@ -17,10 +17,12 @@ a {
     text-decoration: none;
     cursor: pointer;
 	border: none;
+	color: #007BFF;
     transition: color 0.3s ease;
 }
 
 a:hover {
+	color: #0056b3;
     font-weight: bold;
 }
 
