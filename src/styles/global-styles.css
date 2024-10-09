@@ -104,6 +104,10 @@ input.button{
 	text-align: center;
 }
 
+input.button:hover {
+    background-color: #45a049;
+}
+
 span.buffer{
 	display: inline-block;
 	margin: 20px;
