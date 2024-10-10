@@ -2,7 +2,6 @@
 /* ------------------------------------------------- */
 html {
     font-family: 'Roboto', sans-serif;
-    line-height: 1.5; /* Improved readability */
 }
 
 img {
@@ -19,7 +18,7 @@ a {
     cursor: pointer;
     border: none;
     color: #007BFF;
-    transition: color 0.2s ease, font-weight 0.2s ease; /* Smoother hover transition */
+    transition: color 0.2s ease; /* Slight transition for smoother hover */
 }
 
 a:hover {
@@ -30,8 +29,8 @@ a:hover {
 input,
 textarea {
     border-radius: 5px;
-    padding: 8px; /* Improved user experience */
-    border: 1px solid #ccc; /* Adding a slight border to make it more visible */
+    border: 1px solid #ccc; /* Added light border to define input boundaries */
+    padding: 5px; /* Consistent input padding for better UX */
 }
 
 code {
@@ -40,15 +39,15 @@ code {
     width: 400px;
     font-family: monospace;
     font-weight: bold;
-    background-color: #f8f9fa; /* Slight background for readability */
-    padding: 4px; /* Added some padding for readability */
+    background-color: #f8f9fa; /* Subtle background color for readability */
+    padding: 4px; /* Padding for readability */
 }
 
 fieldset {
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
-    padding: 10px; /* Added some padding for better structure */
+    padding: 10px; /* Added padding for better spacing */
 }
 
 fieldset legend {
@@ -61,23 +60,23 @@ span.page-title {
     font-size: 18pt;
     font-weight: bold;
     text-align: center;
-    background-color: #f0f0f0; /* Softer color to improve readability */
+    background-color: #e0e0e0; /* Slightly modernized color */
     border: 1px solid #000000;
     border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    padding: 10px; /* Add padding for a balanced look */
+    padding: 10px; /* Add padding to make it look balanced */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Very subtle shadow for depth */
 }
 
 /* Buttons */
 input.button {
     border-radius: 5px;
     font-weight: bold;
-    background-color: #606c3825;
+    background-color: #606c38;
     border: 1px solid black;
-    padding: 10px 20px; /* Consistent padding */
+    padding: 5px 15px; /* Consistent padding */
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.2s ease, color 0.2s ease; /* Added smooth transition */
+    transition: background-color 0.2s ease; /* Smooth hover transition */
 }
 
 input.button:hover {
@@ -99,7 +98,7 @@ div.help-text {
 div.help-text-header {
     border-width: 1px;
     border-style: solid;
-    background-color: #e0e0e0; /* Softer shade */
+    background-color: #e0e0e0;
     text-align: center;
     font-weight: bold;
     padding: 5px;
@@ -109,7 +108,7 @@ div.help-text-header {
 /* Tutorials */
 table.tutorial {
     width: 95%;
-    border-collapse: collapse; /* Improved table display */
+    border-collapse: collapse; /* Ensure clean table structure */
 }
 
 table.tutorial tr {
@@ -122,7 +121,7 @@ table.tutorial tr td {
     background-color: #ffffee;
     text-align: left;
     border: 1px solid black;
-    padding: 10px; /* Consistent padding */
+    padding: 10px; /* Consistent padding for better spacing */
     border-radius: 5px;
 }
 
@@ -135,32 +134,31 @@ table.tutorial tr.tutorial-title td {
 
 /* Reports */
 .report-header {
-    background-color: #f0f0f0; /* Softer color for better readability */
+    background-color: #e0e0e0; /* Softer color */
     font-weight: bold;
     text-align: center;
     border: 1px groove #000000;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
 }
 
 .report-details {
-    background-color: #e8e8e8; /* Light grey to distinguish details */
+    background-color: #cccccc;
     font-weight: bold;
     border-top: 1px dashed #000000;
     border-bottom: 1px dashed #000000;
-    padding: 10px; /* Consistent padding */
+    padding: 5px;
 }
 
 /* Tables */
 table {
     margin-left: auto;
     margin-right: auto;
-    border-collapse: collapse; /* Improved structure */
-    width: 100%;
+    border-collapse: collapse; /* Improved display */
 }
 
 table tr td {
-    padding: 10px; /* Consistent padding for better spacing */
+    padding: 5px; /* Consistent padding */
     border: 1px solid #000000;
 }
 
@@ -172,8 +170,8 @@ table tr td.label {
 .message {
     border-width: 1px;
     border-style: solid;
-    padding: 15px;
-    margin: 20px 0;
+    padding: 10px;
+    margin: 10px 0;
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
