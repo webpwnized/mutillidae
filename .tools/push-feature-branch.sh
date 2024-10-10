@@ -11,7 +11,7 @@ print_message() {
 
 # Function to display help message
 show_help() {
-    echo "Usage: $0 <version> <annotation> [-d|--push-to-development] [-b|--branch <branch-name>]"
+    echo "Usage: $0 <version> <annotation> [-d|--push-to-development] [-b|--branch <branch-name>] [-h|--help]"
     echo ""
     echo "Options:"
     echo "  -h, --help                Display this help message."
@@ -20,9 +20,11 @@ show_help() {
     echo ""
     echo "Description:"
     echo "  This script pushes a specified feature branch and optionally merges it to the development branch."
+    echo "  If the specified branch does not exist, you can create it with the following command:"
+    echo "  git checkout -b <branch-name>"
     echo ""
     echo "Example:"
-    echo "  ./push-feature-branch.sh 1.0.0 "Initial commit" -b feature/my-feature -d"
+    echo "  ./push-feature-branch.sh 1.0.0 \"Initial commit\" -b feature/my-feature -d"
     exit 0
 }
 
@@ -47,48 +49,10 @@ done
 
 # Check if version and annotation are passed
 if (( $# != 2 )); then
-    handle_error "Incorrect number of arguments. Usage: $0 <version> <annotation> [-d|--push-to-development] [-b|--branch <branch-name>]"
-fi
-
-# Assign arguments to variables
-VERSION=$1
-ANNOTATION=$2
-
-# Ensure a feature branch is specified
-if [ -z "$FEATURE_BRANCH" ]; then
-    handle_error "Feature branch not specified. Use -b or --branch to provide the branch name."
-fi
-
-# Verify the feature branch exists
-if ! git show-ref --verify --quiet "refs/heads/$FEATURE_BRANCH"; then
-    handle_error "Feature branch '$FEATURE_BRANCH' does not exist. You can create a new feature branch with 'git checkout -b $FEATURE_BRANCH'."
-fi
-
-# Verify 'git.sh' script exists
-GIT_SCRIPT="./git.sh"
-if [[ ! -f "$GIT_SCRIPT" ]]; then
-    handle_error "'git.sh' script not found"
-fi
-
-# Verify 'git.sh' script is executable
-if [[ ! -x "$GIT_SCRIPT" ]]; then
-    handle_error "'git.sh' script is not executable"
-fi
-
-# Call git.sh script for tagging or other operations
-print_message "Calling git.sh with tag $VERSION with annotation \"$ANNOTATION\""
-"$GIT_SCRIPT" "$VERSION" "$ANNOTATION" || handle_error "Failed to call git.sh"
-
-# Checkout the feature branch
-print_message "Checking out feature branch $FEATURE_BRANCH"
-git checkout "$FEATURE_BRANCH" || handle_error "Failed to checkout feature branch $FEATURE_BRANCH"
-
-# Push the feature branch
-print_message "Pushing feature branch $FEATURE_BRANCH to origin"
-git push origin "$FEATURE_BRANCH" || handle_error "Failed to push feature branch $FEATURE_BRANCH"
-
-# Optionally push to the development branch
-if [ "$PUSH_DEV" = true ]; then
+    handle_error "Incorrect number of arguments. Version and annotation are required.
+Version: A tag for the commit (e.g., '1.0.0').
+Annotation: A description for the version (e.g., 'Initial release').
+Usage: $0 <version> <annotation> [-d|--push-to-development] [-b|--branch <branch-name>] [-h|--help]"
     print_message "Also pushing feature branch $FEATURE_BRANCH to development branch"
     git checkout development || handle_error "Failed to checkout development branch"
     git merge "$FEATURE_BRANCH" --no-ff -m "Merging feature branch $FEATURE_BRANCH into development" || handle_error "Failed to merge feature branch into development"
