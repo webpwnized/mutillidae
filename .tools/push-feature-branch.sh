@@ -1,7 +1,7 @@
 #!/bin/bash
-# Purpose: Push to a feature branch and optionally to the development branch.
-# Usage: ./push-feature-branch.sh <version> <annotation> [-d|--push-to-development] [-b|--branch <branch-name>]
-# Description: This script pushes a feature branch and optionally pushes to development.
+# Purpose: Push feature branch only
+# Usage: ./push-feature-branch.sh <feature_branch> <version> <annotation>
+# Description: This script pushes the feature branch using 'git.sh'.
 
 # Function to print messages with a timestamp
 print_message() {
@@ -11,20 +11,13 @@ print_message() {
 
 # Function to display help message
 show_help() {
-    echo "Usage: $0 <version> <annotation> [-d|--push-to-development] [-b|--branch <branch-name>] [-h|--help]"
+    echo "Usage: $0 <feature_branch> <version> <annotation>"
     echo ""
     echo "Options:"
-    echo "  -h, --help                Display this help message."
-    echo "  -d, --push-to-development Also push the feature branch to development."
-    echo "  -b, --branch              Specify the feature branch to push."
+    echo "  -h, --help     Display this help message."
     echo ""
     echo "Description:"
-    echo "  This script pushes a specified feature branch and optionally merges it to the development branch."
-    echo "  If the specified branch does not exist, you can create it with the following command:"
-    echo "  git checkout -b <branch-name>"
-    echo ""
-    echo "Example:"
-    echo "  ./push-feature-branch.sh 1.0.0 \"Initial commit\" -b feature/my-feature -d"
+    echo "This script pushes the feature branch using 'git.sh'."
     exit 0
 }
 
@@ -35,29 +28,36 @@ handle_error() {
 }
 
 # Parse options
-PUSH_DEV=false
-FEATURE_BRANCH=""
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -h|--help) show_help ;;
-        -d|--push-to-development) PUSH_DEV=true ;;
-        -b|--branch) shift; FEATURE_BRANCH=$1 ;;
         *) break ;;
     esac
     shift
 done
 
-# Check if version and annotation are passed
-if (( $# != 2 )); then
-    handle_error "Incorrect number of arguments. Version and annotation are required.
-Version: A tag for the commit (e.g., '1.0.0').
-Annotation: A description for the version (e.g., 'Initial release').
-Usage: $0 <version> <annotation> [-d|--push-to-development] [-b|--branch <branch-name>] [-h|--help]"
-    print_message "Also pushing feature branch $FEATURE_BRANCH to development branch"
-    git checkout development || handle_error "Failed to checkout development branch"
-    git merge "$FEATURE_BRANCH" --no-ff -m "Merging feature branch $FEATURE_BRANCH into development" || handle_error "Failed to merge feature branch into development"
-    git push origin development || handle_error "Failed to push development branch"
+# Check if exactly three arguments are passed
+if (( $# != 3 )); then
+    handle_error "Incorrect number of arguments. Usage: $0 <feature_branch> <version> <annotation>"
 fi
+
+# Assign arguments to variables
+FEATURE_BRANCH=$1
+VERSION=$2
+ANNOTATION=$3
+
+# Verify 'git.sh' script exists and is executable
+GIT_SCRIPT="./git.sh"
+if [[ ! -x "$GIT_SCRIPT" ]]; then
+    handle_error "'git.sh' script not found or not executable"
+fi
+
+# Push feature branch
+print_message "Checking out feature branch: $FEATURE_BRANCH"
+git checkout "$FEATURE_BRANCH" || handle_error "Failed to checkout feature branch: $FEATURE_BRANCH"
+
+print_message "Pushing feature branch: $FEATURE_BRANCH"
+"$GIT_SCRIPT" "$VERSION" "$ANNOTATION" || handle_error "Failed to push feature branch using git.sh"
 
 # Show git status
 print_message "Git status"
