@@ -82,6 +82,9 @@ git merge development || handle_error "Failed to merge development branch into m
 print_message "Pushing main branch"
 "$GIT_SCRIPT" "$VERSION" "$ANNOTATION" || handle_error "Failed to push main branch using git.sh"
 
+print_message "Checking out feature branch: $FEATURE_BRANCH"
+git checkout "$FEATURE_BRANCH" || handle_error "Failed to checkout feature branch: $FEATURE_BRANCH"
+
 # Show git status
 print_message "Git status"
 git status || handle_error "Failed to show git status"
