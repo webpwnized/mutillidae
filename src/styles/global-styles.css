@@ -1,27 +1,8 @@
-/* Global Styles */
-:root {
-    --primary-color: #007BFF;
-    --secondary-color: #0056b3;
-    --background-light: #f8f9fa;
-    --text-color: #333333;
-    --border-radius: 8px;
-}
-
+/* Global */
+/* ------------------------------------------------- */
 html {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-}
-
-a {
-    text-decoration: none;
-    cursor: pointer;
-    color: var(--primary-color);
-    transition: color 0.3s ease, font-weight 0.3s ease;
-}
-
-a:hover {
-    color: var(--secondary-color);
-    font-weight: 600;
+    line-height: 1.5; /* Improved readability */
 }
 
 img {
@@ -29,94 +10,173 @@ img {
     vertical-align: middle;
 }
 
-input, textarea {
-    border-radius: var(--border-radius);
-    border: 1px solid #ccc;
-    padding: 8px;
+img.icon {
+    margin-right: 4px;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    color: #007BFF;
+    transition: color 0.2s ease, font-weight 0.2s ease; /* Smoother hover transition */
+}
+
+a:hover {
+    color: #0056b3;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    border-radius: 5px;
+    padding: 8px; /* Improved user experience */
+    border: 1px solid #ccc; /* Adding a slight border to make it more visible */
 }
 
 code {
-    display: block;
+    margin-left: 50px;
     white-space: pre-wrap;
-    padding: 12px;
-    background-color: #f1f1f1;
-    font-family: 'Courier New', Courier, monospace;
-    border-radius: var(--border-radius);
+    width: 400px;
+    font-family: monospace;
+    font-weight: bold;
+    background-color: #f8f9fa; /* Slight background for readability */
+    padding: 4px; /* Added some padding for readability */
 }
 
 fieldset {
-    margin: 20px auto;
-    border-radius: var(--border-radius);
-    padding: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    padding: 10px; /* Added some padding for better structure */
 }
 
 fieldset legend {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
-div.page-title, span.page-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+div.page-title,
+span.page-title {
+    font-size: 18pt;
+    font-weight: bold;
     text-align: center;
-    background-color: var(--background-light);
-    border: 1px solid #000;
-    border-radius: var(--border-radius);
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0; /* Softer color to improve readability */
+    border: 1px solid #000000;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 10px; /* Add padding for a balanced look */
 }
 
 /* Buttons */
 input.button {
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    background-color: #4e5a30;
-    border: 1px solid #000;
-    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #606c3825;
+    border: 1px solid black;
+    padding: 10px 20px; /* Consistent padding */
     cursor: pointer;
-    color: #fff;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease; /* Added smooth transition */
 }
 
 input.button:hover {
-    background-color: #606c38;
-    transform: scale(1.05);
+    background-color: #4e5a30;
+    color: #ffffff;
 }
 
+span.buffer {
+    display: inline-block;
+    margin: 20px;
+}
+
+/* Help Text Pop Up Lightbox (jQuery Colorbox) */
+div.help-text {
+    color: #333333;
+    margin: 5px;
+}
+
+div.help-text-header {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #e0e0e0; /* Softer shade */
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Tutorials */
+table.tutorial {
+    width: 95%;
+    border-collapse: collapse; /* Improved table display */
+}
+
+table.tutorial tr {
+    border-top: 1px groove #000000;
+    border-bottom: 1px groove #000000;
+}
+
+table.tutorial tr td {
+    color: #000000;
+    background-color: #ffffee;
+    text-align: left;
+    border: 1px solid black;
+    padding: 10px; /* Consistent padding */
+    border-radius: 5px;
+}
+
+table.tutorial tr.tutorial-title td {
+    background-color: #ffffaa;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Reports */
+.report-header {
+    background-color: #f0f0f0; /* Softer color for better readability */
+    font-weight: bold;
+    text-align: center;
+    border: 1px groove #000000;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.report-details {
+    background-color: #e8e8e8; /* Light grey to distinguish details */
+    font-weight: bold;
+    border-top: 1px dashed #000000;
+    border-bottom: 1px dashed #000000;
+    padding: 10px; /* Consistent padding */
+}
+
+/* Tables */
 table {
-    margin: 20px auto;
-    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse; /* Improved structure */
     width: 100%;
 }
 
 table tr td {
-    padding: 10px;
-    border: 1px solid #000;
+    padding: 10px; /* Consistent padding for better spacing */
+    border: 1px solid #000000;
 }
 
-/* Help Text Pop Up */
-div.help-text {
-    color: var(--text-color);
-    margin: 10px;
+table tr td.label {
+    font-weight: bold;
 }
 
-div.help-text-header {
-    background-color: var(--background-light);
-    text-align: center;
-    font-weight: 600;
-    padding: 10px;
-    border-radius: var(--border-radius);
-}
-
-/* Success, Error, and Warning Messages */
+/* Error and Success Messages */
 .message {
     border-width: 1px;
     border-style: solid;
     padding: 15px;
     margin: 20px 0;
-    border-radius: var(--border-radius);
+    border-radius: 5px;
     text-align: center;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .success-message {
@@ -135,22 +195,4 @@ div.help-text-header {
     border-color: #ffc107;
     background-color: #fff3cd;
     color: #856404;
-}
-
-/* Reports */
-.report-header {
-    background-color: var(--background-light);
-    font-weight: 600;
-    text-align: center;
-    border: 1px solid #000;
-    padding: 15px;
-    border-radius: var(--border-radius);
-}
-
-.report-details {
-    background-color: #e9ecef;
-    font-weight: 400;
-    border-top: 1px dashed #000;
-    border-bottom: 1px dashed #000;
-    padding: 15px;
 }
