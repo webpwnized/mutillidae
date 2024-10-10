@@ -7,10 +7,13 @@ html {
 img {
     border: none;
     vertical-align: middle;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added subtle shadow for depth */
+    border-radius: 5px; /* Added slight rounding for a modern look */
 }
 
 img.icon {
     margin-right: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added subtle shadow for icons */
 }
 
 a {
@@ -18,17 +21,16 @@ a {
     cursor: pointer;
     border: none;
     color: #007BFF;
-    transition: color 0.2s ease; /* Slight transition for a smooth color change */
+    transition: color 0.3s ease;
 }
 
 a:hover {
     color: #0056b3;
+    font-weight: bold;
 }
 
 input, textarea {
     border-radius: 5px;
-    border: 1px solid #ccc; /* Light border to improve visibility */
-    padding: 5px; /* Add some padding for better usability */
 }
 
 code {
@@ -37,21 +39,12 @@ code {
     width: 400px;
     font-family: monospace;
     font-weight: bold;
-    background-color: #f5f5f5; /* Light background for improved readability */
-    padding: 5px; /* Small padding for better legibility */
-}
-
-.important-code {
-    font-family: monospace;
-    font-weight: bold;
-    color: #770000;
 }
 
 fieldset {
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
-    padding: 10px; /* Padding for a more balanced look */
 }
 
 fieldset legend {
@@ -63,52 +56,47 @@ div.page-title, span.page-title {
     font-size: 18pt;
     font-weight: bold;
     text-align: center;
-    background-color: #f0f0f0; /* Slightly softer color for modern look */
-    border: 1px solid #000000;
+    background-color: #dddddd;
+    border-color: #000000;
+    border-width: 1px;
+    border-style: solid;
     border-radius: 5px;
-    padding: 10px; /* Added padding for a clean, spaced look */
-}
-
-.label {
-    font-weight: bold;
-}
-
-.non-wrapping-label {
-    font-weight: bold;
-    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow for better emphasis */
 }
 
 div.click-jacking-button {
-    border: 1px dashed gray; 
-    background-color: white; 
-    opacity: 0.55;
+    border: 1px dashed gray;
+    background-color: white;
+    /* for IE */ filter: alpha(opacity=55);
+    /* CSS3 standard */opacity: 0.55;
     height: 200px;
     width: 400px;
     position: absolute;
     text-align: center;
     font-weight: bold;
     vertical-align: middle;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for better visual hierarchy */
 }
 
 input.button {
     border-radius: 5px;
     font-weight: bold;
-    background-color: #606c38;
-    border: 1px solid black;
-    padding: 5px 15px; /* Adjusted padding for consistent appearance */
+    background-color: #606c3825;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.2s ease; /* Smooth background transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added soft shadow for better depth */
 }
 
 input.button:hover {
     background-color: #4e5a30;
     color: #ffffff;
-}
-
-span.buffer {
-    display: inline-block;
-    margin: 20px;
 }
 
 /* Help Text Pop Up Lightbox (jQuery Colorbox) */
@@ -119,12 +107,14 @@ div.help-text {
 }
 
 div.help-text-header {
-    border: 1px solid #cccccc;
-    background-color: #f0f0f0; /* Lightened background color */
+    border-width: 1px;
+    border-style: solid;
+    background-color: #dddddd;
     text-align: center;
     font-weight: bold;
     padding: 5px;
     border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added subtle shadow for depth */
 }
 
 /* Tutorials */
@@ -134,8 +124,12 @@ table.tutorial {
 }
 
 table.tutorial tr {
-    border-top: 1px groove #000000;
-    border-bottom: 1px groove #000000;
+    border-top-color: #000000;
+    border-top-style: groove;
+    border-top-width: 1px;
+    border-bottom-color: #000000;
+    border-bottom-style: groove;
+    border-bottom-width: 1px;
 }
 
 table.tutorial tr td {
@@ -143,8 +137,10 @@ table.tutorial tr td {
     background-color: #ffffee;
     text-align: left;
     border: 1px solid black;
-    padding: 10px; /* Consistent padding for a more modern feel */
+    padding-left: 15px;
+    padding-right: 15px;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added soft shadow for cells */
 }
 
 table.tutorial tr.tutorial-title td {
@@ -157,63 +153,133 @@ table.tutorial tr.tutorial-title td {
 /* Reports */
 /* ------------------------------------------------- */
 .report-header {
-    background-color: #f0f0f0; /* Softer color */
+    background-color: #dddddd;
     font-weight: bold;
     text-align: center;
-    border: 1px solid #000000;
-    padding: 5px; /* Slight padding increase for a more balanced appearance */
+    border-color: #000000;
+    border-style: groove;
+    border-width: 1px;
+    padding: 3px;
     border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added shadow for better visibility */
 }
 
 .report-details {
-    background-color: #e0e0e0; /* Slightly modernized gray */
+    background-color: #cccccc;
     font-weight: bold;
-    border-top: 1px dashed #000000;
-    border-bottom: 1px dashed #000000;
-    padding: 5px;
+    border-top-color: #000000;
+    border-top-style: dashed;
+    border-top-width: 1px;
+    border-bottom-color: #000000;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
 }
 
-/* Tables */
+/* Display results and data like results of commands */
+/* ----------------------------------------------------------------- */
+pre.output {
+    font-style: monospace;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added subtle shadow for enhanced visual appeal */
+}
+
+/* Hints */
 /* ------------------------------------------------- */
-table {
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse; /* Keep tables clean */
-}
-
-table tr td {
-    padding: 5px; /* Small padding for readability */
-}
-
-table tr td.label {
-    font-weight: bold;
-}
-
-/* Error and Success Messages */
-.message {
+div.hint-wrapper-header {
+    border-color: #999999;
     border-width: 1px;
     border-style: solid;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
     text-align: center;
     font-weight: bold;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added subtle shadow for emphasis */
+}
+
+div.hint-header {
+    border-color: #999999;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added subtle shadow for depth */
+}
+
+table.hint-table {
+    margin: 0px;
+}
+
+table tr.hint-header td {
+    border-color: #999999;
+    border-width: 1px;
+    border-style: solid;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    width: 800px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added soft shadow for better differentiation */
+}
+
+table tr td.hint-body {
+    border-color: #999999;
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added soft shadow for better emphasis */
+}
+
+/* Success Messages */
+/* ------------------------------------------------- */
+table tr td.success-header {
+    border-color: #009900;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #99FF99;
+    text-align: center;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added subtle shadow for emphasis */
 }
 
 .success-message {
-    border-color: #28a745;
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.error-message {
-    border-color: #dc3545;
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-.warning-message {
-    border-color: #ffc107;
-    background-color: #fff3cd;
-    color: #856404;
+    border-color: #003300;
+    border-width: 1px;
+    border-style: dashed;
+    background-color: #92a33230;
+    text-align: center;
+    font-weight: bold;
+    color: #003300;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Added shadow to highlight success messages */
 }
