@@ -18,18 +18,17 @@ a {
     cursor: pointer;
     border: none;
     color: #007BFF;
-    transition: color 0.2s ease, font-weight 0.2s ease; /* Smooth transition */
+    transition: color 0.2s ease; /* Slight transition for a smooth color change */
 }
 
 a:hover {
     color: #0056b3;
-    font-weight: bold;
 }
 
 input, textarea {
     border-radius: 5px;
-    padding: 8px; /* Added padding for better UX */
-    border: 1px solid #ccc; /* More visible, consistent border */
+    border: 1px solid #ccc; /* Light border to improve visibility */
+    padding: 5px; /* Add some padding for better usability */
 }
 
 code {
@@ -38,11 +37,10 @@ code {
     width: 400px;
     font-family: monospace;
     font-weight: bold;
-    background-color: #f8f9fa; /* Subtle background for better readability */
-    padding: 4px; /* Padding for a better visual balance */
+    background-color: #f5f5f5; /* Light background for improved readability */
+    padding: 5px; /* Small padding for better legibility */
 }
 
-/* Removed Universal Selectors (*), which can cause issues */
 .important-code {
     font-family: monospace;
     font-weight: bold;
@@ -50,25 +48,25 @@ code {
 }
 
 fieldset {
-    margin: 20px auto;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 5px;
-    padding: 15px; /* Padding for more space within fieldset */
+    padding: 10px; /* Padding for a more balanced look */
 }
 
 fieldset legend {
-    font-size: 14pt;
+    font-size: 12pt;
     font-weight: bold;
 }
 
 div.page-title, span.page-title {
-    font-size: 20pt;
+    font-size: 18pt;
     font-weight: bold;
     text-align: center;
-    background-color: #f0f0f0; /* Modernized to a softer shade */
+    background-color: #f0f0f0; /* Slightly softer color for modern look */
     border: 1px solid #000000;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer, modern shadow */
-    padding: 10px; /* Added padding for a consistent layout */
+    padding: 10px; /* Added padding for a clean, spaced look */
 }
 
 .label {
@@ -83,14 +81,13 @@ div.page-title, span.page-title {
 div.click-jacking-button {
     border: 1px dashed gray; 
     background-color: white; 
-    opacity: 0.7; /* Updated opacity for better appearance */
+    opacity: 0.55;
     height: 200px;
     width: 400px;
     position: absolute;
     text-align: center;
     font-weight: bold;
     vertical-align: middle;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
 }
 
 input.button {
@@ -98,10 +95,10 @@ input.button {
     font-weight: bold;
     background-color: #606c38;
     border: 1px solid black;
-    padding: 10px 20px; /* Consistent padding for a polished look */
+    padding: 5px 15px; /* Adjusted padding for consistent appearance */
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transition for hover */
+    transition: background-color 0.2s ease; /* Smooth background transition */
 }
 
 input.button:hover {
@@ -123,10 +120,10 @@ div.help-text {
 
 div.help-text-header {
     border: 1px solid #cccccc;
-    background-color: #eeeeee; /* Modernized to a lighter shade */
+    background-color: #f0f0f0; /* Lightened background color */
     text-align: center;
     font-weight: bold;
-    padding: 10px; /* Increased padding for a consistent look */
+    padding: 5px;
     border-radius: 5px;
 }
 
@@ -134,12 +131,11 @@ div.help-text-header {
 /* ------------------------------------------------- */
 table.tutorial {
     width: 95%;
-    border-collapse: collapse; /* Improved table structure */
 }
 
 table.tutorial tr {
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-top: 1px groove #000000;
+    border-bottom: 1px groove #000000;
 }
 
 table.tutorial tr td {
@@ -147,7 +143,7 @@ table.tutorial tr td {
     background-color: #ffffee;
     text-align: left;
     border: 1px solid black;
-    padding: 10px; /* Consistent padding */
+    padding: 10px; /* Consistent padding for a more modern feel */
     border-radius: 5px;
 }
 
@@ -161,32 +157,32 @@ table.tutorial tr.tutorial-title td {
 /* Reports */
 /* ------------------------------------------------- */
 .report-header {
-    background-color: #eeeeee; /* Softer color for readability */
+    background-color: #f0f0f0; /* Softer color */
     font-weight: bold;
     text-align: center;
     border: 1px solid #000000;
-    padding: 10px; /* Increased padding for better visual balance */
+    padding: 5px; /* Slight padding increase for a more balanced appearance */
     border-radius: 5px;
 }
 
 .report-details {
-    background-color: #e0e0e0; /* Light grey for better readability */
+    background-color: #e0e0e0; /* Slightly modernized gray */
     font-weight: bold;
     border-top: 1px dashed #000000;
     border-bottom: 1px dashed #000000;
-    padding: 10px; /* Consistent padding */
+    padding: 5px;
 }
 
 /* Tables */
 /* ------------------------------------------------- */
 table {
-    margin: 20px auto; /* Consistent spacing */
-    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse; /* Keep tables clean */
 }
 
 table tr td {
-    padding: 8px; /* Consistent padding for better spacing */
-    border: 1px solid #000000;
+    padding: 5px; /* Small padding for readability */
 }
 
 table tr td.label {
@@ -197,8 +193,8 @@ table tr td.label {
 .message {
     border-width: 1px;
     border-style: solid;
-    padding: 15px;
-    margin: 20px 0;
+    padding: 10px;
+    margin: 10px 0;
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
