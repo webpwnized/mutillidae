@@ -52,6 +52,14 @@ if [[ ! -x "$GIT_SCRIPT" ]]; then
     handle_error "'git.sh' script not found or not executable"
 fi
 
+# Check if the feature branch exists
+if ! git show-ref --verify --quiet refs/heads/"$FEATURE_BRANCH"; then
+    handle_error "Feature branch '$FEATURE_BRANCH' does not exist. Create it using:
+    
+    git checkout -b $FEATURE_BRANCH
+    git push -u origin $FEATURE_BRANCH"
+fi
+
 # Push feature branch
 print_message "Checking out feature branch: $FEATURE_BRANCH"
 git checkout "$FEATURE_BRANCH" || handle_error "Failed to checkout feature branch: $FEATURE_BRANCH"
@@ -64,3 +72,4 @@ print_message "Git status"
 git status || handle_error "Failed to show git status"
 
 print_message "Script completed successfully"
+exit 0
