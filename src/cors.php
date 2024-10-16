@@ -58,7 +58,7 @@
         var lSendACAOHeader = theForm.idACAO.checked ? "True" : "False";
         var lSendACAMHeader = theForm.idACAM.checked ? "True" : "False";
         var lSendACMAHeader = theForm.idACMA.checked ? "True" : "False";
-        var lMaxAge = encodeURIComponent(theForm.idMaxAgeInput.value || 600); // Default to 600 if empty
+        var lMaxAge = encodeURIComponent(theForm.idMaxAgeInput.value || 600); // Default to 600
 
         var lQueryParameters = 
             "message=" + lMessage + 
@@ -112,7 +112,7 @@
         <tr>
             <td class="label">HTTP Method</td>
             <td>
-                <input type="radio" id="idMethod" name="method" value="GET" checked="checked" /> GET<br>
+                <input type="radio" id="idMethod" name="method" value="GET" checked /> GET<br>
                 <input type="radio" id="idMethod" name="method" value="POST" /> POST<br>
                 <input type="radio" id="idMethod" name="method" value="PUT" /> PUT<br>
                 <input type="radio" id="idMethod" name="method" value="PATCH" /> PATCH<br>
@@ -122,9 +122,9 @@
         <tr>
             <td class="label">Response Headers to Send</td>
             <td>
-                <input type="checkbox" id="idACAO" name="acao" checked="checked" /> Access-Control-Allow-Origin<br>
-                <input type="checkbox" id="idACAM" name="acam" checked="checked" /> Access-Control-Allow-Methods<br>
-                <input type="checkbox" id="idACMA" name="acma" checked="checked" /> Access-Control-Max-Age<br>
+                <input type="checkbox" id="idACAO" name="acao" checked /> Access-Control-Allow-Origin<br>
+                <input type="checkbox" id="idACAM" name="acam" checked /> Access-Control-Allow-Methods<br>
+                <input type="checkbox" id="idACMA" name="acma" checked /> Access-Control-Max-Age<br>
             </td>
         </tr>
         <tr>
@@ -136,7 +136,7 @@
                     name="max-age" 
                     min="0" 
                     max="86400" 
-                    placeholder="600" 
+                    value="600" 
                 />
             </td>
         </tr>
