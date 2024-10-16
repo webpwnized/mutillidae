@@ -84,49 +84,93 @@
 
 				}else{
 
-					/* Display help and list accounts */
-					echo
-						"<a href='//".$_SERVER['HTTP_HOST']."/index.php' style='cursor:pointer;text-decoration:none;font-weight:bold;'/>Back to Home Page</a>
-						<br /><br /><br />
-						<div><span style='font-weight:bold;'>Help:</span> This service exposes GET, POST, PUT, DELETE methods. This service is vulnerable to SQL injection in security level 0.</div>
-						<br />
-						<hr />
-						<div><span style='font-weight:bold;'>DEFAULT GET:</span> (without any parameters) will display this help plus a list of accounts in the system.</div>
-							<br />
-							&nbsp;&nbsp;&nbsp;<span style='font-weight:bold;'>Optional params</span>: None.
-						<br /><br />
-						<hr />
-						<div><span style='font-weight:bold;'>GET:</span> Either displays usernames of all accounts or the username and signature of one account.
-							<br /><br />
-							&nbsp;&nbsp;&nbsp;<span style='font-weight:bold;'>Optional params</span>: username AS URL parameter. If username is &quot;*&quot; then all accounts are returned.<br />
-							<br />
-							<span style='font-weight:bold;'>&nbsp;&nbsp;&nbsp;Example(s):</span><br /><br />
-								&nbsp;&nbsp;&nbsp;Get a particular user: <a href='//".$_SERVER['HTTP_HOST']."/webservices/rest/ws-user-account.php?username=adrian'>/rest/ws-user-account.php?username=adrian</a><br />
-								&nbsp;&nbsp;&nbsp;Get all users: <a href='//".$_SERVER['HTTP_HOST']."/webservices/rest/ws-user-account.php?username=*'>/webservices/rest/ws-user-account.php?username=*</a><br />
-							</div>
-							<br />
-						<div>
-						<span style='font-weight:bold;'>&nbsp;&nbsp;&nbsp;Example Exploit(s):</span><br /><br />
-							&nbsp;&nbsp;&nbsp;SQL injection: <a href='//".$_SERVER['HTTP_HOST']."/webservices/rest/ws-user-account.php?username=%6a%65%72%65%6d%79%27%20%75%6e%69%6f%6e%20%73%65%6c%65%63%74%20%63%6f%6e%63%61%74%28%27%54%68%65%20%70%61%73%73%77%6f%72%64%20%66%6f%72%20%27%2c%75%73%65%72%6e%61%6d%65%2c%27%20%69%73%20%27%2c%20%70%61%73%73%77%6f%72%64%29%2c%6d%79%73%69%67%6e%61%74%75%72%65%20%66%72%6f%6d%20%61%63%63%6f%75%6e%74%73%20%2d%2d%20'>/webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',+password),mysignature+from+accounts+--+<br /></a>
-
-						</div>
-						<br />
-						<hr />
-						<div><span style='font-weight:bold;'>POST:</span> Creates new account.
-								<br /><br /><span style='font-weight:bold;'>&nbsp;&nbsp;&nbsp;Required params</span>: username, password AS POST parameter.
-								<br />
-								&nbsp;&nbsp;&nbsp;<span style='font-weight:bold;'>Optional params</span>: signature AS POST parameter.</div>
-						<br />
-						<hr />
-						<div><span style='font-weight:bold;'>PUT:</span> Creates or updates account. <br /><br /><span style='font-weight:bold;'>&nbsp;&nbsp;&nbsp;Required params</span>: username, password AS POST parameter.
-								<br />
-								&nbsp;&nbsp;&nbsp;<span style='font-weight:bold;'>Optional params</span>: signature AS POST parameter.</div>
-						<br />
-						<hr />
-						<div><span style='font-weight:bold;'>DELETE:</span> Deletes account.
-								<br /><br /><span style='font-weight:bold;'>&nbsp;&nbsp;&nbsp;Required params</span>: username, password AS POST parameter.</div>
-						&nbsp;&nbsp;&nbsp;<span style='font-weight:bold;'>Optional params</span>: None.
-						<br /><br />";
+					// Enhanced help content for GET request without parameters
+					echo "
+					<a href='//".$_SERVER['HTTP_HOST']."/index.php' style='cursor:pointer;text-decoration:none;font-weight:bold;'/>Back to Home Page</a>
+					<br /><br /><br />
+	
+					<div>
+						<h2>Welcome to the User Account Web Service</h2>
+						<p>This service allows you to <strong>create, read, update, and delete</strong> user accounts using various HTTP methods.</p>
+						<p><strong>Note:</strong> This service is vulnerable to SQL injection at security level 0. Be cautious when testing or exploring its functionality.</p>
+					</div>
+	
+					<hr />
+	
+					<h3>Supported HTTP Methods</h3>
+	
+					<h4>1. GET (Retrieve Data)</h4>
+					<p>Use GET requests to retrieve information about one or more accounts.</p>
+					<p><strong>Optional Parameter:</strong> <code>username</code> (as a URL parameter)</p>
+					<ul>
+						<li>If <code>username=* </code>, all accounts will be returned.</li>
+						<li>If <code>username</code> is specified, details for that user will be returned.</li>
+					</ul>
+					<strong>Examples:</strong><br />
+					<ul>
+						<li>Retrieve a specific user: <a href='//".$_SERVER['HTTP_HOST']."/webservices/rest/ws-user-account.php?username=adrian'>/ws-user-account.php?username=adrian</a></li>
+						<li>Retrieve all users: <a href='//".$_SERVER['HTTP_HOST']."/webservices/rest/ws-user-account.php?username=*'>/ws-user-account.php?username=*</a></li>
+					</ul>
+	
+					<hr />
+	
+					<h4>2. POST (Create New Account)</h4>
+					<p>Use POST requests to create a new user account.</p>
+					<p><strong>Required Parameters (POST body):</strong></p>
+					<ul>
+						<li><code>username</code>: The username for the new account</li>
+						<li><code>password</code>: The password for the new account</li>
+						<li><code>firstname</code>: User's first name</li>
+						<li><code>lastname</code>: User's last name</li>
+					</ul>
+					<p><strong>Optional Parameter:</strong> <code>signature</code> (User's signature)</p>
+					<strong>Example:</strong><br />
+					<pre>
+	POST /webservices/rest/ws-user-account.php
+	Content-Type: application/x-www-form-urlencoded
+	
+	username=john&password=pass123&firstname=John&lastname=Doe&signature=JDoe
+					</pre>
+	
+					<hr />
+	
+					<h4>3. PUT (Create or Update Account)</h4>
+					<p>Use PUT requests to <strong>create or update</strong> an existing user account.</p>
+					<p><strong>Required Parameters (POST body):</strong> Same as POST</p>
+					<p>If the account exists, it will be updated. If not, a new account will be created.</p>
+					<strong>Example:</strong><br />
+					<pre>
+	PUT /webservices/rest/ws-user-account.php
+	Content-Type: application/x-www-form-urlencoded
+	
+	username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated
+					</pre>
+	
+					<hr />
+	
+					<h4>4. DELETE (Remove Account)</h4>
+					<p>Use DELETE requests to delete an existing user account.</p>
+					<p><strong>Required Parameters (POST body):</strong></p>
+					<ul>
+						<li><code>username</code>: The username of the account to be deleted</li>
+						<li><code>password</code>: The password for the account</li>
+					</ul>
+					<strong>Example:</strong><br />
+					<pre>
+	DELETE /webservices/rest/ws-user-account.php
+	Content-Type: application/x-www-form-urlencoded
+	
+	username=john&password=newpass123
+					</pre>
+	
+					<hr />
+	
+					<h4>Example Exploits (SQL Injection)</h4>
+					<p>This service is vulnerable to SQL injection at security level 0. Example:</p>
+					<pre>
+	GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),mysignature+from+accounts+--
+					</pre>
+					";
 				}// end if
 
 			break;

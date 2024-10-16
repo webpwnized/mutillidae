@@ -20,8 +20,10 @@
 	require_once '../../includes/minimum-class-definitions.php';
 
 	try{
-        echo "Connection succeeded...";
+		$lSuccessMessage = "Connection succeeded...";
+        echo $lSuccessMessage;
 	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatErrorJSON($e, "Unable to process request to web service ws-test-connectivity");
+		$lErrorMessage = "Unable to process request to web service ws-test-connectivity";
+		echo $CustomErrorHandler->FormatErrorJSON($e, $lErrorMessage);
 	}// end try
 ?>
