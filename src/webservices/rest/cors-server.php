@@ -29,16 +29,19 @@
         $lParentDomain = $lDomainParts[1] . '.' . $lDomainParts[0];
         $lReturnData = true;
 
-        // Populate $_POST if the request method requires it
+        // Populate $_POST if necessary for certain methods
         if (in_array($lVerb, ["PUT", "PATCH", "DELETE"])) {
             populatePOSTSuperGlobal();
         }
 
-        // Retrieve the message from either $_GET or $_POST
-        $messageContent = $_GET['message'] ?? $_POST['message'] ?? 'Hello';
+        // Retrieve max-age value from the request, defaulting to 600 seconds
+        $lMaxAge = $_GET['acma'] ?? $_POST['acma'] ?? 600;
+
+        // Get message from either GET or POST, defaulting to "Hello"
+        $lMessageContent = $_GET['message'] ?? $_POST['message'] ?? 'Hello';
         $lMessage = '';
 
-        // Process based on the HTTP verb and construct a response message
+        // Process based on HTTP method
         switch ($lVerb) {
             case "OPTIONS":
                 $lReturnData = false;
@@ -62,10 +65,10 @@
                 throw new UnsupportedHttpMethodException("Unsupported HTTP method: $lVerb");
         }
 
-        // Combine the received message with the method-specific message
-        $lMessageText = "Message received: " . $messageContent . ". " . $lMessage . ".";
+        // Construct the final message
+        $lMessageText = "Message received: " . $lMessageContent . ". " . $lMessage . ".";
 
-        // Set CORS headers if required
+        // Set CORS headers dynamically
         if ($lVerb == "OPTIONS" ||
             ($_GET['acao'] ?? '') == "True" || ($_POST['acao'] ?? '') == "True") {
             header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
@@ -76,12 +79,12 @@
             header("Access-Control-Allow-Methods: OPTIONS, GET, POST, PUT, PATCH, DELETE");
         }
 
-        if ($lVerb == "OPTIONS" ||
-            ($_GET['acma'] ?? '') == "True" || ($_POST['acma'] ?? '') == "True") {
-            header("Access-Control-Max-Age: 5");
+        // Apply the max-age header with the provided or default value
+        if ($lVerb == "OPTIONS") {
+            header("Access-Control-Max-Age: $lMaxAge");
         }
 
-        // Return the JSON response if required
+        // Return JSON response if needed
         if ($lReturnData) {
             header('Content-Type: application/json');
             echo json_encode([
@@ -90,7 +93,8 @@
                 "Parameters" => [
                     "GET" => $_GET,
                     "POST" => $_POST
-                ]
+                ],
+                "Max-Age" => $lMaxAge
             ]);
         }
     } catch (Exception $e) {
