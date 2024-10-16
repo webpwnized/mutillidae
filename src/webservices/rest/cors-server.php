@@ -16,36 +16,10 @@
         }
     }
 
-    class MissingPostParameterException extends Exception {
-        public function __construct($parameter) {
-            parent::__construct("POST parameter " . $parameter . " is required");
-        }
-    }
-
     function populatePOSTSuperGlobal() {
         $lParameters = [];
         parse_str(file_get_contents('php://input'), $lParameters);
         $_POST = $lParameters + $_POST;
-    }
-
-    function getPOSTParameter($pParameter, $lRequired) {
-        if (isset($_POST[$pParameter])) {
-            return $_POST[$pParameter];
-        } else {
-            if ($lRequired) {
-                throw new MissingPostParameterException($pParameter);
-            } else {
-                return "";
-            }
-        }
-    }
-
-    function jsonEncodeQueryResults($pQueryResult) {
-        $lDataRows = [];
-        while ($lDataRow = mysqli_fetch_assoc($pQueryResult)) {
-            $lDataRows[] = $lDataRow;
-        }
-        return json_encode($lDataRows);
     }
 
     try {
@@ -55,10 +29,16 @@
         $lParentDomain = $lDomainParts[1] . '.' . $lDomainParts[0];
         $lReturnData = true;
 
+        // Populate $_POST if the request method requires it
         if (in_array($lVerb, ["PUT", "PATCH", "DELETE"])) {
             populatePOSTSuperGlobal();
         }
 
+        // Retrieve the message from either $_GET or $_POST
+        $messageContent = $_GET['message'] ?? $_POST['message'] ?? 'Hello';
+        $lMessage = '';
+
+        // Process based on the HTTP verb and construct a response message
         switch ($lVerb) {
             case "OPTIONS":
                 $lReturnData = false;
@@ -82,28 +62,26 @@
                 throw new UnsupportedHttpMethodException("Unsupported HTTP method: $lVerb");
         }
 
+        // Combine the received message with the method-specific message
+        $lMessageText = "Message received: " . $messageContent . ". " . $lMessage . ".";
+
+        // Set CORS headers if required
         if ($lVerb == "OPTIONS" ||
-            (isset($_GET['acao']) && $_GET['acao'] == "True") ||
-            (isset($_POST['acao']) && $_POST['acao'] == "True")) {
+            ($_GET['acao'] ?? '') == "True" || ($_POST['acao'] ?? '') == "True") {
             header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
         }
 
         if ($lVerb == "OPTIONS" ||
-            (isset($_GET['acam']) && $_GET['acam'] == "True") ||
-            (isset($_POST['acam']) && $_POST['acam'] == "True")) {
+            ($_GET['acam'] ?? '') == "True" || ($_POST['acam'] ?? '') == "True") {
             header("Access-Control-Allow-Methods: OPTIONS, GET, POST, PUT, PATCH, DELETE");
         }
 
         if ($lVerb == "OPTIONS" ||
-            (isset($_GET['acma']) && $_GET['acma'] == "True") ||
-            (isset($_POST['acma']) && $_POST['acma'] == "True")) {
+            ($_GET['acma'] ?? '') == "True" || ($_POST['acma'] ?? '') == "True") {
             header("Access-Control-Max-Age: 5");
         }
 
-        $lMessageText = isset($_POST["message"]) ? $_POST["message"] : "Hello";
-
-		$lMessageText = "Hello " . $lMessageText . ". " . $lMessage . ".";
-
+        // Return the JSON response if required
         if ($lReturnData) {
             header('Content-Type: application/json');
             echo json_encode([
