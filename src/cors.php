@@ -5,12 +5,13 @@
 
 	try {
     	switch ($_SESSION["security-level"]){
-    		case "0": // This code is insecure. No input validation is performed.
+			default:
+    		case "0": // This code is insecure
 				$lEnableJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
     		break;
 
-    		case "1": // This code is insecure. No input validation is performed.
+    		case "1": // This code is insecure
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
     		break;
@@ -30,8 +31,8 @@
 
 <div class="page-title">Cross-origin Resource Sharing (CORS)</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc');?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc';?>
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
@@ -93,12 +94,12 @@
 </script>
 
 <a href="index.php?page=echo.php">
-    <img src="images/malware-icon-75-75.png" />
+	<img src="images/malware-icon-75-75.png" alt="Cross-Site Scripting (XSS) Icon" />
     <span class="label">Switch to Cross-Site Scripting (XSS)</span>
 </a>
 <span class="buffer"></span>
 <a href="index.php?page=content-security-policy.php">
-    <img src="images/shield-icon-75-75.png" />
+	<img src="images/shield-icon-75-75.png" alt="Content Security Policy (CSP) Icon" />
     <span class="label">Switch to Content Security Policy (CSP)</span>
 </a>
 
@@ -115,7 +116,7 @@
     			<input 	type="text" id="idMessageInput" name="message" size="20"
     					autofocus="autofocus"
     					onkeypress="if(event.keyCode==13){this.form.submit();}"
-    					<?php if ($lEnableHTMLControls) {echo('minlength="1" maxlength="20" required="required"');} ?>
+    					<?php if ($lEnableHTMLControls) {echo 'minlength="1" maxlength="20" required="required"';} ?>
     			/>
     		</td>
     	</tr>

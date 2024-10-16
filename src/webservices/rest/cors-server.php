@@ -1,163 +1,122 @@
 <?php
-    if (session_status() == PHP_SESSION_NONE){
+    if (session_status() == PHP_SESSION_NONE) {
         session_start();
-    }// end if
+    }
 
-    if (!isset($_SESSION["security-level"])){
+    if (!isset($_SESSION["security-level"])) {
         $_SESSION["security-level"] = 0;
-    }// end if
+    }
 
-	/* ------------------------------------------
-	 * Constants used in application
-	 * ------------------------------------------ */
-	require_once '../../includes/constants.php';
-	require_once '../../includes/minimum-class-definitions.php';
+    require_once '../../includes/constants.php';
+    require_once '../../includes/minimum-class-definitions.php';
 
-	class UnsupportedHttpMethodException extends Exception {
-		public function __construct($message) {
-			parent::__construct($message);
-		}
-	}
+    class UnsupportedHttpMethodException extends Exception {
+        public function __construct($message) {
+            parent::__construct($message);
+        }
+    }
 
-	class MissingPostParameterException extends Exception {
-		public function __construct($parameter) {
-			parent::__construct("POST parameter " . $parameter . " is required");
-		}
-	}
+    class MissingPostParameterException extends Exception {
+        public function __construct($parameter) {
+            parent::__construct("POST parameter " . $parameter . " is required");
+        }
+    }
 
-	function populatePOSTSuperGlobal(){
-		$lParameters = Array();
-		parse_str(file_get_contents('php://input'), $lParameters);
-		$_POST = $lParameters + $_POST;
-	}// end function populatePOSTArray
+    function populatePOSTSuperGlobal() {
+        $lParameters = [];
+        parse_str(file_get_contents('php://input'), $lParameters);
+        $_POST = $lParameters + $_POST;
+    }
 
-	function getPOSTParameter($pParameter, $lRequired){
-		if(isset($_POST[$pParameter])){
-			return $_POST[$pParameter];
-		}else{
-			if($lRequired){
-				throw new MissingPostParameterException($pParameter);
-			}else{
-				return "";
-			}
-		}// end if isset
-	}// end function validatePOSTParameter
+    function getPOSTParameter($pParameter, $lRequired) {
+        if (isset($_POST[$pParameter])) {
+            return $_POST[$pParameter];
+        } else {
+            if ($lRequired) {
+                throw new MissingPostParameterException($pParameter);
+            } else {
+                return "";
+            }
+        }
+    }
 
-	function jsonEncodeQueryResults($pQueryResult){
-		$lDataRows = array();
-		while ($lDataRow = mysqli_fetch_assoc($pQueryResult)) {
-			$lDataRows[] = $lDataRow;
-		}// end while
+    function jsonEncodeQueryResults($pQueryResult) {
+        $lDataRows = [];
+        while ($lDataRow = mysqli_fetch_assoc($pQueryResult)) {
+            $lDataRows[] = $lDataRow;
+        }
+        return json_encode($lDataRows);
+    }
 
-		return json_encode($lDataRows);
-	}//end function jsonEncodeQueryResults
+    try {
+        $lVerb = $_SERVER['REQUEST_METHOD'];
+        $lDomain = $_SERVER['SERVER_NAME'];
+        $lDomainParts = array_reverse(explode('.', $lDomain));
+        $lParentDomain = $lDomainParts[1] . '.' . $lDomainParts[0];
+        $lReturnData = true;
 
-	try {
+        if (in_array($lVerb, ["PUT", "PATCH", "DELETE"])) {
+            populatePOSTSuperGlobal();
+        }
 
-	    $lVerb = $_SERVER['REQUEST_METHOD'];
-
-	    $lDomain = $_SERVER['SERVER_NAME'];
-	    $lDomainParts = explode('.', $lDomain);
-	    $lDomainParts = array_reverse($lDomainParts);
-	    $lParentDomain = $lDomainParts[1] . '.' . $lDomainParts[0];
-	    $lReturnData = true;
-
-	    switch($lVerb){
-	        case "OPTIONS":
-	            $lReturnData = false;
+        switch ($lVerb) {
+            case "OPTIONS":
+                $lReturnData = false;
                 break;
-	        case "GET":
+            case "GET":
+                $lMessage = "GET request received";
                 break;
-	        case "POST"://create
+            case "POST":
+                $lMessage = "POST request processed";
                 break;
-	        case "PUT":	//create or update
-				throw new UnsupportedHttpMethodException("Could not understand HTTP REQUEST_METHOD verb");
-	        case "DELETE":
-	            /* $_POST array is not auto-populated for PUT,PATCH,DELETE method. Parse input into an array. */
-	            populatePOSTSuperGlobal();
-            break;
-	        default:
-				throw new UnsupportedHttpMethodException("Could not understand HTTP REQUEST_METHOD verb");
-            break;
-	    }// end switch
+            case "PUT":
+                $lMessage = "PUT request - resource created or updated";
+                break;
+            case "PATCH":
+                $lMessage = "PATCH request - partial update successful";
+                break;
+            case "DELETE":
+                $lMessage = "DELETE request - resource removed";
+                break;
+            default:
+                throw new UnsupportedHttpMethodException("Unsupported HTTP method: $lVerb");
+        }
 
-	    if ($lVerb == "OPTIONS" ||
-	        (isset($_GET['acao']) && $_GET['acao']=="True") ||
-	        (isset($_POST['acao']) && $_POST['acao']=="True"))
-	    {
-	        header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
-	    }
+        if ($lVerb == "OPTIONS" ||
+            (isset($_GET['acao']) && $_GET['acao'] == "True") ||
+            (isset($_POST['acao']) && $_POST['acao'] == "True")) {
+            header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
+        }
 
-	    if ($lVerb == "OPTIONS" ||
-	        (isset($_GET['acam']) && $_GET['acam']=="True") ||
-	        (isset($_POST['acam']) && $_POST['acam']=="True"))
-	    {
-	        header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,PATCH,DELETE");
-	    }
+        if ($lVerb == "OPTIONS" ||
+            (isset($_GET['acam']) && $_GET['acam'] == "True") ||
+            (isset($_POST['acam']) && $_POST['acam'] == "True")) {
+            header("Access-Control-Allow-Methods: OPTIONS, GET, POST, PUT, PATCH, DELETE");
+        }
 
-	    if ($lVerb == "OPTIONS" ||
-	        (isset($_GET['acma']) && $_GET['acma']=="True") ||
-	        (isset($_POST['acma']) && $_POST['acma']=="True"))
-	    {
-	        header("Access-Control-Max-Age: 5");
-	    }
+        if ($lVerb == "OPTIONS" ||
+            (isset($_GET['acma']) && $_GET['acma'] == "True") ||
+            (isset($_POST['acma']) && $_POST['acma'] == "True")) {
+            header("Access-Control-Max-Age: 5");
+        }
 
-    	switch ($_SESSION["security-level"]){
-			default: // Default case: This code is insecure. No input validation is performed.
-    	    case "0": // This code is insecure. No input validation is performed.
-    	        $lProtectAgainstCommandInjection=false;
-    	        $lProtectAgainstXSS = false;
-    	        break;
+        $lMessageText = isset($_POST["message"]) ? $_POST["message"] : "Hello";
 
-    	    case "1": // This code is insecure. No input validation is performed.
-    	        $lProtectAgainstCommandInjection=false;
-    	        $lProtectAgainstXSS = false;
-    	        break;
+		$lMessageText = $lMessageText . ". " . $lMessage . ".";
 
-    	    case "2":
-    	    case "3":
-    	    case "4":
-    	    case "5": // This code is fairly secure
-    	        $lProtectAgainstCommandInjection=true;
-    	        $lProtectAgainstXSS = true;
-    	        break;
-    	}// end switch
-
-    	if (isset($_GET["message"])) {
-    	    $lMessage = $_GET["message"];
-    	} elseif (isset($_POST["message"])){
-    	    $lMessage = $_POST["message"];
-    	}else{
-    	    $lMessage="Hello";
-    	}//end if
-
-    	if ($lProtectAgainstXSS) {
-    	    /* Protect against XSS by output encoding */
-    	    $lMessageText = $Encoder->encodeForHTML($lMessage);
-    	}else{
-    	    $lMessageText = $lMessage; 		//allow XSS by not encoding output
-    	}//end if
-
-    	if ($lProtectAgainstCommandInjection) {
-    	    $LogHandler->writeToLog("Executed PHP command: echo " . $lMessageText);
-    	}else{
-    	    $lMessage = shell_exec("echo -n " . $lMessage);
-    	    $LogHandler->writeToLog("Executed operating system command: echo " . $lMessageText);
-    	}//end if
-
-    	if ($lReturnData) {
-    	    echo '[';
-    	    echo '{"Message":'.json_encode($lMessage).'},';
-    	    echo '{"Method":'.json_encode($lVerb)."},";
-    	    echo '{"Parameters":[';
-    	    echo '{"GET":'.json_encode($_GET)."},";
-    	    echo '{"POST":'.json_encode($_POST)."}";
-    	    echo ']}';
-    	    echo ']';
-    	}
-
-	}catch(Exception $e){
-	    header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
-	    echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page html5-storage.php");
-	}// end try
+        if ($lReturnData) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                "Message" => $lMessageText,
+                "Method" => $lVerb,
+                "Parameters" => [
+                    "GET" => $_GET,
+                    "POST" => $_POST
+                ]
+            ]);
+        }
+    } catch (Exception $e) {
+        header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
+        echo $CustomErrorHandler->FormatError($e, "Error in handling request");
+    }
 ?>
