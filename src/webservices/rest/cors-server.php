@@ -102,7 +102,7 @@
 
         $lMessageText = isset($_POST["message"]) ? $_POST["message"] : "Hello";
 
-		$lMessageText = $lMessageText . ". " . $lMessage . ".";
+		$lMessageText = "Hello " . $lMessageText . ". " . $lMessage . ".";
 
         if ($lReturnData) {
             header('Content-Type: application/json');
