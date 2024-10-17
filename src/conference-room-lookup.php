@@ -143,7 +143,7 @@
 /* Output results of shell LDAP sent to operating system */
 if ($lFormSubmitted){
 	try{
-		require_once(__SITE_ROOT__ . '/includes/ldap-config.inc');
+		require_once __SITE_ROOT__ . '/includes/ldap-config.inc';
 
 		$ldapconn = ldap_connect("ldap://" . LDAP_HOST . ":" . LDAP_PORT);
 		ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);

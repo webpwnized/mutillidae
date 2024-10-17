@@ -1,6 +1,6 @@
 <?php
 
-	require_once (__SITE_ROOT__ . '/classes/JWT.php');
+	require_once __SITE_ROOT__ . '/classes/JWT.php';
 
 	// attack requires user - if not logged in, just display message and return
 	if(!isset($_SESSION["uid"]) || !is_numeric($_SESSION["uid"])) {
@@ -11,23 +11,24 @@
 	try {
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure.
-				$lEnableSignatureValidation = FALSE;
+				$lEnableSignatureValidation = false;
 				$lKey = 'snowman';
 				break;
     		case "1": // This code is insecure.
-				$lEnableSignatureValidation = TRUE;
+				$lEnableSignatureValidation = true;
 				$lKey = 'snowman';
 				break;
    		case "2":
    		case "3":
    		case "4":
     		case "5": // This code is fairly secure
-				$lEnableSignatureValidation = TRUE;
+				$lEnableSignatureValidation = true;
 				$lKey = 'MIIBPAIBAAJBANBs46xCKgSt8vSgpGlDH0C8znhqhtOZQQjFCaQzcseGCVlrbI';
 			break;
     	}// end switch
 	}catch(Exception $e){
-		echo $CustomErrorHandler->getExceptionMessage($e, "Error setting up configuration on page jwt.php");
+		$lErrorMessage = "Error setting up configuration on page jwt.php";
+		echo $CustomErrorHandler->getExceptionMessage($e, $lErrorMessage);
 	}// end try
 
    // generate a token with the current user info

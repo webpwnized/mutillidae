@@ -83,7 +83,7 @@
      * ----------------------------------------------------
      */
     if (!isset($_SESSION["UserOKWithDatabaseFailure"])) {
-    	$_SESSION["UserOKWithDatabaseFailure"] = "FALSE";
+    	$_SESSION["UserOKWithDatabaseFailure"] = false;
     }// end if
 
     /* ----------------------------------------
@@ -162,7 +162,7 @@
 		exit();
 	}// end function
 
-	if ($_SESSION["UserOKWithDatabaseFailure"] == "FALSE") {
+	if (!$_SESSION["UserOKWithDatabaseFailure"]) {
 		set_exception_handler('handleException');
 	    MySQLHandler::databaseAvailable();
 		restore_exception_handler();
@@ -203,14 +203,14 @@
 	* PROCESS REQUESTS (IF ANY)
 	* ------------------------------------------ */
 	if (isset($_GET["do"])){
-		include_once(__SITE_ROOT__.'/includes/process-commands.php');
+		include_once __SITE_ROOT__.'/includes/process-commands.php';
 	}// end if
 
 	/* ------------------------------------------
 	* PROCESS LOGIN ATTEMPT (IF ANY)
 	* ------------------------------------------ */
 	if (isset($_POST["login-php-submit-button"])){
-		include_once(__SITE_ROOT__.'/includes/process-login-attempt.php');
+		include_once __SITE_ROOT__.'/includes/process-login-attempt.php';
 	}// end if
 
 	/* ------------------------------------------
@@ -242,10 +242,8 @@
 						$_SESSION["logged_in_user"] = $row->username;
 						$_SESSION["logged_in_user_signature"] = $row->mysignature;
 						$_SESSION["is_admin"] = $row->is_admin;
-						if (isset($_SESSION["logged_in_user"])){
-						    header('Logged-In-User: '.$_SESSION["logged_in_user"], true);
-						}// end if
-			    	}// end if ($result->num_rows > 0)
+						header('Logged-In-User: '.$_SESSION["logged_in_user"], true);
+					}// end if ($result->num_rows > 0)
 
 				} catch (Exception $e) {
 			   		echo $CustomErrorHandler->FormatError($e, $lQueryString);
@@ -464,20 +462,24 @@
         $lReportToHeader = 'Report-To: {"group": "csp-endpoint", "max_age": 10886400, "endpoints":[{"url": "includes/capture-data.php"}]}';
 
         $CSPNonce = bin2hex(openssl_random_pseudo_bytes(32));
-        $lCSP = "Content-Security-Policy: " .
-                "script-src 'self' 'nonce-{$CSPNonce}' mutillidae.localhost;" .
-                "style-src 'unsafe-inline' 'self' mutillidae.localhost;" .
-                "img-src 'self' mutillidae.localhost www.paypalobjects.com;" .
-                "connect-src 'self' mutillidae.localhost;" .
-                "form-action 'self' mutillidae.localhost;" .
-                "font-src 'none';" .
-                "frame-src 'self' mutillidae.localhost;" .
-                "media-src 'none';" .
-                "object-src 'none';" .
-                "default-src 'self';".
-                "frame-ancestors 'none';".
-                "report-uri includes/capture-data.php;" .
-                "report-to csp-endpoint;";
+		$lCSP = "Content-Security-Policy: " .
+			"script-src 'self' 'nonce-{$CSPNonce}';" .
+			"style-src 'unsafe-inline' 'self';" .
+			"img-src 'self' www.paypalobjects.com;" .
+			"connect-src 'self' cors.mutillidae.localhost;" .
+			"font-src fonts.googleapis.com;" .
+			"frame-src 'self';" .
+			"media-src 'none';" .
+			"object-src 'none';" .
+			"worker-src 'none';" .
+			"child-src 'none';" .
+			"manifest-src 'none';" .
+			"form-action 'self';" .
+			"frame-ancestors 'none';" .
+			"navigate-to 'self';" .
+			"prefetch-src 'none';" .
+			"report-uri includes/capture-data.php;" .
+			"report-to csp-endpoint;";
 
         header($lReportToHeader, true);
         header($lCSP, true);
