@@ -477,8 +477,6 @@
 		"form-action 'self';" .
 		"frame-ancestors 'none';" .
 		"base-uri 'none';" .
-		"plugin-types 'none';" .
-		"sandbox 'none';" .
 		"report-uri includes/capture-data.php;" .
 		"report-to csp-endpoint;";
 
