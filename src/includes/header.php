@@ -1,21 +1,22 @@
 <?php
     $lSecurityLevel = $_SESSION["security-level"];
+	$lSecurityLevelMessage = "Security Level: ".$lSecurityLevel;
 
     switch ($lSecurityLevel){
 		default: // Default case: This code is insecure
         case "0": // This code is insecure
-            $lSecurityLevelMessage = "Security Level: ".$lSecurityLevel." (Hosed)";
+            $lSecurityLevelMessage = $lSecurityLevelMessage." (Hosed)";
             break;
         case "1": // This code is insecure
             // DO NOTHING: This is equivalent to using client side security
-            $lSecurityLevelMessage = "Security Level: ".$lSecurityLevel." (Client-Side Security)";
+            $lSecurityLevelMessage = $lSecurityLevelMessage." (Client-Side Security)";
             break;
 
         case "2":
         case "3":
         case "4":
         case "5": // This code is fairly secure
-            $lSecurityLevelMessage = "Security Level: ".$lSecurityLevel." (Secure)";
+            $lSecurityLevelMessage = $lSecurityLevelMessage." (Secure)";
             break;
     }// end switch
 
