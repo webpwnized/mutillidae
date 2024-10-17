@@ -463,23 +463,24 @@
 
         $CSPNonce = bin2hex(openssl_random_pseudo_bytes(32));
 		$lCSP = "Content-Security-Policy: " .
-			"script-src 'self' 'nonce-{$CSPNonce}';" .
-			"style-src 'unsafe-inline' 'self' fonts.googleapis.com;" .
-			"img-src 'self' www.paypalobjects.com;" .
-			"connect-src 'self' cors.mutillidae.localhost;" .
-			"font-src fonts.googleapis.com fonts.gstatic.com;" .
-			"frame-src 'self';" .
-			"media-src 'none';" .
-			"object-src 'none';" .
-			"worker-src 'none';" .
-			"child-src 'none';" .
-			"manifest-src 'none';" .
-			"form-action 'self';" .
-			"frame-ancestors 'none';" .
-			"navigate-to 'self';" .
-			"prefetch-src 'none';" .
-			"report-uri includes/capture-data.php;" .
-			"report-to csp-endpoint;";
+		"script-src 'self' 'nonce-{$CSPNonce}';" .
+		"style-src 'unsafe-inline' 'self' fonts.googleapis.com;" .
+		"img-src 'self' www.paypalobjects.com;" .
+		"connect-src 'self' cors.mutillidae.localhost;" .
+		"font-src fonts.googleapis.com fonts.gstatic.com;" .
+		"frame-src 'self';" .
+		"media-src 'none';" .
+		"object-src 'none';" .
+		"worker-src 'none';" .
+		"child-src 'none';" .
+		"manifest-src 'none';" .
+		"form-action 'self';" .
+		"frame-ancestors 'none';" .
+		"base-uri 'none';" .
+		"plugin-types 'none';" .
+		"sandbox 'none';" .
+		"report-uri includes/capture-data.php;" .
+		"report-to csp-endpoint;";
 
         header($lReportToHeader, true);
         header($lCSP, true);
