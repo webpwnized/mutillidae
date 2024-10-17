@@ -18,11 +18,9 @@
    		case "3":
    		case "4":
    		case "5": // This code is fairly secure
-   			if(isset($_SESSION['is_admin'])){
-   				if($_SESSION['is_admin'] == 'TRUE'){
-					$lShowPHPInfo = TRUE;
-   				}// end if is_admin
-   			}// end if isseet $_SESSION['is_admin']
+			if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]){
+				$lShowPHPInfo = true;
+			}// end if isset $_SESSION["is_admin"] and is_admin
   		break;
 	}// end switch
 

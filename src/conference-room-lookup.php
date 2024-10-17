@@ -45,9 +45,9 @@
     		break;
     	}// end switch
 
-    	$lFormSubmitted = FALSE;
+    	$lFormSubmitted = false;
 		if (isset($_POST["default_room_common_name"]) || isset($_REQUEST["default_room_common_name"])) {
-			$lFormSubmitted = TRUE;
+			$lFormSubmitted = true;
 		}// end if
 
 		if ($lFormSubmitted){
@@ -72,8 +72,8 @@
 
 <div class="page-title">Conference Room Lookup</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">

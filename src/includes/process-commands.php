@@ -10,16 +10,17 @@
     };//end function logMessage
 
    	switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure
    		case "0": // This code is insecure
    		case "1": // This code is insecure
-   			$lProtectCookies = FALSE;
+			$lProtectCookies = false;
    		break;
 
 		case "2":
 		case "3":
 		case "4":
    		case "5": // This code is fairly secure
-   			$lProtectCookies = TRUE;
+			$lProtectCookies = true;
    		break;
    	}// end switch
 
@@ -40,12 +41,11 @@
     	break;//case "toggle-enforce-ssl"
 
     	case "logout":
-    	    logMessage("Logout user: {$_SESSION["logged_in_user"]} ({$_SESSION['uid']})");
-		    $_SESSION["user_is_logged_in"] = "False";
-		    $_SESSION["logged_in_user"] = '';
-		    $_SESSION["logged_in_user_signature"] = '';
-			$_SESSION['uid'] = '';
-			$_SESSION['is_admin'] = 'FALSE';
+    	    logMessage("Logout user: {$_SESSION["logged_in_user"]} ({$_SESSION["uid"]})");
+
+			session_start();
+			session_unset();
+			session_destroy();
 
 			/* Delete cookies created in Security Level 0 or 1 - Insecure Mode */
 			$l_cookie_options = array (

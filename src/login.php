@@ -29,7 +29,7 @@
 <script type="text/javascript">
 <!--
 	<?php
-		if ($_SESSION["user_is_logged_in"]=="True") {
+		if (isset($_SESSION["user_is_logged_in"]) && $_SESSION["user_is_logged_in"]) {
 			echo "var l_loggedIn = true;" . PHP_EOL;
 		}else {
 			echo "var l_loggedIn = false;" . PHP_EOL;
@@ -73,8 +73,8 @@
 
 <div class="page-title">Login</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <div id="id-log-in-form-div" style="display: none; text-align:center;">
 	<form 	action="index.php?page=login.php"

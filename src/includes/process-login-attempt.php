@@ -77,19 +77,17 @@
    		
 		$lQueryResult = $SQLQueryHandler->getUserAccount($lUsername, $lPassword);
 
-		if (isset($lQueryResult->num_rows)){
-   			if ($lQueryResult->num_rows > 0) {
-	   			$lAuthenticationAttemptResultFound = true;
-   			}//end if
+		if (isset($lQueryResult->num_rows) && $lQueryResult->num_rows > 0) {
+			$lAuthenticationAttemptResultFound = true;
 		}//end if
 
 		if ($lAuthenticationAttemptResultFound){
 			$lRecord = $lQueryResult->fetch_object();
-			$_SESSION["user_is_logged_in"] = 'True';
-			$_SESSION['uid'] = $lRecord->cid;
+			$_SESSION["user_is_logged_in"] = true;
+			$_SESSION["uid"] = $lRecord->cid;
 			$_SESSION["logged_in_user"] = $lRecord->username;
 			$_SESSION["logged_in_user_signature"] = $lRecord->mysignature;
-			$_SESSION['is_admin'] = $lRecord->is_admin;
+			$_SESSION["is_admin"] = $lRecord->is_admin;
 
    				/*
    				 /* Set client-side auth token. if we are in insecure mode, we will
@@ -145,7 +143,8 @@
 		}// end if $lAuthenticationAttemptResultFound
 
    	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error querying user account");
+		$lErrorMessage = "Error querying user account";
+		echo $CustomErrorHandler->FormatError($e, $lErrorMessage);
 		$lAuthenticationAttemptResult = $cAUTHENTICATION_EXCEPTION_OCCURED;
 	}// end try;
 

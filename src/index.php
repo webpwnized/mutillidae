@@ -70,9 +70,11 @@
      * user is logged out by default
      */
     if (!isset($_SESSION["user_is_logged_in"])){
-	    $_SESSION["user_is_logged_in"] = 'False';
-	    $_SESSION["logged_in_user"] = '';
-	    $_SESSION["logged_in_user_signature"] = '';
+		$_SESSION["user_is_logged_in"] = false;
+		$_SESSION["logged_in_user"] = '';
+		$_SESSION["logged_in_user_signature"] = '';
+		$_SESSION["uid"] = '';
+		$_SESSION["is_admin"] = false;
     }// end if
 
     /* ----------------------------------------------------
@@ -235,11 +237,11 @@
 				    // should never be in cookies.
 				    if ($lQueryResult->num_rows > 0) {
 					    $row = $lQueryResult->fetch_object();
-						$_SESSION["user_is_logged_in"] = 'True';
-						$_SESSION['uid'] = $row->cid;
+						$_SESSION["user_is_logged_in"] = true;
+						$_SESSION["uid"] = $row->cid;
 						$_SESSION["logged_in_user"] = $row->username;
 						$_SESSION["logged_in_user_signature"] = $row->mysignature;
-						$_SESSION['is_admin'] = $row->is_admin;
+						$_SESSION["is_admin"] = $row->is_admin;
 						if (isset($_SESSION["logged_in_user"])){
 						    header('Logged-In-User: '.$_SESSION["logged_in_user"], true);
 						}// end if
@@ -435,11 +437,9 @@
 		  			 * of "DENY ALL".
 		  			 */
 		   			$lUserAuthorized = false;
-		   			if(isset($_SESSION['is_admin'])){
-		   				if($_SESSION['is_admin'] == 'TRUE'){
-		   					$lUserAuthorized = true;
-		   				}// end if is_admin
-		   			}// end if isseet $_SESSION['is_admin']
+					if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]){
+						$lUserAuthorized = true;
+					}// end if is_admin
 
 		   			if($lUserAuthorized){
 		   				$lPage=__SITE_ROOT__.'/phpinfo.php';

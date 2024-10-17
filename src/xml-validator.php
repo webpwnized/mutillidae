@@ -61,9 +61,9 @@
     		$lHTMLControlAttributes="";
     	}// end if
 
-    	$lFormSubmitted = FALSE;
+    	$lFormSubmitted = false;
 		if (isset($_POST["xml-validator-php-submit-button"]) || isset($_REQUEST["xml-validator-php-submit-button"])) {
-			$lFormSubmitted = TRUE;
+			$lFormSubmitted = true;
 		}// end if
 
 		if ($lFormSubmitted){
@@ -127,8 +127,8 @@
 
 <div class="page-title">XML Validator</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <form 	action="./index.php?page=xml-validator.php"
 		method="POST" 

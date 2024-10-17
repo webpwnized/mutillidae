@@ -26,7 +26,7 @@ try {
         case "3":
         case "4":
         case "5": // This code is fairly secure
-            $lProtectAgainstCommandInjection=TRUE;
+            $lProtectAgainstCommandInjection=true;
             $lEnableHTMLControls = true;
             $lEnableJavaScriptValidation = true;
             $lProtectAgainstMethodTampering = true;
@@ -34,9 +34,9 @@ try {
             break;
     }// end switch
 
-    $lFormSubmitted = FALSE;
+    $lFormSubmitted = false;
     if (isset($_POST["message"]) || isset($_REQUEST["message"])) {
-        $lFormSubmitted = TRUE;
+        $lFormSubmitted = true;
     }// end if
 
     if ($lFormSubmitted){
@@ -60,8 +60,8 @@ try {
 <script src="javascript/on-page-scripts/content-security-policy.js"></script>
 <div class="page-title">Content Security Policy (CSP)</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <a href="index.php?page=echo.php">
     <img src="images/malware-icon-75-75.png" />

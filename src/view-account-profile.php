@@ -34,8 +34,8 @@
 <?php
 
     if($lProtectAgainstIDOR){
-	    if(isset($_SESSION['uid'])){
-	       $lUserUID = $_SESSION['uid'];
+	    if(isset($_SESSION["uid"])){
+	       $lUserUID = $_SESSION["uid"];
 	    }else{
 			$lUserUID = null;
 	    } // if isset

@@ -26,7 +26,7 @@
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-    			$lProtectAgainstCommandInjection=TRUE;
+    			$lProtectAgainstCommandInjection=true;
 				$lEnableHTMLControls = true;
     			$lEnableJavaScriptValidation = true;
    				$lProtectAgainstMethodTampering = true;
@@ -34,9 +34,9 @@
     		break;
     	}// end switch
 
-    	$lFormSubmitted = FALSE;
+    	$lFormSubmitted = false;
 		if (isset($_POST["message"]) || isset($_REQUEST["message"])) {
-			$lFormSubmitted = TRUE;
+			$lFormSubmitted = true;
 		}// end if
 
 		if ($lFormSubmitted){
@@ -59,8 +59,8 @@
 
 <div class="page-title"><span style="font-size: 18pt;">Echo</span>, <span style="font-size: 16pt;">Echo</span>, <span style="font-size: 14pt;">Echo</span>...</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">

@@ -8,7 +8,7 @@
 
 <div class="page-title">Authorization Required</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
 
 <table>
 	<tr>

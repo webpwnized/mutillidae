@@ -35,9 +35,9 @@
 			break;
     	}//end switch
 
-    	$lFormSubmitted = FALSE;
+    	$lFormSubmitted = false;
 		if (isset($_POST["user-info-php-submit-button"]) || isset($_REQUEST["user-info-php-submit-button"])) {
-			$lFormSubmitted = TRUE;
+			$lFormSubmitted = true;
 		}// end if
 
 		if ($lFormSubmitted){
@@ -100,8 +100,8 @@
 
 <div class="page-title">User Lookup (XPath)</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/soap/ws-user-account.php">

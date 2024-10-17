@@ -19,7 +19,7 @@
             break;
     }// end switch
 
-	if($_SESSION["user_is_logged_in"] == "True"){
+	if(isset($_SESSION["user_is_logged_in"]) && $_SESSION["user_is_logged_in"]){
 
 	    switch ($lSecurityLevel){
 			default: // Default case: This code is insecure
@@ -39,11 +39,11 @@
 			break;
 	   	}// end switch
 
-	   	$lUserID = $_SESSION['uid'];
+	   	$lUserID = $_SESSION["uid"];
 
 	   	$lUserAuthorizationLevelText = 'User';
 
-	   	if ($_SESSION['is_admin'] == 'TRUE'){
+	   	if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]){
 	   		$lUserAuthorizationLevelText = 'Admin';
 	   	}// end if
 
@@ -58,7 +58,7 @@
 	} else {
 		$logged_in_user = "anonymous";
 		$lAuthenticationStatusMessage = "Not Logged In";
-	}// end if($_SESSION["user_is_logged_in"] == "True")
+	}// end if
 
 	if ($_SESSION["EnforceSSL"] == "True"){
 		$lEnforceSSLLabel = "Drop TLS";
@@ -115,7 +115,7 @@
 			<a href="index.php?page=home.php&popUpNotificationCode=HPH0">Home</a>
 			|
 			<?php
-				if ($_SESSION["user_is_logged_in"] == 'True'){
+				if (isset($_SESSION["user_is_logged_in"]) && $_SESSION["user_is_logged_in"]){
 					echo '<a href="index.php?do=logout">Logout</a>';
 				} else {
 					echo '<a href="index.php?page=login.php">Login/Register</a>';

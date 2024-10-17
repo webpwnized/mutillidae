@@ -1,6 +1,6 @@
 <div class="page-title">Page Not Found</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
 
 <table>
 	<tr id="id-bad-page-tr">

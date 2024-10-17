@@ -7,34 +7,29 @@
 
 	try {
     	switch ($_SESSION["security-level"]){
-    		case "0": // This code is insecure. No input validation is performed.
+			default: // Default case: This code is insecure
+    		case "0": // This code is insecure
+    		case "1": // This code is insecure
 				$lProtectAgainstMethodTampering = false;
 				$lProtectAgainstCommandInjection=false;
 				$lProtectAgainstXSS = false;
-				$lProtectAgainstSSRF = FALSE;
-    		break;
-
-    		case "1": // This code is insecure. No input validation is performed.
-				$lProtectAgainstMethodTampering = false;
-				$lProtectAgainstCommandInjection=false;
-				$lProtectAgainstXSS = false;
-				$lProtectAgainstSSRF = FALSE;
+				$lProtectAgainstSSRF = false;
     		break;
 
 	   		case "2":
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-    			$lProtectAgainstCommandInjection=TRUE;
+    			$lProtectAgainstCommandInjection=true;
    				$lProtectAgainstMethodTampering = true;
    				$lProtectAgainstXSS = true;
-   				$lProtectAgainstSSRF = TRUE;
+   				$lProtectAgainstSSRF = true;
     		break;
     	}// end switch
 
-    	$lFormSubmitted = FALSE;
+    	$lFormSubmitted = false;
 		if (isset($_POST["ServerURL"]) || isset($_REQUEST["ServerURL"])) {
-			$lFormSubmitted = TRUE;
+			$lFormSubmitted = true;
 		}// end if
 
 		$lDefaultServerURL = "http://".$_SERVER['SERVER_NAME']."/webservices/rest/ws-test-connectivity.php";
@@ -65,11 +60,10 @@
 
 <div class="page-title"><span style="font-size: 18pt;">Can you hear me now?</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <!-- BEGIN HTML OUTPUT  -->
-
 <form action="index.php?page=test-connectivity.php"
 		method="post"
 		enctype="application/x-www-form-urlencoded"

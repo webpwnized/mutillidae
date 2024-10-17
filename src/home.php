@@ -17,7 +17,7 @@
 ?>
 
 <div style=" width: 750px; overflow: hidden;">
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 <span style="float: right">
 	<img src="images/arrow-45-degree-left-up.png" style="margin-right: 5px" />
 	<span class="label" style="float: right;">TIP:&nbsp;

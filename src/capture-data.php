@@ -3,8 +3,8 @@
 <link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />
 <div class="page-title">Capture Data</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <!-- BEGIN HTML OUTPUT  -->
 

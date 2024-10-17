@@ -26,7 +26,7 @@
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-    			$lProtectAgainstCommandInjection=TRUE;
+    			$lProtectAgainstCommandInjection=true;
 				$lEnableHTMLControls = true;
     			$lEnableJavaScriptValidation = true;
    				$lProtectAgainstMethodTampering = true;
@@ -34,9 +34,9 @@
     		break;
     	}// end switch
 
-    	$lFormSubmitted = FALSE;
+    	$lFormSubmitted = false;
 		if (isset($_POST["target_host"]) || isset($_REQUEST["target_host"])) {
-			$lFormSubmitted = TRUE;
+			$lFormSubmitted = true;
 		}// end if
 
 		if ($lFormSubmitted){
@@ -66,8 +66,8 @@
 
 <div class="page-title">DNS Lookup</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
-<?php include_once (__SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
+<?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">

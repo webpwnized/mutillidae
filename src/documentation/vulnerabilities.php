@@ -1,6 +1,6 @@
 <div class="page-title">Listing of Vulnerabilities</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc');?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
 
 <table style="width: 800px;">
 	<tr>
