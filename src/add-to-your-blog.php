@@ -139,7 +139,7 @@
 
 			// weak server-side input validation. not good enough.
 			if(strlen($lBlogEntry) > 0){
-				$lValidationFailed = FALSE;
+				$lValidationFailed = false;
 
 				try {
 					$SQLQueryHandler->insertBlogRecord($lLoggedInUser, $lBlogEntry);
@@ -160,7 +160,7 @@
 			echo $CustomErrorHandler->FormatError($e, "Error inserting blog");
 		}// end try
 	}else {
-		$lValidationFailed = FALSE;
+		$lValidationFailed = false;
 	}// end if isSet($_POST["add-to-your-blog-php-submit-button"])
 ?>
 
@@ -185,7 +185,7 @@
 
 <div class="page-title">Welcome To The Blog</div>
 
-<?php include_once (__SITE_ROOT__.'/includes/back-button.inc'); ?>
+<?php include_once __SITE_ROOT__.'/includes/back-button.inc'; ?>
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <fieldset>
