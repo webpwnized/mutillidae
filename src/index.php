@@ -395,6 +395,21 @@
     * ------------------------------------------ */
 
 	/* ------------------------------------------
+    * REQUIRE AUTHENTICATION FOR SOME PAGES
+    * ------------------------------------------ */
+	// Array of pages that require authentication
+	$lPagesRequiringAuthentication = [
+		'add-to-your-blog.php',
+		'edit-account-profile.php',
+		'jwt.php',
+		'view-account-profile.php',
+		'view-someones-blog.php'
+	];
+	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
+		$lPage = __SITE_ROOT__.'/login.php';
+	}// end if
+
+	/* ------------------------------------------
      * SIMULATE "SECRET" PAGES
      * ------------------------------------------ */
 	switch ($lPage){

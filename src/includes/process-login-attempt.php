@@ -89,22 +89,21 @@
 			$_SESSION["logged_in_user_signature"] = $lRecord->mysignature;
 			$_SESSION["is_admin"] = $lRecord->is_admin;
 
-   				/*
-   				 /* Set client-side auth token. if we are in insecure mode, we will
-   				* pay attention to client-side authorization tokens. If we are secure,
-   				* we dont use client-side authortization tokens and we ignore any
-   				* attempts to use them.
-   				*
-   				* If in secure mode, we want the cookie to be protected
-   				* with HTTPOnly flag. There is some irony here. In secure code,
-   				* we are to ignore authorization cookies, so we are protecting
-   				* a cookie we know we are going to ignore. But the point is to
-   				* provide an example to developers of proper coding techniques.
-   				*
-   				* Note: Ideally this cookie must be protected with SSL also but
-   				* again this is just a demo. Once your in SSL mode, maintain SSL
-   				* and escalate any requests for HTTP to HTTPS.
-   				*/
+			/* Set client-side auth token. if we are in insecure mode, we will
+			* pay attention to client-side authorization tokens. If we are secure,
+			* we dont use client-side authortization tokens and we ignore any
+			* attempts to use them.
+			*
+			* If in secure mode, we want the cookie to be protected
+			* with HTTPOnly flag. There is some irony here. In secure code,
+			* we are to ignore authorization cookies, so we are protecting
+			* a cookie we know we are going to ignore. But the point is to
+			* provide an example to developers of proper coding techniques.
+			*
+			* Note: Ideally this cookie must be protected with SSL also but
+			* again this is just a demo. Once your in SSL mode, maintain SSL
+			* and escalate any requests for HTTP to HTTPS.
+			*/
 			if ($lProtectCookies){
 				$lUsernameCookie = $Encoder->encodeForURL($lRecord->username);
 				$l_cookie_options = array (
