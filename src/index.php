@@ -464,7 +464,7 @@
         $CSPNonce = bin2hex(openssl_random_pseudo_bytes(32));
 		$lCSP = "Content-Security-Policy: " .
 			"script-src 'self' 'nonce-{$CSPNonce}';" .
-			"style-src 'unsafe-inline' 'self';" .
+			"style-src 'unsafe-inline' 'self' fonts.googleapis.com;" .
 			"img-src 'self' www.paypalobjects.com;" .
 			"connect-src 'self' cors.mutillidae.localhost;" .
 			"font-src fonts.googleapis.com;" .
