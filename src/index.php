@@ -467,7 +467,7 @@
 			"style-src 'unsafe-inline' 'self' fonts.googleapis.com;" .
 			"img-src 'self' www.paypalobjects.com;" .
 			"connect-src 'self' cors.mutillidae.localhost;" .
-			"font-src fonts.googleapis.com;" .
+			"font-src fonts.googleapis.com fonts.gstatic.com;" .
 			"frame-src 'self';" .
 			"media-src 'none';" .
 			"object-src 'none';" .
