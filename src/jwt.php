@@ -104,9 +104,9 @@
 		var newcell1 = row.insertCell(0);
 		var newcell2 = row.insertCell(1);
 		newcell1.innerText = pFieldName;
-		newcell1.setAttribute("class","label");
+		newcell1.setAttribute("class","report-label");
 		newcell2.innerText = pFieldValue;
-		newcell2.setAttribute("class","data");
+		newcell2.setAttribute("class","report-data");
 	}
 
 </script>
