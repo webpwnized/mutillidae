@@ -5,7 +5,7 @@
 if (!defined('__SITE_ROOT__')){define('__SITE_ROOT__', dirname(dirname(__FILE__)));}
 
 /* Read database configuration file and populate class parameters */
-require_once(__SITE_ROOT__ . '/includes/database-config.inc');
+require_once(__SITE_ROOT__.'/includes/database-config.inc');
 
 class MySQLHandler {
 

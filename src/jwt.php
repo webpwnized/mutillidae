@@ -1,15 +1,10 @@
 <?php
 
-	require_once __SITE_ROOT__ . '/classes/JWT.php';
-
-	// attack requires user - if not logged in, just display message and return
-	if(!isset($_SESSION["uid"]) || !is_numeric($_SESSION["uid"])) {
-		echo '<p>Not logged in. Please <a href="index.php?page=login.php">login/register</a> first...</p>';
-		return;
-	}
+	require_once __SITE_ROOT__.'/classes/JWT.php';
 
 	try {
     	switch ($_SESSION["security-level"]){
+			default:
     		case "0": // This code is insecure.
 				$lEnableSignatureValidation = false;
 				$lKey = 'snowman';
@@ -109,10 +104,9 @@
 		var newcell1 = row.insertCell(0);
 		var newcell2 = row.insertCell(1);
 		newcell1.innerText = pFieldName;
-		newcell1.setAttribute("class","sub-header");
+		newcell1.setAttribute("class","label");
 		newcell2.innerText = pFieldValue;
-		newcell2.setAttribute("class","sub-body");
-		newcell2.setAttribute("style","text-align:left");
+		newcell2.setAttribute("class","data");
 	}
 
 </script>

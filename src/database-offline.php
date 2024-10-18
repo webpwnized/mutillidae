@@ -5,7 +5,7 @@
     require_once 'classes/MySQLHandler.php';
 
     /* Read ldap configuration file and populate class parameters */
-    require_once __SITE_ROOT__ . '/includes/ldap-config.inc';
+    require_once __SITE_ROOT__.'/includes/ldap-config.inc';
 
 	$lErrorMessage = "";
 	$lDatabaseHostResolvedIP = "";

@@ -2,15 +2,15 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
-	include_once('../includes/constants.php');
+	include_once '../includes/constants.php';
 
 	/* ------------------------------------------------------
 	 * INCLUDE CLASS DEFINITION PRIOR TO INITIALIZING SESSION
 	 * ------------------------------------------------------ */
-	require_once (__SITE_ROOT__ . '/classes/CustomErrorHandler.php');
-	require_once (__SITE_ROOT__ . '/classes/LogHandler.php');
-	require_once (__SITE_ROOT__ . '/classes/SQLQueryHandler.php');
-	require_once (__SITE_ROOT__ . '/classes/JWT.php');
+	require_once __SITE_ROOT__.'/classes/CustomErrorHandler.php';
+	require_once __SITE_ROOT__.'/classes/LogHandler.php';
+	require_once __SITE_ROOT__.'/classes/SQLQueryHandler.php';
+	require_once __SITE_ROOT__.'/classes/JWT.php';
 
    /* ------------------------------------------
    * INITIALIZE SESSION
@@ -42,34 +42,38 @@
 
 	try {
     	switch ($_SESSION["security-level"]){
+			default:
     		case "0": // This code is insecure.
-				$lEnableSignatureValidation = FALSE;
+				$lEnableSignatureValidation = false;
 				$lKey = 'snowman';
-				$lObfuscatePassword = FALSE;
+				$lObfuscatePassword = false;
 				break;
     		case "1": // This code is insecure.
-				$lEnableSignatureValidation = TRUE;
+				$lEnableSignatureValidation = true;
 				$lKey = 'snowman';
-				$lObfuscatePassword = FALSE;
+				$lObfuscatePassword = false;
 				break;
    		case "2":
    		case "3":
    		case "4":
     		case "5": // This code is fairly secure
-				$lEnableSignatureValidation = TRUE;
+				$lEnableSignatureValidation = true;
 				$lKey = 'MIIBPAIBAAJBANBs46xCKgSt8vSgpGlDH0C8znhqhtOZQQjFCaQzcseGCVlrbI';
-				$lObfuscatePassword = TRUE;
+				$lObfuscatePassword = true;
 			break;
     	}// end switch
 	}catch(Exception $e){
-		echo $CustomErrorHandler->getExceptionMessage($e, "Error setting up configuration on page ajax/jwt.php");
+		$lErrorMessage = "Error setting up configuration on page ajax/jwt.php";"Error setting up configuration on page ajax/jwt.php";
+		echo $CustomErrorHandler->getExceptionMessage($e, $lErrorMessage);
 	}// end try
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$token = $_SERVER['HTTP_AUTHTOKEN'];
+		
 		if(strlen(trim($token)) == 0) {
 			echo "<p>Error: Expecting JWT in AuthToken header, but none received.";
 		}
+
 		try {
 			$decoded = JWT::decode($token, $lKey, $lEnableSignatureValidation);
 		}catch(Exception $e){
@@ -81,7 +85,7 @@
 		$userInfo = $SQLQueryHandler->getUserAccountByID($decoded->userid);
 		$lUserDetailsJSON = "";
 		while($row = $userInfo->fetch_object()) {
-			if($lObfuscatePassword) $row->password = "********";
+			if($lObfuscatePassword) { $row->password = "********"; }
 			$lUserDetailsJSON .= json_encode($row);
 		}
 		header('Cache-Control: no-cache, must-revalidate');

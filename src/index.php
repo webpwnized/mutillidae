@@ -405,6 +405,7 @@
 		'view-account-profile.php',
 		'view-someones-blog.php'
 	];
+	
 	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
 		$lPage = __SITE_ROOT__.'/login.php';
 	}// end if

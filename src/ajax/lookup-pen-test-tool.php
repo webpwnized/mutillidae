@@ -2,14 +2,14 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
-	include_once('../includes/constants.php');
+	include_once '../includes/constants.php';
 
 	/* ------------------------------------------------------
 	 * INCLUDE CLASS DEFINITION PRIOR TO INITIALIZING SESSION
 	 * ------------------------------------------------------ */
-	require_once (__SITE_ROOT__ . '/classes/CustomErrorHandler.php');
-	require_once (__SITE_ROOT__ . '/classes/LogHandler.php');
-	require_once (__SITE_ROOT__ . '/classes/SQLQueryHandler.php');
+	require_once __SITE_ROOT__.'/classes/CustomErrorHandler.php';
+	require_once __SITE_ROOT__.'/classes/LogHandler.php';
+	require_once __SITE_ROOT__.'/classes/SQLQueryHandler.php';
 
     /* ------------------------------------------
      * INITIALIZE SESSION
