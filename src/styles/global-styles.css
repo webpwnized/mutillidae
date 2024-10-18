@@ -195,7 +195,10 @@ table.tutorial tr.tutorial-title td{
 	 border-bottom-width: 1px;	 
 }
 
-td.report-label {
+table tbody tr th.report-label, 
+table tbody tr td.report-label,
+table tr th.report-label,
+table tr td.report-label {
     border-color: #000000;
     border-style: solid;
     border-width: 1px;
@@ -203,7 +206,8 @@ td.report-label {
     white-space: nowrap;
 }
 
-td.report-data {
+table tbody tr td.report-data,
+table tr td.report-data {
 	border-color: #000000;
 	border-style: solid;
 	border-width: 1px;
