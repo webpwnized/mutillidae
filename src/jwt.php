@@ -88,7 +88,7 @@
 	const displayUserDetails = function(pUserInfoJSON) {
 		try {
 			if (pUserInfoJSON && Object.keys(pUserInfoJSON).length > 0) {
-				document.getElementById("idDisplayTable").style.display = "flex";  // Show the table
+				document.getElementById("idDisplayTable").removeAttribute("style");;  // Show the table
 
 				// Safely access properties with default fallbacks
 				addRow('CID', pUserInfoJSON['cid'] ?? 'N/A');
