@@ -195,19 +195,19 @@ table.tutorial tr.tutorial-title td{
 	 border-bottom-width: 1px;	 
 }
 
-table tr th.report-label{
-	border-color: #000000;
-	border-style: solid;
-	border-width: 1px;
-	font-weight: bold;
-	white-space: nowrap;
+table tr th.report-label, 
+table tr td.report-label {
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: bold;
+    white-space: nowrap;
 }
 
 table tr td.report-data{
 	border-color: #000000;
 	border-style: solid;
 	border-width: 1px;
-	/*font-weight: bold;*/
 }
 /* ------------------------------------------------- */
 /* Tables */
@@ -507,9 +507,7 @@ table tr td.error-detail{
 	border-color: #990000;
 	border-width: 1px;
 	border-style: dashed;
-	/*background-color: #FFCCCC;*/
 	text-align: left;
-	/*font-weight: bold;*/
 	color: #000000;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -522,7 +520,6 @@ span.big-asterik{
 }
 
 div.database-failure-message{
-	text-align: center;
 	width: 600px;
 	text-align: left;
 	font-weight: bold;
@@ -598,7 +595,6 @@ table tr td.success-header{
 /* ------------------------------------------------- */
 
 div.database-success-message{
-	text-align: center;
 	width: 600px;
 	text-align: left;
 	font-weight: bold;
@@ -607,7 +603,6 @@ div.database-success-message{
 }
 
 div.database-informative-message{
-	text-align: center;
 	width: 600px;
 	text-align: left;
 	font-weight: bold;
@@ -616,7 +611,6 @@ div.database-informative-message{
 }
 
 div.database-warning-message{
-	text-align: center;
 	width: 600px;
 	text-align: left;
 	font-weight: bold;
