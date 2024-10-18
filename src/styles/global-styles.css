@@ -195,7 +195,7 @@ table.tutorial tr.tutorial-title td{
 	 border-bottom-width: 1px;	 
 }
 
-*.report-label {
+.report-label {
     border-color: #000000;
     border-style: solid;
     border-width: 1px;
@@ -203,7 +203,7 @@ table.tutorial tr.tutorial-title td{
     white-space: nowrap;
 }
 
-*.report-data {
+.report-data {
 	border-color: #000000;
 	border-style: solid;
 	border-width: 1px;
