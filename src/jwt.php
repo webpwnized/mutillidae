@@ -2,23 +2,36 @@
 
 	require_once __SITE_ROOT__.'/classes/JWT.php';
 
+	define('ONE_HOUR', 60 * 60);
+
+	function generateJWT($pSigningKey) {
+		$lClaims = array(
+		   "iss" => "http://mutillidae.localhost",
+		   "aud" => "http://mutillidae.localhost",
+		   "iat" => time(),
+		   "exp" => time() + ONE_HOUR,
+		   "userid" => $_SESSION["uid"]
+	   );
+	   return JWT::encode($lClaims, $pSigningKey);
+   }
+
 	try {
     	switch ($_SESSION["security-level"]){
 			default:
     		case "0": // This code is insecure.
 				$lEnableSignatureValidation = false;
-				$lKey = 'snowman';
+				$lSigningKey = 'snowman';
 				break;
     		case "1": // This code is insecure.
 				$lEnableSignatureValidation = true;
-				$lKey = 'snowman';
+				$lSigningKey = 'snowman';
 				break;
    		case "2":
    		case "3":
    		case "4":
     		case "5": // This code is fairly secure
 				$lEnableSignatureValidation = true;
-				$lKey = 'MIIBPAIBAAJBANBs46xCKgSt8vSgpGlDH0C8znhqhtOZQQjFCaQzcseGCVlrbI';
+				$lSigningKey = 'MIIBPAIBAAJBANBs46xCKgSt8vSgpGlDH0C8znhqhtOZQQjFCaQzcseGCVlrbI';
 			break;
     	}// end switch
 	}catch(Exception $e){
@@ -27,19 +40,8 @@
 	}// end try
 
    // generate a token with the current user info
-	$authToken = generate_token($lKey);
+	$lAuthorizationToken = generateJWT($lSigningKey);
 
-	function generate_token($key) {
-     	$payload = array(
-			"iss" => "http://mutillidae.localhost",
-			"aud" => "http://mutillidae.localhost",
-			"iat" => time(),
-			"exp" => time() + (30 * 60),
-			"userid" => $_SESSION["uid"]
-		);
-		$jwt = JWT::encode($payload, $key);
-		return $jwt;
-	}
 ?>
 
 <div class="page-title">Current User Information</div>
@@ -61,12 +63,15 @@
 </table>
 
 <script type="text/javascript">
-	var authToken = "<?php echo $authToken ?>";
+	var authToken = "<?php echo $lAuthorizationToken ?>";
 	try{
 		var lXMLHTTP;
+		const READY_STATE_DONE = 4;
+		const HTTP_STATUS_OK = 200;
+
 		lXMLHTTP = new XMLHttpRequest();
 		lXMLHTTP.onreadystatechange=function() {
-			if (lXMLHTTP.readyState==4 && lXMLHTTP.status==200) {
+			if (lXMLHTTP.readyState==READY_STATE_DONE && lXMLHTTP.status==HTTP_STATUS_OK) {
 				var lUserDetailsJSON = JSON.parse(lXMLHTTP.response);
 				loadingdiv = document.getElementById("loading-div");
 				loadingdiv.style.display="none";
@@ -80,23 +85,26 @@
 		alert("Error trying execute AJAX call: " + e.message);
 	}//end try
 
-	var displayUserDetails = function(pUserInfoJSON){
+	const displayUserDetails = function(pUserInfoJSON) {
 		try {
-			var laInfo = pUserInfoJSON;
-			if(laInfo) {
-				document.getElementById("idDisplayTable").style.display="";
-				addRow('CID', pUserInfoJSON['cid']);
-				addRow('User Name', pUserInfoJSON['username']);
-				addRow('First Name', pUserInfoJSON['firstname']);
-				addRow('Last Name', pUserInfoJSON['lastname']);
-				addRow('Signature', pUserInfoJSON['mysignature']);
-				addRow('Is Admin', pUserInfoJSON['is_admin']);
-				addRow('Password', '*********');
+			if (pUserInfoJSON && Object.keys(pUserInfoJSON).length > 0) {
+				document.getElementById("idDisplayTable").style.display = "";
+
+				// Safely access properties with default fallbacks
+				addRow('CID', pUserInfoJSON['cid'] ?? 'N/A');
+				addRow('User Name', pUserInfoJSON['username'] ?? 'N/A');
+				addRow('First Name', pUserInfoJSON['firstname'] ?? 'N/A');
+				addRow('Last Name', pUserInfoJSON['lastname'] ?? 'N/A');
+				addRow('Signature', pUserInfoJSON['mysignature'] ?? 'N/A');
+				addRow('Is Admin', pUserInfoJSON['is_admin'] ? 'Yes' : 'No');  // Handle boolean properly
+				addRow('Password', pUserInfoJSON['password']);  // Mask password display
+			} else {
+				alert("No user details available.");
 			}
-		}catch(/*Exception*/ e){
+		} catch (e) {
 			alert("Error trying to parse JSON: " + e.message);
-		}// end try
-	};// end function
+		}
+	};
 
 	var addRow = function(pFieldName, pFieldValue) {
 		var lTBody = document.getElementById("idDisplayTableBody");
