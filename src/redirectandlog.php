@@ -2,7 +2,7 @@
 	try {	    	
 		switch ($_SESSION["security-level"]){
 	   		case "0": // This code is insecure
-	   		case "1": // This code is insecure 
+	   		case "1": // This code is insecure
 	   			/* This code is insecure. Direct object references in the form of the "forwardurl"
 	   			 parameter give the user complete control of the input. Contrary to popular belief, 
 	   			 input validation, blacklisting, etc is not the best defense. The best defenses are 
@@ -77,10 +77,10 @@
 	   					case 10:$lURL = "https://addons.mozilla.org/en-US/firefox/collections/jdruin/pro-web-developer-qa-pack/";break;
 	   				}// end switch($forwardurl)
 
-					$LogHandler->writeToLog("Redirected user to: " . $lURL);				
+					$LogHandler->writeToLog("Redirected user to: " . $lURL);
 	   				echo '<meta http-equiv="refresh" content="0;url='.$lURL.'">';/* Redirect browser */
 					//header("Location: " . $lURL); /* Redirect browser */
-					exit; /* prevent other headers from runnning */		
+					exit; /* prevent other headers from runnning */
 	   			}else{
 	   				throw(new Exception("Expected integer input. Cannot process request. Support team alerted."));
 	   			}// end if
