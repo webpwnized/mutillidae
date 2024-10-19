@@ -97,7 +97,7 @@
 				addRow('Last Name', pUserInfoJSON['lastname'] ?? 'N/A');
 				addRow('Signature', pUserInfoJSON['mysignature'] ?? 'N/A');
 				addRow('Is Admin', pUserInfoJSON['is_admin'] ? 'Yes' : 'No');  // Handle boolean properly
-				addRow('Password', pUserInfoJSON['password']);  // Mask password display
+				addRow('Password', pUserInfoJSON['password']);
 			} else {
 				alert("No user details available.");
 			}
