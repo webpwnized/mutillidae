@@ -1,27 +1,22 @@
 #!/bin/bash
 # Purpose: Create a new feature branch and push it to the remote repository
-# Usage: ./create-feature-branch.sh <feature_branch_name>
-# Description: This script creates a new feature branch locally, pushes it to the remote, and sets the upstream.
 
-# Function to print messages with a timestamp
+# Print messages with a timestamp
 print_message() {
     echo ""
     echo "$(date +"%Y-%m-%d %H:%M:%S") - $1"
 }
 
-# Function to display help message
+# Display help message
 show_help() {
     echo "Usage: $0 <feature_branch_name>"
     echo ""
     echo "Options:"
     echo "  -h, --help     Display this help message."
-    echo ""
-    echo "Description:"
-    echo "This script creates a new feature branch locally and pushes it to the remote repository."
     exit 0
 }
 
-# Function to handle errors
+# Handle errors
 handle_error() {
     print_message "Error: $1"
     exit 1
@@ -40,22 +35,27 @@ if [[ -z "$FEATURE_BRANCH_NAME" ]]; then
     handle_error "No feature branch name provided. Usage: $0 <feature_branch_name>"
 fi
 
-# Verify that git is installed
+# Check if git is installed
 if ! command -v git &> /dev/null; then
-    handle_error "Git is not installed. Please install Git to use this script."
+    handle_error "Git is not installed. Please install Git."
 fi
 
-# Ensure the working directory is a valid git repository
+# Ensure inside a git repository
 if ! git rev-parse --is-inside-work-tree &> /dev/null; then
-    handle_error "This is not a valid git repository. Please run this script inside a git repository."
+    handle_error "Not inside a valid git repository."
 fi
 
-# Check if the branch already exists locally or remotely
+# Check if the branch exists locally
 if git show-ref --verify --quiet refs/heads/"$FEATURE_BRANCH_NAME"; then
     handle_error "Branch '$FEATURE_BRANCH_NAME' already exists locally."
 fi
 
-if git ls-remote --heads origin "$FEATURE_BRANCH_NAME" &> /dev/null; then
+# Clear local cache of remote branches
+print_message "Fetching latest remote branches to clear any cached data."
+git fetch origin --prune || handle_error "Failed to fetch remote branches."
+
+# Check if the branch exists remotely
+if git ls-remote --heads origin "$FEATURE_BRANCH_NAME" | grep "$FEATURE_BRANCH_NAME" &> /dev/null; then
     handle_error "Branch '$FEATURE_BRANCH_NAME' already exists on the remote."
 fi
 
@@ -73,3 +73,4 @@ print_message "Current branch: $(git branch --show-current)"
 git status || handle_error "Failed to show git status."
 
 print_message "Script completed successfully."
+
