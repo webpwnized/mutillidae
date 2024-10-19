@@ -51,7 +51,7 @@
         }
 
         var lXMLHTTP = new XMLHttpRequest();
-        var lURL = "http://cors.{$_SERVER['SERVER_NAME']}/webservices/rest/ws-cors-echo.php";
+        var lURL = "http://cors.<?php echo $_SERVER['SERVER_NAME']; ?>/webservices/rest/ws-cors-echo.php";
         var lAsynchronously = true;
         var lMessage = encodeURIComponent(lText);
         var lMethod = encodeURIComponent(theForm.idMethod.value);
