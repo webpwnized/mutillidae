@@ -109,7 +109,7 @@
 							<a href="">Command Injection</a>
 							<ul>
 								<li><a href="index.php?page=dns-lookup.php">DNS Lookup</a></li>
-								<li><a href="./webservices/soap/ws-lookup-dns-record.php">DNS Lookup (SOAP Web Service)</a></li>
+								<li><a href="./webservices/soap/ws-lookup-dns.php">DNS Lookup (SOAP Web Service)</a></li>
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
@@ -720,7 +720,7 @@
 						<li>
 							<a href="">Command Injection</a>
 							<ul>
-								<li><a href="./webservices/soap/ws-lookup-dns-record.php">DNS Lookup</a></li>
+								<li><a href="./webservices/soap/ws-lookup-dns.php">DNS Lookup</a></li>
 							</ul>
 						</li>
 						<li>

@@ -656,7 +656,7 @@
 	</ul>
 </div>
 
-<p class="label">webservices/soap/ws-lookup-dns-record.php</p>
+<p class="label">webservices/soap/ws-lookup-dns.php</p>
 <div style="padding-left: 40px;">
 	<ul>
 		<li>SOAP Web Service: Command Injection</li>
