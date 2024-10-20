@@ -1,41 +1,53 @@
 <?php
-	/*  --------------------------------
-	 *  We use the session on this page
-	 *  --------------------------------*/
-    if (session_status() == PHP_SESSION_NONE){
-        session_start();
-    }// end if
+// Get the origin of the request
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : null;
 
-	/* ----------------------------------------
-	 *	initialize security level to "insecure"
-	 * ----------------------------------------*/
-    if (!isset($_SESSION["security-level"])){
-        $_SESSION["security-level"] = 0;
-    }// end if
+// Set the allowed origins (replace with your trusted domains)
+$allowedOrigins = ['http://mutillidae.com',
+				'http://cors.mutillidae.com',
+				'http://webservice.mutillidae.com'];
 
-	/* ------------------------------------------
-	 * Constants used in application
-	 * ------------------------------------------ */
-	require_once '../../includes/constants.php';
-	require_once '../../includes/minimum-class-definitions.php';
+// Check if the request origin is allowed
+if ($origin && in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin"); // Reflect the allowed origin
+    header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Headers: Content-Type'); // Allowed headers
+} else {
+    // If the origin is not allowed, return a 403 Forbidden status
+    http_response_code(403); // Forbidden
+    echo json_encode([
+        "error" => "Forbidden: The origin $origin is not allowed to access this resource."
+    ]);
+    exit();
+}
 
-	header('Content-Type: application/json');
+// Set the content type to JSON
+header('Content-Type: application/json');
 
-	try {
-		// Handle the GET request to test connectivity
-		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-			// Send a 200 OK status code and JSON response
-			http_response_code(200); // OK
-			echo json_encode(["message" => "Connection succeeded"]);
-		} else {
-			// If the request method is not GET, send a 405 Method Not Allowed status code
-			http_response_code(405); // Method Not Allowed
-			echo json_encode(["error" => "Invalid request method"]);
-		}
-	} catch (Exception $e) {
-		// Handle any exceptions with a 500 Internal Server Error response
-		http_response_code(500); // Internal Server Error
-		$lErrorMessage = "Unable to process request to web service ws-test-connectivity";
-		echo $CustomErrorHandler->FormatErrorJSON($e, $lErrorMessage);
-	}
+// Handle preflight requests (OPTIONS)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204); // No Content
+    exit();
+}
+
+// Handle the GET request to test connectivity
+try {
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        // Return a success message with 200 OK status
+        http_response_code(200); // OK
+        echo json_encode(["message" => "Connection succeeded"]);
+    } else {
+        // If the request method is not allowed, return 405 status
+        http_response_code(405); // Method Not Allowed
+        header('Allow: GET, OPTIONS'); // Inform allowed methods
+        echo json_encode(["error" => "Method not allowed. Use GET or OPTIONS request."]);
+    }
+} catch (Exception $e) {
+    // Handle any exceptions with a 500 Internal Server Error response
+    http_response_code(500); // Internal Server Error
+    echo json_encode([
+        "error" => "Unable to process the request",
+        "details" => $e->getMessage()
+    ]);
+}
 ?>
