@@ -1,6 +1,10 @@
-<?php 
+<?php
+	$lHTMLControlInput = 'minlength="1" maxlength="20" required="required"';
+	$lHTMLControlRadio = 'required="required"';
+
 	try {	    	
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure.
     		case "0": // This code is insecure.
     			$lUseClientSideStorageForSensitiveData = TRUE;
     			$lUseJavaScriptValidation = FALSE;
@@ -37,7 +41,7 @@
 
 <!-- BEGIN HTML OUTPUT  -->
 <script type="text/javascript">
-	/* 
+	/*
 		The Storage interface of the browser API
 	
 		interface Storage {
@@ -50,7 +54,7 @@
 		};
 	*/
 
-	<?php 
+	<?php
 		if ($lUseJavaScriptValidation){
 			echo "var gUseJavaScriptValidation = \"TRUE\";";
 		}else{
@@ -65,7 +69,7 @@
 			var lTR = lDocRoot.createElement("tr");
 			var lKeyTD = lDocRoot.createElement("td");
 			var lItemTD = lDocRoot.createElement("td");
-			var lTypeTD = lDocRoot.createElement("td");			
+			var lTypeTD = lDocRoot.createElement("td");
 			var lBlankTD = lDocRoot.createElement("td");
 
 			//lKeyTD.addAttribute("class", "label");
@@ -92,7 +96,7 @@
 	};// end function setMessage
 
 	var addItemToStorage = function(theForm){
-		try{			
+		try{
 			var lKey = theForm.DOMStorageKey.value;
 			var lItem = theForm.DOMStorageItem.value;
 			var lType = "";
@@ -148,11 +152,11 @@
 	
 </script>
 
-<form 	action="index.php?page=html5-storage.php" 
+<form 	action="index.php?page=html5-storage.php"
 		method="post" 
-		enctype="application/x-www-form-urlencoded" 
+		enctype="application/x-www-form-urlencoded"
 		onsubmit="return false;"
-		id="idForm">		
+		id="idForm">
 	<table>
 		<tr id="id-invalid-input-tr" style="display: none;">
 			<td class="error-message">
@@ -173,53 +177,38 @@
 			<td class="sub-body">Key</td>
 			<td class="sub-body">Item</td>
 			<td class="sub-body">Storage Type</td>
-			<td>&nbsp;</td><td>&nbsp;</td>
 		</tr>
 		<tbody id="idSessionStorageTableBody" style="font-weight:bold;"></tbody>
-		<tr><td>&nbsp;</td></tr>
+		<tr><td colspan="3">&nbsp;</td></tr>
 		<tr>
-			<td><input	type="text" id="idDOMStorageKeyInput" name="DOMStorageKey" size="20"
+			<td>
+				<input	type="text" id="idDOMStorageKeyInput" name="DOMStorageKey" size="20"
 						autofocus="autofocus"
-				<?php
-					if ($lEnableHTMLControls) {
-						echo('minlength="1" maxlength="20" required="required"');
-					}// end if
-				?>			
-			></td>
-			<td><input type="text" id="idDOMStorageItemInput" name="DOMStorageItem" size="20"
-				<?php
-					if ($lEnableHTMLControls) {
-						echo('minlength="1" maxlength="20" required="required"');
-					}// end if
-				?>
-			></td>
-			<td class="label">
-				<input type="radio" name="SessionStorageType" value="Session" checked="checked" 
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('required="required"');
-						}// end if
-					?>
-				/>Session
-				<input type="radio" name="SessionStorageType" value="Local"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('required="required"');
-						}// end if
-					?>
-				/>Local
+				<?php if ($lEnableHTMLControls) { echo $lHTMLControlInput; } ?>
+				/>
 			</td>
 			<td>
-			<input 	onclick="addItemToStorage(this.form);"
-					class="button" 
-					type="button" 
-					value="Add New" />
+				<input type="text" id="idDOMStorageItemInput" name="DOMStorageItem" size="20"
+				<?php if ($lEnableHTMLControls) { echo $lHTMLControlInput; } ?>
+				/>
+			</td>
+			<td class="label">
+				<input type="radio" name="SessionStorageType" value="Session" checked="checked" 
+				<?php if ($lEnableHTMLControls) { echo $lHTMLControlRadio; } ?>
+				/>Session
+				<input type="radio" name="SessionStorageType" value="Local"
+				<?php if ($lEnableHTMLControls) { echo $lHTMLControlRadio; } ?>
+				/>Local
+				<input 	onclick="addItemToStorage(this.form);"
+						class="button"
+						type="button"
+						value="Add New" />
 			</td>
 		</tr>
-		<tr><td>&nbsp;</td></tr>
+		<tr><td colspan="3">&nbsp;</td></tr>
 		<tfoot id="idSessionStorageTableFooter">
-			<tr><th colspan="5"><span id="idAddItemMessageSpan"></span></th></tr>
-			<tr><td>&nbsp;</td></tr>
+			<tr><th colspan="3" scope="col"><span id="idAddItemMessageSpan"></span></th></tr>
+			<tr><td colspan="3">&nbsp;</td></tr>
 		</tfoot>
 	</table>
 </form>
