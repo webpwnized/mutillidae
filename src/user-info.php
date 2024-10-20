@@ -211,12 +211,14 @@
 						$lAPIKey = $Encoder->encodeForHTML($row->api_key);
 					}
 					
+					echo "<br/>";
 					echo "<span class=\"label\">First Name=</span><span>{$lFirstName}</span><br/>";
 					echo "<span class=\"label\">Last Name=</span><span>{$lLastName}</span><br/>";
 					echo "<span class=\"label\">Username=</span><span>{$lUsername}</span><br/>";
 					echo "<span class=\"label\">Password=</span><span>{$lPassword}</span><br/>";
-					echo "<span class=\"label\">Signature=</span><span>{$lSignature}</span><br/><br/>";
-					echo "<span class=\"label\">API Key=</span><span>{$lAPIKey}</span><br/><br/>";
+					echo "<span class=\"label\">Signature=</span><span>{$lSignature}</span><br/>";
+					echo "<span class=\"label\">API Key=</span><span>{$lAPIKey}</span><br/>";
+					echo "<br/>";
 				}// end while
 	
 			} else {
