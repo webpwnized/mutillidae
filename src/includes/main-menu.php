@@ -741,6 +741,12 @@
 					<a href="">REST</a>
 					<ul>
 						<li>
+							<a href="">Test Connectivity</a>
+							<ul>
+								<li><a href="./webservices/rest/ws-test-connectivity.php">Test Connectivity</a></li>
+							</ul>
+						</li>
+						<li>
 							<a href="">SQL Injection</a>
 							<ul>
 								<li><a href="./webservices/rest/ws-user-account.php">User Account Management</a></li>
