@@ -170,7 +170,7 @@
 	</table>
 	<table>
 	<tr>
-			<td>
+			<td colspan="3">
 				<div style="margin-left:auto; margin-right:auto;">
 					<span title="Click to delete session storage" onclick='sessionStorage.clear(); var node=window.document.getElementById("idSessionStorageTableBody"); while(node.hasChildNodes()){node.removeChild(node.firstChild)}; init();' style="cursor: pointer;" >
 						<img height="24px" width="24px" src="./images/delete-icon-48-48.png" style="vertical-align: middle;" />
