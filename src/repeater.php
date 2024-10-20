@@ -1,20 +1,21 @@
 <?php 
 	try{
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure.
     		case "0": // This code is insecure.
 				$lEnableJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
-				$lEnableBufferOverflowProtection = FALSE;
-				$lProtectAgainstMethodSwitching = FALSE;
-				$lCreateParameterAdditionVulnerability = TRUE;
+				$lEnableBufferOverflowProtection = false;
+				$lProtectAgainstMethodSwitching = false;
+				$lCreateParameterAdditionVulnerability = true;
     		break;
 
     		case "1": // This code is insecure.
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-				$lEnableBufferOverflowProtection = FALSE;
-				$lProtectAgainstMethodSwitching = FALSE;
-				$lCreateParameterAdditionVulnerability = TRUE;
+				$lEnableBufferOverflowProtection = false;
+				$lProtectAgainstMethodSwitching = false;
+				$lCreateParameterAdditionVulnerability = true;
     		break;
 
 	   		case "2":
@@ -23,9 +24,9 @@
     		case "5": // This code is fairly secure
     			$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-    			$lEnableBufferOverflowProtection = TRUE;
-				$lProtectAgainstMethodSwitching = TRUE;
-				$lCreateParameterAdditionVulnerability = FALSE;
+    			$lEnableBufferOverflowProtection = true;
+				$lProtectAgainstMethodSwitching = true;
+				$lCreateParameterAdditionVulnerability = false;
     		break;
     	}// end switch
     	
@@ -34,7 +35,7 @@
 			$lSubmitButtonClicked = isset($_REQUEST["repeater-php-submit-button"]);
 	   	}else{
 			$lSubmitButtonClicked = isset($_POST["repeater-php-submit-button"]);
-	   	}//end if    	
+	   	}//end if
 
 	   	if($lSubmitButtonClicked){
 
@@ -45,7 +46,7 @@
 		   	}else{
 		   		$lStringToRepeat = $_POST["string_to_repeat"];
 		   		$lTimesToRepeatString = $_POST["times_to_repeat_string"];
-		   	}//end if    	
+		   	}//end if
 	   		
 	    	if($lEnableBufferOverflowProtection){
 	   			/* NOTE: We expect total integer that is less than 134,217,728 when mutilplied 
@@ -63,17 +64,17 @@
 	
 	    		if(!$lTimesToRepeatStringIsDigits){
 	    			$lErrorMessage = "The times to repeat string does not appear to be an integer.";
-	    			throw new Exception($lErrorMessage);	
+	    			throw new Exception($lErrorMessage);
 	    		}// end if
 
 	    		if(!$lStringToRepeatIsReasonable){
 	    			$lErrorMessage = "The string to repeat does not appear to be reasonable.";
-	    			throw new Exception($lErrorMessage);	
+	    			throw new Exception($lErrorMessage);
 	    		}// end if
 
 	    		if(($lTimesToRepeatString * strlen($lStringToRepeat)) > $lMaximumPHPStringBufferSize){
 	    			$lErrorMessage = "The buffer that would need to be allocated exceeds the PHP maximum string buffer size.";
-	    			throw new Exception($lErrorMessage);	
+	    			throw new Exception($lErrorMessage);
 	    		}// end if
 
 	    	}// end if($lEnableBufferOverflowProtection)
@@ -87,7 +88,7 @@
 	   	}//end if $lSubmitButtonClicked
 
 	} catch(Exception $e){
-		$lSubmitButtonClicked = FALSE;
+		$lSubmitButtonClicked = false;
 		echo "<div class=\"error-message\">".$lErrorMessage."</div>";
 		echo $CustomErrorHandler->FormatError($e, "Error attempting to repeat string.");
 	}// end try	
@@ -106,7 +107,7 @@
 			echo "var lValidateInput = true" . PHP_EOL;
 		}else{
 			echo "var lValidateInput = false" . PHP_EOL;
-		}// end if		
+		}// end if
 	?>
 
 	function onSubmitOfRepeaterForm(/*HTMLFormElement*/ theForm){
@@ -202,11 +203,11 @@
 			<td colspan="2" class="hint-header"><?php echo $lBuffer; ?></td>
 		</tr>
 		<tr><td></td></tr>
-	</table>	
+	</table>
 </div>
 
 <script type="text/javascript">
 	if (l_submit_occured){
 		document.getElementById("id-repeater-output-div").style.display="";		
-	}// end if l_submit_occured	
+	}// end if l_submit_occured
 </script>

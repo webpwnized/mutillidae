@@ -1,16 +1,17 @@
 <?php
 	try {
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 			case "0": // This code is insecure
 				$lEnableJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
-				$lEncodeBackgroundColor = FALSE;
+				$lEncodeBackgroundColor = false;
 				break;
 
 			case "1": // This code is insecure
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-				$lEncodeBackgroundColor = FALSE;
+				$lEncodeBackgroundColor = false;
 				break;
 				 
 			case "2":
@@ -19,7 +20,7 @@
 			case "5": // This code is fairly secure
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-				$lEncodeBackgroundColor = TRUE;
+				$lEncodeBackgroundColor = true;
 			break;
 		}// end switch
 	
@@ -56,13 +57,13 @@
 		try{
 			<?php 
 			if($lEnableJavaScriptValidation){
-				echo 'var lValidateInput = "TRUE"' . PHP_EOL;
+				echo 'var lValidateInput = "true"' . PHP_EOL;
 			}else{
-				echo 'var lValidateInput = "FALSE"' . PHP_EOL;
+				echo 'var lValidateInput = "false"' . PHP_EOL;
 			}// end if
 			?>
 
-			if(lValidateInput == "TRUE"){
+			if(lValidateInput == "true"){
 				var lDigits = /[0-9A-Fa-f]{6}/;
 				
 				if (theForm.id_background_color.value.search(lDigits) != 0){

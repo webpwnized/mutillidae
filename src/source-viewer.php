@@ -15,15 +15,16 @@
 	 */
 	try {	    	
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 	   		case "0": // This code is insecure
 	   			$lEnableHTMLControls = false;
-	   			$lValidateAndTokenize = FALSE;
+	   			$lValidateAndTokenize = false;
 	   			$lEncodeOutput = false;
 	   		break;
 	   			 
-	   		case "1": // This code is insecure 
+	   		case "1": // This code is insecure
 				$lEnableHTMLControls = true;
-	   			$lValidateAndTokenize = FALSE;
+	   			$lValidateAndTokenize = false;
 				$lEncodeOutput = false;
 	   		break;
 	    		
@@ -32,7 +33,7 @@
 			case "4":
 	   		case "5": // This code is fairly secure
 				$lEnableHTMLControls = true;
-	   			$lValidateAndTokenize = TRUE;
+	   			$lValidateAndTokenize = true;
 				$lEncodeOutput = true;
 	   		break;
 	   	}// end switch ($_SESSION["security-level"])
@@ -80,12 +81,12 @@
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page']?>">
 				<select name="phpfile" id="id_file_select" autofocus="autofocus" <?php echo $lHTMLControlAttributes ?>>
 				<?php 
-					$_SESSION['source-viewer-files-array'] = "";						
+					$_SESSION['source-viewer-files-array'] = "";
 					if(!$lValidateAndTokenize){
 						// Just print raw filenames as values
 						foreach ($DirectoryIterator as $fileInfo) {
 							$lPHPFileName = $fileInfo->getFilename();
-							if ($fileInfo->GetExtension() == "php" and !$fileInfo->isDot()) {
+							if ($fileInfo->GetExtension() == "php" && !$fileInfo->isDot()) {
 						   		echo '<option value="' . $lPHPFileName . '">' . $lPHPFileName . "</option>";
 							}// end if
 						}// end for each
@@ -95,10 +96,10 @@
 						$lCounter = 0;
 						foreach ($DirectoryIterator as $fileInfo) {
 							$lPHPFileName = $fileInfo->getFilename();
-							if ($fileInfo->GetExtension() == "php" and !$fileInfo->isDot()) {
+							if ($fileInfo->GetExtension() == "php" && !$fileInfo->isDot()) {
 						   		echo '<option value="' . $lCounter . '">' . $lPHPFileName . "</option>";
 								$aAllowedPHPFiles[$lCounter]=$lPHPFileName;
-								$lCounter += 1;							
+								$lCounter += 1;
 							}// end if
 						}// end for each
 						$_SESSION['source-viewer-files-array'] = $aAllowedPHPFiles;
@@ -118,7 +119,7 @@
 </form>
 
 <?php
-	try {	    	
+	try {
 		if (isset($_POST['source-file-viewer-php-submit-button'])){
 
 			if (!$lValidateAndTokenize) {

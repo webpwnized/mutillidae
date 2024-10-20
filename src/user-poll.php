@@ -9,7 +9,7 @@
 		SQL Injection
 	*/
 
-	require_once (__SITE_ROOT__.'/classes/CSRFTokenHandler.php');
+	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
 	if (!isSet($logged_in_user)) {

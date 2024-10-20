@@ -19,6 +19,7 @@
 		}// end if
 
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
     		case "0": // This code is insecure
     		case "1": // This code is insecure
 				$lProtectAgainstMethodTampering = false;
@@ -29,8 +30,8 @@
 			case "3":
 			case "4":
     		case "5": // This code is fairly secure
-				require_once ('./includes/constants.php');
-				require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
+				require_once './includes/constants.php';
+				require_once __SITE_ROOT__.'/classes/EncodingHandler.php';
     			$Encoder = new EncodingHandler();
     			$lProtectAgainstMethodTampering = true;
 				$lEncodeOutput = true;

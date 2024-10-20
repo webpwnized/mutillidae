@@ -1,5 +1,6 @@
 <?php
 	switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure
    		case "0": // This code is insecure
    			// DO NOTHING: This is insecure
    			$lEnableHTMLControls = false;
@@ -9,7 +10,7 @@
    		break;
    		
    		case "1": // This code is insecure
-   			// DO NOTHING: This is insecure		
+   			// DO NOTHING: This is insecure
 			$lEnableHTMLControls = true;
    			$lEncodeOutput = false;
 			$lTokenizeAllowedMarkup = false;

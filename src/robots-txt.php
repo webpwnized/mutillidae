@@ -1,23 +1,3 @@
-<?php 
-	try{
-		switch ($_SESSION["security-level"]){
-	   		case "0": // This code is insecure
-	   		case "1": // This code is insecure
-
-	   			break;
-		    		
-			case "2":
-			case "3":
-			case "4":
-	   		case "5": // This code is fairly secure
-	
-	   		break;
-		}//end switch
-    } catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "Error attempting to set up page configuration");
-    }// end try;
-?>
-
 <div class="page-title">Robots.txt</div>
 
 <?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>

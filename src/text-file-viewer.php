@@ -11,18 +11,19 @@
 	 * HTTP Parameter Pollution (Fix: Scope request variables)
 	 * Method Tampering
 	 */
-	try {	    	
+	try {
 		switch ($_SESSION["security-level"]){
+			default:
    			case "0": // This code is insecure
 				$lEnableHTMLControls = false;
-   				$lUseTokenization = FALSE;
+   				$lUseTokenization = false;
 				$lEncodeOutput = false;
 				$lProtectAgainstMethodTampering = false;
 			break;
 
    			case "1": // This code is insecure
 				$lEnableHTMLControls = true;
-   				$lUseTokenization = FALSE;
+   				$lUseTokenization = false;
 				$lEncodeOutput = false;
 				$lProtectAgainstMethodTampering = false;
 			break;
@@ -32,7 +33,7 @@
 			case "4":
 	   		case "5": // This code is fairly secure
 				$lEnableHTMLControls = true;
-	   			$lUseTokenization = TRUE;
+	   			$lUseTokenization = true;
 				$lEncodeOutput = true;
 				$lProtectAgainstMethodTampering = true;
 			break;
@@ -100,7 +101,7 @@
 </form>
 
 <?php
-	try {	    	
+	try {
 		if (isset($_POST['text-file-viewer-php-submit-button'])){
 
 			/********************************************
@@ -212,7 +213,7 @@
 			/********************************************
 			 * Open file and display contents
 			 *********************************************/
-			try{				
+			try{
 			    // open file handle
 				$handle = fopen($lURL, "r");
 	   			echo '<span class="label">File: '.$lTextFileDescription.'</span>';
@@ -229,7 +230,7 @@
 				
 			}catch(Exception $e){
 				echo $CustomErrorHandler->FormatError($e, "Error opening file stream. Cannot load file.");
-			}// end try		   	
+			}// end try
 		   				
 		}// end if (isset($_POST['text-file-viewer-php-submit-button']))
 	}catch(Exception $e){

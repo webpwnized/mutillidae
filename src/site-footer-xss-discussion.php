@@ -1,9 +1,10 @@
 <?php 
 	try{
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
-	   			// DO NOTHING: This is insecure		
+	   			// DO NOTHING: This is insecure
 				$lEncodeOutput = false;
 			break;
 		    		
@@ -32,7 +33,7 @@
 	   			// this will be HTML encoding because we are outputting data into HTML
 				$lEncodeOutput = true;
 	   		break;
-	   	}// end switch		
+	   	}// end switch
 	
 		require_once 'classes/ClientInformationHandler.php';
 		$lClientInformationHandler = new ClientInformationHandler();

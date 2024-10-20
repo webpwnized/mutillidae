@@ -5,11 +5,12 @@
 	 */
 
 	switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure
    		case "0": // This code is insecure
    		case "1": // This code is insecure
-   			// DO NOTHING: This is insecure		
+   			// DO NOTHING: This is insecure
 			$lEncodeOutput = false;
-			$lLimitOutput = FALSE;
+			$lLimitOutput = false;
 		break;
 	    		
    		case "2":
@@ -31,9 +32,9 @@
    			// encode the output following OWASP standards
    			// this will be HTML encoding because we are outputting data into HTML
 			$lEncodeOutput = true;
-			$lLimitOutput = TRUE;
+			$lLimitOutput = true;
    		break;
-   	}// end switch		
+   	}// end switch
 
    	if(isset($_GET["deleteLogs"])){
    		$lQueryResult = $SQLQueryHandler->truncateHitLog();
@@ -84,7 +85,7 @@
 </tr>
 
 <?php
-	try{// to draw table		
+	try{// to draw table
 
 	    if ($lLimitOutput){
 	    	echo '<tr><td class="error-header" colspan="10">Note: DOS defenses enabled. Rows limited to last 20.</td></tr>';
@@ -106,7 +107,7 @@
 					$lClientIPAddress = $Encoder->encodeForHTML($row->ip);
 					$lBrowser = $Encoder->encodeForHTML($row->browser);
 					$lReferer = $Encoder->encodeForHTML($row->referer);
-					$lDate = $Encoder->encodeForHTML($row->date);				
+					$lDate = $Encoder->encodeForHTML($row->date);
 				}// end if
 				
 				echo "<tr>

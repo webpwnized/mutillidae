@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: data/
 Disallow: passwords/
 Disallow: config.inc
 Disallow: classes/

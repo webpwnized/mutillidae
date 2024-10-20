@@ -28,24 +28,25 @@
 
 	try{
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
     		case "0": // This code is insecure.
 				$lEnableJavaScriptValidation = false;
-				$lEnableBufferOverflowProtection = FALSE;
-				$lProtectAgainstMethodSwitching = FALSE;
-				$lCreateParameterAdditionVulnerability = TRUE;
-				$lLeakIVToBrowser = TRUE;
-				$lIgnoreUserInfluence = FALSE;
+				$lEnableBufferOverflowProtection = false;
+				$lProtectAgainstMethodSwitching = false;
+				$lCreateParameterAdditionVulnerability = true;
+				$lLeakIVToBrowser = true;
+				$lIgnoreUserInfluence = false;
     			$lUserID = "100";
 				$lUserGroupID = "100";
 			break;
 
     		case "1": // This code is insecure.
 				$lEnableJavaScriptValidation = true;
-				$lEnableBufferOverflowProtection = FALSE;
-				$lProtectAgainstMethodSwitching = FALSE;
-				$lCreateParameterAdditionVulnerability = TRUE;
-				$lLeakIVToBrowser = TRUE;
-				$lIgnoreUserInfluence = FALSE;
+				$lEnableBufferOverflowProtection = false;
+				$lProtectAgainstMethodSwitching = false;
+				$lCreateParameterAdditionVulnerability = true;
+				$lLeakIVToBrowser = true;
+				$lIgnoreUserInfluence = false;
     			$lUserID = "174";
 				$lUserGroupID = "235";
 			break;
@@ -55,11 +56,11 @@
 	   		case "4":
     		case "5": // This code is fairly secure
     			$lEnableJavaScriptValidation = true;
-				$lEnableBufferOverflowProtection = TRUE;
-				$lProtectAgainstMethodSwitching = TRUE;
-				$lCreateParameterAdditionVulnerability = FALSE;
-				$lLeakIVToBrowser = FALSE;
-				$lIgnoreUserInfluence = TRUE;
+				$lEnableBufferOverflowProtection = true;
+				$lProtectAgainstMethodSwitching = true;
+				$lCreateParameterAdditionVulnerability = false;
+				$lLeakIVToBrowser = false;
+				$lIgnoreUserInfluence = true;
     			$lUserID = "999";
 				$lUserGroupID = "999";
 			break;
@@ -126,13 +127,13 @@
 		$lUserIDValue = substr($lUnchainedPlaintext,4,3);
 		$lUserGroupIDValue = substr($lUnchainedPlaintext,7,3);
 
-		$lUserIsRoot = FALSE;
+		$lUserIsRoot = false;
 		if ($lUserIDValue == "000" && $lUserGroupIDValue == "000"){
-			$lUserIsRoot = TRUE;
+			$lUserIsRoot = true;
 		}// end if
 
 	} catch(Exception $e){
-		//$lSubmitButtonClicked = FALSE;
+		//$lSubmitButtonClicked = false;
 		echo "<div class=\"error-message\">".$lErrorMessage."</div>";
 		echo $CustomErrorHandler->FormatError($e, "Error attempting to repeat string.");
 	}// end try
