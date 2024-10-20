@@ -39,7 +39,7 @@ $lSOAPWebService->register(
 
 // Define the "testConnectivity" method
 function testConnectivity() {
-    return 'Connection successful';
+    return 'Connection successful...';
 }
 
 // Handle the SOAP request with error handling

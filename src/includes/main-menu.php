@@ -712,9 +712,10 @@
 					<a href="">SOAP</a>
 					<ul>
 						<li>
-							<a href="">Test Page</a>
+							<a href="">Test Pages</a>
 							<ul>
-								<li><a href="./webservices/soap/ws-hello-world.php">Hello World</a></li>
+								<li><a href="./webservices/soap/ws-test-connectivity.php">Test Connectivity</a></li>
+								<li><a href="./webservices/soap/ws-echo.php">Echo</a></li>
 							</ul>
 						</li>
 						<li>
