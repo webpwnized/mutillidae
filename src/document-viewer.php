@@ -1,26 +1,29 @@
 
 <?php
-	/* Known Vulnerabilities: 
-		Cross Site Scripting, 
+	/* Known Vulnerabilities:
+		Cross Site Scripting,
 		HTML injection,
 		HTTP Parameter Pollution
 		Method Tampering
 		Application Log Injection
 	*/
+
+	$lHTMLControls = 'required="required"';
 		
 	switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure
    		case "0": // This code is insecure
-   			// DO NOTHING: This is insecure		
+   			// DO NOTHING: This is insecure
 			$lEncodeOutput = false;
-			$lProtectAgainstMethodSwitching = FALSE;
-			$lHTTPParameterPollutionDetected = FALSE;
+			$lProtectAgainstMethodSwitching = false;
+			$lHTTPParameterPollutionDetected = false;
 			$lEnableHTMLControls = false;
 		break;
 		case "1": // This code is insecure
-   			// DO NOTHING: This is insecure		
+   			// DO NOTHING: This is insecure
 			$lEncodeOutput = false;
-			$lProtectAgainstMethodSwitching = FALSE;
-			$lHTTPParameterPollutionDetected = FALSE;
+			$lProtectAgainstMethodSwitching = false;
+			$lHTTPParameterPollutionDetected = false;
 			$lEnableHTMLControls = true;
 		break;
 	    		
@@ -43,7 +46,7 @@
    			// encode the output following OWASP standards
    			// this will be HTML encoding because we are outputting data into HTML
 			$lEncodeOutput = true;
-			$lProtectAgainstMethodSwitching = TRUE;
+			$lProtectAgainstMethodSwitching = true;
 			$lEnableHTMLControls = true;
 				
 			// Detect multiple params with same name (HTTP Parameter Pollution)
@@ -100,9 +103,9 @@
 
 <fieldset style="text-align: center;">
 	<legend>Document Viewer</legend>
-	<form 	action="index.php" 
+	<form 	action="index.php"
 			method="GET"
-			enctype="application/x-www-form-urlencoded" 
+			enctype="application/x-www-form-urlencoded"
 			id="idDocumentForm">
 		<input type="hidden" name="page" value="document-viewer.php" />
 		<table>
@@ -122,35 +125,19 @@
 							value="documentation/change-log.txt"
 							checked="checked"
 							autofocus="autofocus"
-							<?php
-								if ($lEnableHTMLControls) {
-									echo('required="required"');
-								}// end if
-							?>					
+							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>&nbsp;&nbsp;Change Log<br />
 					<input	name="PathToDocument" id="id_path_to_document" type="radio" 
 							value="robots.txt"
-							<?php
-								if ($lEnableHTMLControls) {
-									echo('required="required"');
-								}// end if
-							?>
+							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>&nbsp;&nbsp;Robots.txt<br />
 					<input	name="PathToDocument" id="id_path_to_document" type="radio"
 							value="documentation/mutillidae-installation-on-xampp-win7.pdf" 
-							<?php
-								if ($lEnableHTMLControls) {
-									echo('required="required"');
-								}// end if
-							?>
+							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>&nbsp;&nbsp;Installation Instructions: Windows 7 (PDF)<br />
 					<input	name="PathToDocument" id="id_path_to_document" type="radio"
 							value="documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php" 
-							<?php
-								if ($lEnableHTMLControls) {
-									echo('required="required"');
-								}// end if
-							?>
+							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>&nbsp;&nbsp;How to access Mutillidae over Virtual-Box-network<br />
 				</td>
 			</tr>

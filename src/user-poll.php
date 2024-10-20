@@ -48,7 +48,7 @@
    			$lEnableHTMLControls = false;
    			$lEncodeOutput = false;
    			$lProtectAgainstMethodTampering = false;
-   			$lHTTPParameterPollutionDetected = FALSE;
+   			$lHTTPParameterPollutionDetected = false;
    			$lLoggedInUser = $logged_in_user;
    		break;
    			   			
@@ -57,7 +57,7 @@
 			$lEnableHTMLControls = true;
    			$lEncodeOutput = false;
 			$lProtectAgainstMethodTampering = false;
-			$lHTTPParameterPollutionDetected = FALSE;
+			$lHTTPParameterPollutionDetected = false;
 			$lLoggedInUser = $logged_in_user;
 		break;
 	    		

@@ -132,14 +132,14 @@
     		case "0": // This code is insecure.
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-				$lProtectAgainstMethodSwitching = FALSE;
+				$lProtectAgainstMethodSwitching = false;
 				$lEncodeOutput = false;
     		break;
 
     		case "1": // This code is insecure.
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-				$lProtectAgainstMethodSwitching = FALSE;
+				$lProtectAgainstMethodSwitching = false;
 				$lEncodeOutput = false;
     		break;
 
@@ -149,7 +149,7 @@
     		case "5": // This code is fairly secure
     			$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-				$lProtectAgainstMethodSwitching = TRUE;
+				$lProtectAgainstMethodSwitching = true;
 				$lEncodeOutput = true;
     		break;
     	}// end switch

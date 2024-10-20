@@ -21,7 +21,7 @@
 	/* ------------------------------------------
 	 * initialize custom error handler
 	 * ------------------------------------------ */
-    require_once (__SITE_ROOT__.'/classes/CustomErrorHandler.php');
+    require_once __SITE_ROOT__.'/classes/CustomErrorHandler.php';
 	if (!isset($CustomErrorHandler)){
 		$CustomErrorHandler =
 		new CustomErrorHandler($lSecurityLevel);
@@ -36,6 +36,6 @@
 	/* ------------------------------------------
  	* initialize SQL Query Handler
  	* ------------------------------------------ */
-	require_once (__SITE_ROOT__.'/classes/SQLQueryHandler.php');
+	require_once __SITE_ROOT__.'/classes/SQLQueryHandler.php';
 	$SQLQueryHandler = new SQLQueryHandler($lSecurityLevel);
 ?>

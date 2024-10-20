@@ -4,7 +4,7 @@
 		/* ------------------------------------------
 		 * Constants used in application
 		* ------------------------------------------ */
-		require_once ('./includes/constants.php');
+		require_once './includes/constants.php';
 
 		if (session_status() == PHP_SESSION_NONE){
 		    session_start();
@@ -17,7 +17,7 @@
 		/* ------------------------------------------
 		 * initialize custom error handler
 		* ------------------------------------------ */
-		require_once (__SITE_ROOT__.'/classes/CustomErrorHandler.php');
+		require_once __SITE_ROOT__.'/classes/CustomErrorHandler.php';
 		if (!isset($CustomErrorHandler)){
 			$CustomErrorHandler =
 			new CustomErrorHandler($_SESSION["security-level"]);
@@ -26,13 +26,13 @@
 		/* ------------------------------------------
 		 * initialize SQL Query Handler
 		* ------------------------------------------ */
-		require_once (__SITE_ROOT__.'/classes/SQLQueryHandler.php');
+		require_once __SITE_ROOT__.'/classes/SQLQueryHandler.php';
 		$SQLQueryHandler = new SQLQueryHandler($_SESSION["security-level"]);
 
 		/* ------------------------------------------
 		 * initialize You Tube Video Handler Handler
 		* ------------------------------------------ */
-		require_once (__SITE_ROOT__.'/classes/YouTubeVideoHandler.php');
+		require_once __SITE_ROOT__.'/classes/YouTubeVideoHandler.php';
 		$YouTubeVideoHandler = new YouTubeVideoHandler($_SESSION["security-level"]);
 
 		if (isset($_REQUEST["level1HintIncludeFile"])) {
