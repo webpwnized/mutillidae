@@ -113,6 +113,8 @@
                     id="idMessageInput"
                     name="message"
                     size="20"
+                    value="Hello World!"
+                    onclick="this.select();"
                     autofocus="autofocus"
                     <?php if ($lEnableHTMLControls) { echo 'minlength="1" maxlength="20" required="required"'; } ?>
                 />
