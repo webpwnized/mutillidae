@@ -1,9 +1,10 @@
 <?php 
 	try{
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
-	   			// DO NOTHING: This is insecure		
+	   			// DO NOTHING: This is insecure
 				$lEncodeOutput = false;
 			break;
 		    		
@@ -32,7 +33,7 @@
 	   			// this will be HTML encoding because we are outputting data into HTML
 				$lEncodeOutput = true;
 	   		break;
-	   	}// end switch		
+	   	}// end switch
 	
 		if ($lEncodeOutput){
 			$lPage = $Encoder->encodeForHTML($_GET['page']);
@@ -50,7 +51,7 @@
 <?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
-<table style="margin-left:auto; margin-right:auto;width:600px;">
+<table>
 	<tr>
 		<td class="form-header">Remote and Local File Inclusion</td>
 	</tr>
