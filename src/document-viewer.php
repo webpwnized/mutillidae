@@ -80,7 +80,7 @@
 	   		$lDocumentToBeFramed = $_GET["PathToDocument"];
 	   	}//end if 
    	}else{
-   		$lDocumentToBeFramed="documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php";
+   		$lDocumentToBeFramed="documentation/usage-instructions.php";
    	}//end if
 
 	// Encode output to protect against cross site scripting 
