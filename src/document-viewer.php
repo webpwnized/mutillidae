@@ -30,7 +30,7 @@
 		case "3":
 		case "4":
 		case "5": // This code is fairly secure
-  			/* 
+  			/*
   			 * NOTE: Input validation is excellent but not enough. The output must be
   			 * encoded per context. For example, if output is placed in HTML,
   			 * then HTML encode it. Blacklisting is a losing proposition. You 
@@ -77,9 +77,9 @@
 	   		$lDocumentToBeFramed = $_REQUEST["PathToDocument"];
 	   	}else{
 	   		$lDocumentToBeFramed = $_GET["PathToDocument"];
-	   	}//end if 
+	   	}//end if
    	}else{
-   		$lDocumentToBeFramed="documentation/usage-instructions.php";
+   		$lDocumentToBeFramed="documentation/robots.php";
    	}//end if
 
 	// Encode output to protect against cross site scripting
@@ -90,7 +90,7 @@
 	// if parameter pollution is not detected, print user choice
    	if (!$lHTTPParameterPollutionDetected){
 		$lDocumentToBeFramedMessage = "Currently viewing document &quot;{$lDocumentToBeFramed}&quot;";
-   	}// end if isSet($_POST["document-viewer-php-submit-button"])
+   	}// end if
 	   	   	
 	$LogHandler->writeToLog("User chose to view document: " . $lDocumentToBeFramed);
 ?>
@@ -120,28 +120,16 @@
 			<tr><td></td></tr>
 			<tr>
 				<td style="text-align:left;">
-					<input 	name="PathToDocument" id="id_path_to_document" type="radio"
-							value="documentation/usage-instructions.php"
-							checked="checked"
-							autofocus="autofocus"
-							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
-					/>&nbsp;&nbsp;Usage Instructions<br />
 					<input	name="PathToDocument" id="id_path_to_document" type="radio" 
 							value="robots.txt"
+							checked="checked"
+							autofocus="autofocus"
 							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>&nbsp;&nbsp;Robots.txt<br />
 					<input	name="PathToDocument" id="id_path_to_document" type="radio"
 							value="documentation/mutillidae-installation-on-xampp-win7.pdf" 
 							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
-					/>&nbsp;&nbsp;Installation Instructions: Windows 7 (PDF)<br />
-					<input	name="PathToDocument" id="id_path_to_document" type="radio"
-							value="documentation/installation.php"
-							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
-					/>&nbsp;&nbsp;Installation Instructions<br />
-					<input	name="PathToDocument" id="id_path_to_document" type="radio"
-							value="documentation/vulnerabilities.php"
-							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
-					/>&nbsp;&nbsp;Vulnerabilities<br />
+					/>&nbsp;&nbsp;Installation Instructions: Windows (PDF)<br />
 				</td>
 			</tr>
 			<tr><td></td></tr>
