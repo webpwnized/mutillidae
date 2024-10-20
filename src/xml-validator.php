@@ -19,26 +19,27 @@
 	    }//end if
 	}// end function HandleXmlError
 
-	try {	    	
+	try {
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
     		case "0": // This code is insecure
 				$lEnableHTMLControls = false;
     			//$lFormMethod = "GET";
 				$lEnableJavaScriptValidation = false;
-				$lEnableXMLValidation = FALSE;
-				$lEnableXMLEncoding = FALSE;
+				$lEnableXMLValidation = false;
+				$lEnableXMLEncoding = false;
 				$lProtectAgainstMethodTampering = false;
-				libxml_disable_entity_loader(FALSE);
+				libxml_disable_entity_loader(false);
 			break;
     		
     		case "1": // This code is insecure
 				$lEnableHTMLControls = true;
     			//$lFormMethod = "GET";
 				$lEnableJavaScriptValidation = true;
-				$lEnableXMLValidation = FALSE;
-				$lEnableXMLEncoding = FALSE;
+				$lEnableXMLValidation = false;
+				$lEnableXMLEncoding = false;
 				$lProtectAgainstMethodTampering = false;
-				libxml_disable_entity_loader(FALSE);
+				libxml_disable_entity_loader(false);
 			break;
 	    		
 			case "2":
@@ -48,10 +49,10 @@
 				$lEnableHTMLControls = true;
     			//$lFormMethod = "POST";
 				$lEnableJavaScriptValidation = true;
-				$lEnableXMLValidation = TRUE;
-				$lEnableXMLEncoding = TRUE;
+				$lEnableXMLValidation = true;
+				$lEnableXMLEncoding = true;
 				$lProtectAgainstMethodTampering = true;
-				libxml_disable_entity_loader(TRUE);
+				libxml_disable_entity_loader(true);
 			break;
     	}//end switch
 
@@ -95,17 +96,17 @@
 <script type="text/javascript">
 	<?php 
 	if($lEnableJavaScriptValidation){
-		echo "var lValidateInput = \"TRUE\"" . PHP_EOL;
+		echo "var lValidateInput = \"true\"" . PHP_EOL;
 	}else{
-		echo "var lValidateInput = \"FALSE\"" . PHP_EOL;
-	}// end if		
+		echo "var lValidateInput = \"false\"" . PHP_EOL;
+	}// end if
 	?>
 			
 	function onSubmitOfForm(/*HTMLFormElement*/ theForm){
 		try{
 			var lUnsafePhrases = /ENTITY/i;
 
-			if(lValidateInput == "TRUE"){
+			if(lValidateInput == "true"){
 				if (theForm.xml.value.length === 0){
 						alert('Please enter a value.');
 						return false;
@@ -164,13 +165,13 @@
 				<input name="xml-validator-php-submit-button" class="button" type="submit" value="Validate XML" />
 			</td>
 		</tr>
-	</table>	
+	</table>
 </form>
 
 <?php
 	if (isset($lXMLValidatorSubmitButton) && !empty($lXMLValidatorSubmitButton) && strlen($lXML) > 0){
 
-		try{		
+		try{
 			if(!($lEnableXMLValidation && (preg_match(XML_EXTERNAL_ENTITY_REGEX_PATTERNS, $lXML) || !preg_match(VALID_XML_CHARACTERS, $lXML)))){
 
 				echo "<fieldset>";
@@ -211,5 +212,5 @@
 			echo $CustomErrorHandler->FormatError($e, $lQueryString);
        	}// end try;
     	
-	}// end if (isset($_POST)) 
+	}// end if (isset($_POST))
 ?>

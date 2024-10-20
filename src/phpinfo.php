@@ -1,7 +1,7 @@
 <div class="page-title">Secret PHP Server Configuration Page</div>
 
 <?php
-	$lShowPHPInfo = FALSE;
+	$lShowPHPInfo = false;
 
 	if(isset($_SESSION["security-level"])){
 	    $lSecurityLevel = $_SESSION["security-level"];
@@ -10,9 +10,10 @@
 	}
 
 	switch ($lSecurityLevel){
+		default: // Default case: This code is insecure
    		case "0": // This code is insecure
    		case "1": // This code is insecure
-			$lShowPHPInfo = TRUE;
+			$lShowPHPInfo = true;
    		break;
    		case "2":
    		case "3":

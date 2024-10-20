@@ -6,7 +6,7 @@
     			$lUseJavaScriptValidation = FALSE;
     			$lUseServerSideValidation = FALSE;
    				$lEncodeOutput = false;
-				$lProtectAgainstMethodTampering = false;	
+				$lProtectAgainstMethodTampering = false;
 			break;
 
     		case "1": // This code is insecure.
@@ -14,7 +14,7 @@
     			$lUseJavaScriptValidation = TRUE;
     			$lUseServerSideValidation = FALSE;
 				$lEncodeOutput = false;
-				$lProtectAgainstMethodTampering = false;    		
+				$lProtectAgainstMethodTampering = false; 
 			break;
 
 	   		case "2":
@@ -116,8 +116,8 @@
 			}// end if user didnt click submit
 		} catch (Exception $e) {
 			echo $CustomErrorHandler->FormatError($e, "Pen test tool lookup failed");
-		}// end try	
-	}//end if isset()	
+		}// end try
+	}//end if isset()
 ?>
 
 <div class="page-title">Pen Test Tool Lookup</div>
@@ -195,7 +195,7 @@
 		try{
 			if(gDisplayError == "TRUE"){
 				document.getElementById("id-invalid-input-tr").style.display="";
-			}// end if		
+			}// end if
 		}catch(/*Exception*/ e){
 			alert("Error trying to display error: " + e.message);
 		}// end try
@@ -219,7 +219,7 @@
 					for (var i=0; i<laTools.length; i++){
 						addRow(laTools[i]);
 					}//end for i
-				}// end if				
+				}// end if
 			}// end if gPenTestToolsJSONString.length > 0
 		}catch(/*Exception*/ e){
 			alert("Error trying to parse JSON: " + e.message);

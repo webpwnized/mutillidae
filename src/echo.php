@@ -6,7 +6,8 @@
 
 	try {
     	switch ($_SESSION["security-level"]){
-    		case "0": // This code is insecure. No input validation is performed.
+			default: // Default case: This code is insecure
+    		case "0": // This code is insecure
 				$lEnableJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
 				$lProtectAgainstMethodTampering = false;
@@ -14,7 +15,7 @@
 				$lProtectAgainstXSS = false;
     		break;
 
-    		case "1": // This code is insecure. No input validation is performed.
+    		case "1": // This code is insecure
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
 				$lProtectAgainstMethodTampering = false;
@@ -89,12 +90,12 @@
 </script>
 
 <a href="index.php?page=content-security-policy.php">
-    <img src="images/shield-icon-75-75.png" />
+	<img src="images/shield-icon-75-75.png" alt="Shield Icon" />
     <span class="label">Switch to Content Security Policy (CSP)</span>
 </a>
 <span class="buffer"></span>
 <a href="index.php?page=cors.php">
-    <img src="images/cors-icon-75-75.png" />
+	<img src="images/cors-icon-75-75.png" alt="CORS Icon" />
     <span class="label">Switch to Cross-Origin Resouce Sharing</span>
 </a>
 
@@ -117,7 +118,7 @@
 
 						<?php
 							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="20" required="required"');
+								echo 'minlength="1" maxlength="20" required="required"';
 							}// end if
 						?>
 				/>

@@ -1,9 +1,10 @@
 <?php
-	require_once (__SITE_ROOT__.'/classes/XMLHandler.php');
+	require_once __SITE_ROOT__.'/classes/XMLHandler.php';
 
 	try{
 
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
     		case "0": // This code is insecure
 				$lEnableHTMLControls = false;
     			$lFormMethod = "GET";
@@ -31,7 +32,7 @@
 				$lEnableJavaScriptValidation = true;
 				$lProtectAgainstMethodTampering = true;
 				$lEncodeOutput = true;
-				$lProtectAgainstXPathInjection = TRUE;
+				$lProtectAgainstXPathInjection = true;
 			break;
     	}//end switch
 

@@ -2,6 +2,7 @@
 
 	try{
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 			case "0": // This code is insecure
 			case "1": // This code is insecure
 				$lProtectAgainstMethodTampering = false;
@@ -17,9 +18,9 @@
 				break;
 		};//end switch
 	
-		$lParameterSubmitted = FALSE;
+		$lParameterSubmitted = false;
 		if (isset($_GET["page-to-frame"]) || isset($_POST["page-to-frame"]) || isset($_REQUEST["page-to-frame"])) {
-			$lParameterSubmitted = TRUE;
+			$lParameterSubmitted = true;
 		}// end if
 	
 		$lPageToFrame = "styling.php?page-title=Styling+with+Mutillidae";

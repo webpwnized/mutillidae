@@ -1,6 +1,7 @@
 <?php
-	try {	    	
+	try {
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
 	   			/* This code is insecure. Direct object references in the form of the "forwardurl"

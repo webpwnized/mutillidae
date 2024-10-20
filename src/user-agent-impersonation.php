@@ -1,9 +1,10 @@
 <?php 
 	try{
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 	   		case "0": // This code is insecure
 	   		case "1": // This code is insecure
-	   			// DO NOTHING: This is insecure		
+	   			// DO NOTHING: This is insecure	
 				$lEncodeOutput = false;
 				$luseSafeJavaScript = "false";
 			break;
@@ -12,7 +13,7 @@
 			case "3":
 			case "4":
 	   		case "5": // This code is fairly secure
-	  			/* 
+	  			/*
 	  			 * NOTE: Input validation is excellent but not enough. The output must be
 	  			 * encoded per context. For example, if output is placed	 in HTML,
 	  			 * then HTML encode it. Blacklisting is a losing proposition. You 
