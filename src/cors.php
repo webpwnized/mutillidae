@@ -55,7 +55,7 @@
         var lURL = "http://cors.<?php echo $_SERVER['SERVER_NAME']; ?>/webservices/rest/ws-cors-echo.php";
         var lAsynchronously = true;
         var lMessage = encodeURIComponent(lText);
-        var lMethod = encodeURIComponent(theForm.idMethod.value);
+        var lMethod = document.querySelector('input[name="method"]:checked').value;
         var lSendACAOHeader = theForm.idACAO.checked ? "True" : "False";
         var lSendACAMHeader = theForm.idACAM.checked ? "True" : "False";
         var lSendACMAHeader = theForm.idACMA.checked ? "True" : "False";
