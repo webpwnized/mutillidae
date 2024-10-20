@@ -86,19 +86,19 @@
 
 					// Enhanced help content for GET request without parameters
 					echo "
-					<a href='//".$_SERVER['HTTP_HOST']."/index.php' style='cursor:pointer;text-decoration:none;font-weight:bold;'/>Back to Home Page</a>
+					<a href='//mutillidae.localhost/index.php' style='cursor:pointer;text-decoration:none;font-weight:bold;'/>Back to Home Page</a>
 					<br /><br /><br />
-	
+
 					<div>
 						<h2>Welcome to the User Account Web Service</h2>
 						<p>This service allows you to <strong>create, read, update, and delete</strong> user accounts using various HTTP methods.</p>
 						<p><strong>Note:</strong> This service is vulnerable to SQL injection at security level 0. Be cautious when testing or exploring its functionality.</p>
 					</div>
-	
+
 					<hr />
-	
+
 					<h3>Supported HTTP Methods</h3>
-	
+
 					<h4>1. GET (Retrieve Data)</h4>
 					<p>Use GET requests to retrieve information about one or more accounts.</p>
 					<p><strong>Optional Parameter:</strong> <code>username</code> (as a URL parameter)</p>
@@ -108,12 +108,12 @@
 					</ul>
 					<strong>Examples:</strong><br />
 					<ul>
-						<li>Retrieve a specific user: <a href='//".$_SERVER['HTTP_HOST']."/webservices/rest/ws-user-account.php?username=adrian'>/ws-user-account.php?username=adrian</a></li>
-						<li>Retrieve all users: <a href='//".$_SERVER['HTTP_HOST']."/webservices/rest/ws-user-account.php?username=*'>/ws-user-account.php?username=*</a></li>
+						<li>Retrieve a specific user: <a href='//mutillidae.localhost/webservices/rest/ws-user-account.php?username=adrian'>/ws-user-account.php?username=adrian</a></li>
+						<li>Retrieve all users: <a href='//mutillidae.localhost/webservices/rest/ws-user-account.php?username=*'>/ws-user-account.php?username=*</a></li>
 					</ul>
-	
+
 					<hr />
-	
+
 					<h4>2. POST (Create New Account)</h4>
 					<p>Use POST requests to create a new user account.</p>
 					<p><strong>Required Parameters (POST body):</strong></p>
@@ -126,28 +126,30 @@
 					<p><strong>Optional Parameter:</strong> <code>signature</code> (User's signature)</p>
 					<strong>Example:</strong><br />
 					<pre>
-	POST /webservices/rest/ws-user-account.php
-	Content-Type: application/x-www-form-urlencoded
-	
-	username=john&password=pass123&firstname=John&lastname=Doe&signature=JDoe
+					POST /webservices/rest/ws-user-account.php HTTP/1.1
+					Host: mutillidae.localhost
+					Content-Type: application/x-www-form-urlencoded
+
+					username=john&password=pass123&firstname=John&lastname=Doe&signature=JDoe
 					</pre>
-	
+
 					<hr />
-	
+
 					<h4>3. PUT (Create or Update Account)</h4>
 					<p>Use PUT requests to <strong>create or update</strong> an existing user account.</p>
 					<p><strong>Required Parameters (POST body):</strong> Same as POST</p>
 					<p>If the account exists, it will be updated. If not, a new account will be created.</p>
 					<strong>Example:</strong><br />
 					<pre>
-	PUT /webservices/rest/ws-user-account.php
-	Content-Type: application/x-www-form-urlencoded
-	
-	username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated
+					PUT /webservices/rest/ws-user-account.php HTTP/1.1
+					Host: mutillidae.localhost
+					Content-Type: application/x-www-form-urlencoded
+
+					username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated
 					</pre>
-	
+
 					<hr />
-	
+
 					<h4>4. DELETE (Remove Account)</h4>
 					<p>Use DELETE requests to delete an existing user account.</p>
 					<p><strong>Required Parameters (POST body):</strong></p>
@@ -157,19 +159,22 @@
 					</ul>
 					<strong>Example:</strong><br />
 					<pre>
-	DELETE /webservices/rest/ws-user-account.php
-	Content-Type: application/x-www-form-urlencoded
-	
-	username=john&password=newpass123
+					DELETE /webservices/rest/ws-user-account.php HTTP/1.1
+					Host: mutillidae.localhost
+					Content-Type: application/x-www-form-urlencoded
+
+					username=john&password=newpass123
 					</pre>
-	
+
 					<hr />
-	
+
 					<h4>Example Exploits (SQL Injection)</h4>
 					<p>This service is vulnerable to SQL injection at security level 0. Example:</p>
 					<pre>
-	GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),mysignature+from+accounts+--
+					GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),mysignature+from+accounts+-- HTTP/1.1
+					Host: mutillidae.localhost
 					</pre>
+
 					";
 				}// end if
 
