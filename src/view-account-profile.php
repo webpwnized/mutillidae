@@ -89,7 +89,7 @@
 						$lFirstName = $Encoder->encodeForHTML($row->firstname);  // Encoded first name
 						$lLastName = $Encoder->encodeForHTML($row->lastname);    // Encoded last name
 					} // if !$lEncodeOutput
-                   $lAPIKey = $row->api_token; // immutable data
+                   $lAPIKey = $row->api_key; // immutable data
 	        	} // if $lResultsFound
 	           
 	    } catch (Exception $e) {

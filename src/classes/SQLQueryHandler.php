@@ -38,7 +38,7 @@ class SQLQueryHandler {
 	   	}// end switch
 	}// end function
 
-	private function generateApiToken($length = 32 /* 32 bytes = 256 bits */){
+	private function generateAPIKey($length = 32 /* 32 bytes = 256 bits */){
 		// Generates a secure 32-byte token for use in API calls
 		// The token is generated using a cryptographically secure pseudorandom number generator
 		// The token is then converted to hexadecimal format
@@ -365,6 +365,26 @@ class SQLQueryHandler {
 		return $this->mMySQLHandler->executeQuery($lQueryString);
 	}//end public function getUserAccount
 
+	public function apiKeyExists($pAPIKey){
+		/*
+		* Note: While escaping works ok in some case, it is not the best defense.
+	   * Using stored procedures is a much stronger defense.
+	   */
+
+		if ($this->stopSQLInjection){
+			$pAPIKey = $this->mMySQLHandler->escapeDangerousCharacters($pAPIKey);
+		}// end if
+
+		$lQueryString =
+			"SELECT EXISTS (
+				SELECT 1
+				FROM accounts
+				WHERE api_key='".$pAPIKey."'".
+			") AS api_key_exists;";
+
+		return $this->mMySQLHandler->executeQuery($lQueryString);
+	}//end public function apiKeyExists
+
 	/* -----------------------------------------
 	 * Insert Queries
 	 * ----------------------------------------- */
@@ -381,15 +401,15 @@ class SQLQueryHandler {
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 
-		$lAPIToken = $this->generateApiToken();
+		$lAPIKey = $this->generateAPIKey();
 
-		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, api_token) VALUES ('" .
+		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, api_key) VALUES ('" .
 			$pUsername ."', '" .
 			$pPassword . "', '" .
 			$pFirstName . "', '" .
 			$pLastName . "', '" .
 			$pSignature . "', '" .
-			$lAPIToken .
+			$lAPIKey .
 			"')";
 
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
@@ -437,7 +457,7 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Update Queries
 	* ----------------------------------------- */
-	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateAPIToken){
+	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateAPIKey){
 		/*
 		 * Note: While escaping works ok in some cases, it is not the best defense.
 		 * Using stored procedures is a much stronger defense.
@@ -450,10 +470,10 @@ class SQLQueryHandler {
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 	
-		if ($pUpdateAPIToken){
-			$lAPIToken = $this->generateApiToken();
+		if ($pUpdateAPIKey){
+			$lAPIKey = $this->generateAPIKey();
 		} else {
-			$lAPIToken = "";
+			$lAPIKey = "";
 		}// end if
 		
 		$lQueryString =
@@ -466,9 +486,9 @@ class SQLQueryHandler {
 				mysignature = '".$pSignature."'
 			";
 		
-		if ($pUpdateAPIToken){
+		if ($pUpdateAPIKey){
 			$lQueryString .= "," .
-				"api_token = '".$lAPIToken."'";
+				"api_key = '".$lAPIKey."'";
 		}// end if
 	
 		$lQueryString .= "" .

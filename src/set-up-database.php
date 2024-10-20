@@ -138,7 +138,7 @@
     			 'is_admin VARCHAR(5),'.
     			 'firstname TEXT, '.
     			 'lastname TEXT, '.
-				 'api_token VARCHAR(64),' .
+				 'api_key VARCHAR(64),' .
     			 'PRIMARY KEY(cid))';
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
@@ -162,7 +162,7 @@
     		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
     	}// end if
 
-		$lQueryString = "INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, api_token) VALUES
+		$lQueryString = "INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, api_key) VALUES
 			('admin', 'adminpass', 'g0t r00t?', 'true' ,'System' ,'Administrator', '".bin2hex(random_bytes(32))."'),
 			('adrian', 'somepassword', 'Zombie Films Rock!', 'true' ,'Adrian' ,'Crenshaw', '".bin2hex(random_bytes(32))."'),
 			('john', 'monkey', 'I like the smell of confunk', 'false' ,'John' ,'Pentest', '".bin2hex(random_bytes(32))."'),
@@ -1280,7 +1280,7 @@
 		$lCounter = 1;
 		$cTAB = CHR(9);
 		
-		$lAccountsText = "CID,Username,Password,Signature,Type,FirstName,LastName,APIToken".PHP_EOL; // Add CSV header
+		$lAccountsText = "CID,Username,Password,Signature,Type,FirstName,LastName,APIKey".PHP_EOL; // Add CSV header
 		
 		while($row = $lQueryResult->fetch_object()){
 			$lAccountType = $row->is_admin == 'TRUE' ? "Admin" : "User";
@@ -1294,7 +1294,7 @@
 			$lAccountsXML .= $cTAB.$cTAB.'<Type>'.htmlspecialchars($lAccountType).'</Type>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.$cTAB.'<FirstName>'.htmlspecialchars($row->firstname).'</FirstName>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.$cTAB.'<LastName>'.htmlspecialchars($row->lastname).'</LastName>'.PHP_EOL;
-			$lAccountsXML .= $cTAB.$cTAB.'<APIToken>'.htmlspecialchars($row->api_token).'</APIToken>'.PHP_EOL;
+			$lAccountsXML .= $cTAB.$cTAB.'<APIKey>'.htmlspecialchars($row->api_key).'</APIKey>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.'</Account>'.PHP_EOL;
 		
 			// CSV Generation
@@ -1305,7 +1305,7 @@
 						   . $lAccountType.","
 						   . $row->firstname.","
 						   . $row->lastname.","
-						   . $row->api_token.PHP_EOL;
+						   . $row->api_key.PHP_EOL;
 		
 			$lCounter += 1;
 		}

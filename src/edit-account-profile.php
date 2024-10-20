@@ -180,7 +180,7 @@
 					$lSignature = $Encoder->encodeForHTML($row->mysignature);
 				}// end if
 				
-				$lAPIKey = $row->api_token; // immutable data
+				$lAPIKey = $row->api_key; // immutable data
 			} // if $lResultsFound
 	           
 	    } catch (Exception $e) {
