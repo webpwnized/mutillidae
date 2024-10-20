@@ -170,11 +170,9 @@
 	    	
 	   		$lResultsFound = false;
 	   		$lRecordsFound = 0;
-	   		if (isset($lQueryResult->num_rows)){
-				if ($lQueryResult->num_rows > 0) {
-					$lResultsFound = true;
-	   				$lRecordsFound = $lQueryResult->num_rows;
-				}//end if
+			if (isset($lQueryResult->num_rows) && $lQueryResult->num_rows > 0) {
+				$lResultsFound = true;
+				$lRecordsFound = $lQueryResult->num_rows;
 			}//end if
 
     		/* Print out table header */
@@ -203,12 +201,14 @@
 						$lSignature = $row->mysignature;
 						$lFirstName = $row->firstname;
 						$lLastName = $row->lastname;
+						$lAPIKey = $row->api_key;
 					} else {
 						$lUsername = $Encoder->encodeForHTML($row->username);
 						$lPassword = !$lProtectAgainstPasswordLeakage ? $Encoder->encodeForHTML($row->password) : '';
 						$lSignature = $Encoder->encodeForHTML($row->mysignature);
 						$lFirstName = $Encoder->encodeForHTML($row->firstname);
 						$lLastName = $Encoder->encodeForHTML($row->lastname);
+						$lAPIKey = $Encoder->encodeForHTML($row->api_key);
 					}
 					
 					echo "<span class=\"label\">First Name=</span><span>{$lFirstName}</span><br/>";
@@ -216,6 +216,7 @@
 					echo "<span class=\"label\">Username=</span><span>{$lUsername}</span><br/>";
 					echo "<span class=\"label\">Password=</span><span>{$lPassword}</span><br/>";
 					echo "<span class=\"label\">Signature=</span><span>{$lSignature}</span><br/><br/>";
+					echo "<span class=\"label\">API Key=</span><span>{$lAPIKey}</span><br/><br/>";
 				}// end while
 	
 			} else {
