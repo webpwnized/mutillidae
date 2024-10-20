@@ -121,12 +121,12 @@
 			<tr><td></td></tr>
 			<tr>
 				<td style="text-align:left;">
-					<input 	name="PathToDocument" id="id_path_to_document" type="radio" 
-							value="documentation/change-log.txt"
+					<input 	name="PathToDocument" id="id_path_to_document" type="radio"
+							value="documentation/usage-instructions.php"
 							checked="checked"
 							autofocus="autofocus"
 							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
-					/>&nbsp;&nbsp;Change Log<br />
+					/>&nbsp;&nbsp;Usage Instructions<br />
 					<input	name="PathToDocument" id="id_path_to_document" type="radio" 
 							value="robots.txt"
 							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
@@ -136,9 +136,13 @@
 							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
 					/>&nbsp;&nbsp;Installation Instructions: Windows 7 (PDF)<br />
 					<input	name="PathToDocument" id="id_path_to_document" type="radio"
-							value="documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php" 
+							value="documentation/installation.php"
 							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
-					/>&nbsp;&nbsp;How to access Mutillidae over Virtual-Box-network<br />
+					/>&nbsp;&nbsp;Installation Instructions<br />
+					<input	name="PathToDocument" id="id_path_to_document" type="radio"
+							value="documentation/vulnerabilities.php"
+							<?php if ($lEnableHTMLControls) {echo $lHTMLControls;} ?>
+					/>&nbsp;&nbsp;Vulnerabilities<br />
 				</td>
 			</tr>
 			<tr><td></td></tr>
