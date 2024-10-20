@@ -2,12 +2,12 @@
     try {
         switch ($_SESSION["security-level"]) {
             default:
-            case "0": 
+            case "0":
                 $lEnableJavaScriptValidation = false;
                 $lEnableHTMLControls = false;
                 break;
 
-            case "1": 
+            case "1":
                 $lEnableJavaScriptValidation = true;
                 $lEnableHTMLControls = true;
                 break;
@@ -15,13 +15,14 @@
             case "2":
             case "3":
             case "4":
-            case "5": 
+            case "5":
                 $lEnableHTMLControls = true;
                 $lEnableJavaScriptValidation = true;
                 break;
         }
     } catch (Exception $e) {
-        echo $CustomErrorHandler->FormatError($e, "Error setting up configuration on page cors.php");
+        $lErrorMessage = "Error setting up configuration on page cors.php";
+        echo $CustomErrorHandler->FormatError($e, $lErrorMessage);
     }
 ?>
 
@@ -99,55 +100,79 @@
         <tr>
             <td class="label">Message</td>
             <td>
-                <input 
-                    type="text" 
-                    id="idMessageInput" 
-                    name="message" 
+                <input
+                    type="text"
+                    id="idMessageInput"
+                    name="message"
                     size="20"
                     autofocus="autofocus"
-                    <?php if ($lEnableHTMLControls) echo 'minlength="1" maxlength="20" required="required"'; ?>
+                    <?php if ($lEnableHTMLControls) { echo 'minlength="1" maxlength="20" required="required"'; } ?>
                 />
             </td>
         </tr>
         <tr>
             <td class="label">HTTP Method</td>
             <td>
-                <input type="radio" id="idMethod" name="method" value="GET" checked /> GET<br>
-                <input type="radio" id="idMethod" name="method" value="POST" /> POST<br>
-                <input type="radio" id="idMethod" name="method" value="PUT" /> PUT<br>
-                <input type="radio" id="idMethod" name="method" value="PATCH" /> PATCH<br>
-                <input type="radio" id="idMethod" name="method" value="DELETE" /> DELETE<br>
+                <label>
+                    <input type="radio" id="idMethodGet" name="method" value="GET" checked />
+                    GET
+                </label><br>
+                <label>
+                    <input type="radio" id="idMethodPost" name="method" value="POST" />
+                    POST
+                </label><br>
+                <label>
+                    <input type="radio" id="idMethodPut" name="method" value="PUT" />
+                    PUT
+                </label><br>
+                <label>
+                    <input type="radio" id="idMethodPatch" name="method" value="PATCH" />
+                    PATCH
+                </label><br>
+                <label>
+                    <input type="radio" id="idMethodDelete" name="method" value="DELETE" />
+                    DELETE
+                </label><br>
             </td>
         </tr>
         <tr>
             <td class="label">Response Headers to Send</td>
             <td>
-                <input type="checkbox" id="idACAO" name="acao" checked /> Access-Control-Allow-Origin<br>
-                <input type="checkbox" id="idACAM" name="acam" checked /> Access-Control-Allow-Methods<br>
-                <input type="checkbox" id="idACMA" name="acma" checked /> Access-Control-Max-Age<br>
+                <label>
+                    <input type="checkbox" id="idACAO" name="acao" checked />
+                    Access-Control-Allow-Origin
+                </label><br>
+                <label>
+                    <input type="checkbox" id="idACAM" name="acam" checked />
+                    Access-Control-Allow-Methods
+                </label><br>
+                <label>
+                    <input type="checkbox" id="idACMA" name="acma" checked />
+                    Access-Control-Max-Age
+                </label><br>
             </td>
         </tr>
         <tr>
             <td class="label">Max-Age (in seconds)</td>
             <td>
-                <input 
-                    type="number" 
-                    id="idMaxAgeInput" 
-                    name="max-age" 
-                    min="0" 
-                    max="86400" 
-                    value="600" 
+                <input
+                    type="number"
+                    id="idMaxAgeInput"
+                    name="max-age"
+                    min="0"
+                    max="86400"
+                    value="600"
                 />
             </td>
         </tr>
         <tr>
             <td colspan="2" style="text-align:center;">
-                <input 
-                    onclick="onSubmitOfForm(this.form);" 
-                    name="echo-php-submit-button" 
-                    class="button" 
-                    type="button" 
-                    value="Echo Message" 
+                <input
+                    onclick="onSubmitOfForm(this.form);"
+                    name="echo-php-submit-button"
+                    class="button"
+                    type="button"
+                    value="Echo Message"
                 />
             </td>
         </tr>
