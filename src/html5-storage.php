@@ -181,18 +181,14 @@
 		<tbody id="idSessionStorageTableBody" style="font-weight:bold;"></tbody>
 		<tr><td colspan="3">&nbsp;</td></tr>
 		<tr>
-			<td>
+			<td class="label" colspan="3">
 				<input	type="text" id="idDOMStorageKeyInput" name="DOMStorageKey" size="20"
 						autofocus="autofocus"
 				<?php if ($lEnableHTMLControls) { echo $lHTMLControlInput; } ?>
 				/>
-			</td>
-			<td>
 				<input type="text" id="idDOMStorageItemInput" name="DOMStorageItem" size="20"
 				<?php if ($lEnableHTMLControls) { echo $lHTMLControlInput; } ?>
 				/>
-			</td>
-			<td class="label">
 				<input type="radio" name="SessionStorageType" value="Session" checked="checked" 
 				<?php if ($lEnableHTMLControls) { echo $lHTMLControlRadio; } ?>
 				/>Session
