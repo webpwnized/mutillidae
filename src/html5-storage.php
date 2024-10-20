@@ -153,7 +153,7 @@
 		enctype="application/x-www-form-urlencoded" 
 		onsubmit="return false;"
 		id="idForm">		
-	<table style="margin-left:auto; margin-right:auto; width: 600px;">
+	<table>
 		<tr id="id-invalid-input-tr" style="display: none;">
 			<td class="error-message">
 				Error: Invalid Input - Both Key and Item are required fields

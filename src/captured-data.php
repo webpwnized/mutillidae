@@ -70,7 +70,7 @@
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <!-- BEGIN HTML OUTPUT  -->
-<table style="margin-left:auto; margin-right:auto; width: 600px;">
+<table>
 	<tr>
 		<td class="form-header">Captured Data Page</td>
 	</tr>
