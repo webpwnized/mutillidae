@@ -55,18 +55,26 @@
         var lURL = "http://cors.<?php echo $_SERVER['SERVER_NAME']; ?>/webservices/rest/ws-cors-echo.php";
         var lAsynchronously = true;
         var lMessage = encodeURIComponent(lText);
-        var lMethod = document.querySelector('input[name="method"]:checked').value;
+
+        // Correct way to get the selected method
+        var lMethodElement = document.querySelector('input[name="method"]:checked');
+        if (!lMethodElement) {
+            alert("Please select an HTTP method.");
+            return false;
+        }
+        var lMethod = lMethodElement.value;
+
         var lSendACAOHeader = theForm.idACAO.checked ? "True" : "False";
         var lSendACAMHeader = theForm.idACAM.checked ? "True" : "False";
         var lSendACMAHeader = theForm.idACMA.checked ? "True" : "False";
         var lMaxAge = encodeURIComponent(theForm.idMaxAgeInput.value || 600); // Default to 600
 
-        var lQueryParameters = 
-            "message=" + lMessage + 
-            "&method=" + lMethod + 
-            "&acao=" + lSendACAOHeader + 
-            "&acam=" + lSendACAMHeader + 
-            "&acma=" + lSendACMAHeader + 
+        var lQueryParameters =
+            "message=" + lMessage +
+            "&method=" + lMethod +
+            "&acao=" + lSendACAOHeader +
+            "&acam=" + lSendACAMHeader +
+            "&acma=" + lSendACMAHeader +
             "&max-age=" + lMaxAge;
 
         lXMLHTTP.onreadystatechange = function() {
@@ -75,7 +83,7 @@
             }
         };
 
-        switch (theForm.idMethod.value) {
+        switch (lMethod) {
             case "GET":
                 lXMLHTTP.open(lMethod, lURL + "?" + lQueryParameters, lAsynchronously);
                 lXMLHTTP.send();
@@ -114,23 +122,23 @@
             <td class="label">HTTP Method</td>
             <td>
                 <label>
-                    <input type="radio" id="idMethodGet" name="method" value="GET" checked />
+                    <input type="radio" name="method" value="GET" checked />
                     GET
                 </label><br>
                 <label>
-                    <input type="radio" id="idMethodPost" name="method" value="POST" />
+                    <input type="radio" name="method" value="POST" />
                     POST
                 </label><br>
                 <label>
-                    <input type="radio" id="idMethodPut" name="method" value="PUT" />
+                    <input type="radio" name="method" value="PUT" />
                     PUT
                 </label><br>
                 <label>
-                    <input type="radio" id="idMethodPatch" name="method" value="PATCH" />
+                    <input type="radio" name="method" value="PATCH" />
                     PATCH
                 </label><br>
                 <label>
-                    <input type="radio" id="idMethodDelete" name="method" value="DELETE" />
+                    <input type="radio" name="method" value="DELETE" />
                     DELETE
                 </label><br>
             </td>
