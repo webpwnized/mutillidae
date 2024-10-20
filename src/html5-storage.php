@@ -131,6 +131,30 @@
 		}// end try
 	};// end JavaScript function
 
+	function clearStorage(storageType) {
+		switch (storageType) {
+			case 'session':
+				sessionStorage.clear();
+				break;
+			case 'local':
+				localStorage.clear();
+				break;
+			case 'all':
+				sessionStorage.clear();
+				localStorage.clear();
+				break;
+		}
+
+		// Clear the HTML table displaying storage items
+		const node = document.getElementById("idSessionStorageTableBody");
+		while (node.hasChildNodes()) {
+			node.removeChild(node.firstChild);
+		}
+
+		// Re-initialize to reflect the current state
+		init();
+	}
+
 	var init = function(){
 		var s = window.sessionStorage;
 		var l = window.localStorage;
@@ -153,7 +177,7 @@
 </script>
 
 <form 	action="index.php?page=html5-storage.php"
-		method="post" 
+		method="post"
 		enctype="application/x-www-form-urlencoded"
 		onsubmit="return false;"
 		id="idForm">
@@ -172,16 +196,22 @@
 	<tr>
 			<td colspan="3">
 				<div style="margin-left:auto; margin-right:auto;">
-					<span title="Click to delete session storage" onclick='sessionStorage.clear(); var node=window.document.getElementById("idSessionStorageTableBody"); while(node.hasChildNodes()){node.removeChild(node.firstChild)}; init();' style="cursor: pointer;" >
+					<span title="Click to delete session storage" 
+						onclick="clearStorage('session')" 
+						style="cursor: pointer;">
 						<img height="24px" width="24px" src="./images/delete-icon-48-48.png" style="vertical-align: middle;" />
 						<span style="font-weight: bold;">Session Storage</span>
 					</span>
-					<span title="Click to delete locate storage" onclick='localStorage.clear(); var node=window.document.getElementById("idSessionStorageTableBody"); while(node.hasChildNodes()){node.removeChild(node.firstChild)}; init();' style="cursor: pointer;" >
-						<img height="24px" width="24px" src="./images/delete-icon-48-48.png" style="vertical-align: middle;margin-left: 20px;" />
+					<span title="Click to delete local storage" 
+						onclick="clearStorage('local')" 
+						style="cursor: pointer; margin-left: 20px;">
+						<img height="24px" width="24px" src="./images/delete-icon-48-48.png" style="vertical-align: middle;" />
 						<span style="font-weight: bold;">Local Storage</span>
 					</span>
-					<span title="Click to delete all html 5 storage" onclick='sessionStorage.clear();localStorage.clear(); var node=window.document.getElementById("idSessionStorageTableBody"); while(node.hasChildNodes()){node.removeChild(node.firstChild)}; init();' style="cursor: pointer;" >
-						<img height="24px" width="24px" src="./images/delete-icon-48-48.png" style="vertical-align: middle;margin-left: 20px;" />
+					<span title="Click to delete all HTML 5 storage" 
+						onclick="clearStorage('all')" 
+						style="cursor: pointer; margin-left: 20px;">
+						<img height="24px" width="24px" src="./images/delete-icon-48-48.png" style="vertical-align: middle;" />
 						<span style="font-weight: bold;">All Storage</span>
 					</span>
 				</div>
