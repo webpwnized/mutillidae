@@ -175,7 +175,7 @@
 					target="_blank"
 					title="Whitepaper: Introduction to OWASP Mutillidae II Web Pen Test Training Environment"
 				>
-					<img align="middle" alt="Webpwnized Twitter Channel" src="./images/pdf-icon-48-48.png" />
+					<img alt="Webpwnized Twitter Channel" src="./images/pdf-icon-48-48.png" />
 					<br/>
 					Getting Started
 				</a>

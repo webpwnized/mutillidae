@@ -81,7 +81,7 @@
 								<li><a href="index.php?page=echo.php">Echo Message</a></li>
 								<li><a href="index.php?page=cors.php">Echo Message (CORS)</a></li>
 								<li><a href="index.php?page=content-security-policy.php">Echo Message (CSP)</a></li>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+								<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 								<li><a href="index.php?page=capture-data.php">Capture Data Page</a></li>
 								<li><a href="index.php?page=login.php">Login</a></li>
 								<li><a href="index.php?page=register.php">Register User</a></li>
@@ -119,7 +119,7 @@
 						<li>
 							<a href="">Frame Source Injection</a>
 							<ul>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+							<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 								<li><a href="index.php?page=styling-frame.php&page-to-frame=styling.php%3Fpage-title%3DStyling+with+Mutillidae">Styling with Mutilidae</a></li>
 							</ul>
 						</li>
@@ -141,7 +141,7 @@
 								<li><a href="index.php?page=html5-storage.php">HTML5 Web Storage</a></li>
 								<li><a href="index.php?page=capture-data.php">Capture Data Page</a></li>
 								<li><a href="index.php?page=captured-data.php">View Captured Data</a></li>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+								<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 								<li><a href="index.php?page=arbitrary-file-inclusion.php">Arbitrary File Inclusion</a></li>
 								<li><a href="index.php?page=user-poll.php">Poll Question</a></li>
 								<li><a href="index.php?page=register.php">Register User</a></li>
@@ -177,7 +177,7 @@
 							<a href="">HTTP Parameter Pollution</a>
 							<ul>
 								<li><a href="index.php?page=user-poll.php">Poll Question</a></li>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+								<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 							</ul>
 						</li>
 						<li>
@@ -440,7 +440,7 @@
 								<li><a href="index.php?page=set-background-color.php">Set Background Color</a></li>
 								<li><a href="index.php?page=html5-storage.php">HTML5 Web Storage</a></li>
 								<li><a href="index.php?page=capture-data.php">Capture Data Page</a></li>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+								<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 								<li><a href="index.php?page=arbitrary-file-inclusion.php">Arbitrary File Inclusion</a></li>
 								<li><a href="index.php?page=xml-validator.php">XML Validator</a></li>
 								<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
@@ -495,7 +495,7 @@
 								<li><a href="index.php">Missing HTTPOnly Attribute</a></li>
 								<li><a href="index.php?page=set-background-color.php">Set Background Color</a></li>
 								<li><a href="index.php?page=pen-test-tool-lookup.php">Pen Test Tool Lookup</a></li>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+								<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 							</ul>
 						</li>
 						<li>
@@ -510,7 +510,7 @@
 						<li>
 							<a href="">Via HTTP Attribute</a>
 							<ul>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+								<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 							</ul>
 						</li>
 						<li>
@@ -572,7 +572,7 @@
 								<li><a href="index.php?page=set-background-color.php">Set Background Color</a></li>
 								<li><a href="index.php?page=html5-storage.php">HTML5 Web Storage</a></li>
 								<li><a href="index.php?page=capture-data.php">Capture Data Page</a></li>
-								<li><a href="index.php?page=document-viewer.php&PathToDocument=documentation/how-to-access-Mutillidae-over-Virtual-Box-network.php">Document Viewer</a></li>
+								<li><a href="index.php?page=document-viewer.php&PathToDocument=robots.txt">Document Viewer</a></li>
 								<li><a href="index.php?page=arbitrary-file-inclusion.php">Arbitrary File Inclusion</a></li>
 								<li><a href="index.php?page=xml-validator.php">XML Validator</a></li>
 								<li><a href="index.php?page=user-info-xpath.php">User Info (XPath)</a></li>
