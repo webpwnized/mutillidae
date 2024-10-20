@@ -1,4 +1,3 @@
-
 <?php
 	/* Known Vulnerabilities:
 		Cross Site Scripting,
@@ -83,17 +82,17 @@
    		$lDocumentToBeFramed="documentation/usage-instructions.php";
    	}//end if
 
-	// Encode output to protect against cross site scripting 
+	// Encode output to protect against cross site scripting
 	if ($lEncodeOutput){
 		$lDocumentToBeFramed = $Encoder->encodeForHTML($lDocumentToBeFramed);
 	}// end if
 		   	
-	// if parameter pollution is not detected, print user choice 
+	// if parameter pollution is not detected, print user choice
    	if (!$lHTTPParameterPollutionDetected){
 		$lDocumentToBeFramedMessage = "Currently viewing document &quot;{$lDocumentToBeFramed}&quot;";
    	}// end if isSet($_POST["document-viewer-php-submit-button"])
 	   	   	
-	$LogHandler->writeToLog("User chose to view document: " . $lDocumentToBeFramed);   	
+	$LogHandler->writeToLog("User chose to view document: " . $lDocumentToBeFramed);
 ?>
 
 <div class="page-title">Document Viewer</div>
@@ -171,6 +170,6 @@
 
 <?php
 	if ($lHTTPParameterPollutionDetected) {
-		echo '<script>document.getElementById("id-bad-path-to-document-tr").style.display="";</script>'; 
+		echo '<script>document.getElementById("id-bad-path-to-document-tr").style.display="";</script>';
 	}// end if ($lHTTPParameterPollutionDetected)
 ?>
