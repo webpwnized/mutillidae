@@ -89,8 +89,11 @@
 /* Output results of shell command sent to operating system */
 if ($lFormSubmitted){
 	    try{
+			$lCurrentOrigin = $_SERVER['HTTP_HOST'];
 	        echo '<div class="report-header">Results for '.$lServerURLText.'</div>';
-            echo '<pre class="output">'.shell_exec("curl --silent " . $lServerURL).'</pre>';
+            echo '<pre class="output">' .
+				 shell_exec("curl --silent -H 'Origin: http://$lCurrentOrigin' " . $lServerURL) .
+				 '</pre>';
 	        $LogHandler->writeToLog("Executed PHP command: curl --silent " . $lServerURLText);
     	}catch(Exception $e){
 			echo $CustomErrorHandler->FormatError($e, "Input: " . $lServerURLText);
