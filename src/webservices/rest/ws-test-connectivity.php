@@ -1,36 +1,10 @@
 <?php
 // Get the origin of the request
-$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : null;
+$lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 
-// Set the allowed origins (your trusted domains)
-$allowedOrigins = [
-    'http://localhost',
-    'http://mutillidae.localhost',
-    'http://www.mutillidae.localhost',
-    'http://mutillidae',
-    'http://dragonfly.localhost',
-    'http://www.dragonfly.localhost',
-    'http://127.0.0.1',
-    'http://cors.mutillidae.localhost',
-    'http://webservice.mutillidae.localhost',
-    'http://api.mutillidae.localhost'
-];
-
-// Check if the request origin is allowed
-if ($origin && in_array($origin, $allowedOrigins)) {
-    header("Access-Control-Allow-Origin: $origin"); // Reflect allowed origin
-    header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
-    header('Access-Control-Allow-Headers: Content-Type'); // Allowed headers
-} else {
-    // If origin is not allowed, return 403 Forbidden
-    http_response_code(403); // Forbidden
-    echo json_encode([
-        "error" => "Forbidden: The origin $origin is not allowed to access this resource."
-    ]);
-    exit();
-}
-
-// Set the content type to JSON
+header("Access-Control-Allow-Origin: $lOrigin"); // Reflect allowed origin
+header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
+header('Access-Control-Allow-Headers: Content-Type'); // Allowed headers
 header('Content-Type: application/json');
 
 // Handle preflight requests (OPTIONS)
