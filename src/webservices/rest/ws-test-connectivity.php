@@ -5,6 +5,7 @@ $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 header("Access-Control-Allow-Origin: $lOrigin"); // Reflect allowed origin
 header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
 header('Access-Control-Allow-Headers: Content-Type'); // Allowed headers
+header("Access-Control-Max-Age: 600"); // 10 minutes cache
 header('Content-Type: application/json');
 
 // Handle preflight requests (OPTIONS)
