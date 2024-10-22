@@ -31,11 +31,12 @@ Accept: application/json
 // Get the origin of the request
 $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 
+header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
 header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
 header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
 header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
-header('Content-Type: application/json');
 header('Access-Control-Allow-Credentials: true'); // Allow credentials (if required)
+header('Content-Type: application/json');
 
 // Handle preflight requests (OPTIONS)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
