@@ -219,8 +219,8 @@ Host: mutillidae.localhost
 				/* $_POST array is not auto-populated for DELETE method. Parse input into an array. */
 				populatePOSTSuperGlobal();
 
-				$lAccountUsername = getPOSTParameter("username", TRUE);
-				$lAccountPassword = getPOSTParameter("password", TRUE);
+				$lAccountUsername = getPOSTParameter("username", true);
+				$lAccountPassword = getPOSTParameter("password", true);
 
 				if($SQLQueryHandler->accountExists($lAccountUsername)){
 
