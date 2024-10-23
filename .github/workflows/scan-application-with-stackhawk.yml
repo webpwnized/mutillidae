@@ -40,14 +40,14 @@ jobs:
           fetch-depth: 0  # Pulls the entire Git history, ensuring .git is present
           path: mutillidae  # Check out the code to this directory
 
-      # Step 1: Check out the mutillidae-docker repository codebase into the `mutillidae-docker` directory.
+      # Step 2: Check out the mutillidae-docker repository codebase into the `mutillidae-docker` directory.
       - name: Check out the mutillidae-docker codebase
         uses: actions/checkout@main
         with:
           repository: webpwnized/mutillidae-docker
           path: mutillidae-docker  # Check out the code to this directory
 
-      # Step 2: Install LDAP Utilities
+      # Step 3: Install LDAP Utilities
       - name: Install LDAP Utilities
         run: |
 
@@ -55,7 +55,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ldap-utils
 
-      # Step 3: Build and Start Containers 
+      # Step 4: Build and Start Containers 
       - name: Build and Start Containers
         working-directory: mutillidae-docker  # Set working directory to mutillidae-docker
         run: |
@@ -63,7 +63,7 @@ jobs:
           # Starting containers using Docker Compose.
           docker compose --file .build/docker-compose.yml up --build --detach
 
-      # Step 4: Load Users into LDAP Directory
+      # Step 5: Load Users into LDAP Directory
       - name: Load Users into LDAP Directory
         working-directory: mutillidae-docker  # Set working directory to mutillidae-docker
         run: |
@@ -74,7 +74,7 @@ jobs:
           CURRENT_DIRECTORY=$(pwd);
           ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap://localhost:389 -f $CURRENT_DIRECTORY/.build/ldap/configuration/ldif/mutillidae.ldif || true;
 
-      # Step 5: Run Database Build Script
+      # Step 6: Run Database Build Script
       - name: Run Database Build Script
         run: |
 
@@ -84,20 +84,20 @@ jobs:
           # Requesting Mutillidae database be built.
           curl http://127.0.0.1/set-up-database.php;
 
-      # Step 6: Check if web application up
+      # Step 7: Check if web application up
       - name: Check Web Application
         run: |
 
           # This should return the index.php home page content
           curl http://127.0.0.1:8888/;
 
-      # Step 7: Set up Java for StackHawk
+      # Step 8: Set up Java for StackHawk
       - uses: actions/setup-java@main
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # Step 8: Run StackHawk Scan
+      # Step 9: Run StackHawk Scan
       - name: Run StackHawk Scan
         uses: stackhawk/hawkscan-action@main
         with:
@@ -110,6 +110,12 @@ jobs:
           NO_PROGRESS: true
           SARIF_ARTIFACT: true
 
+      # Step X: List files
+      - name: List files
+        run: |
+          ls -lah
+
+      # Step 10: Upload SARIF file
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@main
         with:
