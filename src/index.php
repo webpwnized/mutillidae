@@ -407,7 +407,7 @@
 	];
 	
 	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
-		$lPage = __SITE_ROOT__.'/login.php?redirect='.$lPage;
+		$lPage = 'login.php&redirect='.$lPage;
 	}// end if
 
 	/* ------------------------------------------
