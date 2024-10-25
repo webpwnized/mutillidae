@@ -99,7 +99,7 @@
             logMessage("Login Succeeded: Logged in user: {$lRecord->username} ({$lRecord->cid})");
             $lAuthenticationAttemptResult = $cAUTHENTICATION_SUCCESSFUL;
 
-            // New Feature: Check for 'redirect' query parameter
+            // Check for 'redirect' query parameter
 			$lRedirectUrl = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php?popUpNotificationCode=AU1';
 
 			// Log the redirect attempt, regardless of whether it is valid or not.

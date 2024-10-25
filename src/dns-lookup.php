@@ -125,7 +125,7 @@
 						autofocus="autofocus"
 						<?php
 							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="20" required="required"');
+								echo 'minlength="1" maxlength="20" required="required"';
 							}// end if
 						?>
 				/>

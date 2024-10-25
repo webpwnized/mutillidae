@@ -1,28 +1,35 @@
 <?php
 	try {
+		$lHTMLControls = 'minlength="1" maxlength="20" required="required"';
+
 		switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
 			case "0": // This code is insecure.
+			case "1": // This code is insecure.
 				$lEnableJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
+				$lEncodeOutput = false;
 			break;
 		
-			case "1": // This code is insecure.
 			case "2":
 			case "3":
 			case "4":
 			case "5": // This code is fairly secure
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
-			break;
-		
-			default: // Add a default case
-				$lEnableJavaScriptValidation = false;
-				$lEnableHTMLControls = false;
+				$lEncodeOutput = true;
 			break;
 		}// end switch
 
+		$lRedirectURL = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php';
+		
+		if ($lEncodeOutput) {
+			$lRedirectURL = $Encoder->encodeForHTML($lRedirectURL);
+		}
+
 	} catch(Exception $e){
-		echo $CustomErrorHandler->FormatError($e, "Error setting up configuration.");
+		$lErrorMessage = "Error setting up configuration.";
+		echo $CustomErrorHandler->FormatError($e, $lErrorMessage);
 	}// end try
 ?>
 
@@ -52,7 +59,7 @@
 		try{
 			if(lValidateInput == "TRUE"){
 				var lUnsafeCharacters = /[\W]/g;
-				if (theForm.username.value.length > 15){
+				if (theForm.username.value.length > 20){
 						alert('Username too long. We dont want to allow too many characters.\n\nSomeone might have enough room to enter a hack attempt.');
 						return false;
 				};// end if
@@ -82,6 +89,7 @@
 			enctype="application/x-www-form-urlencoded"
 			onsubmit="return onSubmitOfLoginForm(this);"
 			id="idLoginForm">
+		<input type="hidden" name="redirect" value="<?php echo $lRedirectURL; ?>">
 		<table>
 			<tr id="id-authentication-failed-tr" style="display: none;">
 				<td id="id-authentication-failed-td" colspan="2" class="error-message"></td>
@@ -96,11 +104,7 @@
 				<td>
 					<input	type="text" name="username" size="20"
 							autofocus="autofocus"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo 'minlength="1" maxlength="15" required="required"';
-						}// end if
-					?>
+							<?php if ($lEnableHTMLControls) { echo $lHTMLControls; } ?>
 					/>
 				</td>
 			</tr>
@@ -108,11 +112,7 @@
 				<td class="label">Password</td>
 				<td>
 					<input type="password" name="password" size="20"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo 'minlength="1" maxlength="15" required="required"';
-						}// end if
-					?>
+					<?php if ($lEnableHTMLControls) { echo $lHTMLControls; } ?>
 					/>
 				</td>
 			</tr>

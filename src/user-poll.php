@@ -1,7 +1,7 @@
 
 <?php
-	/* Known Vulnerabilities: 
-		Cross Site Scripting, 
+	/* Known Vulnerabilities:
+		Cross Site Scripting,
 		Cross Site Request Forgery,
 		Application Exception Output,
 		HTML injection,
@@ -35,15 +35,16 @@
 			$lCountUnique = count(array_unique($lKeys));
 			$lCountTotal = count($lKeys);
 				
-			return ($lCountUnique < $lCountTotal);
+			return $lCountUnique < $lCountTotal;
 
 		} catch (Exception $e) {
-				return FALSE;
+				return false;
 		}//end catch
 				
 	}//end function isParameterPollutionDetected()
 	
 	switch ($_SESSION["security-level"]){
+		default: // Default case: This code is insecure	
    		case "0": // This code is insecure
    			$lEnableHTMLControls = false;
    			$lEncodeOutput = false;
@@ -53,7 +54,6 @@
    		break;
    			   			
    		case "1": // This code is insecure
-   			// DO NOTHING: This is insecure		
 			$lEnableHTMLControls = true;
    			$lEncodeOutput = false;
 			$lProtectAgainstMethodTampering = false;
@@ -71,7 +71,7 @@
 			$lHTTPParameterPollutionDetected = isParameterPollutionDetected($_SERVER['QUERY_STRING']);
 			$lLoggedInUser = $MySQLHandler->escapeDangerousCharacters($logged_in_user);
    		break;
-   	}// end switch		
+   	}// end switch
 
    	if ($lEnableHTMLControls) {
    		$lHTMLControlAttributes='required="required"';
@@ -90,7 +90,7 @@
    		$lFormSubmitted = isSet($_REQUEST["user-poll-php-submit-button"]);
    	}else{
    		$lFormSubmitted = isSet($_GET["user-poll-php-submit-button"]);
-   	}//end if   
+   	}//end if
 
    	// if user clicked submit button, process input parameters
    	if($lFormSubmitted){
@@ -107,7 +107,7 @@
 		   	}//end if
 
 		   	if (!$lCSRFTokenHandler->validateCSRFToken($lPostedCSRFToken)){
-		   		throw (new Exception("Security Violation: Cross Site Request Forgery attempt detected.", 500));
+				throw new Exception("Security Violation: Cross Site Request Forgery attempt detected.", 500);
 		   	}// end if
 
 			// if parameter pollution is not detected, print user choice 

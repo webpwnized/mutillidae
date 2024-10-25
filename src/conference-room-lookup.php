@@ -122,7 +122,7 @@
 				<input 	type="hidden" id="idDefaultRoomCommonNameInput" name="default_room_common_name" value="1F104"
 						<?php
 							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="20" required="required"');
+								echo 'minlength="1" maxlength="20" required="required"';
 							}// end if
 						?>
 				/>
