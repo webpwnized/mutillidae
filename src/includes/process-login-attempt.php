@@ -100,7 +100,7 @@
             $lAuthenticationAttemptResult = $cAUTHENTICATION_SUCCESSFUL;
 
             // Check for 'redirect' query parameter
-			$lRedirectUrl = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php?popUpNotificationCode=AU1';
+			$lRedirectUrl = isset($_POST['redirect']) ? $_POST['redirect'] : 'index.php?popUpNotificationCode=AU1';
 
 			// Log the redirect attempt, regardless of whether it is valid or not.
 			logMessage("Redirect attempt to: $lRedirectUrl");
