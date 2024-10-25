@@ -405,9 +405,11 @@
 		'view-account-profile.php',
 		'view-someones-blog.php'
 	];
+
+	echo $lPage;
 	
 	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
-		$lPage = 'login.php&redirect='.$lPage;
+		$lPage = "login.php&redirect=".$lPage;
 	}// end if
 
 	/* ------------------------------------------
