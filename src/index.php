@@ -395,22 +395,6 @@
     * ------------------------------------------ */
 
 	/* ------------------------------------------
-    * REQUIRE AUTHENTICATION FOR SOME PAGES
-    * ------------------------------------------ */
-	// Array of pages that require authentication
-	$lPagesRequiringAuthentication = [
-		'add-to-your-blog.php',
-		'edit-account-profile.php',
-		'jwt.php',
-		'view-account-profile.php',
-		'view-someones-blog.php'
-	];
-	
-	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
-		$lPage = "login.php?redirect=".urlencode($lPage);
-	}// end if
-
-	/* ------------------------------------------
      * SIMULATE "SECRET" PAGES
      * ------------------------------------------ */
 	switch ($lPage){
@@ -472,6 +456,23 @@
 	* ------------------------------------------ */
 
 	/* ------------------------------------------
+    * REQUIRE AUTHENTICATION FOR SOME PAGES
+    * ------------------------------------------ */
+	// Array of pages that require authentication
+	$lPagesRequiringAuthentication = [
+		'add-to-your-blog.php',
+		'edit-account-profile.php',
+		'jwt.php',
+		'view-account-profile.php',
+		'view-someones-blog.php'
+	];
+	
+	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
+		header ("Location: index.php?page=login.php&redirect=$lPage", true, 302);
+		exit();
+	}// end if
+
+	/* ------------------------------------------
      * Set Content Security Policy (CSP) if needed
      * ------------------------------------------ */
     if ($lPage == "content-security-policy.php"){
@@ -508,6 +509,8 @@
 
 	/* ------------------------------------------
 	* BEGIN OUTPUT RESPONSE
+	* Note: This is the start of the response. There
+	* cannot be any headers set after this point.
 	* ------------------------------------------ */
 	require_once __SITE_ROOT__."/includes/header.php";
 
