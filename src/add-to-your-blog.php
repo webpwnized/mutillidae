@@ -13,16 +13,12 @@
 	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 
-	if (!isset($logged_in_user)) {
-		throw new Exception("$logged_in_user is not set. Page add-to-your-blog.php requires this variable.");
-	}// end if
-
 	switch ($_SESSION["security-level"]){
 		default: // Default case: This code is insecure
    		case "0": // This code is insecure
    			// DO NOTHING: This is insecure
 			$lEncodeOutput = false;
-			$lLoggedInUser = $logged_in_user;
+			$lLoggedInUser = $_SESSION["logged_in_user"];
 			$lTokenizeAllowedMarkup = false;
 			$lProtectAgainstSQLInjection = false;
 			$lEnableJavaScriptValidation = false;
@@ -33,7 +29,7 @@
    		case "1": // This code is insecure
    			// DO NOTHING: This is insecure
 			$lEncodeOutput = false;
-			$lLoggedInUser = $logged_in_user;
+			$lLoggedInUser = $_SESSION["logged_in_user"];
 			$lTokenizeAllowedMarkup = false;
 			$lProtectAgainstSQLInjection = false;
 			$lEnableJavaScriptValidation = true;
@@ -87,7 +83,7 @@
 			 * There are 3 ways that stored procs can be made vulenrable by developers,
 			 * but they are safe by default. Queries are vulnerable by default.
 			 */
-			$lLoggedInUser = $MySQLHandler->escapeDangerousCharacters($logged_in_user);
+			$lLoggedInUser = $MySQLHandler->escapeDangerousCharacters($_SESSION["logged_in_user"]);
 
 			/*
 			 * There is no security in JS validation. You must validate on the server.
@@ -104,7 +100,7 @@
 	/* ----------------------------------------
 	 * Insert user's new blog entry
 	 * ----------------------------------------
-	 * precondition: $logged_in_user is not null
+	 * precondition: $_SESSION["logged_in_user"] is not null
 	 */
 	if($lFormSubmitted){
 		try {
@@ -199,7 +195,7 @@
 		<input name="csrf-token" type="hidden" value="<?php echo $lNewCSRFTokenForNextRequest; ?>" />
 		<span>
 			<a href="./index.php?page=view-someones-blog.php" style="text-decoration: none;">
-			<img style="vertical-align: middle;" src="./images/magnifying-glass-icon.jpeg" height="32px" width="32px" />
+			<img style="vertical-align: middle;" src="./images/magnifying-glass-icon.jpeg" height="32px" width="32px" alt="Magnifying Glass Icon" />
 			<span style="font-weight:bold;">&nbsp;View Blogs</span>
 			</a>
 		</span>
@@ -227,7 +223,7 @@
 								autofocus="autofocus"
 						<?php
 							if ($lEnableHTMLControls) {
-								echo('minlength="1" maxlength="100" required="required"');
+								echo 'minlength="1" maxlength="100" required="required"';
 							}// end if
 						?>
 					></textarea>
