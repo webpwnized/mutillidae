@@ -468,7 +468,7 @@
 	];
 	
 	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
-		header ("Location: index.php?page=login.php&redirect=$lPage", true, 302);
+		header ("Location: index.php?page=login.php&redirectPage=$lPage", true, 302);
 		exit();
 	}// end if
 

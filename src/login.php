@@ -21,10 +21,10 @@
 			break;
 		}// end switch
 
-		$lRedirectURL = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php';
+		$lRedirectPage = isset($_GET['redirectPage']) ? $_GET['redirectPage'] : '';
 		
 		if ($lEncodeOutput) {
-			$lRedirectURL = $Encoder->encodeForHTML($lRedirectURL);
+			$lRedirectPage = $Encoder->encodeForHTML($lRedirectPage);
 		}
 
 	} catch(Exception $e){
@@ -89,7 +89,7 @@
 			enctype="application/x-www-form-urlencoded"
 			onsubmit="return onSubmitOfLoginForm(this);"
 			id="idLoginForm">
-		<input type="hidden" name="redirect" value="<?php echo $lRedirectURL; ?>">
+		<input type="hidden" name="redirectPage" value="<?php echo $lRedirectPage; ?>">
 		<table>
 			<tr id="id-authentication-failed-tr" style="display: none;">
 				<td id="id-authentication-failed-td" colspan="2" class="error-message"></td>

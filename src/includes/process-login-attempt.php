@@ -44,16 +44,16 @@
         logMessage("User {$lUsername} attempting to authenticate");
 
         if (!$SQLQueryHandler->accountExists($lUsername)) {
-            $lAuthenticationAttemptResult = $lConfidentialityRequired ? 
-                $cUSERNAME_OR_PASSWORD_INCORRECT : 
+            $lAuthenticationAttemptResult = $lConfidentialityRequired ?
+                $cUSERNAME_OR_PASSWORD_INCORRECT :
                 $cACCOUNT_DOES_NOT_EXIST;
             $lKeepGoing = false;
             logMessage("Login Failed: Account {$lUsername} does not exist");
         }
 
         if ($lKeepGoing && !$SQLQueryHandler->authenticateAccount($lUsername, $lPassword)) {
-            $lAuthenticationAttemptResult = $lConfidentialityRequired ? 
-                $cUSERNAME_OR_PASSWORD_INCORRECT : 
+            $lAuthenticationAttemptResult = $lConfidentialityRequired ?
+                $cUSERNAME_OR_PASSWORD_INCORRECT :
                 $cPASSWORD_INCORRECT;
             $lKeepGoing = false;
             logMessage("Login Failed: Password for {$lUsername} incorrect");
@@ -100,23 +100,31 @@
             $lAuthenticationAttemptResult = $cAUTHENTICATION_SUCCESSFUL;
 
             // Check for 'redirect' query parameter
-			$lRedirectUrl = isset($_POST['redirect']) ? $_POST['redirect'] : 'index.php?popUpNotificationCode=AU1';
+			$lBaseRedirectUrl = "index.php?popUpNotificationCode=AU1";
+
+			// Check if 'redirectPage' exists and has a non-empty value
+			if (isset($_POST['redirectPage']) && !empty($_POST['redirectPage'])) {
+				$lRedirectUrl = $lBaseRedirectUrl . "&page=" . $_POST['redirectPage'];
+			} else {
+				// If 'redirectPage' is not set or empty, use only the base URL
+				$lRedirectUrl = $lBaseRedirectUrl;
+			}
 
 			// Log the redirect attempt, regardless of whether it is valid or not.
 			logMessage("Redirect attempt to: $lRedirectUrl");
 
-			// Validate the redirect URL if protection against redirection attacks is enabled.
-			if ($lProtectAgainstRedirectionAttacks && 
-				!preg_match('/^index\.php(\?(.*&)?page=[^&]+)?$/', $lRedirectUrl)) {
+			// Validate the redirect page if protection against redirection attacks is enabled.
+			if ($lProtectAgainstRedirectionAttacks &&
+				!preg_match('/^index\.php\?popUpNotificationCode=AU1(&page=[^&]+)?$/', $lRedirectUrl)) {
 				
 				// Log the invalid redirect attempt.
-				logMessage("Invalid redirect detected. Redirecting to home page: $lRedirectUrl");
+				logMessage("Invalid redirect detected. Redirecting to home page: $lBaseRedirectUrl");
 
 				// Fallback to home page if the redirect URL is invalid.
-				$lRedirectUrl = 'index.php?popUpNotificationCode=AU1';
+				$lRedirectUrl = $lBaseRedirectUrl;
 			} else {
-				// Log valid redirect.
-				logMessage("Valid redirect to: $lRedirectUrl");
+				// Log redirect.
+				logMessage("Redirecting to: $lRedirectUrl");
 			}
 
 			// Perform the redirect and terminate the script to prevent further output.
