@@ -115,7 +115,7 @@
 
 			// Validate the redirect page if protection against redirection attacks is enabled.
 			if ($lProtectAgainstRedirectionAttacks &&
-				!preg_match('/^index\.php\?popUpNotificationCode=AU1(&page=[^&]+)?$/', $lRedirectUrl)) {
+				!preg_match('/^index\.php\?popUpNotificationCode=AU1(&page=[a-zA-Z0-9_-]+\.php)?$/', $lRedirectUrl)) {
 				
 				// Log the invalid redirect attempt.
 				logMessage("Invalid redirect detected. Redirecting to home page: $lBaseRedirectUrl");
