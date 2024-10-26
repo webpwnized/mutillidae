@@ -196,15 +196,27 @@
 			    	}//end try
 					
 					if (!$lEncodeOutput) {
+
+						if (!$lProtectAgainstPasswordLeakage) {
+							$lPassword = $row->password;
+						} else {
+							$lPassword = ''; // Empty if protection is enabled
+						}
+
 						$lUsername = $row->username;
-						$lPassword = (!$lProtectAgainstPasswordLeakage) ? $row->password : '';
 						$lSignature = $row->mysignature;
 						$lFirstName = $row->firstname;
 						$lLastName = $row->lastname;
 						$lAPIKey = $row->api_key;
 					} else {
+
+						if (!$lProtectAgainstPasswordLeakage) {
+							$lPassword = $Encoder->encodeForHTML($row->password);
+						} else {
+							$lPassword = ''; // Empty if protection is enabled
+						}
+
 						$lUsername = $Encoder->encodeForHTML($row->username);
-						$lPassword = (!$lProtectAgainstPasswordLeakage) ? $Encoder->encodeForHTML($row->password) : '';
 						$lSignature = $Encoder->encodeForHTML($row->mysignature);
 						$lFirstName = $Encoder->encodeForHTML($row->firstname);
 						$lLastName = $Encoder->encodeForHTML($row->lastname);
