@@ -111,32 +111,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Account Web Service Documentation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            font-weight: bold;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Account Web Service Documentation</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+		}
+		a {
+			text-decoration: none;
+			font-weight: bold;
+		}
+		pre {
+			background-color: #f4f4f4;
+			padding: 10px;
+			border-radius: 5px;
+		}
+	</style>
 </head>
 <body>
 <a href="//mutillidae.localhost/index.php">Back to Home Page</a>
 <br>
 <div>
-    <h2>Welcome to the User Account Web Service</h2>
-    <p>This service allows you to <strong>create, read, update, and delete</strong> user accounts using various HTTP methods.</p>
-    <p><strong>Note:</strong> This service is vulnerable to SQL injection at security level 0. Be cautious when testing or exploring its functionality.</p>
+	<h2>Welcome to the User Account Web Service</h2>
+	<p>This service allows you to <strong>create, read, update, and delete</strong> user accounts using various HTTP methods.</p>
+	<p><strong>Note:</strong> This service is vulnerable to SQL injection at security level 0. Be cautious when testing or exploring its functionality.</p>
 </div>
 <hr>
 <h3>Supported HTTP Methods</h3>
@@ -144,25 +144,37 @@
 <p>Use GET requests to retrieve information about one or more accounts.</p>
 <p><strong>Optional Parameter:</strong> <code>username</code> (as a URL parameter)</p>
 <ul>
-    <li>If <code>username=*</code>, all accounts will be returned.</li>
-    <li>If <code>username</code> is specified, details for that user will be returned.</li>
+	<li>If <code>username=*</code>, all accounts will be returned.</li>
+	<li>If <code>username</code> is specified, details for that user will be returned.</li>
 </ul>
 <strong>Examples:</strong><br>
 <ul>
-    <li>Retrieve a specific user: <a href="//mutillidae.localhost/webservices/rest/ws-user-account.php?username=adrian">/ws-user-account.php?username=adrian</a></li>
-    <li>Retrieve all users: <a href="//mutillidae.localhost/webservices/rest/ws-user-account.php?username=*">/ws-user-account.php?username=*</a></li>
+	<li>Retrieve a specific user:
+		<pre>
+GET /webservices/rest/ws-user-account.php?username=adrian HTTP/1.1
+Host: mutillidae.localhost
+Accept: application/json
+		</pre>
+	</li>
+	<li>Retrieve all users:
+		<pre>
+GET /webservices/rest/ws-user-account.php?username=* HTTP/1.1
+Host: mutillidae.localhost
+Accept: application/json
+		</pre>
+	</li>
 </ul>
 <hr>
 <h4>2. POST (Create New Account)</h4>
 <p>Use POST requests to create a new user account.</p>
 <p><strong>Required Parameters (POST body):</strong></p>
 <ul>
-    <li><code>username</code>: The username for the new account</li>
-    <li><code>password</code>: The password for the new account</li>
-    <li><code>firstname</code>: Users first name</li>
-    <li><code>lastname</code>: Users last name</li>
+	<li><code>username</code>: The username for the new account</li>
+	<li><code>password</code>: The password for the new account</li>
+	<li><code>firstname</code>: User\'s first name</li>
+	<li><code>lastname</code>: User\'s last name</li>
 </ul>
-<p><strong>Optional Parameter:</strong> <code>signature</code> (Users signature)</p>
+<p><strong>Optional Parameter:</strong> <code>signature</code> (User\'s signature)</p>
 <strong>Example:</strong><br>
 <pre>
 POST /webservices/rest/ws-user-account.php HTTP/1.1
@@ -191,8 +203,8 @@ username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpda
 <p>Use DELETE requests to delete an existing user account.</p>
 <p><strong>Required Parameters (POST body):</strong></p>
 <ul>
-    <li><code>username</code>: The username of the account to be deleted</li>
-    <li><code>password</code>: The password for the account</li>
+	<li><code>username</code>: The username of the account to be deleted</li>
+	<li><code>password</code>: The password for the account</li>
 </ul>
 <strong>Example:</strong><br>
 <pre>
@@ -211,7 +223,8 @@ Host: mutillidae.localhost
 </pre>
 </body>
 </html>
-';
+					';
+					
 				}// end if
 
 			break;
