@@ -194,7 +194,7 @@
 			    	} catch (Exception $e) {
 			    		// do nothing
 			    	}//end try
-					echo $row->password;
+
 					if (!$lEncodeOutput) {
 
 						if (!$lProtectAgainstPasswordLeakage) {
