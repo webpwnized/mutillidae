@@ -6,7 +6,7 @@
 	   		case "1": // This code is insecure
 	   			// DO NOTHING: This is insecure	
 				$lEncodeOutput = false;
-				$luseSafeJavaScript = "false";
+				$lUseSafeJavaScript = false;
 			break;
 
 			case "2":
@@ -33,7 +33,7 @@
 	   			// encode the output following OWASP standards
 	   			// this will be HTML encoding because we are outputting data into HTML
 				$lEncodeOutput = true;
-				$luseSafeJavaScript = "true";
+				$lUseSafeJavaScript = true;
 	   		break;
 	   	}// end switch
     } catch (Exception $e) {
@@ -68,7 +68,7 @@
 
 <script type="text/javascript">
 
-	var g_beSmart = <?php echo $luseSafeJavaScript; ?>;
+	var g_beSmart = <?php echo $lUseSafeJavaScript ? 'true' : 'false'; ?>;
 	var g_usingIE = ('all' in document);
 
 	var outputValue = function(p_elementId, p_elementValue, p_beSmart, p_usingIE){
@@ -119,13 +119,13 @@
 		lResultTD.className = "error-header";
 	}// end if
 		
-	/* 
+	/*
 		Log the browser fingerprint using the capture data page so 
 		we can copy and
 		paste the results to the user-agent switcher easier
 	*/
-	try{ 
-		var lXMLHTTP;	
+	try{
+		var lXMLHTTP;
 		var lURL = "/mutillidae/capture-data.php";
 		var lRequestMethod = "GET";
 		var lAsyncronousRequestFlag = true;
@@ -141,7 +141,7 @@
 		lXMLHTTP.onreadystatechange=function(){}; //end function
 		lXMLHTTP.open(lRequestMethod, lURL+"?"+encodeURI("Browser Fingerprint:" + lBrowserFingerprint), lAsyncronousRequestFlag);
 		lXMLHTTP.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		lXMLHTTP.send(); 
+		lXMLHTTP.send();
 	}catch(e){
 		alert("Error trying execute AJAX call: " + e.message);
 	}//end try

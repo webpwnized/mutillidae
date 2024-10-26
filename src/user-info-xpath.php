@@ -3,6 +3,8 @@
 
 	try{
 
+		$lHTMLControls = 'minlength="1" maxlength="20" required="required"';
+
     	switch ($_SESSION["security-level"]){
 			default: // Default case: This code is insecure
     		case "0": // This code is insecure
@@ -11,7 +13,7 @@
 				$lEnableJavaScriptValidation = false;
 				$lProtectAgainstMethodTampering = false;
 				$lEncodeOutput = false;
-				$lProtectAgainstXPathInjection = FALSE;
+				$lProtectAgainstXPathInjection = false;
 				break;
 
     		case "1": // This code is insecure
@@ -20,7 +22,7 @@
 				$lEnableJavaScriptValidation = true;
 				$lProtectAgainstMethodTampering = false;
 				$lEncodeOutput = false;
-				$lProtectAgainstXPathInjection = FALSE;
+				$lProtectAgainstXPathInjection = false;
 			break;
 
 			case "2":
@@ -61,8 +63,8 @@
     	$XMLHandler->SetDataSource($lXMLAccountFilePath);
 
 	} catch (Exception $e) {
-	    echo $e;
-		echo $CustomErrorHandler->FormatError($e, "Error handled on page user-info-xpath.php");
+	    $lErrorMessage = "Error handled on page user-info-xpath.php";
+		echo $CustomErrorHandler->FormatError($e, $lErrorMessage);
    	}// end try;
 ?>
 
@@ -106,14 +108,14 @@
 
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/soap/ws-user-account.php">
-		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" />
+		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" alt="AJAX Logo" />
 		<span style="font-weight:bold;">Switch to SOAP Web Service version</span>
 	</a>
 </span>
 &nbsp;&nbsp;&nbsp;
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="index.php?page=user-info.php">
-		<img style="vertical-align: middle;" src="./images/sql-logo-64-64.png" />
+		<img style="vertical-align: middle;" src="./images/sql-logo-64-64.png" alt="SQL Logo" />
 		<span style="font-weight:bold;">Switch to SQL version</span>
 	</a>
 </span>
@@ -139,11 +141,7 @@
 			<td class="label">Name</td>
 			<td>
 				<input type="text" name="username" size="20" autofocus="autofocus"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="20" required="required"');
-						}// end if
-					?>
+					<?php if ($lEnableHTMLControls) { echo $lHTMLControls; } ?>
 				/>
 			</td>
 		</tr>
@@ -151,11 +149,7 @@
 			<td class="label">Password</td>
 			<td>
 				<input type="password" name="password" size="20"
-					<?php
-						if ($lEnableHTMLControls) {
-							echo('minlength="1" maxlength="20" required="required"');
-						}// end if
-					?>
+					<?php if ($lEnableHTMLControls) { echo $lHTMLControls; } ?>
 				/>
 			</td>
 		</tr>
@@ -221,7 +215,8 @@
 			echo "<div id=\"xml\" style=\"display: none;\"></div>";
 
     	} catch (Exception $e) {
-			echo $CustomErrorHandler->FormatError($e, "Error attempting to display user information");
+			$lErrorMessage = "Error attempting to display user information";
+			echo $CustomErrorHandler->FormatError($e, $lErrorMessage);
        	}// end try;
 
 	}// end if (isset($_POST))

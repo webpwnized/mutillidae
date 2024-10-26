@@ -18,17 +18,18 @@
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
-    require_once(dirname(__FILE__).'/constants.php');
-	require_once(__SITE_ROOT__.'/includes/minimum-class-definitions.php');
+    require_once dirname(__FILE__).'/constants.php';
+	require_once __SITE_ROOT__.'/includes/minimum-class-definitions.php';
 
 	/* ------------------------------------------
  	* initialize Client Information Handler
  	* ------------------------------------------ */
-	require_once (__SITE_ROOT__.'/classes/ClientInformationHandler.php');
+	require_once __SITE_ROOT__.'/classes/ClientInformationHandler.php';
 	$lClientInformationHandler = new ClientInformationHandler();
 
 	try {
 	    switch ($lSecurityLevel){
+			default: // Default case: This code is insecure
 	   		case "0": // this code is insecure
 	   		case "1": // this code is insecure
 				$lProtectAgainstSQLInjection = false;
@@ -148,5 +149,5 @@
     /* ------------------------------------------
      * LOG USER VISIT TO PAGE
      * ------------------------------------------ */
-	include_once(__SITE_ROOT__."/includes/log-visit.php");
+	include_once __SITE_ROOT__."/includes/log-visit.php";
 ?>

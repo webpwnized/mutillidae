@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/* Known Vulnerabilities
 	 * SQL Injection, (Fix: Use Schematized Stored Procedures)
 	 * Cross Site Scripting, (Fix: Encode all output)
@@ -115,7 +115,7 @@
 	   			 * attack. If a site uses POST, then grab input from _POST. Use _GET for gets. HPP can
 	   			 * occur more easily when input is ambiguous.
 	   			 */
-				$pTextFile = $_REQUEST['textfile'];		
+				$pTextFile = $_REQUEST['textfile'];
 			}//end if
 
 			/********************************************
@@ -143,9 +143,9 @@
 		   			 * thinks the input is (int, string, char, etc.). The fact is that HTTP is text. if the 
 		   			 * "textfile" is expected to be integer, it should be validated as such. If string, then 
 		   			 * validate as string.
-		   			 * 
+		   			 *
 		   			 *  Definition of validation. Perform all of:
-		   			 *  
+		   			 * 
 		   			 *  check data type
 		   			 *  check data length
 		   			 *  check character set
