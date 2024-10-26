@@ -194,17 +194,17 @@
 			    	} catch (Exception $e) {
 			    		// do nothing
 			    	}//end try
-					echo $row->password;
+					
 					if (!$lEncodeOutput) {
 						$lUsername = $row->username;
-						$lPassword = !$lProtectAgainstPasswordLeakage ? $row->password : '';
+						$lPassword = (!$lProtectAgainstPasswordLeakage) ? $row->password : '';
 						$lSignature = $row->mysignature;
 						$lFirstName = $row->firstname;
 						$lLastName = $row->lastname;
 						$lAPIKey = $row->api_key;
 					} else {
 						$lUsername = $Encoder->encodeForHTML($row->username);
-						$lPassword = !$lProtectAgainstPasswordLeakage ? $Encoder->encodeForHTML($row->password) : '';
+						$lPassword = (!$lProtectAgainstPasswordLeakage) ? $Encoder->encodeForHTML($row->password) : '';
 						$lSignature = $Encoder->encodeForHTML($row->mysignature);
 						$lFirstName = $Encoder->encodeForHTML($row->firstname);
 						$lLastName = $Encoder->encodeForHTML($row->lastname);
