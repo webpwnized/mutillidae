@@ -737,13 +737,13 @@
 							<a href="">Test Pages</a>
 							<ul>
 								<li><a href="./webservices/soap/ws-test-connectivity.php">Test Connectivity</a></li>
-								<li><a href="./webservices/soap/ws-echo.php">Echo</a></li>
 							</ul>
 						</li>
 						<li>
 							<a href="">Command Injection</a>
 							<ul>
 								<li><a href="./webservices/soap/ws-lookup-dns.php">DNS Lookup</a></li>
+								<li><a href="./webservices/soap/ws-echo.php">Echo</a></li>
 							</ul>
 						</li>
 						<li>
