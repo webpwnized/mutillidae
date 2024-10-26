@@ -227,7 +227,7 @@
 					echo "<span class=\"label\">First Name:&nbsp;</span><span>{$lFirstName}</span><br/>";
 					echo "<span class=\"label\">Last Name:&nbsp;</span><span>{$lLastName}</span><br/>";
 					echo "<span class=\"label\">Username:&nbsp;</span><span>{$lUsername}</span><br/>";
-					echo "<span class=\"label\">Password:&nbsp;</span><span>{$lPassword}</span><br/>";
+					echo "<span class=\"label\">Password:&nbsp;</span><span>{$row->password}</span><br/>";
 					echo "<span class=\"label\">Signature:&nbsp;</span><span>{$lSignature}</span><br/>";
 					echo "<span class=\"label\">API Key:&nbsp;</span><span>{$lAPIKey}</span><br/>";
 					echo "<br/>";
