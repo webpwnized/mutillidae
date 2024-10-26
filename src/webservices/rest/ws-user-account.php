@@ -166,10 +166,10 @@
 <ul>
     <li><code>username</code>: The username for the new account</li>
     <li><code>password</code>: The password for the new account</li>
-    <li><code>firstname</code>: User's first name</li>
-    <li><code>lastname</code>: User's last name</li>
+    <li><code>firstname</code>: Users first name</li>
+    <li><code>lastname</code>: Users last name</li>
 </ul>
-<p><strong>Optional Parameter:</strong> <code>signature</code> (User's signature)</p>
+<p><strong>Optional Parameter:</strong> <code>signature</code> (Users signature)</p>
 <strong>Example:</strong><br>
 <pre>
 POST /webservices/rest/ws-user-account.php HTTP/1.1
