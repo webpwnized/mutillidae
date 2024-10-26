@@ -41,8 +41,49 @@ $lSOAPWebService->register(
 
 // Define the "echoMessage" method
 function echoMessage($pMessage) {
-    return 'You said: ' . $pMessage;
-}
+
+    try{
+        switch ($_SESSION["security-level"]){
+            default: // Default case: This code is insecure
+            case "0": // This code is insecure
+            case "1": // This code is insecure
+                $lProtectAgainstCommandInjection=false;
+                $lProtectAgainstXSS = false;
+            break;
+
+            case "2":
+            case "3":
+            case "4":
+            case "5": // This code is fairly secure
+                $lProtectAgainstCommandInjection=true;
+                $lProtectAgainstXSS = true;
+            break;
+        }// end switch
+    	
+        // Apply XSS protection if enabled
+        if ($lProtectAgainstXSS) {
+            global $Encoder;
+            $lMessage = $Encoder->encodeForHTML($pMessage);
+        } else {
+            $lMessage = $pMessage;
+        }
+
+        // Handle command execution based on the protection flag
+        if ($lProtectAgainstCommandInjection) {
+            $lResult = $lMessage;
+        } else {
+            // Allow command injection vulnerability (insecure)
+            $lResult = shell_exec("echo " . $lMessage));
+        }
+
+        return $lResult; // Return the result as SOAP response
+
+	}catch(Exception $e){
+        $lMessage = "Error setting up configuration on webservice ws-echo.php";
+        echo $CustomErrorHandler->FormatError($e, $lMessage);
+    }// end try
+
+} // end function echoMessage
 
 // Handle the SOAP request with error handling
 try {
