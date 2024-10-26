@@ -709,6 +709,28 @@
 			<a href="">Web Services</a>
 			<ul>
 				<li>
+					<a href="">REST</a>
+					<ul>
+						<li>
+							<a href="./webservices/rest/ws-test-connectivity.php">
+								Test Connectivity
+							</a>
+						</li>
+						<li>
+							<a href="">SQL Injection</a>
+							<ul>
+								<li><a href="./webservices/rest/ws-user-account.php">User Account Management</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="">Username Enumeration</a>
+							<ul>
+								<li><a href="./webservices/rest/ws-user-account.php">User Account Management</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
 					<a href="">SOAP</a>
 					<ul>
 						<li>
@@ -734,28 +756,6 @@
 							<a href="">Username Enumeration</a>
 							<ul>
 								<li><a href="./webservices/soap/ws-user-account.php">Lookup User</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="">REST</a>
-					<ul>
-						<li>
-							<a href="./webservices/rest/ws-test-connectivity.php">
-								Test Connectivity
-							</a>
-						</li>
-						<li>
-							<a href="">SQL Injection</a>
-							<ul>
-								<li><a href="./webservices/rest/ws-user-account.php">User Account Management</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="">Username Enumeration</a>
-							<ul>
-								<li><a href="./webservices/rest/ws-user-account.php">User Account Management</a></li>
 							</ul>
 						</li>
 					</ul>
