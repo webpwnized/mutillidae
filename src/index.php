@@ -461,10 +461,23 @@
 	// Array of pages that require authentication
 	$lPagesRequiringAuthentication = [
 		'add-to-your-blog.php',
+		'captured-data.php',
+		'conference-room-lookup.php',
+		'dns-lookup.php',
+		'echo.php',
 		'edit-account-profile.php',
 		'jwt.php',
+		'repeater.php',
+		'show-log.php',
+		'source-viewer.php',
+		'text-file-viewer.php',
+		'upload-file.php',
+		'user-info.php',
+		'user-poll.php',
 		'view-account-profile.php',
-		'view-someones-blog.php'
+		'view-someones-blog.php',
+		'view-user-privilege-level.php',
+		'xml-validator.php'
 	];
 	
 	if (in_array($lPage, $lPagesRequiringAuthentication) && !$_SESSION["user_is_logged_in"]){
