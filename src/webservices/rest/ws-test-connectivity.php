@@ -16,7 +16,7 @@
 #   - If method not allowed: 405 Method Not Allowed with allowed methods in response header
 # -------------------------------
 
-/* Example Request:
+/* Example Request: Make sure to copy the new line characters as well
 
 GET /webservices/rest/ws-test-connectivity.php HTTP/1.1
 Host: mutillidae.localhost

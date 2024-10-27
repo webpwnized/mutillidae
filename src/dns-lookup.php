@@ -6,6 +6,7 @@
 
 	try {
     	switch ($_SESSION["security-level"]){
+			default: // Default case: This code is insecure
     		case "0": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
@@ -97,7 +98,7 @@
 
 <span>
 	<a style="text-decoration: none; cursor: pointer;" href="./webservices/soap/ws-lookup-dns.php">
-		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" />
+		<img style="vertical-align: middle;" src="./images/ajax_logo-75-79.jpg" height="75px" width="78px" alt="AJAX Logo" />
 		<span style="font-weight:bold;">Switch to SOAP Web Service Version of this Page</span>
 	</a>
 </span>
