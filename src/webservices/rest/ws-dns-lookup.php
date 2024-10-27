@@ -75,6 +75,9 @@ try {
         $lCommand = escapeshellcmd("nslookup " . escapeshellarg($lHostname));
     }
 
+    // Execute the nslookup command and return the result
+    $lOutput = shell_exec($lCommand);
+
     if ($lOutput === null) {
         throw new CommandExecutionException("Command execution failed.");
     }
@@ -86,10 +89,8 @@ try {
 
 } catch (Exception $e) {
     // Handle errors during configuration setup
-    $lErrorMessage = "Error setting up configuration on page ws-dns-lookup.php";
-    $lErrorMessage = $CustomErrorHandler->FormatError($e, $lErrorMessage);
     http_response_code(500);
     header($lContentTypeJSON); // Set response format to JSON
-    echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $lErrorMessage]);
+    echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $e->getMessage()]);
 }
 ?>
