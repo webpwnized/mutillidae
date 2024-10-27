@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS Echo Service</title>
+</head>
+<body>
+    <h1>WS Echo Service</h1>
+    <p>This service echoes back the message provided by the client.</p>
+
+    <h2>Endpoint</h2>
+    <pre>POST /webservices/rest/ws-echo.php</pre>
+
+    <h2>Request Parameters</h2>
+    <ul>
+        <li><b>message</b> (string): The message to be echoed back.</li>
+    </ul>
+
+    <h2>Example Burp Repeater Request</h2>
+    <pre>
+POST /webservices/rest/ws-echo.php HTTP/1.1
+Host: mutillidae.localhost
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Origin: http://mutillidae.localhost
+Connection: close
+Content-Length: 20
+
+message=Hello+World!
+    </pre>
+
+    <h2>cURL Example</h2>
+    <pre>
+curl -X POST "http://mutillidae.localhost/webservices/rest/ws-echo.php" \
+ -H "Host: mutillidae.localhost" \
+ -H "Accept: application/json" \
+ -H "Origin: http://mutillidae.localhost" \
+ -H "Content-Type: application/x-www-form-urlencoded" \
+ --data "message=Hello+World!"
+    </pre>
+
+    <h2>Response</h2>
+    <pre>
+{
+    "message": "Hello World!",
+    "command": "echo 'Hello World!'",
+    "security-level": 0,
+    "result": "Hello World!"
+}
+    </pre>
+</body>
+</html>
+
