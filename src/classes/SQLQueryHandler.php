@@ -46,7 +46,11 @@ class SQLQueryHandler {
 		return bin2hex(random_bytes($length));
 	}
 
-	public function __construct($pSecurityLevel){
+	public function __construct($pSecurityLevel = 0) {
+		// Ensure the provided level is valid; fall back to 0 if it's not.
+		if (!is_int($pSecurityLevel) || $pSecurityLevel < 0 || $pSecurityLevel > 5) {
+			$pSecurityLevel = 0;
+		}
 
 		$this->doSetSecurityLevel($pSecurityLevel);
 
@@ -80,6 +84,35 @@ class SQLQueryHandler {
 	public function escapeDangerousCharacters($pData){
 	    return $this->mMySQLHandler->escapeDangerousCharacters($pData);
 	}
+
+	public function getSecurityLevelFromDB() {
+		// Query to retrieve the security level from the row with id = 1
+		$lQueryString = "SELECT level FROM security_level WHERE id = 1";
+	
+		// Execute the query
+		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
+	
+		// Check if the query returned a valid result
+		if ($lQueryResult && $lQueryResult->num_rows > 0) {
+			$lRow = $lQueryResult->fetch_assoc();
+			return (int) $lRow['level'];  // Return the level as an integer
+		} else {
+			return null;  // Return null if the row does not exist
+		}
+	} // end function getSecurityLevelFromDB
+	
+	public function setSecurityLevelInDB($pLevel) {
+		if ($pLevel < 0 || $pLevel > 5) {
+			throw new InvalidArgumentException("Security level must be between 0 and 5.");
+		}
+	
+		$safeLevel = (int) $pLevel;
+		$lQueryString = "UPDATE security_level SET level = $safeLevel WHERE id = 1";
+		$this->mMySQLHandler->executeQuery($lQueryString);
+	
+		// Ensure the row was actually updated
+		return $this->mMySQLHandler->affected_rows() > 0;
+	} // end function setSecurityLevelInDB
 
 	public function getPageHelpTexts($pPageName){
 

@@ -49,19 +49,10 @@ $lSOAPWebService->register(
  * @return string XML-formatted result containing the nslookup output or validation error message.
  */
 function lookupDNS($pTargetHost) {
-    // Start session if not already started
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
-    // Initialize security level if not already set
-    if (!isset($_SESSION["security-level"])) {
-        $_SESSION["security-level"] = 0;
-    }
 
     // Include required constants and utility classes
     require_once '../../includes/constants.php';
-    require_once '../../includes/minimum-class-definitions.php';
+    require_once '../../classes/MySQLHandler.php';
 
     // Define a dedicated exception for command execution failures
     class CommandExecutionException extends Exception {}
@@ -69,8 +60,19 @@ function lookupDNS($pTargetHost) {
     class LookupException extends Exception {}
 
     try {
+        // Initialize MySQL handler
+        $MySQLHandler = new MySQLHandler(0);
+
+        $lSecurityLevel = $MySQLHandler->getSecurityLevel();
+
+        // Initialize the log handler
+        $LogHandler = new LogHandler($lSecurityLevel);
+
+        // Initialize the encoder
+        $Encoder = new Encoder($lSecurityLevel);
+
         // Determine security level and protection settings
-        switch ($_SESSION["security-level"]) {
+        switch ($lSecurityLevel) {
 			default: // Insecure
             case "0": // Insecure
             case "1": // Insecure

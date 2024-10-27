@@ -1,24 +1,11 @@
 <?php
-/*  --------------------------------
-    *  We use the session on this page
-    *  --------------------------------*/
-if (session_status() == PHP_SESSION_NONE){
-    session_start();
-}// end if
 
-/* ----------------------------------------
-    *	initialize security level to "insecure"
-    * ----------------------------------------*/
-if (!isset($_SESSION["security-level"])){
-    $_SESSION["security-level"] = 0;
-}// end if
-
-/* ------------------------------------------
-    * Constants used in application
-    * ------------------------------------------ */
 require_once '../../includes/constants.php';
 require_once '../../classes/JWT.php';
 require_once '../../classes/SQLQueryHandler.php';
+
+// Initialize SQL query handler with security level 0
+$SQLQueryHandler = new SQLQueryHandler(0);
 
 $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 

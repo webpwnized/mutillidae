@@ -13,7 +13,7 @@
     /* ------------------------------------------
 	 * initialize encoder
 	 * ------------------------------------------ */
-    require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
+    require_once __SITE_ROOT__.'/classes/EncodingHandler.php';
     if (!isset($Encoder)){
         $Encoder = new EncodingHandler();
     }// end if
@@ -30,7 +30,7 @@
 	/* ------------------------------------------
  	* initialize log error handler
  	* ------------------------------------------ */
-    require_once (__SITE_ROOT__.'/classes/LogHandler.php');
+    require_once __SITE_ROOT__.'/classes/LogHandler.php';
     $LogHandler = new LogHandler($lSecurityLevel);
 
 	/* ------------------------------------------

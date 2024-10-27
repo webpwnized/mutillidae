@@ -13,7 +13,10 @@ if (!isset($_SESSION["security-level"])) {
 
 // Include required constants and utility classes
 require_once '../../includes/constants.php';
-require_once '../../includes/minimum-class-definitions.php';
+require_once '../../classes/SQLQueryHandler.php';
+
+// Initialize SQL query handler with security level 0
+$SQLQueryHandler = new SQLQueryHandler(0);
 
 // Define a dedicated exception for command execution failures
 class CommandExecutionException extends Exception {}
@@ -21,8 +24,11 @@ class CommandExecutionException extends Exception {}
 try {
     $lContentTypeJSON = 'Content-Type: application/json';
 
+    // Get the current security level from database instead of session
+    $lSecurityLevel = $SQLQueryHandler->getSecurityLevel();
+
     // Determine security level and protection settings
-    switch ($_SESSION["security-level"]) {
+    switch ($lSecurityLevel) {
         default: // Insecure
         case "0": // Insecure
         case "1": // Insecure

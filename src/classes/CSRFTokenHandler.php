@@ -12,10 +12,10 @@ class CSRFTokenHandler{
 	protected $mEncoder = null;
 
 	/* flag properties */
-	protected $mEncodeOutput = FALSE;
+	protected $mEncodeOutput = false;
 	protected $mSecurityLevel = 0;
 	protected $mCSRFTokenStrength = "NONE";
-	protected $mProtectAgainstCSRF = FALSE;
+	protected $mProtectAgainstCSRF = false;
 
 	protected $mExpectedCSRFTokenForThisRequest = "";
 	protected $mNewCSRFTokenForNextRequest = "";

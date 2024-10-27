@@ -7,7 +7,7 @@
         } catch (Exception $e) {
             /*do nothing*/
         };
-    };//end function logMessage
+    } //end function logMessage
 
    	switch ($_SESSION["security-level"]){
 		default: // Default case: This code is insecure
@@ -22,7 +22,7 @@
    		case "5": // This code is fairly secure
 			$lProtectCookies = true;
    		break;
-   	}// end switch
+   	} // end switch
 
     /* Precondition: $_REQUEST["do"] is not NULL */
     switch ($_REQUEST["do"]) {
@@ -134,7 +134,7 @@
 
 			if ($lSecurityLevel == '0') {
 				$lSecurityLevel = '1';
-			}else if($lSecurityLevel == '1'){
+			}elseif($lSecurityLevel == '1'){
 				$lSecurityLevel = '5';
 			}else{
 				$lSecurityLevel = '0';
@@ -150,8 +150,8 @@
 		    	    'expires' => 0,              // 0 means session cookie
 		    	    'path' => '/',               // '/' means entire domain
 		    	    //'domain' => '.example.com', // default is current domain
-		    	    'secure' => FALSE,           // true or false
-		    	    'httponly' => FALSE,         // true or false
+		    	    'secure' => false,           // true or false
+		    	    'httponly' => false,         // true or false
 		    	    'samesite' => 'Lax'          // None || Lax  || Strict
 		    	);
 		    	setcookie('showhints', "1", $l_cookie_options);
@@ -168,8 +168,8 @@
 				    'expires' => 0,              // 0 means session cookie
 				    'path' => '/',               // '/' means entire domain
 				    //'domain' => '.example.com', // default is current domain
-				    'secure' => FALSE,           // true or false
-				    'httponly' => FALSE,         /* The showhints cookie is unprotected on purpose because
+				    'secure' => false,           // true or false
+				    'httponly' => false,         /* The showhints cookie is unprotected on purpose because
 				                                  * it is used in one of the lab assignments */
 				    'samesite' => 'Strict'          // None || Lax  || Strict
 				);
@@ -184,7 +184,11 @@
 		   	$RemoteFileHandler->setSecurityLevel($lSecurityLevel);
 		   	$RequiredSoftwareHandler->setSecurityLevel($lSecurityLevel);
 
+			/* Update the security level in the session */
 		    $_SESSION["security-level"] = $lSecurityLevel;
+
+			/* Update the security level in the database */
+			$MySQLHandler->updateSecurityLevel($lSecurityLevel);
 
 			switch ($lSecurityLevel){
 				case 0: $lhintsPopUpNotificationCode = "SL0";break;
@@ -197,5 +201,5 @@
 		break;//case "toggle-hints"
 
 		default: break;
-    }// end switch
+    } // end switch
 ?>

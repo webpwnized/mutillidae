@@ -5,7 +5,7 @@
 if (!defined('__SITE_ROOT__')){define('__SITE_ROOT__', dirname(dirname(__FILE__)));}
 
 /* Read database configuration file and populate class parameters */
-require_once(__SITE_ROOT__.'/includes/database-config.inc');
+require_once __SITE_ROOT__.'/includes/database-config.inc';
 
 class MySQLHandler {
 
@@ -67,8 +67,8 @@ class MySQLHandler {
  	 * OBJECT PROPERTIES
  	 * ------------------------------------------ */
 	//default insecure: no output encoding.
-	protected $encodeOutput = FALSE;
-	protected $stopSQLInjection = FALSE;
+	protected $encodeOutput = false;
+	protected $stopSQLInjection = false;
 	protected $mSecurityLevel = 0;
 	protected $mEncoder = null;
 
@@ -90,9 +90,7 @@ class MySQLHandler {
 	public function __construct($pSecurityLevel){
 
 	    $this->doSetSecurityLevel($pSecurityLevel);
-
-	    /* initialize encoder */
-	    require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
+		require_once 'EncodingHandler.php';
 	    $this->mEncoder = new EncodingHandler();
 
 	    /* initialize custom error handler */
@@ -110,10 +108,11 @@ class MySQLHandler {
 		$this->mSecurityLevel = $pSecurityLevel;
 
 		switch ($this->mSecurityLevel){
+			default: // Insecure
 	   		case "0": // This code is insecure, we are not encoding output
 			case "1": // This code is insecure, we are not encoding output
-				$this->encodeOutput = FALSE;
-				$this->stopSQLInjection = FALSE;
+				$this->encodeOutput = false;
+				$this->stopSQLInjection = false;
 	   		break;
 
 			case "2":
@@ -121,8 +120,8 @@ class MySQLHandler {
 			case "4":
 	   		case "5": // This code is fairly secure
 	  			// If we are secure, then we encode all output
-	   			$this->encodeOutput = TRUE;
-	   			$this->stopSQLInjection = TRUE;
+	   			$this->encodeOutput = true;
+	   			$this->stopSQLInjection = true;
 	   		break;
 	   	}// end switch
 
@@ -230,12 +229,12 @@ class MySQLHandler {
 			$lResult = $this->mMySQLConnection->query($pQueryString);
 
 			if (!$lResult) {
-		    	throw (new Exception("Error executing query: ".$this->serializeMySQLImprovedObjectProperties().")"));
+				throw new Exception("Error executing query: ".$this->serializeMySQLImprovedObjectProperties().")");
 		    }// end if there are no results
 
 		    return $lResult;
 		} catch (Exception $e) {
-			throw(new Exception($this->mCustomErrorHandler->getExceptionMessage($e, "Query: " . $this->mEncoder->encodeForHTML($pQueryString))));
+			throw new Exception($this->mCustomErrorHandler->getExceptionMessage($e, "Query: " . $this->mEncoder->encodeForHTML($pQueryString)));
 		}// end function
 
 	}// end private function executeQuery
@@ -296,7 +295,7 @@ class MySQLHandler {
    			throw new Exception(self::$mDatabaseAvailableMessage);
 		}// end try
 
-		return TRUE;
+		return true;
 
 	} //end	public function databaseAvailable(){
 

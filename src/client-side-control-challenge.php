@@ -4,12 +4,12 @@
 
 		private $mFieldname = "";
 		private $mValue = "";
-		private $mIsCorrect = FALSE;
+		private $mIsCorrect = false;
 
 		public function __construct ($pFieldname, $pValue){
 			$this->mFieldname = $pFieldname;
 			$this->mValue = $pValue;
-			$this->mIsCorrect = FALSE;
+			$this->mIsCorrect = false;
 		}//end constructor
 
 		public function getFieldname(){
@@ -32,9 +32,9 @@
 
 	class ClientFields{
 
-		private $mDLList = NULL;
+		private $mDLList = null;
 		private $mTargetNumber = -1;
-		private $mEncodeOutput = FALSE;
+		private $mEncodeOutput = false;
 		private $Encoder = null;
 
 		public function __construct (){
@@ -43,7 +43,7 @@
 				$this->mDLList->setIteratorMode(SplDoublyLinkedList::IT_MODE_FIFO|SplDoublyLinkedList::IT_MODE_KEEP);
 
 				//initialize encoder
-				require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
+				require_once __SITE_ROOT__.'/classes/EncodingHandler.php';
 				$Encoder = new EncodingHandler();
 
 			} catch(Exception $e){
@@ -129,13 +129,8 @@
 
 	try{
     	switch ($_SESSION["security-level"]){
+			default:
     		case "0": // This code is insecure.
-				$lEnableJavaScriptValidation = true;
-				$lEnableHTMLControls = true;
-				$lProtectAgainstMethodSwitching = false;
-				$lEncodeOutput = false;
-    		break;
-
     		case "1": // This code is insecure.
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;

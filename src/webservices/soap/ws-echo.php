@@ -43,7 +43,18 @@ $lSOAPWebService->register(
 function echoMessage($pMessage) {
 
     try{
-        switch ($_SESSION["security-level"]){
+        // Include required constants and utility classes
+        require_once '../../includes/constants.php';
+        require_once '../../classes/MySQLHandler.php';
+
+        $MySQLHandler = new MySQLHandler(0);
+
+        $lSecurityLevel = $MySQLHandler->getSecurityLevel();
+
+        $Encoder = new Encoder($lSecurityLevel);
+        $CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
+
+        switch ($lSecurityLevel){
             default: // Default case: This code is insecure
             case "0": // This code is insecure
             case "1": // This code is insecure
@@ -73,7 +84,7 @@ function echoMessage($pMessage) {
             $lResult = $lMessage;
         } else {
             // Allow command injection vulnerability (insecure)
-            $lResult = shell_exec("echo " . $lMessage));
+            $lResult = shell_exec("echo " . $lMessage);
         }
 
         return $lResult; // Return the result as SOAP response

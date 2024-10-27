@@ -1,23 +1,24 @@
 <?php
-	/*  --------------------------------
-	 *  We use the session on this page
-	 *  --------------------------------*/
-    if (session_status() == PHP_SESSION_NONE){
-        session_start();
-    }// end if
-
-	/* ----------------------------------------
-	 *	initialize security level to "insecure"
-	 * ----------------------------------------*/
-    if (!isset($_SESSION["security-level"])){
-        $_SESSION["security-level"] = 0;
-    }// end if
+	/* ------------------------------------------
+	 * Documentation:
+	 * - Domain: mutillidae.localhost
+	 * - Description: This is a RESTful web service for managing user accounts
+	 * - Endpoint: /webservices/rest/ws-user-account.php
+	 * - CORS Headers:
+	 *   - Access-Control-Allow-Origin: * (or specific domains)
+	 *   - Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+	 *   - Access-Control-Allow-Headers: Content-Type, Authorization
+	 * - Expected Response:
+	 *   - Status: 200 OK with JSON response
+	 *   - If method not allowed: 405 Method Not Allowed with allowed methods in response header
+	 * ------------------------------------------ */
 
 	/* ------------------------------------------
 	 * Constants used in application
 	 * ------------------------------------------ */
 	require_once '../../includes/constants.php';
-	require_once '../../includes/minimum-class-definitions.php';
+	require_once '../../classes/SQLQueryHandler.php';
+	require_once '../../classes/CustomErrorHandler.php';
 
 	class MissingPostParameterException extends Exception {
 		public function __construct($parameter) {
@@ -59,6 +60,12 @@
 	}//end function jsonEncodeQueryResults
 
 	try{
+		// Initialize the SQL query handler
+		$SQLQueryHandler = new SQLQueryHandler(0);
+		$lSecurityLevel = $SQLQueryHandler->getSecurityLevel();
+
+		$CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
+
 		$lAccountUsername = "";
 		$lVerb = $_SERVER['REQUEST_METHOD'];
 
@@ -366,7 +373,7 @@ Host: mutillidae.localhost
 				
 				// Set the response header to JSON and output the response
 				header('Content-Type: application/json');
-				echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);				
+				echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
 
 			break;
 			default:

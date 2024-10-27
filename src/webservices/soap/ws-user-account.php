@@ -4,22 +4,30 @@
 	// Define a dedicated exception class for missing parameters
 	class MissingParameterException extends Exception {}
 
-    if (session_status() == PHP_SESSION_NONE){
-        session_start();
-    }// end if
-
-    if (!isset($_SESSION["security-level"])){
-        $_SESSION["security-level"] = 0;
-    }// end if
-
 	/* ------------------------------------------
 	 * Constants used in application
 	* ------------------------------------------ */
 	require_once '../../includes/constants.php';
-	require_once '../../includes/minimum-class-definitions.php';
+	require_once '../../classes/MySqlHandler.php';
+	require_once '../../classes/Encoder.php';
+	require_once '../../classes/CustomErrorHandler.php';
+
+	// Initialize the SQL query handler
+	$SQLQueryHandler = new MySqlHandler(0);
+
+	$lSecurityLevel = $SQLQueryHandler->getSecurityLevel();
+
+	// Initialize the encoder
+	$Encoder = new Encoder($lSecurityLevel);
+
+	// Initialize the custom error handler
+	$CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
+
+	// Initialize the log handler
+	$LogHandler = new LogHandler($lSecurityLevel);
 
 	try{
-		switch ($_SESSION["security-level"]){
+		switch ($lSecurityLevel){
 			default: // Insecure
 			case "0": // This code is insecure
 			case "1": // This code is insecure
@@ -34,8 +42,9 @@
 		}//end switch
 
 	} catch (Exception $e) {
-		echo $CustomErrorHandler->FormatError($e, "ws-user-account.php: Unable to parse session");
-	}// end try;
+		$lErrorMessage = "ws-user-account.php: Unable to parse session";
+		echo $CustomErrorHandler->FormatError($e, $lErrorMessage);
+	}// end try
 
 	// Pull in the NuSOAP code
 	require_once './lib/nusoap.php';
@@ -228,15 +237,16 @@
 		return $lResults;
 	}//end function doXMLEncodeQueryResults	
 
-	function xmlEncodeQueryResults($pUsername, $pEncodeOutput, $pSQLQueryHandler) {
+	function xmlEncodeQueryResults($pUsername, $pEncodeOutput) {
+		global $SQLQueryHandler;
 
 		// Fetch query results based on the username
 		if ($pUsername == "*") {
 			// List all accounts
-			$lQueryResult = $pSQLQueryHandler->getUsernames();
+			$lQueryResult = $SQLQueryHandler->getUsernames();
 		} else {
 			// Lookup specific user account
-			$lQueryResult = $pSQLQueryHandler->getNonSensitiveAccountInformation($pUsername);
+			$lQueryResult = $SQLQueryHandler->getNonSensitiveAccountInformation($pUsername);
 		}
 	
 		// Check if the query returned valid results
@@ -267,7 +277,7 @@
 
 		   	assertParameter($pUsername);
 
-			$lResults = xmlEncodeQueryResults($pUsername, $lEncodeOutput, $SQLQueryHandler);
+			$lResults = xmlEncodeQueryResults($pUsername, $lEncodeOutput);
 
 			try {
 				$LogHandler->writeToLog("ws-user-account.php: Fetched user-information for: {$pUsername}");

@@ -24,10 +24,10 @@ if (!defined('__SITE_ROOT__')){if (!defined('__SITE_ROOT__')){define('__SITE_ROO
 class CustomErrorHandler{
 
 	//default insecure: no output encoding.
-	protected $encodeOutput = FALSE;
+	protected $encodeOutput = false;
 	protected $mSecurityLevel = 0;
 	protected $mEncoder = null;
-	protected $supressErrorMessages = FALSE;
+	protected $supressErrorMessages = false;
 
 	protected $mLine = "";
 	protected $mCode = "";
@@ -76,10 +76,11 @@ class CustomErrorHandler{
 		$this->mSecurityLevel = $pSecurityLevel;
 
 		switch ($this->mSecurityLevel){
+			default:
 	   		case "0": // This code is insecure, we are not encoding output
 	   		case "1": // This code is insecure, we are not encoding output
-				$this->encodeOutput = FALSE;
-				$this->supressErrorMessages = FALSE;
+				$this->encodeOutput = false;
+				$this->supressErrorMessages = false;
 	   		break;
 
 	   		case "2":
@@ -87,8 +88,8 @@ class CustomErrorHandler{
 			case "4":
 	   		case "5": // This code is fairly secure
 	  			// If we are secure, then we encode all output.
-	   			$this->encodeOutput = TRUE;
-	   			$this->supressErrorMessages = TRUE;
+	   			$this->encodeOutput = true;
+	   			$this->supressErrorMessages = true;
 	   		break;
 	   	}// end switch
 	}// end function
@@ -125,7 +126,7 @@ class CustomErrorHandler{
 		$this->doSetSecurityLevel($pSecurityLevel);
 
 		//initialize encoder
-		require_once (__SITE_ROOT__.'/classes/EncodingHandler.php');
+		require_once __SITE_ROOT__.'/classes/EncodingHandler.php';
 		$this->mEncoder = new EncodingHandler();
 	}// end function
 
