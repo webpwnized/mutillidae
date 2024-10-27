@@ -1,14 +1,4 @@
 <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
-    if (!isset($_SESSION["security-level"])) {
-        $_SESSION["security-level"] = 0;
-    }
-
-    require_once '../../includes/constants.php';
-    require_once '../../includes/minimum-class-definitions.php';
 
     class UnsupportedHttpMethodException extends Exception {
         public function __construct($message) {
@@ -98,7 +88,15 @@
             ]);
         }
     } catch (Exception $e) {
+        header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
-        echo $CustomErrorHandler->FormatError($e, "Error in handling request");
+        echo json_encode([
+            "Error" => $e->getMessage(),
+            "Method" => $lVerb,
+            "Parameters" => [
+                "GET" => $_GET,
+                "POST" => $_POST
+            ]
+        ]);
     }
 ?>
