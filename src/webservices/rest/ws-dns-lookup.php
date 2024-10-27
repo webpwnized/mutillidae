@@ -65,10 +65,10 @@ try {
 
     // Validate the target host to protect against command injection, if security is enabled
     if ($lProtectAgainstCommandInjection) {
-        $lTargetHostValidated = preg_match(IPV4_REGEX_PATTERN, $pTargetHost) ||
-                                preg_match(DOMAIN_NAME_REGEX_PATTERN, $pTargetHost) ||
-                                preg_match(IPV6_REGEX_PATTERN, $pTargetHost);
-        if (!$lTargetHostValidated) {
+        $lHostnameValidated = preg_match(IPV4_REGEX_PATTERN, $lHostname) ||
+                                preg_match(DOMAIN_NAME_REGEX_PATTERN, $lHostname) ||
+                                preg_match(IPV6_REGEX_PATTERN, $lHostname);
+        if (!$lHostnameValidated) {
             http_response_code(400); // Bad Request
             header($lContentTypeJSON);
             echo json_encode(['error' => 'Invalid hostname format.']);
