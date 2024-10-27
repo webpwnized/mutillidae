@@ -47,7 +47,6 @@ try {
     // Retrieve and sanitize the 'hostname' parameter from the GET request
     $lHostname = isset($_GET['hostname']) ? trim($_GET['hostname']) : '';
 
-    $lHostname = isset($_REQUEST['hostname']) ? trim($_REQUEST['hostname']) : '';
     if (empty($lHostname)) {
         http_response_code(400); // Bad Request
         header($lContentTypeJSON);

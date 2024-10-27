@@ -63,6 +63,11 @@ function lookupDNS($pTargetHost) {
     require_once '../../includes/constants.php';
     require_once '../../includes/minimum-class-definitions.php';
 
+    // Define a dedicated exception for command execution failures
+    class CommandExecutionException extends Exception {}
+    class ValidationException extends Exception {}
+    class LookupException extends Exception {}
+
     try {
         // Determine security level and protection settings
         switch ($_SESSION["security-level"]) {
@@ -86,46 +91,46 @@ function lookupDNS($pTargetHost) {
             $lTargetHostValidated = preg_match(IPV4_REGEX_PATTERN, $pTargetHost) ||
                                     preg_match(DOMAIN_NAME_REGEX_PATTERN, $pTargetHost) ||
                                     preg_match(IPV6_REGEX_PATTERN, $pTargetHost);
-        } else {
-            $lTargetHostValidated = true;  // No validation
+            if (!$lTargetHostValidated) {
+                throw new ValidationException("Invalid target host: " . $pTargetHost);
+            }
         }
 
         // Protect against XSS by encoding the target host, if enabled
         if ($lProtectAgainstXSS) {
-            $lTargetHostText = $Encoder->encodeForHTML($pTargetHost);
+            $lTargetHost = $Encoder->encodeForHTML($pTargetHost);
         } else {
-            $lTargetHostText = $pTargetHost;  // Allow XSS by not encoding
+            $lTargetHost = $pTargetHost;  // Allow XSS by not encoding
         }
 
-    } catch (Exception $e) {
-        // Handle errors during configuration setup
-        $lErrorMessage = "Error setting up configuration on webservice ws-dns-lookup.php";
-        echo $CustomErrorHandler->FormatError($e, $lErrorMessage);
-    }
+        if ($lProtectAgainstCommandInjection) {
+            $lCommand = "nslookup " . $lTargetHost; // Vulnerable: Direct input usage
+        } else {
+            // Secure version: Use escapeshellcmd() and escapeshellarg() to sanitize input
+            $lCommand = escapeshellcmd("nslookup " . escapeshellarg($lTargetHost));
+        }
+    
+        // Execute the nslookup command and return the result
+        $lOutput = shell_exec($lCommand);
+    
+        if ($lOutput === null) {
+            throw new CommandExecutionException("Command execution failed.");
+        }
 
-    // Execute the nslookup command and return the result
-    try {
+        // Execute the nslookup command and return the result
         $lResults = "";  // Initialize results string
-
-        if ($lTargetHostValidated) {
-            $lResults .= '<results host="' . $lTargetHostText . '">';
-            $lResults .= shell_exec("nslookup " . $pTargetHost);  // Execute the command
-            $lResults .= '</results>';
-            $LogHandler->writeToLog("Executed operating system command: nslookup " . $lTargetHostText);  // Log the command execution
-        } else {
-            $lResults .= "<message>Validation Error</message>";  // Validation error message
-        }
+        $lResults .= '<results host="' . $lTargetHostText . '">';
+        $lResults .= $lOutput;  // Append the nslookup output to the results
+        $lResults .= '</results>';
+        $LogHandler->writeToLog("Executed operating system command: nslookup " . $lTargetHostText);  // Log the command execution
 
         return $lResults;
-
     } catch (Exception $e) {
-        // Handle errors during DNS lookup
-        echo $CustomErrorHandler->FormatError($e, "Input: " . $pTargetHost);
-    }
-}
+        throw new LookupException("Error in method lookupDNS: " . $e->getMessage());
+    } // End try-catch
+} // End function lookupDNS
 
-// Handle the SOAP request with error handling
-try {
+try{
     // Process the incoming SOAP request
     $lSOAPWebService->service(file_get_contents("php://input"));
 } catch (Exception $e) {
