@@ -1,16 +1,6 @@
 <?php
 // ws-dns-lookup.php: REST-based Lookup DNS Service with Command Injection for Teaching
 
-// Start session if not already started
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Initialize security level if not already set
-if (!isset($_SESSION["security-level"])) {
-    $_SESSION["security-level"] = 0;
-}
-
 // Include required constants and utility classes
 require_once '../../includes/constants.php';
 require_once '../../classes/SQLQueryHandler.php';
