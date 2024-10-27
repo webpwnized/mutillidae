@@ -66,7 +66,7 @@
 		
 		$CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
 
-		$lAccountUsername = "";
+		$lUsername = "";
 		$lVerb = $_SERVER['REQUEST_METHOD'];
 
 		// Get the origin of the request
@@ -81,15 +81,15 @@
 				if(isset($_GET['username'])){
 					/* Example hack: username=jeremy'+union+select+concat('The+password+for+',username,'+is+',+password),mysignature+from+accounts+--+ */
 
-					$lAccountUsername = $_GET['username'] ?? '';
+					$lUsername = $_GET['username'] ?? '';
 					
 					// Fetch data based on the username
-					if ($lAccountUsername === "*") {
+					if ($lUsername === "*") {
 						// List all accounts
 						$lQueryResult = $SQLQueryHandler->getUsernames();
 					} else {
 						// Lookup specific user
-						$lQueryResult = $SQLQueryHandler->getNonSensitiveAccountInformation($lAccountUsername);
+						$lQueryResult = $SQLQueryHandler->getNonSensitiveAccountInformation($lUsername);
 					}
 					
 					// Prepare the response
@@ -103,7 +103,7 @@
 						$lArrayResponse['Result'] = ['Accounts' => $lArrayAccounts];
 					} else {
 						// User not found message
-						$lArrayResponse['Result'] = "User '$lAccountUsername' does not exist";
+						$lArrayResponse['Result'] = "User '$lUsername' does not exist";
 					}
 					
 					// Output the response as JSON with the correct headers
@@ -238,7 +238,7 @@ Host: mutillidae.localhost
 			case "POST"://create
 
 				// Fetch POST parameters
-				$lAccountUsername = getPOSTParameter("username", true);
+				$lUsername = getPOSTParameter("username", true);
 				$lAccountPassword = getPOSTParameter("password", true);
 				$lAccountFirstName = getPOSTParameter("firstname", true);
 				$lAccountLastName = getPOSTParameter("lastname", true);
@@ -247,14 +247,14 @@ Host: mutillidae.localhost
 				// Prepare response array
 				$lArrayResponse = [];
 				
-				if ($SQLQueryHandler->accountExists($lAccountUsername)) {
+				if ($SQLQueryHandler->accountExists($lUsername)) {
 					// If the account already exists
-					$lArrayResponse['Result'] = "Account '$lAccountUsername' already exists";
+					$lArrayResponse['Result'] = "Account '$lUsername' already exists";
 					$lArrayResponse['Success'] = false;
 				} else {
 					// Insert new account and set the response message
 					$lQueryResult = $SQLQueryHandler->insertNewUserAccount(
-						$lAccountUsername,
+						$lUsername,
 						$lAccountPassword,
 						$lAccountFirstName,
 						$lAccountLastName,
@@ -262,10 +262,10 @@ Host: mutillidae.localhost
 					);
 				
 					if ($lQueryResult) {
-						$lArrayResponse['Result'] = "Inserted account '$lAccountUsername'";
+						$lArrayResponse['Result'] = "Inserted account '$lUsername'";
 						$lArrayResponse['Success'] = true;
 					} else {
-						$lArrayResponse['Result'] = "Failed to insert account '$lAccountUsername'";
+						$lArrayResponse['Result'] = "Failed to insert account '$lUsername'";
 						$lArrayResponse['Success'] = false;
 					}
 				}
@@ -279,7 +279,7 @@ Host: mutillidae.localhost
 				/* $_POST array is not auto-populated for PUT method. Parse input into an array. */
 				populatePOSTSuperGlobal();
 
-				$lAccountUsername = getPOSTParameter("username", true);
+				$lUsername = getPOSTParameter("username", true);
 				$lAccountPassword = getPOSTParameter("password", true);
 				$lAccountFirstName = getPOSTParameter("firstname", true);
 				$lAccountLastName = getPOSTParameter("lastname", true);
@@ -288,10 +288,10 @@ Host: mutillidae.localhost
 				// Initialize the response array
 				$lArrayResponse = [];
 
-				if ($SQLQueryHandler->accountExists($lAccountUsername)) {
+				if ($SQLQueryHandler->accountExists($lUsername)) {
 					// Update the existing account
 					$lQueryResult = $SQLQueryHandler->updateUserAccount(
-						$lAccountUsername,
+						$lUsername,
 						$lAccountPassword,
 						$lAccountFirstName,
 						$lAccountLastName,
@@ -300,18 +300,18 @@ Host: mutillidae.localhost
 					);
 
 					if ($lQueryResult > 0) {
-						$lArrayResponse['Result'] = "Updated account '$lAccountUsername'.";
+						$lArrayResponse['Result'] = "Updated account '$lUsername'.";
 						$lArrayResponse['RowsAffected'] = $lQueryResult;
 						$lArrayResponse['Success'] = true;
 					} else {
-						$lArrayResponse['Result'] = "No rows were updated for account '$lAccountUsername'.";
+						$lArrayResponse['Result'] = "No rows were updated for account '$lUsername'.";
 						$lArrayResponse['RowsAffected'] = 0;
 						$lArrayResponse['Success'] = false;
 					}
 				} else {
 					// Insert a new account
 					$lQueryResult = $SQLQueryHandler->insertNewUserAccount(
-						$lAccountUsername, 
+						$lUsername, 
 						$lAccountPassword, 
 						$lAccountFirstName, 
 						$lAccountLastName, 
@@ -319,11 +319,11 @@ Host: mutillidae.localhost
 					);
 
 					if ($lQueryResult > 0) {
-						$lArrayResponse['Result'] = "Inserted account '$lAccountUsername'.";
+						$lArrayResponse['Result'] = "Inserted account '$lUsername'.";
 						$lArrayResponse['RowsAffected'] = $lQueryResult;
 						$lArrayResponse['Success'] = true;
 					} else {
-						$lArrayResponse['Result'] = "Failed to insert account '$lAccountUsername'.";
+						$lArrayResponse['Result'] = "Failed to insert account '$lUsername'.";
 						$lArrayResponse['RowsAffected'] = 0;
 						$lArrayResponse['Success'] = false;
 					}
@@ -339,35 +339,35 @@ Host: mutillidae.localhost
 				populatePOSTSuperGlobal();
 
 				// Fetch POST parameters
-				$lAccountUsername = getPOSTParameter("username", true);
+				$lUsername = getPOSTParameter("username", true);
 				$lAccountPassword = getPOSTParameter("password", true);
 				
 				// Initialize the response array
 				$lArrayResponse = [];
 				
-				if ($SQLQueryHandler->accountExists($lAccountUsername)) {
+				if ($SQLQueryHandler->accountExists($lUsername)) {
 					// Check if authentication is successful
-					if ($SQLQueryHandler->authenticateAccount($lAccountUsername, $lAccountPassword)) {
+					if ($SQLQueryHandler->authenticateAccount($lUsername, $lAccountPassword)) {
 						// Attempt to delete the user
-						$lQueryResult = $SQLQueryHandler->deleteUser($lAccountUsername);
+						$lQueryResult = $SQLQueryHandler->deleteUser($lUsername);
 				
 						if ($lQueryResult) {
 							// Successful deletion
-							$lArrayResponse['Result'] = "Deleted account '$lAccountUsername'.";
+							$lArrayResponse['Result'] = "Deleted account '$lUsername'.";
 							$lArrayResponse['Success'] = true;
 						} else {
 							// Failed deletion attempt
-							$lArrayResponse['Result'] = "Attempted to delete account '$lAccountUsername', but the result returned was '$lQueryResult'.";
+							$lArrayResponse['Result'] = "Attempted to delete account '$lUsername', but the result returned was '$lQueryResult'.";
 							$lArrayResponse['Success'] = false;
 						}
 					} else {
 						// Authentication failed
-						$lArrayResponse['Result'] = "Could not authenticate account '$lAccountUsername'. Password incorrect.";
+						$lArrayResponse['Result'] = "Could not authenticate account '$lUsername'. Password incorrect.";
 						$lArrayResponse['Success'] = false;
 					}
 				} else {
 					// Account does not exist
-					$lArrayResponse['Result'] = "User '$lAccountUsername' does not exist.";
+					$lArrayResponse['Result'] = "User '$lUsername' does not exist.";
 					$lArrayResponse['Success'] = false;
 				}
 				
