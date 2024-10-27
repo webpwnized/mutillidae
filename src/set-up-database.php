@@ -19,8 +19,6 @@
     require_once 'classes/MySQLHandler.php';
     $MySQLHandler = new MySQLHandler($lSecurityLevel);
     
-	$lErrorDetected = false;
-
 	function format($pMessage, $pLevel) {
 		$styles = [
 			"I" => "database-informative-message",
@@ -34,7 +32,8 @@
 	
 		return "<div class=\"".$lStyle."\">" . htmlspecialchars($pMessage) . "</div>";
 	}
-	
+
+	$lErrorDetected = false;
 ?>
 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -104,6 +103,29 @@
     		echo format("Executed query 'USE DATABASE' " . MySQLHandler::$mMySQLDatabaseName . " with result ".$lQueryResult,"I");
     	}// end if
 
+		$lQueryString = "
+			CREATE TABLE IF NOT EXISTS security_level (
+				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				level INT NOT NULL CHECK (level BETWEEN 0 AND 5) DEFAULT 0
+			);";
+		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
+		if (!$lQueryResult) {
+			$lErrorDetected = true;
+			echo format("Failed to create 'security_level' table.", "F");
+		} else {
+			echo format("Successfully created 'security_level' table.", "S");
+		}
+
+		// Optionally insert the initial value
+		$lInsertQuery = "INSERT INTO security_level (level) VALUES (0)";
+		$lInsertResult = $MySQLHandler->executeQuery($lInsertQuery);
+		if (!$lInsertResult) {
+			$lErrorDetected = true;
+			echo format("Failed to insert initial security level.", "F");
+		} else {
+			echo format("Initial security level set to 0.", "S");
+		}
+
     	$lQueryString = 'CREATE TABLE user_poll_results( '.
     			'cid INT NOT NULL AUTO_INCREMENT, '.
     			'tool_name TEXT, '.
@@ -113,8 +135,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'user_poll_results' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'user_poll_results' table.", "S");
     	}// end if
 
     	$lQueryString = 'CREATE TABLE blogs_table( '.
@@ -126,8 +149,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'blogs_table' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'blogs_table' table.", "S");
     	}// end if
 
     	$lQueryString = 'CREATE TABLE accounts( '.
@@ -143,8 +167,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'accounts' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'accounts' table.", "S");
     	}// end if
 
     	$lQueryString = 'CREATE TABLE hitlog( '.
@@ -158,8 +183,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'hitlog' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'hitlog' table.", "S");
     	}// end if
 
 		$lQueryString = "INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, api_key) VALUES
@@ -204,8 +230,9 @@
 			$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 		if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to insert data into 'accounts' table.", "F");
     	}else{
-    		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
+			echo format("Successfully inserted data into 'accounts' table.", "S");
     	}// end if
 
 		$lQueryString = "INSERT INTO `blogs_table` (`cid`, `blogger_name`, `comment`, `date`) VALUES
@@ -235,8 +262,9 @@
 		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to insert data into 'blogs_table' table.", "F");
     	}else{
-    		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
+			echo format("Successfully inserted data into 'blogs_table' table.", "S");
     	}// end if
 
     	$lQueryString = 'CREATE TABLE credit_cards( '.
@@ -248,8 +276,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'credit_cards' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'credit_cards' table.", "S");
     	}// end if
 
 		$lQueryString = "INSERT INTO `credit_cards` (`ccid`, `ccnumber`, `ccv`, `expiration`) VALUES
@@ -269,8 +298,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to insert data into 'credit_cards' table.", "F");
     	}else{
-    		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
+			echo format("Successfully inserted data into 'credit_cards' table.", "S");
     	}// end if
 
     	$lQueryString =
@@ -284,38 +314,53 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'pen_test_tools' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'pen_test_tools' table.", "S");
     	}// end if
 
-    	$lQueryString ="INSERT INTO `pen_test_tools` (`tool_id`, `tool_name`, `phase_to_use`, `tool_type`, `comment`) VALUES
-    		(1, 'WebSecurify', 'Discovery', 'Scanner', 'Can capture screenshots automatically'),
-    		(2, 'Grendel-Scan', 'Discovery', 'Scanner', 'Has interactive-mode. Lots plug-ins. Includes Nikto. May not spider JS menus well.'),
-    		(3, 'Skipfish', 'Discovery', 'Scanner', 'Agressive. Fast. Uses wordlists to brute force directories.'),
-    		(4, 'w3af', 'Discovery', 'Scanner', 'GUI simple to use. Can call sqlmap. Allows scan packages to be saved in profiles. Provides evasion, discovery, brute force, vulneraility assessment (audit), exploitation, pattern matching (grep).'),
-    		(5, 'Burp-Suite', 'Discovery', 'Scanner', 'GUI simple to use. Provides highly configurable manual scan assistence with productivity enhancements.'),
-    		(6, 'Netsparker Community Edition', 'Discovery', 'Scanner', 'Excellent spider abilities and reporting. GUI driven. Runs on Windows. Good at SQLi and XSS detection. From Mavituna Security. Professional version available for purchase.'),
-    		(7, 'NeXpose', 'Discovery', 'Scanner', 'GUI driven. Runs on Windows. From Rapid7. Professional version available for purchase. Updates automatically. Requires large amounts of memory.'),
-    		(8, 'Hailstorm', 'Discovery', 'Scanner', 'From Cenzic. Professional version requires dedicated staff, multiple dediciated servers, professional pen-tester to analyze results, and very large license fee. Extensive scanning ability. Very large vulnerability database. Highly configurable. Excellent reporting. Can scan entire networks of web applications. Extremely expensive. Requires large amounts of memory.'),
-    		(9, 'Tamper Data', 'Discovery', 'Interception Proxy', 'Firefox add-on. Easy to use. Tampers with POST parameters and HTTP Headers. Does not tamper with URL query parameters. Requires manual browsing.'),
-    		(10, 'DirBuster', 'Discovery', 'Fuzzer', 'OWASP tool. Fuzzes directory names to brute force directories.'),
-    		(11, 'SQL Inject Me', 'Discovery', 'Fuzzer', 'Firefox add-on. Attempts common strings which elicit XSS responses. Not compatible with Firefox 8.0.'),
-    		(12, 'XSS Me', 'Discovery', 'Fuzzer', 'Firefox add-on. Attempts common strings which elicit responses from databases when SQL injection is present. Not compatible with Firefox 8.0.'),
-    		(13, 'GreaseMonkey', 'Discovery', 'Browser Manipulation Tool', 'Firefox add-on. Allows the user to inject Javascripts and change page.'),
-    		(14, 'NSLookup', 'Reconnaissance', 'DNS Server Query Tool', 'DNS query tool can query DNS name or reverse lookup on IP. Set debug for better output. Premiere tool on Windows but Linux perfers Dig. DNS traffic generally over UDP 53 unless response long then over TCP 53. Online version combined with anonymous proxy or TOR network may be prefered for stealth.'),
-    		(15, 'Whois', 'Reconnaissance', 'Domain name lookup service', 'Whois is available in Linux naitvely and Windows as a Sysinternals download plus online. Whois can lookup the registrar of a domain and the IP block associated. An online version is http://network-tools.com/'),
-    		(16, 'Dig', 'Reconnaissance', 'DNS Server Query Tool', 'The Domain Information Groper is prefered on Linux over NSLookup and provides more information natively. NSLookup must be in debug mode to give similar output. DIG can perform zone transfers if the DNS server allows transfers.'),
-    		(17, 'Fierce Domain Scanner', 'Reconnaissance', 'DNS Server Query Tool', 'Powerful DNS scan tool. FDS is a Perl program which scans and reverse scans a domain plus scans IPs within the same block to look for neighoring machines. Available in the Samurai and Backtrack distributions plus http://ha.ckers.org/fierce/'),
-    		(18, 'host', 'Reconnaissance', 'DNS Server Query Tool', 'A simple DNS lookup tool included with BIND. The tool is a friendly and capible command line tool with excellent documentation. Does not posess the automation of FDS.'),
-    		(19, 'zaproxy', 'Reconnaissance', 'Interception Proxy', 'OWASP Zed Attack Proxy. An interception proxy that can also passively or actively scan applications as well as perform brute-forcing. Similar to Burp-Suite without the disadvantage of requiring a costly license.'),
-    		(20, 'Google intitle', 'Discovery', 'Search Engine','intitle and site directives allow directory discovery. GHDB available to provide hints. See Hackers for Charity site.')";
-    	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
-    	if (!$lQueryResult) {
-    		$lErrorDetected = true;
-    	}else{
-    		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
-    	}// end if
-
+		$lQueryString = "
+		INSERT INTO `pen_test_tools` (`tool_id`, `tool_name`, `phase_to_use`, `tool_type`, `comment`) VALUES
+		(1, 'Burp Suite Professional', 'Discovery', 'Interception Proxy', 'Advanced manual testing with automated scanning capabilities.'),
+		(2, 'OWASP ZAP', 'Discovery', 'Interception Proxy', 'Free, open-source alternative to Burp Suite with active and passive scanning.'),
+		(3, 'Nmap', 'Reconnaissance', 'Network Scanner', 'Highly versatile tool for network discovery and security auditing.'),
+		(4, 'Nuclei', 'Discovery', 'Scanner', 'Automated scanner powered by custom templates for detecting vulnerabilities.'),
+		(5, 'SQLMap', 'Exploitation', 'SQL Injection Tool', 'Automates the process of detecting and exploiting SQL injection flaws.'),
+		(6, 'Metasploit Framework', 'Exploitation', 'Exploitation Framework', 'Comprehensive platform for developing, testing, and using exploits.'),
+		(7, 'Recon-ng', 'Reconnaissance', 'Framework', 'Web reconnaissance framework with modular structure.'),
+		(8, 'Amass', 'Reconnaissance', 'DNS Enumeration Tool', 'Performs subdomain enumeration and DNS reconnaissance.'),
+		(9, 'Shodan', 'Discovery', 'Search Engine', 'Search engine for Internet-connected devices with vulnerabilities.'),
+		(10, 'Aquatone', 'Discovery', 'Visual Reconnaissance Tool', 'Captures screenshots of websites for quick inspection.'),
+		(11, 'Sublist3r', 'Reconnaissance', 'DNS Enumeration Tool', 'Finds subdomains across multiple sources.'),
+		(12, 'Dirsearch', 'Discovery', 'Directory Brute-forcing Tool', 'Brute-forces web directories to discover hidden content.'),
+		(13, 'Hydra', 'Exploitation', 'Password Cracking Tool', 'Performs brute force attacks on various services like SSH, FTP, etc.'),
+		(14, 'John the Ripper', 'Exploitation', 'Password Cracker', 'Advanced password cracking tool with modular capabilities.'),
+		(15, 'Hashcat', 'Exploitation', 'Password Cracker', 'GPU-based password cracking tool for large hash sets.'),
+		(16, 'Responder', 'Exploitation', 'Network Attack Tool', 'Intercepts and relays authentication traffic on the network.'),
+		(17, 'Aircrack-ng', 'Exploitation', 'Wireless Attack Tool', 'Suite for auditing Wi-Fi networks by capturing and cracking keys.'),
+		(18, 'Wireshark', 'Reconnaissance', 'Network Protocol Analyzer', 'Captures and analyzes network traffic.'),
+		(19, 'PwnCat', 'Exploitation', 'Post-Exploitation Tool', 'Advanced backdoor framework for remote access.'),
+		(20, 'Cobalt Strike', 'Exploitation', 'Red Teaming Tool', 'Commercial tool for advanced adversary simulations.'),
+		(21, 'BloodHound', 'Discovery', 'Active Directory Tool', 'Maps out Active Directory relationships for attack path discovery.'),
+		(22, 'PowerShell Empire', 'Exploitation', 'Post-Exploitation Tool', 'Framework for managing agents and post-exploitation operations.'),
+		(23, 'Ffuf', 'Discovery', 'Fuzzer', 'Fast web fuzzer written in Go. Useful for directory and parameter brute-forcing.'),
+		(24, 'Ghidra', 'Analysis', 'Reverse Engineering Tool', 'Open-source reverse engineering suite from NSA.'),
+		(25, 'Radare2', 'Analysis', 'Reverse Engineering Tool', 'Powerful command-line framework for binary analysis and exploitation.'),
+		(26, 'LinPEAS', 'Discovery', 'Privilege Escalation Tool', 'Searches for potential privilege escalation vectors on Linux systems.'),
+		(27, 'Windows Exploit Suggester', 'Discovery', 'Privilege Escalation Tool', 'Suggests exploits based on missing patches.'),
+		(28, 'Maltego', 'Reconnaissance', 'OSINT Tool', 'Graphs and correlates public data for OSINT investigations.'),
+		(29, 'TheHarvester', 'Reconnaissance', 'OSINT Tool', 'Collects emails, subdomains, and names from public sources.'),
+		(30, 'Censys', 'Discovery', 'Search Engine', 'Search engine for Internet-connected devices and vulnerabilities.');";
+	
+		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
+		
+		if (!$lQueryResult) {
+			$lErrorDetected = true;
+			echo format("Failed to populate 'pen_test_tools' table.", "F");
+		} else {
+			echo format("Successfully populated 'pen_test_tools' table.", "S");
+		}
+	
     	$lQueryString =
     			'CREATE TABLE captured_data('.
     				'data_id INT NOT NULL AUTO_INCREMENT, '.
@@ -331,8 +376,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'captured_data' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'captured_data' table.", "S");
     	}// end if
 
     	$lQueryString =
@@ -345,8 +391,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'page_hints' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'page_hints' table.", "S");
     	}// end if
 
     	$lQueryString =
@@ -359,8 +406,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'page_help' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'page_help' table.", "S");
     	}// end if
 
     	$lQueryString ="INSERT INTO `page_help` (`page_name`, `help_text_key`, `order_preference`) VALUES
@@ -803,8 +851,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to insert data into 'page_help' table.", "F");
     	}else{
-    		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
+			echo format("Successfully inserted data into 'page_help' table.", "S");
     	}// end if
 
     	$lQueryString =
@@ -817,8 +866,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'level_1_help_include_files' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'level_1_help_include_files' table.", "S");
     	}// end if
 
     	/* NOTE: Be sure to keep indexes in the help_texts table
@@ -952,8 +1002,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to insert data into 'level_1_help_include_files' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully inserted data into 'level_1_help_include_files' table.", "S");
     	}// end if
 
     	$lQueryString =
@@ -965,8 +1016,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'help_texts' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'help_texts' table.", "S");
     	}// end if
 
     	/* NOTE: Be sure to keep indexes in the help_texts table
@@ -1036,8 +1088,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to insert data into 'help_texts' table.", "F");
     	}else{
-    		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
+			echo format("Successfully inserted data into 'help_texts' table.", "S");
     	}// end if
 
     	$lQueryString = 'CREATE TABLE youTubeVideos( '.
@@ -1049,8 +1102,9 @@
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
+			echo format("Failed to create 'youTubeVideos' table.", "F");
     	}else{
-    		echo format("Executed query 'CREATE TABLE' with result ".$lQueryResult,"S");
+			echo format("Successfully created 'youTubeVideos' table.", "S");
     	}// end if
 
     	$lQueryString = "INSERT INTO youTubeVideos(recordIndetifier, identificationToken, title)
@@ -1242,10 +1296,10 @@
     $lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {
 		$lErrorDetected = true;
+		echo format("Failed to insert data into 'youTubeVideos' table.", "F");
 	}else{
-		echo "<div class=\"database-success-message\">Executed query 'INSERT INTO TABLE' with result ".$lQueryResult."</div>";
+		echo format("Successfully inserted data into 'youTubeVideos' table.", "S");
 	}// end if
-
 
 	/* ***********************************************************************************
 	 * Create accounts.xml password.txt file from MySQL accounts table
@@ -1264,11 +1318,9 @@
 	$lQueryString = "SELECT * FROM accounts;";
 	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 
-	if (isset($lQueryResult->num_rows)){
-		if ($lQueryResult->num_rows > 0) {
-			$lResultsFound = true;
-			$lRecordsFound = $lQueryResult->num_rows;
-		}//end if
+	if (isset($lQueryResult->num_rows) && $lQueryResult->num_rows > 0) {
+		$lResultsFound = true;
+		$lRecordsFound = $lQueryResult->num_rows;
 	}//end if
 
 	if ($lResultsFound){
