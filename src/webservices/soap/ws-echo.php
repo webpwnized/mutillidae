@@ -1,4 +1,7 @@
 <?php
+
+class MethodExecutionException extends Exception {}
+
 // Include the nusoap library
 require_once './lib/nusoap.php';
 
@@ -47,14 +50,12 @@ function echoMessage($pMessage) {
         require_once '../../includes/constants.php';
         require_once '../../classes/MySQLHandler.php';
         require_once '../../classes/Encoder.php';
-        require_once '../../classes/CustomErrorHandler.php';
         
         $MySQLHandler = new MySQLHandler(0);
 
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
         $Encoder = new Encoder($lSecurityLevel);
-        $CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
 
         switch ($lSecurityLevel){
             default: // Default case: This code is insecure
@@ -92,8 +93,8 @@ function echoMessage($pMessage) {
         return $lResult; // Return the result as SOAP response
 
 	}catch(Exception $e){
-        $lMessage = "Error setting up configuration on webservice ws-echo.php";
-        echo $CustomErrorHandler->FormatError($e, $lMessage);
+        $lMessage = "Error executing method echoMessage in webservice ws-echo.php";
+        throw new MethodExecutionException($lMessage);
     }// end try
 
 } // end function echoMessage
@@ -106,4 +107,5 @@ try {
     // Send a fault response back to the client
     $lSOAPWebService->fault('Server', "SOAP Service Error: " . $e->getMessage());
 }
+
 ?>
