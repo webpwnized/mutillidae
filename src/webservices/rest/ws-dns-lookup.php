@@ -1,5 +1,5 @@
 <?php
-// ws-lookup-dns.php: REST-based Lookup DNS Service with Command Injection for Teaching
+// ws-dns-lookup.php: REST-based Lookup DNS Service with Command Injection for Teaching
 
 // Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {

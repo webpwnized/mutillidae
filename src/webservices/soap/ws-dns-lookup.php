@@ -22,7 +22,7 @@ $lSOAPWebService->register(
     <br/>
     <br/>Sample Request (Copy and paste into Burp Repeater)
     <br/>
-    <br/>POST /webservices/soap/ws-lookup-dns.php HTTP/1.1
+    <br/>POST /webservices/soap/ws-dns-lookup.php HTTP/1.1
     <br/>Accept-Encoding: gzip,deflate
     <br/>Content-Type: text/xml;charset=UTF-8
     <br/>SOAPAction: "urn:commandinjwsdl#commandinj"
