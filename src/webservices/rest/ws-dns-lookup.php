@@ -14,18 +14,21 @@ if (!isset($_SESSION["security-level"])) {
 // Include required constants and utility classes
 require_once '../../includes/constants.php';
 require_once '../../classes/SQLQueryHandler.php';
+require_once '../../classes/LogHandler.php';
 
 // Initialize SQL query handler with security level 0
 $SQLQueryHandler = new SQLQueryHandler(0);
+
+ // Get the current security level from database instead of session
+ $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+
+ $LogHandler = new LogHandler($lSecurityLevel);
 
 // Define a dedicated exception for command execution failures
 class CommandExecutionException extends Exception {}
 
 try {
     $lContentTypeJSON = 'Content-Type: application/json';
-
-    // Get the current security level from database instead of session
-    $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
     // Determine security level and protection settings
     switch ($lSecurityLevel) {
@@ -82,6 +85,7 @@ try {
 
     // Execute the nslookup command and return the result
     $lOutput = shell_exec($lCommand);
+    $LogHandler->writeToLog("Command executed from web service ws-dns-lookup.php: " . $lCommand);
 
     if ($lOutput === null) {
         throw new CommandExecutionException("Command execution failed.");
@@ -90,7 +94,7 @@ try {
     // Return the output as JSON
     http_response_code(200);
     header($lContentTypeJSON); // Set response format to JSON
-    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'result' => $lOutput]);
+    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput]);
 
 } catch (Exception $e) {
     // Handle errors during configuration setup
