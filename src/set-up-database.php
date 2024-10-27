@@ -106,19 +106,34 @@
 		$lQueryString = "
 			CREATE TABLE IF NOT EXISTS security_level (
 				id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				level INT NOT NULL CHECK (level BETWEEN 0 AND 5) DEFAULT 0
-			);";
+				level INT NOT NULL DEFAULT 0
+			);
+		";
+		
 		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
+		
 		if (!$lQueryResult) {
 			$lErrorDetected = true;
 			echo format("Failed to create 'security_level' table.", "F");
 		} else {
 			echo format("Successfully created 'security_level' table.", "S");
+		
+			// Ensure AUTO_INCREMENT starts at 1 (default behavior)
+			$lAutoIncrementQuery = "ALTER TABLE security_level AUTO_INCREMENT = 1;";
+			$lAutoIncrementResult = $MySQLHandler->executeQuery($lAutoIncrementQuery);
+		
+			if (!$lAutoIncrementResult) {
+				$lErrorDetected = true;
+				echo format("Failed to set AUTO_INCREMENT to 1.", "F");
+			} else {
+				echo format("AUTO_INCREMENT set to start at 1.", "S");
+			}
 		}
-
+		
 		// Optionally insert the initial value
 		$lInsertQuery = "INSERT INTO security_level (level) VALUES (0)";
 		$lInsertResult = $MySQLHandler->executeQuery($lInsertQuery);
+		
 		if (!$lInsertResult) {
 			$lErrorDetected = true;
 			echo format("Failed to insert initial security level.", "F");
