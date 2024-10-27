@@ -84,7 +84,7 @@ try {
     // Return the output as JSON
     http_response_code(200);
     header($lContentTypeJSON); // Set response format to JSON
-    echo json_encode(['hostname' => $lHostname, 'result' => $lOutput]);
+    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'result' => $lOutput]);
 
 } catch (Exception $e) {
     // Handle errors during configuration setup
