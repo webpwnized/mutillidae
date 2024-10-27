@@ -1459,7 +1459,7 @@ if (!$lErrorDetected) {
 
     // JavaScript-based redirect to ensure the session is cleared before the redirect
     echo "<script>
-        if (confirm('Database reset successful. Click OK to continue to the home page.')) {
+        if (confirm('Database reset successful. Click OK to continue to the home page. Click Cancel to stay on this page.')) {
             window.location.href = '$lRedirectLocation';
         }
     </script>";

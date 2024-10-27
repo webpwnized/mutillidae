@@ -46,10 +46,12 @@ function echoMessage($pMessage) {
         // Include required constants and utility classes
         require_once '../../includes/constants.php';
         require_once '../../classes/MySQLHandler.php';
-
+        require_once '../../classes/Encoder.php';
+        require_once '../../classes/CustomErrorHandler.php';
+        
         $MySQLHandler = new MySQLHandler(0);
 
-        $lSecurityLevel = $MySQLHandler->getSecurityLevel();
+        $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
         $Encoder = new Encoder($lSecurityLevel);
         $CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);

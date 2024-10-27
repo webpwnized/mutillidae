@@ -11,11 +11,12 @@
 	require_once '../../classes/MySqlHandler.php';
 	require_once '../../classes/Encoder.php';
 	require_once '../../classes/CustomErrorHandler.php';
+	require_once '../../classes/LogHandler.php';
 
 	// Initialize the SQL query handler
 	$SQLQueryHandler = new MySqlHandler(0);
 
-	$lSecurityLevel = $SQLQueryHandler->getSecurityLevel();
+	$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
 	// Initialize the encoder
 	$Encoder = new Encoder($lSecurityLevel);

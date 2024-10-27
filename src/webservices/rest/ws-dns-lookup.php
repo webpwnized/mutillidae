@@ -25,7 +25,7 @@ try {
     $lContentTypeJSON = 'Content-Type: application/json';
 
     // Get the current security level from database instead of session
-    $lSecurityLevel = $SQLQueryHandler->getSecurityLevel();
+    $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
     // Determine security level and protection settings
     switch ($lSecurityLevel) {

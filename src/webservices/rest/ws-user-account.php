@@ -62,8 +62,8 @@
 	try{
 		// Initialize the SQL query handler
 		$SQLQueryHandler = new SQLQueryHandler(0);
-		$lSecurityLevel = $SQLQueryHandler->getSecurityLevel();
-
+		$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+		
 		$CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
 
 		$lAccountUsername = "";
