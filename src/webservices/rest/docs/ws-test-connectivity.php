@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS Test Connectivity Service Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0 2rem;
+            background-color: #f5f5f5;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 1rem;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>WS Test Connectivity Service Documentation</h1>
+    <p>
+        Welcome to the <strong>WS Test Connectivity Service</strong>. This service allows you to test 
+        if your client can successfully connect to the API. It supports only <code>GET</code> and <code>OPTIONS</code> requests 
+        and provides a JSON response confirming the connection status.
+    </p>
+
+    <div class="note">
+        <strong>Note for Beginners:</strong> 
+        This example shows how to make a request using Burp Repeater and the <code>curl</code> command. 
+        If you’re new to web services, follow these examples to learn how requests and responses work.
+    </div>
+
+    <h2>Endpoint</h2>
+    <p>The service is hosted at the following endpoint:</p>
+    <pre><code>GET /webservices/rest/ws-test-connectivity.php</code></pre>
+
+    <h2>Request Methods</h2>
+    <ul>
+        <li><b>GET</b>: Tests the connectivity and returns a success message.</li>
+        <li><b>OPTIONS</b>: Preflight request to determine allowed methods and headers.</li>
+    </ul>
+
+    <h2>Step-by-Step Example Using Burp Repeater</h2>
+    <p>Here’s how you can test the connectivity with Burp Repeater:</p>
+    <pre><code>GET /webservices/rest/ws-test-connectivity.php HTTP/1.1
+Host: mutillidae.localhost
+Origin: http://mutillidae.localhost
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36
+Accept: application/json
+Connection: close
+Content-Type: application/json</code></pre>
+
+    <p><strong>Instructions:</strong></p>
+    <ol>
+        <li>Open Burp Suite and navigate to the Repeater tab.</li>
+        <li>Copy the above request and paste it into the Repeater window.</li>
+        <li>Click <strong>Send</strong> to receive the response from the server.</li>
+    </ol>
+
+    <h2>Example Using <code>curl</code> (Command Line)</h2>
+    <p>If you prefer the command line, use the following <code>curl</code> command:</p>
+    <pre><code>curl -X GET "http://mutillidae.localhost/webservices/rest/ws-test-connectivity.php" \
+ -H "Host: mutillidae.localhost" \
+ -H "Origin: http://mutillidae.localhost" \
+ -H "Accept: application/json" \
+ -H "Content-Type: application/json"</code></pre>
+
+    <p><strong>Instructions:</strong></p>
+    <ol>
+        <li>Open a terminal or command prompt.</li>
+        <li>Copy and paste the above <code>curl</code> command.</li>
+        <li>Press <strong>Enter</strong> to send the request and view the response.</li>
+    </ol>
+
+    <h2>Expected Response</h2>
+    <p>If everything works correctly, you should receive a response like this:</p>
+    <pre><code>{
+    "code": 200,
+    "status": "OK",
+    "message": "Connection succeeded...",
+    "timestamp": "2024-10-27 22:35:12"
+}</code></pre>
+
+    <div class="note">
+        <strong>Troubleshooting Tips:</strong> 
+        <ul>
+            <li>Ensure that the <code>mutillidae.localhost</code> host is correctly configured in your environment.</li>
+            <li>If using Burp Suite, verify that your tool or browser is correctly configured to route traffic through Burp.</li>
+            <li>If you receive a <code>405 Method Not Allowed</code> response, make sure you're using a <code>GET</code> request.</li>
+        </ul>
+    </div>
+
+    <h2>Learn More</h2>
+    <p>Try experimenting with preflight <code>OPTIONS</code> requests to explore how CORS settings affect the service. 
+    This will help you understand how the API behaves in real-world scenarios.</p>
+</body>
+</html>
+
