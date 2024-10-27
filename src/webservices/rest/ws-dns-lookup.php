@@ -67,7 +67,7 @@ try {
         }
     }
 
-    if ($lProtectAgainstCommandInjection) {
+    if (!$lProtectAgainstCommandInjection) {
         $lCommand = "nslookup " . $lHostname; // Vulnerable: Direct input usage
     } else {
         // Secure version: Use escapeshellcmd() and escapeshellarg() to sanitize input
