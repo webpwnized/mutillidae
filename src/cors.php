@@ -92,6 +92,7 @@
             case "PUT":
             case "PATCH":
             case "DELETE":
+            case "OPTIONS":
                 lXMLHTTP.open(lMethod, lURL, lAsynchronously);
                 lXMLHTTP.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                 lXMLHTTP.send(lQueryParameters);
@@ -123,26 +124,12 @@
         <tr>
             <td class="label">HTTP Method</td>
             <td>
-                <label>
-                    <input type="radio" name="method" value="GET" checked />
-                    GET
-                </label><br>
-                <label>
-                    <input type="radio" name="method" value="POST" />
-                    POST
-                </label><br>
-                <label>
-                    <input type="radio" name="method" value="PUT" />
-                    PUT
-                </label><br>
-                <label>
-                    <input type="radio" name="method" value="PATCH" />
-                    PATCH
-                </label><br>
-                <label>
-                    <input type="radio" name="method" value="DELETE" />
-                    DELETE
-                </label><br>
+                <label><input type="radio" name="method" value="GET" checked /> GET</label><br>
+                <label><input type="radio" name="method" value="POST" /> POST</label><br>
+                <label><input type="radio" name="method" value="PUT" /> PUT</label><br>
+                <label><input type="radio" name="method" value="PATCH" /> PATCH</label><br>
+                <label><input type="radio" name="method" value="DELETE" /> DELETE</label><br>
+                <label><input type="radio" name="method" value="OPTIONS" /> OPTIONS</label><br>
             </td>
         </tr>
         <tr>
