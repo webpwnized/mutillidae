@@ -188,7 +188,7 @@
 		    $_SESSION["security-level"] = $lSecurityLevel;
 
 			/* Update the security level in the database */
-			$MySQLHandler->updateSecurityLevel($lSecurityLevel);
+			$SQLQueryHandler->updateSecurityLevel($lSecurityLevel);
 
 			switch ($lSecurityLevel){
 				case 0: $lhintsPopUpNotificationCode = "SL0";break;
