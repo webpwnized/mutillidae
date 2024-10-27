@@ -1439,29 +1439,31 @@
 	echo $CustomErrorHandler->FormatError($e, $lQueryString);
 }// end try
 
-// if no errors were detected, send the user back to the page that requested the database be reset.
-//We use JS instead of HTTP Location header so that HTML5 clearing JS above will run
-if(!$lErrorDetected){
-	/*If the user came from the database error page but we do not have
-	 * database errors anymore, send them to the home page.
-	 */
-	$lHTTPReferer = "";
-	if (isset($_SERVER["HTTP_REFERER"])) {
-		$lHTTPReferer = $_SERVER["HTTP_REFERER"];
-	}//end if
+if (!$lErrorDetected) {
+    // Check for HTTP referer (only if available)
+    $lHTTPReferer = $_SERVER["HTTP_REFERER"] ?? "";
 
-	$lReferredFromDBOfflinePage = preg_match("/database-offline.php/", $lHTTPReferer);
-	$lReferredFromPageWithURLParameters = preg_match("/\?/", $lHTTPReferer);
+    // Determine if the referer matches certain conditions
+    $lReferredFromOfflinePage = strpos($lHTTPReferer, "database-offline.php") !== false;
+    $lContainsURLParameters = strpos($lHTTPReferer, "?") !== false;
 
-	if ($lReferredFromDBOfflinePage || $lReferredFromPageWithURLParameters){
-		$lPopUpNotificationCode = "&popUpNotificationCode=SUD1";
-	}else{
-		$lPopUpNotificationCode = "?popUpNotificationCode=SUD1";
-	}// end if any parameters in referrer
+    // Construct notification code parameter appropriately
+    $lNotificationParam = $lContainsURLParameters ? "&popUpNotificationCode=SUD1" : "?popUpNotificationCode=SUD1";
 
-	$lRedirectLocation = str_ireplace("database-offline.php", "index.php?page=home.php", $lHTTPReferer).$lPopUpNotificationCode;
-	echo "<script>if(confirm(\"No PHP or MySQL errors were detected when resetting the database.\\n\\nClick OK to proceed to ".$lRedirectLocation." or Cancel to stay on this page.\")){document.location=\"".$lRedirectLocation."\"};</script>";
-}// end if
+    // Redirect to home page if offline page triggered the reset
+    if ($lReferredFromOfflinePage) {
+        $lRedirectLocation = "index.php?page=home.php" . $lNotificationParam;
+    } else {
+        $lRedirectLocation = "index.php?page=home.php";
+    }
+
+    // JavaScript-based redirect to ensure the session is cleared before the redirect
+    echo "<script>
+        if (confirm('Database reset successful. Click OK to continue to the home page.')) {
+            window.location.href = '$lRedirectLocation';
+        }
+    </script>";
+}
 
 $CustomErrorHandler = null;
 ?>
