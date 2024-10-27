@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WS User Account Service Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0 2rem;
+            background-color: #f5f5f5;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 1rem;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>WS User Account Service Documentation</h1>
+    <p>
+        The <strong>WS User Account Service</strong> is a RESTful web service that allows you to manage user accounts.
+        You can create, retrieve, update, and delete user accounts using appropriate HTTP methods.
+    </p>
+
+    <div class="note">
+        <strong>Note for Beginners:</strong> 
+        This documentation provides step-by-step examples for testing each method using Burp Repeater and the <code>curl</code> command.
+    </div>
+
+    <h2>Endpoint</h2>
+    <p>The service is available at the following endpoint:</p>
+    <pre><code>/webservices/rest/ws-user-account.php</code></pre>
+
+    <h2>Supported HTTP Methods</h2>
+    <ul>
+        <li><b>GET</b>: Retrieve user account(s) information.</li>
+        <li><b>POST</b>: Create a new user account.</li>
+        <li><b>PUT</b>: Update an existing account or create a new one.</li>
+        <li><b>DELETE</b>: Delete a user account.</li>
+        <li><b>OPTIONS</b>: Get CORS-related information.</li>
+    </ul>
+
+    <h2>Request and Response Examples</h2>
+
+    <h3>1. GET (Retrieve User Information)</h3>
+    <p><strong>Optional Query Parameter:</strong> <code>username</code></p>
+    <ul>
+        <li>If <code>username=*</code>, all accounts will be returned.</li>
+        <li>If a specific <code>username</code> is provided, only that user’s details will be returned.</li>
+    </ul>
+    <strong>Example:</strong>
+    <pre><code>GET /webservices/rest/ws-user-account.php?username=adrian HTTP/1.1
+Host: mutillidae.localhost
+Accept: application/json
+Connection: close</code></pre>
+
+    <h4>Response</h4>
+    <pre><code>{
+    "Result": {
+        "Accounts": [
+            {
+                "username": "adrian",
+                "firstname": "Adrian",
+                "lastname": "Smith",
+                "signature": "AS"
+            }
+        ]
+    }
+}</code></pre>
+
+    <h3>2. POST (Create a New Account)</h3>
+    <p><strong>Required Parameters (POST body):</strong></p>
+    <ul>
+        <li><code>username</code></li>
+        <li><code>password</code></li>
+        <li><code>firstname</code></li>
+        <li><code>lastname</code></li>
+    </ul>
+    <p><strong>Optional Parameter:</strong> <code>signature</code></p>
+    <pre><code>POST /webservices/rest/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: application/x-www-form-urlencoded
+
+username=john&password=pass123&firstname=John&lastname=Doe&signature=JD</code></pre>
+
+    <h4>Response</h4>
+    <pre><code>{
+    "Result": "Inserted account 'john'",
+    "Success": true
+}</code></pre>
+
+    <h3>3. PUT (Update an Existing Account)</h3>
+    <p>If the account exists, it will be updated. Otherwise, a new account will be created.</p>
+    <pre><code>PUT /webservices/rest/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: application/x-www-form-urlencoded
+
+username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated</code></pre>
+
+    <h4>Response</h4>
+    <pre><code>{
+    "Result": "Updated account 'john'.",
+    "RowsAffected": 1,
+    "Success": true
+}</code></pre>
+
+    <h3>4. DELETE (Remove a User Account)</h3>
+    <p><strong>Required Parameters (POST body):</strong></p>
+    <ul>
+        <li><code>username</code></li>
+        <li><code>password</code></li>
+    </ul>
+    <pre><code>DELETE /webservices/rest/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: application/x-www-form-urlencoded
+
+username=john&password=newpass123</code></pre>
+
+    <h4>Response</h4>
+    <pre><code>{
+    "Result": "Deleted account 'john'.",
+    "Success": true
+}</code></pre>
+
+    <h2>Error Handling</h2>
+    <ul>
+        <li><strong>405 Method Not Allowed:</strong> Returned when an unsupported HTTP method is used.</li>
+        <li><strong>500 Internal Server Error:</strong> Returned if the server encounters an issue processing the request.</li>
+    </ul>
+
+    <h2>Learn More</h2>
+    <p>To practice SQL injection, try sending the following query:</p>
+    <pre><code>GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),signature+from+accounts+-- HTTP/1.1
+Host: mutillidae.localhost</code></pre>
+
+    <div class="note">
+        <strong>Important:</strong> This service is vulnerable to SQL injection when the security level is set to 0. Use it responsibly and only in a controlled environment.
+    </div>
+</body>
+</html>
+
