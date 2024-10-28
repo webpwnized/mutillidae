@@ -76,7 +76,6 @@ function echoMessage($pMessage) {
     	
         // Apply XSS protection if enabled
         if ($lProtectAgainstXSS) {
-            global $Encoder;
             $lMessage = $Encoder->encodeForHTML($pMessage);
         } else {
             $lMessage = $pMessage;
