@@ -52,37 +52,35 @@
     <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \\
 -H "Content-Type: text/xml; charset=UTF-8" \\
 -H "SOAPAction: \\"urn:ws-user-account#getUser\\"" \\
---data @- << 'EOF'
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-                  xmlns:urn="urn:ws-user-account">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <urn:getUser>
-         <username>Jeremy</username>
-      </urn:getUser>
-   </soapenv:Body>
-</soapenv:Envelope>
-EOF</code></pre>
+--data '&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:urn="urn:ws-user-account"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:getUser&gt;
+         &lt;username&gt;Jeremy&lt;/username&gt;
+      &lt;/urn:getUser&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
 
     <h2>2. registerUser Operation</h2>
     <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \\
 -H "Content-Type: text/xml; charset=UTF-8" \\
 -H "SOAPAction: \\"urn:ws-user-account#registerUser\\"" \\
---data @- << 'EOF'
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-                  xmlns:urn="urn:ws-user-account">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <urn:registerUser>
-         <username>Joe</username>
-         <password>Holly</password>
-         <firstname>Joe</firstname>
-         <lastname>Holly</lastname>
-         <signature>Try Harder</signature>
-      </urn:registerUser>
-   </soapenv:Body>
-</soapenv:Envelope>
-EOF</code></pre>
+--data '&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:urn="urn:ws-user-account"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:registerUser&gt;
+         &lt;username&gt;Joe&lt;/username&gt;
+         &lt;password&gt;Holly&lt;/password&gt;
+         &lt;firstname&gt;Joe&lt;/firstname&gt;
+         &lt;lastname&gt;Holly&lt;/lastname&gt;
+         &lt;signature&gt;Try Harder&lt;/signature&gt;
+      &lt;/urn:registerUser&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
 
     <div class="note">
         <strong>Troubleshooting Tips:</strong>
