@@ -17,6 +17,7 @@
             background-color: #ecf0f1;
             padding: 1rem;
             border-radius: 5px;
+            overflow-x: auto;
         }
         code {
             font-family: Consolas, "Courier New", monospace;
@@ -34,68 +35,89 @@
 </head>
 <body>
     <h1>SOAP Echo Service Documentation</h1>
-    <p>The SOAP Echo Service receives an input message and sends back the same message. It’s a useful tool to verify if your request was processed correctly.</p>
+    <p>
+        The <strong>SOAP Echo Service</strong> receives a message and returns the same message in the response. 
+        It is useful to verify if requests are handled correctly and to test SOAP-based communication.
+    </p>
 
     <h2>Endpoint</h2>
     <pre><code>POST /webservices/soap/ws-echo.php</code></pre>
 
-    <h2>Request Structure</h2>
-    <p>Below is an example of the SOAP request body.</p>
-    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    <h2>SOAP Request Structure</h2>
+    <p>Below is the SOAP request body that you can use:</p>
+    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:echowsdl"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
-      &lt;echo&gt;
-         &lt;message&gt;Hello SOAP World!&lt;/message&gt;
-      &lt;/echo&gt;
+      &lt;urn:echoMessage&gt;
+         &lt;message&gt;Hello, world!&lt;/message&gt;
+      &lt;/urn:echoMessage&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
-    <h2>Step-by-Step Example Using Burp Repeater</h2>
+    <h2>Using Burp Repeater</h2>
+    <p>To send the SOAP request using Burp Repeater:</p>
     <pre><code>POST /webservices/soap/ws-echo.php HTTP/1.1
 Host: mutillidae.localhost
-Content-Type: text/xml; charset=utf-8
-SOAPAction: "urn:echo"
+Content-Type: text/xml;charset=UTF-8
+SOAPAction: "urn:echowsdl#echoMessage"
 Content-Length: [length]
 
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:echowsdl"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
-      &lt;echo&gt;
-         &lt;message&gt;Hello SOAP World!&lt;/message&gt;
-      &lt;/echo&gt;
+      &lt;urn:echoMessage&gt;
+         &lt;message&gt;Hello, world!&lt;/message&gt;
+      &lt;/urn:echoMessage&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
-    <h2>Example Using <code>curl</code></h2>
+    <h2>Using <code>curl</code></h2>
+    <p>Here’s the same request using <code>curl</code>:</p>
     <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-echo.php" \
- -H "Content-Type: text/xml; charset=utf-8" \
- -H "SOAPAction: \"urn:echo\"" \
- --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+-H "Content-Type: text/xml; charset=UTF-8" \
+-H "SOAPAction: \"urn:echowsdl#echoMessage\"" \
+--data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:echowsdl"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
-      &lt;echo&gt;
-         &lt;message&gt;Hello SOAP World!&lt;/message&gt;
-      &lt;/echo&gt;
+      &lt;urn:echoMessage&gt;
+         &lt;message&gt;Hello, world!&lt;/message&gt;
+      &lt;/urn:echoMessage&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;'</code></pre>
 
     <h2>Expected Response</h2>
+    <p>The server will return the following SOAP response:</p>
     <pre><code>&lt;?xml version="1.0"?&gt;
-&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-   &lt;soap:Body&gt;
-      &lt;echoResponse&gt;
-         &lt;message&gt;Hello SOAP World!&lt;/message&gt;
-      &lt;/echoResponse&gt;
-   &lt;/soap:Body&gt;
-&lt;/soap:Envelope&gt;</code></pre>
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:echoMessageResponse&gt;
+         &lt;message&gt;Hello, world!&lt;/message&gt;
+      &lt;/urn:echoMessageResponse&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+    <h2>Handling Errors</h2>
+    <p>If an error occurs, the server will return a fault message like this:</p>
+    <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Body&gt;
+      &lt;soapenv:Fault&gt;
+         &lt;faultcode&gt;Server&lt;/faultcode&gt;
+         &lt;faultstring&gt;SOAP Service Error: [Error Message]&lt;/faultstring&gt;
+      &lt;/soapenv:Fault&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
 
     <div class="note">
         <strong>Troubleshooting Tips:</strong>
         <ul>
-            <li>Ensure that the service is accessible at <code>mutillidae.localhost</code>.</li>
-            <li>If using Burp Repeater, make sure the <code>Content-Type</code> header is set correctly.</li>
-            <li>Use the correct SOAPAction header for SOAP requests.</li>
+            <li>Ensure that the <code>mutillidae.localhost</code> server is correctly configured and accessible.</li>
+            <li>Make sure the SOAP request includes the correct <code>SOAPAction</code> header.</li>
+            <li>If using Burp Repeater, verify that the <code>Content-Type</code> header is set to <code>text/xml; charset=UTF-8</code>.</li>
         </ul>
     </div>
+
+    <h2>Learn More</h2>
+    <p>You can experiment by modifying the <code>message</code> parameter and observing the response. For example, send the message <code>Hello from SOAP!</code> and check if it’s echoed back correctly.</p>
 </body>
 </html>
