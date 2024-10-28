@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAP User Account Service Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 2rem;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>SOAP User Account Service Documentation</h1>
+    <p>The SOAP User Account Service allows users to create, retrieve, update, and delete user accounts via SOAP requests.</p>
+
+    <h2>Endpoint</h2>
+    <pre><code>POST /soap/ws-user-account.php</code></pre>
+
+    <h2>Request Structure - Create User</h2>
+    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;createUser&gt;
+         &lt;username&gt;john&lt;/username&gt;
+         &lt;password&gt;12345&lt;/password&gt;
+         &lt;firstname&gt;John&lt;/firstname&gt;
+         &lt;lastname&gt;Doe&lt;/lastname&gt;
+         &lt;signature&gt;JDoe&lt;/signature&gt;
+      &lt;/createUser&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+    <h2>Example Using <code>curl</code> - Create User</h2>
+    <pre><code>curl -X POST "http://mutillidae.localhost/soap/ws-user-account.php" \
+ -H "Content-Type: text/xml; charset=utf-8" \
+ -H "SOAPAction: \"urn:createUser\"" \
+ --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;createUser&gt;
+         &lt;username&gt;john&lt;/username&gt;
+         &lt;password&gt;12345&lt;/password&gt;
+         &lt;firstname&gt;John&lt;/firstname&gt;
+         &lt;lastname&gt;Doe&lt;/lastname&gt;
+         &lt;signature&gt;JDoe&lt;/signature&gt;
+      &lt;/createUser&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
+
+    <h2>Expected Response</h2>
+    <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;createUserResponse&gt;
+         &lt;message&gt;User created successfully.&lt;/message&gt;
+      &lt;/createUserResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+
+    <h2>Other Operations</h2>
+    <ul>
+        <li><strong>Retrieve User:</strong> Use the <code>getUser</code> operation with the username as input.</li>
+        <li><strong>Update User:</strong> Use the <code>updateUser</code> operation with the updated fields.</li>
+        <li><strong>Delete User:</strong> Use the <code>deleteUser</code> operation with the username.</li>
+    </ul>
+
+    <h2>Troubleshooting</h2>
+    <div class="note">
+        <strong>Troubleshooting Tips:</strong>
+        <ul>
+            <li>Ensure the SOAPAction header matches the operation.</li>
+            <li>Check that all required fields are included in the request.</li>
+            <li>Make sure your server is properly configured to accept SOAP requests.</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAP DNS Lookup Service Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 2rem;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>SOAP DNS Lookup Service Documentation</h1>
+    <p>The SOAP DNS Lookup Service allows users to perform DNS lookups through a SOAP interface.</p>
+
+    <h2>Endpoint</h2>
+    <pre><code>POST /soap/ws-dns-lookup.php</code></pre>
+
+    <h2>Request Structure</h2>
+    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;dnsLookup&gt;
+         &lt;hostname&gt;example.com&lt;/hostname&gt;
+      &lt;/dnsLookup&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+    <h2>Example Using <code>curl</code></h2>
+    <pre><code>curl -X POST "http://mutillidae.localhost/soap/ws-dns-lookup.php" \
+ -H "Content-Type: text/xml; charset=utf-8" \
+ -H "SOAPAction: \"urn:dnsLookup\"" \
+ --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;dnsLookup&gt;
+         &lt;hostname&gt;example.com&lt;/hostname&gt;
+      &lt;/dnsLookup&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
+
+    <h2>Expected Response</h2>
+    <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;dnsLookupResponse&gt;
+         &lt;ipAddress&gt;93.184.216.34&lt;/ipAddress&gt;
+      &lt;/dnsLookupResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+</body>
+</html>

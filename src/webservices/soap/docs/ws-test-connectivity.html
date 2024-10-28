@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAP Test Connectivity Service Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 2rem;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>SOAP Test Connectivity Service Documentation</h1>
+    <p>
+        The <strong>SOAP Test Connectivity Service</strong> allows you to verify if the server is reachable and responding correctly. 
+        It is a simple service that returns a status message confirming a successful connection.
+    </p>
+
+    <h2>Endpoint</h2>
+    <pre><code>POST /soap/ws-test-connectivity.php</code></pre>
+
+    <h2>Request Structure</h2>
+    <p>Below is the structure of the SOAP request used to test connectivity:</p>
+    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;testConnectivity/&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+    <h2>Example Using <code>curl</code> (Command Line)</h2>
+    <pre><code>curl -X POST "http://mutillidae.localhost/soap/ws-test-connectivity.php" \
+ -H "Content-Type: text/xml; charset=utf-8" \
+ -H "SOAPAction: \"urn:testConnectivity\"" \
+ --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;testConnectivity/&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
+
+    <h2>Expected Response</h2>
+    <p>If the request is successful, the server will respond with the following SOAP message:</p>
+    <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;testConnectivityResponse&gt;
+         &lt;status&gt;OK&lt;/status&gt;
+         &lt;code&gt;200&lt;/code&gt;
+         &lt;message&gt;Connection succeeded.&lt;/message&gt;
+         &lt;timestamp&gt;2024-10-27 14:00:00&lt;/timestamp&gt;
+      &lt;/testConnectivityResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+
+    <h2>Troubleshooting</h2>
+    <div class="note">
+        <strong>Troubleshooting Tips:</strong>
+        <ul>
+            <li>Ensure the server is up and running at <code>mutillidae.localhost</code>.</li>
+            <li>Verify the endpoint URL is correct and accessible.</li>
+            <li>If using <code>curl</code>, ensure you have network connectivity.</li>
+        </ul>
+    </div>
+
+    <h2>How to Use in Burp Repeater</h2>
+    <ol>
+        <li>Open Burp Suite and navigate to the Repeater tab.</li>
+        <li>Copy the following request and paste it into the Repeater window:</li>
+    </ol>
+
+    <pre><code>POST /soap/ws-test-connectivity.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "urn:testConnectivity"
+Content-Length: 147
+
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;testConnectivity/&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+    <p>Click <strong>Send</strong> to test the connectivity. If the service is working, the server will respond with a status message.</p>
+
+    <h2>Learn More</h2>
+    <p>Try sending multiple requests and observe how the timestamp changes in each response.</p>
+</body>
+</html>
