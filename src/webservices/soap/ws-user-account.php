@@ -14,7 +14,7 @@
 	require_once '../../classes/LogHandler.php';
 
 	// Initialize the SQL query handler
-	$SQLQueryHandler = new MySqlHandler(0);
+	$SQLQueryHandler = new SQLQueryHandler(0);
 
 	$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
