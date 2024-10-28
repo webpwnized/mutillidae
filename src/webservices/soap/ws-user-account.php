@@ -8,7 +8,7 @@
 	 * Constants used in application
 	* ------------------------------------------ */
 	require_once '../../includes/constants.php';
-	require_once '../../classes/MySqlHandler.php';
+	require_once '../../classes/SQLQueryHandler.php';
 	require_once '../../classes/EncodingHandler.php';
 	require_once '../../classes/CustomErrorHandler.php';
 	require_once '../../classes/LogHandler.php';
