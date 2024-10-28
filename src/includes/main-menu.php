@@ -712,6 +712,11 @@
 					<a href="">REST</a>
 					<ul>
 						<li>
+							<a href="./webservices/rest/docs/rest-services.html">
+								Documentation
+							</a>
+						</li>
+						<li>
 							<a href="./webservices/rest/ws-test-connectivity.php">
 								Test Connectivity
 							</a>
