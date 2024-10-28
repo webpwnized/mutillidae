@@ -17,6 +17,7 @@
             background-color: #ecf0f1;
             padding: 1rem;
             border-radius: 5px;
+            overflow-x: auto;
         }
         code {
             font-family: Consolas, "Courier New", monospace;
@@ -34,42 +35,73 @@
 </head>
 <body>
     <h1>SOAP DNS Lookup Service Documentation</h1>
-    <p>The SOAP DNS Lookup Service allows users to perform DNS lookups through a SOAP interface.</p>
+    <p>
+        The SOAP DNS Lookup Service allows users to perform DNS lookups through a SOAP interface. 
+        This service queries a given hostname or IP address using the <code>nslookup</code> command and returns the result in XML format.
+    </p>
+
+    <div class="note">
+        <strong>Note:</strong> 
+        Ensure your SOAP client or tool (e.g., Burp Repeater) includes the correct headers and SOAPAction. 
+        Use this service only for educational purposes, as it can expose vulnerabilities at lower security levels.
+    </div>
 
     <h2>Endpoint</h2>
     <pre><code>POST /webservices/soap/ws-dns-lookup.php</code></pre>
 
-    <h2>Request Structure</h2>
-    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    <h2>SOAP Request Structure</h2>
+    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:urn="urn:commandinjwsdl"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
-      &lt;dnsLookup&gt;
-         &lt;hostname&gt;example.com&lt;/hostname&gt;
-      &lt;/dnsLookup&gt;
+      &lt;urn:lookupDNS&gt;
+         &lt;targetHost&gt;example.com&lt;/targetHost&gt;
+      &lt;/urn:lookupDNS&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
     <h2>Example Using <code>curl</code></h2>
     <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-dns-lookup.php" \
  -H "Content-Type: text/xml; charset=utf-8" \
- -H "SOAPAction: \"urn:dnsLookup\"" \
- --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+ -H "SOAPAction: \"urn:commandinjwsdl#lookupDNS\"" \
+ --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" \
+        xmlns:urn="urn:commandinjwsdl"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
-      &lt;dnsLookup&gt;
-         &lt;hostname&gt;example.com&lt;/hostname&gt;
-      &lt;/dnsLookup&gt;
+      &lt;urn:lookupDNS&gt;
+         &lt;targetHost&gt;example.com&lt;/targetHost&gt;
+      &lt;/urn:lookupDNS&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;'</code></pre>
 
-    <h2>Expected Response</h2>
-    <pre><code>&lt;?xml version="1.0"?&gt;
-&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-   &lt;soap:Body&gt;
-      &lt;dnsLookupResponse&gt;
-         &lt;ipAddress&gt;93.184.216.34&lt;/ipAddress&gt;
-      &lt;/dnsLookupResponse&gt;
-   &lt;/soap:Body&gt;
-&lt;/soap:Envelope&gt;</code></pre>
+    <h2>Expected XML Response</h2>
+    <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;results&gt;
+  &lt;host&gt;example.com&lt;/host&gt;
+  &lt;output&gt;&lt;![CDATA[
+Server:  dns.google
+Address: 8.8.8.8
+
+Non-authoritative answer:
+Name:    example.com
+Address: 93.184.216.34
+]]&gt;&lt;/output&gt;
+&lt;/results&gt;</code></pre>
+
+    <h2>Troubleshooting Tips</h2>
+    <ul>
+        <li>
+            Ensure that the service is accessible at <code>mutillidae.localhost</code> and the correct SOAPAction header is used.
+        </li>
+        <li>
+            If using Burp Repeater, verify the request body matches the structure shown in the example.
+        </li>
+        <li>
+            If the response is empty or malformed, ensure the <code>nslookup</code> command works on the server.
+        </li>
+        <li>
+            Check the service logs for details if the request fails due to security settings (e.g., command injection protection).
+        </li>
+    </ul>
 </body>
 </html>
