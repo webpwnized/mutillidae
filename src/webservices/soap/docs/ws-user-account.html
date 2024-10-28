@@ -37,7 +37,7 @@
     <p>The SOAP User Account Service allows users to create, retrieve, update, and delete user accounts via SOAP requests.</p>
 
     <h2>Endpoint</h2>
-    <pre><code>POST /soap/ws-user-account.php</code></pre>
+    <pre><code>POST /webservices/soap/ws-user-account.php</code></pre>
 
     <h2>Request Structure - Create User</h2>
     <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
@@ -54,7 +54,7 @@
 &lt;/soapenv:Envelope&gt;</code></pre>
 
     <h2>Example Using <code>curl</code> - Create User</h2>
-    <pre><code>curl -X POST "http://mutillidae.localhost/soap/ws-user-account.php" \
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \
  -H "Content-Type: text/xml; charset=utf-8" \
  -H "SOAPAction: \"urn:createUser\"" \
  --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;

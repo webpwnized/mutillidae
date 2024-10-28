@@ -37,7 +37,7 @@
     <p>The SOAP DNS Lookup Service allows users to perform DNS lookups through a SOAP interface.</p>
 
     <h2>Endpoint</h2>
-    <pre><code>POST /soap/ws-dns-lookup.php</code></pre>
+    <pre><code>POST /webservices/soap/ws-dns-lookup.php</code></pre>
 
     <h2>Request Structure</h2>
     <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
@@ -50,7 +50,7 @@
 &lt;/soapenv:Envelope&gt;</code></pre>
 
     <h2>Example Using <code>curl</code></h2>
-    <pre><code>curl -X POST "http://mutillidae.localhost/soap/ws-dns-lookup.php" \
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-dns-lookup.php" \
  -H "Content-Type: text/xml; charset=utf-8" \
  -H "SOAPAction: \"urn:dnsLookup\"" \
  --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;

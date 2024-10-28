@@ -37,7 +37,7 @@
     <p>The SOAP Echo Service receives an input message and sends back the same message. It’s a useful tool to verify if your request was processed correctly.</p>
 
     <h2>Endpoint</h2>
-    <pre><code>POST /soap/ws-echo.php</code></pre>
+    <pre><code>POST /webservices/soap/ws-echo.php</code></pre>
 
     <h2>Request Structure</h2>
     <p>Below is an example of the SOAP request body.</p>
@@ -51,7 +51,7 @@
 &lt;/soapenv:Envelope&gt;</code></pre>
 
     <h2>Step-by-Step Example Using Burp Repeater</h2>
-    <pre><code>POST /soap/ws-echo.php HTTP/1.1
+    <pre><code>POST /webservices/soap/ws-echo.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: text/xml; charset=utf-8
 SOAPAction: "urn:echo"
@@ -67,7 +67,7 @@ Content-Length: [length]
 &lt;/soapenv:Envelope&gt;</code></pre>
 
     <h2>Example Using <code>curl</code></h2>
-    <pre><code>curl -X POST "http://mutillidae.localhost/soap/ws-echo.php" \
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-echo.php" \
  -H "Content-Type: text/xml; charset=utf-8" \
  -H "SOAPAction: \"urn:echo\"" \
  --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
