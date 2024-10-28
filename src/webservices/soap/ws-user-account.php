@@ -19,7 +19,7 @@
 	$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
 	// Initialize the encoder
-	$Encoder = new Encoder($lSecurityLevel);
+	$Encoder = new EncodingHandler($lSecurityLevel);
 
 	// Initialize the custom error handler
 	$CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);

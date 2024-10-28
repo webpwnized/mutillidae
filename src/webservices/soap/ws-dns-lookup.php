@@ -52,9 +52,9 @@ function lookupDNS($pTargetHost) {
 
     // Include required constants and utility classes
     require_once '../../includes/constants.php';
-    require_once '../../classes/MySQLHandler.php';
     require_once '../../classes/LogHandler.php';
     require_once '../../classes/EncodingHandler.php';
+    require_once '../../classes/SQLQueryHandler.php';
 
     // Define a dedicated exception for command execution failures
     class CommandExecutionException extends Exception {}
@@ -62,8 +62,8 @@ function lookupDNS($pTargetHost) {
     class LookupException extends Exception {}
 
     try {
-        // Initialize MySQL handler
-        $MySQLHandler = new MySQLHandler(0);
+        // Initialize the SQL query handler
+        $SQLQueryHandler = new SQLQueryHandler(0);
 
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
@@ -71,7 +71,7 @@ function lookupDNS($pTargetHost) {
         $LogHandler = new LogHandler($lSecurityLevel);
 
         // Initialize the encoder
-        $Encoder = new Encoder($lSecurityLevel);
+        $Encoder = new EncodingHandler();
 
         // Determine security level and protection settings
         switch ($lSecurityLevel) {

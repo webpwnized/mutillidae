@@ -48,14 +48,14 @@ function echoMessage($pMessage) {
     try{
         // Include required constants and utility classes
         require_once '../../includes/constants.php';
-        require_once '../../classes/MySQLHandler.php';
         require_once '../../classes/EncodingHandler.php';
-        
-        $MySQLHandler = new MySQLHandler(0);
+        require_once '../../classes/SQLQueryHandler.php';
+
+        $SQLQueryHandler = new SQLQueryHandler(0);
 
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
-        $Encoder = new Encoder($lSecurityLevel);
+        $Encoder = new EncodingHandler();
 
         switch ($lSecurityLevel){
             default: // Default case: This code is insecure
