@@ -17,6 +17,7 @@
             background-color: #ecf0f1;
             padding: 1rem;
             border-radius: 5px;
+            overflow-x: auto;
         }
         code {
             font-family: Consolas, "Courier New", monospace;
@@ -34,28 +35,26 @@
 </head>
 <body>
     <h1>SOAP User Account Service Documentation</h1>
-    <p>This service provides SOAP-based operations for managing user accounts. The available operations include <strong>getting user information</strong>, <strong>registering new users</strong>, <strong>updating existing accounts</strong>, and <strong>deleting users</strong>.</p>
+    <p>This service offers SOAP-based operations for user account management, including retrieving, creating, updating, and deleting user accounts.</p>
 
     <h2>Endpoint</h2>
     <pre><code>POST /webservices/soap/ws-user-account.php</code></pre>
 
-    <h2>Available Operations</h2>
+    <h2>Operations</h2>
     <ul>
         <li><b>getUser</b>: Fetches user information.</li>
         <li><b>registerUser</b>: Creates a new user account.</li>
-        <li><b>updateUser</b>: Updates an existing account or creates it if it doesn’t exist.</li>
+        <li><b>updateUser</b>: Updates an existing user or creates it if it doesn't exist.</li>
         <li><b>deleteUser</b>: Deletes an existing user account.</li>
     </ul>
 
-    <h2>Example Requests and Responses</h2>
-
-    <h3>1. <code>getUser</code> Example</h3>
+    <h2>1. getUser Operation</h2>
     <pre><code>POST /webservices/soap/ws-user-account.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: text/xml; charset=UTF-8
 SOAPAction: "urn:ws-user-account#getUser"
 
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
                   xmlns:urn="urn:ws-user-account"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -65,36 +64,29 @@ SOAPAction: "urn:ws-user-account#getUser"
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
-    <h3>Curl Command</h3>
-    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \\
- -H "Content-Type: text/xml; charset=UTF-8" \\
- -H "SOAPAction: \\"urn:ws-user-account#getUser\\"" \\
- --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" \\
-                  xmlns:urn="urn:ws-user-account"&gt;
-   &lt;soapenv:Header/&gt;
-   &lt;soapenv:Body&gt;
-      &lt;urn:getUser&gt;
-         &lt;username&gt;Jeremy&lt;/username&gt;
-      &lt;/urn:getUser&gt;
-   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;'</code></pre>
+    <h3>cURL Command</h3>
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \
+-H "Content-Type: text/xml; charset=UTF-8" \
+-H "SOAPAction: \"urn:ws-user-account#getUser\"" \
+--data-binary @- <<EOF
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:urn="urn:ws-user-account">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:getUser>
+         <username>Jeremy</username>
+      </urn:getUser>
+   </soapenv:Body>
+</soapenv:Envelope>
+EOF</code></pre>
 
-    <h3>Expected Response:</h3>
-    <pre><code>&lt;accounts message="Results for Jeremy"&gt;
-   &lt;account&gt;
-      &lt;username&gt;Jeremy&lt;/username&gt;
-      &lt;firstname&gt;Jeremy&lt;/firstname&gt;
-      &lt;lastname&gt;Doe&lt;/lastname&gt;
-   &lt;/account&gt;
-&lt;/accounts&gt;</code></pre>
-
-    <h3>2. <code>registerUser</code> Example</h3>
+    <h2>2. registerUser Operation</h2>
     <pre><code>POST /webservices/soap/ws-user-account.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: text/xml; charset=UTF-8
 SOAPAction: "urn:ws-user-account#registerUser"
 
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
                   xmlns:urn="urn:ws-user-account"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
@@ -108,30 +100,32 @@ SOAPAction: "urn:ws-user-account#registerUser"
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
-    <h3>Curl Command</h3>
-    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \\
- -H "Content-Type: text/xml; charset=UTF-8" \\
- -H "SOAPAction: \\"urn:ws-user-account#registerUser\\"" \\
- --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" \\
-                  xmlns:urn="urn:ws-user-account"&gt;
-   &lt;soapenv:Header/&gt;
-   &lt;soapenv:Body&gt;
-      &lt;urn:registerUser&gt;
-         &lt;username&gt;Joe&lt;/username&gt;
-         &lt;password&gt;Holly&lt;/password&gt;
-         &lt;firstname&gt;Joe&lt;/firstname&gt;
-         &lt;lastname&gt;Holly&lt;/lastname&gt;
-         &lt;signature&gt;Try Harder&lt;/signature&gt;
-      &lt;/urn:registerUser&gt;
-   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;'</code></pre>
+    <h3>cURL Command</h3>
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \
+-H "Content-Type: text/xml; charset=UTF-8" \
+-H "SOAPAction: \"urn:ws-user-account#registerUser\"" \
+--data-binary @- <<EOF
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:urn="urn:ws-user-account">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:registerUser>
+         <username>Joe</username>
+         <password>Holly</password>
+         <firstname>Joe</firstname>
+         <lastname>Holly</lastname>
+         <signature>Try Harder</signature>
+      </urn:registerUser>
+   </soapenv:Body>
+</soapenv:Envelope>
+EOF</code></pre>
 
     <div class="note">
         <strong>Troubleshooting Tips:</strong>
         <ul>
-            <li>Ensure that the <code>mutillidae.localhost</code> host is correctly configured in your environment.</li>
-            <li>If using Burp Repeater, set the correct <code>SOAPAction</code> header.</li>
-            <li>Ensure the <code>Content-Type</code> header is <code>text/xml; charset=UTF-8</code>.</li>
+            <li>Ensure that the host <code>mutillidae.localhost</code> is properly configured in your environment.</li>
+            <li>Use the correct <code>SOAPAction</code> header for the operation you want to perform.</li>
+            <li>Ensure that the <code>Content-Type</code> is set to <code>text/xml; charset=UTF-8</code>.</li>
         </ul>
     </div>
 </body>
