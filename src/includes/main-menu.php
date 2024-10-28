@@ -745,6 +745,11 @@
 					<a href="">SOAP</a>
 					<ul>
 						<li>
+							<a href="./webservices/soap/docs/soap-services.html">
+								Documentation
+							</a>
+						</li>
+						<li>
 							<a href="">Test Pages</a>
 							<ul>
 								<li><a href="./webservices/soap/ws-test-connectivity.php">Test Connectivity</a></li>
