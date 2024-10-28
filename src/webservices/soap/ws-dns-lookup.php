@@ -1,4 +1,10 @@
 <?php
+
+// Define a dedicated exception for command execution failures
+class CommandExecutionException extends Exception {}
+class ValidationException extends Exception {}
+class LookupException extends Exception {}
+
 // Pull in the NuSOAP library
 require_once './lib/nusoap.php';
 
@@ -11,12 +17,12 @@ $lSOAPWebService->configureWSDL('commandinjwsdl', 'urn:commandinjwsdl');
 // Register the lookupDNS method to expose as a SOAP service
 $lSOAPWebService->register(
     'lookupDNS',                           // Method name
-    array('targetHost' => 'xsd:string'),   // Input parameters
-    array('Answer' => 'xsd:xml'),          // Output parameters (returns XML result)
-    'urn:commandinjwsdl',                  // Namespace
-    'urn:commandinjwsdl#commandinj',       // SOAP action
-    'rpc',                                 // Style
-    'encoded',                             // Use
+    array('targetHost' => 'xsd:string'), // Input parameter
+    array('return' => 'xsd:string'),     // Output parameter (XML returned as string)
+    'urn:commandinjwsdl',                // Namespace
+    'urn:commandinjwsdl#lookupDNS',      // SOAP action
+    'rpc',                               // Style
+    'encoded',                           // Use
     // Detailed documentation for the method, including a sample SOAP request
     'Returns the results of a DNS lookup.
     <br/>
@@ -56,21 +62,11 @@ function lookupDNS($pTargetHost) {
     require_once '../../classes/EncodingHandler.php';
     require_once '../../classes/SQLQueryHandler.php';
 
-    // Define a dedicated exception for command execution failures
-    class CommandExecutionException extends Exception {}
-    class ValidationException extends Exception {}
-    class LookupException extends Exception {}
-
     try {
-        // Initialize the SQL query handler
+        // Initialize classes
         $SQLQueryHandler = new SQLQueryHandler(0);
-
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
-
-        // Initialize the log handler
         $LogHandler = new LogHandler($lSecurityLevel);
-
-        // Initialize the encoder
         $Encoder = new EncodingHandler();
 
         // Determine security level and protection settings
@@ -101,34 +97,32 @@ function lookupDNS($pTargetHost) {
         }
 
         // Protect against XSS by encoding the target host, if enabled
-        if ($lProtectAgainstXSS) {
-            $lTargetHost = $Encoder->encodeForHTML($pTargetHost);
-        } else {
-            $lTargetHost = $pTargetHost;  // Allow XSS by not encoding
-        }
+        $lTargetHost = $lProtectAgainstXSS
+            ? $Encoder->encodeForHTML($pTargetHost)
+            : $pTargetHost;
 
-        if ($lProtectAgainstCommandInjection) {
-            $lCommand = "nslookup " . $lTargetHost; // Vulnerable: Direct input usage
-        } else {
-            // Secure version: Use escapeshellcmd() and escapeshellarg() to sanitize input
-            $lCommand = escapeshellcmd("nslookup " . escapeshellarg($lTargetHost));
-        }
+        // Construct the command
+        $lCommand = $lProtectAgainstCommandInjection
+            ? escapeshellcmd("nslookup " . escapeshellarg($lTargetHost))
+            : "nslookup $lTargetHost";
     
-        // Execute the nslookup command and return the result
+        // Execute the command and capture output
         $lOutput = shell_exec($lCommand);
-    
         if ($lOutput === null) {
             throw new CommandExecutionException("Command execution failed.");
         }
 
-        // Execute the nslookup command and return the result
-        $lResults = "";  // Initialize results string
-        $lResults .= '<results host="' . $lTargetHostText . '">';
-        $lResults .= $lOutput;  // Append the nslookup output to the results
-        $lResults .= '</results>';
-        $LogHandler->writeToLog("Executed operating system command: nslookup " . $lTargetHostText);  // Log the command execution
+        // Build the XML response
+        $lXmlResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $lXmlResponse .= "<results>\n";
+        $lXmlResponse .= "  <host>" . htmlspecialchars($lTargetHost) . "</host>\n";
+        $lXmlResponse .= "  <output><![CDATA[\n$lOutput\n]]></output>\n";
+        $lXmlResponse .= "</results>";
 
-        return $lResults;
+        $LogHandler->writeToLog("Executed nslookup on: $lTargetHost");
+
+        return $lXmlResponse; // Return XML as string
+
     } catch (Exception $e) {
         throw new LookupException("Error in method lookupDNS: " . $e->getMessage());
     } // End try-catch
