@@ -54,7 +54,7 @@ function lookupDNS($pTargetHost) {
     require_once '../../includes/constants.php';
     require_once '../../classes/MySQLHandler.php';
     require_once '../../classes/LogHandler.php';
-    require_once '../../classes/Encoder.php';
+    require_once '../../classes/EncodingHandler.php';
 
     // Define a dedicated exception for command execution failures
     class CommandExecutionException extends Exception {}
