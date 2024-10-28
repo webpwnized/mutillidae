@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST Services - Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0 2rem;
+            background-color: #f5f5f5;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 1rem 0;
+        }
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            font-size: 1.2rem;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>REST Services Documentation</h1>
+    <p>Welcome to the main documentation page for the RESTful web services. Below you will find links to detailed documentation for each service along with examples of how to interact with them.</p>
+
+    <div class="note">
+        <strong>Note for Beginners:</strong> If you are new to web services, each linked page contains easy-to-follow examples using tools like <code>curl</code> and <strong>Burp Suite</strong>. These will help you get started quickly and efficiently.
+    </div>
+
+    <h2>Available Services</h2>
+    <ul>
+        <li>
+            <a href="ws-echo.html">WS Echo Service</a> - A service to echo back messages sent to it, useful for testing connectivity.
+        </li>
+        <li>
+            <a href="ws-dns-lookup.html">WS DNS Lookup Service</a> - Perform DNS lookups by providing a hostname.
+        </li>
+        <li>
+            <a href="ws-test-connectivity.html">WS Test Connectivity Service</a> - Verify the connection to the web service.
+        </li>
+        <li>
+            <a href="ws-user-account.html">WS User Account Service</a> - Manage user accounts with CRUD operations (Create, Read, Update, Delete).
+        </li>
+    </ul>
+
+    <h2>How to Use the Services</h2>
+    <p>Each service page provides:</p>
+    <ul>
+        <li>An overview of the service functionality.</li>
+        <li>Examples of requests using Burp Repeater and <code>curl</code>.</li>
+        <li>Details about the expected response from the service.</li>
+        <li>Troubleshooting tips in case of issues.</li>
+    </ul>
+
+    <h2>Troubleshooting Common Issues</h2>
+    <ul>
+        <li>Ensure the web server is running and accessible on <code>mutillidae.localhost</code>.</li>
+        <li>Verify the correct HTTP method (GET, POST, etc.) is used for each service.</li>
+        <li>If using Burp Suite, confirm that traffic is correctly routed to the web service.</li>
+        <li>Refer to the individual service pages for specific troubleshooting tips.</li>
+    </ul>
+
+    <p>If you have any further questions or need assistance, feel free to reach out to your instructor or class support team.</p>
+</body>
+</html>
+
