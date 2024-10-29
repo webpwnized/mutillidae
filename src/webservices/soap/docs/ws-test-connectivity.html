@@ -45,12 +45,23 @@
 
     <h2>Request Structure</h2>
     <p>Below is the structure of the SOAP request used to test connectivity:</p>
-    <pre><code>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    <pre><code>
+POST /webservices/soap/ws-test-connectivity.php HTTP/1.1
+Host: mutillidae.localhost
+User-Agent: curl/8.5.0
+Accept: */*
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "urn:testConnectivity"
+Content-Length: 180
+Connection: keep-alive
+
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
       &lt;testConnectivity/&gt;
    &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;</code></pre>
+&lt;/soapenv:Envelope&gt;
+</code></pre>
 
     <h2>Example Using <code>curl</code> (Command Line)</h2>
     <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-test-connectivity.php" \
