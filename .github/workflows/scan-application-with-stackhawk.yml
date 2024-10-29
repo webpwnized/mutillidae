@@ -120,7 +120,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@main
         with:
           # Path to SARIF file relative to the root of the repository
-          sarif_file: stackhawk.sarif
+          sarif_file: mutillidae/stackhawk.sarif
           # Optional category for the results
           # Used to differentiate multiple results for one commit
           category: StackHawk

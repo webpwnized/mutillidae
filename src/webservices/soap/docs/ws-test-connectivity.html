@@ -52,8 +52,8 @@ User-Agent: curl/8.5.0
 Accept: */*
 Content-Type: text/xml; charset=utf-8
 SOAPAction: "urn:testConnectivity"
-Content-Length: 180
-Connection: keep-alive
+Content-Length: 185
+Connection: close
 
 &lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
    &lt;soapenv:Header/&gt;
@@ -73,6 +73,27 @@ Connection: keep-alive
       &lt;testConnectivity/&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;'</code></pre>
+
+<h2>How to Use in Burp Repeater</h2>
+<ol>
+    <li>Open Burp Suite and navigate to the Repeater tab.</li>
+    <li>Copy the following request and paste it into the Repeater window:</li>
+</ol>
+
+<pre><code>POST /webservices/soap/ws-test-connectivity.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "urn:testConnectivity"
+Content-Length: 147
+
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+&lt;soapenv:Header/&gt;
+&lt;soapenv:Body&gt;
+  &lt;testConnectivity/&gt;
+&lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+<p>Click <strong>Send</strong> to test the connectivity. If the service is working, the server will respond with a status message.</p>
 
     <h2>Expected Response</h2>
     <p>If the request is successful, the server will respond with the following SOAP message:</p>
@@ -97,27 +118,6 @@ Connection: keep-alive
             <li>If using <code>curl</code>, ensure you have network connectivity.</li>
         </ul>
     </div>
-
-    <h2>How to Use in Burp Repeater</h2>
-    <ol>
-        <li>Open Burp Suite and navigate to the Repeater tab.</li>
-        <li>Copy the following request and paste it into the Repeater window:</li>
-    </ol>
-
-    <pre><code>POST /webservices/soap/ws-test-connectivity.php HTTP/1.1
-Host: mutillidae.localhost
-Content-Type: text/xml; charset=utf-8
-SOAPAction: "urn:testConnectivity"
-Content-Length: 147
-
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-   &lt;soapenv:Header/&gt;
-   &lt;soapenv:Body&gt;
-      &lt;testConnectivity/&gt;
-   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;</code></pre>
-
-    <p>Click <strong>Send</strong> to test the connectivity. If the service is working, the server will respond with a status message.</p>
 
     <h2>Learn More</h2>
     <p>Try sending multiple requests and observe how the timestamp changes in each response.</p>
