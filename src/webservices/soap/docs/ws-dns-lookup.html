@@ -52,7 +52,7 @@
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
-    <h2>Step-by-Step Example Using Burp Repeater</h2>
+    <h2>Example Using Burp Repeater</h2>
     <pre><code>POST /webservices/soap/ws-dns-lookup.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: text/xml; charset=utf-8
@@ -70,7 +70,7 @@ Content-Length: [length]
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
-<h2>Step-by-Step Example Using <code>curl</code></h2>
+<h2>Example Using <code>curl</code></h2>
 <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-dns-lookup.php" \
 -H "Content-Type: text/xml; charset=utf-8" \
 -H "SOAPAction: \"urn:commandinjwsdl#lookupDNS\"" \

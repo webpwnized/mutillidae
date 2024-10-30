@@ -63,17 +63,6 @@ Connection: close
 &lt;/soapenv:Envelope&gt;
 </code></pre>
 
-    <h2>Example Using <code>curl</code> (Command Line)</h2>
-    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-test-connectivity.php" \
- -H "Content-Type: text/xml; charset=utf-8" \
- -H "SOAPAction: \"urn:testConnectivity\"" \
- --data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
-   &lt;soapenv:Header/&gt;
-   &lt;soapenv:Body&gt;
-      &lt;testConnectivity/&gt;
-   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;'</code></pre>
-
 <h2>How to Use in Burp Repeater</h2>
 <ol>
     <li>Open Burp Suite and navigate to the Repeater tab.</li>
@@ -94,6 +83,17 @@ Content-Length: 147
 &lt;/soapenv:Envelope&gt;</code></pre>
 
 <p>Click <strong>Send</strong> to test the connectivity. If the service is working, the server will respond with a status message.</p>
+
+<h2>Example Using <code>curl</code> (Command Line)</h2>
+<pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-test-connectivity.php" \
+-H "Content-Type: text/xml; charset=utf-8" \
+-H "SOAPAction: \"urn:testConnectivity\"" \
+--data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+&lt;soapenv:Header/&gt;
+&lt;soapenv:Body&gt;
+  &lt;testConnectivity/&gt;
+&lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
 
     <h2>Expected Response</h2>
     <p>If the request is successful, the server will respond with the following SOAP message:</p>
