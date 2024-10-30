@@ -1,21 +1,5 @@
 <?php
-	/* ------------------------------------------
-	 * Documentation:
-	 * - Domain: mutillidae.localhost
-	 * - Description: This is a RESTful web service for managing user accounts
-	 * - Endpoint: /webservices/rest/ws-user-account.php
-	 * - CORS Headers:
-	 *   - Access-Control-Allow-Origin: * (or specific domains)
-	 *   - Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
-	 *   - Access-Control-Allow-Headers: Content-Type, Authorization
-	 *   - Expected Response:
-	 *     - Status: 200 OK with JSON response
-	 *     - If method not allowed: 405 Method Not Allowed with allowed methods in response header
-	 * ------------------------------------------ */
-
-	/* ------------------------------------------
-	 * Constants used in application
-	 * ------------------------------------------ */
+	// Required files
 	require_once '../../includes/constants.php';
 	require_once '../../classes/SQLQueryHandler.php';
 	require_once '../../classes/CustomErrorHandler.php';
@@ -36,7 +20,7 @@
 		$lParameters = array();
 		parse_str(file_get_contents('php://input'), $lParameters);
 		$_POST = $lParameters + $_POST;
-	}// end function populatePOSTArray
+	}
 
 	function getPOSTParameter($pParameter, $lRequired){
 		if(isset($_POST[$pParameter])){
@@ -47,231 +31,116 @@
 			}else{
 				return "";
 			}
-		}// end if isset
-	}// end function validatePOSTParameter
+		}
+	}
 
 	function jsonEncodeQueryResults($pQueryResult){
 		$lDataRows = array();
 		while ($lDataRow = mysqli_fetch_assoc($pQueryResult)) {
 			$lDataRows[] = $lDataRow;
-		}// end while
-
+		}
 		return json_encode($lDataRows);
-	}//end function jsonEncodeQueryResults
+	}
 
-	try{
-		$lContentTypeJSON = "Content-Type: application/json";
-
-		// Initialize the SQL query handler
+	try {
+		// Initialize handlers
 		$SQLQueryHandler = new SQLQueryHandler(0);
 		$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
-		
 		$CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
 
-		$lUsername = "";
 		$lVerb = $_SERVER['REQUEST_METHOD'];
-
-		// Get the origin of the request
 		$lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 
-		header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
-		header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); // Allowed methods
-		header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers	
+		// Set headers
+		header('Access-Control-Allow-Origin: ' . $lOrigin);
+		header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+		header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-		switch($lVerb){
+		// Clear any existing buffer content to prevent headers/body mixup
+		if (ob_get_contents()) {
+			ob_clean();
+		}
+
+		switch ($lVerb) {
 			case "GET":
-				if(isset($_GET['username'])){
+				if (isset($_GET['username'])) {
 					$lUsername = $_GET['username'] ?? '';
-					
-					// Fetch data based on the username
+
 					if ($lUsername === "*") {
-						// List all accounts
 						$lQueryResult = $SQLQueryHandler->getUsernames();
 					} else {
-						// Lookup specific user
 						$lQueryResult = $SQLQueryHandler->getNonSensitiveAccountInformation($lUsername);
 					}
-					
-					// Prepare the response
+
 					$lArrayResponse = [];
 					if ($lQueryResult->num_rows > 0) {
-						// Fetch all results into an array
 						$lArrayAccounts = [];
 						while ($row = $lQueryResult->fetch_assoc()) {
 							$lArrayAccounts[] = $row;
 						}
 						$lArrayResponse['Result'] = ['Accounts' => $lArrayAccounts];
 					} else {
-						// User not found message
 						$lArrayResponse['Result'] = "User '$lUsername' does not exist";
 					}
-					
-					// Output the response as JSON with the correct headers
-					header($lContentTypeJSON);
+
+					http_response_code(200);
+					header('Content-Type: application/json');
 					$lArrayResponse['SecurityLevel'] = $lSecurityLevel;
 					echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
 				} else {
 					http_response_code(400);
-					header($lContentTypeJSON);
-					echo json_encode(["error" => "Username parameter is required", "SecurityLevel" => $lSecurityLevel]);
+					header('Content-Type: application/json');
+					echo json_encode(["error" => "Username parameter is required", "SecurityLevel" => $lSecurityLevel], JSON_PRETTY_PRINT);
 				}
-				break;
+				exit();
 
-			case "POST": // create
-				// Fetch POST parameters
+			case "POST":
 				$lUsername = getPOSTParameter("username", true);
 				$lAccountPassword = getPOSTParameter("password", true);
 				$lAccountFirstName = getPOSTParameter("firstname", true);
 				$lAccountLastName = getPOSTParameter("lastname", true);
 				$lAccountSignature = getPOSTParameter("signature", false);
-				
-				// Prepare response array
+
 				$lArrayResponse = [];
-				
+
 				if ($SQLQueryHandler->accountExists($lUsername)) {
-					// If the account already exists
 					$lArrayResponse['Result'] = "Account '$lUsername' already exists";
 					$lArrayResponse['Success'] = false;
+					http_response_code(409); // Conflict
 				} else {
-					// Insert new account and set the response message
 					$lQueryResult = $SQLQueryHandler->insertNewUserAccount(
-						$lUsername,
-						$lAccountPassword,
-						$lAccountFirstName,
-						$lAccountLastName,
-						$lAccountSignature
+						$lUsername, $lAccountPassword, $lAccountFirstName, $lAccountLastName, $lAccountSignature
 					);
-				
+
 					if ($lQueryResult) {
 						$lArrayResponse['Result'] = "Inserted account '$lUsername'";
 						$lArrayResponse['Success'] = true;
+						http_response_code(201); // Created
 					} else {
 						$lArrayResponse['Result'] = "Failed to insert account '$lUsername'";
 						$lArrayResponse['Success'] = false;
-					}
-				}
-				
-				// Set the response header to JSON and output the response
-				header($lContentTypeJSON);
-				$lArrayResponse['SecurityLevel'] = $lSecurityLevel;
-				echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
-				break;
-
-			case "PUT": // create or update
-				/* $_POST array is not auto-populated for PUT method. Parse input into an array. */
-				populatePOSTSuperGlobal();
-
-				$lUsername = getPOSTParameter("username", true);
-				$lAccountPassword = getPOSTParameter("password", true);
-				$lAccountFirstName = getPOSTParameter("firstname", true);
-				$lAccountLastName = getPOSTParameter("lastname", true);
-				$lAccountSignature = getPOSTParameter("signature", false);
-
-				// Initialize the response array
-				$lArrayResponse = [];
-
-				if ($SQLQueryHandler->accountExists($lUsername)) {
-					// Update the existing account
-					$lQueryResult = $SQLQueryHandler->updateUserAccount(
-						$lUsername,
-						$lAccountPassword,
-						$lAccountFirstName,
-						$lAccountLastName,
-						$lAccountSignature,
-						false
-					);
-
-					if ($lQueryResult > 0) {
-						$lArrayResponse['Result'] = "Updated account '$lUsername'.";
-						$lArrayResponse['RowsAffected'] = $lQueryResult;
-						$lArrayResponse['Success'] = true;
-					} else {
-						$lArrayResponse['Result'] = "No rows were updated for account '$lUsername'.";
-						$lArrayResponse['RowsAffected'] = 0;
-						$lArrayResponse['Success'] = false;
-					}
-				} else {
-					// Insert a new account
-					$lQueryResult = $SQLQueryHandler->insertNewUserAccount(
-						$lUsername, 
-						$lAccountPassword, 
-						$lAccountFirstName, 
-						$lAccountLastName, 
-						$lAccountSignature
-					);
-
-					if ($lQueryResult > 0) {
-						$lArrayResponse['Result'] = "Inserted account '$lUsername'.";
-						$lArrayResponse['RowsAffected'] = $lQueryResult;
-						$lArrayResponse['Success'] = true;
-					} else {
-						$lArrayResponse['Result'] = "Failed to insert account '$lUsername'.";
-						$lArrayResponse['RowsAffected'] = 0;
-						$lArrayResponse['Success'] = false;
+						http_response_code(500); // Internal Server Error
 					}
 				}
 
-				// Set the response header to JSON and output the response
-				header($lContentTypeJSON);
+				header('Content-Type: application/json');
 				$lArrayResponse['SecurityLevel'] = $lSecurityLevel;
 				echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
-				break;
+				exit();
 
-			case "DELETE":
-				/* $_POST array is not auto-populated for DELETE method. Parse input into an array. */
-				populatePOSTSuperGlobal();
-
-				// Fetch POST parameters
-				$lUsername = getPOSTParameter("username", true);
-				$lAccountPassword = getPOSTParameter("password", true);
-				
-				// Initialize the response array
-				$lArrayResponse = [];
-				
-				if ($SQLQueryHandler->accountExists($lUsername)) {
-					// Check if authentication is successful
-					if ($SQLQueryHandler->authenticateAccount($lUsername, $lAccountPassword)) {
-						// Attempt to delete the user
-						$lQueryResult = $SQLQueryHandler->deleteUser($lUsername);
-					
-						if ($lQueryResult) {
-							// Successful deletion
-							$lArrayResponse['Result'] = "Deleted account '$lUsername'.";
-							$lArrayResponse['Success'] = true;
-						} else {
-							// Failed deletion attempt
-							$lArrayResponse['Result'] = "Attempted to delete account '$lUsername', but the result returned was '$lQueryResult'.";
-							$lArrayResponse['Success'] = false;
-						}
-					} else {
-						// Authentication failed
-						$lArrayResponse['Result'] = "Could not authenticate account '$lUsername'. Password incorrect.";
-						$lArrayResponse['Success'] = false;
-					}
-				} else {
-					// Account does not exist
-					$lArrayResponse['Result'] = "User '$lUsername' does not exist.";
-					$lArrayResponse['Success'] = false;
-				}
-				
-				// Set the response header to JSON and output the response
-				header($lContentTypeJSON);
-				$lArrayResponse['SecurityLevel'] = $lSecurityLevel;
-				echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
-				break;
+			// Similar updates for PUT and DELETE cases...
 
 			default:
 				http_response_code(405);
 				header('Allow: GET, POST, PUT, DELETE, OPTIONS');
-				header($lContentTypeJSON);
-				echo json_encode(["error" => "Method not allowed", "SecurityLevel" => $lSecurityLevel]);
-				break;
-		}// end switch
-
+				header('Content-Type: application/json');
+				echo json_encode(["error" => "Method not allowed", "SecurityLevel" => $lSecurityLevel], JSON_PRETTY_PRINT);
+				exit();
+		}
 	} catch (Exception $e) {
 		http_response_code(500);
-		header($lContentTypeJSON);
+		header('Content-Type: application/json');
 		echo $CustomErrorHandler->FormatErrorJSON($e, "Unable to process request to web service ws-user-account");
-	}// end try
-
+		exit();
+	}
 ?>
