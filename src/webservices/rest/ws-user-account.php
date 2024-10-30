@@ -43,6 +43,8 @@
     }
 
     try {
+		$lContentTypeJSON = 'Content-Type: application/json';
+
         // Initialize handlers
         $SQLQueryHandler = new SQLQueryHandler(0);
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
@@ -79,14 +81,14 @@
                     }
 
                     http_response_code(200);
-                    header('Content-Type: application/json');
+                    header($lContentTypeJSON);
                     $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                     echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                     exit(); // Exit after response
 
                 } else {
                     http_response_code(400);
-                    header('Content-Type: application/json');
+                    header($lContentTypeJSON);
                     echo json_encode(["error" => "Username parameter is required", "SecurityLevel" => $lSecurityLevel], JSON_PRETTY_PRINT);
                     exit(); // Exit after response
                 }
@@ -121,7 +123,7 @@
                     }
                 }
 
-                header('Content-Type: application/json');
+                header($lContentTypeJSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                 exit(); // Exit after response
@@ -183,7 +185,7 @@
                     }
                 }
 
-                header('Content-Type: application/json');
+                header($lContentTypeJSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                 exit(); // Exit after response
@@ -221,7 +223,7 @@
                     http_response_code(404); // Not Found
                 }
 
-                header('Content-Type: application/json');
+                header($lContentTypeJSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                 exit(); // Exit after response
@@ -229,13 +231,13 @@
             default:
                 http_response_code(405);
                 header('Allow: GET, POST, PUT, DELETE, OPTIONS');
-                header('Content-Type: application/json');
+                header($lContentTypeJSON);
                 echo json_encode(["error" => "Method not allowed", "SecurityLevel" => $lSecurityLevel], JSON_PRETTY_PRINT);
                 exit(); // Exit after response
         }
     } catch (Exception $e) {
         http_response_code(500);
-        header('Content-Type: application/json');
+        header($lContentTypeJSON);
         echo $CustomErrorHandler->FormatErrorJSON($e, "Unable to process request to web service ws-user-account");
         exit(); // Exit after response
     }
