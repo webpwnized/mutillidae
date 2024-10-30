@@ -52,21 +52,6 @@
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
 
-    <h2>Step-by-Step Example Using <code>curl</code></h2>
-    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-dns-lookup.php" \
- -H "Content-Type: text/xml; charset=utf-8" \
- -H "SOAPAction: \"urn:commandinjwsdl#lookupDNS\"" \
- --data '&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-                  xmlns:urn="urn:commandinjwsdl"&gt;
-   &lt;soapenv:Header/&gt;
-   &lt;soapenv:Body&gt;
-      &lt;urn:lookupDNS&gt;
-         &lt;targetHost&gt;example.com&lt;/targetHost&gt;
-      &lt;/urn:lookupDNS&gt;
-   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;'</code></pre>
-
     <h2>Step-by-Step Example Using Burp Repeater</h2>
     <pre><code>POST /webservices/soap/ws-dns-lookup.php HTTP/1.1
 Host: mutillidae.localhost
@@ -84,6 +69,21 @@ Content-Length: [length]
       &lt;/urn:lookupDNS&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;</code></pre>
+
+<h2>Step-by-Step Example Using <code>curl</code></h2>
+<pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-dns-lookup.php" \
+-H "Content-Type: text/xml; charset=utf-8" \
+-H "SOAPAction: \"urn:commandinjwsdl#lookupDNS\"" \
+--data '&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+              xmlns:urn="urn:commandinjwsdl"&gt;
+&lt;soapenv:Header/&gt;
+&lt;soapenv:Body&gt;
+  &lt;urn:lookupDNS&gt;
+     &lt;targetHost&gt;example.com&lt;/targetHost&gt;
+  &lt;/urn:lookupDNS&gt;
+&lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
 
     <h2>Expected Response</h2>
     <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
