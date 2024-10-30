@@ -163,10 +163,10 @@
                 } else {
                     // Insert a new account
                     $lQueryResult = $SQLQueryHandler->insertNewUserAccount(
-                        $lUsername, 
-                        $lAccountPassword, 
-                        $lAccountFirstName, 
-                        $lAccountLastName, 
+                        $lUsername,
+                        $lAccountPassword,
+                        $lAccountFirstName,
+                        $lAccountLastName,
                         $lAccountSignature
                     );
 
