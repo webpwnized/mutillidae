@@ -106,7 +106,6 @@ jobs:
           configurationFiles: .github/workflows/config/stackhawk.yml  # Path to configuration file relative to workspace.
           githubToken: ${{ github.token }}   # GitHub token for authentication to Code Scanning Alerts
         env:
-          APP_ID: ${{ secrets.HAWK_APP_ID }}
           NO_PROGRESS: true
           SARIF_ARTIFACT: true
 
