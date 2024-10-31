@@ -109,11 +109,6 @@ jobs:
           NO_PROGRESS: true
           SARIF_ARTIFACT: true
 
-      # Step X: List files
-      - name: List files
-        run: |
-          ls -lah
-
       # Step 10: Upload SARIF file
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@main
