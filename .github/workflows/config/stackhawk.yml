@@ -2,7 +2,7 @@
 
   app:
     # Unique Application ID from StackHawk account; reference this securely in the GitHub Actions as an environment variable or secret.
-    applicationId: "${{ secrets.HAWK_APP_ID }}" 
+    applicationId: ${{ secrets.HAWK_APP_ID }} # (required)
   
     # Environment name in StackHawk, useful for tracking scans in different environments like "Development", "Staging", etc.
     env: Mutillidae-Development # (required)
