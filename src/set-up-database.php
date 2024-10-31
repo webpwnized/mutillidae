@@ -241,6 +241,8 @@
 			('hansel', 'hansel123', 'Hansel. Hes so hot right now.', 'false', 'Hansel', '', '".bin2hex(random_bytes(32))."'),
 			('mugatu', 'mugatu123', 'I invented the piano key necktie!', 'true', 'Jacobim', 'Mugatu', '".bin2hex(random_bytes(32))."'),
 			('matilda', 'journalist123', 'Investigative reporter', 'false', 'Matilda', 'Jeffries', '".bin2hex(random_bytes(32))."'),
+		    ('stackhawk', 'Kaakaww', 'Swooping in for security', 'false', 'Stack', 'Hawk', '".bin2hex(random_bytes(32))."'),
+			('zoolander', 'zoolander123', 'I am really, really, really, ridiculously good looking', 'false', 'Derek', 'Zoolander', '".bin2hex(random_bytes(32))."'),			
 			('maury', 'maury123', 'Youre the guy who cant turn left', 'false', 'Maury', 'Ballstein', '".bin2hex(random_bytes(32))."')";
 			$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 		if (!$lQueryResult) {

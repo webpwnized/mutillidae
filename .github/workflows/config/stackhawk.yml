@@ -1,26 +1,50 @@
 # -- stackhawk configuration for mutillidae --
-app:
-  # Your Application ID from YOUR StackHawk account
-  applicationId: ${{ secrets.HAWK_APP_ID}} 
-  env: Mutillidae-Development # (required)
-  host: http://127.0.0.1:8888/ # (required)
-  excludePaths:
-    - "/set-up-database.php"
-    - "/index.php?do=logout"
-  authentication:
-    loggedInIndicator: "\\QLogged In User\\E"
-    loggedOutIndicator: "\\QNot Logged In\\E"
-    usernamePassword:
-      type: FORM
-      loginPath: /index.php?page=login.php
-      loginPagePath: /index.php?page=login.php
-      usernameField: username
-      passwordField: password # pragma: allowlist secret
-      scanUsername: "jeremy"
-      scanPassword: "password" # pragma: allowlist secret
-    cookieAuthorization:
-      cookieNames:
-        - "PHPSESSID"
-    testPath:
-      path: /index.php?page=edit-account-profile.php
-      fail: "User.*profile.*not.*found.*"
+
+  app:
+    # Unique Application ID from StackHawk account; reference this securely in the GitHub Actions as an environment variable or secret.
+    applicationId: "${{ secrets.HAWK_APP_ID }}" 
+  
+    # Environment name in StackHawk, useful for tracking scans in different environments like "Development", "Staging", etc.
+    env: Mutillidae-Development # (required)
+  
+    # The base URL or IP where the application is hosted. This must be reachable from the scan environment.
+    host: http://127.0.0.1:8888/ # (required)
+  
+    # Paths to exclude from the scan. These may be endpoints not meant for testing or that could cause issues if hit repeatedly.
+    excludePaths:
+      - "/set-up-database.php"
+      - "/index.php?do=logout"
+  
+    # Authentication settings
+    authentication:
+      # Regular expression to detect when a user is logged in.
+      loggedInIndicator: "\\QLogged In User\\E"
+      # Regular expression to detect when a user is logged out.
+      loggedOutIndicator: "\\QNot Logged In\\E"
+  
+      # Authentication type, typically FORM-based for applications with a login form.
+      usernamePassword:
+        type: FORM
+        loginPath: /index.php?page=login.php  # Path to submit login credentials.
+        loginPagePath: /index.php?page=login.php  # Path for the login page, can help identify when the user is redirected due to a failed login.
+        usernameField: username  # Field name for the username input in the login form.
+        passwordField: password  # pragma: allowlist secret
+        scanUsername: "stackhawk"  # Username for the scan login; ideally stored securely, not hardcoded.
+        scanPassword: "Kaakaww"  # pragma: allowlist secret
+
+      # Authorization using session cookies. Define specific cookies used to maintain session state.
+      cookieAuthorization:
+        cookieNames:
+          - "PHPSESSID"
+  
+      # A path to test whether login was successful; used to verify logged-in access.
+      testPath:
+        path: /index.php?page=edit-account-profile.php
+        fail: "User.*profile.*not.*found.*"  # Regular expression to detect a failed login.
+  
+  # HawkScan-specific configurations
+  hawk:
+    scan:
+      # Maximum time (in minutes) for the scan to run before it is terminated.
+      maxDurationMinutes: 30  # Limits the scan to 30 minutes to prevent extended scan durations.
+  
