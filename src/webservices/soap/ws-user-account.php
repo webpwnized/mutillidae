@@ -50,7 +50,12 @@
 	// Pull in the NuSOAP code
 	require_once './lib/nusoap.php';
 
-	// Create the server instance
+	$lServerName = $_SERVER['SERVER_NAME'];
+
+	// Construct the full URL to the documentation
+	$lDocumentationURL = "http://{$lServerName}/webservices/soap/docs/soap-services.html";
+
+	// Create the SOAP server instance
 	$lSOAPWebService = new soap_server();
 
 	// Initialize WSDL support
@@ -66,26 +71,7 @@
 		'rpc',                                // Style (remote procedure call)
 		'encoded',                            // Use (encoding style)
 		// Documentation: Functionality and Sample SOAP Request
-		'Fetches user information if the user exists, otherwise returns an error message.
-		<br/>
-		<br/>Sample Request (Copy and paste into Burp Repeater)
-		<br/>
-		<br/>POST /webservices/soap/ws-user-account.php HTTP/1.1
-		<br/>Accept-Encoding: gzip,deflate
-		<br/>Content-Type: text/xml;charset=UTF-8
-		<br/>Content-Length: 458
-		<br/>Host: localhost
-		<br/>Connection: Keep-Alive
-		<br/>User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-		<br/>
-		<br/>&lt;soapenv:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:urn=&quot;urn:ws-user-account&quot;&gt;
-		<br/>   &lt;soapenv:Header/&gt;
-		<br/>   &lt;soapenv:Body&gt;
-		<br/>      &lt;urn:getUser soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
-		<br/>         &lt;username xsi:type=&quot;xsd:string&quot;&gt;Jeremy&lt;/username&gt;
-		<br/>      &lt;/urn:getUser&gt;
-		<br/>   &lt;/soapenv:Body&gt;
-		<br/>&lt;/soapenv:Envelope&gt;' // End of documentation
+		"Fetches user information if the user exists, otherwise returns an error message. For detailed documentation, visit: {$lDocumentationURL}"
 	);
 	
 	// Register the method to expose

@@ -2,6 +2,11 @@
 // Include the nusoap library
 require_once './lib/nusoap.php';
 
+$lServerName = $_SERVER['SERVER_NAME'];
+
+// Construct the full URL to the documentation
+$lDocumentationURL = "http://{$lServerName}/webservices/soap/docs/soap-services.html";
+
 // Create the SOAP server instance
 $lSOAPWebService = new soap_server();
 
@@ -18,23 +23,7 @@ $lSOAPWebService->register(
     'rpc',                             // Style
     'encoded',                         // Use
     // Documentation with a sample request
-    'Returns a simple message to confirm connectivity.
-    <br/>
-    <br/>Sample Request (Copy and paste into Burp Repeater):
-    <br/>
-    <br/>POST /webservices/soap/ws-test-connectivity.php HTTP/1.1
-    <br/>Host: localhost
-    <br/>Content-Type: text/xml;charset=UTF-8
-    <br/>SOAPAction: "urn:connectivitywsdl#testConnectivity"
-    <br/>Content-Length: 356
-    <br/>Connection: Keep-Alive
-    <br/>
-    <br/>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:connectivitywsdl"&gt;
-    <br/>   &lt;soapenv:Header/&gt;
-    <br/>   &lt;soapenv:Body&gt;
-    <br/>      &lt;urn:testConnectivity/&gt;
-    <br/>   &lt;/soapenv:Body&gt;
-    <br/>&lt;/soapenv:Envelope&gt;'
+    "Returns a simple message to confirm connectivity. For detailed documentation, visit: {$lDocumentationURL}"
 );
 
 // Define the "testConnectivity" method
