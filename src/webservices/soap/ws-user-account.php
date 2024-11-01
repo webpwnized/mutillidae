@@ -88,30 +88,7 @@
 			'urn:ws-user-account#registerUser',                				// soapaction
 			'rpc',                                							// style
 			'encoded',                            							// use
-			'Creates new user account
-			<br/>
-			<br/>Sample Request (Copy and paste into Burp Repeater)
-			<br/>
-			<br />POST /webservices/soap/ws-user-account.php HTTP/1.1
-			<br />Accept-Encoding: gzip,deflate
-			<br />Content-Type: text/xml;charset=UTF-8
-			<br />Content-Length: 587
-			<br />Host: localhost
-			<br />Connection: Keep-Alive
-			<br />User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-			<br />
-			<br />&lt;soapenv:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:urn=&quot;urn:ws-user-account&quot;&gt;
-			<br />   &lt;soapenv:Header/&gt;
-			<br />   &lt;soapenv:Body&gt;
-			<br />      &lt;urn:registerUser soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
-			<br />         &lt;username xsi:type=&quot;xsd:string&quot;&gt;Joe2&lt;/username&gt;
-			<br />         &lt;password xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/password&gt;
-			<br />         &lt;firstname xsi:type=&quot;xsd:string&quot;&gt;Joe&lt;/firstname&gt;
-			<br />         &lt;lastname xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/lastname&gt;
-			<br />         &lt;signature xsi:type=&quot;xsd:string&quot;&gt;Try Harder&lt;/signature&gt;
-			<br />      &lt;/urn:registerUser&gt;
-			<br />   &lt;/soapenv:Body&gt;
-			<br />&lt;/soapenv:Envelope&gt;'	// end documentation
+			"Creates new user account.  For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
 	// Register the method to expose
@@ -128,30 +105,7 @@
 			'urn:ws-user-account#updateUser',                				// soapaction
 			'rpc',                                							// style
 			'encoded',                            							// use
-			'If account exists, updates existing user account else creates new user account
-			<br/>
-			<br/>Sample Request (Copy and paste into Burp Repeater)
-			<br/>
-			<br />POST /webservices/soap/ws-user-account.php HTTP/1.1
-			<br />Accept-Encoding: gzip,deflate
-			<br />Content-Type: text/xml;charset=UTF-8
-			<br />Content-Length: 587
-			<br />Host: localhost
-			<br />Connection: Keep-Alive
-			<br />User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-			<br />
-			<br />&lt;soapenv:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:urn=&quot;urn:ws-user-account&quot;&gt;
-			<br />   &lt;soapenv:Header/&gt;
-			<br />   &lt;soapenv:Body&gt;
-			<br />      &lt;urn:updateUser soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
-			<br />         &lt;username xsi:type=&quot;xsd:string&quot;&gt;Joe2&lt;/username&gt;
-			<br />         &lt;password xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/password&gt;
-			<br />         &lt;firstname xsi:type=&quot;xsd:string&quot;&gt;Joe&lt;/firstname&gt;
-			<br />         &lt;lastname xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/lastname&gt;
-			<br />         &lt;signature xsi:type=&quot;xsd:string&quot;&gt;Try Harder&lt;/signature&gt;
-			<br />      &lt;/urn:updateUser&gt;
-			<br />   &lt;/soapenv:Body&gt;
-			<br />&lt;/soapenv:Envelope&gt;'	// end documentation
+			"If account exists, updates existing user account else creates new user account. For detailed documentation, visit: {$lDocumentationURL}"
 				);
 
 	// Register the method to expose
@@ -165,28 +119,7 @@
 			'urn:ws-user-account#deleteUser',           // soapaction
 			'rpc',                                		// style
 			'encoded',                            		// use
-			'If account exists, deletes user account
-			<br/>
-			<br/>Sample Request (Copy and paste into Burp Repeater)
-			<br/>
-			<br/>POST /webservices/soap/ws-user-account.php HTTP/1.1
-			<br/>Accept-Encoding: gzip,deflate
-			<br/>Content-Type: text/xml;charset=UTF-8
-			<br/>Content-Length: 587
-			<br/>Host: localhost
-			<br/>Connection: Keep-Alive
-			<br/>User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-			<br/>
-			<br/>&lt;soapenv:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:urn=&quot;urn:ws-user-account&quot;&gt;
-			<br/>   &lt;soapenv:Header/&gt;
-			<br/>   &lt;soapenv:Body&gt;
-			<br/>      &lt;urn:deleteUser soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
-			<br/>         &lt;username xsi:type=&quot;xsd:string&quot;&gt;Joe&lt;/username&gt;
-			<br/>         &lt;password xsi:type=&quot;xsd:string&quot;&gt;Holly&lt;/password&gt;
-			<br/>      &lt;/urn:deleteUser&gt;
-			<br/>   &lt;/soapenv:Body&gt;
-			<br/>&lt;/soapenv:Envelope&gt;
-			'	// documentation
+			"If account exists, deletes user account.  For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
 	function doXMLEncodeQueryResults($pUsername, $pQueryResult, $pEncodeOutput) {
