@@ -11,7 +11,7 @@ require_once './lib/nusoap.php';
 $lServerName = $_SERVER['SERVER_NAME'];
 
 // Construct the full URL to the documentation
-$lDocumentationURL = "http://{$serverName}/webservices/soap/docs/soap-services.html";
+$lDocumentationURL = "http://{$lServerName}/webservices/soap/docs/soap-services.html";
 
 // Create the SOAP server instance
 $lSOAPWebService = new soap_server();
@@ -29,7 +29,7 @@ $lSOAPWebService->register(
     'rpc',                               // Style
     'encoded',                           // Use
     // Detailed documentation for the method, including a sample SOAP request
-    'Executes a DNS lookup for the specified host and returns the result as a string. For detailed documentation, visit: {$documentationURL}'
+    "Executes a DNS lookup for the specified host and returns the result as a string. For detailed documentation, visit: {$lDocumentationURL}"
 );
 
 /**
