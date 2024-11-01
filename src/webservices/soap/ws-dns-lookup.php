@@ -8,6 +8,11 @@ class LookupException extends Exception {}
 // Pull in the NuSOAP library
 require_once './lib/nusoap.php';
 
+$lServerName = $_SERVER['SERVER_NAME'];
+
+// Construct the full URL to the documentation
+$lDocumentationURL = "http://{$serverName}/webservices/soap/docs/soap-services.html";
+
 // Create the SOAP server instance
 $lSOAPWebService = new soap_server();
 
@@ -24,27 +29,7 @@ $lSOAPWebService->register(
     'rpc',                               // Style
     'encoded',                           // Use
     // Detailed documentation for the method, including a sample SOAP request
-    'Returns the results of a DNS lookup.
-    <br/>
-    <br/>Sample Request (Copy and paste into Burp Repeater)
-    <br/>
-    <br/>POST /webservices/soap/ws-dns-lookup.php HTTP/1.1
-    <br/>Accept-Encoding: gzip,deflate
-    <br/>Content-Type: text/xml;charset=UTF-8
-    <br/>SOAPAction: "urn:commandinjwsdl#commandinj"
-    <br/>Content-Length: 473
-    <br/>Host: localhost
-    <br/>Connection: Keep-Alive
-    <br/>User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
-    <br/>
-    <br/>&lt;soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:commandinjwsdl"&gt;
-    <br/>   &lt;soapenv:Header/&gt;
-    <br/>   &lt;soapenv:Body&gt;
-    <br/>      &lt;urn:lookupDNS soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;
-    <br/>         &lt;targetHost xsi:type="xsd:string"&gt;www.google.com&lt;/targetHost&gt;
-    <br/>      &lt;/urn:lookupDNS&gt;
-    <br/>   &lt;/soapenv:Body&gt;
-    <br/>&lt;/soapenv:Envelope&gt;'
+    'Executes a DNS lookup for the specified host and returns the result as a string. For detailed documentation, visit: {$documentationURL}'
 );
 
 /**

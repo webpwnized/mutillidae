@@ -81,7 +81,7 @@
                     }
 
                     http_response_code(200);
-                    header($lContentTypeJSON);
+                    header($lContentTypeJSON); 
                     $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                     echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                     exit(); // Exit after response
