@@ -103,10 +103,10 @@ function lookupDNS($pTargetHost) {
         // Build the XML response
         $lXmlResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         $lXmlResponse .= "<results>\n";
-        $lXmlResponse .= "  <host>" . $lTargetHost . "</host>\n";
+        $lXmlResponse .= "  <host>" . $lTargetHost . "</host>\n"; // Removed htmlspecialchars to avoid over-encoding
         $lXmlResponse .= "  <securityLevel>" . $lSecurityLevel . "</securityLevel>\n";
         $lXmlResponse .= "  <timestamp>" . $lTimestamp . "</timestamp>\n";
-        $lXmlResponse .= "  <output><![CDATA[\n$lOutput\n]]></output>\n";
+        $lXmlResponse .= "  <output>\n<![CDATA[\n$lOutput\n]]>\n</output>\n";
         $lXmlResponse .= "</results>";
 
         $LogHandler->writeToLog("Executed nslookup on: $lTargetHost");
