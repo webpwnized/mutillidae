@@ -37,7 +37,7 @@ $lSOAPWebService->register(
  * Performs a DNS lookup for a given target host.
  * 
  * @param string $pTargetHost The host name or IP address to look up.
- * @return string XML-formatted result containing the nslookup output or validation error message.
+ * @return string XML-formatted result containing the nslookup output, timestamp, security level, or validation error message.
  */
 function lookupDNS($pTargetHost) {
 
@@ -56,7 +56,7 @@ function lookupDNS($pTargetHost) {
 
         // Determine security level and protection settings
         switch ($lSecurityLevel) {
-			default: // Insecure
+            default: // Insecure
             case "0": // Insecure
             case "1": // Insecure
                 $lProtectAgainstCommandInjection = false;
@@ -97,11 +97,16 @@ function lookupDNS($pTargetHost) {
             throw new CommandExecutionException("Command execution failed.");
         }
 
+        // Get the current timestamp
+        $lTimestamp = date('Y-m-d H:i:s');
+
         // Build the XML response
         $lXmlResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         $lXmlResponse .= "<results>\n";
-        $lXmlResponse .= "  <host>" . htmlspecialchars($lTargetHost) . "</host>\n";
-        $lXmlResponse .= "  <output><![CDATA[\n$lOutput\n]]></output>\n";
+        $lXmlResponse .= "  <host>" . $lTargetHost . "</host>\n"; // Removed htmlspecialchars to avoid over-encoding
+        $lXmlResponse .= "  <securityLevel>" . $lSecurityLevel . "</securityLevel>\n";
+        $lXmlResponse .= "  <timestamp>" . $lTimestamp . "</timestamp>\n";
+        $lXmlResponse .= "  <output>\n<![CDATA[\n$lOutput\n]]>\n</output>\n";
         $lXmlResponse .= "</results>";
 
         $LogHandler->writeToLog("Executed nslookup on: $lTargetHost");
