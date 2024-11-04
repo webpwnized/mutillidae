@@ -28,6 +28,16 @@ Accept: application/json
 
 */
 
+// Include required constants and utility classes
+require_once '../../includes/constants.php';
+require_once '../../classes/SQLQueryHandler.php';
+
+// Initialize SQL query handler with security level 0
+$SQLQueryHandler = new SQLQueryHandler(0);
+
+// Get the current security level from database instead of session
+$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+
 // Get the origin of the request
 $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 
@@ -50,7 +60,7 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // Return a success message with 200 OK status
         http_response_code(200); // OK
-        echo json_encode(["code" => 200, "status" => "OK", "message" => "Connection succeeded...", "timestamp" => date('Y-m-d H:i:s')], JSON_PRETTY_PRINT);
+        echo json_encode(["code" => 200, "status" => "OK", "message" => "Connection succeeded...", 'security-level' => $lSecurityLevel, "timestamp" => date('Y-m-d H:i:s')], JSON_PRETTY_PRINT);
     } else {
         // If the request method is not allowed, return 405 status
         http_response_code(405); // Method Not Allowed
