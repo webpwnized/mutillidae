@@ -111,7 +111,8 @@ function lookupDNS($pTargetHost) {
 
         $LogHandler->writeToLog("Executed nslookup on: $lTargetHost");
 
-        return $lXmlResponse; // Return XML as string
+        # return $lXmlResponse; // Return XML as string
+        return new soapval('return', 'xsd:string', $lXmlResponse, '', '', array('use' => 'literal'));
 
     } catch (Exception $e) {
         throw new LookupException("Error in method lookupDNS: " . $e->getMessage());
