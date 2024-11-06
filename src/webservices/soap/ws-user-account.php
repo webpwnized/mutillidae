@@ -219,7 +219,7 @@
 
 			$lTimestamp = date('Y-m-d H:i:s');
 
-			$response = array(
+			$lResponse = array(
 				'message' => "User data fetched successfully",
 				'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 				'timestamp' => $lTimestamp,
@@ -232,7 +232,7 @@
 				// do nothing
 			}//end try
 
-			return $response;
+			return $lResponse;
 
 		} catch (Exception $e) {
 			return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->getUser()");
@@ -258,22 +258,22 @@
 			$lTimestamp = date('Y-m-d H:i:s');
 
 			if ($SQLQueryHandler->accountExists($pUsername)){
-				$response = array(
+				$lResponse = array(
 					'message' => "User {$pUsername} already exists",
 					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 					'timestamp' => $lTimestamp,
 					'output' => ""
 				);
-				return $response;
+				return $lResponse;
 			}else{
 				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
-				$response = array(
+				$lResponse = array(
 					'message' => "Inserted account {$pUsername}",
 					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 					'timestamp' => $lTimestamp,
 					'output' => ""
 				);
-				return $response;
+				return $lResponse;
 			}// end if
 
 		} catch (Exception $e) {
@@ -301,22 +301,22 @@
 
 			if ($SQLQueryHandler->accountExists($pUsername)){
 				$lQueryResult = $SQLQueryHandler->updateUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature, false);
-				$response = array(
+				$lResponse = array(
 					'message' => "Updated account {$pUsername}",
 					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 					'timestamp' => $lTimestamp,
 					'output' => ""
 				);
-				return $response;
+				return $lResponse;
 			}else{
 				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
-				$response = array(
+				$lResponse = array(
 					'message' => "Inserted account {$pUsername}",
 					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 					'timestamp' => $lTimestamp,
 					'output' => ""
 				);
-				return $response;
+				return $lResponse;
 			}// end if
 
 		} catch (Exception $e) {
@@ -345,41 +345,41 @@
 					$lQueryResult = $SQLQueryHandler->deleteUser($pUsername);
 
 					if ($lQueryResult){
-						$response = array(
+						$lResponse = array(
 							'message' => "Deleted account {$pUsername}",
 							'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 							'timestamp' => $lTimestamp,
 							'output' => ""
 						);
-						return $response;
+						return $lResponse;
 					}else{
-						$response = array(
+						$lResponse = array(
 							'message' => "Attempted to delete account {$pUsername} but result returned was {$lQueryResult}",
 							'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 							'timestamp' => $lTimestamp,
 							'output' => ""
 						);
-						return $response;
+						return $lResponse;
 					}//end if
 
 				}else{
-					$response = array(
+					$lResponse = array(
 						'message' => "Could not authenticate account {$pUsername}. Password incorrect.",
 						'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 						'timestamp' => $lTimestamp,
 						'output' => ""
 					);
-					return $response;
+					return $lResponse;
 				}// end if
 
 			}else{
-				$response = array(
+				$lResponse = array(
 					'message' => "User {$pUsername} does not exist",
 					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
 					'timestamp' => $lTimestamp,
 					'output' => ""
 				);
-				return $response;
+				return $lResponse;
 			}// end if
 
 		} catch (Exception $e) {
