@@ -27,7 +27,7 @@ $lSOAPWebService->register(
     'urn:commandinjwsdl',                // Namespace
     'urn:commandinjwsdl#lookupDNS',      // SOAP action
     'rpc',                               // Style
-    'encoded',                           // Use
+    'literal',                           // Use
     // Detailed documentation for the method, including a sample SOAP request
     "Executes a DNS lookup for the specified host and returns the result as a string. For detailed documentation, visit: {$lDocumentationURL}"
 );
