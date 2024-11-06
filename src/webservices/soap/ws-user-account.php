@@ -61,11 +61,26 @@
 	// Initialize WSDL support
 	$lSOAPWebService->configureWSDL('ws-user-account', 'urn:ws-user-account');
 
+	// Define a complex type for the response
+	$lSOAPWebService->wsdl->addComplexType(
+		'UserAccountResponse',
+		'complexType',
+		'struct',
+		'all',
+		'',
+		array(
+			'message' => array('name' => 'message', 'type' => 'xsd:string'),
+			'securityLevel' => array('name' => 'securityLevel', 'type' => 'xsd:string'),
+			'timestamp' => array('name' => 'timestamp', 'type' => 'xsd:string'),
+			'output' => array('name' => 'output', 'type' => 'xsd:string')
+		)
+	);
+
 	// Register the method to expose
 	$lSOAPWebService->register(
 		'getUser',                            // Method name
 		array('username' => 'xsd:string'),    // Input parameter (expects a username)
-		array('return' => 'xsd:xml'),         // Output parameter (returns XML)
+		array('return' => 'tns:UserAccountResponse'),         // Output parameter (returns XML)
 		'urn:ws-user-account',                // Namespace
 		'urn:ws-user-account#getUser',        // SOAP action
 		'rpc',                                // Style (remote procedure call)
@@ -75,24 +90,24 @@
 	);
 	
 	// Register the method to expose
-	$lSOAPWebService->register('registerUser',			                	// method name
+	$lSOAPWebService->register('registerUser',				                // method name
 			array(
 				'username' => 'xsd:string',
 				'password' => 'xsd:string',
 				'firstname' => 'xsd:string',
 				'lastname' => 'xsd:string',
 				'signature' => 'xsd:string'
-			),																// input parameters
-			array('return' => 'xsd:xml'),      								// output parameters
-			'urn:ws-user-account',                      					// namespace
-			'urn:ws-user-account#registerUser',                				// soapaction
-			'rpc',                                							// style
-			'encoded',                            							// use
+			),																	// input parameters
+			array('return' => 'tns:UserAccountResponse'),       // output parameters
+			'urn:ws-user-account',                       // namespace
+			'urn:ws-user-account#registerUser',                // soapaction
+			'rpc',                                 // style
+			'encoded',                             // use
 			"Creates new user account.  For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
 	// Register the method to expose
-	$lSOAPWebService->register('updateUser',			                	// method name
+	$lSOAPWebService->register('updateUser',				                // method name
 			array(
 					'username' => 'xsd:string',
 					'password' => 'xsd:string',
@@ -100,25 +115,25 @@
 					'lastname' => 'xsd:string',
 					'signature' => 'xsd:string'
 			),																// input parameters
-			array('return' => 'xsd:xml'),      								// output parameters
-			'urn:ws-user-account',                      					// namespace
-			'urn:ws-user-account#updateUser',                				// soapaction
-			'rpc',                                							// style
-			'encoded',                            							// use
+			array('return' => 'tns:UserAccountResponse'),       // output parameters
+			'urn:ws-user-account',                      // namespace
+			'urn:ws-user-account#updateUser',                // soapaction
+			rpc',                                 // style
+			'encoded',                             // use
 			"If account exists, updates existing user account else creates new user account. For detailed documentation, visit: {$lDocumentationURL}"
-				);
+	);
 
 	// Register the method to expose
-	$lSOAPWebService->register('deleteUser',			                	// method name
+	$lSOAPWebService->register('deleteUser',				                // method name
 			array(
 					'username' => 'xsd:string',
 					'password' => 'xsd:string'
-			),											// input parameters
-			array('return' => 'xsd:xml'),      			// output parameters
+			),					// input parameters
+			array('return' => 'tns:UserAccountResponse'),       // output parameters
 			'urn:ws-user-account',                      // namespace
 			'urn:ws-user-account#deleteUser',           // soapaction
-			'rpc',                                		// style
-			'encoded',                            		// use
+			'rpc',                                 // style
+			'encoded',                             // use
 			"If account exists, deletes user account.  For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
@@ -126,7 +141,7 @@
 		global $Encoder;
 	
 		// Start the XML result with the root element and a message attribute
-		$lResults = "<accounts message=\"Results for {$pUsername}\">";
+		$lResults = "<accounts>";
 	
 		// Iterate over each row in the query result
 		while ($row = $pQueryResult->fetch_object()) {
@@ -174,7 +189,7 @@
 			return doXMLEncodeQueryResults($pUsername, $lQueryResult, $pEncodeOutput);
 		} else {
 			// Return a message if no user is found
-			return "<accounts message=\"User {$pUsername} does not exist\" />";
+			return "<accounts><message>User {$pUsername} does not exist</message></accounts>";
 		}
 		
 	}//end function xmlEncodeQueryResults
@@ -189,15 +204,24 @@
 	function getUser($pUsername) {
 
 		try{
-		   	$lResults = "";
-		   	global $LogHandler;
-		   	global $lEncodeOutput;
-		   	global $SQLQueryHandler;
-		   	global $CustomErrorHandler;
+			$lResults = "";
+			global $LogHandler;
+			global $lEncodeOutput;
+			global $SQLQueryHandler;
+			global $CustomErrorHandler;
 
-		   	assertParameter($pUsername);
+			assertParameter($pUsername);
 
 			$lResults = xmlEncodeQueryResults($pUsername, $lEncodeOutput);
+
+			$lTimestamp = date('Y-m-d H:i:s');
+
+			$response = array(
+				'message' => "User data fetched successfully",
+				'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+				'timestamp' => $lTimestamp,
+				'output' => $lResults
+			);
 
 			try {
 				$LogHandler->writeToLog("ws-user-account.php: Fetched user-information for: {$pUsername}");
@@ -205,11 +229,11 @@
 				// do nothing
 			}//end try
 
-		    return $lResults;
+			return $response;
 
-	    } catch (Exception $e) {
-	    	return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->getUser()");
-	    }// end try
+		} catch (Exception $e) {
+			return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->getUser()");
+		}// end try
 
 	}// end function getUser()
 
@@ -228,11 +252,25 @@
 			assertParameter($pLastname);
 			assertParameter($pSignature);
 
+			$lTimestamp = date('Y-m-d H:i:s');
+
 			if ($SQLQueryHandler->accountExists($pUsername)){
-				return "<accounts message=\"User {$pUsername} already exists\" />";
+				$response = array(
+					'message' => "User {$pUsername} already exists",
+					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+					'timestamp' => $lTimestamp,
+					'output' => ""
+				);
+				return $response;
 			}else{
 				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
-				return "<accounts message=\"Inserted account {$pUsername}\" />";
+				$response = array(
+					'message' => "Inserted account {$pUsername}",
+					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+					'timestamp' => $lTimestamp,
+					'output' => ""
+				);
+				return $response;
 			}// end if
 
 		} catch (Exception $e) {
@@ -256,12 +294,26 @@
 			assertParameter($pLastname);
 			assertParameter($pSignature);
 
+			$lTimestamp = date('Y-m-d H:i:s');
+
 			if ($SQLQueryHandler->accountExists($pUsername)){
 				$lQueryResult = $SQLQueryHandler->updateUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature, false);
-				return "<accounts message=\"Updated account {$pUsername}\" />";
+				$response = array(
+					'message' => "Updated account {$pUsername}",
+					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+					'timestamp' => $lTimestamp,
+					'output' => ""
+				);
+				return $response;
 			}else{
 				$lQueryResult = $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
-				return "<accounts message=\"Inserted account {$pUsername}\" />";
+				$response = array(
+					'message' => "Inserted account {$pUsername}",
+					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+					'timestamp' => $lTimestamp,
+					'output' => ""
+				);
+				return $response;
 			}// end if
 
 		} catch (Exception $e) {
@@ -282,23 +334,49 @@
 			assertParameter($pUsername);
 			assertParameter($pPassword);
 
+			$lTimestamp = date('Y-m-d H:i:s');
+
 			if($SQLQueryHandler->accountExists($pUsername)){
 
 				if($SQLQueryHandler->authenticateAccount($pUsername,$pPassword)){
 					$lQueryResult = $SQLQueryHandler->deleteUser($pUsername);
 
 					if ($lQueryResult){
-						return "<accounts message=\"Deleted account {$pUsername}\" />";
+						$response = array(
+							'message' => "Deleted account {$pUsername}",
+							'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+							'timestamp' => $lTimestamp,
+							'output' => ""
+						);
+						return $response;
 					}else{
-						return "<accounts message=\"Attempted to delete account {$pUsername} but result returned was {$lQueryResult}\" />";
+						$response = array(
+							'message' => "Attempted to delete account {$pUsername} but result returned was {$lQueryResult}",
+							'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+							'timestamp' => $lTimestamp,
+							'output' => ""
+						);
+						return $response;
 					}//end if
 
 				}else{
-					return "<accounts message=\"Could not authenticate account {$pUsername}. Password incorrect.\" />";
+					$response = array(
+						'message' => "Could not authenticate account {$pUsername}. Password incorrect.",
+						'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+						'timestamp' => $lTimestamp,
+						'output' => ""
+					);
+					return $response;
 				}// end if
 
 			}else{
-				return "<accounts message=\"User {$pUsername} does not exist\" />";
+				$response = array(
+					'message' => "User {$pUsername} does not exist",
+					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+					'timestamp' => $lTimestamp,
+					'output' => ""
+				);
+				return $response;
 			}// end if
 
 		} catch (Exception $e) {
