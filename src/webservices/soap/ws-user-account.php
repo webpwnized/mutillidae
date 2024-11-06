@@ -76,7 +76,7 @@
 		)
 	);
 
-	// Register the method to expose
+	// Register the "getUser" method
 	$lSOAPWebService->register(
 		'getUser',                            // Method name
 		array('username' => 'xsd:string'),    // Input parameter (expects a username)
@@ -89,52 +89,55 @@
 		"Fetches user information if the user exists, otherwise returns an error message. For detailed documentation, visit: {$lDocumentationURL}"
 	);
 	
-	// Register the method to expose
-	$lSOAPWebService->register('registerUser',				                // method name
-			array(
-				'username' => 'xsd:string',
-				'password' => 'xsd:string',
-				'firstname' => 'xsd:string',
-				'lastname' => 'xsd:string',
-				'signature' => 'xsd:string'
-			),																	// input parameters
-			array('return' => 'tns:UserAccountResponse'),       // output parameters
-			'urn:ws-user-account',                       // namespace
-			'urn:ws-user-account#registerUser',                // soapaction
-			'rpc',                                 // style
-			'encoded',                             // use
-			"Creates new user account.  For detailed documentation, visit: {$lDocumentationURL}"
+	// Register the "registerUser" method
+	$lSOAPWebService->register(
+		'registerUser',                           // Method name
+		array(
+			'username' => 'xsd:string',
+			'password' => 'xsd:string',
+			'firstname' => 'xsd:string',
+			'lastname' => 'xsd:string',
+			'signature' => 'xsd:string'
+		),                                        // Input parameters
+		array('return' => 'tns:UserAccountResponse'), // Output parameters
+		'urn:ws-user-account',                    // Namespace
+		'urn:ws-user-account#registerUser',       // SOAP action
+		'rpc',                                    // Style
+		'encoded',                                // Use
+		"Creates new user account. For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
-	// Register the method to expose
-	$lSOAPWebService->register('updateUser',				                // method name
-			array(
-					'username' => 'xsd:string',
-					'password' => 'xsd:string',
-					'firstname' => 'xsd:string',
-					'lastname' => 'xsd:string',
-					'signature' => 'xsd:string'
-			),																// input parameters
-			array('return' => 'tns:UserAccountResponse'),       // output parameters
-			'urn:ws-user-account',                      // namespace
-			'urn:ws-user-account#updateUser',                // soapaction
-			rpc',                                 // style
-			'encoded',                             // use
-			"If account exists, updates existing user account else creates new user account. For detailed documentation, visit: {$lDocumentationURL}"
+	// Register the "updateUser" method
+	$lSOAPWebService->register(
+		'updateUser',                             // Method name
+		array(
+			'username' => 'xsd:string',
+			'password' => 'xsd:string',
+			'firstname' => 'xsd:string',
+			'lastname' => 'xsd:string',
+			'signature' => 'xsd:string'
+		),                                        // Input parameters
+		array('return' => 'tns:UserAccountResponse'), // Output parameters
+		'urn:ws-user-account',                    // Namespace
+		'urn:ws-user-account#updateUser',         // SOAP action
+		'rpc',                                    // Style
+		'encoded',                                // Use
+		"If account exists, updates existing user account else creates new user account. For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
-	// Register the method to expose
-	$lSOAPWebService->register('deleteUser',				                // method name
-			array(
-					'username' => 'xsd:string',
-					'password' => 'xsd:string'
-			),					// input parameters
-			array('return' => 'tns:UserAccountResponse'),       // output parameters
-			'urn:ws-user-account',                      // namespace
-			'urn:ws-user-account#deleteUser',           // soapaction
-			'rpc',                                 // style
-			'encoded',                             // use
-			"If account exists, deletes user account.  For detailed documentation, visit: {$lDocumentationURL}"
+	// Register the "deleteUser" method
+	$lSOAPWebService->register(
+		'deleteUser',                             // Method name
+		array(
+			'username' => 'xsd:string',
+			'password' => 'xsd:string'
+		),                                        // Input parameters
+		array('return' => 'tns:UserAccountResponse'), // Output parameters
+		'urn:ws-user-account',                    // Namespace
+		'urn:ws-user-account#deleteUser',         // SOAP action
+		'rpc',                                    // Style
+		'encoded',                                // Use
+		"If account exists, deletes user account. For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
 	function doXMLEncodeQueryResults($pUsername, $pQueryResult, $pEncodeOutput) {
@@ -383,7 +386,7 @@
 			return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->deleteUser()");
 		}// end try
 
-	}// end function registerUser()
+	}// end function deleteUser()
 
 	// Handle the SOAP request with error handling
 	try {
