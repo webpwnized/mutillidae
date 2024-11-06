@@ -20,12 +20,27 @@ $lSOAPWebService->configureWSDL('echowsdl', 'urn:echowsdl');
 $lSOAPWebService->register(
     'echoMessage',                     // Method name
     array('message' => 'xsd:string'),  // Input parameter
-    array('return' => 'xsd:string'),   // Output parameter
+    array('return' => 'tns:EchoMessageResponse'),   // Output parameter defined as a complex type
     'urn:echowsdl',                    // Namespace
     'urn:echowsdl#echoMessage',        // SOAP action
     'rpc',                             // Style
     'encoded',                         // Use
     "Echoes the provided message back to the caller. For detailed documentation, visit: {$lDocumentationURL}"
+);
+
+// Define a complex type for the response
+$lSOAPWebService->wsdl->addComplexType(
+    'EchoMessageResponse',
+    'complexType',
+    'struct',
+    'all',
+    '',
+    array(
+        'message' => array('name' => 'message', 'type' => 'xsd:string'),
+        'securityLevel' => array('name' => 'securityLevel', 'type' => 'xsd:string'),
+        'timestamp' => array('name' => 'timestamp', 'type' => 'xsd:string'),
+        'output' => array('name' => 'output', 'type' => 'xsd:string')
+    )
 );
 
 // Define the "echoMessage" method
@@ -59,7 +74,7 @@ function echoMessage($pMessage) {
                 $lProtectAgainstXSS = true;
             break;
         }// end switch
-    	
+    
         // Apply XSS protection if enabled
         if ($lProtectAgainstXSS) {
             $lMessage = $Encoder->encodeForHTML($pMessage);
@@ -75,9 +90,20 @@ function echoMessage($pMessage) {
             $lResult = shell_exec("echo " . $lMessage);
         }
 
-        return $lResult; // Return the result as SOAP response
+        // Get the current timestamp
+        $lTimestamp = date('Y-m-d H:i:s');
 
-	}catch(Exception $e){
+        // Create a structured response as an associative array
+        $lResponse = array(
+            'message' => $lMessage,
+            'securityLevel' => $lSecurityLevel,
+            'timestamp' => $lTimestamp,
+            'output' => $lResult
+        );
+
+        return $lResponse; // Return as an array for NuSOAP to serialize
+
+    }catch(Exception $e){
         $lMessage = "Error executing method echoMessage in webservice ws-echo.php";
         throw new MethodExecutionException($lMessage);
     }// end try

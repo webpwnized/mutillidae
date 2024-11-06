@@ -22,14 +22,28 @@ $lSOAPWebService->configureWSDL('commandinjwsdl', 'urn:commandinjwsdl');
 // Register the lookupDNS method to expose as a SOAP service
 $lSOAPWebService->register(
     'lookupDNS',                           // Method name
-    array('targetHost' => 'xsd:string'), // Input parameter
-    array('return' => 'xsd:string'),     // Output parameter (XML returned as string)
-    'urn:commandinjwsdl',                // Namespace
-    'urn:commandinjwsdl#lookupDNS',      // SOAP action
-    'rpc',                               // Style
-    'encoded',                           // Use
-    // Detailed documentation for the method, including a sample SOAP request
-    "Executes a DNS lookup for the specified host and returns the result as a string. For detailed documentation, visit: {$lDocumentationURL}"
+    array('targetHost' => 'xsd:string'),   // Input parameter
+    array('return' => 'tns:LookupDNSResponse'),  // Output parameter defined as a complex type
+    'urn:commandinjwsdl',                  // Namespace
+    'urn:commandinjwsdl#lookupDNS',        // SOAP action
+    'rpc',                                 // Style
+    'encoded',                             // Use
+    "Executes a DNS lookup for the specified host and returns the result."
+);
+
+// Define a complex type for the response
+$lSOAPWebService->wsdl->addComplexType(
+    'LookupDNSResponse',
+    'complexType',
+    'struct',
+    'all',
+    '',
+    array(
+        'host' => array('name' => 'host', 'type' => 'xsd:string'),
+        'securityLevel' => array('name' => 'securityLevel', 'type' => 'xsd:string'),
+        'timestamp' => array('name' => 'timestamp', 'type' => 'xsd:string'),
+        'output' => array('name' => 'output', 'type' => 'xsd:string')
+    )
 );
 
 /**
@@ -37,7 +51,7 @@ $lSOAPWebService->register(
  * Performs a DNS lookup for a given target host.
  * 
  * @param string $pTargetHost The host name or IP address to look up.
- * @return string XML-formatted result containing the nslookup output, timestamp, security level, or validation error message.
+ * @return array An associative array containing the nslookup output, timestamp, security level, and host.
  */
 function lookupDNS($pTargetHost) {
 
@@ -61,14 +75,14 @@ function lookupDNS($pTargetHost) {
             case "1": // Insecure
                 $lProtectAgainstCommandInjection = false;
                 $lProtectAgainstXSS = false;
-            break;
+                break;
             case "2": // Moderate security
             case "3": // More secure
             case "4": // Secure
             case "5": // Fairly secure
                 $lProtectAgainstCommandInjection = true;
                 $lProtectAgainstXSS = true;
-            break;
+                break;
         }
 
         // Validate the target host to protect against command injection, if security is enabled
@@ -90,7 +104,7 @@ function lookupDNS($pTargetHost) {
         $lCommand = $lProtectAgainstCommandInjection
             ? escapeshellcmd("nslookup " . escapeshellarg($lTargetHost))
             : "nslookup $lTargetHost";
-    
+
         // Execute the command and capture output
         $lOutput = shell_exec($lCommand);
         if ($lOutput === null) {
@@ -100,25 +114,24 @@ function lookupDNS($pTargetHost) {
         // Get the current timestamp
         $lTimestamp = date('Y-m-d H:i:s');
 
-        // Build the XML response
-        $lXmlResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $lXmlResponse .= "<results>\n";
-        $lXmlResponse .= "  <host>" . $lTargetHost . "</host>\n"; // Removed htmlspecialchars to avoid over-encoding
-        $lXmlResponse .= "  <securityLevel>" . $lSecurityLevel . "</securityLevel>\n";
-        $lXmlResponse .= "  <timestamp>" . $lTimestamp . "</timestamp>\n";
-        $lXmlResponse .= "  <output>\n<![CDATA[\n$lOutput\n]]>\n</output>\n";
-        $lXmlResponse .= "</results>";
+        // Create a structured response as an associative array
+        $response = array(
+            'host' => $lTargetHost,
+            'securityLevel' => $lSecurityLevel,
+            'timestamp' => $lTimestamp,
+            'output' => $lOutput
+        );
 
         $LogHandler->writeToLog("Executed nslookup on: $lTargetHost");
 
-        return $lXmlResponse; // Return XML as string
+        return $response; // Return as an array for NuSOAP to serialize
 
     } catch (Exception $e) {
         throw new LookupException("Error in method lookupDNS: " . $e->getMessage());
-    } // End try-catch
-} // End function lookupDNS
+    }
+}
 
-try{
+try {
     // Process the incoming SOAP request
     $lSOAPWebService->service(file_get_contents("php://input"));
 } catch (Exception $e) {
