@@ -25,7 +25,7 @@
 <div id="id-hover-div" class="click-jacking-button"
 onclick="window.alert('This page has been hijacked by the Mutillidae development team.');document.location.href='https://github.com/webpwnized/mutillidae';"
 >
-Giant Invisible Click-Jacking Button 
+Giant Invisible Click-Jacking Button
 </div>
 
 <script>

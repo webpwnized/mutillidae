@@ -8,7 +8,7 @@
 	 */
 
 	try{
-		$Encoder = NULL;
+		$Encoder = null;
 
 		if (session_status() == PHP_SESSION_NONE){
 		    session_start();
@@ -38,9 +38,9 @@
 			break;
     	};//end switch
 
-    	$lParameterSubmitted = FALSE;
+    	$lParameterSubmitted = false;
 		if (isset($_REQUEST["page-title"])) {
-			$lParameterSubmitted = TRUE;
+			$lParameterSubmitted = true;
 		}// end if
 
 		$lPageTitle = "Styling with Mutillidae";
@@ -62,7 +62,7 @@
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html lang="en" xml:lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
 	<link rel="stylesheet" type="text/css" href="./styles/global-styles.css" />

@@ -9,11 +9,14 @@
 		SQL Injection
 	*/
 
-	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
-	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
+	class UserNotLoggedInException extends Exception {}
 
-	if (!isSet($logged_in_user)) {
-		throw new Exception("$logged_in_user is not set. Page add-to-your-blog.php requires this variable.");
+	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
+	
+	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
+		
+	if (!isset($logged_in_user)) {
+		throw new UserNotLoggedInException("$logged_in_user is not set. Page add-to-your-blog.php requires this variable.");
 	}// end if
 	
 	function isParameterPollutionDetected(/*String*/ $pQueryString){
@@ -87,9 +90,9 @@
 
    	// determine if user clicked the submit buttton
    	if(!$lProtectAgainstMethodTampering){
-   		$lFormSubmitted = isSet($_REQUEST["user-poll-php-submit-button"]);
+		$lFormSubmitted = isset($_REQUEST["user-poll-php-submit-button"]);
    	}else{
-   		$lFormSubmitted = isSet($_GET["user-poll-php-submit-button"]);
+		$lFormSubmitted = isset($_GET["user-poll-php-submit-button"]);
    	}//end if
 
    	// if user clicked submit button, process input parameters

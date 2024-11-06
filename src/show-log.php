@@ -61,9 +61,9 @@
 </style>
 <table class="results-table" id="idLogRecords">
 <tr class="report-header">
-	<td colspan="10">	
+	<td colspan="10">
 		<span>
-			<img width="32px" height="32px" src="./images/information-icon-64-64.png" />
+			<img width="32px" height="32px" src="./images/information-icon-64-64.png" alt="Information Icon" />
 			<?php echo $lQueryResult->num_rows; ?> log records found
 		</span>
 		<span title="Click to refresh log file" onclick="document.location.href=document.location.href.replace('&deleteLogs=deleteLogs','').replace('&popUpNotificationCode=LFD1','').concat('&popUpNotificationCode=LFR1');" style="cursor: pointer;margin-left:35px;margin-right:35px;white-space:nowrap;font-weight:bold;">
@@ -75,7 +75,7 @@
 			Delete Logs
 		</span>
 	</td>
-</tr>		
+</tr>
 <tr class="report-header">
     <td style="font-weight:bold;">Hostname</td>
     <td style="font-weight:bold;">IP</td>

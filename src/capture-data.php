@@ -10,7 +10,7 @@
 
 <div>
 	<a href="./index.php?page=captured-data.php" style="text-decoration: none;">
-	<img style="vertical-align: middle;" src="./images/cage-48-48.png" />
+	<img style="vertical-align: middle;" src="./images/cage-48-48.png" alt="Captured Data Icon" />
 	<span style="font-weight:bold; cursor: pointer;">View Captured Data</span>
 	</a>
 </div>

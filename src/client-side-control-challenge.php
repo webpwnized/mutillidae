@@ -52,11 +52,11 @@
 		}//end constructor
 
 		public function EnableOutputEncoding(){
-			$this->mEncodeOutput = TRUE;
+			$this->mEncodeOutput = true;
 		}// end try
 
 		public function DisableOutputEncoding(){
-			$this->mEncodeOutput = FALSE;
+			$this->mEncodeOutput = false;
 		}// end try
 
 		public function addFieldHelper(/*ClientField*/ $pClientField){
@@ -250,7 +250,7 @@
 	   	$lRandomFlag = $_SESSION['cscc-random-flag'];
 
 	} catch(Exception $e){
-		$lSubmitButtonClicked = FALSE;
+		$lSubmitButtonClicked = false;
 		echo $CustomErrorHandler->FormatError($e, "Error creating client-side challenge");
 	}// end try
 ?>

@@ -13,7 +13,7 @@
 	 * SQL Exception, (Fix: Employ custom error handler)
 	 * HTTP Parameter Pollution (Fix: Scope request variables)
 	 */
-	try {	    	
+	try {
 		switch ($_SESSION["security-level"]){
 			default: // Default case: This code is insecure
 	   		case "0": // This code is insecure
@@ -60,8 +60,8 @@
 <?php include_once __SITE_ROOT__.'/includes/back-button.inc';?>
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
-<form 	action="index.php?page=source-viewer.php" 
-		method="post" 
+<form 	action="index.php?page=source-viewer.php"
+		method="post"
 		enctype="application/x-www-form-urlencoded">
 		
 	<table>
@@ -181,15 +181,15 @@
 	   				throw new Exception('Validation Failed: Did not receive allowed values array.');
 	   			}// end if
 
-	   			if (!($lArrayCount > 0)){
+				if ($lArrayCount <= 0){
 	   				throw new Exception('Validation Failed: Array is empty.');
 	   			}// end if
 	   			
 	   			/* We expect small int. validate positive integer between 0-9.
 	   			 * Regex pattern makes sure the user doesnt send in characters that
 	   			 * are not actually digits but can be cast to digits.
-	   			 */	
-	   			$isDigits = (preg_match("/\d{1,4}/", $pPHPFile) == 1);    			
+	   			 */
+	   			$isDigits = (preg_match("/\d{1,4}/", $pPHPFile) == 1);
 	   			if (!($isDigits && $pPHPFile >= 0 && $pPHPFile < $lArrayCount)){
 	   				throw(new Exception("Expected integer input. Cannot process request. Support team alerted."));
 	   			}// end if

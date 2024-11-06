@@ -6,7 +6,8 @@
 
 try {
     switch ($_SESSION["security-level"]){
-        case "0": // This code is insecure. No input validation is performed.
+        default: // This code is insecure. 
+        case "0": // This code is insecure. 
             $lEnableJavaScriptValidation = false;
             $lEnableHTMLControls = false;
             $lProtectAgainstMethodTampering = false;
@@ -14,7 +15,7 @@ try {
             $lProtectAgainstXSS = false;
             break;
 
-        case "1": // This code is insecure. No input validation is performed.
+        case "1": // This code is insecure. 
             $lEnableJavaScriptValidation = true;
             $lEnableHTMLControls = true;
             $lProtectAgainstMethodTampering = false;
@@ -64,12 +65,12 @@ try {
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 
 <a href="index.php?page=echo.php">
-    <img src="images/malware-icon-75-75.png" />
+    <img src="images/malware-icon-75-75.png" alt="Malware Icon" />
     <span class="label">Switch to Cross-Site Scripting (XSS)</span>
 </a>
 <span class="buffer"></span>
 <a href="index.php?page=cors.php">
-    <img src="images/cors-icon-75-75.png" />
+    <img src="images/cors-icon-75-75.png" alt="CORS Icon" />
     <span class="label">Switch to Cross-Origin Resource Sharing (CORS)</span>
 </a>
 

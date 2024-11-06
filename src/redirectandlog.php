@@ -28,10 +28,10 @@
 	   			 * validate as string. 
 	   			 */
 	   			$forwardurl=$_REQUEST["forwardurl"];
-				$LogHandler->writeToLog("Redirected user to: " . $forwardurl);				
+				$LogHandler->writeToLog("Redirected user to: " . $forwardurl);
 				echo '<meta http-equiv="refresh" content="0;url='.$forwardurl.'">';
 				//header("Location: " . $forwardurl); /* Redirect browser */
-				exit; /* prevent other headers from runnning */				
+				exit; /* prevent other headers from runnning */
 	   		break;
 	    		
 	   		case "2":
@@ -49,7 +49,7 @@
 	   			 * Regex pattern makes sure the user doesnt send in characters that
 	   			 * are not actually digits but can be cast to digits.
 	   			 */	
-	   			$isDigits = (preg_match("/\d{1,2}/", $forwardurl) == 1);    			
+	   			$isDigits = (preg_match("/\d{1,2}/", $forwardurl) == 1);
 	   			if ($isDigits && $forwardurl > 0 && $forwardurl < 11){
 					$lURL = "";
 					/* Insecure Direct Object References are patched
@@ -66,6 +66,7 @@
 					 * the direct object, which is the forwarding URL.
 					 */ 
 	   				switch($forwardurl){
+						default: $lURL = "http://www.irongeek.com/";break;
 	   					case 1: $lURL = "http://www.irongeek.com/";break;
 	   					case 2: $lURL = "http://www.owasp.org";break;
 	   					case 3: $lURL = "http://www.issa-kentuckiana.org/";break;

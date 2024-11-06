@@ -4,6 +4,7 @@
 <?php
 	try{
     	switch ($_SESSION["security-level"]){
+			default: // This code is insecure. No input validation is performed.
     		case "0": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = false;
     			$lEnableHTMLControls = false;
@@ -164,7 +165,7 @@
 					<tr><td class='label'>Permanent File Name</td><td>{$lFilePermanentName}</td></tr>
 					<tr><td class='label'>File Type</td><td>{$lFileType}</td></tr>
 					<tr><td class='label'>File Size</td><td>{$lFileSizeString}</td></tr>
-				</table>	
+				</table>
 			</div>
 			<div>&nbsp;</div>";
 	}//end if
@@ -191,7 +192,9 @@
 				    <input type="hidden" name="MAX_FILE_SIZE" id="id_max_file_size" value="<?php echo $lAllowedFileSize; ?>" />
 					<label for="filename-text" class="label">Filename</label>
 					<input type="text" style="background-color:#ffffff;color:#000000;font-family:courier" disabled="disabled" name="filename-text" id="idFilenameText" size="50" />
-					<img src="./images/upload-32-32.png" align="middle" onclick="idFilename.click();" />
+					<button type="button" onclick="idFilename.click();" style="background: none; border: none; padding: 0; cursor: pointer;">
+						<img src="./images/upload-32-32.png" alt="Upload" />
+					</button>
 					<input type="file" id="idFilename" name="filename" style="display: none;" onchange="idFilenameText.value=this.value" />
 				</td>
 			</tr>

@@ -76,7 +76,7 @@
 	<legend>View Blog Entries</legend>
 	<span>
 		<a href="./index.php?page=add-to-your-blog.php" style=" text-decoration: none;">
-		<img style="vertical-align: middle;" src="./images/add-icon-32-32.png" />
+		<img style="vertical-align: middle;" src="./images/add-icon-32-32.png" alt="Add Icon" />
 		<span style="font-weight:bold;">&nbsp;Add To Your Blog</span>
 		</a>
 	</span>
@@ -114,7 +114,7 @@
 								}// end while
 							} catch (Exception $e) {
 								echo $CustomErrorHandler->FormatError($e, $lQueryString);
-							}// end try		
+							}// end try
 						?>
 					</select>
 					<input name="view-someones-blog-php-submit-button" class="button" type="submit" value="View Blog Entries" />
@@ -126,12 +126,12 @@
 </fieldset>
 
 <?php
-	/* Known Vulnerabilities: 
+	/* Known Vulnerabilities:
 		SQL injection, Cross Site Scripting, Cross Site Request Forgery
 		Known Vulnerable Output: Name, Comment
 	*/
 
-	if(isSet($_POST["view-someones-blog-php-submit-button"])){
+	if(isset($_POST["view-someones-blog-php-submit-button"])){
 		try {
 
 			/* Note that $MySQLHandler->escapeDangerousCharacters is ok but not the best defense. Stored
@@ -211,12 +211,12 @@
 						<td>{$lComment}</td>
 					</tr>\n";
 				}//end while $row
-				echo "</table>";		
+				echo "</table>";
 			    		
 			}// end if ($lAuthor == "53241E83-76EC-4920-AD6D-503DD2A6BA68" || strlen($lAuthor) == 0)		
 
 		} catch (Exception $e) {
 			echo $CustomErrorHandler->FormatError($e, $lQueryString);
-		}// end try		
+		}// end try
 	}// end if isSet($_POST["view-someones-blog-php-submit-button"])
 ?>
