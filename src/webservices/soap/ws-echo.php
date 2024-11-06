@@ -87,21 +87,21 @@ function echoMessage($pMessage) {
             $lResult = $lMessage;
         } else {
             // Allow command injection vulnerability (insecure)
-            $lResult = shell_exec("echo " . escapeshellarg($lMessage));
+            $lResult = shell_exec("echo " . $lMessage);
         }
 
         // Get the current timestamp
         $lTimestamp = date('Y-m-d H:i:s');
 
         // Create a structured response as an associative array
-        $response = array(
+        $lResponse = array(
             'message' => $lMessage,
             'securityLevel' => $lSecurityLevel,
             'timestamp' => $lTimestamp,
             'output' => $lResult
         );
 
-        return $response; // Return as an array for NuSOAP to serialize
+        return $lResponse; // Return as an array for NuSOAP to serialize
 
     }catch(Exception $e){
         $lMessage = "Error executing method echoMessage in webservice ws-echo.php";
