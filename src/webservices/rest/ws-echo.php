@@ -8,10 +8,10 @@ require_once '../../classes/LogHandler.php';
 // Initialize SQL query handler with security level 0
 $SQLQueryHandler = new SQLQueryHandler(0);
 
- // Get the current security level from database instead of session
- $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+// Get the current security level from database instead of session
+$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
- $LogHandler = new LogHandler($lSecurityLevel);
+$LogHandler = new LogHandler($lSecurityLevel);
 
 // Define a dedicated exception for command execution failures
 class CommandExecutionException extends Exception {}
