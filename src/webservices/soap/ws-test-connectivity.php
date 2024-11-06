@@ -17,18 +17,53 @@ $lSOAPWebService->configureWSDL('connectivitywsdl', 'urn:connectivitywsdl');
 $lSOAPWebService->register(
     'testConnectivity',                // Method name
     array(),                           // No input parameters
-    array('return' => 'xsd:string'),   // Output parameter
+    array('return' => 'tns:TestConnectivityResponse'),   // Output parameter defined as a complex type
     'urn:connectivitywsdl',            // Namespace
     'urn:connectivitywsdl#testConnectivity', // SOAP action
     'rpc',                             // Style
     'encoded',                         // Use
-    // Documentation with a sample request
     "Returns a simple message to confirm connectivity. For detailed documentation, visit: {$lDocumentationURL}"
+);
+
+// Define a complex type for the response
+$lSOAPWebService->wsdl->addComplexType(
+    'TestConnectivityResponse',
+    'complexType',
+    'struct',
+    'all',
+    '',
+    array(
+        'successMessage' => array('name' => 'successMessage', 'type' => 'xsd:string'),
+        'securityLevel' => array('name' => 'securityLevel', 'type' => 'xsd:string'),
+        'timestamp' => array('name' => 'timestamp', 'type' => 'xsd:string')
+    )
 );
 
 // Define the "testConnectivity" method
 function testConnectivity() {
-    return 'Connection successful...';
+    try {
+        // Include required constants and utility classes
+        require_once '../../includes/constants.php';
+        require_once '../../classes/SQLQueryHandler.php';
+
+        $SQLQueryHandler = new SQLQueryHandler(0);
+        $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+
+        // Get the current timestamp
+        $lTimestamp = date('Y-m-d H:i:s');
+
+        // Create a structured response as an associative array
+        $response = array(
+            'successMessage' => 'Connection successful...',
+            'securityLevel' => $lSecurityLevel,
+            'timestamp' => $lTimestamp
+        );
+
+        return $response; // Return as an array for NuSOAP to serialize
+
+    } catch (Exception $e) {
+        throw new Exception("Error executing method testConnectivity in webservice ws-connectivity.php: " . $e->getMessage());
+    }
 }
 
 // Handle the SOAP request with error handling
