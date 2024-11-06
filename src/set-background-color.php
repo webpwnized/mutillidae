@@ -48,7 +48,7 @@
     	
 	}else{
 		$lBackgroundColor = $lBackgroundColorText = "eecccc";
-	}// end if (isset($_POST)) 
+	}// end if (isset($_POST))
 ?>
 
 <script type="text/javascript">

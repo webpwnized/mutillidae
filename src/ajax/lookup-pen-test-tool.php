@@ -36,7 +36,7 @@
 	try {
     	switch ($_SESSION["security-level"]){
     		case "0": // This code is insecure.
-    			$lUseServerSideValidation = FALSE;
+    			$lUseServerSideValidation = false;
    				$lEncodeOutput = false;
 				$lTokenizeAllowedMarkup = false;
 				$lProtectAgainstSQLInjection = false;
@@ -45,7 +45,7 @@
 				break;
 
     		case "1": // This code is insecure.
-    			$lUseServerSideValidation = FALSE;
+    			$lUseServerSideValidation = false;
 				$lEncodeOutput = false;
 				$lTokenizeAllowedMarkup = false;
 				$lProtectAgainstSQLInjection = false;
@@ -57,7 +57,7 @@
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-    			$lUseServerSideValidation = TRUE;
+    			$lUseServerSideValidation = true;
     			$lProtectAgainstMethodTampering = true;
 	  			/*
 	  			 * NOTE: Input validation is excellent but not enough. The output must be

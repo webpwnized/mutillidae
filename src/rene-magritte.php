@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Rene Magritte Frame</title>

@@ -1,6 +1,6 @@
 <?php
 
-	function PrettyPrintStringtoHex($lString) {
+	function prettyPrintStringToHex($lString) {
 		$lHexText = "";
 		for($i=0;$i<strlen($lString);$i++){
 			$lHexText .= "0X" . str_pad(dechex(ord($lString[$i])), 2, "0", STR_PAD_LEFT) . " ";
@@ -170,11 +170,11 @@
 		</tr>
 		<tr>
 			<td class="label" style="text-align: left;">User ID</td>
-			<td style="text-align: left;"><?php echo $lUserIDValue . " ( Hint: " . PrettyPrintStringtoHex($lUserIDValue) . ")"; ?></td>
+			<td style="text-align: left;"><?php echo $lUserIDValue . " ( Hint: " . prettyPrintStringToHex($lUserIDValue) . ")"; ?></td>
 		</tr>
 		<tr>
 			<td class="label" style="text-align: left;">Group ID</td>
-			<td style="text-align: left;"><?php echo $lUserGroupIDValue . " ( Hint: " . PrettyPrintStringtoHex($lUserGroupIDValue) . ")"; ?></td>
+			<td style="text-align: left;"><?php echo $lUserGroupIDValue . " ( Hint: " . prettyPrintStringToHex($lUserGroupIDValue) . ")"; ?></td>
 		</tr>
 		<tr><td></td></tr>
 		<tr><td class="label" colspan="2">Note: UID/GID "000" is root.<br />You need to make User ID and Group ID equal to<br />"000" to become root user.</td></tr>

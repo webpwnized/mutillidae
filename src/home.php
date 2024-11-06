@@ -19,7 +19,7 @@
 <div style=" width: 750px; overflow: hidden;">
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
 <span style="float: right">
-	<img src="images/arrow-45-degree-left-up.png" style="margin-right: 5px" />
+	<img src="images/arrow-45-degree-left-up.png" style="margin-right: 5px" alt="Arrow pointing left up" />
 	<span class="label" style="float: right;">TIP:&nbsp;
 	<span style="float: right; text-align: center;">Click 
 	<span style="color: blue;font-style: italic;">Hint and Videos</span><br/>on each page</span></span>
@@ -30,7 +30,7 @@
  	<tr>
 	    <td>
 			<a title="Usage Instructions" href="./index.php?page=documentation/usage-instructions.php">
-				<img alt="What Should I Do?" align="middle" src="./images/question-mark-40-61.png" />
+				<img alt="What Should I Do?" style="vertical-align: middle;" src="./images/question-mark-40-61.png" />
 				What Should I Do?
 			</a>
 		</td>

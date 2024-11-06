@@ -73,7 +73,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" style="text-align:center;" class="label">
-			What could possibly go wrong? 
+			What could possibly go wrong?
 		</td>
 	</tr>
 	<tr><td>&nbsp;</td></tr>

@@ -2,17 +2,17 @@
 	$lHTMLControlInput = 'minlength="1" maxlength="20" required="required"';
 	$lHTMLControlRadio = 'required="required"';
 
-	try {	    	
+	try {
     	switch ($_SESSION["security-level"]){
 			default: // Default case: This code is insecure.
     		case "0": // This code is insecure.
-    			$lUseClientSideStorageForSensitiveData = TRUE;
-    			$lUseJavaScriptValidation = FALSE;
+    			$lUseClientSideStorageForSensitiveData = true;
+    			$lUseJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
     		break;
     		case "1": // This code is insecure.
-    			$lUseClientSideStorageForSensitiveData = TRUE;
-    			$lUseJavaScriptValidation = TRUE;
+    			$lUseClientSideStorageForSensitiveData = true;
+    			$lUseJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
     		break;
 
@@ -20,8 +20,8 @@
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-    			$lUseClientSideStorageForSensitiveData = FALSE;
-    			$lUseJavaScriptValidation = TRUE;
+    			$lUseClientSideStorageForSensitiveData = false;
+    			$lUseJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
     		break;
     	}// end switch

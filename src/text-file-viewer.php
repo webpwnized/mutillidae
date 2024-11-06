@@ -178,6 +178,7 @@
 						 * the direct object, which is the forwarding URL.
 						 */ 
 		   				switch($pTextFile){
+							default:
 		   					case 1: $lURL = "http://www.textfiles.com/hacking/auditool.txt";break;
 		   					case 2: $lURL = "http://www.textfiles.com/hacking/atms";break;
 		   					case 3: $lURL = "http://www.textfiles.com/hacking/backdoor.txt";break;

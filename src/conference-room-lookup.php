@@ -24,21 +24,21 @@
 				$lEnableJavaScriptValidation = false;
 				$lEnableHTMLControls = false;
 				$lProtectAgainstMethodTampering = false;
-				$lProtectAgainstLDAPInjection=FALSE;
+				$lProtectAgainstLDAPInjection=false;
     		break;
 
     		case "1": // This code is insecure. No input validation is performed.
 				$lEnableJavaScriptValidation = true;
 				$lEnableHTMLControls = true;
 				$lProtectAgainstMethodTampering = false;
-				$lProtectAgainstLDAPInjection=FALSE;
+				$lProtectAgainstLDAPInjection=false;
     		break;
 
 	   		case "2":
 	   		case "3":
 	   		case "4":
     		case "5": // This code is fairly secure
-    			$lProtectAgainstLDAPInjection=TRUE;
+    			$lProtectAgainstLDAPInjection=true;
 				$lEnableHTMLControls = true;
     			$lEnableJavaScriptValidation = true;
    				$lProtectAgainstMethodTampering = true;

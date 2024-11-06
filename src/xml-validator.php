@@ -11,7 +11,7 @@
 </change-log>
 */
  
-	function HandleXmlError($errno, $errstr, $errfile, $errline){
+	function handleXmlError($errno, $errstr, $errfile, $errline){
 	    if ($errno==E_WARNING && (substr_count($errstr,"DOMDocument::loadXML()")>0)){
 	        throw new DOMException($errstr);
 	    }else{
@@ -136,7 +136,7 @@
 		enctype="application/x-www-form-urlencoded"
 		onsubmit="return onSubmitOfForm(this);"
 >
-	<input type="hidden" name="page" value="xml-validator.php" />	
+	<input type="hidden" name="page" value="xml-validator.php" />
 	<table>
 		<tr id="id-bad-cred-tr" style="display: none;">
 			<td colspan="2" class="error-message">
@@ -181,7 +181,7 @@
 				echo "<div>&nbsp;</div>";
 				
 				try {
-					set_error_handler('HandleXmlError');
+					set_error_handler('handleXmlError');
 					
 					$lDOMDocument = new DOMDocument();
 					$lDOMDocument->resolveExternals = true;

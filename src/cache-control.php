@@ -47,7 +47,7 @@
 			Nirsoft <span class="label">IE CacheView</span> also useful
 			<br/><br/>
 			<span class="report-header">Reporting</span>
-			<br/><br/>	
+			<br/><br/>
 			RFC-7234 from the Internet Engineering Task Force (IETF) specifies caching controls.
 			HTTP headers are used to specify caching directives (Section 5.2.1).
 			"Cache-Control" is standard for HTTP/1.1.
