@@ -398,26 +398,40 @@ class SQLQueryHandler {
 		return $this->mMySQLHandler->executeQuery($lQueryString);
 	}//end public function getUserAccount
 
-	public function apiKeyExists($pAPIKey){
+	public function getAccountByClientId($pClientId){
 		/*
-		* Note: While escaping works ok in some case, it is not the best defense.
-	   * Using stored procedures is a much stronger defense.
-	   */
-
-		if ($this->stopSQLInjection){
-			$pAPIKey = $this->mMySQLHandler->escapeDangerousCharacters($pAPIKey);
-		}// end if
-
-		$lQueryString =
-			"SELECT EXISTS (
-				SELECT 1
-				FROM accounts
-				WHERE api_key='".$pAPIKey."'".
-			") AS api_key_exists;";
-
+		 * Vulnerability: Using direct user input in SQL without escaping or parameterization,
+		 * making it vulnerable to SQL injection.
+		 */
+		if ($this->stopSQLInjection) {
+			$pClientId = $this->mMySQLHandler->escapeDangerousCharacters($pClientId);
+		}
+	
+		$lQueryString = "SELECT * FROM accounts WHERE client_id='" . $pClientId . "'";
 		return $this->mMySQLHandler->executeQuery($lQueryString);
-	}//end public function apiKeyExists
-
+	}
+	
+	public function authenticateByClientCredentials($pClientId, $pClientSecret){
+		/*
+		 * Vulnerability: Directly using user-supplied client_id and client_secret without proper escaping,
+		 * making this function vulnerable to SQL injection.
+		 */
+		if ($this->stopSQLInjection) {
+			$pClientId = $this->mMySQLHandler->escapeDangerousCharacters($pClientId);
+			$pClientSecret = $this->mMySQLHandler->escapeDangerousCharacters($pClientSecret);
+		}
+	
+		$lQueryString =
+			"SELECT COUNT(*) AS count FROM accounts " .
+			"WHERE client_id='" . $pClientId . "' " .
+			"AND api_key='" . $pClientSecret . "'";
+		
+		$result = $this->mMySQLHandler->executeQuery($lQueryString);
+		$row = $result->fetch_assoc();
+	
+		return $row['count'] > 0;
+	}
+	
 	/* -----------------------------------------
 	 * Insert Queries
 	 * ----------------------------------------- */

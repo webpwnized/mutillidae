@@ -41,18 +41,25 @@ if (!$clientId || !$clientSecret || !$audience) {
 }
 
 // Validate credentials
-$isValid = $SQLQueryHandler->validateClientCredentials($clientId, $clientSecret);
+$isValid = $SQLQueryHandler->authenticateByClientCredentials($clientId, $clientSecret);
 if (!$isValid) {
     http_response_code(401);
     echo json_encode(["error" => "Invalid client credentials."]);
     exit();
 }
 
-// Define a list of valid audiences
+// Define a list of valid audiences based on known endpoints
 $validAudiences = [
-    "https://api.your-service.com/endpoint1",
-    "https://api.your-service.com/endpoint2",
-    "https://api.your-service.com/desired-endpoint"
+    "https://your-domain.com/rest/ws-cors-echo.php",
+    "https://your-domain.com/rest/ws-dns-lookup.php",
+    "https://your-domain.com/rest/ws-echo.php",
+    "https://your-domain.com/rest/ws-prototype-login.php",
+    "https://your-domain.com/rest/ws-test-connectivity.php",
+    "https://your-domain.com/rest/ws-user-account.php",
+    "https://your-domain.com/soap/ws-dns-lookup.php",
+    "https://your-domain.com/soap/ws-echo.php",
+    "https://your-domain.com/soap/ws-test-connectivity.php",
+    "https://your-domain.com/soap/ws-user-account.php"
 ];
 
 // Check if the requested audience is valid
@@ -64,8 +71,8 @@ if (!in_array($audience, $validAudiences)) {
 
 // Define JWT claims with audience
 $payload = [
-    'iss' => 'https://your-service.com',
-    'aud' => $audience,                     // Include audience in token
+    'iss' => 'https://your-domain.com',       // Issuer is your domain
+    'aud' => $audience,                       // Include audience in token
     'iat' => time(),
     'nbf' => time(),
     'exp' => time() + 3600,
@@ -75,6 +82,7 @@ $payload = [
 
 $jwt = JWT::encode($payload, getenv('JWT_SECRET_KEY') ?: 'default-secret-key');
 
+// Respond with JWT token
 http_response_code(200);
 echo json_encode([
     'access_token' => $jwt,
