@@ -213,7 +213,7 @@
 			("jeremy", "password", "d1373 1337 speak", false, "Jeremy", "Druin", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("bryce", "password", "I Love SANS", false, "Bryce", "Galbraith", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("samurai", "samurai", "Carving fools", false, "Samurai", "WTF", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
-			("jim", "password", "Rome is burning", false, "Jim", "Rome", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("dodgerjim", "password", "Rome is burning", false, "Jim", "Rome", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("bobby", "password", "Hank is my dad", false, "Bobby", "Hill", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("simba", "password", "I am a super-cat", false, "Simba", "Lion", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("dreveil", "password", "Preparation H", false, "Dr.", "Evil", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
