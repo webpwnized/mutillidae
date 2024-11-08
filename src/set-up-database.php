@@ -209,7 +209,7 @@
 		$lQueryString = 'INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, client_id, api_key) VALUES
 			("admin", "adminpass", "g0t r00t?", true, "System", "Administrator", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("adrian", "somepassword", "Zombie Films Rock!", true, "Adrian", "Crenshaw", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
-			("john", "monkey", "I like the smell of confunk", false, "John", "Pentest", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("patches", "tortoise", "meow", false, "Patches", "Pester", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("jeremy", "password", "d1373 1337 speak", false, "Jeremy", "Druin", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("bryce", "password", "I Love SANS", false, "Bryce", "Galbraith", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("samurai", "samurai", "Carving fools", false, "Samurai", "WTF", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
