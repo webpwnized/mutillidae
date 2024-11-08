@@ -222,7 +222,6 @@
 			("john", "password", "Do the Duggie!", false, "John", "Wall", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("kevin", "42", "Doug Adams rocks", false, "Kevin", "Johnson", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("dave", "set", "Bet on S.E.T. FTW", false, "Dave", "Kennedy", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
-			("patches", "tortoise", "meow", false, "Patches", "Pester", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("rocky", "stripes", "treats?", false, "Rocky", "Paws", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("tim", "lanmaster53", "Because reconnaissance is hard to spell", false, "Tim", "Tomes", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("ABaker", "SoSecret", "Muffin tops only", true, "Aaron", "Baker", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
