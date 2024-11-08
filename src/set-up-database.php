@@ -169,17 +169,20 @@
 			echo format("Successfully created 'blogs_table' table.", "S");
     	}// end if
 
-    	$lQueryString = 'CREATE TABLE accounts( '.
-    			 'cid INT NOT NULL AUTO_INCREMENT, '.
-    	         'username TEXT, '.
-    	         'password TEXT, '.
-    			 'mysignature TEXT, '.
-    			 'is_admin VARCHAR(5),'.
-    			 'firstname TEXT, '.
-    			 'lastname TEXT, '.
-				 'api_key VARCHAR(64),' .
-    			 'PRIMARY KEY(cid))';
-    	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
+		$lQueryString = 'CREATE TABLE accounts (
+				cid INT NOT NULL AUTO_INCREMENT,
+				username VARCHAR(255) NOT NULL UNIQUE,
+				password VARCHAR(255) NOT NULL,
+				mysignature TEXT,
+				is_admin BOOLEAN DEFAULT FALSE,
+				firstname VARCHAR(255),
+				lastname VARCHAR(255),
+				client_id CHAR(32) NOT NULL UNIQUE,
+				api_key VARCHAR(64) NOT NULL UNIQUE,
+				created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY(cid)
+			)';
+		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;
 			echo format("Failed to create 'accounts' table.", "F");
@@ -203,48 +206,48 @@
 			echo format("Successfully created 'hitlog' table.", "S");
     	}// end if
 
-		$lQueryString = "INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, api_key) VALUES
-			('admin', 'adminpass', 'g0t r00t?', 'true' ,'System' ,'Administrator', '".bin2hex(random_bytes(32))."'),
-			('adrian', 'somepassword', 'Zombie Films Rock!', 'true' ,'Adrian' ,'Crenshaw', '".bin2hex(random_bytes(32))."'),
-			('john', 'monkey', 'I like the smell of confunk', 'false' ,'John' ,'Pentest', '".bin2hex(random_bytes(32))."'),
-			('jeremy', 'password', 'd1373 1337 speak', 'false' ,'Jeremy' ,'Druin', '".bin2hex(random_bytes(32))."'),
-			('bryce', 'password', 'I Love SANS', 'false' ,'Bryce' ,'Galbraith', '".bin2hex(random_bytes(32))."'),
-			('samurai', 'samurai', 'Carving fools', 'false' ,'Samurai' ,'WTF', '".bin2hex(random_bytes(32))."'),
-			('jim', 'password', 'Rome is burning', 'false' ,'Jim' ,'Rome', '".bin2hex(random_bytes(32))."'),
-			('bobby', 'password', 'Hank is my dad', 'false' ,'Bobby' ,'Hill', '".bin2hex(random_bytes(32))."'),
-			('simba', 'password', 'I am a super-cat', 'false' ,'Simba' ,'Lion', '".bin2hex(random_bytes(32))."'),
-			('dreveil', 'password', 'Preparation H', 'false' ,'Dr.' ,'Evil', '".bin2hex(random_bytes(32))."'),
-			('scotty', 'password', 'Scotty do', 'false' ,'Scotty' ,'Evil', '".bin2hex(random_bytes(32))."'),
-			('cal', 'password', 'C-A-T-S Cats Cats Cats', 'false' ,'John' ,'Calipari', '".bin2hex(random_bytes(32))."'),
-			('john', 'password', 'Do the Duggie!', 'false' ,'John' ,'Wall', '".bin2hex(random_bytes(32))."'),
-			('kevin', '42', 'Doug Adams rocks', 'false' ,'Kevin' ,'Johnson', '".bin2hex(random_bytes(32))."'),
-			('dave', 'set', 'Bet on S.E.T. FTW', 'false' ,'Dave' ,'Kennedy', '".bin2hex(random_bytes(32))."'),
-			('patches', 'tortoise', 'meow', 'false' ,'Patches' ,'Pester', '".bin2hex(random_bytes(32))."'),
-			('rocky', 'stripes', 'treats?', 'false' ,'Rocky' ,'Paws', '".bin2hex(random_bytes(32))."'),
-			('tim', 'lanmaster53', 'Because reconnaissance is hard to spell', 'false' ,'Tim' ,'Tomes', '".bin2hex(random_bytes(32))."'),
-			('ABaker', 'SoSecret', 'Muffin tops only', 'true' ,'Aaron' ,'Baker', '".bin2hex(random_bytes(32))."'),
-			('PPan', 'NotTelling', 'Where is Tinker?', 'false' ,'Peter' ,'Pan', '".bin2hex(random_bytes(32))."'),
-			('CHook', 'JollyRoger', 'Gator-hater', 'false' ,'Captain' ,'Hook', '".bin2hex(random_bytes(32))."'),
-			('james', 'i<3devs', 'Occupation: Researcher', 'false' ,'James' ,'Jardine', '".bin2hex(random_bytes(32))."'),
-			('ed', 'pentest', 'Commandline KungFu anyone?', 'false' ,'Ed' ,'Skoudis', '".bin2hex(random_bytes(32))."'),
-			('peter', 'initech123', 'I dont like my job', 'false', 'Peter', 'Gibbons', '".bin2hex(random_bytes(32))."'),
-			('milton', 'stapler', 'Wheres my stapler?', 'false', 'Milton', 'Waddams', '".bin2hex(random_bytes(32))."'),
-			('bill', 'tpsreports', 'Did you get the memo?', 'true', 'Bill', 'Lumbergh', '".bin2hex(random_bytes(32))."'),
-			('samir', 'nojoke123', 'No one can pronounce my last name', 'false', 'Samir', 'Nagheenanajar', '".bin2hex(random_bytes(32))."'),
-			('michael_b', 'michael123', 'We fixed the glitch', 'false', 'Michael', 'Bolton', '".bin2hex(random_bytes(32))."'),
-			('michael_s', 'worldsbestboss', 'Worlds Best Boss', 'true', 'Michael', 'Scott', '".bin2hex(random_bytes(32))."'),
-			('jim', 'bearsbeatsbattlestar', 'Pranking Dwight', 'false', 'Jim', 'Halpert', '".bin2hex(random_bytes(32))."'),
-			('dwight', 'assistant_to_the_regional_manager', 'Bears. Beets. Battlestar Galactica.', 'false', 'Dwight', 'Schrute', '".bin2hex(random_bytes(32))."'),
-			('pam', 'pammy123', 'Dunder Mifflin', 'false', 'Pam', 'Beesly', '".bin2hex(random_bytes(32))."'),
-			('ryan', 'temp123', 'I am the temp', 'false', 'Ryan', 'Howard', '".bin2hex(random_bytes(32))."'),
-			('derek', 'bluestrike', 'Im pretty sure theres more to life than being really, really ridiculously good looking', 'false', 'Derek', 'Zoolander', '".bin2hex(random_bytes(32))."'),
-			('hansel', 'hansel123', 'Hansel. Hes so hot right now.', 'false', 'Hansel', '', '".bin2hex(random_bytes(32))."'),
-			('mugatu', 'mugatu123', 'I invented the piano key necktie!', 'true', 'Jacobim', 'Mugatu', '".bin2hex(random_bytes(32))."'),
-			('matilda', 'journalist123', 'Investigative reporter', 'false', 'Matilda', 'Jeffries', '".bin2hex(random_bytes(32))."'),
-		    ('stackhawk', 'Kaakaww', 'Swooping in for security', 'false', 'Stack', 'Hawk', '".bin2hex(random_bytes(32))."'),
-			('zoolander', 'zoolander123', 'I am really, really, really, ridiculously good looking', 'false', 'Derek', 'Zoolander', '".bin2hex(random_bytes(32))."'),			
-			('maury', 'maury123', 'Youre the guy who cant turn left', 'false', 'Maury', 'Ballstein', '".bin2hex(random_bytes(32))."')";
-			$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
+		$lQueryString = 'INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, client_id, api_key) VALUES
+			("admin", "adminpass", "g0t r00t?", true, "System", "Administrator", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("adrian", "somepassword", "Zombie Films Rock!", true, "Adrian", "Crenshaw", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("john", "monkey", "I like the smell of confunk", false, "John", "Pentest", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("jeremy", "password", "d1373 1337 speak", false, "Jeremy", "Druin", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("bryce", "password", "I Love SANS", false, "Bryce", "Galbraith", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("samurai", "samurai", "Carving fools", false, "Samurai", "WTF", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("jim", "password", "Rome is burning", false, "Jim", "Rome", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("bobby", "password", "Hank is my dad", false, "Bobby", "Hill", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("simba", "password", "I am a super-cat", false, "Simba", "Lion", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("dreveil", "password", "Preparation H", false, "Dr.", "Evil", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("scotty", "password", "Scotty do", false, "Scotty", "Evil", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("cal", "password", "C-A-T-S Cats Cats Cats", false, "John", "Calipari", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("john", "password", "Do the Duggie!", false, "John", "Wall", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("kevin", "42", "Doug Adams rocks", false, "Kevin", "Johnson", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("dave", "set", "Bet on S.E.T. FTW", false, "Dave", "Kennedy", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("patches", "tortoise", "meow", false, "Patches", "Pester", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("rocky", "stripes", "treats?", false, "Rocky", "Paws", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("tim", "lanmaster53", "Because reconnaissance is hard to spell", false, "Tim", "Tomes", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("ABaker", "SoSecret", "Muffin tops only", true, "Aaron", "Baker", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("PPan", "NotTelling", "Where is Tinker?", false, "Peter", "Pan", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("CHook", "JollyRoger", "Gator-hater", false, "Captain", "Hook", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("james", "i<3devs", "Occupation: Researcher", false, "James", "Jardine", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("ed", "pentest", "Commandline KungFu anyone?", false, "Ed", "Skoudis", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("peter", "initech123", "I dont like my job", false, "Peter", "Gibbons", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("milton", "stapler", "Wheres my stapler?", false, "Milton", "Waddams", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("bill", "tpsreports", "Did you get the memo?", true, "Bill", "Lumbergh", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("samir", "nojoke123", "No one can pronounce my last name", false, "Samir", "Nagheenanajar", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("michael_b", "michael123", "We fixed the glitch", false, "Michael", "Bolton", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("michael_s", "worldsbestboss", "Worlds Best Boss", true, "Michael", "Scott", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("jim", "bearsbeatsbattlestar", "Pranking Dwight", false, "Jim", "Halpert", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("dwight", "assistant_to_the_regional_manager", "Bears. Beets. Battlestar Galactica.", false, "Dwight", "Schrute", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("pam", "pammy123", "Dunder Mifflin", false, "Pam", "Beesly", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("ryan", "temp123", "I am the temp", false, "Ryan", "Howard", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("derek", "bluestrike", "Im pretty sure theres more to life than being really, really ridiculously good looking", false, "Derek", "Zoolander", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("hansel", "hansel123", "Hansel. Hes so hot right now.", false, "Hansel", "", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("mugatu", "mugatu123", "I invented the piano key necktie!", true, "Jacobim", "Mugatu", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("matilda", "journalist123", "Investigative reporter", false, "Matilda", "Jeffries", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("stackhawk", "Kaakaww", "Swooping in for security", false, "Stack", "Hawk", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("zoolander", "zoolander123", "I am really, really, really, ridiculously good looking", false, "Derek", "Zoolander", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("maury", "maury123", "Youre the guy who cant turn left", false, "Maury", "Ballstein", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '");';
+		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 		if (!$lQueryResult) {
     		$lErrorDetected = true;
 			echo format("Failed to insert data into 'accounts' table.", "F");
@@ -269,11 +272,11 @@
 			(14, 'pam', 'Art school has been really fulfilling.', '2024-10-07 09:10:00'),
 			(15, 'dwight', 'Bears. Beets. Battlestar Galactica.', '2024-10-07 09:15:00'),
 			(16, 'ryan', 'Starting my new tech venture.', '2024-10-07 09:20:00'),
-			(17, 'peter', 'Today, I didn’t really do much work. Feels great.', '2024-10-07 09:25:00'),
+			(17, 'peter', 'Today, I didnt really do much work. Feels great.', '2024-10-07 09:25:00'),
 			(18, 'milton', 'They took my stapler again...', '2024-10-07 09:30:00'),
 			(19, 'bill', 'Did you get the memo?', '2024-10-07 09:35:00'),
 			(20, 'samir', 'No one can still pronounce my last name...', '2024-10-07 09:40:00'),
-			(21, 'michael_b', 'It’s not that Michael Bolton!', '2024-10-07 09:45:00'),
+			(21, 'michael_b', 'Its not that Michael Bolton!', '2024-10-07 09:45:00'),
 			(22, 'mugatu', 'The Derelicte campaign is going great!', '2024-10-07 09:50:00'),
 			(23, 'derek', 'Being ridiculously good looking has its perks.', '2024-10-07 09:55:00')";
 		$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
