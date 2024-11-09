@@ -60,6 +60,7 @@
     $lLastName = "";
     $lIsAdmin = "";
     $lAPIKey = "";
+    $lClientID = "";
     $lResultsFound = false;
     
     if($lUserLoggedIn){
@@ -84,6 +85,7 @@
                         $lLastName = $row->lastname;    // Get last name
                         $lIsAdmin = $row->is_admin;     // Get admin status
                         $lAPIKey = $row->api_key;       // Get API key
+                        $lClientID = $row->cid;         // Get client ID
                     }else{
                         $lUsername = $Encoder->encodeForHTML($row->username);
                         if (!$lProtectAgainstPasswordLeakage){
@@ -94,6 +96,7 @@
                         $lLastName = $Encoder->encodeForHTML($row->lastname);    // Encoded last name
                         $lIsAdmin = $Encoder->encodeForHTML($row->is_admin);     // Encoded admin status
                         $lAPIKey = $Encoder->encodeForHTML($row->api_key);       // Encoded API key
+                        $lClientID = $Encoder->encodeForHTML($row->cid);         // Encoded client ID
                     } // if !$lEncodeOutput
                 } // if $lResultsFound
                
@@ -116,6 +119,10 @@
         <tr><td>&nbsp;</td></tr>
         <tr>
             <td colspan="2" class="form-header" id="user-profile-header">User Profile</td>
+        </tr>
+        <tr>
+            <td class="label">Client ID</td>
+            <td><?php echo $lClientID; ?></td>
         </tr>
         <tr>
             <td class="label">First Name</td>
