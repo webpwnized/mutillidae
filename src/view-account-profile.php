@@ -63,6 +63,8 @@
     $lClientSecret = "";
     $lClientID = "";
     $lResultsFound = false;
+	$lAccountType = "User";
+			
     
     if($lUserLoggedIn){
         try {
@@ -101,6 +103,9 @@
                         $lClientSecret = $Encoder->encodeForHTML($row->client_secret);       // Encoded API key
                         $lClientID = $Encoder->encodeForHTML($row->client_id);         // Encoded client ID
                     } // if !$lEncodeOutput
+
+					$lAccountType = $row->is_admin == 'TRUE' ? "Admin" : "User";
+			
                 } // if $lResultsFound
                
         } catch (Exception $e) {
@@ -148,8 +153,8 @@
             <td><?php echo $lSignature; ?></td>
         </tr>
         <tr>
-            <td class="label">Admin Status</td>
-            <td><?php echo $lIsAdmin; ?></td>
+            <td class="label">Account Type</td>
+            <td><?php echo $lAccountType; ?></td>
         </tr>
         <tr>
             <td class="label">Client ID</td>
