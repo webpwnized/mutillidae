@@ -65,7 +65,7 @@
 				$lFirstName = $_POST["firstname"];
 				$lLastName = $_POST["lastname"];
 				$lPostedCSRFToken = $_POST['csrf-token'];
-				$lGenerateNewAPIKey = isset($_POST['generate_new_api_key']);
+				$lGenerateNewClientSecret = isset($_POST['generate_new_client_secret']);
 			} else {
 				$lUsername = $_REQUEST["username"];
 				$lPassword = $_REQUEST["password"];
@@ -74,7 +74,7 @@
 				$lFirstName = $_REQUEST["firstname"];
 				$lLastName = $_REQUEST["lastname"];
 				$lPostedCSRFToken = $_REQUEST['csrf-token'];
-				$lGenerateNewAPIKey = isset($_REQUEST['generate_new_api_key']);
+				$lGenerateNewClientSecret = isset($_REQUEST['generate_new_client_secret']);
 			}// end if $lProtectAgainstMethodTampering
 	   		
 			if ($lEncodeOutput){
@@ -109,7 +109,7 @@
 		   	}// end if
 
 		   	if (!$lValidationFailed){
-				$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lFirstName, $lLastName, $lUserSignature, $lGenerateNewAPIKey);
+				$lRowsAffected = $SQLQueryHandler->updateUserAccount($lUsername, $lPassword, $lFirstName, $lLastName, $lUserSignature, $lGenerateNewClientSecret);
 				echo '<div class="success-message">Profile updated for ' . $lUsernameText . '</div>';
 				$LogHandler->writeToLog("Profile updated for: " . $lUsername);
 		   	}// end if (!$lValidationFailed)
@@ -180,7 +180,7 @@
 					$lSignature = $Encoder->encodeForHTML($row->mysignature);
 				}// end if
 				
-				$lAPIKey = $row->api_key; // immutable data
+				$lClientSecret = $row->client_secret; // immutable data
 			} // if $lResultsFound
 	           
 	    } catch (Exception $e) {
@@ -292,14 +292,14 @@
 			<tr>
                 <td class="label">API Key</td>
                 <td>
-					<?php echo $lAPIKey; ?>
+					<?php echo $lClientSecret; ?>
                 </td>
             </tr>
 			<tr>
 				<td>&nbsp;</td>
 				<td>
-					<input type="checkbox" id="generate_new_api_key" name="generate_new_api_key" />
-					<label for="generate_new_api_key">Generate New API Key</label>
+					<input type="checkbox" id="generate_new_client_secret" name="generate_new_client_secret" />
+					<label for="generate_new_client_secret">Generate New API Key</label>
 				</td>
 			</tr>
 			<tr><td colspan="2">&nbsp;</td></tr>

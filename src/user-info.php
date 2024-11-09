@@ -201,14 +201,14 @@
 						$lSignature = $row->mysignature;
 						$lFirstName = $row->firstname;
 						$lLastName = $row->lastname;
-						$lAPIKey = $row->api_key;
+						$lClientSecret = $row->client_secret;
 					} else {
 						$lUsername = $Encoder->encodeForHTML($row->username);
 						$lPassword = !$lProtectAgainstPasswordLeakage ? $Encoder->encodeForHTML($row->password) : '';
 						$lSignature = $Encoder->encodeForHTML($row->mysignature);
 						$lFirstName = $Encoder->encodeForHTML($row->firstname);
 						$lLastName = $Encoder->encodeForHTML($row->lastname);
-						$lAPIKey = $Encoder->encodeForHTML($row->api_key);
+						$lClientSecret = $Encoder->encodeForHTML($row->client_secret);
 					}
 					
 					echo "<br/>";
@@ -217,7 +217,7 @@
 					echo "<span class=\"label\">Username:&nbsp;</span><span>{$lUsername}</span><br/>";
 					echo "<span class=\"label\">Password:&nbsp;</span><span>{$row->password}</span><br/>";
 					echo "<span class=\"label\">Signature:&nbsp;</span><span>{$lSignature}</span><br/>";
-					echo "<span class=\"label\">API Key:&nbsp;</span><span>{$lAPIKey}</span><br/>";
+					echo "<span class=\"label\">API Key:&nbsp;</span><span>{$lClientSecret}</span><br/>";
 					echo "<br/>";
 				}// end while
 	

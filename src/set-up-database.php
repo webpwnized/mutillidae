@@ -178,7 +178,7 @@
 				firstname VARCHAR(255),
 				lastname VARCHAR(255),
 				client_id CHAR(32) NOT NULL UNIQUE,
-				api_key VARCHAR(64) NOT NULL UNIQUE,
+				client_secret VARCHAR(64) NOT NULL UNIQUE,
 				created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY(cid)
 			)';
@@ -206,7 +206,7 @@
 			echo format("Successfully created 'hitlog' table.", "S");
     	}// end if
 
-		$lQueryString = 'INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, client_id, api_key) VALUES
+		$lQueryString = 'INSERT INTO accounts (username, password, mysignature, is_admin, firstname, lastname, client_id, client_secret) VALUES
 			("admin", "adminpass", "g0t r00t?", true, "System", "Administrator", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("adrian", "somepassword", "Zombie Films Rock!", true, "Adrian", "Crenshaw", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("patches", "tortoise", "meow", false, "Patches", "Pester", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
@@ -1351,7 +1351,7 @@
 		$lCounter = 1;
 		$cTAB = CHR(9);
 		
-		$lAccountsText = "CID,Username,Password,Signature,Type,FirstName,LastName,APIKey".PHP_EOL; // Add CSV header
+		$lAccountsText = "CID,Username,Password,Signature,Type,FirstName,LastName,ClientSecret".PHP_EOL; // Add CSV header
 		
 		while($row = $lQueryResult->fetch_object()){
 			$lAccountType = $row->is_admin == 'TRUE' ? "Admin" : "User";
@@ -1365,7 +1365,7 @@
 			$lAccountsXML .= $cTAB.$cTAB.'<Type>'.htmlspecialchars($lAccountType).'</Type>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.$cTAB.'<FirstName>'.htmlspecialchars($row->firstname).'</FirstName>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.$cTAB.'<LastName>'.htmlspecialchars($row->lastname).'</LastName>'.PHP_EOL;
-			$lAccountsXML .= $cTAB.$cTAB.'<APIKey>'.htmlspecialchars($row->api_key).'</APIKey>'.PHP_EOL;
+			$lAccountsXML .= $cTAB.$cTAB.'<ClientSecret>'.htmlspecialchars($row->client_secret).'</ClientSecret>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.'</Account>'.PHP_EOL;
 		
 			// CSV Generation
@@ -1376,7 +1376,7 @@
 						   . $lAccountType.","
 						   . $row->firstname.","
 						   . $row->lastname.","
-						   . $row->api_key.PHP_EOL;
+						   . $row->client_secret.PHP_EOL;
 		
 			$lCounter += 1;
 		}

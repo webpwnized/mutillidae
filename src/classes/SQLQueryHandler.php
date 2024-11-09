@@ -38,7 +38,7 @@ class SQLQueryHandler {
 	   	}// end switch
 	}// end function
 
-	private function generateAPIKey($length = 32 /* 32 bytes = 256 bits */){
+	private function generateClientSecret($length = 32 /* 32 bytes = 256 bits */){
 		// Generates a secure 32-byte token for use in API calls
 		// The token is generated using a cryptographically secure pseudorandom number generator
 		// The token is then converted to hexadecimal format
@@ -424,7 +424,7 @@ class SQLQueryHandler {
 		$lQueryString =
 			"SELECT COUNT(*) AS count FROM accounts " .
 			"WHERE client_id='" . $pClientId . "' " .
-			"AND api_key='" . $pClientSecret . "'";
+			"AND client_secret='" . $pClientSecret . "'";
 		
 		$result = $this->mMySQLHandler->executeQuery($lQueryString);
 		$row = $result->fetch_assoc();
@@ -448,15 +448,15 @@ class SQLQueryHandler {
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 
-		$lAPIKey = $this->generateAPIKey();
+		$lClientSecret = $this->generateClientSecret();
 
-		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, api_key) VALUES ('" .
+		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, client_secret) VALUES ('" .
 			$pUsername ."', '" .
 			$pPassword . "', '" .
 			$pFirstName . "', '" .
 			$pLastName . "', '" .
 			$pSignature . "', '" .
-			$lAPIKey .
+			$lClientSecret .
 			"')";
 
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
@@ -504,7 +504,7 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Update Queries
 	* ----------------------------------------- */
-	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateAPIKey){
+	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateClientSecret){
 		/*
 		 * Note: While escaping works ok in some cases, it is not the best defense.
 		 * Using stored procedures is a much stronger defense.
@@ -517,10 +517,10 @@ class SQLQueryHandler {
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
 	
-		if ($pUpdateAPIKey){
-			$lAPIKey = $this->generateAPIKey();
+		if ($pUpdateClientSecret){
+			$lClientSecret = $this->generateClientSecret();
 		} else {
-			$lAPIKey = "";
+			$lClientSecret = "";
 		}// end if
 		
 		$lQueryString =
@@ -533,9 +533,9 @@ class SQLQueryHandler {
 				mysignature = '".$pSignature."'
 			";
 		
-		if ($pUpdateAPIKey){
+		if ($pUpdateClientSecret){
 			$lQueryString .= "," .
-				"api_key = '".$lAPIKey."'";
+				"client_secret = '".$lClientSecret."'";
 		}// end if
 	
 		$lQueryString .= "" .

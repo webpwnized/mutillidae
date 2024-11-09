@@ -59,7 +59,7 @@
     $lFirstName = "";
     $lLastName = "";
     $lIsAdmin = "";
-    $lAPIKey = "";
+    $lClientSecret = "";
     $lClientID = "";
     $lResultsFound = false;
     
@@ -84,7 +84,7 @@
                         $lFirstName = $row->firstname;  // Get first name
                         $lLastName = $row->lastname;    // Get last name
                         $lIsAdmin = $row->is_admin;     // Get admin status
-                        $lAPIKey = $row->api_key;       // Get API key
+                        $lClientSecret = $row->client_secret;       // Get API key
                         $lClientID = $row->cid;         // Get client ID
                     }else{
                         $lUsername = $Encoder->encodeForHTML($row->username);
@@ -95,7 +95,7 @@
                         $lFirstName = $Encoder->encodeForHTML($row->firstname);  // Encoded first name
                         $lLastName = $Encoder->encodeForHTML($row->lastname);    // Encoded last name
                         $lIsAdmin = $Encoder->encodeForHTML($row->is_admin);     // Encoded admin status
-                        $lAPIKey = $Encoder->encodeForHTML($row->api_key);       // Encoded API key
+                        $lClientSecret = $Encoder->encodeForHTML($row->client_secret);       // Encoded API key
                         $lClientID = $Encoder->encodeForHTML($row->cid);         // Encoded client ID
                     } // if !$lEncodeOutput
                 } // if $lResultsFound
@@ -150,7 +150,7 @@
         </tr>
         <tr>
             <td class="label">API Key</td>
-            <td><?php echo $lAPIKey; ?></td>
+            <td><?php echo $lClientSecret; ?></td>
         </tr>
     </table>
 </div>
