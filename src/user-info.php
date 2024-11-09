@@ -21,7 +21,7 @@
 				$lEncodeOutput = false;
 				$lProtectAgainstPasswordLeakage = false;
 			break;
-	    		
+    		
 			case "2":
 			case "3":
 			case "4":
@@ -41,15 +41,15 @@
 		}// end if
 		
 		if ($lFormSubmitted){
-	    	if ($lProtectAgainstMethodTampering) {
-	   			$lUserInfoSubmitButton = $_POST["user-info-php-submit-button"];
+    		if ($lProtectAgainstMethodTampering) {
+   				$lUserInfoSubmitButton = $_POST["user-info-php-submit-button"];
 				$lUsername = $_POST["username"];
 				$lPassword = $_POST["password"];
-	    	}else{
+    		}else{
     			$lUserInfoSubmitButton = $_REQUEST["user-info-php-submit-button"];
 				$lUsername = $_REQUEST["username"];
 				$lPassword = $_REQUEST["password"];
-	    	}// end if $lProtectAgainstMethodTampering
+    		}// end if $lProtectAgainstMethodTampering
 		}// end if $lFormSubmitted
 
    	} catch (Exception $e) {
@@ -161,15 +161,15 @@
 	if ($lFormSubmitted){
 		try {
 			try {
-				$LogHandler->writeToLog("Recieved request to display user information for: " . $lUsername);					
+				$LogHandler->writeToLog("Recieved request to display user information for: " . $lUsername);                    
 			} catch (Exception $e) {
 				//do nothing
 			}// end try
-	    			
+    			
 			$lQueryResult = $SQLQueryHandler->getUserAccount($lUsername, $lPassword);
-	    	
-	   		$lResultsFound = false;
-	   		$lRecordsFound = 0;
+    		
+   			$lResultsFound = false;
+   			$lRecordsFound = 0;
 			if (isset($lQueryResult->num_rows) && $lQueryResult->num_rows > 0) {
 				$lResultsFound = true;
 				$lRecordsFound = $lQueryResult->num_rows;
@@ -202,6 +202,7 @@
 						$lFirstName = $row->firstname;
 						$lLastName = $row->lastname;
 						$lClientSecret = $row->client_secret;
+						$lClientID = $row->client_id;
 					} else {
 						$lUsername = $Encoder->encodeForHTML($row->username);
 						$lPassword = !$lProtectAgainstPasswordLeakage ? $Encoder->encodeForHTML($row->password) : '';
@@ -209,14 +210,16 @@
 						$lFirstName = $Encoder->encodeForHTML($row->firstname);
 						$lLastName = $Encoder->encodeForHTML($row->lastname);
 						$lClientSecret = $Encoder->encodeForHTML($row->client_secret);
+						$lClientID = $Encoder->encodeForHTML($row->client_id);
 					}
 					
 					echo "<br/>";
 					echo "<span class=\"label\">First Name:&nbsp;</span><span>{$lFirstName}</span><br/>";
 					echo "<span class=\"label\">Last Name:&nbsp;</span><span>{$lLastName}</span><br/>";
 					echo "<span class=\"label\">Username:&nbsp;</span><span>{$lUsername}</span><br/>";
-					echo "<span class=\"label\">Password:&nbsp;</span><span>{$row->password}</span><br/>";
+					echo "<span class=\"label\">Password:&nbsp;</span><span>{$lPassword}</span><br/>";
 					echo "<span class=\"label\">Signature:&nbsp;</span><span>{$lSignature}</span><br/>";
+					echo "<span class=\"label\">Client ID:&nbsp;</span><span>{$lClientID}</span><br/>";
 					echo "<span class=\"label\">Client Secret:&nbsp;</span><span>{$lClientSecret}</span><br/>";
 					echo "<br/>";
 				}// end while
@@ -227,6 +230,6 @@
     	} catch (Exception $e) {
 			echo $CustomErrorHandler->FormatError($e, "Error attempting to display user information");
        	}// end try;
-    	
+		
 	}// end if (isset($_POST))
 ?>
