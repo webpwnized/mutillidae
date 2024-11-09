@@ -121,10 +121,6 @@
             <td colspan="2" class="form-header" id="user-profile-header">User Profile</td>
         </tr>
         <tr>
-            <td class="label">Client ID</td>
-            <td><?php echo $lClientID; ?></td>
-        </tr>
-        <tr>
             <td class="label">First Name</td>
             <td><?php echo $lFirstName; ?></td>
         </tr>
@@ -149,7 +145,11 @@
             <td><?php echo $lIsAdmin; ?></td>
         </tr>
         <tr>
-            <td class="label">API Key</td>
+            <td class="label">Client ID</td>
+            <td><?php echo $lClientID; ?></td>
+        </tr>
+        <tr>
+            <td class="label">Client Secret</td>
             <td><?php echo $lClientSecret; ?></td>
         </tr>
     </table>

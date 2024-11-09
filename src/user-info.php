@@ -217,7 +217,7 @@
 					echo "<span class=\"label\">Username:&nbsp;</span><span>{$lUsername}</span><br/>";
 					echo "<span class=\"label\">Password:&nbsp;</span><span>{$row->password}</span><br/>";
 					echo "<span class=\"label\">Signature:&nbsp;</span><span>{$lSignature}</span><br/>";
-					echo "<span class=\"label\">API Key:&nbsp;</span><span>{$lClientSecret}</span><br/>";
+					echo "<span class=\"label\">Client Secret:&nbsp;</span><span>{$lClientSecret}</span><br/>";
 					echo "<br/>";
 				}// end while
 	

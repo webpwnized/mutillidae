@@ -290,7 +290,7 @@
                 </td>
             </tr>
 			<tr>
-                <td class="label">API Key</td>
+                <td class="label">Client Secret</td>
                 <td>
 					<?php echo $lClientSecret; ?>
                 </td>
@@ -299,7 +299,7 @@
 				<td>&nbsp;</td>
 				<td>
 					<input type="checkbox" id="generate_new_client_secret" name="generate_new_client_secret" />
-					<label for="generate_new_client_secret">Generate New API Key</label>
+					<label for="generate_new_client_secret">Generate New Client Secret</label>
 				</td>
 			</tr>
 			<tr><td colspan="2">&nbsp;</td></tr>
