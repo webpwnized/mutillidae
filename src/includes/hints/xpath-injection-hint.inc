@@ -26,7 +26,7 @@ null characters, and XML that does not meet the XSL specification.
 <br/><br/>
 <span class="report-header">Example</span>
 <br/><br/>
-Try this example in the username field
+Try this example in the username field and the password field, both at the same time
 <br/>
 <code>
 	admin&apos; or &apos;1&apos; = &apos;1

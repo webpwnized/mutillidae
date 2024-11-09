@@ -38,7 +38,15 @@ class SQLQueryHandler {
 	   	}// end switch
 	}// end function
 
-	private function generateAPIKey($length = 32 /* 32 bytes = 256 bits */){
+	private function generateClientID($length = 16 /* 16 bytes = 128 bits */){
+		// Generates a secure 16-byte token for use as a Client ID
+		// The token is generated using a cryptographically secure pseudorandom number generator
+		// The token is then converted to hexadecimal format
+		// The token will be 32 characters long
+		return bin2hex(random_bytes($length));
+	}
+	
+	private function generateClientSecret($length = 32 /* 32 bytes = 256 bits */){
 		// Generates a secure 32-byte token for use in API calls
 		// The token is generated using a cryptographically secure pseudorandom number generator
 		// The token is then converted to hexadecimal format
@@ -398,34 +406,48 @@ class SQLQueryHandler {
 		return $this->mMySQLHandler->executeQuery($lQueryString);
 	}//end public function getUserAccount
 
-	public function apiKeyExists($pAPIKey){
+	public function getAccountByClientId($pClientId){
 		/*
-		* Note: While escaping works ok in some case, it is not the best defense.
-	   * Using stored procedures is a much stronger defense.
-	   */
-
-		if ($this->stopSQLInjection){
-			$pAPIKey = $this->mMySQLHandler->escapeDangerousCharacters($pAPIKey);
-		}// end if
-
-		$lQueryString =
-			"SELECT EXISTS (
-				SELECT 1
-				FROM accounts
-				WHERE api_key='".$pAPIKey."'".
-			") AS api_key_exists;";
-
+		 * Vulnerability: Using direct user input in SQL without escaping or parameterization,
+		 * making it vulnerable to SQL injection.
+		 */
+		if ($this->stopSQLInjection) {
+			$pClientId = $this->mMySQLHandler->escapeDangerousCharacters($pClientId);
+		}
+	
+		$lQueryString = "SELECT * FROM accounts WHERE client_id='" . $pClientId . "'";
 		return $this->mMySQLHandler->executeQuery($lQueryString);
-	}//end public function apiKeyExists
-
+	}
+	
+	public function authenticateByClientCredentials($pClientId, $pClientSecret){
+		/*
+		 * Vulnerability: Directly using user-supplied client_id and client_secret without proper escaping,
+		 * making this function vulnerable to SQL injection.
+		 */
+		if ($this->stopSQLInjection) {
+			$pClientId = $this->mMySQLHandler->escapeDangerousCharacters($pClientId);
+			$pClientSecret = $this->mMySQLHandler->escapeDangerousCharacters($pClientSecret);
+		}
+	
+		$lQueryString =
+			"SELECT COUNT(*) AS count FROM accounts " .
+			"WHERE client_id='" . $pClientId . "' " .
+			"AND client_secret='" . $pClientSecret . "'";
+		
+		$result = $this->mMySQLHandler->executeQuery($lQueryString);
+		$row = $result->fetch_assoc();
+	
+		return $row['count'] > 0;
+	}
+	
 	/* -----------------------------------------
 	 * Insert Queries
 	 * ----------------------------------------- */
 	public function insertNewUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature){
-   		/*
-  		 * Note: While escaping works ok in some case, it is not the best defense.
- 		 * Using stored procedures is a much stronger defense.
- 		 */
+		/*
+		 * Note: While escaping works ok in some cases, it is not the best defense.
+		 * Using stored procedures is a much stronger defense.
+		 */
 		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
@@ -433,25 +455,27 @@ class SQLQueryHandler {
 			$pLastName = $this->mMySQLHandler->escapeDangerousCharacters($pLastName);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
-
-		$lAPIKey = $this->generateAPIKey();
-
-		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, api_key) VALUES ('" .
+	
+		$lClientID = $this->generateClientID();
+		$lClientSecret = $this->generateClientSecret();
+			
+		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, client_id, client_secret) VALUES ('" .
 			$pUsername ."', '" .
 			$pPassword . "', '" .
 			$pFirstName . "', '" .
 			$pLastName . "', '" .
 			$pSignature . "', '" .
-			$lAPIKey .
+			$lClientID . "', '" .
+			$lClientSecret .
 			"')";
-
+	
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
 			return $this->mMySQLHandler->affected_rows();
 		}else{
 			return 0;
 		}
 	}//end function insertNewUserAccount
-
+	
 	public function insertCapturedData(
 		$pClientIP,
 		$pClientHostname,
@@ -490,7 +514,7 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Update Queries
 	* ----------------------------------------- */
-	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateAPIKey){
+	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateClientID, $pUpdateClientSecret){
 		/*
 		 * Note: While escaping works ok in some cases, it is not the best defense.
 		 * Using stored procedures is a much stronger defense.
@@ -501,36 +525,44 @@ class SQLQueryHandler {
 			$pFirstName = $this->mMySQLHandler->escapeDangerousCharacters($pFirstName);
 			$pLastName = $this->mMySQLHandler->escapeDangerousCharacters($pLastName);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
-		}// end if
+		}
 	
-		if ($pUpdateAPIKey){
-			$lAPIKey = $this->generateAPIKey();
+		if ($pUpdateClientID){
+			$lClientID = $this->generateClientID();
 		} else {
-			$lAPIKey = "";
-		}// end if
-		
-		$lQueryString =
+			$lClientID = "";
+		}
+	
+		if ($pUpdateClientSecret){
+			$lClientSecret = $this->generateClientSecret();
+		} else {
+			$lClientSecret = "";
+		}
+	
+		$lQueryString = 
 			"UPDATE accounts
 			SET
 				username = '".$pUsername."',
 				password = '".$pPassword."',
 				firstname = '".$pFirstName."',
 				lastname = '".$pLastName."',
-				mysignature = '".$pSignature."'
-			";
-		
-		if ($pUpdateAPIKey){
-			$lQueryString .= "," .
-				"api_key = '".$lAPIKey."'";
-		}// end if
+				mysignature = '".$pSignature."'";
 	
-		$lQueryString .= "" .
-			"WHERE
-				username = '".$pUsername."';";
+		if ($pUpdateClientID){
+			$lQueryString .= "," .
+				"client_id = '".$lClientID."'";
+		}
+	
+		if ($pUpdateClientSecret){
+			$lQueryString .= "," .
+				"client_secret = '".$lClientSecret."'";
+		}
+	
+		$lQueryString .= " WHERE username = '".$pUsername."';";
 	
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
 			return $this->mMySQLHandler->affected_rows();
-		}else{
+		} else {
 			return 0;
 		}
 	}//end function updateUserAccount
