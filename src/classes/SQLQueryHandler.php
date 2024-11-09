@@ -38,6 +38,14 @@ class SQLQueryHandler {
 	   	}// end switch
 	}// end function
 
+	private function generateClientID($length = 16 /* 16 bytes = 128 bits */){
+		// Generates a secure 16-byte token for use as a Client ID
+		// The token is generated using a cryptographically secure pseudorandom number generator
+		// The token is then converted to hexadecimal format
+		// The token will be 32 characters long
+		return bin2hex(random_bytes($length));
+	}
+	
 	private function generateClientSecret($length = 32 /* 32 bytes = 256 bits */){
 		// Generates a secure 32-byte token for use in API calls
 		// The token is generated using a cryptographically secure pseudorandom number generator
@@ -504,7 +512,7 @@ class SQLQueryHandler {
 	/* -----------------------------------------
 	 * Update Queries
 	* ----------------------------------------- */
-	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateClientSecret){
+	public function updateUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature, $pUpdateClientID, $pUpdateClientSecret){
 		/*
 		 * Note: While escaping works ok in some cases, it is not the best defense.
 		 * Using stored procedures is a much stronger defense.
@@ -515,36 +523,44 @@ class SQLQueryHandler {
 			$pFirstName = $this->mMySQLHandler->escapeDangerousCharacters($pFirstName);
 			$pLastName = $this->mMySQLHandler->escapeDangerousCharacters($pLastName);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
-		}// end if
+		}
+	
+		if ($pUpdateClientID){
+			$lClientID = $this->generateClientID();
+		} else {
+			$lClientID = "";
+		}
 	
 		if ($pUpdateClientSecret){
 			$lClientSecret = $this->generateClientSecret();
 		} else {
 			$lClientSecret = "";
-		}// end if
-		
-		$lQueryString =
+		}
+	
+		$lQueryString = 
 			"UPDATE accounts
 			SET
 				username = '".$pUsername."',
 				password = '".$pPassword."',
 				firstname = '".$pFirstName."',
 				lastname = '".$pLastName."',
-				mysignature = '".$pSignature."'
-			";
-		
+				mysignature = '".$pSignature."'";
+	
+		if ($pUpdateClientID){
+			$lQueryString .= "," .
+				"client_id = '".$lClientID."'";
+		}
+	
 		if ($pUpdateClientSecret){
 			$lQueryString .= "," .
 				"client_secret = '".$lClientSecret."'";
-		}// end if
+		}
 	
-		$lQueryString .= "" .
-			"WHERE
-				username = '".$pUsername."';";
+		$lQueryString .= " WHERE username = '".$pUsername."';";
 	
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
 			return $this->mMySQLHandler->affected_rows();
-		}else{
+		} else {
 			return 0;
 		}
 	}//end function updateUserAccount
