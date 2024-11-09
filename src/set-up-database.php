@@ -1351,7 +1351,7 @@
 		$lCounter = 1;
 		$cTAB = CHR(9);
 		
-		$lAccountsText = "CID,Username,Password,Signature,Type,FirstName,LastName,ClientSecret".PHP_EOL; // Add CSV header
+		$lAccountsText = "CID,Username,Password,Signature,Type,FirstName,LastName,ClientID,ClientSecret".PHP_EOL; // Add CSV header
 		
 		while($row = $lQueryResult->fetch_object()){
 			$lAccountType = $row->is_admin == 'TRUE' ? "Admin" : "User";
@@ -1365,6 +1365,7 @@
 			$lAccountsXML .= $cTAB.$cTAB.'<Type>'.htmlspecialchars($lAccountType).'</Type>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.$cTAB.'<FirstName>'.htmlspecialchars($row->firstname).'</FirstName>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.$cTAB.'<LastName>'.htmlspecialchars($row->lastname).'</LastName>'.PHP_EOL;
+			$lAccountsXML .= $cTAB.$cTAB.'<ClientID>'.htmlspecialchars($row->client_id).'</ClientID>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.$cTAB.'<ClientSecret>'.htmlspecialchars($row->client_secret).'</ClientSecret>'.PHP_EOL;
 			$lAccountsXML .= $cTAB.'</Account>'.PHP_EOL;
 		
@@ -1376,6 +1377,7 @@
 						   . $lAccountType.","
 						   . $row->firstname.","
 						   . $row->lastname.","
+						   . $row->client_id.","
 						   . $row->client_secret.PHP_EOL;
 		
 			$lCounter += 1;

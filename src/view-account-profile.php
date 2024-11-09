@@ -53,7 +53,8 @@
     
     $lUserLoggedIn = !(is_null($lUserUID));
 
-    $lUsername = "";
+    $lCID = "";
+	$lUsername = "";
     $lPassword = "";
     $lSignature = "";
     $lFirstName = "";
@@ -76,6 +77,7 @@
                    $row = $lQueryResult->fetch_object();
                    
                     if(!$lEncodeOutput){
+                        $lCID = $row->cid;
                         $lUsername = $row->username;
                         if (!$lProtectAgainstPasswordLeakage){
                             $lPassword = $row->password;
@@ -85,8 +87,9 @@
                         $lLastName = $row->lastname;    // Get last name
                         $lIsAdmin = $row->is_admin;     // Get admin status
                         $lClientSecret = $row->client_secret;       // Get API key
-                        $lClientID = $row->cid;         // Get client ID
+                        $lClientID = $row->client_id;         // Get client ID
                     }else{
+                        $lCID = $Encoder->encodeForHTML($row->cid);
                         $lUsername = $Encoder->encodeForHTML($row->username);
                         if (!$lProtectAgainstPasswordLeakage){
                             $lPassword = $Encoder->encodeForHTML($row->password);
@@ -96,7 +99,7 @@
                         $lLastName = $Encoder->encodeForHTML($row->lastname);    // Encoded last name
                         $lIsAdmin = $Encoder->encodeForHTML($row->is_admin);     // Encoded admin status
                         $lClientSecret = $Encoder->encodeForHTML($row->client_secret);       // Encoded API key
-                        $lClientID = $Encoder->encodeForHTML($row->cid);         // Encoded client ID
+                        $lClientID = $Encoder->encodeForHTML($row->client_id);         // Encoded client ID
                     } // if !$lEncodeOutput
                 } // if $lResultsFound
                
@@ -119,6 +122,10 @@
         <tr><td>&nbsp;</td></tr>
         <tr>
             <td colspan="2" class="form-header" id="user-profile-header">User Profile</td>
+        </tr>
+        <tr>
+            <td class="label">ID</td>
+            <td><?php echo $lCID; ?></td>
         </tr>
         <tr>
             <td class="label">First Name</td>
