@@ -444,10 +444,10 @@ class SQLQueryHandler {
 	 * Insert Queries
 	 * ----------------------------------------- */
 	public function insertNewUserAccount($pUsername, $pPassword, $pFirstName, $pLastName, $pSignature){
-   		/*
-  		 * Note: While escaping works ok in some case, it is not the best defense.
- 		 * Using stored procedures is a much stronger defense.
- 		 */
+		/*
+		 * Note: While escaping works ok in some cases, it is not the best defense.
+		 * Using stored procedures is a much stronger defense.
+		 */
 		if ($this->stopSQLInjection){
 			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
 			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
@@ -455,25 +455,27 @@ class SQLQueryHandler {
 			$pLastName = $this->mMySQLHandler->escapeDangerousCharacters($pLastName);
 			$pSignature = $this->mMySQLHandler->escapeDangerousCharacters($pSignature);
 		}// end if
-
+	
+		$lClientID = $this->generateClientID();
 		$lClientSecret = $this->generateClientSecret();
-
-		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, client_secret) VALUES ('" .
+			
+		$lQueryString = "INSERT INTO accounts (username, password, firstname, lastname, mysignature, client_id, client_secret) VALUES ('" .
 			$pUsername ."', '" .
 			$pPassword . "', '" .
 			$pFirstName . "', '" .
 			$pLastName . "', '" .
 			$pSignature . "', '" .
+			$lClientID . "', '" .
 			$lClientSecret .
 			"')";
-
+	
 		if ($this->mMySQLHandler->executeQuery($lQueryString)){
 			return $this->mMySQLHandler->affected_rows();
 		}else{
 			return 0;
 		}
 	}//end function insertNewUserAccount
-
+	
 	public function insertCapturedData(
 		$pClientIP,
 		$pClientHostname,
