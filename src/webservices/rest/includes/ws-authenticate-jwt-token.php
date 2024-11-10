@@ -9,7 +9,7 @@
  * - Throws an `InvalidTokenException` if any validation fails.
  */
 
-require_once '../../../classes/JWT.php';
+require_once '../../classes/JWT.php';
 
 // Define constants for JWT validation if not already defined.
 if (!defined('JWT_SECRET_KEY')) {
