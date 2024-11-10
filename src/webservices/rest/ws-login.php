@@ -78,15 +78,15 @@ if (!isset($lAudience) || !filter_var($lAudience, FILTER_VALIDATE_URL)) {
 
 // Define a list of valid audiences based on known endpoints
 $lValidAudiences = [
-    BASE_URL . "/rest/ws-cors-echo.php",
-    BASE_URL . "/rest/ws-dns-lookup.php",
-    BASE_URL . "/rest/ws-echo.php",
-    BASE_URL . "/rest/ws-test-connectivity.php",
-    BASE_URL . "/rest/ws-user-account.php",
-    BASE_URL . "/soap/ws-dns-lookup.php",
-    BASE_URL . "/soap/ws-echo.php",
-    BASE_URL . "/soap/ws-test-connectivity.php",
-    BASE_URL . "/soap/ws-user-account.php"
+    BASE_URL . "/webservices/rest/ws-cors-echo.php",
+    BASE_URL . "/webservices/rest/ws-dns-lookup.php",
+    BASE_URL . "/webservices/rest/ws-echo.php",
+    BASE_URL . "/webservices/rest/ws-test-connectivity.php",
+    BASE_URL . "/webservices/rest/ws-user-account.php",
+    BASE_URL . "/webservices/soap/ws-dns-lookup.php",
+    BASE_URL . "/webservices/soap/ws-echo.php",
+    BASE_URL . "/webservices/soap/ws-test-connectivity.php",
+    BASE_URL . "/webservices/soap/ws-user-account.php"
 ];
 
 // Check if the requested audience is valid

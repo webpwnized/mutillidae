@@ -1,4 +1,10 @@
 <?php
+	class CrossSiteRequestForgeryException extends Exception {
+		public function __construct($message = "Cross Site Request Forgery attempt detected.", $code = 400, Exception $previous = null) {
+			parent::__construct($message, $code, $previous);
+		}// end function __construct
+	}// end class CrossSiteRequestForgeryException
+
 	require_once __SITE_ROOT__.'/classes/CSRFTokenHandler.php';
 	$lCSRFTokenHandler = new CSRFTokenHandler($_SESSION["security-level"], "register-user");
 	$lHTMLControls = 'minlength="1" maxlength="15" required="required"';
@@ -57,7 +63,7 @@
 				$lConfirmedPassword = $_POST["confirm_password"];
 				$lUserSignature = $_POST["my_signature"];
 				$lFirstName = $_POST["firstname"];
-				$lLastName = $_POST["lastname"]; 
+				$lLastName = $_POST["lastname"];
 				$lPostedCSRFToken = $_POST['csrf-token'];
 			} else {
 				$lUsername = $_REQUEST["username"];
@@ -65,7 +71,7 @@
 				$lConfirmedPassword = $_REQUEST["confirm_password"];
 				$lUserSignature = $_REQUEST["my_signature"];
 				$lFirstName = $_REQUEST["firstname"];
-				$lLastName = $_REQUEST["lastname"]; 
+				$lLastName = $_REQUEST["lastname"];
 				$lPostedCSRFToken = $_REQUEST['csrf-token'];
 			}
 	   		
@@ -76,12 +82,13 @@
 	   			$lUsernameText = $lUsername;
 	   		}//end if
 	   		
-			$LogHandler->writeToLog("Attempting to add account for: " . $lUsername);				
+			$LogHandler->writeToLog("Attempting to add account for: " . $lUsername);
 		   	
 			if (!$lCSRFTokenHandler->validateCSRFToken($lPostedCSRFToken)){
-				throw (new Exception("Security Violation: Cross Site Request Forgery attempt detected.", 500));
+				$lErrorMessage = "Security Violation: Cross Site Request Forgery attempt detected.";
+				throw new CrossSiteRequestForgeryException($lErrorMessage, 400, null);
 			}// end if
-					
+
 		   	if (strlen($lUsername) == 0) {
 		   		$lValidationFailed = true;
 				echo '<h2 class="error-message">Username cannot be blank</h2>';
