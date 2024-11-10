@@ -2,16 +2,24 @@
 
 	require_once __SITE_ROOT__.'/classes/JWT.php';
 
+	// Configuration Constants
+	define('JWT_EXPIRATION_TIME', 3600); // Token expiration time in seconds
+	define('BASE_URL', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
 	define('ONE_HOUR', 60 * 60);
 
 	function generateJWT($pSigningKey) {
-		$lClaims = array(
-		   "iss" => "http://mutillidae.localhost",
-		   "aud" => "http://mutillidae.localhost",
-		   "iat" => time(),
-		   "exp" => time() + ONE_HOUR,
-		   "userid" => $_SESSION["uid"]
-	   );
+		// Define JWT claims with audience
+		$lClaims = [
+			'iss' => BASE_URL,   // Issuer is your domain
+			'aud' => BASE_URL,  // Audience for the token
+			'iat' => time(),      // Issued at
+			'nbf' => time(),      // Not before
+			'exp' => time() + JWT_EXPIRATION_TIME, // Expiration time
+			'sub' => $_SESSION["uid"],  // Subject is the client ID
+			'userid' => $_SESSION["uid"],
+			'jti' => bin2hex(random_bytes(16)) // JWT ID
+		];
+
 	   return JWT::encode($lClaims, $pSigningKey);
    }
 
