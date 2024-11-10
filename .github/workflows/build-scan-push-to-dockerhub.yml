@@ -36,14 +36,14 @@ jobs:
           repository: webpwnized/mutillidae
           path: mutillidae  # Check out the code to this directory
 
-      # Step 1: Check out the mutillidae-docker repository codebase into the `mutillidae-docker` directory.
+      # Step 2: Check out the mutillidae-docker repository codebase into the `mutillidae-docker` directory.
       - name: Check out the mutillidae-docker codebase
         uses: actions/checkout@main
         with:
           repository: webpwnized/mutillidae-docker
           path: mutillidae-docker  # Check out the code to this directory
 
-      # Step 2: Set the version to the version of Mutillidae, 
+      # Step 3: Set the version to the version of Mutillidae, 
       # not the mutillidae-docker build project.
       - name: Get version from version file
         working-directory: mutillidae  # Set working directory to mutillidae
@@ -53,32 +53,41 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
         shell: bash
 
-      # Step 3: Set up QEMU on the runner to support different architectures.
+      # Step 4: Set up QEMU on the runner to support different architectures.
       - name: Set up QEMU on the runner
         uses: docker/setup-qemu-action@master
 
-      # Step 4: Set up Docker Buildx, a CLI plugin that allows for multi-platform builds.
+      # Step 5: Set up Docker Buildx, a CLI plugin that allows for multi-platform builds.
       - name: Set up Docker Buildx on the runner
         uses: docker/setup-buildx-action@master
 
-      # Step 5: Log in to Docker Hub using secrets stored in the GitHub repository.
+      # Step 6: Log in to Docker Hub using secrets stored in the GitHub repository.
       - name: Login to Docker Hub
         uses: docker/login-action@master
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Step 7: Cache Trivy database to reduce repeated downloads
+      - name: Cache Trivy database
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/trivy
+          key: trivy-db-cache-${{ runner.os }}-${{ hashFiles('**/*.lock') }}
+          restore-keys: |
+            trivy-db-cache-${{ runner.os }}
+
       # ----------------------------------------------------------------------------
       # Loop over each container defined in the matrix to build, scan, and push.
       # ----------------------------------------------------------------------------
       
-      # Step 6: Print the current container name being processed (from matrix).
+      # Step 8: Print the current container name being processed (from matrix).
       - name: Print Current Container Name
         run: |
           echo "STATUS: Currently working on container: ${{ matrix.container_name }}"
         shell: bash
 
-      # Step 7: Build and load the container using Docker Buildx.
+      # Step 9: Build and load the container using Docker Buildx.
       - name: Build and Load Container
         uses: docker/build-push-action@master
         with:
@@ -87,7 +96,7 @@ jobs:
           load: true
           tags: webpwnized/mutillidae:${{ matrix.container_name }}
 
-      # Step 8: Run the Trivy vulnerability scanner on the built container.
+      # Step 10: Run the Trivy vulnerability scanner on the built container.
       - name: Run Trivy vulnerability scanner on Container
         uses: aquasecurity/trivy-action@master
         with:
@@ -95,20 +104,20 @@ jobs:
           format: 'sarif'
           output: '${{ matrix.container_name }}-trivy-scan-results.sarif'
     
-      # Step 9: Print the Trivy scan results to the console.
+      # Step 11: Print the Trivy scan results to the console.
       - name: Print Trivy scan results to the console
         run: |
           cat '${{ matrix.container_name }}-trivy-scan-results.sarif'
         shell: bash
       
-      # Step 10: Upload the Trivy scan results to the GitHub Security tab.
+      # Step 12: Upload Trivy scan results to the GitHub Security tab.
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@main
         with:
           sarif_file: '${{ matrix.container_name }}-trivy-scan-results.sarif'
           category: ${{ matrix.container_name }}
 
-      # Step 11: Push the container to Docker Hub.
+      # Step 13: Push the container to Docker Hub.
       - name: Push Container
         uses: docker/build-push-action@master
         with:
@@ -117,7 +126,7 @@ jobs:
           push: true
           tags: webpwnized/mutillidae:${{ matrix.container_name }}
 
-      # Step 12: Push the container with the version number to Docker Hub.
+      # Step 14: Push the container with the version number to Docker Hub.
       - name: Push Container with version number
         uses: docker/build-push-action@master
         with:
