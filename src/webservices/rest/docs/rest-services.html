@@ -55,11 +55,30 @@
         <strong>Note for Beginners:</strong> If you are new to web services, each section includes basic examples using <code>curl</code> and <strong>Burp Suite</strong>. These examples will help you learn how to send requests and handle authentication when required.
     </div>
 
+    <h2>Available Services</h2>
+    <ul>
+        <li>
+            <a href="ws-echo.html">WS Echo Service</a> - A service to echo back messages sent to it, useful for testing connectivity.
+        </li>
+        <li>
+            <a href="ws-dns-lookup.html">WS DNS Lookup Service</a> - Perform DNS lookups by providing a hostname.
+        </li>
+        <li>
+            <a href="ws-test-connectivity.html">WS Test Connectivity Service</a> - Verify the connection to the web service.
+        </li>
+        <li>
+            <a href="ws-user-account.html">WS User Account Service</a> - Manage user accounts with CRUD operations (Create, Read, Update, Delete).
+        </li>
+        <li>
+            <a href="ws-login.html">WS Login Service</a> - Authenticate clients and receive a JWT for further requests.
+        </li>
+    </ul>
+
     <h2>Understanding Security Levels and Authentication</h2>
     <p>This system has multiple security levels that affect access to the web services:</p>
     <ul>
         <li><strong>Security Level 0</strong> - No authentication required. You can send requests without any additional headers or tokens.</li>
-        <li><strong>Security Level 1 or Higher</strong> - Authentication with a JWT token is required for all services except <code>ws-login</code>. You must obtain a JWT token by logging in through the <code>ws-login</code> endpoint.</li>
+        <li><strong>Security Level 1 or Higher</strong> - Authentication with a JWT token is required for all services except <code>ws-login</code>. You must obtain a JWT token by logging in through the <code>ws-login</code> endpoint using your <code>client_id</code> and <code>client_secret</code>.</li>
     </ul>
     
     <div class="auth-note">
@@ -70,10 +89,10 @@
     <ol>
         <li>
             <strong>Log In to Obtain a JWT Token:</strong>
-            Send a POST request to the <a href="ws-login.html">WS Login Service</a> with your login credentials. This will return a JWT token if your credentials are correct. 
+            Send a POST request to the <a href="ws-login.html">WS Login Service</a> using your <code>client_id</code> and <code>client_secret</code> to authenticate. If successful, the response will include a JWT token.
             <p><strong>Example (curl):</strong></p>
             <pre><code>curl -X POST http://mutillidae.localhost/webservices/rest/ws-login.php \
--d "username=your-username&password=your-password"</code></pre>
+-d "client_id=your-client-id&client_secret=your-client-secret"</code></pre>
             <p>The response will include a token in the format:</p>
             <pre><code>{"token": "your-jwt-token-here"}</code></pre>
         </li>
@@ -106,25 +125,6 @@ Host: mutillidae.localhost</code></pre>
             <li>Click <strong>Send</strong> to submit the request. If the token is valid, you will receive a successful response from the server.</li>
         </ol>
     </ol>
-
-    <h2>Available Services</h2>
-    <ul>
-        <li>
-            <a href="ws-echo.html">WS Echo Service</a> - A service to echo back messages sent to it, useful for testing connectivity.
-        </li>
-        <li>
-            <a href="ws-dns-lookup.html">WS DNS Lookup Service</a> - Perform DNS lookups by providing a hostname.
-        </li>
-        <li>
-            <a href="ws-test-connectivity.html">WS Test Connectivity Service</a> - Verify the connection to the web service.
-        </li>
-        <li>
-            <a href="ws-user-account.html">WS User Account Service</a> - Manage user accounts with CRUD operations (Create, Read, Update, Delete).
-        </li>
-        <li>
-            <a href="ws-login.html">WS Login Service</a> - Authenticate clients and receive a JWT for further requests.
-        </li>
-    </ul>
 
     <h2>How to Use the Services</h2>
     <p>Each service page provides:</p>
