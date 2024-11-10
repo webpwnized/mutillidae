@@ -11,7 +11,7 @@
             padding: 0 2rem;
             background-color: #f5f5f5;
         }
-        h1, h2 {
+        h1, h2, h3 {
             color: #2c3e50;
         }
         ul {
@@ -35,43 +35,76 @@
             margin: 1rem 0;
             padding: 0.5rem 1rem;
         }
+        code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.9rem;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
     <h1>REST Services Documentation</h1>
-    <p>Welcome to the main documentation page for the RESTful web services. Below you will find links to detailed documentation for each service along with examples of how to interact with them.</p>
+    <p>Welcome to the documentation for interacting with RESTful web services. This guide explains how to use various tools to make requests and includes a section on handling authentication if security is enabled.</p>
 
     <div class="note">
-        <strong>Note for Beginners:</strong> If you are new to web services, each linked page contains easy-to-follow examples using tools like <code>curl</code> and <strong>Burp Suite</strong>. These will help you get started quickly and efficiently.
+        <strong>Note for Beginners:</strong> If you are new to web services, each section includes basic examples using <code>curl</code> and <strong>Burp Suite</strong>. These examples will help you learn how to send requests and handle authentication when required.
     </div>
 
-    <h2>Security Levels and Authentication</h2>
-    <p>The system has multiple security levels that impact the accessibility of the web services:</p>
+    <h2>Understanding Security Levels and Authentication</h2>
+    <p>This system has multiple security levels that affect access to the web services:</p>
     <ul>
-        <li><strong>Security Level 0</strong> - No authentication required for any service.</li>
-        <li><strong>Security Level 1 or higher</strong> - All services (except <code>ws-login</code>) require authentication using a JWT token. You must first log in via the <code>ws-login</code> endpoint to obtain a token.</li>
+        <li><strong>Security Level 0</strong> - No authentication required. You can send requests without any additional headers or tokens.</li>
+        <li><strong>Security Level 1 or Higher</strong> - Authentication with a JWT token is required for all services except <code>ws-login</code>. You must obtain a JWT token by logging in through the <code>ws-login</code> endpoint.</li>
     </ul>
     
     <div class="auth-note">
-        <strong>Important:</strong> At security level 1 or higher, you must include a valid JWT token in the <code>Authorization</code> header for each request. If no token is provided, the service will return a <code>401 Unauthorized</code> error.
+        <strong>Important:</strong> At security level 1 or higher, you must include a JWT token in the <code>Authorization</code> header for each request. Without a valid token, you will receive a <code>401 Unauthorized</code> error.
     </div>
 
-    <h2>How to Authenticate and Use a JWT Token</h2>
+    <h2>Step-by-Step Guide to Using JWT Authentication</h2>
     <ol>
         <li>
-            <strong>Log In:</strong> Start by sending a POST request to the <a href="ws-login.html">WS Login Service</a> with your login credentials. If successful, the response will include a JWT token.
+            <strong>Log In to Obtain a JWT Token:</strong>
+            Send a POST request to the <a href="ws-login.html">WS Login Service</a> with your login credentials. This will return a JWT token if your credentials are correct. 
+            <p><strong>Example (curl):</strong></p>
+            <pre><code>curl -X POST http://mutillidae.localhost/webservices/rest/ws-login.php \
+-d "username=your-username&password=your-password"</code></pre>
+            <p>The response will include a token in the format:</p>
+            <pre><code>{"token": "your-jwt-token-here"}</code></pre>
         </li>
+        
         <li>
-            <strong>Store the Token:</strong> Copy the JWT token from the response and store it securely. You’ll need to include it in the Authorization header for subsequent requests.
+            <strong>Save the Token:</strong> Copy the JWT token from the response and store it securely. You will need to include it in the Authorization header of each authenticated request.
         </li>
+        
         <li>
-            <strong>Include the Token in Requests:</strong> For services that require authentication, add the token to the <code>Authorization</code> header in the format <code>Bearer &lt;your-token&gt;</code>.
+            <strong>Include the Token in Requests:</strong> When calling any authenticated endpoint, include the token in the Authorization header using the format <code>Bearer &lt;your-token&gt;</code>.
         </li>
-        <li>
-            <strong>Example Request:</strong> Below is an example of how to use the JWT token with <code>curl</code>:
-            <pre><code>curl -X GET http://mutillidae.localhost/webservices/rest/ws-dns-lookup.php?hostname=google.com \ 
+
+        <h3>Examples of Making Authenticated Requests</h3>
+        <h4>Using curl</h4>
+        <p>Below is an example of an authenticated request using <code>curl</code>:</p>
+        <pre><code>curl -X GET http://mutillidae.localhost/webservices/rest/ws-dns-lookup.php?hostname=google.com \ 
 -H "Authorization: Bearer &lt;your-token&gt;"</code></pre>
-        </li>
+
+        <h4>Using Burp Suite</h4>
+        <p>To send an authenticated request in Burp Suite:</p>
+        <ol>
+            <li>Open <strong>Burp Suite</strong> and navigate to the <strong>Repeater</strong> tab.</li>
+            <li>Enter the URL in the Request line, such as:
+                <pre><code>GET /webservices/rest/ws-dns-lookup.php?hostname=google.com HTTP/1.1
+Host: mutillidae.localhost</code></pre>
+            </li>
+            <li>In the <strong>Headers</strong> section, add an Authorization header:
+                <pre><code>Authorization: Bearer your-jwt-token-here</code></pre>
+            </li>
+            <li>Click <strong>Send</strong> to submit the request. If the token is valid, you will receive a successful response from the server.</li>
+        </ol>
     </ol>
 
     <h2>Available Services</h2>
@@ -107,7 +140,6 @@
         <li>Ensure the web server is running and accessible on <code>mutillidae.localhost</code>.</li>
         <li>Verify the correct HTTP method (GET, POST, etc.) is used for each service.</li>
         <li>If using Burp Suite, confirm that traffic is correctly routed to the web service.</li>
-        <li>Refer to the individual service pages for specific troubleshooting tips.</li>
         <li>If receiving a <code>401 Unauthorized</code> error, ensure your token is included in the <code>Authorization</code> header and has not expired.</li>
     </ul>
 
