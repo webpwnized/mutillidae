@@ -26,7 +26,7 @@
 </span>
 </div>
 
-<table>
+<table style="margin:0px;margin-top:5px;">
  	<tr>
 	    <td>
 			<a title="Usage Instructions" href="./index.php?page=documentation/usage-instructions.php">
