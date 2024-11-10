@@ -9,7 +9,7 @@
  * - Throws an `InvalidTokenException` if any validation fails.
  */
 
-require_once '../../classes/JWT.php';
+require_once '../../classes/JWT.php'; // Adjust path if necessary
 
 // Define constants for JWT validation if not already defined.
 if (!defined('JWT_SECRET_KEY')) {
@@ -47,7 +47,7 @@ class InvalidTokenException extends Exception {}
  * @throws InvalidTokenException If the token is missing, invalid, expired, or fails validation.
  * @return object The decoded token payload if authentication is successful.
  */
-function authenticateJWTToken() {
+function authenticate() {
     // Retrieve the Authorization header and extract the token.
     $lAuthHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
     $lToken = str_replace('Bearer ', '', $lAuthHeader);
@@ -70,11 +70,11 @@ function authenticateJWTToken() {
         if (is_array($lDecodedToken->aud)) {
             // If `aud` is an array, ensure EXPECTED_AUDIENCE is in the list.
             if (!in_array(EXPECTED_AUDIENCE, $lDecodedToken->aud)) {
-                throw new InvalidTokenException("Invalid token audience.");
+                throw new InvalidTokenException("Invalid token audience. Received: [" . implode(", ", $lDecodedToken->aud) . "]. Expected: " . EXPECTED_AUDIENCE);
             }
         } elseif ($lDecodedToken->aud !== EXPECTED_AUDIENCE) {
             // If `aud` is a single string, ensure it matches EXPECTED_AUDIENCE.
-            throw new InvalidTokenException("Invalid token audience.");
+            throw new InvalidTokenException("Invalid token audience. Received: " . $lDecodedToken->aud . ". Expected: " . EXPECTED_AUDIENCE);
         }
 
         // Validate the `exp` (expiration) claim to ensure token hasn't expired.
