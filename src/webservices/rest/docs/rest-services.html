@@ -29,7 +29,7 @@
         a:hover {
             text-decoration: underline;
         }
-        .note {
+        .note, .auth-note {
             background-color: #e7f3fe;
             border-left: 6px solid #2196F3;
             margin: 1rem 0;
@@ -44,6 +44,35 @@
     <div class="note">
         <strong>Note for Beginners:</strong> If you are new to web services, each linked page contains easy-to-follow examples using tools like <code>curl</code> and <strong>Burp Suite</strong>. These will help you get started quickly and efficiently.
     </div>
+
+    <h2>Security Levels and Authentication</h2>
+    <p>The system has multiple security levels that impact the accessibility of the web services:</p>
+    <ul>
+        <li><strong>Security Level 0</strong> - No authentication required for any service.</li>
+        <li><strong>Security Level 1 or higher</strong> - All services (except <code>ws-login</code>) require authentication using a JWT token. You must first log in via the <code>ws-login</code> endpoint to obtain a token.</li>
+    </ul>
+    
+    <div class="auth-note">
+        <strong>Important:</strong> At security level 1 or higher, you must include a valid JWT token in the <code>Authorization</code> header for each request. If no token is provided, the service will return a <code>401 Unauthorized</code> error.
+    </div>
+
+    <h2>How to Authenticate and Use a JWT Token</h2>
+    <ol>
+        <li>
+            <strong>Log In:</strong> Start by sending a POST request to the <a href="ws-login.html">WS Login Service</a> with your login credentials. If successful, the response will include a JWT token.
+        </li>
+        <li>
+            <strong>Store the Token:</strong> Copy the JWT token from the response and store it securely. You’ll need to include it in the Authorization header for subsequent requests.
+        </li>
+        <li>
+            <strong>Include the Token in Requests:</strong> For services that require authentication, add the token to the <code>Authorization</code> header in the format <code>Bearer &lt;your-token&gt;</code>.
+        </li>
+        <li>
+            <strong>Example Request:</strong> Below is an example of how to use the JWT token with <code>curl</code>:
+            <pre><code>curl -X GET http://mutillidae.localhost/webservices/rest/ws-dns-lookup.php?hostname=google.com \ 
+-H "Authorization: Bearer &lt;your-token&gt;"</code></pre>
+        </li>
+    </ol>
 
     <h2>Available Services</h2>
     <ul>
@@ -79,6 +108,7 @@
         <li>Verify the correct HTTP method (GET, POST, etc.) is used for each service.</li>
         <li>If using Burp Suite, confirm that traffic is correctly routed to the web service.</li>
         <li>Refer to the individual service pages for specific troubleshooting tips.</li>
+        <li>If receiving a <code>401 Unauthorized</code> error, ensure your token is included in the <code>Authorization</code> header and has not expired.</li>
     </ul>
 
     <p>If you have any further questions or need assistance, feel free to reach out to your instructor or class support team.</p>
