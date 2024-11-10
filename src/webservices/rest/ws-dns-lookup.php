@@ -119,4 +119,11 @@ try {
 
     http_response_code(SUCCESS_CODE);
     header(CONTENT_TYPE_JSON);
-    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'sec
+    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput]);
+
+} catch (Exception $e) {
+    http_response_code(SERVER_ERROR_CODE);
+    header(CONTENT_TYPE_JSON);
+    echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $e->getMessage()]);
+}
+?>
