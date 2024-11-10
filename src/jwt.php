@@ -106,6 +106,8 @@
 				addRow('Signature', pUserInfoJSON['mysignature'] ?? 'N/A');
 				addRow('Is Admin', pUserInfoJSON['is_admin'] ? 'Yes' : 'No');  // Handle boolean properly
 				addRow('Password', pUserInfoJSON['password']);
+				addRow('Client ID', pUserInfoJSON['client_id']);
+				addRow('Client Secret', pUserInfoJSON['client_secret']);
 			} else {
 				alert("No user details available.");
 			}
