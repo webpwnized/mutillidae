@@ -17,6 +17,8 @@ define('UNAUTHORIZED_CODE', 401);
 define('SERVER_ERROR_CODE', 500);
 define('SUCCESS_CODE', 200);
 define('JWT_SECRET_KEY', getenv('JWT_SECRET_KEY') ?: 'snowman');
+define('EXPECTED_ISSUER', 'http://mutillidae.localhost');
+define('EXPECTED_AUDIENCE', 'http://mutillidae.localhost/rest/ws-dns-lookup.php');
 
 $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
 $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
@@ -45,7 +47,7 @@ try {
     }
 
     if ($lRequireAuthentication) {
-        $lAuthHeader = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+        $lAuthHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
         $lToken = str_replace('Bearer ', '', $lAuthHeader);
 
         if (empty($lToken)) {
@@ -56,7 +58,19 @@ try {
         }
 
         try {
+            // Decode the token and validate required claims
             $lDecodedToken = JWT::decode($lToken, JWT_SECRET_KEY, ['HS256']);
+
+            // Validate token claims
+            if ($lDecodedToken->iss !== EXPECTED_ISSUER) {
+                throw new Exception("Invalid token issuer.");
+            }
+            if ($lDecodedToken->aud !== EXPECTED_AUDIENCE) {
+                throw new Exception("Invalid token audience.");
+            }
+            if ($lDecodedToken->exp < time()) {
+                throw new Exception("Token has expired.");
+            }
         } catch (Exception $e) {
             http_response_code(UNAUTHORIZED_CODE);
             header(CONTENT_TYPE_JSON);
@@ -105,11 +119,4 @@ try {
 
     http_response_code(SUCCESS_CODE);
     header(CONTENT_TYPE_JSON);
-    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput]);
-
-} catch (Exception $e) {
-    http_response_code(SERVER_ERROR_CODE);
-    header(CONTENT_TYPE_JSON);
-    echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $e->getMessage()]);
-}
-?>
+    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'sec
