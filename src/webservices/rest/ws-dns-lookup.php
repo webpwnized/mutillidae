@@ -51,7 +51,7 @@ try {
     }
 
     if ($lRequireAuthentication) {
-        $lAuthHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+        $lAuthHeader = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? $_SERVER['HTTP_AUTHORIZATION'] ?? '';
         $lToken = str_replace('Bearer ', '', $lAuthHeader);
 
         if (empty($lToken)) {
