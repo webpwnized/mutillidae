@@ -7,18 +7,21 @@ require_once '../../classes/SQLQueryHandler.php';
 // Configuration Constants
 define('JWT_SECRET_KEY', getenv('JWT_SECRET_KEY') ?: 'snowman');
 define('JWT_EXPIRATION_TIME', 3600); // Token expiration time in seconds
-define('MAX_FAILED_ATTEMPTS', 10); // Maximum number of failed login attempts
+define('MAX_FAILED_ATTEMPTS', 5); // Maximum number of failed login attempts
 define('CORS_MAX_AGE', 600); // CORS preflight cache duration in seconds
 
 define('TRUSTED_ORIGINS', [
     'http://mutillidae.localhost'
 ]);
 
+// Define the Base URL dynamically based on the current request
+define('BASE_URL', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
+
 // Initialize SQLQueryHandler
 $lSQLQueryHandler = new SQLQueryHandler(0);
 
 // Get the origin of the request
-$lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : 'http://mutillidae.localhost';
+$lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : BASE_URL;
 
 // CORS Validation - Only allow trusted origins
 if (!in_array($lOrigin, TRUSTED_ORIGINS)) {
@@ -75,15 +78,15 @@ if (!isset($lAudience) || !filter_var($lAudience, FILTER_VALIDATE_URL)) {
 
 // Define a list of valid audiences based on known endpoints
 $lValidAudiences = [
-    "$lBaseUrl/rest/ws-cors-echo.php",
-    "$lBaseUrl/rest/ws-dns-lookup.php",
-    "$lBaseUrl/rest/ws-echo.php",
-    "$lBaseUrl/rest/ws-test-connectivity.php",
-    "$lBaseUrl/rest/ws-user-account.php",
-    "$lBaseUrl/soap/ws-dns-lookup.php",
-    "$lBaseUrl/soap/ws-echo.php",
-    "$lBaseUrl/soap/ws-test-connectivity.php",
-    "$lBaseUrl/soap/ws-user-account.php"
+    BASE_URL . "/rest/ws-cors-echo.php",
+    BASE_URL . "/rest/ws-dns-lookup.php",
+    BASE_URL . "/rest/ws-echo.php",
+    BASE_URL . "/rest/ws-test-connectivity.php",
+    BASE_URL . "/rest/ws-user-account.php",
+    BASE_URL . "/soap/ws-dns-lookup.php",
+    BASE_URL . "/soap/ws-echo.php",
+    BASE_URL . "/soap/ws-test-connectivity.php",
+    BASE_URL . "/soap/ws-user-account.php"
 ];
 
 // Check if the requested audience is valid
@@ -121,7 +124,7 @@ if (!$lIsValid) {
 
 // Define JWT claims with audience
 $lPayload = [
-    'iss' => $lBaseUrl,   // Issuer is your domain
+    'iss' => BASE_URL,   // Issuer is your domain
     'aud' => $lAudience,  // Audience for the token
     'iat' => time(),      // Issued at
     'nbf' => time(),      // Not before
