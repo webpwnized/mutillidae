@@ -38,14 +38,13 @@
 <body>
     <h1>WS Login Service Documentation</h1>
     <p>
-        Welcome to the <strong>WS Login Service</strong>. This service allows clients to authenticate and receive a JSON Web Token (JWT) for subsequent requests. The token includes information about the client and is valid for a limited duration.
+        Welcome to the <strong>WS Login Service</strong>. This service allows clients to authenticate and receive a JSON Web Token (JWT) for accessing other web services. The token includes information about the client and is valid for a limited duration.
     </p>
 
     <div class="note">
         <strong>Note for Beginners:</strong>
-        In this documentation, you’ll find examples of how to interact with the service using
-        <strong>Burp Repeater</strong> (for testing purposes) and <code>curl</code> (for command-line users).
-        If you’re new to these tools, follow the steps carefully, and soon you’ll be making requests with ease.
+        Follow the step-by-step examples below for making requests to the login service using
+        <strong>Burp Repeater</strong> and <code>curl</code>. After obtaining a token, use the instructions at the end to include the token in future requests.
     </div>
 
     <h2>Endpoint</h2>
@@ -56,11 +55,11 @@
     <ul>
         <li><b>client_id</b> (string, required): The unique identifier for the client.</li>
         <li><b>client_secret</b> (string, required): The secret key associated with the client ID.</li>
-        <li><b>audience</b> (string, required): The intended audience for the token (e.g., a specific service endpoint).</li>
+        <li><b>audience</b> (string, required): The intended audience for the token. For example, use <code>http://mutillidae.localhost/webservices/rest/ws-user-account.php</code> if you intend to call that service.</li>
     </ul>
 
-    <h2>Step-by-Step Example Using Burp Repeater</h2>
-    <p>Here’s how to send a request to this service using Burp Repeater:</p>
+    <h2>Example Request Using Burp Repeater</h2>
+    <p>Here’s how to send a request to the login service using Burp Repeater:</p>
     <pre><code>POST /webservices/rest/ws-login.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: application/json
@@ -68,8 +67,8 @@ Origin: http://mutillidae.localhost
 
 {
     "client_id": "your-client-id",
-    "client_secret": "your-client-secret", <!-- # pragma: allowlist secret -->
-    "audience": "http://mutillidae.localhost/rest/ws-echo.php"
+    "client_secret": "your-client-secret",<!-- # pragma: allowlist secret -->
+    "audience": "http://mutillidae.localhost/webservices/rest/ws-user-account.php"
 }</code></pre>
 
     <p><strong>Instructions:</strong></p>
@@ -79,14 +78,14 @@ Origin: http://mutillidae.localhost
         <li>Click <strong>Send</strong> to see the response from the server.</li>
     </ol>
 
-    <h2>Example Using <code>curl</code> (Command Line)</h2>
+    <h2>Example Request Using <code>curl</code></h2>
     <p>If you prefer using the command line, here’s how you can make the same request with <code>curl</code>:</p>
     <pre><code>curl -X POST "http://mutillidae.localhost/webservices/rest/ws-login.php" \
 -H "Content-Type: application/json" \
 -d '{
     "client_id": "your-client-id",
-    "client_secret": "your-client-secret", <!-- # pragma: allowlist secret -->
-    "audience": "http://mutillidae.localhost/rest/ws-echo.php"
+    "client_secret": "your-client-secret",<!-- # pragma: allowlist secret -->
+    "audience": "http://mutillidae.localhost/webservices/rest/ws-user-account.php"
 }'</code></pre>
 
     <p><strong>Instructions:</strong></p>
@@ -104,17 +103,41 @@ Origin: http://mutillidae.localhost
     "expires_in": 3600
 }</code></pre>
 
+    <h2>Using the JWT Token in Subsequent Requests</h2>
+    <p>
+        After obtaining the token, include it in the <code>Authorization</code> header for any further requests to secured endpoints. Below are examples of how to do this with both <code>curl</code> and Burp Repeater.
+    </p>
+
+    <h3>Example Using curl</h3>
+    <p>Make a request to an authenticated endpoint (e.g., <code>ws-user-account</code>) using <code>curl</code>:</p>
+    <pre><code>curl -X GET "http://mutillidae.localhost/webservices/rest/ws-user-account.php" \
+-H "Authorization: Bearer your-jwt-token"</code></pre>
+
+    <h3>Example Using Burp Repeater</h3>
+    <p>To include the JWT token in Burp Suite:</p>
+    <ol>
+        <li>Open Burp Suite and navigate to the Repeater tab.</li>
+        <li>Enter the URL of the endpoint, for example:
+            <pre><code>GET /webservices/rest/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost</code></pre>
+        </li>
+        <li>In the <strong>Headers</strong> section, add an Authorization header:
+            <pre><code>Authorization: Bearer your-jwt-token</code></pre>
+        </li>
+        <li>Click <strong>Send</strong> to submit the request. If the token is valid, you will receive a successful response.</li>
+    </ol>
+
     <div class="note">
         <strong>Troubleshooting Tips:</strong>
-        If you encounter any issues:
         <ul>
             <li>Ensure that the <code>mutillidae.localhost</code> host is correctly configured in your environment.</li>
             <li>Check that the service is running and accessible.</li>
             <li>If using Burp Suite, verify that traffic is correctly routed to the service.</li>
+            <li>If you receive a <code>401 Unauthorized</code> error, ensure your token is correct and has not expired.</li>
         </ul>
     </div>
 
     <h2>Learn More</h2>
-    <p>To continue exploring, use the token obtained from this service to authenticate other service requests. For example, you can use the token to access the <code>WS User Account Service</code> and perform actions as an authenticated user.</p>
+    <p>Now that you have your JWT token, you can access other authenticated services. Refer to the individual service pages for specific instructions on interacting with each service.</p>
 </body>
 </html>
