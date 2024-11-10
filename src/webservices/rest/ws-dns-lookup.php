@@ -24,6 +24,14 @@ $LogHandler = new LogHandler($lSecurityLevel);
 
 class CommandExecutionException extends Exception {}
 
+<?php
+// Debugging script to list all server variables
+header('Content-Type: application/json');
+echo json_encode($_SERVER, JSON_PRETTY_PRINT);
+exit;
+?>
+
+
 try {
     switch ($lSecurityLevel) {
         default:
