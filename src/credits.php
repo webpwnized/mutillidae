@@ -15,7 +15,7 @@
    			 Note: For static links, the best defense is to simply hardcode the links in an anchor tag.
    			 This exercise will use mapping to show how it works, but it should be recognized that 
    			 for giving the user links to click, hardcoding is the best defense.
-   			*/ 
+   			*/
 			$lOWASPURLReference = "http://www.owasp.org";
 			$lKYISSAURLReference = "http://www.issa-kentuckiana.org";
 			$lOWASPLouisvilleURLReference = "http://www.owasp.org/index.php/Louisville";
