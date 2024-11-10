@@ -24,10 +24,11 @@ if (!defined('EXPECTED_ISSUER')) {
 
 if (!defined('EXPECTED_AUDIENCE')) {
     /**
-     * Expected audience (aud claim) for the token, dynamically set to the current endpoint URL.
+     * Expected audience (aud claim) for the token, dynamically set to the current endpoint URL without query parameters.
      * This allows the token to be validated based on the endpoint it's intended for.
      */
-    define('EXPECTED_AUDIENCE', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    $lAudienceUrl = 'http://' . $_SERVER['HTTP_HOST'] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    define('EXPECTED_AUDIENCE', $lAudienceUrl);
 }
 
 /**
