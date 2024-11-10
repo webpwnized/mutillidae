@@ -73,7 +73,7 @@ $lValidAudiences = [
     "$lBaseUrl/rest/ws-cors-echo.php",
     "$lBaseUrl/rest/ws-dns-lookup.php",
     "$lBaseUrl/rest/ws-echo.php",
-    "$lBaseUrl/rest/ws-prototype-login.php",
+    "$lBaseUrl/rest/ws-login.php",
     "$lBaseUrl/rest/ws-test-connectivity.php",
     "$lBaseUrl/rest/ws-user-account.php",
     "$lBaseUrl/soap/ws-dns-lookup.php",
