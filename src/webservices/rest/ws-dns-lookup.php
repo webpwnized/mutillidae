@@ -65,9 +65,16 @@ try {
             if ($lDecodedToken->iss !== EXPECTED_ISSUER) {
                 throw new Exception("Invalid token issuer.");
             }
-            if ($lDecodedToken->aud !== EXPECTED_AUDIENCE) {
+
+            // Check if the audience claim is a list and validate accordingly
+            if (is_array($lDecodedToken->aud)) {
+                if (!in_array(EXPECTED_AUDIENCE, $lDecodedToken->aud)) {
+                    throw new Exception("Invalid token audience.");
+                }
+            } elseif ($lDecodedToken->aud !== EXPECTED_AUDIENCE) {
                 throw new Exception("Invalid token audience.");
             }
+
             if ($lDecodedToken->exp < time()) {
                 throw new Exception("Token has expired.");
             }
