@@ -42,7 +42,7 @@
 	<tr>
 		<td>
 			<a href="./index.php?page=./documentation/vulnerabilities.php">
-				<img alt="Help" align="middle" src="./images/siren-48-48.png" />
+				<img alt="Help" src="./images/siren-48-48.png" />
 				Listing of vulnerabilities
 			</a>
 		</td>
