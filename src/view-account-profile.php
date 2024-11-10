@@ -122,62 +122,57 @@
     </a>
 </span>
 
-<div id="id-edit-account-profile-form-div" style="display:hidden;">
-    <table>
-        <tr><td>&nbsp;</td></tr>
-        <tr>
-            <td colspan="2" class="form-header" id="user-profile-header">User Profile</td>
-        </tr>
-        <tr>
-            <td class="label">ID</td>
-            <td><?php echo $lCID; ?></td>
-        </tr>
-        <tr>
-            <td class="label">First Name</td>
-            <td><?php echo $lFirstName; ?></td>
-        </tr>
-        <tr>
-            <td class="label">Last Name</td>
-            <td><?php echo $lLastName; ?></td>
-        </tr>
-        <tr>
-            <td class="label">Username</td>
-            <td><?php echo $lUsername; ?></td>
-        </tr>
-        <tr>
-            <td class="label">Password</td>
-            <td><?php echo $lPassword; ?></td>
-        </tr>
-        <tr>
-            <td class="label">Signature</td>
-            <td><?php echo $lSignature; ?></td>
-        </tr>
-        <tr>
-            <td class="label">Account Type</td>
-            <td><?php echo $lAccountType; ?></td>
-        </tr>
-        <tr>
-            <td class="label">Client ID</td>
-            <td><?php echo $lClientID; ?></td>
-        </tr>
-        <tr>
-            <td class="label">Client Secret</td>
-            <td><?php echo $lClientSecret; ?></td>
-        </tr>
-    </table>
+<div id="id-edit-account-profile-form-div" class="fieldset-container" style="display: none;">
+    <fieldset class="form-header">
+        <legend class="form-header">User Profile</legend>
+        <table class="results-table">
+            <tr>
+                <td class="label">ID</td>
+                <td class="report-data"><?php echo $lCID; ?></td>
+            </tr>
+            <tr>
+                <td class="label">First Name</td>
+                <td class="report-data"><?php echo $lFirstName; ?></td>
+            </tr>
+            <tr>
+                <td class="label">Last Name</td>
+                <td class="report-data"><?php echo $lLastName; ?></td>
+            </tr>
+            <tr>
+                <td class="label">Username</td>
+                <td class="report-data"><?php echo $lUsername; ?></td>
+            </tr>
+            <tr>
+                <td class="label">Password</td>
+                <td class="report-data"><?php echo $lPassword; ?></td>
+            </tr>
+            <tr>
+                <td class="label">Signature</td>
+                <td class="report-data"><?php echo $lSignature; ?></td>
+            </tr>
+            <tr>
+                <td class="label">Account Type</td>
+                <td class="report-data"><?php echo $lAccountType; ?></td>
+            </tr>
+            <tr>
+                <td class="label">Client ID</td>
+                <td class="report-data"><?php echo $lClientID; ?></td>
+            </tr>
+            <tr>
+                <td class="label">Client Secret</td>
+                <td class="report-data"><?php echo $lClientSecret; ?></td>
+            </tr>
+        </table>
+    </fieldset>
 </div>
 
-<div id="id-profile-not-found-div" style="text-align: center; display: none;">
-    <table>
-        <th>
-            <td style="text-align:center;" class="label">User profile not found. You may <a href="index.php?page=login.php">login here</a></td>
-        </th>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
+<div id="id-profile-not-found-div" class="profile-not-found" style="display: none;">
+    <table class="results-table">
         <tr>
-            <td style="text-align:center; font-style: italic;">
-                Dont have an account? <a href="index.php?page=register.php">Please register here</a>
-            </td>
+            <td class="error-header">User profile not found. You may <a href="index.php?page=login.php">login here</a></td>
+        </tr>
+        <tr>
+            <td class="label">Don't have an account? <a href="index.php?page=register.php">Please register here</a></td>
         </tr>
     </table>
 </div>
