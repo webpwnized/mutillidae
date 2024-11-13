@@ -47,6 +47,7 @@
         // Initialize handlers
         $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+        $SQLQueryHandler->setSecurityLevel($lSecurityLevel);
         $CustomErrorHandler = new CustomErrorHandler($lSecurityLevel);
 
         // Get the origin of the request
@@ -68,18 +69,13 @@
         switch ($lSecurityLevel) {
             default:
             case SECURITY_LEVEL_INSECURE:
-                $lProtectAgainstCommandInjection = false;
                 $lRequireAuthentication = false;
                 break;
             case SECURITY_LEVEL_MEDIUM:
-                $lProtectAgainstCommandInjection = false;
-                $lRequireAuthentication = true;
-                break;
             case 2:
             case 3:
             case 4:
             case SECURITY_LEVEL_SECURE:
-                $lProtectAgainstCommandInjection = true;
                 $lRequireAuthentication = true;
                 break;
         }
