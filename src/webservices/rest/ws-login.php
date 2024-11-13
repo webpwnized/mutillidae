@@ -5,7 +5,7 @@ require_once '../../classes/JWT.php';
 require_once '../../classes/SQLQueryHandler.php';
 
 // Configuration Constants
-define('JWT_SECRET_KEY', getenv('JWT_SECRET_KEY') ?: 'snowman');
+define('JWT_SECRET_KEY', 'snowman');
 define('JWT_EXPIRATION_TIME', 3600); // Token expiration time in seconds
 define('MAX_FAILED_ATTEMPTS', 5); // Maximum number of failed login attempts
 define('CORS_MAX_AGE', 600); // CORS preflight cache duration in seconds
@@ -124,13 +124,14 @@ if (!$lIsValid) {
 
 // Define JWT claims with audience
 $lPayload = [
-    'iss' => BASE_URL,   // Issuer is your domain
-    'aud' => $lAudience,  // Audience for the token
-    'iat' => time(),      // Issued at
-    'nbf' => time(),      // Not before
-    'exp' => time() + JWT_EXPIRATION_TIME, // Expiration time
-    'sub' => $lClientId,  // Subject is the client ID
-    'jti' => bin2hex(random_bytes(16)) // JWT ID
+    'iss' => BASE_URL,                      // Issuer is your domain
+    'aud' => $lAudience,                    // Audience for the token
+    'iat' => time(),                        // Issued at
+    'nbf' => time(),                        // Not before
+    'exp' => time() + JWT_EXPIRATION_TIME,  // Expiration time
+    'sub' => $lClientId,                    // Subject is the client ID
+    'scope' => 'execute:method',            // Scope of the token
+    'jti' => bin2hex(random_bytes(16))      // JWT ID
 ];
 
 // Encode the JWT token with a specified algorithm

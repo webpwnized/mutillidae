@@ -2,20 +2,9 @@
 // ws-dns-lookup.php: REST-based Lookup DNS Service with Command Injection for Teaching
 
 require_once '../../includes/constants.php';
-require_once './includes/ws-authenticate-jwt-token.php'; // Include the shared authentication
 require_once '../../classes/SQLQueryHandler.php';
 require_once '../../classes/LogHandler.php';
-
-// Define constants for readability and maintainability
-define('CONTENT_TYPE_JSON', 'Content-Type: application/json');
-define('SECURITY_LEVEL_INSECURE', 0);
-define('SECURITY_LEVEL_MEDIUM', 1);
-define('SECURITY_LEVEL_SECURE', 5);
-define('METHOD_NOT_ALLOWED_CODE', 405);
-define('BAD_REQUEST_CODE', 400);
-define('UNAUTHORIZED_CODE', 401);
-define('SERVER_ERROR_CODE', 500);
-define('SUCCESS_CODE', 200);
+require_once './includes/ws-constants.php';
 
 $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
 $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
@@ -24,6 +13,22 @@ $LogHandler = new LogHandler($lSecurityLevel);
 class CommandExecutionException extends Exception {}
 
 try {
+    // Get the origin of the request
+    $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
+
+    header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
+    header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
+    header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
+    header(CONTENT_TYPE_JSON);
+
+    // Handle preflight requests (OPTIONS)
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header(ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+        http_response_code(SUCCESS_NO_CONTENT); // No Content
+        exit();
+    }
+
     switch ($lSecurityLevel) {
         default:
         case SECURITY_LEVEL_INSECURE:
@@ -43,6 +48,10 @@ try {
             break;
     }
 
+    // Shared: Include the shared JWT token authentication function
+    require_once './includes/ws-authenticate-jwt-token.php';
+
+    // Shared: Authenticate the user if required
     if ($lRequireAuthentication) {
         try {
             $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function

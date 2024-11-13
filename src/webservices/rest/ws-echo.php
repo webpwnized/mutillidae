@@ -4,9 +4,10 @@
 require_once '../../includes/constants.php';
 require_once '../../classes/SQLQueryHandler.php';
 require_once '../../classes/LogHandler.php';
+require_once './includes/ws-constants.php';
 
 // Initialize SQL query handler with security level 0
-$SQLQueryHandler = new SQLQueryHandler(0);
+$SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
 
 // Get the current security level from database instead of session
 $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
@@ -17,27 +18,60 @@ $LogHandler = new LogHandler($lSecurityLevel);
 class CommandExecutionException extends Exception {}
 
 try {
-    $lContentTypeJSON = 'Content-Type: application/json';
+    // Get the origin of the request
+    $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 
-    // Determine security level and protection settings
+    header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
+    header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
+    header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
+    header(CONTENT_TYPE_JSON);
+
+    // Handle preflight requests (OPTIONS)
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header(ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+        http_response_code(SUCCESS_NO_CONTENT); // No Content
+        exit();
+    }
+
     switch ($lSecurityLevel) {
-        default: // Insecure
-        case "0": // Insecure
-        case "1": // Insecure
+        default:
+        case SECURITY_LEVEL_INSECURE:
             $lProtectAgainstCommandInjection = false;
-        break;
-        case "2": // Moderate security
-        case "3": // More secure
-        case "4": // Secure
-        case "5": // Fairly secure
+            $lRequireAuthentication = false;
+            break;
+        case SECURITY_LEVEL_MEDIUM:
+            $lProtectAgainstCommandInjection = false;
+            $lRequireAuthentication = true;
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case SECURITY_LEVEL_SECURE:
             $lProtectAgainstCommandInjection = true;
-        break;
+            $lRequireAuthentication = true;
+            break;
+    }
+
+    // Shared: Include the shared JWT token authentication function
+    require_once './includes/ws-authenticate-jwt-token.php';
+
+    // Shared: Authenticate the user if required
+    if ($lRequireAuthentication) {
+        try {
+            $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
+        } catch (InvalidTokenException $e) {
+            http_response_code(UNAUTHORIZED_CODE);
+            header(CONTENT_TYPE_JSON);
+            echo json_encode(['error' => 'Unauthorized', 'details' => $e->getMessage()]);
+            exit;
+        }
     }
 
     // Allow only POST requests for this endpoint
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        http_response_code(405); // Method Not Allowed
-        header($lContentTypeJSON);
+        http_response_code(METHOD_NOT_ALLOWED_CODE); // Method Not Allowed
+        header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Method Not Allowed. Use POST for this endpoint.']);
         exit;
     }
@@ -46,8 +80,8 @@ try {
     $lMessage = isset($_POST['message']) ? trim($_POST['message']) : '';
 
     if (empty($lMessage)) {
-        http_response_code(400); // Bad Request
-        header($lContentTypeJSON);
+        http_response_code(BAD_REQUEST_CODE); // Bad Request
+        header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Message parameter is required.']);
         exit;
     }
@@ -68,14 +102,14 @@ try {
     }
 
     // Return the output as JSON
-    http_response_code(200);
-    header($lContentTypeJSON); // Set response format to JSON
+    http_response_code(SUCCESS_CODE); // OK
+    header(CONTENT_TYPE_JSON); // Set response format to JSON
     echo json_encode(['message' => $lMessage, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput]);
 
 } catch (Exception $e) {
     // Handle errors during configuration setup
-    http_response_code(500);
-    header($lContentTypeJSON); // Set response format to JSON
+    http_response_code(SERVER_ERROR_CODE); // Internal Server Error
+    header(CONTENT_TYPE_JSON); // Set response format to JSON
     echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $e->getMessage()]);
 }
 ?>

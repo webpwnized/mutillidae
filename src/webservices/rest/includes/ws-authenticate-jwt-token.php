@@ -48,6 +48,7 @@ class InvalidTokenException extends Exception {}
  * @throws InvalidTokenException If the token is missing, invalid, expired, or fails validation.
  * @return object The decoded token payload if authentication is successful.
  */
+
 function authenticateJWTToken() {
     // Retrieve the Authorization header and extract the token.
     $lAuthHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
