@@ -311,9 +311,7 @@
 			(8, '6011000990139424', '345', '2027-02-01 15:45:30'), -- Discover Debit Test Card
 			(9, '4000000000000002', '456', '2025-05-01 08:15:00'), -- Visa Credit Test Card
 			(10, '3566002020360505', '567', '2024-12-01 18:20:10'), -- JCB Test Card
-			(11, '5038370200000000', '678', '2026-07-01 11:00:00'), -- Maestro Test Card
-			(12, '6011111111111117', '789', '2028-06-01 14:22:25'), -- Discover Test Card
-			(13, '4000002760003184', '852', '2026-10-01 09:00:00') -- Visa Debit Test Card";
+			(11, '5038370200000000', '678', '2026-07-01 11:00:00') -- Maestro Test Card";
     	$lQueryResult = $MySQLHandler->executeQuery($lQueryString);
     	if (!$lQueryResult) {
     		$lErrorDetected = true;

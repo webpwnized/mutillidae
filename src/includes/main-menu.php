@@ -709,7 +709,7 @@
 			<a href="">Web Services</a>
 			<ul>
 				<li>
-					<a href="">REST</a>
+					<a href="./webservices/rest/docs/rest-services.html">REST</a>
 					<ul>
 						<li>
 							<a href="./webservices/rest/docs/rest-services.html">
@@ -742,7 +742,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="">SOAP</a>
+					<a href="./webservices/soap/docs/soap-services.html">SOAP</a>
 					<ul>
 						<li>
 							<a href="./webservices/soap/docs/soap-services.html">
