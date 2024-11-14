@@ -92,21 +92,32 @@ curl -X POST "http://mutillidae.localhost/webservices/rest/ws-user-account.php" 
 <hr>
 <h4>3. PUT (Create or Update Account)</h4>
 <p>Use PUT requests to <strong>create or update</strong> an existing user account.</p>
-<p><strong>Required Parameters (POST body):</strong> Same as POST</p>
-<p>If the account exists, it will be updated. If not, a new account will be created.</p>
+<p><strong>Required Parameters (POST body):</strong></p>
+<ul>
+    <li><code>username</code>: The username for the account</li>
+    <li><code>password</code>: The password for the account</li>
+    <li><code>firstname</code>: User's first name</li>
+    <li><code>lastname</code>: User's last name</li>
+</ul>
+<p><strong>Optional Parameters:</strong></p>
+<ul>
+    <li><code>signature</code>: User's signature</li>
+    <li><code>update_client_id</code> (boolean): If <code>true</code>, updates the client_id</li>
+    <li><code>update_client_secret</code> (boolean): If <code>true</code>, updates the client_secret</li>
+</ul>
 <strong>Example:</strong><br>
 <pre>
 PUT /webservices/rest/ws-user-account.php HTTP/1.1
 Host: mutillidae.localhost
 Content-Type: application/x-www-form-urlencoded
 
-username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated
+username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated&update_client_id=true&update_client_secret=false
 </pre>
 <strong>cURL Example:</strong>
 <pre>
 curl -X PUT "http://mutillidae.localhost/webservices/rest/ws-user-account.php" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated"
+  -d "username=john&password=newpass123&firstname=John&lastname=Doe&signature=JDoeUpdated&update_client_id=true&update_client_secret=false"
 </pre>
 <hr>
 <h4>4. DELETE (Remove Account)</h4>
