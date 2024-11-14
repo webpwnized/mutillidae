@@ -107,18 +107,14 @@
             }
 
             if (!$lValidationFailed) {
-                // Generate new client ID and/or client secret if checkboxes are checked
-                $lClientID = $lGenerateNewClientID ? bin2hex(random_bytes(8)) : null;
-                $lClientSecret = $lGenerateNewClientSecret ? bin2hex(random_bytes(16)) : null;
-
                 $lRowsAffected = $SQLQueryHandler->updateUserAccount(
-                    $lUsername, 
-                    $lPassword, 
-                    $lFirstName, 
-                    $lLastName, 
-                    $lUserSignature, 
-                    $lClientID,
-                    $lClientSecret
+                    $lUsername,
+                    $lPassword,
+                    $lFirstName,
+                    $lLastName,
+                    $lUserSignature,
+                    $lGenerateNewClientID,
+                    $lGenerateNewClientSecret
                 );
                 echo '<div class="success-message">Profile updated for ' . $lUsernameText . '</div>';
                 $LogHandler->writeToLog("Profile updated for: " . $lUsername);
