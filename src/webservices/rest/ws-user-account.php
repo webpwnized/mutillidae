@@ -128,7 +128,7 @@
 
                 } else {
                     http_response_code(BAD_REQUEST_CODE);
-                    header($lContentTypeJSON);
+                    header(CONTENT_TYPE_JSON);
                     echo json_encode(["error" => "Username parameter is required", "SecurityLevel" => $lSecurityLevel], JSON_PRETTY_PRINT);
                     exit(); // Exit after response
                 }
@@ -163,7 +163,7 @@
                     }
                 }
 
-                header($lContentTypeJSON);
+                header(CONTENT_TYPE_JSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                 $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
@@ -226,7 +226,7 @@
                     }
                 }
 
-                header($lContentTypeJSON);
+                header(CONTENT_TYPE_JSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                 $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
@@ -265,7 +265,7 @@
                     http_response_code(NOT_FOUND_CODE); // Not Found
                 }
 
-                header($lContentTypeJSON);
+                header(CONTENT_TYPE_JSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                 $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
@@ -274,13 +274,13 @@
             default:
                 http_response_code(METHOD_NOT_ALLOWED_CODE);
                 header('Allow: GET, POST, PUT, DELETE, OPTIONS');
-                header($lContentTypeJSON);
+                header(CONTENT_TYPE_JSON);
                 echo json_encode(["error" => "Method not allowed", "SecurityLevel" => $lSecurityLevel], JSON_PRETTY_PRINT);
                 exit(); // Exit after response
         }
     } catch (Exception $e) {
         http_response_code(SERVER_ERROR_CODE);
-        header($lContentTypeJSON);
+        header(CONTENT_TYPE_JSON);
         echo $CustomErrorHandler->FormatErrorJSON($e, "Unable to process request to web service ws-user-account");
         exit(); // Exit after response
     }
