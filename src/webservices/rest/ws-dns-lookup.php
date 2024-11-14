@@ -14,7 +14,7 @@ class CommandExecutionException extends Exception {}
 
 try {
     // Get the origin of the request
-    $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
+    $lOrigin = $_SERVER['HTTP_ORIGIN'] ?? '*';
 
     header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
     header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
@@ -32,7 +32,6 @@ try {
     // Allow only POST requests
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(METHOD_NOT_ALLOWED_CODE);
-        header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Method Not Allowed. Use POST for this endpoint.']);
         exit();
     }
@@ -65,16 +64,22 @@ try {
             $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
         } catch (InvalidTokenException $e) {
             http_response_code(UNAUTHORIZED_CODE);
-            header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Unauthorized', 'details' => $e->getMessage()]);
             exit();
         }
     }
 
-    $lHostname = isset($_POST['hostname']) ? trim($_POST['hostname']) : '';
+    // Parse JSON body
+    $inputData = json_decode(file_get_contents('php://input'), true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        http_response_code(BAD_REQUEST_CODE);
+        echo json_encode(['error' => 'Invalid JSON input.']);
+        exit();
+    }
+
+    $lHostname = $inputData['hostname'] ?? '';
     if (empty($lHostname)) {
         http_response_code(BAD_REQUEST_CODE);
-        header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Hostname parameter is required.']);
         exit();
     }
@@ -85,7 +90,6 @@ try {
                               preg_match(IPV6_REGEX_PATTERN, $lHostname);
         if (!$lHostnameValidated) {
             http_response_code(BAD_REQUEST_CODE);
-            header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Invalid hostname format.']);
             exit();
         }
@@ -103,12 +107,10 @@ try {
     }
 
     http_response_code(SUCCESS_CODE);
-    header(CONTENT_TYPE_JSON);
     echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput]);
 
 } catch (Exception $e) {
     http_response_code(SERVER_ERROR_CODE);
-    header(CONTENT_TYPE_JSON);
     echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $e->getMessage()]);
 }
 ?>
