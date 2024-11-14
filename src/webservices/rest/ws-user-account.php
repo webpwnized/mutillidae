@@ -172,15 +172,19 @@
             case "PUT": // create or update
                 /* $_POST array is not auto-populated for PUT method. Parse input into an array. */
                 populatePOSTSuperGlobal();
-
+            
                 $lUsername = getPOSTParameter("username", true);
                 $lAccountPassword = getPOSTParameter("password", true);
                 $lAccountFirstName = getPOSTParameter("firstname", true);
                 $lAccountLastName = getPOSTParameter("lastname", true);
                 $lAccountSignature = getPOSTParameter("signature", false);
-
+            
+                // New boolean parameters to decide whether to update client_id and client_secret
+                $lUpdateClientID = filter_var(getPOSTParameter("update_client_id", false), FILTER_VALIDATE_BOOLEAN);
+                $lUpdateClientSecret = filter_var(getPOSTParameter("update_client_secret", false), FILTER_VALIDATE_BOOLEAN);
+            
                 $lArrayResponse = [];
-
+            
                 if ($SQLQueryHandler->accountExists($lUsername)) {
                     // Update the existing account
                     $lQueryResult = $SQLQueryHandler->updateUserAccount(
@@ -189,10 +193,10 @@
                         $lAccountFirstName,
                         $lAccountLastName,
                         $lAccountSignature,
-                        false,
-                        false
+                        $lUpdateClientID,
+                        $lUpdateClientSecret
                     );
-
+            
                     if ($lQueryResult > 0) {
                         $lArrayResponse['Result'] = "Updated account '$lUsername'.";
                         $lArrayResponse['RowsAffected'] = $lQueryResult;
@@ -213,7 +217,7 @@
                         $lAccountLastName,
                         $lAccountSignature
                     );
-
+            
                     if ($lQueryResult > 0) {
                         $lArrayResponse['Result'] = "Inserted account '$lUsername'.";
                         $lArrayResponse['RowsAffected'] = $lQueryResult;
@@ -226,7 +230,7 @@
                         http_response_code(SERVER_ERROR_CODE); // Internal Server Error
                     }
                 }
-
+            
                 header(CONTENT_TYPE_JSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
                 $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
