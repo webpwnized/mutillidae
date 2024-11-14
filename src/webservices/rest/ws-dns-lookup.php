@@ -17,7 +17,7 @@ try {
     $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 
     header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
-    header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
     header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
     header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
     header(CONTENT_TYPE_JSON);
@@ -26,6 +26,14 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         header(ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
         http_response_code(SUCCESS_NO_CONTENT); // No Content
+        exit();
+    }
+
+    // Allow only POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(METHOD_NOT_ALLOWED_CODE);
+        header(CONTENT_TYPE_JSON);
+        echo json_encode(['error' => 'Method Not Allowed. Use POST for this endpoint.']);
         exit();
     }
 
@@ -59,23 +67,16 @@ try {
             http_response_code(UNAUTHORIZED_CODE);
             header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Unauthorized', 'details' => $e->getMessage()]);
-            exit;
+            exit();
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-        http_response_code(METHOD_NOT_ALLOWED_CODE);
-        header(CONTENT_TYPE_JSON);
-        echo json_encode(['error' => 'Method Not Allowed. Use GET for this endpoint.']);
-        exit;
-    }
-
-    $lHostname = isset($_GET['hostname']) ? trim($_GET['hostname']) : '';
+    $lHostname = isset($_POST['hostname']) ? trim($_POST['hostname']) : '';
     if (empty($lHostname)) {
         http_response_code(BAD_REQUEST_CODE);
         header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Hostname parameter is required.']);
-        exit;
+        exit();
     }
 
     if ($lProtectAgainstCommandInjection) {
@@ -86,7 +87,7 @@ try {
             http_response_code(BAD_REQUEST_CODE);
             header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Invalid hostname format.']);
-            exit;
+            exit();
         }
     }
 
