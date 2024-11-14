@@ -122,6 +122,7 @@
                     http_response_code(SUCCESS_CODE);
                     header(CONTENT_TYPE_JSON);
                     $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
+                    $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
                     echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                     exit(); // Exit after response
 
@@ -164,6 +165,7 @@
 
                 header($lContentTypeJSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
+                $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                 exit(); // Exit after response
 
@@ -226,6 +228,7 @@
 
                 header($lContentTypeJSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
+                $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                 exit(); // Exit after response
 
@@ -259,11 +262,12 @@
                 } else {
                     $lArrayResponse['Result'] = "User '$lUsername' does not exist.";
                     $lArrayResponse['Success'] = false;
-                    http_response_code(404); // Not Found
+                    http_response_code(NOT_FOUND_CODE); // Not Found
                 }
 
                 header($lContentTypeJSON);
                 $lArrayResponse['SecurityLevel'] = $lSecurityLevel;
+                $lArrayResponse['Timestamp'] = date(DATE_TIME_FORMAT);
                 echo json_encode($lArrayResponse, JSON_PRETTY_PRINT);
                 exit(); // Exit after response
 

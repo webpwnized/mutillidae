@@ -23,5 +23,8 @@ define('ACCESS_CONTROL_MAX_AGE', 'Access-Control-Max-Age: 600');
 define('JWT_SECRET_KEY', 'snowman');
 define('JWT_EXPIRATION_TIME', 3600); // Token expiration time in seconds
 define('MAX_FAILED_ATTEMPTS', 5); // Maximum number of failed login attempts
+define('EXPECTED_ISSUER', 'http://mutillidae.localhost');
+define('EXPECTED_ALGORITHM', 'HS256');
+define('DATE_TIME_FORMAT', 'Y-m-d H:i:s');
 
 ?>

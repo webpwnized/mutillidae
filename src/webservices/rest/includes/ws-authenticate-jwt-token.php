@@ -61,7 +61,7 @@ function authenticateJWTToken() {
 
     try {
         // Decode the token using the JWT_SECRET_KEY and verify the HS256 signature.
-        $lDecodedToken = JWT::decode($lToken, JWT_SECRET_KEY, ['HS256']);
+        $lDecodedToken = JWT::decode($lToken, JWT_SECRET_KEY, [EXPECTED_ALGORITHM]);
 
         // Validate the `iss` (issuer) claim.
         if ($lDecodedToken->iss !== EXPECTED_ISSUER) {

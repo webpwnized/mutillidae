@@ -97,6 +97,6 @@
                 "GET" => $_GET,
                 "POST" => $_POST
             ]
-        ]);
+        ], JSON_PRETTY_PRINT);
     }
 ?>

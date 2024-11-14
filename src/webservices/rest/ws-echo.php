@@ -104,7 +104,7 @@ try {
     // Return the output as JSON
     http_response_code(SUCCESS_CODE); // OK
     header(CONTENT_TYPE_JSON); // Set response format to JSON
-    echo json_encode(['message' => $lMessage, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput]);
+    echo json_encode(['message' => $lMessage, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'timestamp' => date(DATE_TIME_FORMAT), 'result' => $lOutput], JSON_PRETTY_PRINT);
 
 } catch (Exception $e) {
     // Handle errors during configuration setup

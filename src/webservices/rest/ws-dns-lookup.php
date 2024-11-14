@@ -107,7 +107,7 @@ try {
     }
 
     http_response_code(SUCCESS_CODE);
-    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput], JSON_PRETTY_PRINT);
+    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'timestamp' => date(DATE_TIME_FORMAT), 'result' => $lOutput], JSON_PRETTY_PRINT);
 
 } catch (Exception $e) {
     http_response_code(SERVER_ERROR_CODE);

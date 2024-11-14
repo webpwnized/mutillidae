@@ -89,7 +89,7 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // Return a success message with 200 OK status
         http_response_code(200); // OK
-        echo json_encode(["code" => 200, "status" => "OK", "message" => "Connection succeeded...", 'security-level' => $lSecurityLevel, "timestamp" => date('Y-m-d H:i:s')], JSON_PRETTY_PRINT);
+        echo json_encode(["code" => 200, "status" => "OK", "message" => "Connection succeeded...", 'security-level' => $lSecurityLevel, "timestamp" => date(DATE_TIME_FORMAT)], JSON_PRETTY_PRINT);
     } else {
         // If the request method is not allowed, return 405 status
         http_response_code(405); // Method Not Allowed

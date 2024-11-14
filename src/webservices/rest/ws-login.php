@@ -130,14 +130,15 @@ $lPayload = [
 ];
 
 // Encode the JWT token with a specified algorithm
-$lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, 'HS256'); // Use a secure algorithm
+$lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, EXPECTED_ALGORITHM); // Use a secure algorithm
 
 // Respond with JWT token
 http_response_code(SUCCESS_CODE);
 echo json_encode([
     'access_token' => $lJwt,
     'token_type' => 'bearer',
-    'expires_in' => JWT_EXPIRATION_TIME
+    'expires_in' => JWT_EXPIRATION_TIME,
+    'timestamp' => date(DATE_TIME_FORMAT)
 ]);
 
 ?>
