@@ -52,10 +52,10 @@
 
     <h2>Endpoint</h2>
     <p>The service is accessible at the following endpoint:</p>
-    <pre><code>GET /webservices/rest/ws-dns-lookup.php</code></pre>
+    <pre><code>POST /webservices/rest/ws-dns-lookup.php</code></pre>
 
     <h2>How It Works</h2>
-    <p>Provide a hostname as a query parameter, and the service will perform a DNS lookup for that hostname. 
+    <p>Provide a hostname in the request body, and the service will perform a DNS lookup for that hostname. 
     If the security level is set high, the service will validate the hostname to protect against malicious input.</p>
 
     <h2>Request Parameters</h2>
@@ -65,11 +65,16 @@
 
     <h2>Step-by-Step Example Using Burp Repeater</h2>
     <p>Here’s how to send a request to this service using Burp Repeater:</p>
-    <pre><code>GET /webservices/rest/ws-dns-lookup.php?hostname=google.com HTTP/1.1
+    <pre><code>POST /webservices/rest/ws-dns-lookup.php HTTP/1.1
 Host: mutillidae.localhost
+Content-Type: application/json
 Accept: application/json
 Origin: http://mutillidae.localhost
-Connection: close</code></pre>
+Connection: close
+
+{
+    "hostname": "google.com"
+}</code></pre>
 
     <p><strong>Instructions:</strong></p>
     <ol>
@@ -80,11 +85,13 @@ Connection: close</code></pre>
 
     <h2>Example Using <code>curl</code> (Command Line)</h2>
     <p>If you prefer using the command line, here’s how you can make the same request with <code>curl</code>:</p>
-    <pre><code>curl -X GET "http://mutillidae.localhost/webservices/rest/ws-dns-lookup.php?hostname=google.com" \
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/rest/ws-dns-lookup.php" \
+ -H "Content-Type: application/json" \
  -H "Host: mutillidae.localhost" \
  -H "Accept: application/json" \
  -H "Origin: http://mutillidae.localhost" \
- -H "Connection: close"</code></pre>
+ -H "Connection: close" \
+ -d '{"hostname": "google.com"}'</code></pre>
 
     <p><strong>Instructions:</strong></p>
     <ol>
@@ -117,4 +124,3 @@ Connection: close</code></pre>
     For example, you can send the hostname <code>example.com</code> and check if it resolves correctly.</p>
 </body>
 </html>
-

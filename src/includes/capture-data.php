@@ -135,7 +135,7 @@
 	}// end try
 
 	try {
-		$LogHandler->writeToLog("Captured user data");
+		$LogHandler->writeToLog("Captured User Data");
 		$LogHandler->writeToLog("Captured Client IP: ".$lClientIP);
 		$LogHandler->writeToLog("Captured Client Hostname: ".$lClientHostname);
 		$LogHandler->writeToLog("Captured Client User Agent: ".$lClientUserAgentString);

@@ -2,20 +2,9 @@
 // ws-dns-lookup.php: REST-based Lookup DNS Service with Command Injection for Teaching
 
 require_once '../../includes/constants.php';
-require_once './includes/ws-authenticate-jwt-token.php'; // Include the shared authentication
 require_once '../../classes/SQLQueryHandler.php';
 require_once '../../classes/LogHandler.php';
-
-// Define constants for readability and maintainability
-define('CONTENT_TYPE_JSON', 'Content-Type: application/json');
-define('SECURITY_LEVEL_INSECURE', 0);
-define('SECURITY_LEVEL_MEDIUM', 1);
-define('SECURITY_LEVEL_SECURE', 5);
-define('METHOD_NOT_ALLOWED_CODE', 405);
-define('BAD_REQUEST_CODE', 400);
-define('UNAUTHORIZED_CODE', 401);
-define('SERVER_ERROR_CODE', 500);
-define('SUCCESS_CODE', 200);
+require_once './includes/ws-constants.php';
 
 $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
 $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
@@ -24,6 +13,29 @@ $LogHandler = new LogHandler($lSecurityLevel);
 class CommandExecutionException extends Exception {}
 
 try {
+    // Get the origin of the request
+    $lOrigin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+
+    header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
+    header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
+    header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
+    header(CONTENT_TYPE_JSON);
+
+    // Handle preflight requests (OPTIONS)
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header(ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+        http_response_code(SUCCESS_NO_CONTENT); // No Content
+        exit();
+    }
+
+    // Allow only POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(METHOD_NOT_ALLOWED_CODE);
+        echo json_encode(['error' => 'Method Not Allowed. Use POST for this endpoint.']);
+        exit();
+    }
+
     switch ($lSecurityLevel) {
         default:
         case SECURITY_LEVEL_INSECURE:
@@ -43,30 +55,33 @@ try {
             break;
     }
 
+    // Shared: Include the shared JWT token authentication function
+    require_once './includes/ws-authenticate-jwt-token.php';
+
+    // Shared: Authenticate the user if required
     if ($lRequireAuthentication) {
         try {
             $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
         } catch (InvalidTokenException $e) {
             http_response_code(UNAUTHORIZED_CODE);
-            header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Unauthorized', 'details' => $e->getMessage()]);
-            exit;
+            exit();
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-        http_response_code(METHOD_NOT_ALLOWED_CODE);
-        header(CONTENT_TYPE_JSON);
-        echo json_encode(['error' => 'Method Not Allowed. Use GET for this endpoint.']);
-        exit;
+    // Parse JSON body
+    $inputData = json_decode(file_get_contents('php://input'), true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        http_response_code(BAD_REQUEST_CODE);
+        echo json_encode(['error' => 'Invalid JSON input.']);
+        exit();
     }
 
-    $lHostname = isset($_GET['hostname']) ? trim($_GET['hostname']) : '';
+    $lHostname = $inputData['hostname'] ?? '';
     if (empty($lHostname)) {
         http_response_code(BAD_REQUEST_CODE);
-        header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Hostname parameter is required.']);
-        exit;
+        exit();
     }
 
     if ($lProtectAgainstCommandInjection) {
@@ -75,9 +90,8 @@ try {
                               preg_match(IPV6_REGEX_PATTERN, $lHostname);
         if (!$lHostnameValidated) {
             http_response_code(BAD_REQUEST_CODE);
-            header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Invalid hostname format.']);
-            exit;
+            exit();
         }
     }
 
@@ -93,12 +107,10 @@ try {
     }
 
     http_response_code(SUCCESS_CODE);
-    header(CONTENT_TYPE_JSON);
-    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'result' => $lOutput]);
+    echo json_encode(['hostname' => $lHostname, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'timestamp' => date(DATE_TIME_FORMAT), 'result' => $lOutput], JSON_PRETTY_PRINT);
 
 } catch (Exception $e) {
     http_response_code(SERVER_ERROR_CODE);
-    header(CONTENT_TYPE_JSON);
     echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $e->getMessage()]);
 }
 ?>

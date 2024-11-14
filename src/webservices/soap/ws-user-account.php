@@ -300,7 +300,7 @@
 			$lTimestamp = date('Y-m-d H:i:s');
 
 			if ($SQLQueryHandler->accountExists($pUsername)){
-				$lQueryResult = $SQLQueryHandler->updateUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature, false);
+				$lQueryResult = $SQLQueryHandler->updateUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature, false, false);
 				$lResponse = array(
 					'message' => "Updated account {$pUsername}",
 					'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),

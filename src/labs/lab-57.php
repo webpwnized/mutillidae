@@ -6,7 +6,7 @@ $lChoice_1 = "Fred";
 $lChoice_2 = "Sally";
 $lChoice_3 = "Joe";
 $lChoice_4 = "Amanda";
-$lChoice_5 = "John";
+$lChoice_5 = "Patches";
 $lCorrectAnswer = 5;
 
 require_once("labs/lab-template.inc");

@@ -5,8 +5,8 @@
     $lChoice_1 = "1";
     $lChoice_2 = "3";
     $lChoice_3 = "5";
-    $lChoice_4 = "7";
-    $lChoice_5 = "9";
+    $lChoice_4 = "10";
+    $lChoice_5 = "15";
     $lCorrectAnswer = 4;
 
     require_once("labs/lab-template.inc");

@@ -48,6 +48,7 @@ class InvalidTokenException extends Exception {}
  * @throws InvalidTokenException If the token is missing, invalid, expired, or fails validation.
  * @return object The decoded token payload if authentication is successful.
  */
+
 function authenticateJWTToken() {
     // Retrieve the Authorization header and extract the token.
     $lAuthHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
@@ -60,7 +61,7 @@ function authenticateJWTToken() {
 
     try {
         // Decode the token using the JWT_SECRET_KEY and verify the HS256 signature.
-        $lDecodedToken = JWT::decode($lToken, JWT_SECRET_KEY, ['HS256']);
+        $lDecodedToken = JWT::decode($lToken, JWT_SECRET_KEY, [EXPECTED_ALGORITHM]);
 
         // Validate the `iss` (issuer) claim.
         if ($lDecodedToken->iss !== EXPECTED_ISSUER) {

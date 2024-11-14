@@ -7,7 +7,7 @@ $lChoice_2 = "10 minutes";
 $lChoice_3 = "20 minutes";
 $lChoice_4 = "30 minutes";
 $lChoice_5 = "60 minutes";
-$lCorrectAnswer = 4;
+$lCorrectAnswer = 5;
 
 require_once("labs/lab-template.inc");
 ?>
