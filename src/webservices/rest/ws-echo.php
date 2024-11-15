@@ -54,7 +54,7 @@ try {
     }
 
     // Shared: Include the shared JWT token authentication function
-    require_once './includes/ws-authenticate-jwt-token.php';
+    require_once '../includes/ws-authenticate-jwt-token.php';
 
     // Shared: Authenticate the user if required
     if ($lRequireAuthentication) {
