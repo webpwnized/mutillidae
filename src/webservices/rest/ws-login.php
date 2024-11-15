@@ -3,11 +3,7 @@
 require_once '../../includes/constants.php';
 require_once '../../classes/JWT.php';
 require_once '../../classes/SQLQueryHandler.php';
-require_once './includes/ws-constants.php';
-
-define('TRUSTED_ORIGINS', [
-    'http://mutillidae.localhost'
-]);
+require_once '../includes/ws-constants.php';
 
 // Define the Base URL dynamically based on the current request
 define('BASE_URL', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
@@ -35,7 +31,7 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header('Access-Control-Allow-Origin: ' . $lOrigin);
     header(ACCESS_CONTROL_MAX_AGE);
-    http_response_code(204);
+    http_response_code(SUCCESS_NO_CONTENT);
     exit();
 }
 
@@ -71,21 +67,8 @@ if (!isset($lAudience) || !filter_var($lAudience, FILTER_VALIDATE_URL)) {
     exit();
 }
 
-// Define a list of valid audiences based on known endpoints
-$lValidAudiences = [
-    BASE_URL . "/webservices/rest/ws-cors-echo.php",
-    BASE_URL . "/webservices/rest/ws-dns-lookup.php",
-    BASE_URL . "/webservices/rest/ws-echo.php",
-    BASE_URL . "/webservices/rest/ws-test-connectivity.php",
-    BASE_URL . "/webservices/rest/ws-user-account.php",
-    BASE_URL . "/webservices/soap/ws-dns-lookup.php",
-    BASE_URL . "/webservices/soap/ws-echo.php",
-    BASE_URL . "/webservices/soap/ws-test-connectivity.php",
-    BASE_URL . "/webservices/soap/ws-user-account.php"
-];
-
 // Check if the requested audience is valid
-if (!in_array($lAudience, $lValidAudiences)) {
+if (!in_array($lAudience, VALID_AUDIENCES)) {
     http_response_code(NOT_FOUND_CODE);
     echo json_encode(["error" => "Invalid audience specified."]);
     exit();
