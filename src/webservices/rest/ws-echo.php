@@ -4,7 +4,7 @@
 require_once '../../includes/constants.php';
 require_once '../../classes/SQLQueryHandler.php';
 require_once '../../classes/LogHandler.php';
-require_once './includes/ws-constants.php';
+require_once '../includes/ws-constants.php';
 
 // Initialize SQL query handler with security level 0
 $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);

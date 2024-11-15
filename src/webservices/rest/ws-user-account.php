@@ -3,7 +3,7 @@
     require_once '../../includes/constants.php';
     require_once '../../classes/SQLQueryHandler.php';
     require_once '../../classes/CustomErrorHandler.php';
-    require_once './includes/ws-constants.php';
+    require_once '../includes/ws-constants.php';
 
     class MissingPostParameterException extends Exception {
         public function __construct($parameter) {

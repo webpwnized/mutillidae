@@ -31,7 +31,7 @@ Accept: application/json
 // Include required constants and utility classes
 require_once '../../includes/constants.php';
 require_once '../../classes/SQLQueryHandler.php';
-require_once './includes/ws-constants.php';
+require_once '../includes/ws-constants.php';
 
 // Initialize SQL query handler with security level 0
 $SQLQueryHandler = new SQLQueryHandler(0);
