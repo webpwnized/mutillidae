@@ -39,33 +39,24 @@ function login($pClientID, $pClientSecret, $pAudience) {
         $SQLQueryHandler = new SQLQueryHandler(0);
 
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
-
         $SQLQueryHandler->setSecurityLevel($lSecurityLevel);
 
         // Validate Inputs
-        if (!isset($lClientId) || !preg_match('/^[a-f0-9]{32}$/', $lClientId)) {
-            http_response_code(BAD_REQUEST_CODE);
-            echo json_encode(["error" => "Invalid Client ID format."]);
-            exit();
+        if (!isset($pClientID) || !preg_match('/^[a-f0-9]{32}$/', $pClientID)) {
+            throw new soap_fault("ClientError", "", "Invalid Client ID format.");
         }
 
-        if (!isset($lClientSecret) || !preg_match('/^[a-f0-9]{64}$/', $lClientSecret)) {
-            http_response_code(BAD_REQUEST_CODE);
-            echo json_encode(["error" => "Invalid Client Secret format."]);
-            exit();
+        if (!isset($pClientSecret) || !preg_match('/^[a-f0-9]{64}$/', $pClientSecret)) {
+            throw new soap_fault("ClientError", "", "Invalid Client Secret format.");
         }
 
-        if (!isset($lAudience) || !filter_var($lAudience, FILTER_VALIDATE_URL)) {
-            http_response_code(BAD_REQUEST_CODE);
-            echo json_encode(["error" => "Invalid Audience format."]);
-            exit();
+        if (!isset($pAudience) || !filter_var($pAudience, FILTER_VALIDATE_URL)) {
+            throw new soap_fault("ClientError", "", "Invalid Audience format.");
         }
 
         // Check if the requested audience is valid
-        if (!in_array($lAudience, VALID_AUDIENCES)) {
-            http_response_code(NOT_FOUND_CODE);
-            echo json_encode(["error" => "Invalid audience specified."]);
-            exit();
+        if (!in_array($pAudience, VALID_AUDIENCES)) {
+            throw new soap_fault("ClientError", "", "Invalid audience specified.");
         }
 
         // Rate limiting mechanism
@@ -77,18 +68,14 @@ function login($pClientID, $pClientSecret, $pAudience) {
 
         // Lockout mechanism after MAX_FAILED_ATTEMPTS failed attempts
         if ($_SESSION[$lFailedAttemptsKey] >= MAX_FAILED_ATTEMPTS) {
-            http_response_code(TOO_MANY_REQUESTS_CODE);
-            echo json_encode(["error" => "Too many failed attempts. Please try again later."]);
-            exit();
+            throw new soap_fault("ClientError", "", "Too many failed attempts. Please try again later.");
         }
 
         // Validate credentials
-        $lIsValid = $lSQLQueryHandler->authenticateByClientCredentials($lClientId, $lClientSecret);
+        $lIsValid = $SQLQueryHandler->authenticateByClientCredentials($pClientID, $pClientSecret);
         if (!$lIsValid) {
             $_SESSION[$lFailedAttemptsKey]++;
-            http_response_code(UNAUTHORIZED_CODE);
-            echo json_encode(["error" => "Authentication failed."]);
-            exit();
+            throw new soap_fault("AuthenticationError", "", "Authentication failed.");
         } else {
             // Reset failed attempts on successful login
             $_SESSION[$lFailedAttemptsKey] = 0;
@@ -96,30 +83,30 @@ function login($pClientID, $pClientSecret, $pAudience) {
 
         // Define JWT claims with audience
         $lPayload = [
-            'iss' => BASE_URL,                      // Issuer is your domain
-            'aud' => $lAudience,                    // Audience for the token
-            'iat' => time(),                        // Issued at
-            'nbf' => time(),                        // Not before
-            'exp' => time() + JWT_EXPIRATION_TIME,  // Expiration time
-            'sub' => $lClientId,                    // Subject is the client ID
-            'scope' => 'execute:method',            // Scope of the token
-            'jti' => bin2hex(random_bytes(16))      // JWT ID
+            'iss' => BASE_URL,
+            'aud' => $pAudience,
+            'iat' => time(),
+            'nbf' => time(),
+            'exp' => time() + JWT_EXPIRATION_TIME,
+            'sub' => $pClientID,
+            'scope' => 'execute:method',
+            'jti' => bin2hex(random_bytes(16))
         ];
 
         // Encode the JWT token with a specified algorithm
-        $lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, EXPECTED_ALGORITHM); // Use a secure algorithm
+        $lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, EXPECTED_ALGORITHM);
 
-        // Respond with JWT token
-        http_response_code(SUCCESS_CODE);
-        echo json_encode([
-            'access_token' => $lJwt,
-            'token_type' => 'bearer',
-            'expires_in' => JWT_EXPIRATION_TIME,
-            'timestamp' => date(DATE_TIME_FORMAT)
-        ]);
+        // Construct a SOAP-compliant XML response
+        $response = new SimpleXMLElement("<response/>");
+        $response->addChild("access_token", $lJwt);
+        $response->addChild("token_type", "bearer");
+        $response->addChild("expires_in", JWT_EXPIRATION_TIME);
+        $response->addChild("timestamp", date(DATE_TIME_FORMAT));
+
+        return $response->asXML();
 
     } catch (Exception $e) {
-        return json_encode(["status" => "error", "message" => $e->getMessage()]);
+        return new soap_fault("ServerError", "", $e->getMessage());
     }
 }
 
