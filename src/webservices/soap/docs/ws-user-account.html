@@ -43,7 +43,7 @@
     <h2>Methods</h2>
 
     <h3>1. Get User</h3>
-    <p>Retrieves the account information for the specified user.</p>
+    <p>Retrieves the account information for the specified user. Passing "*" as the username retrieves all users.</p>
 
     <h4>Burp Repeater Request:</h4>
     <pre><code>POST /webservices/soap/ws-user-account.php HTTP/1.1
@@ -57,7 +57,7 @@ Content-Length: 345
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
       &lt;urn:getUser&gt;
-         &lt;username&gt;Jeremy&lt;/username&gt;
+         &lt;username&gt;*&lt;/username&gt;
       &lt;/urn:getUser&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;
@@ -72,7 +72,7 @@ xmlns:urn='urn:ws-user-account'&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
       &lt;urn:getUser&gt;
-         &lt;username&gt;Jeremy&lt;/username&gt;
+         &lt;username&gt;*&lt;/username&gt;
       &lt;/urn:getUser&gt;
    &lt;/soapenv:Body&gt;
 &lt;/soapenv:Envelope&gt;"
