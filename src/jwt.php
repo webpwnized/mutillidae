@@ -4,14 +4,14 @@
 
 	// Configuration Constants
 	define('JWT_EXPIRATION_TIME', 3600); // Token expiration time in seconds
-	define('BASE_URL', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
+	define('JWT_BASE_URL', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']);
 	define('ONE_HOUR', 60 * 60);
 
 	function generateJWT($pSigningKey) {
 		// Define JWT claims with audience
 		$lClaims = [
-			'iss' => BASE_URL,   // Issuer is your domain
-			'aud' => BASE_URL,  // Audience for the token
+			'iss' => JWT_BASE_URL,   // Issuer is your domain
+			'aud' => JWT_BASE_URL,  // Audience for the token
 			'iat' => time(),      // Issued at
 			'nbf' => time(),      // Not before
 			'exp' => time() + JWT_EXPIRATION_TIME, // Expiration time

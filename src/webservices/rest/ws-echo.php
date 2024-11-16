@@ -18,10 +18,8 @@ $LogHandler = new LogHandler($lSecurityLevel);
 class CommandExecutionException extends Exception {}
 
 try {
-    // Get the origin of the request
-    $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
-
-    header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
+    // Set CORS headers
+    header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
     header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
     header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
     header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
@@ -29,8 +27,8 @@ try {
 
     // Handle preflight requests (OPTIONS)
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        header(ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
-        http_response_code(SUCCESS_NO_CONTENT); // No Content
+        header(CORS_ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+        http_response_code(RESPONSE_CODE_NO_CONTENT); // No Content
         exit();
     }
 
@@ -61,7 +59,7 @@ try {
         try {
             $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
         } catch (InvalidTokenException $e) {
-            http_response_code(UNAUTHORIZED_CODE);
+            http_response_code(RESPONSE_CODE_UNAUTHORIZED);
             header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Unauthorized', 'details' => $e->getMessage()]);
             exit;
@@ -70,7 +68,7 @@ try {
 
     // Allow only POST requests for this endpoint
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        http_response_code(METHOD_NOT_ALLOWED_CODE); // Method Not Allowed
+        http_response_code(RESPONSE_CODE_METHOD_NOT_ALLOWED); // Method Not Allowed
         header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Method Not Allowed. Use POST for this endpoint.']);
         exit;
@@ -80,7 +78,7 @@ try {
     $lMessage = isset($_POST['message']) ? trim($_POST['message']) : '';
 
     if (empty($lMessage)) {
-        http_response_code(BAD_REQUEST_CODE); // Bad Request
+        http_response_code(RESPONSE_CODE_BAD_REQUEST); // Bad Request
         header(CONTENT_TYPE_JSON);
         echo json_encode(['error' => 'Message parameter is required.']);
         exit;
@@ -102,13 +100,13 @@ try {
     }
 
     // Return the output as JSON
-    http_response_code(SUCCESS_CODE); // OK
+    http_response_code(RESPONSE_CODE_OK); // OK
     header(CONTENT_TYPE_JSON); // Set response format to JSON
     echo json_encode(['message' => $lMessage, 'command' => $lCommand, 'security-level' => $lSecurityLevel, 'timestamp' => date(DATE_TIME_FORMAT), 'result' => $lOutput], JSON_PRETTY_PRINT);
 
 } catch (Exception $e) {
     // Handle errors during configuration setup
-    http_response_code(SERVER_ERROR_CODE); // Internal Server Error
+    http_response_code(RESPONSE_CODE_INTERNAL_SERVER_ERROR); // Internal Server Error
     header(CONTENT_TYPE_JSON); // Set response format to JSON
     echo json_encode(['error' => 'An unexpected error occurred.', 'details' => $e->getMessage()]);
 }

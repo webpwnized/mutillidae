@@ -76,7 +76,7 @@
 
         // Return JSON response if needed
         if ($lReturnData) {
-            header('Content-Type: application/json');
+            header(CONTENT_TYPE_JSON);
             echo json_encode([
                 "Message" => $lMessageText,
                 "Method" => $lVerb,
@@ -88,7 +88,7 @@
             ]);
         }
     } catch (Exception $e) {
-        header('Content-Type: application/json');
+        header(CONTENT_TYPE_JSON);
         header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
         echo json_encode([
             "Error" => $e->getMessage(),

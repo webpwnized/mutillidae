@@ -41,10 +41,8 @@ $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
 // Handle the GET request to test connectivity
 try {
-    // Get the origin of the request
-    $lOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
-
-    header('Access-Control-Allow-Origin: ' . $lOrigin); // Allow requests from any origin domain
+    // Set CORS headers
+    header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
     header('Access-Control-Allow-Methods: GET, OPTIONS'); // Allowed methods
     header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
     header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
@@ -52,8 +50,8 @@ try {
 
     // Handle preflight requests (OPTIONS)
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        header(ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
-        http_response_code(204); // No Content
+        header(CORS_ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+        http_response_code(RESPONSE_CODE_NO_CONTENT);
         exit();
     }
 
@@ -79,7 +77,7 @@ try {
         try {
             $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
         } catch (InvalidTokenException $e) {
-            http_response_code(UNAUTHORIZED_CODE);
+            http_response_code(RESPONSE_CODE_UNAUTHORIZED);
             header(CONTENT_TYPE_JSON);
             echo json_encode(['error' => 'Unauthorized', 'details' => $e->getMessage()]);
             exit;
@@ -88,17 +86,17 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // Return a success message with 200 OK status
-        http_response_code(200); // OK
-        echo json_encode(["code" => 200, "status" => "OK", "message" => "Connection succeeded...", 'security-level' => $lSecurityLevel, "timestamp" => date(DATE_TIME_FORMAT)], JSON_PRETTY_PRINT);
+        http_response_code(RESPONSE_CODE_OK); // OK
+        echo json_encode(["code" => RESPONSE_CODE_OK, "status" => "OK", "message" => "Connection succeeded...", 'security-level' => $lSecurityLevel, "timestamp" => date(DATE_TIME_FORMAT)], JSON_PRETTY_PRINT);
     } else {
         // If the request method is not allowed, return 405 status
-        http_response_code(405); // Method Not Allowed
+        http_response_code(RESPONSE_CODE_METHOD_NOT_ALLOWED);
         header('Allow: GET, OPTIONS'); // Inform allowed methods
         echo json_encode(["error" => "Method not allowed. Use GET or OPTIONS request."]);
     }
 } catch (Exception $e) {
     // Handle any exceptions with a 500 Internal Server Error response
-    http_response_code(500); // Internal Server Error
+    http_response_code(RESPONSE_CODE_INTERNAL_SERVER_ERROR);
     echo json_encode([
         "error" => "Unable to process the request",
         "details" => $e->getMessage()

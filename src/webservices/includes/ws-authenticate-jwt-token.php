@@ -17,9 +17,9 @@ if (!defined('JWT_SECRET_KEY')) {
     define('JWT_SECRET_KEY', getenv('JWT_SECRET_KEY') ?: 'snowman');
 }
 
-if (!defined('EXPECTED_ISSUER')) {
+if (!defined('JWT_EXPECTED_ISSUER')) {
     // Expected token issuer (iss claim), to validate that the token is from a trusted source.
-    define('EXPECTED_ISSUER', 'http://mutillidae.localhost');
+    define('JWT_EXPECTED_ISSUER', 'http://mutillidae.localhost');
 }
 
 if (!defined('EXPECTED_AUDIENCE')) {
@@ -41,7 +41,7 @@ class InvalidTokenException extends Exception {}
  *
  * This function performs authentication by decoding and validating a JWT token from the 
  * Authorization header. It verifies the following claims:
- * - `iss` (issuer) matches the EXPECTED_ISSUER constant.
+ * - `iss` (issuer) matches the JWT_EXPECTED_ISSUER constant.
  * - `aud` (audience) matches the EXPECTED_AUDIENCE constant.
  * - `exp` (expiration) is greater than the current time.
  *
@@ -61,10 +61,10 @@ function authenticateJWTToken() {
 
     try {
         // Decode the token using the JWT_SECRET_KEY and verify the HS256 signature.
-        $lDecodedToken = JWT::decode($lToken, JWT_SECRET_KEY, [EXPECTED_ALGORITHM]);
+        $lDecodedToken = JWT::decode($lToken, JWT_SECRET_KEY, [JWT_EXPECTED_ALGORITHM]);
 
         // Validate the `iss` (issuer) claim.
-        if ($lDecodedToken->iss !== EXPECTED_ISSUER) {
+        if ($lDecodedToken->iss !== JWT_EXPECTED_ISSUER) {
             throw new InvalidTokenException("Invalid token issuer.");
         }
 
