@@ -12,6 +12,7 @@
 	require_once '../../classes/EncodingHandler.php';
 	require_once '../../classes/CustomErrorHandler.php';
 	require_once '../../classes/LogHandler.php';
+	require_once '../includes/ws-constants.php';
 
 	// Initialize the SQL query handler
 	$SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
