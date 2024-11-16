@@ -14,7 +14,7 @@
 	require_once '../../classes/LogHandler.php';
 
 	// Initialize the SQL query handler
-	$SQLQueryHandler = new SQLQueryHandler(0);
+	$SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
 
 	$lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
@@ -140,40 +140,37 @@
 		"If account exists, deletes user account. For detailed documentation, visit: {$lDocumentationURL}"
 	);
 
-	function doXMLEncodeQueryResults($pUsername, $pQueryResult, $pEncodeOutput) {
+	function doXMLEncodeQueryResults($pQueryResult, $pEncodeOutput) {
 		global $Encoder;
 	
-		// Start the XML result with the root element and a message attribute
 		$lResults = "<accounts>";
 	
-		// Iterate over each row in the query result
 		while ($row = $pQueryResult->fetch_object()) {
-			// Handle encoding of username
 			$lUsername = $pEncodeOutput ? $Encoder->encodeForHTML($row->username) : $row->username;
 	
-			// Handle encoding of signature if it exists
-			$lSignature = null;
-			if (isset($row->mysignature)) {
-				$encodedSignature = $pEncodeOutput ? $Encoder->encodeForHTML($row->mysignature) : $row->mysignature;
-				$lSignature = $encodedSignature;
-			}
+			// Safely check and handle undefined properties
+			$lFirstname = isset($row->firstname) ? $row->firstname : '';
+			$lLastname = isset($row->lastname) ? $row->lastname : '';
+			$lFirstname = $pEncodeOutput ? $Encoder->encodeForHTML($lFirstname) : $lFirstname;
+			$lLastname = $pEncodeOutput ? $Encoder->encodeForHTML($lLastname) : $lLastname;
 	
-			// Construct the XML for each account
 			$lResults .= "<account>";
 			$lResults .= "<username>{$lUsername}</username>";
-			$lResults .= "<firstname>{$row->firstname}</firstname>";
-			$lResults .= "<lastname>{$row->lastname}</lastname>";
-			if ($lSignature) {
+			$lResults .= "<firstname>{$lFirstname}</firstname>";
+			$lResults .= "<lastname>{$lLastname}</lastname>";
+	
+			if (isset($row->mysignature)) {
+				$lSignature = $pEncodeOutput ? $Encoder->encodeForHTML($row->mysignature) : $row->mysignature;
 				$lResults .= "<signature>{$lSignature}</signature>";
 			}
+	
 			$lResults .= "</account>";
 		}
 	
-		// Close the root element
 		$lResults .= "</accounts>";
 	
 		return $lResults;
-	}//end function doXMLEncodeQueryResults	
+	}
 
 	function xmlEncodeQueryResults($pUsername, $pEncodeOutput) {
 		global $SQLQueryHandler;
@@ -189,7 +186,7 @@
 	
 		// Check if the query returned valid results
 		if ($lQueryResult && $lQueryResult->num_rows > 0) {
-			return doXMLEncodeQueryResults($pUsername, $lQueryResult, $pEncodeOutput);
+			return doXMLEncodeQueryResults($lQueryResult, $pEncodeOutput);
 		} else {
 			// Return a message if no user is found
 			return "<accounts><message>User {$pUsername} does not exist</message></accounts>";
