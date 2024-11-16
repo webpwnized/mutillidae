@@ -36,8 +36,7 @@ $lSOAPWebService->register(
 function login($pClientID, $pClientSecret, $pAudience) {
     try {
         // Initialize the SQL query handler
-        $SQLQueryHandler = new SQLQueryHandler(0);
-
+        $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
         $SQLQueryHandler->setSecurityLevel($lSecurityLevel);
 
@@ -55,7 +54,7 @@ function login($pClientID, $pClientSecret, $pAudience) {
         }
 
         // Check if the requested audience is valid
-        if (!in_array($pAudience, VALID_AUDIENCES)) {
+        if (!in_array($pAudience, JWT_VALID_AUDIENCES)) {
             throw new soap_fault("ClientError", "", "Invalid audience specified.");
         }
 
@@ -83,7 +82,7 @@ function login($pClientID, $pClientSecret, $pAudience) {
 
         // Define JWT claims with audience
         $lPayload = [
-            'iss' => BASE_URL,
+            'iss' => JWT_BASE_URL,
             'aud' => $pAudience,
             'iat' => time(),
             'nbf' => time(),
@@ -94,7 +93,7 @@ function login($pClientID, $pClientSecret, $pAudience) {
         ];
 
         // Encode the JWT token with a specified algorithm
-        $lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, EXPECTED_ALGORITHM);
+        $lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, JWT_EXPECTED_ALGORITHM);
 
         // Construct a SOAP-compliant XML response
         $response = new SimpleXMLElement("<response/>");
