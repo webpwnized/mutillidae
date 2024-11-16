@@ -78,7 +78,7 @@ define('SECURITY_LEVEL_INSECURE', 0);
 define('SECURITY_LEVEL_MEDIUM', 1);
 define('SECURITY_LEVEL_SECURE', 5);
 
-define('CONTENT_TYPE_JSON', CONTENT_TYPE_JSON);
+define('CONTENT_TYPE_JSON', 'Content-Type: application/json');
 define('DATE_TIME_FORMAT', 'Y-m-d H:i:s');
 
 define('JWT_SECRET_KEY', 'snowman');
