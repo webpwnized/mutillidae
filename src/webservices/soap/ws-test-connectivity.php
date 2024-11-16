@@ -1,4 +1,16 @@
 <?php
+
+class TestConnectionException extends Exception {
+    public $faultcode;
+    public $detail;
+
+    public function __construct($message, $faultcode = 'Server', $detail = null) {
+        parent::__construct($message);
+        $this->faultcode = $faultcode;
+        $this->detail = $detail;
+    }
+}
+
 // Include the nusoap library
 require_once './lib/nusoap.php';
 
@@ -46,23 +58,26 @@ function testConnectivity() {
         require_once '../../includes/constants.php';
         require_once '../../classes/SQLQueryHandler.php';
 
-        $SQLQueryHandler = new SQLQueryHandler(0);
+        $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
         // Get the current timestamp
         $lTimestamp = date('Y-m-d H:i:s');
 
-        // Create a structured response as an associative array
-        $response = array(
+        // Return a structured response as an associative array
+        return array(
             'successMessage' => 'Connection successful...',
             'securityLevel' => $lSecurityLevel,
             'timestamp' => $lTimestamp
         );
 
-        return $response; // Return as an array for NuSOAP to serialize
-
     } catch (Exception $e) {
-        throw new Exception("Error executing method testConnectivity in webservice ws-connectivity.php: " . $e->getMessage());
+        // Throw a SOAP-compliant custom exception
+        throw new TestConnectionException(
+            "Error executing method testConnectivity in webservice ws-connectivity.php: " . $e->getMessage(),
+            'Server',
+            array('method' => 'testConnectivity', 'details' => $e->getMessage())
+        );
     }
 }
 
@@ -70,8 +85,12 @@ function testConnectivity() {
 try {
     // Process the incoming SOAP request
     $lSOAPWebService->service(file_get_contents("php://input"));
+} catch (TestConnectionException $e) {
+    // Send a detailed SOAP fault response back to the client
+    $detail = $e->detail ? json_encode($e->detail) : null;
+    $lSOAPWebService->fault($e->faultcode, $e->getMessage(), '', $detail);
 } catch (Exception $e) {
-    // Send a fault response back to the client
-    $lSOAPWebService->fault('Server', "SOAP Service Error: " . $e->getMessage());
+    // Send a generic SOAP fault response for unexpected errors
+    $lSOAPWebService->fault('Server', "Unexpected SOAP Service Error: " . $e->getMessage());
 }
 ?>
