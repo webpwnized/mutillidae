@@ -1,0 +1,25 @@
+name: PR Title Check
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  lint-pr-title:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check PR Title
+        uses: actions/github-script@v7.0.1
+        with:
+          script: |
+            const title = context.payload.pull_request.title;
+            const regex = /^(feat|fix|chore|docs|style|refactor|perf|test): .+/;
+            if (!regex.test(title)) {
+              core.setFailed(`Invalid PR title: "${title}". Titles must match the pattern "type: description" (e.g., "feat: Add new feature").`);
+            } else {
+              console.log(`PR title "${title}" is valid.`);
+            }
