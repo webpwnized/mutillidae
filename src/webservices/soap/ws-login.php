@@ -34,6 +34,7 @@ $lSOAPWebService->register(
 
 // Define the login function
 function login($pClientID, $pClientSecret, $pAudience) {
+    // Start by setting a default response in case of error
     try {
         // Initialize the SQL query handler
         $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
@@ -42,20 +43,20 @@ function login($pClientID, $pClientSecret, $pAudience) {
 
         // Validate Inputs
         if (!isset($pClientID) || !preg_match('/^[a-f0-9]{32}$/', $pClientID)) {
-            throw new soap_fault("ClientError", "", "Invalid Client ID format.");
+            return new soap_fault("ClientError", "", "Invalid Client ID format.");
         }
 
         if (!isset($pClientSecret) || !preg_match('/^[a-f0-9]{64}$/', $pClientSecret)) {
-            throw new soap_fault("ClientError", "", "Invalid Client Secret format.");
+            return new soap_fault("ClientError", "", "Invalid Client Secret format.");
         }
 
         if (!isset($pAudience) || !filter_var($pAudience, FILTER_VALIDATE_URL)) {
-            throw new soap_fault("ClientError", "", "Invalid Audience format.");
+            return new soap_fault("ClientError", "", "Invalid Audience format.");
         }
 
         // Check if the requested audience is valid
         if (!in_array($pAudience, JWT_VALID_AUDIENCES)) {
-            throw new soap_fault("ClientError", "", "Invalid audience specified.");
+            return new soap_fault("ClientError", "", "Invalid audience specified.");
         }
 
         // Rate limiting mechanism
@@ -67,14 +68,14 @@ function login($pClientID, $pClientSecret, $pAudience) {
 
         // Lockout mechanism after MAX_FAILED_ATTEMPTS failed attempts
         if ($_SESSION[$lFailedAttemptsKey] >= MAX_FAILED_ATTEMPTS) {
-            throw new soap_fault("ClientError", "", "Too many failed attempts. Please try again later.");
+            return new soap_fault("ClientError", "", "Too many failed attempts. Please try again later.");
         }
 
         // Validate credentials
         $lIsValid = $SQLQueryHandler->authenticateByClientCredentials($pClientID, $pClientSecret);
         if (!$lIsValid) {
             $_SESSION[$lFailedAttemptsKey]++;
-            throw new soap_fault("AuthenticationError", "", "Authentication failed.");
+            return new soap_fault("AuthenticationError", "", "Authentication failed.");
         } else {
             // Reset failed attempts on successful login
             $_SESSION[$lFailedAttemptsKey] = 0;
@@ -105,6 +106,7 @@ function login($pClientID, $pClientSecret, $pAudience) {
         return $response->asXML();
 
     } catch (Exception $e) {
+        // Ensure the exception message is returned as a SOAP fault
         return new soap_fault("ServerError", "", $e->getMessage());
     }
 }
