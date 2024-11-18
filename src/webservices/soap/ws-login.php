@@ -96,7 +96,7 @@ function login($pClientID, $pClientSecret, $pAudience) {
         $lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, JWT_EXPECTED_ALGORITHM);
 
         // Construct a SOAP-compliant XML response
-        $response = <<<XML
+        $responseXML = <<<XML
 <response>
     <access_token>{$lJwt}</access_token>
     <token_type>bearer</token_type>
@@ -105,8 +105,8 @@ function login($pClientID, $pClientSecret, $pAudience) {
 </response>
 XML;
 
-        // Return the raw XML response
-        return new soapval('return', 'xsd:string', $response);
+        // Embed the response XML directly into the SOAP response
+        return new soapval('return', '', $responseXML, 'urn:ws-login');
 
     } catch (Exception $e) {
         // Ensure the exception message is returned as a SOAP fault
