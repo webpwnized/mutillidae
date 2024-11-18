@@ -29,11 +29,21 @@
         a:hover {
             text-decoration: underline;
         }
-        .note {
+        .note, .auth-note {
             background-color: #e7f3fe;
             border-left: 6px solid #2196F3;
             margin: 1rem 0;
             padding: 1rem;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.9rem;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -52,17 +62,105 @@
         <li><a href="ws-echo.html">WS Echo Service</a> - A simple echo service to test message transmission.</li>
         <li><a href="ws-test-connectivity.html">WS Test Connectivity Service</a> - Verifies connectivity with the API.</li>
         <li><a href="ws-user-account.html">WS User Account Service</a> - Manages user accounts (CRUD operations).</li>
+        <li><a href="ws-login.html">WS Login Service</a> - Authenticates clients and returns a JWT for further requests.</li>
     </ul>
 
-    <h2>How to Use This Documentation</h2>
-    <p>Each service documentation page provides:</p>
+    <h2>Understanding Security Levels and Authentication</h2>
+    <p>This system has multiple security levels that affect access to the web services:</p>
     <ul>
-        <li>A description of the service and its purpose.</li>
-        <li>Supported SOAP methods with example requests and responses.</li>
-        <li>Step-by-step guides for interacting with the service using Burp Repeater and <code>curl</code>.</li>
-        <li>Troubleshooting tips for common issues.</li>
+        <li><strong>Security Level 0</strong> - No authentication required. You can send requests without any additional headers or tokens.</li>
+        <li><strong>Security Level 1 or Higher</strong> - Authentication with a JWT token is required for all services except <code>ws-login</code>. You must obtain a JWT token by logging in through the <code>ws-login</code> endpoint using your <code>client_id</code> and <code>client_secret</code>.</li>
     </ul>
 
-    <p>If you encounter any issues or have questions, feel free to reach out to your instructor or refer to the troubleshooting sections in the individual documentation pages.</p>
+    <div class="auth-note">
+        <strong>Important:</strong> At security level 1 or higher, you must include a JWT token in the <code>Authorization</code> header for each request. Without a valid token, you will receive a <code>401 Unauthorized</code> error.
+    </div>
+
+    <h2>Step-by-Step Guide to Using JWT Authentication</h2>
+    <ol>
+        <li>
+            <strong>Log In to Obtain a JWT Token:</strong>
+            Send a POST request to the <a href="ws-login.html">WS Login Service</a> using your <code>client_id</code> and <code>client_secret</code> to authenticate. If successful, the response will include a JWT token.
+            <p><strong>Example (curl):</strong></p>
+            <pre><code>curl -X POST http://mutillidae.localhost/webservices/soap/ws-login.php \
+-H "Content-Type: text/xml" \
+--data "&lt;soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' \
+xmlns:urn='urn:ws-login'&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:login&gt;
+         &lt;client_id&gt;your-client-id&lt;/client_id&gt;
+         &lt;client_secret&gt;your-client-secret&lt;/client_secret&gt;
+         &lt;audience&gt;target-audience-url&lt;/audience&gt;
+      &lt;/urn:login&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;"</code></pre>
+            <p>The response will include a token in the format:</p>
+            <pre><code>{
+  "access_token": "your-jwt-token-here",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "timestamp": "2024-11-17T19:30:00Z"
+}</code></pre>
+        </li>
+
+        <li>
+            <strong>Save the Token:</strong> Copy the JWT token from the response and store it securely. You will need to include it in the Authorization header of each authenticated request.
+        </li>
+
+        <li>
+            <strong>Include the Token in Requests:</strong> When calling any authenticated endpoint, include the token in the Authorization header using the format <code>Bearer &lt;your-token&gt;</code>.
+        </li>
+
+        <h3>Examples of Making Authenticated Requests</h3>
+        <h4>Using curl</h4>
+        <p>Below is an example of an authenticated request using <code>curl</code>:</p>
+        <pre><code>curl -X POST http://mutillidae.localhost/webservices/soap/ws-user-account.php \
+-H "Content-Type: text/xml" \
+-H "Authorization: Bearer &lt;your-token&gt;" \
+--data "&lt;soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' \
+xmlns:urn='urn:ws-user-account'&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:getUser&gt;
+         &lt;username&gt;john&lt;/username&gt;
+      &lt;/urn:getUser&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;"</code></pre>
+
+        <h4>Using Burp Suite</h4>
+        <p>To send an authenticated request in Burp Suite:</p>
+        <ol>
+            <li>Open <strong>Burp Suite</strong> and navigate to the <strong>Repeater</strong> tab.</li>
+            <li>Enter the URL in the Request line, such as:
+                <pre><code>POST /webservices/soap/ws-user-account.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: text/xml
+Authorization: Bearer your-jwt-token-here</code></pre>
+            </li>
+            <li>In the <strong>Headers</strong> section, ensure the Authorization header is included:
+                <pre><code>Authorization: Bearer your-jwt-token-here</code></pre>
+            </li>
+            <li>Click <strong>Send</strong> to submit the request. If the token is valid, you will receive a successful response from the server.</li>
+        </ol>
+    </ol>
+
+    <h2>How to Use the Services</h2>
+    <p>Each service page provides:</p>
+    <ul>
+        <li>An overview of the service functionality.</li>
+        <li>Examples of requests using Burp Repeater and <code>curl</code>.</li>
+        <li>Details about the expected response from the service.</li>
+        <li>Troubleshooting tips in case of issues.</li>
+    </ul>
+
+    <h2>Troubleshooting Common Issues</h2>
+    <ul>
+        <li><strong>401 Unauthorized:</strong> Make sure your request includes a valid JWT token in the <code>Authorization</code> header. If you haven't obtained a token yet, refer to the "Log In to Obtain a JWT Token" section.</li>
+        <li><strong>400 Bad Request:</strong> Verify that your request follows the correct SOAP structure and all required parameters are included. Missing or incorrectly formatted parameters can cause this error.</li>
+        <li><strong>500 Internal Server Error:</strong> This usually indicates a server-side issue. Check the SOAP response for detailed error messages and ensure the server is functioning correctly.</li>
+    </ul>
+
+    <p>If you encounter other issues, please consult the documentation or contact support for assistance.</p>
 </body>
 </html>

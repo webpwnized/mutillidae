@@ -229,6 +229,7 @@
 			("CHook", "JollyRoger", "Gator-hater", false, "Captain", "Hook", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("james", "i<3devs", "Occupation: Researcher", false, "James", "Jardine", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("ed", "pentest", "Commandline KungFu anyone?", false, "Ed", "Skoudis", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
+			("joe", "holly", "Off by one error", false, "Joe", "Holly", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("peter", "initech123", "I dont like my job", false, "Peter", "Gibbons", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("milton", "stapler", "Wheres my stapler?", false, "Milton", "Waddams", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
 			("bill", "tpsreports", "Did you get the memo?", true, "Bill", "Lumbergh", "' . bin2hex(random_bytes(16)) . '", "' . bin2hex(random_bytes(32)) . '"),
