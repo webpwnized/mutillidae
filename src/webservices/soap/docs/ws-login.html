@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAP WS Login Service Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 2rem;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>SOAP WS Login Service Documentation</h1>
+    <p>The <strong>SOAP WS Login Service</strong> allows clients to authenticate using their <code>client_id</code> and <code>client_secret</code>, receiving a JSON Web Token (JWT) for further interaction with secured services.</p>
+
+    <h2>Endpoint</h2>
+    <pre><code>POST /webservices/soap/ws-login.php</code></pre>
+
+    <h2>Request Parameters</h2>
+    <ul>
+        <li><b>client_id</b> (string, required): A 32-character unique identifier for the client.</li>
+        <li><b>client_secret</b> (string, required): A 64-character secret associated with the client ID.</li>
+        <li><b>audience</b> (string, required): The intended audience for the token, typically the endpoint you want to access.</li>
+    </ul>
+
+    <h2>Example Request Using Burp Repeater</h2>
+    <p>Here’s how to send a SOAP request to the login service using Burp Repeater:</p>
+    <pre><code>POST /webservices/soap/ws-login.php HTTP/1.1
+Host: mutillidae.localhost
+Content-Type: text/xml; charset=utf-8
+SOAPAction: "urn:ws-login#login"
+Content-Length: [length]
+Connection: close
+
+&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                   xmlns:urn="urn:ws-login"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:login&gt;
+         &lt;client_id&gt;your-client-id&lt;/client_id&gt;
+         &lt;client_secret&gt;your-client-secret&lt;/client_secret&gt;
+         &lt;audience&gt;http://mutillidae.localhost/webservices/soap/ws-user-account.php&lt;/audience&gt;
+      &lt;/urn:login&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;</code></pre>
+
+    <p><strong>Instructions:</strong></p>
+    <ol>
+        <li>Open Burp Suite and navigate to the Repeater tab.</li>
+        <li>Copy the above request and paste it into the Repeater window.</li>
+        <li>Update the <code>Content-Length</code> header to match the byte size of the body.</li>
+        <li>Click <strong>Send</strong> to see the response.</li>
+    </ol>
+
+    <h2>Example Request Using <code>curl</code></h2>
+    <p>If you prefer using the command line, here’s how to send the same request with <code>curl</code>:</p>
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-login.php" \
+-H "Content-Type: text/xml; charset=utf-8" \
+-H "SOAPAction: \"urn:ws-login#login\"" \
+--data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" \
+                   xmlns:urn="urn:ws-login"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:login&gt;
+         &lt;client_id&gt;your-client-id&lt;/client_id&gt;
+         &lt;client_secret&gt;your-client-secret&lt;/client_secret&gt;
+         &lt;audience&gt;http://mutillidae.localhost/webservices/soap/ws-user-account.php&lt;/audience&gt;
+      &lt;/urn:login&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
+
+    <p><strong>Instructions:</strong></p>
+    <ol>
+        <li>Open a terminal or command prompt.</li>
+        <li>Copy and paste the above <code>curl</code> command.</li>
+        <li>Replace <code>your-client-id</code> and <code>your-client-secret</code> with valid values.</li>
+        <li>Press <strong>Enter</strong> to send the request and view the response.</li>
+    </ol>
+
+    <h2>Expected Response</h2>
+    <p>Upon successful authentication, the server will respond with a JWT token:</p>
+    <pre><code>&lt;?xml version="1.0"?&gt;
+&lt;response&gt;
+   &lt;access_token&gt;your-jwt-token&lt;/access_token&gt;
+   &lt;token_type&gt;bearer&lt;/token_type&gt;
+   &lt;expires_in&gt;3600&lt;/expires_in&gt;
+   &lt;timestamp&gt;2024-11-18T12:00:00Z&lt;/timestamp&gt;
+&lt;/response&gt;</code></pre>
+
+    <h2>Using the JWT Token in Subsequent Requests</h2>
+    <p>After obtaining the token, include it in the <code>Authorization</code> header for future SOAP or REST requests. For example:</p>
+
+    <h3>Example Using curl</h3>
+    <p>To call an authenticated endpoint, such as <code>ws-user-account</code>:</p>
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \
+-H "Content-Type: text/xml; charset=utf-8" \
+-H "SOAPAction: \"urn:ws-user-account#getUser\"" \
+-H "Authorization: Bearer your-jwt-token" \
+--data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" \
+                   xmlns:urn="urn:ws-user-account"&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;urn:getUser&gt;
+         &lt;username&gt;some-user&lt;/username&gt;
+      &lt;/urn:getUser&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;'</code></pre>
+
+    <h3>Example Using Burp Repeater</h3>
+    <p>To include the token in Burp Suite:</p>
+    <ol>
+        <li>Paste the token in the <code>Authorization</code> header of your request:</li>
+        <pre><code>Authorization: Bearer your-jwt-token</code></pre>
+        <li>Send the request to a secured endpoint.</li>
+    </ol>
+
+    <div class="note">
+        <strong>Troubleshooting Tips:</strong>
+        <ul>
+            <li>Ensure the <code>SOAPAction</code> header matches the registered action for the service.</li>
+            <li>Check for proper XML formatting and valid <code>client_id</code> and <code>client_secret</code> values.</li>
+            <li>If authentication fails, verify the <code>audience</code> matches a valid endpoint.</li>
+        </ul>
+    </div>
+</body>
+</html>
