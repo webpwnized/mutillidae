@@ -34,7 +34,6 @@ $lSOAPWebService->register(
 
 // Define the login function
 function login($pClientID, $pClientSecret, $pAudience) {
-    // Start by setting a default response in case of error
     try {
         // Initialize the SQL query handler
         $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
@@ -97,13 +96,17 @@ function login($pClientID, $pClientSecret, $pAudience) {
         $lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, JWT_EXPECTED_ALGORITHM);
 
         // Construct a SOAP-compliant XML response
-        $response = new SimpleXMLElement("<response/>");
-        $response->addChild("access_token", $lJwt);
-        $response->addChild("token_type", "bearer");
-        $response->addChild("expires_in", JWT_EXPIRATION_TIME);
-        $response->addChild("timestamp", date(DATE_TIME_FORMAT));
+        $response = <<<XML
+<response>
+    <access_token>{$lJwt}</access_token>
+    <token_type>bearer</token_type>
+    <expires_in>{JWT_EXPIRATION_TIME}</expires_in>
+    <timestamp>{date(DATE_TIME_FORMAT)}</timestamp>
+</response>
+XML;
 
-        return $response->asXML();
+        // Return the raw XML response
+        return new soapval('return', 'xsd:string', $response);
 
     } catch (Exception $e) {
         // Ensure the exception message is returned as a SOAP fault
