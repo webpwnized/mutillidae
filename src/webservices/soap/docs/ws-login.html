@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,8 +58,8 @@ SOAPAction: "urn:ws-login#login"
 Content-Length: [length]
 Connection: close
 
-&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-                   xmlns:urn="urn:ws-login"&gt;
+&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;
+                   xmlns:urn=&quot;urn:ws-login&quot;&gt;
    &lt;soapenv:Header/&gt;
    &lt;soapenv:Body&gt;
       &lt;urn:login&gt;
@@ -78,20 +80,17 @@ Connection: close
 
     <h2>Example Request Using <code>curl</code></h2>
     <p>If you prefer using the command line, here’s how to send the same request with <code>curl</code>:</p>
-    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-login.php" \
--H "Content-Type: text/xml; charset=utf-8" \
--H "SOAPAction: \"urn:ws-login#login\"" \
---data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" \
-                   xmlns:urn="urn:ws-login"&gt;
-   &lt;soapenv:Header/&gt;
-   &lt;soapenv:Body&gt;
-      &lt;urn:login&gt;
-         &lt;client_id&gt;fb975a0e0248994221b3a6e87ba92fe9&lt;/client_id&gt;
-         &lt;client_secret&gt;f1d10934f1525ebfdf0b08a2413a3a3f683eaae3913489c786e496e403ab7bff&lt;/client_secret&gt;
-         &lt;audience&gt;http://mutillidae.localhost/webservices/soap/ws-user-account.php&lt;/audience&gt;
-      &lt;/urn:login&gt;
-   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;'</code></pre>
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-login.php" -H "Content-Type: text/xml; charset=utf-8" -H "SOAPAction: "urn:ws-login#login"" --data '<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ws-login">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:login>
+         <client_id>fb975a0e0248994221b3a6e87ba92fe9</client_id>
+         <client_secret>f1d10934f1525ebfdf0b08a2413a3a3f683eaae3913489c786e496e403ab7bff</client_secret>
+         <audience>http://mutillidae.localhost/webservices/soap/ws-user-account.php</audience>
+      </urn:login>
+   </soapenv:Body>
+</soapenv:Envelope>'</code></pre>
 
     <p><strong>Instructions:</strong></p>
     <ol>
@@ -103,7 +102,7 @@ Connection: close
 
     <h2>Expected Response</h2>
     <p>Upon successful authentication, the server will respond with a JWT token:</p>
-    <pre><code>&lt;?xml version="1.0"?&gt;
+    <pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;response&gt;
    &lt;access_token&gt;your-jwt-token&lt;/access_token&gt;
    &lt;token_type&gt;bearer&lt;/token_type&gt;
@@ -116,19 +115,15 @@ Connection: close
 
     <h3>Example Using curl</h3>
     <p>To call an authenticated endpoint, such as <code>ws-user-account</code>:</p>
-    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" \
--H "Content-Type: text/xml; charset=utf-8" \
--H "SOAPAction: \"urn:ws-user-account#getUser\"" \
--H "Authorization: Bearer your-jwt-token" \
---data '&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" \
-                   xmlns:urn="urn:ws-user-account"&gt;
-   &lt;soapenv:Header/&gt;
-   &lt;soapenv:Body&gt;
-      &lt;urn:getUser&gt;
-         &lt;username&gt;some-user&lt;/username&gt;
-      &lt;/urn:getUser&gt;
-   &lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;'</code></pre>
+    <pre><code>curl -X POST "http://mutillidae.localhost/webservices/soap/ws-user-account.php" -H "Content-Type: text/xml; charset=utf-8" -H "SOAPAction: "urn:ws-user-account#getUser"" -H "Authorization: Bearer your-jwt-token" --data '<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:ws-user-account">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:getUser>
+         <username>some-user</username>
+      </urn:getUser>
+   </soapenv:Body>
+</soapenv:Envelope>'</code></pre>
 
     <h3>Example Using Burp Repeater</h3>
     <p>To include the token in Burp Suite:</p>
