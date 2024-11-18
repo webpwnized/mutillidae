@@ -717,6 +717,11 @@
 							</a>
 						</li>
 						<li>
+							<a href="./webservices/rest/ws-login.php">
+								Login
+							</a>
+						</li>
+						<li>
 							<a href="./webservices/rest/ws-test-connectivity.php">
 								Test Connectivity
 							</a>
@@ -747,6 +752,11 @@
 						<li>
 							<a href="./webservices/soap/docs/soap-services.html">
 								Documentation
+							</a>
+						</li>
+						<li>
+							<a href="./webservices/soap/ws-login.php">
+								Login
 							</a>
 						</li>
 						<li>
