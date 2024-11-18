@@ -96,17 +96,15 @@ function login($pClientID, $pClientSecret, $pAudience) {
         $lJwt = JWT::encode($lPayload, JWT_SECRET_KEY, JWT_EXPECTED_ALGORITHM);
 
         // Construct a SOAP-compliant XML response
-        $responseXML = <<<XML
-<response>
-    <access_token>{$lJwt}</access_token>
-    <token_type>bearer</token_type>
-    <expires_in>{JWT_EXPIRATION_TIME}</expires_in>
-    <timestamp>{date(DATE_TIME_FORMAT)}</timestamp>
-</response>
-XML;
+        $responseXML = "<response>
+            <access_token>{$lJwt}</access_token>
+            <token_type>bearer</token_type>
+            <expires_in>" . JWT_EXPIRATION_TIME . "</expires_in>
+            <timestamp>" . date(DATE_TIME_FORMAT) . "</timestamp>
+        </response>";
 
         // Embed the response XML directly into the SOAP response
-        return new soapval('return', '', $responseXML, 'urn:ws-login');
+        return new soapval('return', 'xsd:string', $responseXML, 'urn:ws-login');
 
     } catch (Exception $e) {
         // Ensure the exception message is returned as a SOAP fault
