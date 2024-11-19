@@ -69,6 +69,10 @@ function lookupDNS($pTargetHost) {
         $LogHandler = new LogHandler($lSecurityLevel);
         $Encoder = new EncodingHandler();
 
+        if (!defined('CORS_ACCESS_CONTROL_ALLOW_ORIGIN')) {
+            throw new Exception("CORS_ACCESS_CONTROL_ALLOW_ORIGIN is not defined. Ensure the constants file is included properly.");
+        }
+        
         // Set CORS headers
         header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
         header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
