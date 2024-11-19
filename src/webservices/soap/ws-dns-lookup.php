@@ -40,6 +40,7 @@ $lSOAPWebService->wsdl->addComplexType(
     '',
     array(
         'host' => array('name' => 'host', 'type' => 'xsd:string'),
+        'command' => array('name' => 'command', 'type' => 'xsd:string'),
         'securityLevel' => array('name' => 'securityLevel', 'type' => 'xsd:string'),
         'timestamp' => array('name' => 'timestamp', 'type' => 'xsd:string'),
         'output' => array('name' => 'output', 'type' => 'xsd:string')
@@ -68,21 +69,65 @@ function lookupDNS($pTargetHost) {
         $LogHandler = new LogHandler($lSecurityLevel);
         $Encoder = new EncodingHandler();
 
-        // Determine security level and protection settings
+        require_once '../includes/ws-constants.php';
+ 
+        // Set CORS headers
+        header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
+        header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
+        header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
+        header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
+        header(CONTENT_TYPE_XML); // Set content type as XML
+
+        // Handle preflight requests (OPTIONS)
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            header(CORS_ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+            http_response_code(RESPONSE_CODE_NO_CONTENT); // No Content
+            exit();
+        }
+
+        // Allow only POST requests
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(RESPONSE_CODE_METHOD_NOT_ALLOWED);
+            header(CONTENT_TYPE_XML);
+            echo ERROR_MESSAGE_METHOD_NOT_ALLOWED;
+            exit();
+        }
+
         switch ($lSecurityLevel) {
-            default: // Insecure
-            case "0": // Insecure
-            case "1": // Insecure
+            default:
+            case SECURITY_LEVEL_INSECURE:
                 $lProtectAgainstCommandInjection = false;
                 $lProtectAgainstXSS = false;
+                $lRequireAuthentication = false;
                 break;
-            case "2": // Moderate security
-            case "3": // More secure
-            case "4": // Secure
-            case "5": // Fairly secure
+            case SECURITY_LEVEL_MEDIUM:
+                $lProtectAgainstCommandInjection = false;
+                $lProtectAgainstXSS = false;
+                $lRequireAuthentication = true;
+                break;
+            case 2:
+            case 3:
+            case 4:
+            case SECURITY_LEVEL_SECURE:
                 $lProtectAgainstCommandInjection = true;
                 $lProtectAgainstXSS = true;
+                $lRequireAuthentication = true;
                 break;
+        }
+
+        // Shared: Include the shared JWT token authentication function
+        require_once '../includes/ws-authenticate-jwt-token.php';
+
+        // Shared: Authenticate the user if required
+        if ($lRequireAuthentication) {
+            try {
+                $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
+            } catch (InvalidTokenException $e) {
+                http_response_code(RESPONSE_CODE_UNAUTHORIZED);
+                header(CONTENT_TYPE_XML);
+                echo '<?xml version="1.0" encoding="UTF-8"?><error><message>Unauthorized: ' . htmlspecialchars($e->getMessage()) . '</message></error>';
+                exit();
+            }
         }
 
         // Validate the target host to protect against command injection, if security is enabled
@@ -117,6 +162,7 @@ function lookupDNS($pTargetHost) {
         // Create a structured response as an associative array
         $response = array(
             'host' => $lTargetHost,
+            'command' => $lCommand,
             'securityLevel' => $lSecurityLevel,
             'timestamp' => $lTimestamp,
             'output' => $lOutput
@@ -136,6 +182,6 @@ try {
     $lSOAPWebService->service(file_get_contents("php://input"));
 } catch (Exception $e) {
     // Send a fault response back to the client if an error occurs
-    $lSOAPWebService->fault('Server', "SOAP Service Error: " . $e->getMessage());
+    $lSOAPWebService->fault('Server', "SOAP Service Error: " . htmlspecialchars($e->getMessage()));
 }
 ?>

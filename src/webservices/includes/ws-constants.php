@@ -79,6 +79,7 @@ define('SECURITY_LEVEL_MEDIUM', 1);
 define('SECURITY_LEVEL_SECURE', 5);
 
 define('CONTENT_TYPE_JSON', 'Content-Type: application/json');
+define('CONTENT_TYPE_XML', 'Content-Type: text/xml; charset=UTF-8');
 define('DATE_TIME_FORMAT', 'Y-m-d H:i:s');
 
 define('JWT_SECRET_KEY', 'snowman');
@@ -100,11 +101,14 @@ define('JWT_VALID_AUDIENCES', [
     JWT_BASE_URL . "/webservices/soap/ws-user-account.php"
 ]);
 
-define('CORS_REQUEST_ORIGIN', isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : JWT_BASE_URL);
+define('CORS_REQUEST_ORIGIN', isset($_SERVER['HTTP_ORIGIN']) && !empty($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : JWT_BASE_URL);
 define('CORS_ACCESS_CONTROL_MAX_AGE', 'Access-Control-Max-Age: 600');
 define('CORS_ACCESS_CONTROL_ALLOW_ORIGIN', 'Access-Control-Allow-Origin: ' . CORS_REQUEST_ORIGIN);
 define('CORS_TRUSTED_ORIGINS', [
     'http://mutillidae.localhost'
 ]);
+
+define('ERROR_MESSAGE_METHOD_NOT_ALLOWED', '<?xml version="1.0" encoding="UTF-8"?><error><message>Method Not Allowed. Use POST for this endpoint.</message></error>');
+define('ERROR_MESSAGE_UNAUTHORIZED', '<?xml version="1.0" encoding="UTF-8"?><error><message>Unauthorized</message></error>');
 
 ?>
