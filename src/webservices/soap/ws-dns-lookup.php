@@ -57,7 +57,7 @@ $lSOAPWebService->wsdl->addComplexType(
 function lookupDNS($pTargetHost) {
 
     // Include required constants and utility classes
-    require_once '../includes/constants.php';
+    require_once '../../includes/constants.php';
     require_once '../../classes/LogHandler.php';
     require_once '../../classes/EncodingHandler.php';
     require_once '../../classes/SQLQueryHandler.php';
@@ -69,6 +69,8 @@ function lookupDNS($pTargetHost) {
         $LogHandler = new LogHandler($lSecurityLevel);
         $Encoder = new EncodingHandler();
 
+        require_once '../includes/ws-constants.php';
+ 
         // Set CORS headers
         header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
         header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
