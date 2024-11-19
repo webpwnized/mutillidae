@@ -101,7 +101,7 @@ define('JWT_VALID_AUDIENCES', [
     JWT_BASE_URL . "/webservices/soap/ws-user-account.php"
 ]);
 
-define('CORS_REQUEST_ORIGIN', isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : JWT_BASE_URL);
+define('CORS_REQUEST_ORIGIN', isset($_SERVER['HTTP_ORIGIN']) && !empty($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : JWT_BASE_URL);
 define('CORS_ACCESS_CONTROL_MAX_AGE', 'Access-Control-Max-Age: 600');
 define('CORS_ACCESS_CONTROL_ALLOW_ORIGIN', 'Access-Control-Allow-Origin: ' . CORS_REQUEST_ORIGIN);
 define('CORS_TRUSTED_ORIGINS', [

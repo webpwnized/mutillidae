@@ -90,6 +90,7 @@ function lookupDNS($pTargetHost) {
         // Allow only POST requests
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(RESPONSE_CODE_METHOD_NOT_ALLOWED);
+            header(CONTENT_TYPE_XML);
             echo ERROR_MESSAGE_METHOD_NOT_ALLOWED;
             exit();
         }
@@ -125,6 +126,7 @@ function lookupDNS($pTargetHost) {
                 $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
             } catch (InvalidTokenException $e) {
                 http_response_code(RESPONSE_CODE_UNAUTHORIZED);
+                header(CONTENT_TYPE_XML);
                 echo ERROR_MESSAGE_UNAUTHORIZED;
                 exit();
             }
