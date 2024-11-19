@@ -125,7 +125,7 @@ function lookupDNS($pTargetHost) {
             } catch (InvalidTokenException $e) {
                 http_response_code(RESPONSE_CODE_UNAUTHORIZED);
                 header(CONTENT_TYPE_XML);
-                echo '<?xml version="1.0" encoding="UTF-8"?><error><message>Unauthorized: ' . htmlspecialchars($e->getMessage()) . '</message></error>';
+                echo ERROR_MESSAGE_UNAUTHORIZED_PREFIX . 'Unauthorized: ' . htmlspecialchars($e->getMessage()) . ERROR_MESSAGE_UNAUTHORIZED_SUFFIX;
                 exit();
             }
         }
