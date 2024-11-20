@@ -123,10 +123,8 @@ function lookupDNS($pTargetHost) {
         // Validate the target host to protect against command injection, if security is enabled
         if ($lSecurityLevel >= SECURITY_LEVEL_SECURE) {
             $lProtectAgainstCommandInjection = true;
-            $lProtectAgainstXSS = true;
         } else {
             $lProtectAgainstCommandInjection = false;
-            $lProtectAgainstXSS = false;
         }
 
         if ($lProtectAgainstCommandInjection) {
@@ -138,15 +136,10 @@ function lookupDNS($pTargetHost) {
             }
         }
 
-        // Protect against XSS by encoding the target host, if enabled
-        $lTargetHost = $lProtectAgainstXSS
-            ? $Encoder->encodeForHTML($pTargetHost)
-            : $pTargetHost;
-
         // Construct the command
         $lCommand = $lProtectAgainstCommandInjection
-            ? escapeshellcmd("nslookup " . escapeshellarg($lTargetHost))
-            : "nslookup $lTargetHost";
+            ? escapeshellcmd("nslookup " . escapeshellarg($pTargetHost))
+            : "nslookup $pTargetHost";
 
         // Execute the command and capture output
         $lOutput = shell_exec($lCommand);
