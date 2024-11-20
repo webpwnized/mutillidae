@@ -136,6 +136,11 @@ function lookupDNS($pTargetHost) {
             }
         }
 
+        // Protect against XSS by encoding the target host, if enabled
+        $lTargetHost = $lProtectAgainstXSS
+            ? $Encoder->encodeForHTML($pTargetHost)
+            : $pTargetHost;
+
         // Construct the command
         $lCommand = $lProtectAgainstCommandInjection
             ? escapeshellcmd("nslookup " . escapeshellarg($pTargetHost))
