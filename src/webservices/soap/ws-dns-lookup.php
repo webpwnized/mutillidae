@@ -121,7 +121,7 @@ function lookupDNS($pTargetHost) {
         authenticateRequest($lSecurityLevel);
 
         // Validate the target host to protect against command injection, if security is enabled
-        if ($lSecurityLevel >= SECURITY_LEVEL_MEDIUM) {
+        if ($lSecurityLevel >= SECURITY_LEVEL_SECURE) {
             $lProtectAgainstCommandInjection = true;
             $lProtectAgainstXSS = true;
         } else {
