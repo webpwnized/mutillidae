@@ -7,6 +7,7 @@ class LookupException extends Exception {}
 
 // Pull in the NuSOAP library
 require_once './lib/nusoap.php';
+require_once '../includes/ws-constants.php';
 
 $lServerName = $_SERVER['SERVER_NAME'];
 
@@ -48,6 +49,53 @@ $lSOAPWebService->wsdl->addComplexType(
 );
 
 /**
+ * Function: authenticateRequest
+ * Handles request authentication and CORS headers.
+ * 
+ * @param int $lSecurityLevel The security level.
+ * @throws InvalidTokenException If the authentication fails.
+ */
+function authenticateRequest($lSecurityLevel) {
+
+    // Set CORS headers
+    header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
+    header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
+    header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
+    header(CONTENT_TYPE_XML); // Set content type as XML
+
+    // Handle preflight requests (OPTIONS)
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header(CORS_ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+        http_response_code(RESPONSE_CODE_NO_CONTENT); // No Content
+        exit();
+    }
+
+    // Allow only POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(RESPONSE_CODE_METHOD_NOT_ALLOWED);
+        header(CONTENT_TYPE_XML);
+        echo ERROR_MESSAGE_METHOD_NOT_ALLOWED;
+        exit();
+    }
+
+    // Shared: Include the shared JWT token authentication function
+    require_once '../includes/ws-authenticate-jwt-token.php';
+
+    // Shared: Authenticate the user if required
+    if ($lSecurityLevel >= SECURITY_LEVEL_MEDIUM) {
+        try {
+            $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
+        } catch (InvalidTokenException $e) {
+            http_response_code(RESPONSE_CODE_UNAUTHORIZED);
+            header(CONTENT_TYPE_XML);
+            echo ERROR_MESSAGE_UNAUTHORIZED_PREFIX . 'Unauthorized: ' . htmlspecialchars($e->getMessage()) . ERROR_MESSAGE_UNAUTHORIZED_SUFFIX;
+            exit();
+        }
+    }
+}
+
+/**
  * Method: lookupDNS
  * Performs a DNS lookup for a given target host.
  * 
@@ -69,68 +117,18 @@ function lookupDNS($pTargetHost) {
         $LogHandler = new LogHandler($lSecurityLevel);
         $Encoder = new EncodingHandler();
 
-        require_once '../includes/ws-constants.php';
- 
-        // Set CORS headers
-        header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
-        header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
-        header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
-        header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
-        header(CONTENT_TYPE_XML); // Set content type as XML
-
-        // Handle preflight requests (OPTIONS)
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            header(CORS_ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
-            http_response_code(RESPONSE_CODE_NO_CONTENT); // No Content
-            exit();
-        }
-
-        // Allow only POST requests
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            http_response_code(RESPONSE_CODE_METHOD_NOT_ALLOWED);
-            header(CONTENT_TYPE_XML);
-            echo ERROR_MESSAGE_METHOD_NOT_ALLOWED;
-            exit();
-        }
-
-        switch ($lSecurityLevel) {
-            default:
-            case SECURITY_LEVEL_INSECURE:
-                $lProtectAgainstCommandInjection = false;
-                $lProtectAgainstXSS = false;
-                $lRequireAuthentication = false;
-                break;
-            case SECURITY_LEVEL_MEDIUM:
-                $lProtectAgainstCommandInjection = false;
-                $lProtectAgainstXSS = false;
-                $lRequireAuthentication = true;
-                break;
-            case 2:
-            case 3:
-            case 4:
-            case SECURITY_LEVEL_SECURE:
-                $lProtectAgainstCommandInjection = true;
-                $lProtectAgainstXSS = true;
-                $lRequireAuthentication = true;
-                break;
-        }
-
-        // Shared: Include the shared JWT token authentication function
-        require_once '../includes/ws-authenticate-jwt-token.php';
-
-        // Shared: Authenticate the user if required
-        if ($lRequireAuthentication) {
-            try {
-                $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
-            } catch (InvalidTokenException $e) {
-                http_response_code(RESPONSE_CODE_UNAUTHORIZED);
-                header(CONTENT_TYPE_XML);
-                echo '<?xml version="1.0" encoding="UTF-8"?><error><message>Unauthorized: ' . htmlspecialchars($e->getMessage()) . '</message></error>';
-                exit();
-            }
-        }
+        // Authenticate the request using the shared function
+        authenticateRequest($lSecurityLevel);
 
         // Validate the target host to protect against command injection, if security is enabled
+        if ($lSecurityLevel >= SECURITY_LEVEL_MEDIUM) {
+            $lProtectAgainstCommandInjection = true;
+            $lProtectAgainstXSS = true;
+        } else {
+            $lProtectAgainstCommandInjection = false;
+            $lProtectAgainstXSS = false;
+        }
+
         if ($lProtectAgainstCommandInjection) {
             $lTargetHostValidated = preg_match(IPV4_REGEX_PATTERN, $pTargetHost) ||
                                     preg_match(DOMAIN_NAME_REGEX_PATTERN, $pTargetHost) ||
@@ -157,7 +155,7 @@ function lookupDNS($pTargetHost) {
         }
 
         // Get the current timestamp
-        $lTimestamp = date('Y-m-d H:i:s');
+        $lTimestamp = date(DATE_TIME_FORMAT);
 
         // Create a structured response as an associative array
         $response = array(
@@ -184,4 +182,5 @@ try {
     // Send a fault response back to the client if an error occurs
     $lSOAPWebService->fault('Server', "SOAP Service Error: " . htmlspecialchars($e->getMessage()));
 }
+
 ?>

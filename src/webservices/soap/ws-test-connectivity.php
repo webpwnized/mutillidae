@@ -11,8 +11,10 @@ class TestConnectionException extends Exception {
     }
 }
 
-// Include the nusoap library
+// Include the nusoap library and required constants
 require_once './lib/nusoap.php';
+require_once '../includes/ws-constants.php';
+require_once '../includes/ws-authenticate-jwt-token.php';
 
 $lServerName = $_SERVER['SERVER_NAME'];
 
@@ -51,7 +53,56 @@ $lSOAPWebService->wsdl->addComplexType(
     )
 );
 
-// Define the "testConnectivity" method
+/**
+ * Function: authenticateRequest
+ * Handles request authentication and CORS headers.
+ * 
+ * @param int $lSecurityLevel The security level.
+ * @throws InvalidTokenException If the authentication fails.
+ */
+function authenticateRequest($lSecurityLevel) {
+
+    // Set CORS headers
+    header(CORS_ACCESS_CONTROL_ALLOW_ORIGIN);
+    header('Access-Control-Allow-Methods: POST, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Specify allowed headers
+    header('Access-Control-Expose-Headers: Authorization'); // Expose headers if needed
+    header(CONTENT_TYPE_XML); // Set content type as XML
+
+    // Handle preflight requests (OPTIONS)
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header(CORS_ACCESS_CONTROL_MAX_AGE); // Cache the preflight response for 600 seconds (10 minutes)
+        http_response_code(RESPONSE_CODE_NO_CONTENT); // No Content
+        exit();
+    }
+
+    // Allow only POST requests
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(RESPONSE_CODE_METHOD_NOT_ALLOWED);
+        header(CONTENT_TYPE_XML);
+        echo ERROR_MESSAGE_METHOD_NOT_ALLOWED;
+        exit();
+    }
+
+    // Authenticate the user if required
+    if ($lSecurityLevel >= SECURITY_LEVEL_MEDIUM) {
+        try {
+            $lDecodedToken = authenticateJWTToken(); // Authenticate using the shared function
+        } catch (InvalidTokenException $e) {
+            http_response_code(RESPONSE_CODE_UNAUTHORIZED);
+            header(CONTENT_TYPE_XML);
+            echo ERROR_MESSAGE_UNAUTHORIZED_PREFIX . 'Unauthorized: ' . htmlspecialchars($e->getMessage()) . ERROR_MESSAGE_UNAUTHORIZED_SUFFIX;
+            exit();
+        }
+    }
+}
+
+/**
+ * Define the "testConnectivity" method
+ * 
+ * @return array An associative array containing a success message, security level, and timestamp.
+ * @throws TestConnectionException If there is an error executing the method.
+ */
 function testConnectivity() {
     try {
         // Include required constants and utility classes
@@ -61,8 +112,11 @@ function testConnectivity() {
         $SQLQueryHandler = new SQLQueryHandler(SECURITY_LEVEL_INSECURE);
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
 
+        // Authenticate the request using the shared function
+        authenticateRequest($lSecurityLevel);
+
         // Get the current timestamp
-        $lTimestamp = date('Y-m-d H:i:s');
+        $lTimestamp = date(DATE_TIME_FORMAT);
 
         // Return a structured response as an associative array
         return array(

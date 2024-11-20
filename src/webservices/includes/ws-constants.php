@@ -109,6 +109,7 @@ define('CORS_TRUSTED_ORIGINS', [
 ]);
 
 define('ERROR_MESSAGE_METHOD_NOT_ALLOWED', '<?xml version="1.0" encoding="UTF-8"?><error><message>Method Not Allowed. Use POST for this endpoint.</message></error>');
-define('ERROR_MESSAGE_UNAUTHORIZED', '<?xml version="1.0" encoding="UTF-8"?><error><message>Unauthorized</message></error>');
+define('ERROR_MESSAGE_UNAUTHORIZED_PREFIX', '<?xml version="1.0" encoding="UTF-8"?><error><message>');
+define('ERROR_MESSAGE_UNAUTHORIZED_SUFFIX', '</message></error>');
 
 ?>
