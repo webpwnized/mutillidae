@@ -121,11 +121,8 @@ function lookupDNS($pTargetHost) {
         authenticateRequest($lSecurityLevel);
 
         // Validate the target host to protect against command injection, if security is enabled
-        if ($lSecurityLevel >= SECURITY_LEVEL_SECURE) {
-            $lProtectAgainstCommandInjection = true;
-        } else {
-            $lProtectAgainstCommandInjection = false;
-        }
+        $lProtectAgainstXSS = ($lSecurityLevel >= SECURITY_LEVEL_SECURE);
+        $lProtectAgainstCommandInjection = $lProtectAgainstXSS;
 
         if ($lProtectAgainstCommandInjection) {
             $lTargetHostValidated = preg_match(IPV4_REGEX_PATTERN, $pTargetHost) ||
