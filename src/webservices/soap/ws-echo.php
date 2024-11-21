@@ -105,6 +105,7 @@ function echoMessage($pMessage) {
         require_once '../../includes/constants.php';
         require_once '../../classes/EncodingHandler.php';
         require_once '../../classes/SQLQueryHandler.php';
+        require_once '../../classes/LogHandler.php';
 
         $SQLQueryHandler = new SQLQueryHandler(0);
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
