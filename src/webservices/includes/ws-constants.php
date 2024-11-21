@@ -81,6 +81,7 @@ define('SECURITY_LEVEL_SECURE', 5);
 define('CONTENT_TYPE_JSON', 'Content-Type: application/json');
 define('CONTENT_TYPE_XML', 'Content-Type: text/xml; charset=UTF-8');
 define('DATE_TIME_FORMAT', 'Y-m-d H:i:s');
+define('XSD_ANY_TIME', 'xsd:anyType');
 
 define('JWT_SECRET_KEY', 'snowman');
 define('JWT_EXPIRATION_TIME', 3600); // Token expiration time in seconds
