@@ -108,22 +108,23 @@ function echoMessage($pMessage) {
 
         $SQLQueryHandler = new SQLQueryHandler(0);
         $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+        $LogHandler = new LogHandler($lSecurityLevel);
         $Encoder = new EncodingHandler();
 
         // Authenticate the request using the shared function
         authenticateRequest($lSecurityLevel);
 
         // Set security-related variables
-        $lProtectAgainstCommandInjection = $lSecurityLevel >= SECURITY_LEVEL_MEDIUM;
-        $lProtectAgainstXSS = $lSecurityLevel >= SECURITY_LEVEL_MEDIUM;
+        $lProtectAgainstCommandInjection = $lSecurityLevel >= SECURITY_LEVEL_SECURE;
+        $lProtectAgainstXSS = $lProtectAgainstCommandInjection;
 
         // Apply XSS protection if enabled
         $lMessage = $lProtectAgainstXSS ? $Encoder->encodeForHTML($pMessage) : $pMessage;
 
         // Construct the command
         $lCommand = $lProtectAgainstCommandInjection
-            ? escapeshellcmd("echo " . escapeshellarg($lMessage))
-            : "echo $lMessage";
+            ? escapeshellcmd("echo " . escapeshellarg($pMessage))
+            : "echo $pMessage";
 
         // Execute the command and capture output
         $lOutput = shell_exec($lCommand);
@@ -142,6 +143,8 @@ function echoMessage($pMessage) {
             'timestamp' => $lTimestamp,
             'output' => $lOutput
         );
+
+        $LogHandler->writeToLog("Executed echo on: $lMessage");
 
         return $lResponse; // Return as an array for NuSOAP to serialize
 
