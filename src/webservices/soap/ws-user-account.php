@@ -214,7 +214,7 @@
                 'message' => "User data fetched successfully",
                 'securityLevel' => $lSecurityLevel,
                 'timestamp' => $lTimestamp,
-                'output' => new soapval('output', XSD_ANY_TYPE, $lResults)
+                'output' => new soapval('output', 'xsd:anyType', $lResults)
             );
 
             $LogHandler->writeToLog("ws-user-account.php: Fetched user-information for: {$pUsername}");
@@ -244,7 +244,7 @@
                     'message' => "User {$pUsername} already exists",
                     'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
-                    'output' => new soapval('output', XSD_ANY_TYPE, '')
+                    'output' => new soapval('output', 'xsd:anyType', '')
                 );
                 return $lResponse;
             } else {
@@ -253,7 +253,7 @@
                     'message' => "Inserted account {$pUsername}",
                     'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
-                    'output' => new soapval('output', XSD_ANY_TYPE, '')
+                    'output' => new soapval('output', 'xsd:anyType', '')
                 );
                 $LogHandler->writeToLog("ws-user-account.php: Inserted account {$pUsername}");
                 return $lResponse;
@@ -284,7 +284,7 @@
                     'message' => "Updated account {$pUsername}",
                     'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
-                    'output' => new soapval('output', XSD_ANY_TYPE, '')
+                    'output' => new soapval('output', 'xsd:anyType', '')
                 );
                 $LogHandler->writeToLog("ws-user-account.php: Updated account {$pUsername}");
                 return $lResponse;
@@ -294,7 +294,7 @@
                     'message' => "Inserted account {$pUsername}",
                     'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
-                    'output' => new soapval('output', XSD_ANY_TYPE, '')
+                    'output' => new soapval('output', 'xsd:anyType', '')
                 );
                 $LogHandler->writeToLog("ws-user-account.php: Created account {$pUsername}");
                 return $lResponse;
@@ -323,7 +323,7 @@
                         'message' => "Deleted account {$pUsername}",
                         'securityLevel' => $lSecurityLevel,
                         'timestamp' => $lTimestamp,
-                        'output' => new soapval('output', XSD_ANY_TYPE, '')
+                        'output' => new soapval('output', 'xsd:anyType', '')
                     );
                     $LogHandler->writeToLog("ws-user-account.php: Deleted account {$pUsername}");
                     return $lResponse;
@@ -332,7 +332,7 @@
                         'message' => "Could not authenticate account {$pUsername}. Password incorrect.",
                         'securityLevel' => $lSecurityLevel,
                         'timestamp' => $lTimestamp,
-                        'output' => new soapval('output', XSD_ANY_TYPE, '')
+                        'output' => new soapval('output', 'xsd:anyType', '')
                     );
                     return $lResponse;
                 }
@@ -341,7 +341,7 @@
                     'message' => "User {$pUsername} does not exist",
                     'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
-                    'output' => new soapval('output', XSD_ANY_TYPE, '')
+                    'output' => new soapval('output', 'xsd:anyType', '')
                 );
                 return $lResponse;
             }
