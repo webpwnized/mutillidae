@@ -8,12 +8,16 @@
     require_once '../../includes/constants.php';
     require_once '../../classes/SQLQueryHandler.php';
     require_once '../../classes/EncodingHandler.php';
-    require_once '../../classes/CustomErrorHandler.php';
     require_once '../../classes/LogHandler.php';
     require_once '../includes/ws-constants.php';
 
     // Pull in the NuSOAP code
     require_once './lib/nusoap.php';
+
+    $SQLQueryHandler = new SQLQueryHandler(0);
+    $lSecurityLevel = $SQLQueryHandler->getSecurityLevelFromDB();
+    $LogHandler = new LogHandler($lSecurityLevel);
+    $Encoder = new EncodingHandler();
 
     $lServerName = $_SERVER['SERVER_NAME'];
 
@@ -196,10 +200,10 @@
     // Define the SOAP method implementations
 
     function getUser($pUsername) {
-        global $LogHandler, $lEncodeOutput, $SQLQueryHandler, $CustomErrorHandler;
+        global $lSecurityLevel, $LogHandler, $lEncodeOutput;
 
         try {
-            authenticateRequest($SQLQueryHandler->getSecurityLevelFromDB());
+            authenticateRequest($lSecurityLevel);
 
             assertParameter($pUsername);
 
@@ -208,7 +212,7 @@
 
             $lResponse = array(
                 'message' => "User data fetched successfully",
-                'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                'securityLevel' => $lSecurityLevel,
                 'timestamp' => $lTimestamp,
                 'output' => $lResults
             );
@@ -217,15 +221,15 @@
             return $lResponse;
 
         } catch (Exception $e) {
-            return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->getUser()");
+            throw new SoapFault("Server", "Error in getUser: " . $e->getMessage());
         }
     }
 
     function registerUser($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature) {
-        global $LogHandler, $SQLQueryHandler, $CustomErrorHandler;
+        global $lSecurityLevel, $LogHandler, $SQLQueryHandler;
 
         try {
-            authenticateRequest($SQLQueryHandler->getSecurityLevelFromDB());
+            authenticateRequest($lSecurityLevel);
 
             assertParameter($pUsername);
             assertParameter($pPassword);
@@ -238,7 +242,7 @@
             if ($SQLQueryHandler->accountExists($pUsername)) {
                 $lResponse = array(
                     'message' => "User {$pUsername} already exists",
-                    'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                    'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
                     'output' => ""
                 );
@@ -247,23 +251,24 @@
                 $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
                 $lResponse = array(
                     'message' => "Inserted account {$pUsername}",
-                    'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                    'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
                     'output' => ""
                 );
+                $LogHandler->writeToLog("ws-user-account.php: Inserted account {$pUsername}");
                 return $lResponse;
             }
 
         } catch (Exception $e) {
-            return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->registerUser()");
+            throw new SoapFault("Server", "Error in registerUser: " . $e->getMessage());
         }
     }
 
     function updateUser($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature) {
-        global $LogHandler, $SQLQueryHandler, $CustomErrorHandler;
+        global $lSecurityLevel, $LogHandler, $SQLQueryHandler;
 
         try {
-            authenticateRequest($SQLQueryHandler->getSecurityLevelFromDB());
+            authenticateRequest($lSecurityLevel);
 
             assertParameter($pUsername);
             assertParameter($pPassword);
@@ -277,29 +282,31 @@
                 $SQLQueryHandler->updateUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature, false, false);
                 $lResponse = array(
                     'message' => "Updated account {$pUsername}",
-                    'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                    'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
                     'output' => ""
                 );
+                $LogHandler->writeToLog("ws-user-account.php: Updated account {$pUsername}");
                 return $lResponse;
             } else {
                 $SQLQueryHandler->insertNewUserAccount($pUsername, $pPassword, $pFirstname, $pLastname, $pSignature);
                 $lResponse = array(
                     'message' => "Inserted account {$pUsername}",
-                    'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                    'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
                     'output' => ""
                 );
+                $LogHandler->writeToLog("ws-user-account.php: Created account {$pUsername}");
                 return $lResponse;
             }
 
         } catch (Exception $e) {
-            return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->updateUser()");
+            throw new SoapFault("Server", "Error in updateUser: " . $e->getMessage());
         }
     }
 
     function deleteUser($pUsername, $pPassword) {
-        global $LogHandler, $SQLQueryHandler, $CustomErrorHandler;
+        global $lSecurityLevel, $LogHandler, $SQLQueryHandler;
 
         try {
             authenticateRequest($SQLQueryHandler->getSecurityLevelFromDB());
@@ -314,15 +321,16 @@
                     $SQLQueryHandler->deleteUser($pUsername);
                     $lResponse = array(
                         'message' => "Deleted account {$pUsername}",
-                        'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                        'securityLevel' => $lSecurityLevel,
                         'timestamp' => $lTimestamp,
                         'output' => ""
                     );
+                    $LogHandler->writeToLog("ws-user-account.php: Deleted account {$pUsername}");
                     return $lResponse;
                 } else {
                     $lResponse = array(
                         'message' => "Could not authenticate account {$pUsername}. Password incorrect.",
-                        'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                        'securityLevel' => $lSecurityLevel,
                         'timestamp' => $lTimestamp,
                         'output' => ""
                     );
@@ -331,7 +339,7 @@
             } else {
                 $lResponse = array(
                     'message' => "User {$pUsername} does not exist",
-                    'securityLevel' => $SQLQueryHandler->getSecurityLevelFromDB(),
+                    'securityLevel' => $lSecurityLevel,
                     'timestamp' => $lTimestamp,
                     'output' => ""
                 );
@@ -339,7 +347,7 @@
             }
 
         } catch (Exception $e) {
-            return $CustomErrorHandler->FormatErrorXML($e, "Unable to process request to web service ws-user-account->deleteUser()");
+            throw new SoapFault("Server", "Error in deleteUser: " . $e->getMessage());
         }
     }
 
