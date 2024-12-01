@@ -14,6 +14,11 @@
         }
     }
 
+    function generateTransactionID() {
+        // Generate a secure random hexadecimal transaction ID
+        return bin2hex(random_bytes(8)); // 16-character random hex string
+    }
+
     function populatePOSTSuperGlobal() {
         $lParameters = [];
         parse_str(file_get_contents('php://input'), $lParameters);
@@ -21,6 +26,7 @@
     }
 
     try {
+        $lTransactionID = generateTransactionID(); // Generate a transaction ID
         $lVerb = $_SERVER['REQUEST_METHOD'];
         $lDomain = $_SERVER['SERVER_NAME'];
         $lDomainParts = array_reverse(explode('.', $lDomain));
@@ -93,6 +99,7 @@
         if ($lReturnData) {
             header(CONTENT_TYPE_JSON);
             echo json_encode([
+                "TransactionID" => $transactionID,
                 "Message" => $lMessageText,
                 "Method" => $lVerb,
                 "Parameters" => [
@@ -107,6 +114,7 @@
         header(CONTENT_TYPE_JSON);
         header("Access-Control-Allow-Origin: {$_SERVER['REQUEST_SCHEME']}://{$lParentDomain}");
         echo json_encode([
+            "TransactionID" => generateTransactionID(),
             "Error" => $e->getMessage(),
             "Method" => $lVerb,
             "Parameters" => [
