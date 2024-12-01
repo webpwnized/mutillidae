@@ -38,11 +38,11 @@
     #idMessageOutput {
         white-space: pre-wrap; /* Preserve whitespace and wrap long lines */
         font-family: monospace; /* Use a monospace font for better readability */
-        background: #000000; /* Optional: Add a light background for better contrast */
-        color: #ffffff; /* Optional: Use a dark color for better contrast */
-        padding: 10px; /* Optional: Add some padding for aesthetics */
-        border-radius: 5px; /* Optional: Round corners */
-        border: 1px solid #ddd; /* Optional: Add a subtle border */
+        background: #1e1e2f; /* A dark but softer background color */
+        color: #c8d3f5; /* Light, cool-toned text color for high readability */
+        padding: 10px; /* Add padding for aesthetics */
+        border-radius: 5px; /* Round corners for a modern look */
+        border: 1px solid #3c3f4e; /* Subtle border that blends with the background */
     }
     #idMessageOutput pre {
         margin: 0; /* Remove extra margin for <pre> when used */
