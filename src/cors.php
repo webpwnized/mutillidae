@@ -95,12 +95,20 @@
             "&max-age=" + lMaxAge;
 
         lXMLHTTP.onreadystatechange = function() {
+            
             if (this.readyState == 4) {
 
                 if (this.status === 0) {
-                    // Status 0 usually indicates that the browser blocked the response due to CORS
-                    document.getElementById("idMessageOutput").innerText =
+                    // Status 0 usually indicates a CORS-related issue
+                    document.getElementById("idMessageOutput").innerText = 
                         "Error: The browser blocked the response. This typically happens because the 'Access-Control-Allow-Origin' header is missing or does not match the request's origin. Try enabling the ACAO header.";
+                    return;
+                }
+
+                if (document.querySelector('input[name="method"]:checked').value === "OPTIONS") {
+                    // OPTIONS requests do not include a response body by design
+                    document.getElementById("idMessageOutput").innerText = 
+                        "The OPTIONS request was sent successfully. Note that according to the CORS standard, OPTIONS responses typically do not include a response body. This is normal.";
                     return;
                 }
 
