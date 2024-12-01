@@ -99,7 +99,7 @@
         if ($lReturnData) {
             header(CONTENT_TYPE_JSON);
             echo json_encode([
-                "TransactionID" => $transactionID,
+                "TransactionID" => $lTransactionID,
                 "Message" => $lMessageText,
                 "Method" => $lVerb,
                 "Parameters" => [
