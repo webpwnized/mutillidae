@@ -8,6 +8,12 @@
         }
     }
 
+    class UnauthorizedOriginException extends Exception {
+        public function __construct($message) {
+            parent::__construct($message);
+        }
+    }
+
     function populatePOSTSuperGlobal() {
         $lParameters = [];
         parse_str(file_get_contents('php://input'), $lParameters);
@@ -21,6 +27,12 @@
         $lParentDomain = $lDomainParts[1] . '.' . $lDomainParts[0];
         $lReturnData = true;
 
+        // Validate origin against trusted origins
+        $lOrigin = $_SERVER['HTTP_ORIGIN'] ?? '';
+        if (!in_array($lOrigin, CORS_TRUSTED_ORIGINS)) {
+            throw new UnauthorizedOriginException("Unauthorized Origin: $lOrigin");
+        }
+
         // Populate $_POST if necessary for certain methods
         if (in_array($lVerb, ["PUT", "PATCH", "DELETE"])) {
             populatePOSTSuperGlobal();
@@ -30,8 +42,8 @@
         $lMaxAge = $_GET['acma'] ?? $_POST['acma'] ?? 600;
 
         // Get message from either GET or POST, defaulting to "Hello"
-        $lMessageContent = $_GET['message'] ?? $_POST['message'] ?? 'Hello';
-        $lMessage = '';
+        $lMessageReceived = $_GET['message'] ?? $_POST['message'] ?? 'Hello';
+        $lMethodMessage = '';
 
         // Process based on HTTP method
         switch ($lVerb) {
@@ -39,26 +51,26 @@
                 $lReturnData = false;
                 break;
             case "GET":
-                $lMessage = "GET request received";
+                $lMethodMessage = "GET request received";
                 break;
             case "POST":
-                $lMessage = "POST request processed";
+                $lMethodMessage = "POST request processed";
                 break;
             case "PUT":
-                $lMessage = "PUT request - resource created or updated";
+                $lMethodMessage = "PUT request - resource created or updated";
                 break;
             case "PATCH":
-                $lMessage = "PATCH request - partial update successful";
+                $lMethodMessage = "PATCH request - partial update successful";
                 break;
             case "DELETE":
-                $lMessage = "DELETE request - resource removed";
+                $lMethodMessage = "DELETE request - resource removed";
                 break;
             default:
                 throw new UnsupportedHttpMethodException("Unsupported HTTP method: $lVerb");
         }
 
         // Construct the final message
-        $lMessageText = "Message received: " . $lMessageContent . ". " . $lMessage . ".";
+        $lMessageText = "Message received: " . $lMessageReceived . ". " . $lMethodMessage . ".";
 
         // Set CORS headers dynamically
         if ($lVerb == "OPTIONS" ||
@@ -74,6 +86,7 @@
         // Apply the max-age header with the provided or default value
         if ($lVerb == "OPTIONS") {
             header("Access-Control-Max-Age: $lMaxAge");
+            header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
         }
 
         // Return JSON response if needed
@@ -87,7 +100,7 @@
                     "POST" => $_POST
                 ],
                 "Max-Age" => $lMaxAge
-            ]);
+            ], JSON_PRETTY_PRINT);
         }
     } catch (Exception $e) {
         header(CONTENT_TYPE_JSON);
