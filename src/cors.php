@@ -38,7 +38,8 @@
     #idMessageOutput {
         white-space: pre-wrap; /* Preserve whitespace and wrap long lines */
         font-family: monospace; /* Use a monospace font for better readability */
-        background: #f4f4f4; /* Optional: Add a light background for better contrast */
+        background: #ffffff; /* Optional: Add a light background for better contrast */
+        color: #000000; /* Optional: Use a dark color for better contrast */
         padding: 10px; /* Optional: Add some padding for aesthetics */
         border-radius: 5px; /* Optional: Round corners */
         border: 1px solid #ddd; /* Optional: Add a subtle border */
@@ -95,7 +96,7 @@
             "&max-age=" + lMaxAge;
 
         lXMLHTTP.onreadystatechange = function() {
-            
+
             if (this.readyState == 4) {
 
                 if (this.status === 0) {
