@@ -43,6 +43,9 @@
         border-radius: 5px; /* Optional: Round corners */
         border: 1px solid #ddd; /* Optional: Add a subtle border */
     }
+    #idMessageOutput pre {
+        margin: 0; /* Remove extra margin for <pre> when used */
+    }
 </style>
 
 <script type="text/javascript">
@@ -103,7 +106,7 @@
                         document.getElementById("idMessageOutput").innerText = prettyJson;
                     <?php } else { ?>
                         // Allow potential XSS for educational purposes (XSS protection disabled)
-                        document.getElementById("idMessageOutput").innerHTML = prettyJson;
+                        document.getElementById("idMessageOutput").innerHTML = "<pre>" + prettyJson + "</pre>";
                     <?php } ?>
                 } catch (e) {
                     // Handle non-JSON responses
@@ -112,11 +115,12 @@
                     <?php if ($lProtectAgainstXSS) { ?>
                         document.getElementById("idMessageOutput").innerText = rawResponse;
                     <?php } else { ?>
-                        document.getElementById("idMessageOutput").innerHTML = rawResponse;
+                        document.getElementById("idMessageOutput").innerHTML = "<pre>" + rawResponse + "</pre>";
                     <?php } ?>
                 }
             }
         };
+
 
         switch (lMethod) {
             case "GET":
