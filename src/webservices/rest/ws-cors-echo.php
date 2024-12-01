@@ -16,7 +16,7 @@
 
     function generateTransactionID() {
         // Generate a secure random hexadecimal transaction ID
-        return bin2hex(random_bytes(8)); // 16-character random hex string
+        return bin2hex(random_bytes(16)); // 16-character random hex string
     }
 
     function populatePOSTSuperGlobal() {
