@@ -5,11 +5,13 @@
             case "0":
                 $lEnableJavaScriptValidation = false;
                 $lEnableHTMLControls = false;
+                $lProtectAgainstXSS = false;
                 break;
 
             case "1":
                 $lEnableJavaScriptValidation = true;
                 $lEnableHTMLControls = true;
+                $lProtectAgainstXSS = false;
                 break;
 
             case "2":
@@ -18,6 +20,7 @@
             case "5":
                 $lEnableHTMLControls = true;
                 $lEnableJavaScriptValidation = true;
+                $lProtectAgainstXSS = true;
                 break;
         }
     } catch (Exception $e) {
@@ -30,6 +33,17 @@
 
 <?php include_once __SITE_ROOT__.'/includes/back-button.inc'; ?>
 <?php include_once __SITE_ROOT__.'/includes/hints/hints-menu-wrapper.inc'; ?>
+
+<style>
+    #idMessageOutput {
+        white-space: pre-wrap; /* Preserve whitespace and wrap long lines */
+        font-family: monospace; /* Use a monospace font for better readability */
+        background: #f4f4f4; /* Optional: Add a light background for better contrast */
+        padding: 10px; /* Optional: Add some padding for aesthetics */
+        border-radius: 5px; /* Optional: Round corners */
+        border: 1px solid #ddd; /* Optional: Add a subtle border */
+    }
+</style>
 
 <script type="text/javascript">
     var onSubmitOfForm = function(theForm) {
@@ -79,7 +93,28 @@
 
         lXMLHTTP.onreadystatechange = function() {
             if (this.readyState == 4) {
-                document.getElementById("idMessageOutput").innerHTML = lXMLHTTP.responseText;
+                try {
+                    // Parse and pretty print JSON
+                    const jsonResponse = JSON.parse(lXMLHTTP.responseText);
+                    const prettyJson = JSON.stringify(jsonResponse, null, 4);
+
+                    <?php if ($lProtectAgainstXSS) { ?>
+                        // Securely display the response (XSS protection enabled)
+                        document.getElementById("idMessageOutput").innerText = prettyJson;
+                    <?php } else { ?>
+                        // Allow potential XSS for educational purposes (XSS protection disabled)
+                        document.getElementById("idMessageOutput").innerHTML = prettyJson;
+                    <?php } ?>
+                } catch (e) {
+                    // Handle non-JSON responses
+                    const rawResponse = lXMLHTTP.responseText;
+
+                    <?php if ($lProtectAgainstXSS) { ?>
+                        document.getElementById("idMessageOutput").innerText = rawResponse;
+                    <?php } else { ?>
+                        document.getElementById("idMessageOutput").innerHTML = rawResponse;
+                    <?php } ?>
+                }
             }
         };
 
