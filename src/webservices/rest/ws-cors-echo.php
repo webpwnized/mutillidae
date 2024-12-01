@@ -43,9 +43,9 @@
 
         // Get message from either GET or POST, defaulting to "Hello"
         $lMessageReceived = $_GET['message'] ?? $_POST['message'] ?? 'Hello';
-        $lMethodMessage = '';
 
         // Process based on HTTP method
+        $lMethodMessage = '';
         switch ($lVerb) {
             case "OPTIONS":
                 $lReturnData = false;
@@ -99,7 +99,8 @@
                     "GET" => $_GET,
                     "POST" => $_POST
                 ],
-                "Max-Age" => $lMaxAge
+                "Max-Age" => $lMaxAge,
+                "Timestamp" => date(DATE_TIME_FORMAT)
             ], JSON_PRETTY_PRINT);
         }
     } catch (Exception $e) {
@@ -111,7 +112,8 @@
             "Parameters" => [
                 "GET" => $_GET,
                 "POST" => $_POST
-            ]
+            ],
+            "Timestamp" => date(DATE_TIME_FORMAT)
         ], JSON_PRETTY_PRINT);
     }
 ?>
