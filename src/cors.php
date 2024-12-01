@@ -96,8 +96,16 @@
 
         lXMLHTTP.onreadystatechange = function() {
             if (this.readyState == 4) {
+
+                if (this.status === 0) {
+                    // Status 0 usually indicates that the browser blocked the response due to CORS
+                    document.getElementById("idMessageOutput").innerText =
+                        "Error: The browser blocked the response. This typically happens because the 'Access-Control-Allow-Origin' header is missing or does not match the request's origin. Try enabling the ACAO header.";
+                    return;
+                }
+
                 try {
-                    // Parse and pretty print JSON
+                    // Attempt to parse and pretty print JSON
                     const jsonResponse = JSON.parse(lXMLHTTP.responseText);
                     const prettyJson = JSON.stringify(jsonResponse, null, 4);
 
@@ -121,6 +129,10 @@
             }
         };
 
+        lXMLHTTP.onerror = function() {
+            document.getElementById("idMessageOutput").innerText =
+                "Error: An error occurred during the request. This may be due to the lack of a proper 'Access-Control-Allow-Origin' header.";
+        };
 
         switch (lMethod) {
             case "GET":
