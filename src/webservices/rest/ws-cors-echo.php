@@ -1,5 +1,7 @@
 <?php
 
+    require_once '../includes/ws-constants.php';
+    
     class UnsupportedHttpMethodException extends Exception {
         public function __construct($message) {
             parent::__construct($message);
