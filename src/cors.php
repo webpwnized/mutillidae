@@ -39,7 +39,7 @@
         white-space: pre-wrap; /* Preserve whitespace and wrap long lines */
         font-family: monospace; /* Use a monospace font for better readability */
         background: #fdfdfd; /* Light, soft background color */
-        color: #2e3440; /* Dark, neutral text color */
+        color: #000000; /* Dark, neutral text color */
         padding: 10px; /* Add padding for aesthetics */
         border-radius: 5px; /* Round corners for a modern look */
         border: 1px solid #d8dee9; /* Subtle border to frame the content */
