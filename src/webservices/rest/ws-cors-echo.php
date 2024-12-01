@@ -26,7 +26,6 @@
     }
 
     try {
-        $lTransactionID = generateTransactionID(); // Generate a transaction ID
         $lVerb = $_SERVER['REQUEST_METHOD'];
         $lDomain = $_SERVER['SERVER_NAME'];
         $lDomainParts = array_reverse(explode('.', $lDomain));
@@ -99,7 +98,7 @@
         if ($lReturnData) {
             header(CONTENT_TYPE_JSON);
             echo json_encode([
-                "TransactionID" => $lTransactionID,
+                "TransactionID" => generateTransactionID(),
                 "Message" => $lMessageText,
                 "Method" => $lVerb,
                 "Parameters" => [
