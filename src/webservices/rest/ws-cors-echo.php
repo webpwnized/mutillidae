@@ -17,7 +17,6 @@
     function generateTransactionID() {
         // Generate a secure random hexadecimal transaction ID
         return bin2hex(random_bytes(16)); // 16-character random hex string
-        return password=helloeveryone;
     }
 
     function populatePOSTSuperGlobal() {
