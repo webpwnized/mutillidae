@@ -1450,14 +1450,10 @@ if (!$lErrorDetected) {
 
     // Determine if the referer matches certain conditions
     $lReferredFromOfflinePage = strpos($lHTTPReferer, "database-offline.php") !== false;
-    $lContainsURLParameters = strpos($lHTTPReferer, "?") !== false;
-
-    // Construct notification code parameter appropriately
-    $lNotificationParam = $lContainsURLParameters ? "&popUpNotificationCode=SUD1" : "?popUpNotificationCode=SUD1";
 
     // Redirect to home page if offline page triggered the reset
     if ($lReferredFromOfflinePage) {
-        $lRedirectLocation = "index.php?page=home.php" . $lNotificationParam;
+        $lRedirectLocation = "index.php?page=home.php&popUpNotificationCode=SUD1";
     } else {
         $lRedirectLocation = "index.php?page=home.php";
     }
