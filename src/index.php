@@ -303,6 +303,10 @@
 			/* Referrer Policy */
 			header("Referrer-Policy: unsafe-url", true);
 
+			/* Anti-Tab Nabbing headers */
+			header("Cross-Origin-Opener-Policy: unsafe-none");
+		    header_remove("Cross-Origin-Embedder-Policy");
+
 			header_remove("Pragma");
 
 			/* Content sniffing */
@@ -335,6 +339,10 @@
 
 			/* Referrer Policy */
 			header("Referrer-Policy: no-referrer", true);
+
+			// Anti-Tab Nabbing headers
+			header("Cross-Origin-Opener-Policy: same-origin");
+			header("Cross-Origin-Embedder-Policy: require-corp");
 
 			/* Server version banners */
 			header_remove("X-Powered-By");
