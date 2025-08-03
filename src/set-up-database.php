@@ -1309,7 +1309,8 @@
     	        (311, '6BIdjAYCyKc', 'Mutillidae: Lab 61 Walkthrough'),
     	        (312, 'z0USLZLCPPE', 'Mutillidae: Lab 62 Walkthrough'),
     	    	(313, '2fQfma45UMc', 'Mutillidae: Lab 63 Walkthrough'),
-                (314, 'Y4TWdPZp2eA', 'Mutillidae: Lab 51 Walkthrough - Alternate Method')";
+                (314, 'Y4TWdPZp2eA', 'Mutillidae: Lab 51 Walkthrough - Alternate Method'),
+				(315, 'kNSAhKiXctA', 'How to Analyze Session Token Randomness using Burp-Suite Sequencer')";
 
     $lQueryResult = $MySQLHandler->executeQuery($lQueryString);
 	if (!$lQueryResult) {

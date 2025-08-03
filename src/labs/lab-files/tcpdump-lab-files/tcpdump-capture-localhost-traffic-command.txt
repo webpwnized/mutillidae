@@ -1,1 +1,0 @@
-tcpdump -i lo -nn -A -vvv -w /tmp/packet-capture.pcap

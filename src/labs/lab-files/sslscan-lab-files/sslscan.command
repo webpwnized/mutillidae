@@ -1,1 +1,0 @@
-sslscan mutillidae.localhost
