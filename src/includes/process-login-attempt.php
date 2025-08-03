@@ -35,7 +35,12 @@
         }
 
         $cUNSURE = -1;
+        $cACCOUNT_DOES_NOT_EXIST = 0;
+        $cPASSWORD_INCORRECT = 1;
+        $cNO_RESULTS_FOUND = 2;
         $cAUTHENTICATION_SUCCESSFUL = 3;
+        $cAUTHENTICATION_EXCEPTION_OCCURED = 4;
+        $cUSERNAME_OR_PASSWORD_INCORRECT = 5;
 
         $lAuthenticationAttemptResult = $cUNSURE;
         $lAuthenticationAttemptResultFound = false;
