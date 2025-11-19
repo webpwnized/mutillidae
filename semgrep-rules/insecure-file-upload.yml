@@ -1,0 +1,12 @@
+rules:
+  - id: insecure-file-upload
+    message: "move_uploaded_file used with user-controlled filename. Potential unsafe file upload."
+    severity: ERROR
+    languages: [php]
+    patterns:
+      - pattern: |
+          move_uploaded_file($SRC, $DST)
+    metadata:
+      cwe: "CWE-434"
+      description: "Detects insecure file upload where uploaded filename is not sanitized."
+      author: "yourname"

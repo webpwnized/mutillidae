@@ -1,0 +1,18 @@
+rules:
+  - id: php-reflected-xss-taint
+    message: "Reflected XSS: user input flows into echo without escaping"
+    languages: [php]
+    severity: ERROR
+    mode: taint
+
+    pattern-sources:
+      - pattern: $_GET[$X]
+      - pattern: $_POST[$X]
+      - pattern: $_REQUEST[$X]
+
+    pattern-sinks:
+      - pattern: |
+          echo $SINK;
+
+    pattern-sanitizers:
+      - pattern: $ENC->encodeForHTML(...)
