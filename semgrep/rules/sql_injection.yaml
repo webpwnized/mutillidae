@@ -1,0 +1,12 @@
+rules:
+  - id: php-sqli-generic
+    languages: [php]
+    severity: WARNING
+    message: "Possible SQL injection detected."
+    patterns:
+      - pattern: mysqli_query($DB, $Q);
+      - pattern-inside: |
+          $Q = $A . $B;
+      - metavariable-pattern:
+          metavariable: $B
+          pattern: $_GET[...]

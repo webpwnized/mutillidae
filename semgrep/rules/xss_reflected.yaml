@@ -1,0 +1,23 @@
+rules:
+  - id: php-xss-reflected
+    languages: [php]
+    severity: WARNING
+    message: "Reflected XSS: untrusted input is echoed without sanitization"
+    patterns:
+      - pattern-either:
+          - pattern: echo $_GET[...];
+          - pattern: echo $_POST[...];
+          - pattern: echo $_REQUEST[...];
+          - pattern: print $_GET[...];
+          - pattern: print $_POST[...];
+          - pattern: print $_REQUEST[...];
+
+      # Ignore sanitized outputs
+      - pattern-not: echo htmlspecialchars(...);
+      - pattern-not: echo htmlentities(...);
+      - pattern-not: echo $ENCODER->encodeForHTML(...);
+
+    metadata:
+      category: security
+      cwe: "CWE-79"
+      owasp: "A03:2021"
