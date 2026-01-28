@@ -1,0 +1,31 @@
+# Sample LDAP users for Mutillidae
+# This file is loaded when the LDAP container starts
+# Add custom LDAP entries here
+
+dn: ou=users,dc=mutillidae,dc=localhost
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=groups,dc=mutillidae,dc=localhost
+objectClass: organizationalUnit
+ou: groups
+
+dn: cn=admin_group,ou=groups,dc=mutillidae,dc=localhost
+objectClass: groupOfNames
+cn: admin_group
+member: cn=admin,dc=mutillidae,dc=localhost
+
+dn: uid=testuser,ou=users,dc=mutillidae,dc=localhost
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: testuser
+sn: User
+givenName: Test
+cn: Test User
+displayName: Test User
+uidNumber: 10000
+gidNumber: 10000
+userPassword: testuser
+homeDirectory: /home/testuser
+loginShell: /bin/bash

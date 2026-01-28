@@ -1,0 +1,45 @@
+# Docker build context exclusions for Mutillidae
+# This file specifies patterns to exclude from the Docker build context
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+documentation/
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+README.md
+README-INSTALLATION.md
+SECURITY.md
+
+# Docker files (prevent recursive inclusion)
+docker-compose*.yml
+Dockerfile*
+.docker/
+.dockerignore
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing and development
+*.log
+*.tmp
+*.bak
+
+# Version control
+.svn/
+.hg/
+
+# Build artifacts
+*.tar
+*.gz
+*.zip

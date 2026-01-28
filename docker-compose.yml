@@ -1,0 +1,129 @@
+# OWASP Mutillidae II - Docker Compose Configuration
+# WARNING: This is a DELIBERATELY VULNERABLE application for security training only
+# DO NOT expose to the internet or run on production systems
+
+services:
+  # Web Application (Apache + PHP)
+  www:
+    build:
+      context: ./.docker/www
+      dockerfile: Dockerfile
+    container_name: mutillidae-www
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:80:80"
+    volumes:
+      - ./src:/var/www/html:rw
+    environment:
+      - MUTILLIDAE_DB_HOST=database
+      - MUTILLIDAE_DB_USERNAME=root
+      - MUTILLIDAE_DB_PASSWORD=mutillidae
+      - MUTILLIDAE_DB_NAME=mutillidae
+      - MUTILLIDAE_DB_PORT=3306
+      - MUTILLIDAE_LDAP_HOST=ldap
+      - MUTILLIDAE_LDAP_PORT=389
+    depends_on:
+      database:
+        condition: service_healthy
+      ldap:
+        condition: service_started
+    networks:
+      - mutillidae-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # MySQL Database
+  database:
+    image: mysql:8.0
+    container_name: mutillidae-database
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mutillidae
+      MYSQL_DATABASE: mutillidae
+    volumes:
+      - mutillidae-db-data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - mutillidae-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmutillidae"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Database Administration (phpMyAdmin)
+  database_admin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: mutillidae-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: mutillidae
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - mutillidae-network
+
+  # LDAP Server (OpenLDAP)
+  ldap:
+    image: osixia/openldap:1.5.0
+    container_name: mutillidae-ldap
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:389:389"
+      - "127.0.0.1:636:636"
+    environment:
+      LDAP_ORGANISATION: "Mutillidae"
+      LDAP_DOMAIN: "mutillidae.localhost"
+      LDAP_BASE_DN: "dc=mutillidae,dc=localhost"
+      LDAP_ADMIN_PASSWORD: mutillidae
+      LDAP_CONFIG_PASSWORD: mutillidae
+      LDAP_READONLY_USER: "false"
+      LDAP_TLS: "false"
+    volumes:
+      - mutillidae-ldap-data:/var/lib/ldap
+      - mutillidae-ldap-config:/etc/ldap/slapd.d
+    networks:
+      - mutillidae-network
+
+  # LDAP Administration (phpLDAPadmin)
+  ldap_admin:
+    image: osixia/phpldapadmin:0.9.0
+    container_name: mutillidae-phpldapadmin
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8443:443"
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap
+      PHPLDAPADMIN_HTTPS: "true"
+    depends_on:
+      - ldap
+    networks:
+      - mutillidae-network
+
+# Named volumes for data persistence
+volumes:
+  mutillidae-db-data:
+    driver: local
+  mutillidae-ldap-data:
+    driver: local
+  mutillidae-ldap-config:
+    driver: local
+
+# Isolated network for the vulnerable application
+networks:
+  mutillidae-network:
+    driver: bridge
+    name: mutillidae-network
