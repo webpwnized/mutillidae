@@ -1,4 +1,4 @@
-# Define the name of the workflow.
+# The name of the workflow.
 name: Scan Application with StackHawk
 
 # Define when the workflow should be triggered.
