@@ -25,8 +25,10 @@
       # Authentication type, typically FORM-based for applications with a login form.
       usernamePassword:
         type: FORM
-        loginPath: /index.php?page=login.php  # Path to submit login credentials.
-        loginPagePath: /index.php?page=login.php  # Path for the login page, can help identify when the user is redirected due to a failed login.
+        # loginPath: /index.php?page=login.php  # Path to submit login credentials.
+        # loginPagePath: /index.php?page=login.php  # Path for the login page, can help identify when the user is redirected due to a failed login.
+        loginPath: "http://127.0.0.1:8888/index.php?page=login.php"
+        loginPagePath: "http://127.0.0.1:8888/index.php?page=login.php"
         usernameField: username  # Field name for the username input in the login form.
         passwordField: password  # pragma: allowlist secret
         scanUsername: "stackhawk"  # Username for the scan login; ideally stored securely, not hardcoded.
