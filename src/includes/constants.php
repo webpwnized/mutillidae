@@ -1,6 +1,6 @@
 <?php
 	/* ------------------------------------------
-	 * @VERSION
+	 * @VERSION - Sync this with the version in the project directory
 	 * ------------------------------------------*/
 	$C_VERSION = "2.12.6";
 	$C_VERSION_STRING = "Version: " . $C_VERSION;
