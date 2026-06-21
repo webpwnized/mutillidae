@@ -338,26 +338,44 @@ class SQLQueryHandler {
 
 	public function authenticateAccount($pUsername, $pPassword){
 
+		echo "<pre>";
+
+		echo "stopSQLInjection: ";
+		var_dump($this->stopSQLInjection);
+
+		echo "\nOriginal username:\n";
+		var_dump($pUsername);
+
+		echo "\nOriginal password:\n";
+		var_dump($pPassword);
+
 		if ($this->stopSQLInjection){
-			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
-			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
-		}// end if
+			$escapedUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
+			$escapedPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
+
+			echo "\nEscaped username:\n";
+			var_dump($escapedUsername);
+
+			echo "\nEscaped password:\n";
+			var_dump($escapedPassword);
+
+			$pUsername = $escapedUsername;
+			$pPassword = $escapedPassword;
+		}
 
 		$lQueryString =
-			"SELECT username ".
-			"FROM accounts ".
-			"WHERE username='".$pUsername."' ".
+			"SELECT username " .
+			"FROM accounts " .
+			"WHERE username='".$pUsername."' " .
 			"AND password='".$pPassword."';";
 
-		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
+		echo "\nFinal query:\n";
+		echo htmlspecialchars($lQueryString);
 
-		if (isset($lQueryResult->num_rows)){
-			return $lQueryResult->num_rows > 0;
-		}else{
-			return false;
-		}// end if
+		echo "</pre>";
 
-	}//end public function getUsernames
+		die("DEBUG STOP");
+	}
 
 	public function getNonSensitiveAccountInformation($pUsername){
 		/*
