@@ -347,6 +347,16 @@ class SQLQueryHandler {
 
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 
+		echo "<pre>";
+		echo "SESSION security-level: ";
+		var_dump($_SESSION["security-level"]);
+
+		echo "stopSQLInjection: ";
+		var_dump($this->stopSQLInjection);
+		echo "</pre>";
+
+		die("DEBUG STOP");
+
 		if (isset($lQueryResult->num_rows)){
 			return $lQueryResult->num_rows > 0;
 		}else{
