@@ -55,10 +55,6 @@ class SQLQueryHandler {
 	}
 
 	public function __construct($pSecurityLevel = 0) {
-		// Ensure the provided level is valid; fall back to 0 if it's not.
-		if (!is_int($pSecurityLevel) || $pSecurityLevel < 0 || $pSecurityLevel > 5) {
-			$pSecurityLevel = 0;
-		}
 
 		$this->doSetSecurityLevel($pSecurityLevel);
 
@@ -110,11 +106,11 @@ class SQLQueryHandler {
 	} // end function getSecurityLevelFromDB
 	
 	public function setSecurityLevelInDB($pLevel) {
-		if ($pLevel < 0 || $pLevel > 5) {
+		if ($pSecurityLevel < 0 || $pSecurityLevel > 5) {
 			throw new InvalidArgumentException("Security level must be between 0 and 5.");
 		}
 	
-		$safeLevel = (int) $pLevel;
+		$safeLevel = (int) $pSecurityLevel;
 		$lQueryString = "UPDATE security_level SET level = $safeLevel WHERE id = 1";
 		$this->mMySQLHandler->executeQuery($lQueryString);
 	
@@ -338,44 +334,26 @@ class SQLQueryHandler {
 
 	public function authenticateAccount($pUsername, $pPassword){
 
-		echo "<pre>";
-
-		echo "stopSQLInjection: ";
-		var_dump($this->stopSQLInjection);
-
-		echo "\nOriginal username:\n";
-		var_dump($pUsername);
-
-		echo "\nOriginal password:\n";
-		var_dump($pPassword);
-
 		if ($this->stopSQLInjection){
-			$escapedUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
-			$escapedPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
-
-			echo "\nEscaped username:\n";
-			var_dump($escapedUsername);
-
-			echo "\nEscaped password:\n";
-			var_dump($escapedPassword);
-
-			$pUsername = $escapedUsername;
-			$pPassword = $escapedPassword;
-		}
+			$pUsername = $this->mMySQLHandler->escapeDangerousCharacters($pUsername);
+			$pPassword = $this->mMySQLHandler->escapeDangerousCharacters($pPassword);
+		}// end if
 
 		$lQueryString =
-			"SELECT username " .
-			"FROM accounts " .
-			"WHERE username='".$pUsername."' " .
+			"SELECT username ".
+			"FROM accounts ".
+			"WHERE username='".$pUsername."' ".
 			"AND password='".$pPassword."';";
 
-		echo "\nFinal query:\n";
-		echo htmlspecialchars($lQueryString);
+		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 
-		echo "</pre>";
+		if (isset($lQueryResult->num_rows)){
+			return $lQueryResult->num_rows > 0;
+		}else{
+			return false;
+		}// end if
 
-		die("DEBUG STOP");
-	}
+	}//end public function authenticateAccount
 
 	public function getNonSensitiveAccountInformation($pUsername){
 		/*
