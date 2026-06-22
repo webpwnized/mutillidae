@@ -130,15 +130,17 @@
 
 		case "toggle-security":
 			/* Make security level go up a level or roll over*/
-			$lSecurityLevel = $_SESSION["security-level"];
+			$lSecurityLevel = isset($_SESSION["security-level"])
+				? (int)$_SESSION["security-level"]
+				: 0;
 
-			if ($lSecurityLevel == '0') {
-				$lSecurityLevel = '1';
-			}elseif($lSecurityLevel == '1'){
-				$lSecurityLevel = '5';
-			}else{
-				$lSecurityLevel = '0';
-		    }// end if
+			if ($lSecurityLevel === 0) {
+				$lSecurityLevel = 1;
+			} elseif ($lSecurityLevel === 1) {
+				$lSecurityLevel = 5;
+			} else {
+				$lSecurityLevel = 0;
+			}
 
 		    /* If we have looped back around to security level 0,
 		     * show the hints again */
