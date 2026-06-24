@@ -44,7 +44,7 @@
 
 				//initialize encoder
 				require_once __SITE_ROOT__.'/classes/EncodingHandler.php';
-				$Encoder = new EncodingHandler();
+				$this->Encoder = new EncodingHandler();
 
 			} catch(Exception $e){
 				echo $CustomErrorHandler->FormatError($e, "ClientFields.__construct()");
