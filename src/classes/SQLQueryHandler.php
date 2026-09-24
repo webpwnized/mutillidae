@@ -96,8 +96,13 @@ class SQLQueryHandler {
 		// Execute the query
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 	
-echo $lQueryString;
-echo $lQueryResult;
+// --- DEBUGGING OUTPUT ---
+    echo "<pre>";
+    echo "--- DEBUG: Query String ---\n";
+    echo $lQueryString . "\n\n";
+
+    echo "--- DEBUG: Query Result Object ---\n";
+    var_dump($lQueryResult);
 
 		// Check if the query returned a valid result
 		if ($lQueryResult && $lQueryResult->num_rows > 0) {
