@@ -107,40 +107,31 @@ class SQLQueryHandler {
 
 	/**
 	 * Updates the system security level in the database.
-	 * Explicitly commits the transaction to prevent silent rollbacks.
+	 * Uses the public commit method on MySQLHandler to guarantee transaction persistence.
 	 *
 	 * @param int $pSecurityLevel Target security level (0 to 5).
-	 * @return bool Returns true if the query succeeded.
-	 * @throws InvalidArgumentException If $pSecurityLevel is outside 0-5.
+	 * @return bool Returns true if the query executed successfully.
+	 * @throws InvalidArgumentException If $pSecurityLevel is outside the range 0-5.
 	 */
 	public function setSecurityLevelInDB($pSecurityLevel) {
-		// 1. Validate parameter range
+		// 1. Validate that the security level falls within allowed range (0 to 5)
 		if ($pSecurityLevel < 0 || $pSecurityLevel > 5) {
 			throw new InvalidArgumentException("Security level must be between 0 and 5.");
 		}
 
-		// 2. Cast safely to integer
+		// 2. Cast safely to an integer to prevent SQL injection
 		$safeLevel = (int) $pSecurityLevel;
 
-		// 3. Construct update query
+		// 3. Construct the UPDATE statement
 		$lQueryString = "UPDATE security_level SET level = {$safeLevel} WHERE id = 1";
 
-		// 4. Execute the query
+		// 4. Execute the query via MySQLHandler
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 
-		// 5. Force transaction commit if the connection supports it
-		if (isset($this->mMySQLHandler->mMySQLConnection)) {
-			$conn = $this->mMySQLHandler->mMySQLConnection;
-			
-			// Log affected rows (will be 0 if id=1 does not exist)
-			error_log("[MUTILLIDAE DB DEBUG] Affected Rows: " . $conn->affected_rows);
+		// 5. Commit the transaction through MySQLHandler's public API
+		$this->mMySQLHandler->commit();
 
-			// Force commit to ensure changes persist across HTTP requests
-			if (method_exists($conn, 'commit')) {
-				$conn->commit();
-			}
-		}
-
+		// 6. Return true if the query executed without errors
 		return $lQueryResult !== false;
 	} // end function setSecurityLevelInDB()
 
