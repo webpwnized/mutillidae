@@ -106,39 +106,41 @@ class SQLQueryHandler {
 	} // end function getSecurityLevelFromDB()
 
 	/**
-	 * Updates the system security level in the database with diagnostic checks.
+	 * Updates the system security level in the database.
+	 * Explicitly commits the transaction to prevent silent rollbacks.
 	 *
-	 * @param int $pSecurityLevel The desired security level (0 to 5).
-	 * @return bool True if the query executed without throwing an exception.
+	 * @param int $pSecurityLevel Target security level (0 to 5).
+	 * @return bool Returns true if the query succeeded.
 	 * @throws InvalidArgumentException If $pSecurityLevel is outside 0-5.
-	 * @throws Exception If the database query fails.
 	 */
 	public function setSecurityLevelInDB($pSecurityLevel) {
-		// 1. Validate that the security level falls within the allowed range
+		// 1. Validate parameter range
 		if ($pSecurityLevel < 0 || $pSecurityLevel > 5) {
 			throw new InvalidArgumentException("Security level must be between 0 and 5.");
 		}
 
-		// 2. Cast the parameter safely to an integer
+		// 2. Cast safely to integer
 		$safeLevel = (int) $pSecurityLevel;
 
-		// 3. Construct the update query
+		// 3. Construct update query
 		$lQueryString = "UPDATE security_level SET level = {$safeLevel} WHERE id = 1";
 
-		// 4. Execute the query via MySQL handler
+		// 4. Execute the query
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 
-		// 5. Diagnostic check: Log affected rows and database info to error log
+		// 5. Force transaction commit if the connection supports it
 		if (isset($this->mMySQLHandler->mMySQLConnection)) {
 			$conn = $this->mMySQLHandler->mMySQLConnection;
 			
-			// Log affected rows (0 means row id=1 was already set to $safeLevel or id=1 doesn't exist)
-			error_log("[DIAGNOSTIC] Query executed: {$lQueryString}");
-			error_log("[DIAGNOSTIC] Affected Rows: " . $conn->affected_rows);
-			error_log("[DIAGNOSTIC] Connection Thread ID: " . $conn->thread_id);
+			// Log affected rows (will be 0 if id=1 does not exist)
+			error_log("[MUTILLIDAE DB DEBUG] Affected Rows: " . $conn->affected_rows);
+
+			// Force commit to ensure changes persist across HTTP requests
+			if (method_exists($conn, 'commit')) {
+				$conn->commit();
+			}
 		}
 
-		// 6. Return true as long as execution completes without throwing an exception
 		return $lQueryResult !== false;
 	} // end function setSecurityLevelInDB()
 
