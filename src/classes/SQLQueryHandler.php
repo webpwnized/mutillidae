@@ -96,6 +96,9 @@ class SQLQueryHandler {
 		// Execute the query
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 	
+echo $lQueryString;
+echo $lQueryResult;
+
 		// Check if the query returned a valid result
 		if ($lQueryResult && $lQueryResult->num_rows > 0) {
 			$lRow = $lQueryResult->fetch_assoc();
