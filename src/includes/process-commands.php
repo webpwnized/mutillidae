@@ -189,6 +189,8 @@
 			/* Update the security level in the session */
 		    $_SESSION["security-level"] = $lSecurityLevel;
 
+			error_log("[DEBUG process-commands] Target new security level: " . $lSecurityLevel);
+			
 			/* Update the security level in the database */
 			$SQLQueryHandler->setSecurityLevelInDB($lSecurityLevel);
 

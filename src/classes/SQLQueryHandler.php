@@ -95,14 +95,6 @@ class SQLQueryHandler {
 	
 		// Execute the query
 		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
-	
-// --- DEBUGGING OUTPUT ---
-    echo "<pre>";
-    echo "--- DEBUG: Query String ---\n";
-    echo $lQueryString . "\n\n";
-
-    echo "--- DEBUG: Query Result Object ---\n";
-    var_dump($lQueryResult);
 
 		// Check if the query returned a valid result
 		if ($lQueryResult && $lQueryResult->num_rows > 0) {
@@ -113,18 +105,35 @@ class SQLQueryHandler {
 		}
 	} // end function getSecurityLevelFromDB
 	
-	public function setSecurityLevelInDB($pLevel) {
+	/**
+	 * Updates the system security level in the database with debug logging.
+	 *
+	 * @param int $pSecurityLevel The target security level (0 to 5).
+	 * @return bool True if updated, false otherwise.
+	 * @throws InvalidArgumentException
+	 */
+	public function setSecurityLevelInDB($pSecurityLevel) {
+		// Debug 1: Log incoming argument type and value
+		error_log("[DEBUG setSecurityLevelInDB] Input received: " . var_export($pSecurityLevel, true));
+
 		if ($pSecurityLevel < 0 || $pSecurityLevel > 5) {
 			throw new InvalidArgumentException("Security level must be between 0 and 5.");
 		}
-	
+
 		$safeLevel = (int) $pSecurityLevel;
-		$lQueryString = "UPDATE security_level SET level = $safeLevel WHERE id = 1";
+		$lQueryString = "UPDATE security_level SET level = {$safeLevel} WHERE id = 1";
+
+		// Debug 2: Log query string
+		error_log("[DEBUG setSecurityLevelInDB] Executing SQL: " . $lQueryString);
+
 		$this->mMySQLHandler->executeQuery($lQueryString);
-	
-		// Ensure the row was actually updated
-		return $this->mMySQLHandler->affected_rows() > 0;
-	} // end function setSecurityLevelInDB
+
+		// Debug 3: Check affected rows and error state
+		$affectedRows = $this->mMySQLHandler->affected_rows();
+		error_log("[DEBUG setSecurityLevelInDB] Affected rows: " . $affectedRows);
+
+		return $affectedRows > 0;
+	} // end function setSecurityLevelInDB()
 
 	public function getPageHelpTexts($pPageName){
 
