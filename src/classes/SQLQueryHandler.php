@@ -103,36 +103,43 @@ class SQLQueryHandler {
 		} else {
 			return null;  // Return null if the row does not exist
 		}
-	} // end function getSecurityLevelFromDB
-	
+	} // end function getSecurityLevelFromDB()
+
 	/**
-	 * Updates the system security level in the database with debug logging.
+	 * Updates the system security level in the database with diagnostic checks.
 	 *
-	 * @param int $pSecurityLevel The target security level (0 to 5).
-	 * @return bool True if updated, false otherwise.
-	 * @throws InvalidArgumentException
+	 * @param int $pSecurityLevel The desired security level (0 to 5).
+	 * @return bool True if the query executed without throwing an exception.
+	 * @throws InvalidArgumentException If $pSecurityLevel is outside 0-5.
+	 * @throws Exception If the database query fails.
 	 */
 	public function setSecurityLevelInDB($pSecurityLevel) {
-		// Debug 1: Log incoming argument type and value
-		error_log("[DEBUG setSecurityLevelInDB] Input received: " . var_export($pSecurityLevel, true));
-
+		// 1. Validate that the security level falls within the allowed range
 		if ($pSecurityLevel < 0 || $pSecurityLevel > 5) {
 			throw new InvalidArgumentException("Security level must be between 0 and 5.");
 		}
 
+		// 2. Cast the parameter safely to an integer
 		$safeLevel = (int) $pSecurityLevel;
+
+		// 3. Construct the update query
 		$lQueryString = "UPDATE security_level SET level = {$safeLevel} WHERE id = 1";
 
-		// Debug 2: Log query string
-		error_log("[DEBUG setSecurityLevelInDB] Executing SQL: " . $lQueryString);
+		// 4. Execute the query via MySQL handler
+		$lQueryResult = $this->mMySQLHandler->executeQuery($lQueryString);
 
-		$this->mMySQLHandler->executeQuery($lQueryString);
+		// 5. Diagnostic check: Log affected rows and database info to error log
+		if (isset($this->mMySQLHandler->mMySQLConnection)) {
+			$conn = $this->mMySQLHandler->mMySQLConnection;
+			
+			// Log affected rows (0 means row id=1 was already set to $safeLevel or id=1 doesn't exist)
+			error_log("[DIAGNOSTIC] Query executed: {$lQueryString}");
+			error_log("[DIAGNOSTIC] Affected Rows: " . $conn->affected_rows);
+			error_log("[DIAGNOSTIC] Connection Thread ID: " . $conn->thread_id);
+		}
 
-		// Debug 3: Check affected rows and error state
-		$affectedRows = $this->mMySQLHandler->affected_rows();
-		error_log("[DEBUG setSecurityLevelInDB] Affected rows: " . $affectedRows);
-
-		return $affectedRows > 0;
+		// 6. Return true as long as execution completes without throwing an exception
+		return $lQueryResult !== false;
 	} // end function setSecurityLevelInDB()
 
 	public function getPageHelpTexts($pPageName){
